@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Anyade una entrada en la tabla LIC_PRODUCTOSOFERTAS
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="InformarDatosCOmpraJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="InformarDatosCOmpraJSON.xsl"?>
+
+<InformaDatosCompra xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="IDCENTRO"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="CANTIDAD"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InformaDatosCompra');
+		IF US_ID>=0 THEN
+			Licitacionesagregadas_pck.InformarCompra_XML(
+				NULL,
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_PROD_ID}',
+				'{@IDCENTRO}',
+				NULL,
+				NULL,
+				NULL,
+				NULL,
+				NULL,
+				NULL,
+				'{@CANTIDAD}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</InformaDatosCompra>

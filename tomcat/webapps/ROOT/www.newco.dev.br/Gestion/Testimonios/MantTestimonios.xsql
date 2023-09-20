@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Testimonios de los clientes
+ *
+
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantTestimoniosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantTestimoniosHTML.xsl"?>
+
+<Testimonios xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  
+   <!-- mantenimiento testimonios -->
+   	 <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+    	BEGIN
+			IF '{@SES_ID}' IS NOT NULL THEN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Testimonios');
+			END IF;
+			IF US_ID IS NOT NULL THEN
+	   			TESTIMONIOS_PCK.Testimonio_XML('{@ID}');	
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>	
+ 
+</Testimonios>

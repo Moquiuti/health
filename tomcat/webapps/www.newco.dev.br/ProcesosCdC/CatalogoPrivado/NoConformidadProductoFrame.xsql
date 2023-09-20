@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NoConformidadProductoFrameHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NoConformidadProductoFrameHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="IDINFORME"/>
+  <xsql:include-param name="READ_ONLY"/>
+</Mantenimiento>

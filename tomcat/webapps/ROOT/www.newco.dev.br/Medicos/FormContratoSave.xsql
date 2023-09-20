@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="FormContratoSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="FormContratoSaveHTML.xsl"?>
+
+<Contrato xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+ <!-- 
+       copiamos el codigo de FormAltaSave, para que se haga la insert de los datos
+       y comentamos el update de la aceptacion del contrato puesto que ya no se muestra
+  -->
+  <xsql:include-owa>
+ 	 MEDICOS_PCK.Alta(
+			'{@MED_NUM_COLEGIADO}',
+			'{@MED_NIF}',
+			'{@MED_TITULO}',
+			'{@MED_NOMBRE}',
+			'{@MED_APELLIDO1}',
+			'{@MED_APELLIDO2}',
+			'{@MED_FECHA_NAC}',
+			'{@MED_DIRECCION}',
+			'{@MED_POBLACION}',
+			'{@MED_PROVINCIA}',
+			'{@MED_CPOSTAL}',
+			'{@MED_TF_FIJO}',
+			'{@MED_TF_MOVIL}',
+			'{@MED_FAX}',
+			'{@MED_EMAIL}',
+			'{@MED_ESPECIALIDAD}',
+			'{@MED_ESPECIALIDAD_OTROS}',
+			'{@MED_CARGO}',
+			'{@MED_CEN_NIF1}', -- Centro 1
+			'{@MED_CEN_NOMBRE1}',
+			'{@MED_CEN_DIRECCION1}',
+			'{@MED_CEN_POBLACION1}',
+			'{@MED_CEN_PROVINCIA1}',
+			'{@MED_CEN_CPOSTAL1}',									
+			'{@MED_CEN_PERSONA_CONTACTO1}',
+			'{@MED_CEN_TELEFONO1}',
+			'{@MED_CEN_EMAIL1}',
+			'{@MED_CEN_TIPO_CENTRO1}',
+			'{@MED_CEN_AFILIAR1}',
+			'{@MED_CEN_DESCRIPCION1}',
+			'{@MED_CEN_LISTA_PROVEEDORES1}',
+			'{@MED_CEN_VOLUMENCOMPRAANUAL1}',
+			'{@MED_CEN_FAX1}',
+			'{@MED_CEN_ESPECIALIDAD1}',
+			'{@MED_CEN_ESPECIALIDAD1_OTROS}',
+			'{@MED_CEN_NIF2}', -- Centro 2
+			'{@MED_CEN_NOMBRE2}',	
+			'{@MED_CEN_DIRECCION2}',
+			'{@MED_CEN_POBLACION2}',
+			'{@MED_CEN_PROVINCIA2}',
+			'{@MED_CEN_CPOSTAL2}',									
+			'{@MED_CEN_PERSONA_CONTACTO2}',
+			'{@MED_CEN_TELEFONO2}',
+			'{@MED_CEN_EMAIL2}',
+			'{@MED_CEN_TIPO_CENTRO2}',			
+			'{@MED_CEN_AFILIAR2}',
+			'{@MED_CEN_DESCRIPCION2}',
+			'{@MED_CEN_LISTA_PROVEEDORES2}',
+			'{@MED_CEN_VOLUMENCOMPRAANUAL2}',
+			'{@MED_CEN_FAX2}',
+			'{@MED_CEN_ESPECIALIDAD2}',
+			'{@MED_CEN_ESPECIALIDAD2_OTROS}',
+			'{@MED_CEN_NIF3}', -- Centro 3
+			'{@MED_CEN_NOMBRE3}',	
+			'{@MED_CEN_DIRECCION3}',
+			'{@MED_CEN_POBLACION3}',
+			'{@MED_CEN_PROVINCIA3}',	
+			'{@MED_CEN_CPOSTAL3}',						
+			'{@MED_CEN_PERSONA_CONTACTO3}',
+			'{@MED_CEN_TELEFONO3}',
+			'{@MED_CEN_EMAIL3}',
+			'{@MED_CEN_TIPO_CENTRO3}',			
+			'{@MED_CEN_AFILIAR3}',
+			'{@MED_CEN_DESCRIPCION3}',
+			'{@MED_CEN_LISTA_PROVEEDORES3}',
+			'{@MED_CEN_VOLUMENCOMPRAANUAL3}',
+			'{@MED_CEN_FAX3}',
+			'{@MED_CEN_ESPECIALIDAD3}',
+			'{@MED_CEN_ESPECIALIDAD3_OTROS}',
+			'{@MED_EXISTENCIA_VM}',
+			'{@MED_EXISTENCIA_VM_OTROS}',
+			'{@MED_COMENTARIOS}'
+			 );
+  </xsql:include-owa>
+  <!--
+                          update del contrato del contrato
+  <xsql:include-owa>
+  
+  <![CDATA[
+	     MEDICOS_PCK.Contrato('{@CODIGO_ALTA}' , '{@CONTRATO}');
+  ]]>
+  </xsql:include-owa>
+  -->
+</Contrato>

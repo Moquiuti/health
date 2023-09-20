@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Solicitud de alta / Mantenimiento de Empresa
+	Ultima revision: ET 18oct21 17:20
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="EMPNuevaSimpleHTML.xsl"?>
+
+<Empresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+  
+	<xsql:include-param name="ACCION"/>
+	<xsql:include-param name="PORTAL"/>
+	<xsql:include-param name="IDPAIS"/>
+	<xsql:include-param name="INDEXLANG"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			v_IDSesion		NUMBER;
+			v_IDUsuario		NUMBER;
+			v_IDEmpresa		NUMBER;
+        BEGIN
+		
+			utilidades_pck.debug('EMPNuevaSimpleXSQL. ACCION:{@ACCION}. IDSesion:{@SES_ID}. Nif:{@EMP_NIF}. Nombre:{@EMP_NOMBRE}');
+
+			IF ('{@ACCION}'	IS NULL) THEN
+
+	          	Empresas_mant_Pck.NuevaEmpresa_XML('MVMB', 'VENDEDOR');
+
+			ELSE	
+				IF ('{@ACCION}'='NUEVA') THEN
+
+					--	Alta rápida de empresa
+					v_IDSesion:=Empresas_mant_Pck.NuevaEmpresa
+					(
+						'{@PORTAL}',
+						'VENDEDOR',
+						'{@EMP_NIF}',
+						'{@EMP_NOMBRE}',
+						'{@EMP_NOMBRECORTOPUBLICO}',
+						'{@EMP_PROVINCIA}',
+						'{@EMP_POBLACION}',
+						'{@EMP_DIRECCION}',
+						'{@EMP_CPOSTAL}',
+						--PENDIENTE! '{@EMP_IDTIPO}',
+						'{@EMP_TELEFONO}',
+						'{@US_NOMBRE}',
+						'{@US_APELLIDO1}',
+						'{@US_EMAIL}',
+						'{@EMP_BARRIO}',
+						--'{@EMP_SELECCIONES}'				--	PENDIENTE
+						'{@EMP_REFERENCIAS}',				--	14jun21
+						'{@EMP_PEDIDOMINIMO}'				--	14jun21
+					);
+
+					IF v_IDSesion IS NOT NULL THEN
+
+						Empresas_mant_Pck.Empresa_XML(v_IDSesion, '{@FASE}');
+
+					ELSE
+		  				HTP.P('<ERROR/>');
+					END IF;
+				ELSIF (('{@ACCION}'='GUARDA') OR ('{@ACCION}'='ENVIA')) THEN
+
+					v_IDSesion:='{@SES_ID}';
+					v_IDUsuario:=SEGURIDAD_PCK.CompruebaCodigoDeSesion(v_IDSesion,'EMPNuevaSimple');
+					IF v_IDUsuario>=0 THEN
+
+
+						utilidades_pck.debug('EMPNuevaSimpleXSQL. ACCION:{@ACCION}. IDSesion:{@SES_ID}. Nif:{@EMP_NIF}. Nombre:{@EMP_NOMBRE}. PROCESANDO Empresas_mant_Pck.ModificarEmpresa');
+
+						--	Alta rápida de empresa
+						v_IDEmpresa:=Empresas_mant_Pck.ModificarEmpresa
+						(
+							v_IDUsuario,
+							'{@EMP_ID}',
+							'{@EMP_NIF}',
+							'{@EMP_NOMBRE}',
+							'{@EMP_NOMBRECORTOPUBLICO}',
+							'{@EMP_PROVINCIA}',
+							'{@EMP_POBLACION}',
+							'{@EMP_DIRECCION}',
+							'{@EMP_CPOSTAL}',
+							--PENDIENTE! '{@EMP_IDTIPO}',
+							'{@EMP_TELEFONO}',
+							'{@US_NOMBRE}',
+							'{@US_APELLIDO1}',
+							'{@US_EMAIL}',
+							'{@EMP_BARRIO}',
+							--'{@EMP_SELECCIONES}'				--	PENDIENTE
+							'{@EMP_REFERENCIAS}',				--	14jun21
+							'{@EMP_PEDIDOMINIMO}',				--	14jun21
+							'{@ACCION}'							--	02jul21
+						);
+
+						IF v_IDSesion IS NOT NULL THEN
+
+ 							--HTP.P('<SES_ID>'||v_IDSesion||'</SES_ID>');
+							Empresas_mant_Pck.Empresa_XML
+							(
+								v_IDSesion,
+								'{@FASE}'							--	02nov21
+							);
+
+						ELSE
+		  					HTP.P('<ERROR/>');
+						END IF;
+					ELSE
+		  				HTP.P('<ERROR/>');
+					END IF;
+
+				ELSE
+
+					Empresas_mant_Pck.Empresa_XML('{@SES_ID}', '{@FASE}');
+
+				END IF;
+
+			END IF;
+		  
+        END;
+        ]]>
+  </xsql:include-owa>
+
+</Empresa>
+

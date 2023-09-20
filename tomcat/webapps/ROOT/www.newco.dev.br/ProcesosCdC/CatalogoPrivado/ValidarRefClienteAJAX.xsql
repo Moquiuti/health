@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que comprueba si una referencia cliente de producto estandar ya existe -->
+<?xml-stylesheet type="text/xsl" href="ValidarRefClienteJSON.xsl"?>
+
+
+<ValidarRefCliente xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDEMPRESA"/>
+	<xsql:include-param name="REFERENCIA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		BOOLEAN;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ValidarRefClienteAJAX');
+			IF US_ID>=0 THEN
+
+				v_Res := CATALOGOPRIVADO_PCK.ExisteOtraReferenciaCliente(
+					'{@REFERENCIA}',
+					{@IDEMPRESA},
+					'{@NIVEL}',
+					{@CP_ID}
+				);
+
+				HTP.P(Utilidades_Pck.CabeceraXML);
+				IF v_Res != FALSE THEN
+					HTP.P('<ERROR/>');
+				ELSE
+					HTP.P('<OK/>');
+				END IF;
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ValidarRefCliente>

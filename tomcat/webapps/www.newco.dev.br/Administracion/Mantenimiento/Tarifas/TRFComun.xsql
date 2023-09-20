@@ -1,0 +1,70 @@
+<!--
+ |  Este fichero es compartido por TRFManten y TRFBorrar
+ |
+ | 
+ +-->
+<Comun xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <field name="TRF_IDDIVISA">
+   <xsql:query rowset-element="dropDownList"          
+          row-element="listElem">                  
+    <![CDATA[                                        
+    select DIV_ID AS "ID",                           
+         DIV_NOMBRE AS "listItem"
+    from DIVISAS                     
+    ORDER BY DECODE(DIV_ID,1,0,0,1,DIV_ID)
+    ]]>                                            
+   <xsql:no-rows-query rowset-element="dropDownList"          
+          row-element="listElem">                              
+          Select '-1' "ID",
+                 '[Divisas]' "listItem" 
+            from dual 
+   </xsql:no-rows-query>                             
+  </xsql:query>                                      
+ </field>
+ 
+<!--
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>  
+    <page>G-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+-->
+
+<button label="Anterior" caption="G-0001">
+    <name_function>retornaSituacionAnterior</name_function>
+    <param>document.forms[0]</param>     
+  </button>
+  
+<button label="Guardar" caption="IMG-0025">
+    <name_function>guardarCambiosTarifas</name_function>
+    <param>document.forms[0]</param> 
+    <param>'TRF_CANTIDAD'</param>
+    <param>'TRF_IMPORTE'</param>
+    <param>'TRF_IDDIVISA'</param>        
+  </button>  
+  
+<!-- 
+
+  La base de datos reconoce los cambios realizados en las tarifas. Tanto modificaciones, altas como borrados.
+ 
+  <button label="Eliminar" caption="IMG-0500">
+    <name_function>BorrarSeleccionados</name_function>
+    <param>document.forms[0]</param>
+    <param>'eliminar'</param>
+    <param>'TRFMantenSave.xsql'</param>
+    <param_msg>G-1040</param_msg>     
+  </button> 
+  
+-->  
+ 
+  <button label="Aceptar" caption="IMG-0035">
+    <name_function>Actua</name_function>
+    <param>document.forms[0]</param>
+    <param>'TRF_CANTIDAD'</param>
+    <param>'TRF_IMPORTE'</param>
+    <param>'TRF_IDDIVISA'</param>            
+  </button>
+  
+</Comun>

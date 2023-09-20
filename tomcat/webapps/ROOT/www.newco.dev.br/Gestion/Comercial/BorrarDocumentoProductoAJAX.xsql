@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Borra el campo LIC_PROD_IDDOCUMENTO de la tabla LIC_PRODUCTOS
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BorrarDocumentoProductoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BorrarDocumentoProductoJSON.xsl"?>
+
+<BorraDocumento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(50);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarDocumentoProd');
+		IF US_ID>=0 THEN
+			v_Res:=LICITACIONES_PCK.Producto_BorrarDocumento(
+				US_ID,
+				'{@ID}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</BorraDocumento>

@@ -1,0 +1,4 @@
+13abr20 ET Usuario MULTIEMPRESA + EISListado.xsl -> EISListadoHTML.xsl
+11set21 ET Incluir columna de LICITACION para CO_PED_EUR
+13set21 ET Generar listado desde JS (incluir columna LICITACION cuando corresponda)
+

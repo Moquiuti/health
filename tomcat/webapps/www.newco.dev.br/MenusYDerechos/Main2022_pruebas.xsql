@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Login directo a partir de la cookie de sesion
+	ultima revision ET 9dic21
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="MainHTML2022_pruebas.xsl"?>
+
+<Main xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="LANG" value="{@LANG}"/>
+    <xsql:include-param name="PORTAL" value="{@PORTAL}"/>
+    <!--<xsql:include-param name="ACCION" value="{@ACCION}"/>-->
+    <xsql:include-param name="HOJADEGASTOS" value="{@HOJADEGASTOS}"/>
+    <xsql:include-param name="NUMCEDULA" value="{@NUMCEDULA}"/>
+    <xsql:include-param name="NOMBREPACIENTE" value="{@NOMBREPACIENTE}"/>
+    <xsql:include-param name="HABITACION" value="{@HABITACION}"/>
+    <xsql:include-param name="PARSES" value="{@PARSES}"/>
+    <xsql:include-owa>
+	<![CDATA[
+		BEGIN
+			utilidades_pck.debug('Main.xsql. PARSES:{@PARSES}. SES_ID:{@SES_ID}');
+			IF (('{@PARSES}' IS NULL) OR ('{@PARSES}'='')) THEN
+				seguridad_pck.Sesion_XML('{@SES_ID}','{@ACCION}');
+			ELSE
+				seguridad_pck.Sesion_XML('{@PARSES}','{@ACCION}');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</Main>

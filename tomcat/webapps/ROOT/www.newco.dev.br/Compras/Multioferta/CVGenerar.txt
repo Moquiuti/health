@@ -1,0 +1,25 @@
+29jun17 ET Utilizar el código asociado al usuario, para clientes con varias codificaciones
+29jun17	ET Limpiar código XSL
+29jun17	ET Permitir asociar un documento al pedido
+6nov17	ET Recuperar divisa desde el XML
+22nov17	ET No se guarda correctamente la forma y plazo de pago tras el segundo paso del pedido
+20jun18	ET Campos obligatorios para pedidos de Elementos Especiales: documento, cédula paciente, nombre paciente. CambioJS: CVGenerar_210618.js
+07set18	ET No se ocultaba correctamente el campo "Enviar"
+25feb19 ET Si el pedido es urgente, obligar a poner comentarios justificativos
+04abr19 ET Detectado problema al utilizar #, | o $ en los campos que se juntan (comentarios, urgente, cod.pedido)
+05abr19 ET Separar los campos de Comentarios, Urgente y Codigo de pedido de la clínica que antes se enviaban juntos 
+18dic19 ET El botón de programar no funciona si se ha añadido un fichero al pedido CVGenerar_181219.js
+07feb20 ET Problema con el desplegable de plazos de entrega, es mejor no presentarlo, solo calendario
+31mar20 ET Pedidos de depósito
+04ago20 ET Incluir LP_HOJADEGASTOS
+07set20 ET Incluir campo "baja prioridad" CVGenerar_070920.js
+17set20 ET Creado CVGenerar_Pruebas.xsql para no tener que hacer los 2 pasos del pedido para cada prueba
+17set20 ET Incluir varios documentos en un mismo pedido. CVGenerar_170920.js
+CVGenerar_171120.js
+CVGenerar_271120.js
+10dic20 ET Se produce error al pulsar el botón "Programar" "formPrincipal.elements[("NoComercial" + mo_id)] is undefined". CVGenerar_101220a.js
+28dic20 ET Resuelto problema con cadenas largas en comentarios, se rompian en varias lineas. Ahora se envian en formato JS
+30dic20 ET Editar coste de trasnporte, e IVA coste transporte. CVGenerar_301220.js
+08ene21 ET Incluir nuevo campo HABITACION. CVGenerar_080121.js
+15ene21 ET Separar los parmetros de las observaciones para que no sean editables pero el campo si. CVGenerar_150121.js
+

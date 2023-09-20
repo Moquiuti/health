@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de Menus de un Usuario
+	Ultima revision: ET 25ene23 16:00
+-->
+<?xml-stylesheet type="text/xsl" href="MenusMantenHTML2022.xsl"?>
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@LANG}"/>
+
+    <xsql:include-owa>
+      <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+		  	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MenusMantenSave');
+		  	IF US_ID>=0 THEN
+				USUARIOS_PCK.MantenimientoMenusPorUsuario(US_ID, '{@ID_USUARIO}', '{@EMP_ID}', '{@CAMBIOS_MENUS}', '{@ACCION}');
+      		END IF;				   
+     	END;
+        ]]>
+    </xsql:include-owa>
+</Mantenimiento>
+

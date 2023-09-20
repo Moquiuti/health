@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PaginaEnBlanco.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PaginaEnBlanco.xsl"?>
+
+
+<!--
+ |   Mostramos algunos datos de interés sobre cambios en el catálogo privado del usuario
+ +-->
+
+
+<PaginaEnBlanco xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="STYLE"/>
+	<xsql:include-owa>
+        <![CDATA[
+			DECLARE
+				US_ID		NUMBER;
+				v_Res		VARCHAR2(1000);
+    		BEGIN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PaginaEnBlanco');	
+				IF US_ID>=0 THEN
+					HTP.P(Utilidades_Pck.CabeceraXML
+							||'<INICIO>');
+							
+					v_Res:=catalogoautomatico_pck.SolicitudDeEmplantillar_Mail(US_ID, '{@EMPLANTILLAR}');
+					HTP.P('<MENSAJE>'||utilidades_pck.Piece(v_Res,'|',1)||'</MENSAJE>');
+					
+					Catalogoprivado_Seg_Pck.UltimosCambiosCatalogo_XML(US_ID,'S','S','S','S',300,5);
+					
+					ENCUESTAS_PCK.EncuestasDelUsuario_XML(US_ID,'N');
+					
+					HTP.P('</INICIO>');
+				END IF;
+			END;
+        ]]>
+	</xsql:include-owa>
+</PaginaEnBlanco>		
+
+
+
+		

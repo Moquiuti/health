@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Recupera lista de productos equivalentes dado un IDProdEstandar
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="RecuperaProdEquivJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="RecuperaProdEquivJSON.xsl"?>
+
+<ProductosEquivalentes xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProveedor');
+		IF US_ID>=0 THEN
+			PRODUCTOSEQUIVALENTES_PCK.EquivalentesManuales_XML(
+				US_ID,
+				'{@IDPROD}',
+                                '{@IDIDIOMA}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ProductosEquivalentes>

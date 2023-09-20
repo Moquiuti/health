@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevaSolicitudCatalogacionHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevaSolicitudCatalogacionHTML.xsl"?>
+
+<NuevaSolicitud xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		EMPRESA_ID	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevaSolicitudCatalogacion');
+		IF US_ID>=0 THEN
+			EMPRESA_ID:=UTILIDADES_PCK.EmpresaDelUsuario(US_ID);
+
+			HTP.P('<DATOS_USUARIO>'
+				|| '<IDUSUARIO>'||US_ID||'</IDUSUARIO>'
+				|| '<IDEMPRESA>'||EMPRESA_ID||'</IDEMPRESA>'
+				|| '</DATOS_USUARIO>'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevaSolicitud>

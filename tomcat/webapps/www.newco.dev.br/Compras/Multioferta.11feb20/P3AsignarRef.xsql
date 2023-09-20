@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="P3InsertarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="P3InsertarHTML.xsl"?>
+
+<Plantilla xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-request-params/>
+  
+<!--
+ |  Nombre de la pagina. Parametro para guardar el error en caso de xsql-error
+ +-->  
+<pagename>P3AsignarRef</pagename>
+
+<xsql:include-owa>
+<![CDATA[
+BEGIN
+COMPRAVENTA_PCK.InsertarReferencias(
+   p_LP_ID => '{@LP_ID}',
+   p_LLP_ID => '{@LLP_ID}',
+   p_TCV_ID => '{@TCV_ID}',
+   p_US_ID => '{@US_ID}',
+   p_REGISTROS_ANTES => '{@CONTROLREGISTRES}',
+   p_REGISTROS_DESPUES => '{@SELECCIONARTOTAL}',
+   p_REFERENCIACLIENTE => '{@REFERENCIACLIENTE}',
+   p_LLP_PRODUCTO_DETERMINADO => '{@LLP_PRODUCTO_DETERMINADO}'
+);
+END;   
+]]>	  
+</xsql:include-owa>
+
+<!-- 
+ |   Este XSQL devuelve el LP_ID, para saltar a la pagina
+ +-->
+ 
+</Plantilla>
+

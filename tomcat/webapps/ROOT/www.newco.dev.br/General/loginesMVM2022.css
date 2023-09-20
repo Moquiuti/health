@@ -1,0 +1,557 @@
+@charset 'UTF-8';
+
+@import url('http://fonts.googleapis.com/css?family=Roboto');
+
+:root {
+	--fundo_paginas:  #F7F7F7; 
+	--cor_fonte_menu: #6C757D;    
+	--cor_principal: #3D5F90;   	
+	--cor_destaque: #56CCF2;    
+	--logo_login: url(/images/2022/img/logo_login.png); 
+	--logo_loginsaludb2b: url(/images/2022/img/logoSaludB2B-1.png); 
+	--logo:  url(/images/2022/img/logo.png); 
+	--logo_saludb2b: url(/images/2022/img/logoSaludB2B-1.png); 
+	--background_img: url(/images/2022/img/background_login.png);
+	--background_img_es: url(/images/2022/img/background_login_es.png);
+}
+
+/*
+
+Inicio Gerais/General/Generic
+
+*/
+
+body { 
+	margin: 0;
+	position: relative;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	background-color: var(--fundo_paginas);
+	overflow-x: hidden;
+}
+
+.header {
+	overflow: hidden;
+	background-color: #FFFFFF;
+}
+
+.logo_es {
+	position: absolute;
+	width: 299.72px;
+	height: 53px;
+	left: 100px;
+	top: 30px;
+	background: var(--logo);
+	background-repeat: no-repeat;
+	margin-left: 20px;
+}
+
+.logo_es_saludb2b {
+	position: absolute;
+	width: 299.72px;
+	height: 53px;
+	left: 100px;
+	top: 30px;
+	background: var(--logo_saludb2b);
+	background-repeat: no-repeat;
+	margin-left: 20px;
+}
+
+.menu_es {
+	float: right;
+	overflow: hidden;
+	margin-right: 160px;
+	margin-top: 30px;
+	color: var(--cor_fonte_menu);
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 21px;
+}
+
+.menu_es a {
+	position: relative;
+	float: left;
+	outline: none;
+	cursor: indicadores;
+	padding: 14px 25px;
+	transition: 0.3s;
+	box-sizing: border-box;
+	text-decoration:none; 
+	color: var(--cor_principal);
+}
+
+.menu_es a:before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	bottom: 0;
+	left: 0;
+	background-color: var(--cor_principal);
+	visibility: hidden;
+	-webkit-transform: scaleX(0);
+	transform: scaleX(0);
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+}
+
+.menu_es a:hover:before {
+	visibility: visible;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
+}
+
+.alert_danger{
+	color: #FF0000;
+	margin-top: 1%;
+}
+
+/*TAMANHO DAS COLUNAS dos formularios PARDÃO BOOTSTRAP .col-sm-1 até .col-sm-12*/
+.col-sm-4{
+	width: 31.3333333333%;
+	height: 59px;
+	left: 10px;
+	top: 0px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+	display: inline-block;	
+}
+
+.col-sm-8{
+	width: 64.6666666666%;
+	height: 79px;
+	left: 10px;
+	top: 40px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+	display: inline-block;	
+}
+
+.col-sm-12{
+	width: 100%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+	display: inline-block;	
+}
+
+/******************************************************************************************/
+
+.input_formulario{ 
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 14px 10px;
+	background: #FFFFFF;
+	border: 1px solid #6D8CC1;
+	box-sizing: border-box;
+	border-radius: 10px;
+	color: var(--cor_principal);
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin: 4px 0px;
+	outline: 0;
+	width: 100%;
+	font-size: 18px;
+}
+
+/*CARACTERÍSTICAS da LABEL .label*/
+.label{
+	width: 59px;
+	height: 16px;
+	left: 16px;
+	top: 0px;
+	color: #6D8CC1;
+	margin-left: 15px;
+}
+
+.botao_acessar{
+        width: 98%;
+	height: 58px;
+	background: var(--cor_destaque);
+	border-radius: 30px;
+	text-align: center;
+	text-decoration: none;
+	color: var(--cor_principal);
+	font-size: 16px;
+	line-height: 60px; 
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 4%;
+	display: block;
+	/*width: 98%;
+	height: 58px;
+	background: var(--cor_destaque);
+	border-radius: 30px;
+	align-self: stretch;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	float:left;
+	cursor: pointer;
+	color: var(--cor_principal);
+	font-size: 16px;
+	line-height: 25px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 6%;
+	display: block;*/
+}
+
+/* DIV para separar formulario de login */
+.coluna_login {
+	padding-right: 40px;
+	padding-left: 40px;
+	width: 78%;
+	margin-top: 20px;
+}
+
+.esqueci_senha{
+	width: 100%;
+	height: 19px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: var(--cor_destaque);
+	display: block;
+	text-decoration: none;
+	margin-top: 1%;
+        margin-bottom:1%;
+        text-align:center;
+}
+
+/* DIV com background e com formulario de login e texto sobre MVM*/
+.login_principal_login_es{
+	/*position: relative;*/
+	width: 100%;
+	height: 700px;
+	left: 0px;
+	background: var(--background_img_es), var(--cor_principal);
+	background-blend-mode: luminosity, normal;
+	background-size: 80%
+}
+
+/* DIV dentro da DIV .login_principal com texto e formulario*/
+.login_principal_interno_login_es{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 40px;
+	/*position: absolute;*/
+	width: 80%;
+	height: 800px;
+	left: 100px;
+	top: 60px;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(48px);
+	border-radius: 16px;
+	float: left;
+}
+
+/*DIV com texto da MVM ao lado do formulario de login*/
+.quem_somos_login_es{
+	width: 50%;
+	height: 100%;
+}
+
+.quem_somos_login_es h2{
+	color: var(--cor_destaque);
+	margin-bottom: 30px;
+}
+
+.quem_somos_login_es p{
+	color: #FFFFFF;
+	margin-bottom: 30px;
+	font-size: 15px;
+	line-height: 130%;
+}
+
+/*DIV com formulario de login*/
+.formulario_login_es{
+	width: 50%;
+	height: 170%;
+	padding-left: 10%;
+}
+
+.formulario_interno_login_es{
+	width: 95%;
+	height: 95%;
+        margin-top: 275px;
+	left: 619px;
+	top: 61px;
+	background: #FFFFFF;
+	border-radius: 8px;
+	/*padding: 10%;*/
+        padding-top: 10%;
+        padding-bottom: 10%;
+}
+
+
+/* DIV para separar formulario de login */
+.coluna_login_es {
+	padding-right: 40px;
+	padding-left: 40px;
+	width: 76%;
+	margin-top: 58px;
+}
+
+
+
+/*DIV com os 4 blocos informativos*/
+.informativo_login_es  {
+	width: 100%;
+	height: 280px;
+	background-color: var(--fundo_paginas);
+}
+
+/*DIV com margem a esquerda*/
+.bloco_flutuante_login_es{
+	position: absolute;
+	float: left;
+	width: 100%;
+	margin: -75px 100px 171px;
+}
+
+/*DIV com informativa dentro da DIV .informativo_login_es*/
+.bloco_informativo_login_es{
+	float: left;
+	width: 15%;
+	height: 308px;
+	left: 100px;
+	background: #FFFFFF;
+	box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+	border-radius: 16px;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	margin: 0px 35px;
+}
+
+.bloco_informativo_interno_login_es{
+	width: 95%;
+	height: 95%;
+	left: 619px;
+	top: 61px;
+	background: #FFFFFF;
+	border-radius: 8px;
+	padding: 13%;
+}
+
+.bloco_informativo_interno_login_es h2{
+	color: #56CCF2;
+	width: 60%;
+	line-height: 1.2;
+}
+
+.bloco_informativo_interno_login_es p{
+	font-size: 16px;
+	line-height: 130%;
+	color: #2C2C2C;
+}
+
+
+/*DIV background azul com informações para cliente e proveedor*/
+.cliente_proveedor_login_es{
+	position: relative;
+	align-items: center;
+	width: 100%;
+	height: 350px;
+	background: var(--cor_principal);
+	display: flex;
+	flex-flow: row wrap;
+}
+
+/* DIV dentro .cliente_proveedor com informações de CLIENTE */
+.coluna_esquerda_login_es{
+	width: 50%;
+	height: 100%;
+	margin-top: 3%;
+}
+
+
+.coluna_dereta_login_es{
+	width: 50%;
+	height: 100%;
+	margin-top: 3%;
+}
+
+.informativo_cliente_login_es{
+	margin-left: 28%;
+}
+
+.informativo_cliente_login_es h2{
+	color: #56CCF2;
+	margin-bottom: 30px;
+}
+
+.informativo_cliente_login_es li{
+	color: #FFFFFF;
+	margin-top: 15px;
+}
+
+/* DIV dentro .cliente_proveedor com informações de PROVEEDOR */
+.coluna_direita_login_es{
+	width: 50%;
+	height: 100%;
+	margin-top: 3%;
+}
+
+.informativo_proveedor_login_es h2{
+	color: #56CCF2;
+	margin-bottom: 30px;
+}
+
+.informativo_proveedor_login_es li{
+	color: #FFFFFF;
+	margin-top: 15px;
+}
+
+/*DIV com logo de clientes e formulario de contato*/
+.logos_contatos_login_es  {
+	position: relative;
+	width: 100%;
+	height: 800px;
+	background: #FFFFFF;
+	margin-top: 3%;
+}
+
+/*SLIDE clientes*/
+#owl-demo {
+	width: 85%;
+	margin-left: 100px;
+}
+
+#owl-demo .item{
+	width: 200px;
+}
+#owl-demo .item img{
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+
+.contato_login_es{
+	position: relative;
+	display: table;
+	float: left;
+	width: 100%;
+	height: 256px;
+	margin: 10px 50px 20px;
+}
+
+.contato_login_es h2{
+	color: #56CCF2;
+	width: 60%;
+	padding-left: 40px;
+}
+
+/*DIV com formulario de contato*/
+.formulario_contato_login_es {
+	width: 65%;
+	height: 100%;
+	padding-left: 18%;
+	position: absolute;
+}
+
+.coluna_formulario_login_es {
+	padding-right: 40px;
+	padding-left: 40px;
+	width: 80%;
+	margin-top: 28px;
+	position: relative;
+}
+
+.rodape_login_es{
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 480px;
+	background: #E0E0E0;
+}
+
+.rodape_logo_email_login_es{
+	position: relative;
+	width: 100%;
+	height: 40%;
+	padding-left: 20%;
+	display: inline-block;
+}
+
+.rodape_coluna_esquerda_login_es{
+	width: 28%;
+	height: 50px;
+	margin-top: 3%;
+	display: inline-block;
+	color: var(--cor_principal);
+	position: absolute;
+}
+
+.rodape_coluna_esquerda_login_es .logo{
+	margin-top: 3%;
+	display: inline-block;
+	background-size: 75%;
+	top: 0px;
+	left: 0px;
+	margin-left: 0px;
+}
+
+.rodape_email_direita_login_es{
+	width: 100%;
+	height: 50px;
+	margin-top: 5%;
+	display: inline-block;
+	color: var(--cor_principal);
+	margin-left: 100%;
+}
+
+.rodape_reservado_login_es{
+	position: relative;
+	width: 840px;
+	height: 40%;
+	padding-left: 20%;
+	color: var(--cor_principal);
+	margin-top: 3%;
+}
+
+/*LINHA DE SEPARAÇÃO VERTICAL*/
+.linha_separacao_eixo_x_es{
+	width: 61%;
+	border: 0.5px solid #b3b3b3;
+	margin-left: 20%;
+	margin-top: 1%;
+}
+
+.logo_rodape {
+	position: absolute;
+	width: 299.72px;
+	height: 53px;
+	top: 30px;
+	background: var(--logo);
+	background-size: 80%;
+	background-repeat: no-repeat;
+	margin-left: 20px;
+}

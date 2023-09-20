@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NoticiaLeidaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NoticiaLeidaJSON.xsl"?>
+
+<NoticiaLeida xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_noticia	VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NoticiaLeida');
+		IF US_ID>=0 THEN
+			v_noticia:=NOTICIAS_PCK.Leida(
+				US_ID,
+				'{@ID_NOTICIA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_noticia = 'OK' THEN
+				HTP.P('<OK>'||v_noticia||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NoticiaLeida>

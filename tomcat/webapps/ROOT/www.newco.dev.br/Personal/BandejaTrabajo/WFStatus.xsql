@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	PAGINA DE INICIO
+	Ultima revision: ET 11ene22 18:16
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="WFStatusHTML.xsl"?>
+
+
+<WorkFlowPendientes xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="STYLE" />
+
+	<!--	Pedidos problematicos, alarmas, bandeja y licitaciones en curso	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','WFStatus');
+					IF US_ID>=0 THEN
+					
+						--utilidades_pck.debug('WFStatus XSQL. IDFILTROSEMAFORO:{@IDFILTROSEMAFORO}');
+					
+						BANDEJA_PCK.Inicio
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDFILTROMOTIVO}',
+							'{@IDFILTRORESPONSABLE}',
+							'{@IDFILTROCOMPRADOR}',
+							'{@IDFILTROESTADO}',
+							'{@IDFILTROSEMAFORO}',
+							'{@IDFILTROTIPOPEDIDO}',
+							'{@IDCENTROCONSUMO}',				-- 30ago21
+							'{@BLOQUEADO}',
+							'{@NOCUMPLEPEDMIN}',				-- 15mar18 NOCUMPLEPEDMIN:	{@FARMACIA},
+							'{@BUSCAR_PACKS}',					-- 15mar18	{@MATERIAL},
+							'{@CODIGOPEDIDO}',
+							'{@SINSTOCKS}',
+							'{@PRODUCTO}',
+							'{@TODOS12MESES}',
+							'{@INCFUERAPLAZO}',
+							'{@PED_ENTREGADOOK}',               -- 7abr15
+							'{@PED_PEDIDONOCOINCIDE}',          -- 7abr15
+							'{@PED_RETRASADO}',                 -- 7abr15
+							'{@PED_ENTREGADOPARCIAL}',          -- 7abr15
+							'{@PED_RETRASODOCTECNICA}',         -- 7abr15
+							'{@PED_NOINFORMADOENPLATAFORMA}',   -- 7abr15
+							'{@PED_PRODUCTOSANYADIDOS}',        -- 7abr15
+							'{@PED_PRODUCTOSRETIRADO}',         -- 7abr15
+							'{@FECHA_INICIO}',                  -- 7abr15
+							'{@FECHA_FINAL}',                   -- 7abr15
+							'{@PED_MALAATENCIONPROV}',          -- 8abr15
+							'{@PED_URGENTE}',                   -- 5oct15
+							'{@PAGINA}',                        -- 7abr15
+							'{@LINEA_POR_PAGINA}',				-- 7abr15 Lineas por pagina (Number)
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+							'{@SOLOPEDIDOS}',                   -- 2set19
+							'{@BUSQUEDASESPECIALES}',			-- 20ene20
+							'{@FIDAREAGEOGRAFICA}',				-- 10ene22
+							'{@FTEXTO}',						-- 11ene22
+							'{@PLAZOCONSULTA}',					-- 11ene22
+							'{@IDFILTROVENDEDOR}'				-- 21ene22
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</WorkFlowPendientes>

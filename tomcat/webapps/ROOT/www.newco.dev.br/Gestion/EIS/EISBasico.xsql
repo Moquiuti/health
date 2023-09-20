@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EISDatosHTML.xsl"?>
+
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="MOSTRAR_ALERTA"/>
+<xsql:include-param name="CODIGO_MENSAJE"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-param name="CP_EMPRESA2"/>
+<xsql:include-param name="CP_AGRUPAR"/>
+
+
+<!--
+
+	Prepara una consulta predefinida del EIS
+	(c) 2002	ET
+
+-->
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-param name="SES_ID"/>
+
+<xsql:include-request-params/>
+
+<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISBasico');
+			IF US_ID>=0 THEN
+				EIS_PCK.ConsultaPredefinida(US_ID, '{@IDCONSULTA}', '{@IDEMPRESA}', '{@REFERENCIA}');
+			END IF;
+		END;
+	]]>
+</xsql:include-owa>
+<returnHome/>
+</EIS_XML>

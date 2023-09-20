@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de productos
+	Ultima revision: ET 6nov20 11:41
+ -->
+<!---->
+<?xml-stylesheet type="text/xsl" href="PROTarifasHTML.xsl"?>
+
+<MantenimientoProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="PRO_ID"/>
+
+<Form name="AltaProductos" method="post">
+<xsql:include-owa>
+<![CDATA[
+
+
+
+
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROTarifas');
+		IF US_ID>=0 THEN
+			
+			IF '{@ACCION}'='GUARDAR' THEN
+			
+				utilidades_pck.debug('PROTarifas:{@PRO_ID} (IDUsuario:'||US_ID||')');
+				v_Res:=tarifas_pck.GuardarTarifaCompleta
+				(
+					US_ID,
+					'{@IDCLIENTE}',
+					'{@PRO_ID}',
+					'{@IMPORTE}',
+					'{@IDDIVISA}',						--	7dic20 IDDivisa
+					'U',								--	Origen
+					'{@FECHAINICIO}',
+					'{@FECHAFINAL}',
+					'{@IDDOCUMENTO}',
+					'{@NOMBREDOCUMENTO}',
+					'{@IDTIPONEGOCIACION}',
+					'{@BONIF_COMPRA}',
+					'{@BONIF_GRATIS}',
+					'{@BONIF_REFPRODUCTO}',				--	7dic20 Ref producto asociado a bonif
+					'{@IDSELECCIONGEO}'			
+				);
+
+			ELSIF '{@ACCION}'='BORRAR' THEN
+
+				v_Res:=tarifas_pck.BorrarTarifa
+				(
+					US_ID,
+					'{@IDCLIENTE}',
+					'{@PRO_ID}',
+					'{@IDSELECCIONGEO}'
+				);
+				
+			END IF;
+		
+			MANTENIMIENTOPRODUCTOS_PCK.MostrarProducto ('{@PRO_ID}', US_ID, 'S');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Form>
+</MantenimientoProductos>

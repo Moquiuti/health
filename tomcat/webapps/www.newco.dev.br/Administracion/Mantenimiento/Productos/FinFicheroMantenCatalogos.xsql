@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	ultima revision ET 8jun18 09:16
+-->
+<!--30jun22 <?xml-stylesheet type="text/xsl" href="FinFicheroMantenCatalogosJSON.xsl"?>-->
+<?xml-stylesheet type="text/xsl" href="FinFicheroMantenProductosJSON.xsl"?>
+
+<FinEnvioFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas
+	<xsql:include-param name="NOMBRE" value="{@NOMBRE}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	-->
+	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','FinMantenCatalogos_XML');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL: IntegracionRecepcion_pck.FinMantenCatalogos_XML {@IDFICHERO},{@NUMLINEAS},{@ESTADO}');
+
+				IntegracionRecepcion_pck.FinMantenCatalogos_XML(US_ID,'{@IDFICHERO}','{@NUMLINEAS}','{@ESTADO}');
+    		END IF;
+		END;
+]]>
+</xsql:include-owa>
+</FinEnvioFichero>

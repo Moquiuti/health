@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Convocatorias especiales. Carga de productos desde fichero
+	Ultima revisión: ET 21set18 12:29
+-->
+<?xml-stylesheet type="text/xsl" href="ConvocatoriasEspecialesHTML.xsl"?>
+
+<MantenProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ConvocatoriasEspeciales.Inicio_XML');
+
+			IF US_ID > 0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				ConvocatoriasEspeciales_pck.Inicio_XML(US_ID,'{@FIDEMPRESA}');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</MantenProductos>

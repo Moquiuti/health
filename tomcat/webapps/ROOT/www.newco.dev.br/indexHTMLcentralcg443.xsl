@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Área pública de Central CG -->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"> 
+<xsl:output method="html" encoding="iso-8859-1" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" indent="yes"/>
+
+<xsl:template match="/">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+	Nueva pagina principal de medicalvm.com
+	17dic16	ET
+	Ultima revision: 20ene17 18:18  20190226 CentralCG
+-->
+
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:choose>
+	<xsl:when test="/AreaPublica/INDEXLANG != ''"><xsl:value-of select="/AreaPublica/INDEXLANG"/></xsl:when>
+	<xsl:otherwise>spanish</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<xsl:variable name="doc">http://www.centralCG.com.co/General/texts443_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--fin idioma-->
+
+<!--portal-->
+<xsl:variable name="portal">
+	<xsl:choose>
+	<xsl:when test="/AreaPublica/PORTAL != ''"><xsl:value-of select="/AreaPublica/PORTAL"/></xsl:when>
+	<xsl:otherwise>CENTERGR</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<!--portal-->
+
+<!--login minimo-->
+<xsl:variable name="reducido">
+	<xsl:choose>
+	<xsl:when test="/AreaPublica/REDUCIDO != ''"><xsl:value-of select="/AreaPublica/REDUCIDO"/></xsl:when>
+	<xsl:otherwise>N</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<!--portal-->
+
+<xsl:variable name="AP_Titulo">AP_<xsl:value-of select="$portal"/>_titulo</xsl:variable>
+<xsl:variable name="AP_metadescr">AP_<xsl:value-of select="$portal"/>_metadescr</xsl:variable>
+<xsl:variable name="AP_Portal">AP_<xsl:value-of select="$portal"/>_Portal</xsl:variable>
+
+<xsl:variable name="AP_textocookie1">AP_<xsl:value-of select="$portal"/>_textocookie1</xsl:variable>
+<xsl:variable name="AP_textocookie2">AP_<xsl:value-of select="$portal"/>_textocookie2</xsl:variable>
+<xsl:variable name="AP_textocookie3">AP_<xsl:value-of select="$portal"/>_textocookie3</xsl:variable>
+
+<xsl:variable name="AP_URL">AP_<xsl:value-of select="$portal"/>_URL</xsl:variable>
+<xsl:variable name="AP_Logo">AP_<xsl:value-of select="$portal"/>_Logo</xsl:variable>
+<xsl:variable name="AP_PortalLargo">AP_<xsl:value-of select="$portal"/>_PortalLargo</xsl:variable>
+<xsl:variable name="AP_Dominio">AP_<xsl:value-of select="$portal"/>_Dominio</xsl:variable>
+
+<xsl:variable name="AP_Mision">AP_<xsl:value-of select="$portal"/>_Mision</xsl:variable>
+<xsl:variable name="AP_MisionTexto">AP_<xsl:value-of select="$portal"/>_MisionTexto</xsl:variable>
+<xsl:variable name="AP_Vision">AP_<xsl:value-of select="$portal"/>_Vision</xsl:variable>
+<xsl:variable name="AP_VisionTexto">AP_<xsl:value-of select="$portal"/>_VisionTexto</xsl:variable>
+<xsl:variable name="AP_Valores">AP_<xsl:value-of select="$portal"/>_Valores</xsl:variable>
+<xsl:variable name="AP_ValoresTexto">AP_<xsl:value-of select="$portal"/>_ValoresTexto</xsl:variable>
+
+
+<head>
+
+	<title><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Titulo]/node()"/></title>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<!-- PS 20170623 <script type="text/javascript" src="http://www.newco.dev.br/General/login_18may17.js"></script>-->
+	<!--<script type="text/javascript" src="http://www.newco.dev.br/General/login_21jun17OHSJD.js"></script>-->
+	<script type="text/javascript" src="http://www.newco.dev.br/General/login_06nov18centralcg.js"></script>
+	<link rel="shortcut icon" href="http://www.newco.dev.br/images/MedicalVM.ico"/>
+	<meta name="description" content="Medical VM es la primera plataforma para crear centrales de compras a medida.">
+		<xsl:attribute name="content"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_metadescr]/node()"/></xsl:attribute>
+	</meta>
+<!--        <link rel="stylesheet" href="http://www.newco.dev.br/General/areapublica443.css" type="text/css"/> -->
+	<link rel="stylesheet" href="http://www.newco.dev.br/centralcg/General/areapublica443.css" type="text/css"/>
+	<script type="text/javascript">
+		var errorLogin = 'Se ha producido un error al entrar el usuario o la contraseña.';
+
+        function CompruebaCookie(){
+
+			var aceptoCookie = GetCookie('ACEPTO_COOKIE');
+
+			if (aceptoCookie == '' || aceptoCookie == null) {
+				//si no ha aceptado la cookie pongo aviso
+				document.getElementById("avisoCookieBox").style.display = 'block';
+				<!--document.getElementById("separador").style.display = 'none';-->
+			}
+			else
+			{
+			<!--	document.getElementById("separador").style.display = 'block';-->
+				document.getElementById("avisoCookieBox").style.display = 'none';
+			}
+		}
+            
+        function AceptaCookie(){
+
+			SetCookie('ACEPTO_COOKIE','S');
+			CompruebaCookie();
+		}
+            
+	</script>
+</head>
+<body onload="CompruebaHTTPcentralcg('{document($doc)/translation/texts/item[@name='URLSeguracentralcg']/node()}');CompruebaCookie();">
+<!--20180416<body>-->
+
+<form name="frmLogin">
+	<input type="hidden" name="DOMINIO" value="{document($doc)/translation/texts/item[@name=$AP_Dominio]/node()}"/><!-- necesario para la cookie    -->
+</form>
+
+
+    <div class="todo">
+		<a name="MedicalVM"/>
+		<div class="avisoCookie" id="avisoCookieBox" style="display:none;">
+			<div class="avisoCookieBox">
+                    <p class="textoCookie"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_textocookie1]/node()"/></p>
+                    <p class="textoCookie"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_textocookie2]/node()"/></p>
+                    <p class="textoCookie"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_textocookie3]/node()"/>
+                    <!--&#160;&#160;&#160;&#160;<a id="aceptaCookie" class="btnOscuro" href="javascript:AceptaCookie();">Acepta</a>-->
+                    <a id="aceptaCookie" class="btnOscuro" href="javascript:AceptaCookie();">
+                    	<xsl:value-of select="document($doc)/translation/texts/item[@name='acepta']/node()"/>
+                    </a></p>
+                </div>
+      	</div>
+    	<!-- 20180312<div class="cabecera">-->
+    		<!-- 20180312 <div class="logo">
+				<a>
+					<xsl:attribute name="href"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_URL]/node()"/></xsl:attribute>
+					<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/></xsl:attribute>
+					<img>
+						<xsl:attribute name="src"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Logo]/node()"/></xsl:attribute>
+						<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/></xsl:attribute>
+					</img>
+				</a>
+			</div>-->
+		<!-- PS 20180312
+			<xsl:if test="$reducido != 'S'">
+				<nav>
+					<ul>
+						<li>
+							<a href="#MedicalVM">&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/></a>
+						</li>
+						<li>
+							<a href="#Servicios">&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Servicios']/node()"/></a>
+						</li>
+						<li>
+							<a href="#Clientes">&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Clientes']/node()"/></a>
+						</li>
+						<li>
+							<a href="#Clientes">&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Proveedores']/node()"/></a>
+						</li>
+						<li>
+							<a href="#Contacto">&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Contacto']/node()"/></a>
+						</li>
+					</ul>
+				</nav>
+			</xsl:if>
+			-->
+<!-- 20180312		</div> -->
+    	<div class="separador" id="separador" style="display:none;"></div>
+    	<div class="centro">
+    		<div class="textocentro">
+				<xsl:choose>
+				<xsl:when test="$reducido != 'S'">
+
+<!-- OHSJD --> 
+					<xsl:choose>
+					<xsl:when test="$portal = 'OHSJD'">
+                                       	<img src="http://www.newco.dev.br/images/ordenhospitalaria/ideas4-04.png" width="1200" height="500">
+                                       	</img>
+                                       	<img src="http://www.newco.dev.br/images/ordenhospitalaria/ideas7-04.png" width="1200" height="500">
+                                       	</img>
+					</xsl:when>
+<!-- Fin OHSJD -->
+					<xsl:otherwise>
+					<h1><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_PortalLargo]/node()"/></h1>
+					<p style="text-align: justify;"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Innovacion']/node()"/></p>
+					<p style="text-align: justify;"><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Ahorros']/node()"/></p>
+					<!--<p><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Procedimientos']/node()"/></p> -->
+					<p style="text-align: justify;"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Procedimientos']/node()"/>
+					<a href="http://www.centergroupsa.com/es/contacto/" style="color:#000000"   target="_blank"> http://www.centergroupsa.com/es/contacto/</a>
+					</p>
+   			<!-- 20190228		<p><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Escalable']/node()"/></p> -->
+					<!--<p><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Clientesyproveedores']/node()"/>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Portal]/node()"/><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Donde']/node()"/></p>-->
+					<p><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Clientesyproveedores']/node()"/></p>
+					</xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise>
+					<br/>
+					<br/>
+					<br/>
+					<h1><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_PortalLargo]/node()"/></h1>
+					<p><strong><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Mision]/node()"/></strong></p>
+					<p><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_MisionTexto]/node()"/></p>
+					<p><strong><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Vision]/node()"/></strong></p>
+					<p><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_VisionTexto]/node()"/></p>
+					<p><strong><xsl:value-of select="document($doc)/translation/texts/item[@name=$AP_Valores]/node()"/></strong></p>
+					<p><xsl:copy-of select="document($doc)/translation/texts/item[@name=$AP_ValoresTexto]/node()"/></p>
+
+				</xsl:otherwise>
+				</xsl:choose>
+				
+				<!--<div class="login"></div>--> 
+
+			</div>
+
+
+		<!--		<div class="login"></div> --> 
+
+			<!--<div>
+				<img src="ImagenConFondoAzul.png"/>
+			</div>-->
+						<br />
+		</div>
+		<xsl:if test="$reducido != 'S'">
+			<a name="Servicios"/>
+    		<div class="zonados">
+<!-- PS 20180312 20190227 CENTRALCG --><div class="servicios">
+   				<div class="servicios">
+    				<div class="servicio">
+						<img src="http://www.newco.dev.br/images/login2017/icone-software-de-compras.png">
+							<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_PlatCompras']/node()"/></xsl:attribute>
+						</img>
+						<h3 class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_PlatCompras']/node()"/></h3>
+						<p class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_PlatCompras_explic']/node()"/></p>
+					</div>
+    				<div class="servicio">
+						<img src="http://www.newco.dev.br/images/login2017/icone-follow-up-medical-vm.png">
+							<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_SegPedidos']/node()"/></xsl:attribute>
+						</img>
+						<h3 class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_SegPedidos']/node()"/></h3>
+						<p class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_SegPedidos_explic']/node()"/></p>
+					</div>
+    				<div class="servicio">
+						<img src="http://www.newco.dev.br/images/login2017/icone-central-de-compras.png">
+							<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_CentralCompras']/node()"/></xsl:attribute>
+						</img>
+						<h3 class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_CentralCompras']/node()"/></h3>
+						<p class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_CentralCompras_explic']/node()"/></p>
+					</div>
+    				<div class="servicio">
+						<img src="http://www.newco.dev.br/images/login2017/icone-compras-agregadas.png">
+							<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_AgregCompras']/node()"/></xsl:attribute>
+						</img>
+						<h3 class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_AgregCompras']/node()"/></h3>
+						<p class="textoOscuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_AgregCompras_explic']/node()"/></p>
+					</div>
+				</div>
+			</div>
+                </div> <!-- end zonados -->
+			<a name="Clientes"/>
+    		<div class="zonatres"> 
+			<!-- 20180312 -->
+    			<div class="cliente">
+					<h3>Cliente</h3>
+					<ul class="listaHome">
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentCliente1']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentCliente2']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentCliente3']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentCliente4']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentCliente5']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentCliente6']/node()"/></li>
+					</ul>
+				</div>
+    			<div class="proveedor">
+					<h3>Proveedor</h3>
+					<ul>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentProveedor1']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentProveedor2']/node()"/></li>
+					<!--<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentProveedor3']/node()"/></li>-->
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentProveedor4']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentProveedor5']/node()"/></li>
+					<li class="textoClaro"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_VentProveedor6']/node()"/></li>
+					</ul>
+				</div>
+			</div>
+
+			<a name="Contacto"/>
+    		<div class="zonacuatro">
+    			<div class="contacto">
+ 				<h3 class="textoOscuro"><span class="textoDestacado"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ContacteCENTERCG']/node()"/></span>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_PresentacionCENTRALCG']/node()"/>:</h3>
+				<form name="Contacto" method="Post" enctype="text/plain" class="formEstandar">
+					<input type="hidden" name="CONTACTO_CARGO"/>
+					<input type="hidden" name="PAIS" id="PAIS" value="57"/>
+					<input type="hidden" name="PORTAL" id="PORTAL" value="{$portal}"/>
+					<ul>
+						<li>
+							<label><span class="textoDestacado">&gt;</span>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Empresa']/node()"/>:</label>
+							<input maxLength="50" name="CONTACTO_EMPRESA"/>
+						</li>
+						<li>
+							<label><span class="textoDestacado">&gt;</span>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Actividad']/node()"/>:</label>
+							<input maxLength="50" name="CONTACTO_TIPO_EMP"/>
+						</li>
+						<li>
+							<label><span class="textoDestacado">&gt;</span>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Nombrecontacto']/node()"/>:</label>
+							<input type="text" maxLength="50" name="CONTACTO_NOMBRE"/>
+						</li>
+						<li>
+							<label><span class="textoDestacado">&gt;</span>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Telefono']/node()"/>:</label>
+							<input type="tel" maxLength="50" name="CONTACTO_TEL"/>
+						</li>
+						<li>
+							<label><span class="textoDestacado">&gt;</span>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_EMail']/node()"/>:</label>
+							<input maxLength="50" name="CONTACTO_MAIL"/>
+						</li>
+						<li>
+							<label><span class="textoDestacado">&gt;</span>&#160;<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Comentarios']/node()"/>:</label>
+							<textarea name="CONTACTO_TEXT"></textarea>
+						</li>
+						<li>
+							<a class="btnOscuro" id="botonContacto" href="javascript:EnviaContacto(document.forms['Contacto']);"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ContactecentralCG']/node()"/></a>
+						</li>
+					</ul>
+				</form>
+				<div id="confirmBox" class="confirmBoxInfo" style="display:none;" align="center"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Gracias']/node()"/></div>
+				<div id="waitBox" style="display:none;">&#160;</div><br/><br/>
+            	<form name="mensajeJS">
+					<input type="hidden" name="CNTC_NOMBRE_OBL"><xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ErrorFaltaNombre']/node()"/></xsl:attribute></input>
+					<input type="hidden" name="CNTC_EMAIL_OBL"><xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ErrorFaltaEMail']/node()"/></xsl:attribute></input>
+					<input type="hidden" name="CNTC_TLFN_OBL"><xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ErrorFaltaTelf']/node()"/></xsl:attribute></input>
+					<input type="hidden" name="CNTC_NOM_EMPRESA_OBL"><xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ErrorFaltaEmpresa']/node()"/></xsl:attribute></input>
+					<input type="hidden" name="CNTC_TIPO_EMPRESA_OBL"><xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ErrorFaltaTipo']/node()"/></xsl:attribute></input>
+					<input type="hidden" name="CNTC_CARGO_OBL"><xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ErrorFaltaCargo']/node()"/></xsl:attribute></input>
+					<input type="hidden" name="CNTC_INFO_OBL"><xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_ErrorFaltaInfo']/node()"/></xsl:attribute></input>
+            	</form>
+				</div>
+<!-- 20180418
+				<div class="logosClientes">
+					<img src="http://www.newco.dev.br/images/login2017/logosClientes.png" width="250px" height="400px">
+						<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_LogosClientes']/node()"/></xsl:attribute>
+					</img>
+				</div>
+-->
+			</div>
+		
+    		<div class="pie">
+				<p><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Pie1CENTERCG']/node()"/></p>
+				<p>
+				<a href="http://www.newco.dev.br/centralcg/" target="_blank">
+				<xsl:value-of select="document($doc)/translation/texts/item[@name='AP_Pie2CENTERCG']/node()"/>
+				</a>
+				</p>
+				<!-- 20190228 CentralCG <xsl:if test="$reducido != 'S'">
+					<p><xsl:value-of select="document($doc)/translation/texts/item[@name='AP_DatosLegales']/node()"/></p>
+				</xsl:if> -->
+			</div>
+		</xsl:if>
+	</div>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

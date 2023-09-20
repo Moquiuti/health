@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Guarda comentario via AJAX, devuelve resueltado JSON
+	ultima revision ET 19dic18
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="GuardarComentarioJSON.xsl"?>
+
+<GuardarComentario xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ConvocatoriasEspeciales.Producto');
+
+	 		IF US_ID > 0 THEN
+				--utilidades_pck.debug('XSQL: ConvocatoriasEspeciales.Producto {@US_ID}, {@INTF_ID},{@NUMLINEA},{@REFERENCIA}');
+
+				v_Res:=Licitaciones_conv_pck.ActualizarComentarioOferta
+				(
+					'{@US_ID}',
+					'{@LIC_OFE_ID}',
+					'{@COMENTARIOSCDC}'
+				);
+				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P('<OK/>');
+				ELSE
+					HTP.P(utilidades_pck.CabeceraXML||'<ERROR msg="'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'"/>');
+				END IF;
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</GuardarComentario>

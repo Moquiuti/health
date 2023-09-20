@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CompromisoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CompromisoHTML.xsl"?>
+
+<FamiliasYProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Compromiso');
+		IF US_ID>=0 THEN
+
+			Compromiso_PCK.Inicio_XML
+			(
+				US_ID,
+				'{@FIDCENTROCONSULTA}',
+				'{@FIDPROVEEDOR}'||'{@IDPROVEEDOR}',	--	En el buscador de cabecera mantiene el nombre antiguo
+				'{@IDFAMILIA}',
+				'{@IDSUBFAMILIA}',
+				'{@PRODUCTO}',
+				'{@FSELECCION}',
+				'{@ACCION}',
+				'{@PARAMETROS}',
+				'{@COMENTARIOS}'
+			);
+
+		END IF;
+	END;
+    ]]>
+  </xsql:include-owa>
+
+  <returnHome/>
+</FamiliasYProductos>

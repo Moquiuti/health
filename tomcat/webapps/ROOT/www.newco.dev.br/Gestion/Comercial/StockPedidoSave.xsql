@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockOfertaHTML.xsl"?>
+-->
+<StockOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="GUARDAR" value="{@GUARDAR}"/>
+<xsql:include-param name="STOCK_ESTADO" value="{@STOCK_ESTADO}"/>
+<xsql:include-param name="STOCK_ID" value="{@STOCK_ID}"/>
+
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDPedido		NUMBER;
+	BEGIN
+	
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockPedidoSave');
+		IF US_ID > 0 THEN
+                
+			IF '{@STOCK_ID}' IS NOT NULL THEN
+                        
+               v_IDPedido := ANUNCIOSSTOCKS_PCK.NuevoPedido(
+							US_ID,
+							'{@STOCK_ID}',
+							'{@CODIGO_PEDIDO}',						--	NULL para CVT
+							'{@STOCK_CANTIDAD}'						--	NULL para CVT
+						);
+			
+		END IF;
+                        
+        IF '{@STOCK_ID}' IS NOT NULL AND v_IDPedido> 0 THEN
+				ANUNCIOSSTOCKS_PCK.Oferta_XML(
+					US_ID,
+					'{@STOCK_ID}',
+					'S'
+				);
+		ELSE
+			HTP.P('<ERROR/>');
+		END IF;
+                        
+    END IF; --end if us_id mayor 0
+	END;
+]]>
+</xsql:include-owa>
+</StockOferta>

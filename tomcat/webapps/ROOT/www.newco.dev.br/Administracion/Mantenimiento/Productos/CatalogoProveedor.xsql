@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+    Buscador de productos en catalogo de proveedor
+	Última revisión ET 29ago18 13:47
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="CatalogoProveedorHTML.xsl"?>
+
+<CatalogoProveedor  xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="STYLE"/>
+<!--	<xsql:include-param name="REFERENCIA"/>
+	<xsql:include-param name="IDEMPRESA"/>
+	<xsql:include-param name="IDPRODUCTO"/>-->
+	<xsql:include-param name="ORIGEN"/>
+	<xsql:include-param name="INPUT_SOL"/>
+<!--	<xsql:include-param name="EVALUACION"/>
+	<xsql:include-param name="DESCRIPCION"/>-->
+	
+  <xsql:include-owa>
+      <![CDATA[
+	  	DECLARE
+			US_ID	NUMBER;
+			Res		VARCHAR2(1000);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CatalogoProveedor');
+			IF US_ID>=0 THEN
+			CatalogoProveedor_PCK.ListadoCatalogo_XML
+			(
+				US_ID,
+				'{@IDEMPRESA}', 
+				'{@IDPROVEEDOR}', 
+				'{@REFERENCIA}',
+				'{@PRODUCTO}',
+				'{@MARCA}',
+				'{@FLINEASPORPAGINA}',	--	17ago16
+				'{@PAGINA}'				--	17ago16
+			);
+			END IF;
+		 END;
+     ]]>
+	 
+	
+  </xsql:include-owa>
+
+  
+</CatalogoProveedor>

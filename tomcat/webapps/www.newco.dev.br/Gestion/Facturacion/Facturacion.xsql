@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Control y facturas a clientes MVM
+	Ultima revisión: ET 20ene20 16:30 Facturacion_200120.js
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="FacturacionHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="FacturacionHTML.xsl"?>
+
+<Facturacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+    <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+    <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+    <xsql:include-param name="STYLE"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Gestion Facturacion');
+
+	 		IF US_ID > 0 THEN
+				FACTURACION_PCK.InformeCentros_XML
+				(
+					US_ID,
+					NULL,
+					'{@MES}',
+					'{@ANNO}',
+					NVL('{@SOLOREMESAS}', 'N'),
+					'{@NOMBRE}'
+				);
+    		END IF;
+		END;
+]]>
+</xsql:include-owa>
+</Facturacion>

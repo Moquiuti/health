@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Confirmación via Ajax del estado de aprobación de un documento
+	Ultima revisión: ET 12jun18	10:27
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="confirmDocRevisadoJSON.xsl"?>
+
+<confirmDocRevisado xmlns:xsql="urn:oracle-xsql" connection="newco" >
+	<xsql:include-owa>
+		  <![CDATA[
+	
+	    	DECLARE
+		        US_ID		NUMBER;
+				v_Res		VARCHAR2(1000);
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DetalleEmpresa');
+				IF US_ID>0 THEN
+				
+					v_Res:= documentos_pck.Revisado(
+					 US_ID, 
+					 '{@ID_DOCUMENTO}', 
+					 '{@ESTADO}'
+					);	
+					
+					HTP.P(Utilidades_Pck.CabeceraXML);
+					IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+						HTP.P('<OK>'||utilidades_pck.Piece(v_Res,'|',1)||'</OK>');
+					ELSE
+						HTP.P('<ERROR>'||utilidades_pck.Piece(v_Res,'|',1)||'</ERROR>');
+					END IF;
+					
+				END IF;
+				
+			END;
+   		
+	      ]]>	  
+    	  
+	</xsql:include-owa>
+</confirmDocRevisado>
+

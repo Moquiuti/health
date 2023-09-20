@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="Rendimiento.xsl"?>
+<?xml-stylesheet type="text/xsl" href="Rendimiento.xsl"?>
+
+<Rendimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:query tag-case="upper" row-element="LINEAESTADISTICA" rowset-element="">
+    <![CDATA[
+	select substr(rn_idtipo||':'|| rn_etapa,1,50) ETAPA, count(*) Repeticiones,
+			ROUND(max(rn_duracion/100),2) MAX,
+			ROUND(avg(rn_duracion/100),2) AVG,
+			ROUND(min(rn_duracion/100),2) MIN
+	from rendimiento
+	where rn_inicio>=sysdate-{@PERIODO}
+	group by rn_idtipo, rn_etapa
+	order by rn_idtipo, rn_etapa
+	]]>
+  </xsql:query>
+</Rendimiento>

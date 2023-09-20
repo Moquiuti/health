@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" />
+  
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>  
+  <xsl:template match="/">
+    <html>
+      <head>
+      <!--style-->
+      <xsl:call-template name="estiloIndip"/>
+      <!--fin de style-->  
+<xsl:text disable-output-escaping="yes"><![CDATA[
+     <script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	 <script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+     
+		
+	
+ 		<script type="text/javascript">
+		  
+		<!--
+		//
+		//	Funciones con carpetas
+		//
+		
+		
+		var msgPrivilegiosEditarCarpeta='No tiene autorización para editar la carpeta.\nPor favor, compruebe quien es el propietario.';
+		var msgPrivilegiosEditarPlantilla='No tiene autorización para editar la plantilla.\nPor favor, compruebe quien es el propietario.';
+		var msgPrivilegiosBorrarCarpeta='No tiene autorización para borrar la carpeta.\nPor favor, compruebe quien es el propietario.';
+		var msgPrivilegiosBorrarPlantilla='No tiene autorización para borrar la plantilla.\nPor favor, compruebe quien es el propietario.';
+		var msgPrivilegiosProducto='No tiene autorización para modificar el contenido de la plantilla.\nPor favor, compruebe quien es el propietario.';
+		var msgNoCreaCarpetas='No tiene autorización para crear carpetas.\nPor favor, contacte con el usuario Administrador.';
+		var msgNoCreaPlantillas='No tiene autorización para crear plantillas. Por favor, contacte con el usuario Administrador.';
+		var msgSinPlantilla='No hay ninguna plantilla activa. Por favor, cree una plantilla con el botón Nueva.'
+		var msgSinCarpetaParaPlantilla='No hay ninguna carpeta activa. Por favor, cree una carpeta antes de crear la plantilla.';
+		
+		
+		
+		/*
+		
+		    variables para controlar si el usuario puede modificar la carpeta, plantilla y los productos
+		
+		*/
+		
+		]]></xsl:text>
+		
+		
+		
+		var existeCarpeta=<xsl:value-of select="count(ZonaPlantilla/AREAPLANTILLAS/CARPETAS/field/dropDownList/listElem)"/>;
+		var existePlantilla=<xsl:value-of select="count(ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/field/dropDownList/listElem)"/>;
+		
+		  <xsl:choose>
+		    <xsl:when test="ZonaPlantilla/AREAPLANTILLAS/CARPETAS/EDICION">
+		      privilegiosCarpeta=1;
+		    </xsl:when>
+		    <xsl:otherwise>
+		      privilegiosCarpeta=0;
+		    </xsl:otherwise>
+		  </xsl:choose>
+		  
+		 
+		 
+		 
+		
+		  
+		      /*
+		      
+		       solo se usa esta marca al cargarse la pagina
+		       una vez se cambia de plantilla, mientras no se recargue la pagina
+		       (solo pasa si se cambia de carpeta) se coje del arrayPlantillas, para cada una de ellas
+		       
+		      */ 
+		       
+		 
+		  <xsl:choose>
+		    <xsl:when test="ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/EDICION">
+		      var privilegiosPlantilla=1;
+		    </xsl:when>
+		    <xsl:otherwise>
+		      var privilegiosPlantilla=0;
+		    </xsl:otherwise>
+		  </xsl:choose>
+
+		  
+		<xsl:text disable-output-escaping="yes"><![CDATA[
+		
+		
+		/*
+		
+		  montamos un array con las plantillas y con los derechos de edicion (atributo EDICION='SI' o sin atributo si no lo tiene)
+		
+		*/
+		
+		var arrayPlantillas=new Array();
+		
+		
+		]]></xsl:text>
+		  <xsl:for-each select="//ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/field/dropDownList/listElem">
+		     
+		    <xsl:variable name="edicion"><xsl:choose><xsl:when test="ID/@EDICION='SI'">1</xsl:when><xsl:otherwise>0</xsl:otherwise></xsl:choose></xsl:variable>
+		    
+		    arrayPlantillas[arrayPlantillas.length]=new Array('<xsl:value-of select="ID"/>', '<xsl:value-of select="listItem"/>',<xsl:value-of select="$edicion"/>);
+		  </xsl:for-each>
+		<xsl:text disable-output-escaping="yes"><![CDATA[
+		
+		
+		/*
+		  funcion para montar un desplegable dinamicamente
+		  
+		  recibe el array
+		  y el valor por defecto
+		*/
+		
+		function montarDesplegable(arrayDatos, obj, defecto){
+		  
+		  obj.length=0; 
+		  
+		  for(var n=0;n<arrayDatos.length;n++){
+		    if(defecto==arrayDatos[n][0]){
+		      var addOption=new Option('['+arrayDatos[n][1]+']',arrayDatos[n][0]);
+		      privilegiosPlantilla=arrayDatos[n][2];
+                      obj.options[obj.length]=addOption;
+                      obj.options[obj.length-1].selected=true;
+                    }
+                    else{
+                      var addOption=new Option(arrayDatos[n][1],arrayDatos[n][0]);
+                      obj.options[obj.length]=addOption;
+                    }
+		  }
+		}
+
+		/* quitamos ya no se usa ninguna funcion para carpetas
+     	function NuevaCarpeta() {
+     	  
+     	  ]]></xsl:text>
+     	    <xsl:choose>
+     	      <xsl:when test="/ZonaPlantilla/AREAPLANTILLAS/NOCREAPLANTILLAS">
+     	        var puedeCrearCarpetas='N';
+     	      </xsl:when>
+     	      <xsl:otherwise>
+     	        var puedeCrearCarpetas='S';
+     	      </xsl:otherwise>
+     	    </xsl:choose>
+          <xsl:text disable-output-escaping="yes"><![CDATA[
+     	  
+     	  if(puedeCrearCarpetas=='S'){
+     	    var objFrame=new Object();
+     	    objFrame=obtenerFrame(top,'areaTrabajo');
+     	    objFrame.location.href='../NuevaMultioferta/CARPManten.xsql?BOTON=NUEVA';
+     	  }
+     	  else{
+     	    alert(msgNoCreaCarpetas);
+     	  }
+     	}
+     	 
+     	
+		function EditarCarpeta()
+		{
+     	  var pl_id = document.forms[0].elements['IDCARPETA'].value;
+	  		if (pl_id==-1)
+	  			alert('No hay ninguna carpeta activa para consultar propiedades');
+			else
+			{
+			var objFrame=new Object();
+     	                objFrame=obtenerFrame(top,'areaTrabajo');
+     	                objFrame.location.href='../NuevaMultioferta/CARPManten.xsql?CARP_ID='+pl_id+'&amp;BOTON=CABECERA';
+			}
+     	}    
+     	//
+     	//
+     	// No dejamos borrar la última carpeta. De esta forma aseguramos que no nos quedamos
+     	//  sin carpetas.
+     	function BorrarCarpeta() 
+		{
+     	if(privilegiosCarpeta){
+     	    var carp_actual = document.forms[0].elements['IDCARPETA'].value;
+
+	  		if (carp_actual==-1)
+	  			alert('No hay ninguna Carpeta activa para borrar');
+			else
+			{
+     	    	contestacion = confirm("¿Esta seguro de querer eliminar la carpeta?");
+	    		if (!contestacion) 
+	      			return;
+	    		else
+	      			EnviarCambios('BORRARCARPETA', carp_actual);
+	      			
+			}
+	}else{
+	  alert(msgPrivilegiosBorrarCarpeta);
+	}
+	
+     	}
+		fin de funcion carpetas*/
+		
+		//
+        // Hacemos el cambio de la CARPETA ACTUAL.
+     	function CambioCarpetaActual()
+		{
+     	    document.forms[0].elements['ACCION'].value='CAMBIOCARPETA';
+     	    document.forms[0].elements['IDNUEVACARPETA'].value=document.forms[0].elements['IDCARPETA'].value;
+     	    zonaProductosEnBlanco();
+	    SubmitForm(document.forms[0]);
+		}
+		
+
+		//
+        // Hacemos el cambio de la PLANTILLA ACTUAL.
+        //
+     	function CambioPlantillaActual()
+		{
+			CambioPlantilla();
+		}
+		
+	function SeleccionarPlantillaDeLaCarpetaActual(nombreDesplegable,idPlantilla){
+	  for(var n=0;n<document.forms[0].elements[nombreDesplegable].length;n++){
+	    if(document.forms[0].elements[nombreDesplegable].options[n].value==idPlantilla){
+	      document.forms[0].elements[nombreDesplegable].options[n].selected=true;
+	      return true;
+	    }
+	  }
+	  return false;
+	}
+	  
+	function CambioPlantillaExterno(idPlantilla){
+	  if(SeleccionarPlantillaDeLaCarpetaActual('IDPLANTILLA',idPlantilla)){
+	    //montarDesplegable(arrayPlantillas, document.forms[0].elements['IDPLANTILLA'],idPlantilla);
+	    CambioPlantillaActual();
+	  }
+	  else{
+	    document.forms[0].elements['ACCION'].value='CAMBIOPLANTILLA';
+     	    document.forms[0].elements['IDNUEVAPLANTILLA'].value=idPlantilla;
+     	    zonaProductosEnBlanco();
+	    SubmitForm(document.forms[0]);
+	  }
+	  
+	}
+		
+     	function CambioPlantilla(){	    
+	    /*
+	    
+	    nacho 14/11/2002
+	    recargamos la zonpaProductos en vez de someter el form
+	    */
+	    
+	    
+	    carp_id=document.forms[0].elements['IDCARPETA'].value;
+	    pl_id=document.forms[0].elements['IDPLANTILLA'].value;
+	    montarDesplegable(arrayPlantillas, document.forms[0].elements['IDPLANTILLA'],pl_id);
+	    
+	    
+
+	   CargarListaProductos(carp_id, pl_id,'','');
+	    
+     	}
+     	
+     	function EditarPlantilla()
+		{
+     	  var pl_id = document.forms[0].elements['IDPLANTILLA'].value;
+	  		if (pl_id==-1)
+	  			alert(document.forms['MensajeJS'].elements['MENS_SIN_PLANTILLA'].value);
+			else
+			{
+			  var objFrame=new Object();
+     	                  objFrame=obtenerFrame(top,'areaTrabajo');
+     	                  objFrame.location.href='../Multioferta/PLManten.xsql?PL_ID='+pl_id+'&amp;BOTON=CABECERA';
+			}
+     	}    
+
+     	
+     	//
+     	//
+     	// No dejamos borrar la última plantilla. De esta forma aseguramos que no nos quedamos
+     	//  sin plantillas.
+     	function BorrarPlantilla() 
+		{
+     	if(privilegiosPlantilla){
+     	  var pl_actual = document.forms[0].elements['IDPLANTILLA'].value;
+
+	  		if (pl_actual==-1)
+	  			alert(document.forms['MensajeJS'].elements['MENS_SIN_PLANTILLA'].value);
+			else
+			{
+     	    	contestacion = confirm("¿Esta seguro de querer eliminar la plantilla?");
+	    		if (!contestacion) 
+	      			return;
+	    		else
+	      			EnviarCambios('BORRARPLANTILLA', pl_actual);
+			}
+	}else{
+	  alert(document.forms['MensajeJS'].elements['NO_AUTORIZADO_BORRAR_PLANTILLA'].value);
+	}
+     	}
+     	
+     	function CopiarPlantilla(pl_id) 
+		{
+     		document.location.href='../Multioferta/PLManten.xsql?PL_ID='+pl_id+'&amp;BOTON=COPIAR';
+     	}	
+     	
+     	function NuevaPlantilla(){
+     	  var carp_actual = document.forms[0].elements['IDCARPETA'].value;
+     	  
+     	  ]]></xsl:text>
+     	    <xsl:choose>
+     	      <xsl:when test="/ZonaPlantilla/AREAPLANTILLAS/NOCREAPLANTILLAS">
+     	        var puedeCrearPlantillas='N';
+     	      </xsl:when>
+     	      <xsl:otherwise>
+     	        var puedeCrearPlantillas='S';
+     	      </xsl:otherwise>
+     	    </xsl:choose>
+          <xsl:text disable-output-escaping="yes"><![CDATA[
+     	   	
+     	  if(puedeCrearPlantillas=='S'){
+     	    if (carp_actual==-1){
+	      alert(document.forms['MensajeJS'].elements['NO_CARPETAS_NO_PLANTILLAS'].value);
+	    }
+	    else{
+	      var objFrame=new Object();
+     	      objFrame=obtenerFrame(top,'areaTrabajo');
+     	      objFrame.location.href='../Multioferta/PLManten.xsql?BOTON=NUEVA';
+     	    }
+     	  }
+     	  else{
+     	    alert(document.forms['MensajeJS'].elements['NO_AUTORIZADO_CREAR_PLANTILLA'].value);
+     	  }
+     	} 
+		
+		
+		function InsertarProducto(idProducto)
+		{ 
+		 	var pl_actual = document.forms[0].elements['IDPLANTILLA'].value;
+	  		if (pl_actual==-1)
+	  			alert(document.forms['MensajeJS'].elements['MENS_SIN_PLANTILLA'].value);
+			else
+			{
+				EnviarCambios('INSERTARPRODUCTO', idProducto);
+			}
+		}
+		
+        function BorrarProducto(){
+          if(privilegiosPlantilla){
+            if(confirm('¿Esta seguro de querer eliminar el Producto?'))
+              return true;
+          }
+	   else{
+	     alert(document.forms['MensajeJS'].elements['NO_AUTORIZADO_MODIFICAR_PLANTILLA'].value);
+	     return false;
+	   }
+        }
+     	
+     	function EnviarCambios(accion, idObjeto)
+		{
+     	  
+     	  
+     	  if(document.forms[0].elements['IDPLANTILLA'])
+     	    var pl_actual = document.forms[0].elements['IDPLANTILLA'].value;
+     	  if(document.forms[0].elements['IDCARPETA'])  
+     	    var carp_actual = document.forms[0].elements['IDCARPETA'].value;
+     	    
+     	    
+     	    if(accion=='BORRARPRODUCTO'){
+     	      document.forms[0].elements['IDPRODUCTO'].value=idObjeto;
+     	    }
+     	    else{
+     	      if(accion=='BORRARPLANTILLA'){
+     	        document.forms[0].elements['IDNUEVAPLANTILLA'].value=idObjeto;
+     	      }
+     	      else{
+     	        if(accion=='BORRARCARPETA'){
+     	          document.forms[0].elements['IDNUEVACARPETA'].value=idObjeto;
+     	        }
+     	      }
+     	    }
+
+			
+     	   document.forms[0].elements['ACCION'].value=accion;
+     	   
+	   //document.forms[0].elements['IDPRODUCTO'].value=idObjeto;
+	    
+     	    
+     	    var laUrl;
+     	    var nombreFrame;
+     	    var actualizarFrame=0;
+     	    var frameARecargar='PaginaEnBlanco.xsql';
+     	    
+     	    if(top.mainFrame.areaTrabajo.zonaTrabajo){
+     	      laUrl=top.mainFrame.areaTrabajo.zonaTrabajo.location;
+     	      nombreFrame='zonaTrabajo';
+     	    }
+     	    else{
+     	      if(top.mainFrame.areaTrabajo){
+     	        laUrl=top.mainFrame.areaTrabajo.location;
+     	        nombreFrame='areaTrabajo';
+     	        frameARecargar='AreaTrabajo.html';
+     	      }
+     	    }
+
+     	    laUrl=String(laUrl);
+     	    
+     	    
+     	    /*
+     	        si en el frame derecho esta cargada alguna pagina
+     	        que esta afectada por la accion a ejecutar (borrado de carpetas, plantillas o productos)
+     	        actualizamos este frame
+     	    */
+     	    
+     	    /*
+     	      alert('carpeta nueva: '+document.forms[0].elements['IDNUEVACARPETA'].value+'\n'
+     	          +' plantilla nueva: '+document.forms[0].elements['IDNUEVAPLANTILLA'].value+'\n'
+     	          +' accion: '+document.forms[0].elements['ACCION'].value+'\n'
+     	          +' producto: '+document.forms[0].elements['IDPRODUCTO'].value);
+     	     */ 
+     	        
+     	    
+     	    
+     	    
+     	    /*
+     	       a veces se produce un error de productos 
+     	       duplicados en la plantilla, no sabemos si es un problema de oracle o de javascript
+     	       en el campo FECHA enviamos los milisegundos a la hora de hacer el envio.
+     	    
+     	    */
+     	    
+     	    var miFecha=new Date();
+     	    document.forms[0].elements['FECHA'].value=' los milisegundos: '+ miFecha.getMilliseconds();
+     	          
+     	    
+     	    
+     	    if(accion=='BORRARPRODUCTO'){
+     	      if(laUrl.match('LPLista.xsql') && laUrl.match('PL_ID='+pl_actual)){
+     	        //MostrarPlantilla();
+     	        actualizarFrame=1;
+     	      }
+     	    }
+     	    else{
+     	      if(accion=='BORRARCARPETA'){
+     	        if(laUrl.match('CARPManten.xsql') && laUrl.match('CARP_ID='+carp_actual)){
+     	          actualizarFrame=1; 
+     	        }
+     	        else{
+     	          if(laUrl.match('PLManten.xsql')){
+     	            actualizarFrame=1;
+     	          }
+     	          else{
+     	            if(laUrl.match('LPLista.xsql')){
+     	              actualizarFrame=1;
+     	            }
+     	          }
+     	        }
+     	      } 
+     	      else{
+     	        if(accion=='BORRARPLANTILLA'){
+     	          if(laUrl.match('PLManten.xsql') && laUrl.match('PL_ID='+pl_actual)){
+     	            actualizarFrame=1;
+     	          }
+     	          else{
+     	            if(laUrl.match('LPLista.xsql') && laUrl.match('PL_ID='+pl_actual)){
+     	              actualizarFrame=1;
+     	            }
+     	          }
+     	        }
+     	      }
+     	    }
+            zonaProductosEnBlanco();
+     	    SubmitForm(document.forms[0]);
+     	    
+     	    /*
+     	      si hemos de recargar lo hacemos
+     	    */
+     	    
+     	    
+     	    
+     	    
+     	    if(actualizarFrame)
+     	      if(nombreFrame=='areaTrabajo'){
+     	      var objFrame=new Object();
+     	                objFrame=obtenerFrame(top,'areaTrabajo');
+     	                objFrame.location=frameARecargar;
+     	      }
+     	      else{
+     	        if(nombreFrame=='zonaTrabajo'){
+     	                var objFrame=new Object();
+     	                objFrame=obtenerFrame(top,'zonaTrabajo');
+     	                objFrame.location=frameARecargar;
+     	        }
+     	      }	
+	  }
+	  
+	  function zonaProductosEnBlanco(){
+	    var objFrame=new Object();
+     	    objFrame=obtenerFrame(top,'zonaProducto');
+     	    objFrame.location.href='about:blank';
+	  }
+	  
+	  
+	  
+	function MostrarPlantilla(){
+	  var pl_id = document.forms[0].elements['IDPLANTILLA'].value;
+	  if (pl_id==-1)
+	  		alert(document.forms['MensajeJS'].elements['MENS_SIN_PLANTILLA'].value);
+		else
+		{
+		  var objFrame=new Object();
+     	                objFrame=obtenerFrame(top,'areaTrabajo');
+     	                objFrame.location.href='CambioPlantilla.xsql?PL_ID='+pl_id+'&SES_ID='+]]></xsl:text><xsl:value-of select="//SES_ID"/><xsl:text disable-output-escaping="yes"><![CDATA[;
+		}
+	}
+	
+	function PrepararOfertaPedido(tipo){
+	  var pl_id = document.forms[0].elements['IDPLANTILLA'].value;
+	  
+	  var objFrame=new Object();
+	  objFrame=obtenerFrame(top,'zonaProducto');
+	  var productos = objFrame.document.forms[0].elements['PRODUCTOS'].value;
+	  
+	  if (pl_id==-1)
+	  	alert(document.forms['MensajeJS'].elements['MENS_SIN_PLANTILLA'].value);
+	  else if (productos==-1)
+	  	alert(document.forms['MensajeJS'].elements['PLANTILLA_SIN_PRODUCTOS'].value);
+	  else
+	  {
+	  	if(tipo=='EDICION'){
+	  	        var objFrame=new Object();
+     	                objFrame=obtenerFrame(top,'areaTrabajo');
+     	                objFrame.location.href='../Multioferta/LPAnalizarFrame.xsql?PL_ID='+pl_id+'&SES_ID='+]]></xsl:text><xsl:value-of select="//SES_ID"/><xsl:text disable-output-escaping="yes"><![CDATA[+'&ACCION='+tipo;
+	  	}
+	  	else{
+	  	var objFrame=new Object();
+     	                objFrame=obtenerFrame(top,'areaTrabajo');
+     	                objFrame.location.href='../Multioferta/LPAnalizarFrame.xsql?PL_ID='+pl_id+'&SES_ID='+]]></xsl:text><xsl:value-of select="//SES_ID"/><xsl:text disable-output-escaping="yes"><![CDATA[+'&ACCION='+tipo;
+	  	}
+	 }
+	}
+	
+	/*
+	  funcion para controlar que el producto que se quiere insertar no existe ya en la plantilla.
+	  si existe se avisa al usuario y no se somete la accion
+	  
+	  en caso contrario seguimos
+	*/
+	
+	function sinoExisteEnPlantillaEnviarCambios(accion,idProducto){
+    
+	  if(existePlantilla>0){
+	    if(privilegiosPlantilla){
+	      for(var n=0;n<document.forms['plantillas'].length;n++){
+	        if(document.forms['plantillas'].elements[n].name.match('PRODUCTO_') && document.forms['plantillas'].elements[n].value==idProducto){
+	          alert(document.forms['MensajeJS'].elements['PRODUCTO_YA_EXISTE'].value);
+	          return;
+	        }   
+	      }
+	      InsertarProducto(idProducto);
+	    }
+	    else{
+	      alert(document.forms['MensajeJS'].elements['NO_AUTORIZADO_MODIFICAR_PLANTILLA'].value);
+	    }
+	  }
+	  else{
+	    alert(document.forms['MensajeJS'].elements['MENS_SIN_PLANTILLA'].value);
+	  }
+	}
+	
+	//	Presenta la lista de todas las carpetas y plantillas
+	function ListarCarpetasYPlantillas(){
+	         var objFrame=new Object();
+     	            objFrame=obtenerFrame(top,'areaTrabajo');
+     	            objFrame.location.href='CarpetasYPlantillasFrame.html';
+	}
+	
+	//	Presenta la lista de todos los productos incluidos en plantillas
+	function ListarProductosPlantillas(){
+	         var objFrame=new Object();
+     	            objFrame=obtenerFrame(top,'areaTrabajo');
+     	            objFrame.location.href='ProductosEnPlantillasFrame.html';
+	}
+
+	function CargarListaProductos(idCarpeta, idPlantilla, idProducto, accion){
+
+     	  var objFrame=new Object();
+     	  objFrame=obtenerFrame(top,'zonaProducto');
+     	  objFrame.location.href='http://www.newco.dev.br/Compras/NuevaMultioferta/ZonaProducto.xsql?IDCARPETA='+idCarpeta+'&IDPLANTILLA='+idPlantilla+'&IDPRODUCTO='+idProducto+'&ACCION='+accion;
+     	}
+		
+		
+//funcion para cambiar categoria de productos, farmacia o normales
+	function cambioCategoria(accion,cat){
+		//alert('cat '+cat);
+		//alert(document.forms[0].elements['IDNUEVACARPETA'].value);
+		//alert(document.forms[0].elements['IDNUEVAPLANTILLA'].value);
+		//alert(document.forms[0].elements['IDPRODUCTO'].value);
+		//alert(document.forms[0].elements['FECHA'].value);
+		document.forms[0].elements['CATEGORIA'].value = cat;
+		document.forms[0].elements['ACCION'].value=accion;
+		 var laUrl;
+     	    var nombreFrame;
+     	    var actualizarFrame=0;
+     	    var frameARecargar='PaginaEnBlanco.xsql';
+     	    
+     	    if(top.mainFrame.areaTrabajo.zonaTrabajo){
+     	      laUrl=top.mainFrame.areaTrabajo.zonaTrabajo.location;
+     	      nombreFrame='zonaTrabajo';
+     	    }
+     	    else{
+     	      if(top.mainFrame.areaTrabajo){
+     	        laUrl=top.mainFrame.areaTrabajo.location;
+     	        nombreFrame='areaTrabajo';
+     	        frameARecargar='AreaTrabajo.html';
+     	      }
+     	    }
+
+     	    laUrl=String(laUrl);
+     	       	    
+     	    var miFecha=new Date();
+     	    document.forms[0].elements['FECHA'].value=' los milisegundos: '+ miFecha.getMilliseconds();
+     	          
+     	    
+     	    
+            zonaProductosEnBlanco();
+     	    SubmitForm(document.forms[0]);			
+		
+	}
+			
+		//-->
+		</script>
+		]]></xsl:text>
+		
+      </head>
+      <body onLoad="montarDesplegable(arrayPlantillas,document.forms[0].elements['IDPLANTILLA'],'{//ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/field/@current}');CargarListaProductos(document.forms[0].elements['IDCARPETA'].value, document.forms[0].elements['IDPLANTILLA'].value,'','');"> 
+      
+       <!--idioma-->
+         <xsl:variable name="lang">
+        <xsl:choose>
+            <xsl:when test="/ZonaPlantilla/LANG"><xsl:value-of select="/ZonaPlantilla/LANG" /></xsl:when>
+            <xsl:otherwise>spanish</xsl:otherwise>
+            </xsl:choose>  
+        </xsl:variable>
+
+        <xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>        
+      <!--idioma fin-->
+      
+            
+		<xsl:choose>
+		<xsl:when test="//SESION_CADUCADA">
+                <xsl:apply-templates select="//SESION_CADUCADA"/>        
+                 </xsl:when>   
+		<xsl:otherwise>
+		<form action="ZonaPlantilla.xsql" name="plantillas" method="POST">
+             <input type="hidden" name="FECHA"/>
+			<input type="hidden" name="ACCION"/>
+			<input type="hidden" name="IDPRODUCTO"/>
+             <input type="hidden" name="CATEGORIA"/>
+			<input type="hidden" name="IDNUEVACARPETA">
+		   		<xsl:attribute name="value"><xsl:value-of select="ZonaPlantilla/AREAPLANTILLAS/CARPETAS/field/@current"/>
+				</xsl:attribute>
+			</input>
+
+			<input type="hidden" name="IDNUEVAPLANTILLA">
+		   		<xsl:attribute name="value"><xsl:value-of select="ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/field/@current"/>
+				</xsl:attribute>
+			</input>
+			 <table class="plantilla">
+				<tr>
+                	
+             		<td id="tdFarmacia">
+                    	<xsl:attribute name="style">
+                        	<xsl:if test="ZonaPlantilla/AREAPLANTILLAS/CATEGORIA = 'F'">background:#ffffff; font-weight:bold; border:2px solid #3b5998; border-bottom:0px; padding:5px 3px; text-align:center;</xsl:if>
+                            <xsl:if test="ZonaPlantilla/AREAPLANTILLAS/CATEGORIA = 'N'">background:#e4e4e5; font-weight:bold; padding:5px 3px; text-align:center;</xsl:if>
+                        </xsl:attribute>
+                     	<a id="verFarmacia" style="cursor:pointer; text-decoration:none;" onclick="cambioCategoria('CAMBIOCATEGORIA','F');" title="Farmacia">
+                        	<img src="http://www.newco.dev.br/images/farmacia-icon.gif" alt="Farmacia" /></a>
+                    </td>
+            		<td id="tdMatSan">
+                    <xsl:attribute name="style">
+                        	<xsl:if test="ZonaPlantilla/AREAPLANTILLAS/CATEGORIA = 'F'">background:#e4e4e5; font-weight:bold; padding:5px 3px; text-align:center;</xsl:if>
+                            <xsl:if test="ZonaPlantilla/AREAPLANTILLAS/CATEGORIA = 'N'">background:#ffffff; font-weight:bold; border:2px solid #3b5998; border-bottom:0px; padding:5px 3px; text-align:center;</xsl:if>
+                        </xsl:attribute>
+                    	<a id="verMatSan" style="cursor:pointer; text-decoration:none;" onclick="cambioCategoria('CAMBIOCATEGORIA','N');" title="Material Sanitario">
+                        	<img src="http://www.newco.dev.br/images/matSan-icon.gif" alt="Material Sanitario" /></a>
+                    </td>
+				</tr>
+                </table>
+                <!--fin de pestañas-->
+                
+                
+			<xsl:choose>
+				<xsl:when test="ZonaPlantilla/AREAPLANTILLAS/VERCARPETAS">
+               
+				<table class="plantilla">
+                <thead>
+				<tr>
+                	<th>&nbsp;</th>
+                	<th colspan="3" style="padding:3px 0px;"><xsl:value-of select="document($doc)/translation/texts/item[@name='carpetas']/node()"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				       <!--[ <a href="javascript:ListarCarpetasYPlantillas();" onMouseOver="window.status='Lista todas las carpetas y sus plantillas';return true;" onMouseOut="window.status='';return true;"><xsl:value-of select="document($doc)/translation/texts/item[@name='ver_todas']/node()"/></a> ]-->
+				    </th>
+                    <th>&nbsp;</th>
+				</tr>
+                </thead>
+                <tbody>
+				<tr>
+                <td>&nbsp;</td>
+                <td colspan="3" class="select">
+					<xsl:choose>
+					<xsl:when test="ZonaPlantilla/AREAPLANTILLAS/CARPETAS/field/dropDownList/listElem">				
+						<xsl:call-template name="desplegable">
+        					<xsl:with-param name="path" select="ZonaPlantilla/AREAPLANTILLAS/CARPETAS/field">
+        					</xsl:with-param>
+      					</xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+                    	 <xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_carpetas']/node()"/>
+						<input type="hidden" name="IDCARPETA" value="-1"/>
+					</xsl:otherwise>			
+					</xsl:choose>
+					</td>
+                <td>&nbsp;</td>
+				</tr>
+	   		 	<!--<tr>
+                 
+					<xsl:choose>
+     	      		<xsl:when test="/ZonaPlantilla/AREAPLANTILLAS/NOCREAPLANTILLAS">
+                        <td>&nbsp;</td>
+						<td colspan="3">&nbsp;</td>
+                        <td>&nbsp;</td>
+					</xsl:when>
+					<xsl:otherwise>
+                    <td>&nbsp;</td>
+					<td class="cinco">
+						<xsl:call-template name="botonNostyle">
+				                          <xsl:with-param name="path" select="ZonaPlantilla/button[@label='NuevaCarpeta']"/>
+				                        </xsl:call-template>
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;
+                        	<a href="javascript:EditarCarpeta();">
+                    			<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+                   			</a>  
+						</td>
+						<td>
+                        	<a href="javascript:BorrarCarpeta();">
+                    			<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+                   			</a>  
+                        &nbsp;&nbsp;
+						</td>
+                         <td>&nbsp;</td>
+					</xsl:otherwise>
+					</xsl:choose>	
+                    
+					</tr>-->
+                    </tbody>
+                   <tfoot>
+                        <tr height="5px">
+                        <td></td>
+                        <td colspan="3"></td>
+                        <td></td>
+                        </tr>
+                    </tfoot>
+					</table>
+                    
+                 </xsl:when>
+                 <xsl:otherwise>
+					<!--NO VER CARPETAS-->
+					<input type="hidden" name="IDCARPETA">
+		   				<xsl:attribute name="value"><xsl:value-of select="ZonaPlantilla/AREAPLANTILLAS/CARPETAS/field/@current"/>
+						</xsl:attribute>
+					</input>
+				</xsl:otherwise>			
+				</xsl:choose>
+		
+        <!--PLANTILLAS-->
+			  <table class="plantilla">
+                <thead>
+				<tr>
+                    <th>&nbsp;</th>
+                	<th colspan="3" style="padding:3px 0px;"> <xsl:value-of select="document($doc)/translation/texts/item[@name='plantillas']/node()"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				              <!--<xsl:choose>
+				                <xsl:when test="ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/EDICION">-->
+				                  [ <a href="javascript:ListarProductosPlantillas();" onMouseOver="window.status='Lista todos los productos y plantillas a las que pertenecen';return true;" onMouseOut="window.status='';return true;"> <xsl:value-of select="document($doc)/translation/texts/item[@name='ver_todas']/node()"/></a> ]
+				               <!-- </xsl:when>
+				              </xsl:choose>-->
+				   			  
+					</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+				<tr>
+                 <td>&nbsp;</td>
+                <td colspan="3" class="select">
+				<xsl:choose>
+				<xsl:when test="ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/field/dropDownList/listElem">				
+				<xsl:call-template name="desplegable">
+        			<xsl:with-param name="path" select="ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/field">
+        			</xsl:with-param>
+      			</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<br/>
+                     <xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_plantillas']/node()"/>
+					<br/>&nbsp;
+					<input type="hidden" name="IDPLANTILLA" value="-1"/>
+				</xsl:otherwise>			
+				</xsl:choose>
+
+				</td>
+                 <td>&nbsp;</td>
+                </tr>
+                <!--si usuario con derechos enseño botones-->
+                <xsl:if test="ZonaPlantilla/AREAPLANTILLAS/PLANTILLAS/EDICION">
+                 <tr>
+                        <td>&nbsp;</td>
+						<td class="cinco">
+						<!--<xsl:call-template name="botonNostyle">
+				                          <xsl:with-param name="path" select="ZonaPlantilla/button[@label='NuevaPlantilla']"/>
+				                        </xsl:call-template>-->
+						</td>
+						<td>
+                        	<a href="javascript:EditarPlantilla();">
+                    			<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+                   			</a>  
+						</td>
+						<td>
+                        	<a href="javascript:BorrarPlantilla();">
+                    			<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+                   			</a>  
+						</td> 
+                        <td>&nbsp;</td>
+					</tr>
+                    </xsl:if>
+					</tbody>
+                    	<xsl:if test="ZonaPlantilla/AREAPLANTILLAS/VERCARPETAS">
+                            <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3" height="25px;" align="center" valign="bottom"> 
+                            <a href="javascript:PrepararOfertaPedido('DIRECTO');" title="Preparar pedido" class="strongAzul botonPedido"> <xsl:value-of select="document($doc)/translation/texts/item[@name='preparar_pedido']/node()"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td>&nbsp;</td>
+                            </tr>
+                        </xsl:if>
+                       
+				</table>
+                <table class="plantilla"> 
+                <tfoot>
+                <tr>
+                        <td class="footLeft">&nbsp;</td>
+                        <td colspan="3">&nbsp;</td>
+                        <td class="footRight">&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+				<br/>
+                
+                <!--si no hay tabla carpetas enseño boton abajo-->
+				<xsl:choose>
+				<xsl:when test="ZonaPlantilla/AREAPLANTILLAS/VERCARPETAS">
+                </xsl:when>
+                <xsl:otherwise>
+                    <!--PREPARAR PEDIDO-->
+                    <div class="botonGrande">
+                        <a href="javascript:PrepararOfertaPedido('DIRECTO');" title="Preparar pedido"> <xsl:copy-of select="document($doc)/translation/texts/item[@name='preparar_pedido_2line']/node()"/></a>
+                    </div><!--fin de botonGrande-->
+                </xsl:otherwise>
+                </xsl:choose>
+					
+				
+			</form>
+			</xsl:otherwise>
+			</xsl:choose>
+            
+    <form name="MensajeJS">
+  	<input type="hidden" name="SEGURO_BORRAR_PLANTILLA" value="{document($doc)/translation/texts/item[@name='seguro_borrar_plantilla']/node()}"/>
+    
+    <input type="hidden" name="MENS_SIN_PLANTILLA" value="{document($doc)/translation/texts/item[@name='mens_sin_plantilla']/node()}"/>
+    
+    <input type="hidden" name="NO_AUTORIZADO_BORRAR_PLANTILLA" value="{document($doc)/translation/texts/item[@name='no_autorizado_borrar_plantilla']/node()}"/>   
+     <input type="hidden" name="NO_CARPETAS_NO_PLANTILLAS" value="{document($doc)/translation/texts/item[@name='no_carpetas_no_plantillas']/node()}"/>   
+     <input type="hidden" name="NO_AUTORIZADO_CREAR_PLANTILLA" value="{document($doc)/translation/texts/item[@name='no_autorizado_crear_plantilla']/node()}"/>     
+     <input type="hidden" name="NO_AUTORIZADO_MODIFICAR_PLANTILLA" value="{document($doc)/translation/texts/item[@name='no_autorizado_modificar_plantilla']/node()}"/>    
+      <input type="hidden" name="NO_AUTORIZADO_MODIFICAR_PLANTILLA" value="{document($doc)/translation/texts/item[@name='no_autorizado_modificar_plantilla']/node()}"/>    
+       <input type="hidden" name="PRODUCTO_YA_EXISTE" value="{document($doc)/translation/texts/item[@name='producto_ya_existe']/node()}"/>     
+    </form>  
+            
+	</body>      
+</html>   
+ </xsl:template>
+ 
+<xsl:template match="PROVEEDOR">
+	<table width="100%">
+	<tr><td align="left">
+	<a class="suave" onmouseover="window.status=' ';return true" onmouseup="window.status=' ';return true" onmousedown="window.status=' ';return true">  
+	<xsl:attribute name="href">javascript:MostrarPagPersonalizada('../../Administracion/Mantenimiento/Productos/PRODetalle.xsql?PRO_ID=<xsl:value-of select="../ID"/>&amp;SES_ID=<xsl:value-of select="../../../../SES_ID"/>','producto',70,50,0,-50);</xsl:attribute>
+	<!--Pedidos:&nbsp;<xsl:value-of select="../PEDIDOSMES"/>-->
+	</a>
+	</td>
+	<td align="right">
+	<a style="color:#015E4B">
+    <xsl:attribute name="href">javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID=<xsl:value-of select="../IDPROVEEDOR"/>&amp;VENTANA=NUEVA','empresa',65,58,0,-50)</xsl:attribute> 
+    <xsl:attribute name="onMouseOver">window.status='Información sobre la empresa.';return true;</xsl:attribute>
+    <xsl:attribute name="class">suave</xsl:attribute>
+    <xsl:attribute name="onMouseOut">window.status='';return true;</xsl:attribute>
+    <xsl:value-of select="." disable-output-escaping="yes"/>
+	</a>
+	</td></tr></table>
+</xsl:template>
+
+<xsl:template match="NOMBRE">
+	<input type="hidden" name="IDPRODUCTO_{../ID}" value="{../ID}"/>
+	<a class="suave" onmouseover="window.status='Ver detalle del producto';return true" onmouseup="window.status=' ';return true" onmousedown="window.status=' ';return true">  
+	<xsl:attribute name="href">javascript:MostrarPagPersonalizada('../../Administracion/Mantenimiento/Productos/PRODetalle.xsql?PRO_ID=<xsl:value-of select="../ID"/>&amp;SES_ID=<xsl:value-of select="../../../../SES_ID"/>','producto',70,50,0,-50);</xsl:attribute>
+	<xsl:value-of select="." disable-output-escaping="yes"/></a>
+</xsl:template> 
+ 
+</xsl:stylesheet>

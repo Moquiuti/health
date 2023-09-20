@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EmpListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EmpListaHTML.xsl"?>
+
+<ListaEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+ <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <!--<xsql:ref-cursor-function>-->
+<xsql:include-owa>
+    <![CDATA[
+      EMPRESAS_PCK.EMP_Busca(p_emp_nif => '{@EMP_NIF}',
+                             p_emp_nombre => '{@EMP_NOMBRE}',
+                             p_emp_direccion => '{@EMP_DIRECCION}',
+                             p_emp_cpostal => '{@EMP_CPOSTAL}',                             
+                             p_emp_poblacion => '{@EMP_POBLACION}',                                                          
+                             p_emp_provincia => '{@EMP_PROVINCIA}',                             
+                             p_emp_idtipo => '{@EMP_IDTIPO}',
+                             p_emp_telefono => '{@EMP_TELEFONO}',
+                             p_emp_fax => '{@EMP_FAX}',                             
+                             p_emp_referencias => '{@EMP_REFERENCIAS}',                                                          
+                             p_ORDERBY => 'EMP_CPOSTAL, EMP_POBLACION');
+    ]]>
+</xsql:include-owa>
+  <!--</xsql:ref-cursor-function>-->
+  
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>
+    <page>G-0010</page>
+    <caption>G-0001</caption>    
+  </jumpTo>
+  
+</ListaEmpresas>

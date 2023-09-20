@@ -1,0 +1,15 @@
+19mar18	ET No se filtraba bien por código de licitación al exportar a excel. Cambios en JS.
+20mar18	ET Multiples mejoras a nivel de PL/SQL, para mostrar correctamente las ofertas cuando no hay pedidos
+18abr18	ET Nuevo filtro: productos borrados de pedidos
+19mar19 ET Nuevas columnas: ADJUDICADA, ORDEN
+20jun19 ET Nuevo filtro CodMVM para poder filtrar categorías, familias, etc
+13abr20 ET Destacar la linea al pasar el cursor <tr class="conhover">
+13ene21 ET Nuevo modo "ahorro por negociacion". LicAnalisisLineas_130121.js
+19may21 ET Por un error validando el campo AHORRONEGOCIACION, siempre se mostraban estas columnas
+24jun21 ET Adaptamos este buscador a los proveedores
+25jun21 ET Permitimos tambien buscar en el historico
+04nov21 ET El action del form era incorrecto, corregido a LicAnalisisLineas.xsql
+15dic21 ET Revision cabeceras
+16dic21 ET Separar campo MARCA. LicAnalisisLineas_161221.js
+05ene22 ET Cambios solicitados por MVMB: Incluir vencimiento, incluir hora para la fecha de alta, ocultar a proveedores casilla Ref.MVM
+08jun22 ET Otelo solicita annadir filtro de "licitaciones activas"

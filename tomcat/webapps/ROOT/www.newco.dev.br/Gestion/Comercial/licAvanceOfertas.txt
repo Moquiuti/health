@@ -1,0 +1,3 @@
+30mar20 ET Informe de vencedores + 2 mejores ofertas, requerido por Federassantas
+31mar20 ET Quitar último pedido, incluir justificacion
+20ene21 ET Extraccion CSV

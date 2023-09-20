@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<!--<?xml-stylesheet type="text/xsl" media="Mozilla" href="USMenusHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="USMenusHTML.xsl"?>-->
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" >
+ <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+   <xsql:include-owa>
+     USUARIOS_PCK.mostrarMenus(SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MentenimientoMenus'),'');
+   </xsql:include-owa>
+
+  
+  
+ 
+</Mantenimiento>
+

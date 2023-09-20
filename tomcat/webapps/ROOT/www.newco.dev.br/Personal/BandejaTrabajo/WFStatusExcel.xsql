@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Listado excel de los pedidos de la página de inicio
+	Ultima revisión: ET 14abr22 10:30
+-->
+<?xml-stylesheet type="text/xsl" href="WFStatusExcelHTML.xsl"?>
+
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<!--	Pedidos problematicos, alarmas, bandeja y licitaciones en curso	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','WFStatus');
+					IF US_ID>=0 THEN
+						PedidosProblematicos_Pck.Listado_Excel
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDFILTROMOTIVO}',
+							'{@IDFILTRORESPONSABLE}',
+							'{@IDFILTROCOMPRADOR}',
+							'{@IDFILTROESTADO}',
+							'{@IDFILTROSEMAFORO}',
+							'{@IDFILTROTIPOPEDIDO}',
+							'{@IDCENTROCONSUMO}',				--	30ago21
+							'{@BLOQUEADO}',
+							'{@NOCUMPLEPEDMIN}',				--	15mar18 NOCUMPLEPEDMIN:	{@FARMACIA},
+							'{@BUSCAR_PACKS}',					--	15mar18	{@MATERIAL},
+							'{@CODIGOPEDIDO}',
+							'{@SINSTOCKS}',
+							'{@PRODUCTO}',
+							'{@TODOS12MESES}',
+							'{@INCFUERAPLAZO}',
+							'{@PED_ENTREGADOOK}',               -- 7abr15
+							'{@PED_PEDIDONOCOINCIDE}',          -- 7abr15
+							'{@PED_RETRASADO}',                 -- 7abr15
+							'{@PED_ENTREGADOPARCIAL}',          -- 7abr15
+							'{@PED_RETRASODOCTECNICA}',         -- 7abr15
+							'{@PED_NOINFORMADOENPLATAFORMA}',   -- 7abr15
+							'{@PED_PRODUCTOSANYADIDOS}',        -- 7abr15
+							'{@PED_PRODUCTOSRETIRADO}',         -- 7abr15
+							'{@FECHA_INICIO}',                  -- 7abr15
+							'{@FECHA_FINAL}',                   -- 7abr15
+							'{@PED_MALAATENCIONPROV}',          -- 8abr15
+							'{@PED_URGENTE}',                   -- 5oct15
+							'{@PAGINA}',                        -- 7abr15
+							'{@LINEA_POR_PAGINA}',              -- 7abr15
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+							'S',								--	14abr22	p_MostrarCabecera
+							'{@SOLOPEDIDOS}',                    -- 2set19
+							'{@BUSQUEDASESPECIALES}',            -- 20ene20
+							'{@FIDAREAGEOGRAFICA}',				-- 10ene22
+							'{@FTEXTO}',						-- 11ene22
+							'{@PLAZOCONSULTA}',					-- 11ene22
+							'{@IDFILTROVENDEDOR}',				-- 21ene22
+							'{@IDLUGARENTREGA}'					-- 21jun23
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</DescargaExcel>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Guarda los cambios del mantenimiento de productos
+	Ultima revision: ET 8mar22 17:50
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="PROMantenHTML2022.xsl"?>
+
+<MantenimientoProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<TIPO>M</TIPO>
+
+
+
+
+
+<Form name="AltaProductos"  method="post">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDProducto	NUMBER;
+		v_Res			VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROManten');
+		IF US_ID>=0 THEN
+		
+			utilidades_pck.debug( 'PROManten.xsql Accion:{@ACCION}');
+		
+			IF '{@ACCION}' IS NOT NULL THEN
+			
+				IF '{@ACCION}'='ACEPTAR_CAMBIOS' THEN
+				
+					v_IDProducto:=MantenimientoProductos_PCK.TratarCambiosProveedor(US_ID, '{@PRO_ID}', '{@ACCION}', '{@COMENTARIOS}');
+		
+				ELSIF '{@PRO_BORRAR_VAL}'='S' AND '{@ROL}'='COMPRADOR' THEN
+
+					v_Res:=MantenimientoProductos_PCK.BorrarProducto
+					(
+						US_ID,
+						'{@PRO_ID}'
+					);
+
+					IF v_Res='OK' THEN
+						v_IDProducto:=NULL;
+					ELSE
+						v_IDProducto:='{@PRO_ID}';
+					END IF;
+				ELSE
+
+					v_IDProducto:=MantenimientoProductos_PCK.ModificarProducto_prov
+					(
+						US_ID,
+						'{@PRO_ID}',
+						'{@IDPROVEEDOR}',
+						'{@PRO_NOMBRE}',
+						'{@PRO_MARCA}',
+						'{@PRO_UNIDADBASICA}',
+						'{@PRO_UNIDADESPORLOTE}',
+						'{@PRO_REFERENCIA}',
+						'{@PRO_IDTIPOIVA}',
+						'{@CADENA_IMAGENES}',
+						'{@IMAGENES_BORRADAS}',
+						'{@PRO_BORRAR_VAL}',
+						'{@FECHA_ACCION}',
+						'{@IDFICHA}',
+						'{@PRO_OCULTO}',
+						'{@PRO_CATEGORIA}',
+						'{@PRO_REF_ESTANDAR}',
+						'{@PRO_LISTA_CAMBIOS}',
+            			'{@PRO_REQUIEREPRESUPUESTO}',
+            			'{@PRO_CODEXPEDIENTE}',					--	15ene18	nuevos campos Colombia
+            			'{@PRO_CODCUM}',
+            			'{@PRO_CODINVIMA}',
+            			'{@PRO_FECHACADINVIMA}',
+            			'{@PRO_CLASIFICACIONRIESGO}',
+            			'{@PRO_REGULADO}',
+           				'{@PRO_CODIUM}',						--	13feb20
+           				NULL,									--	Registro sanitario, ya no se utiliza, duplicado con CODIUM
+           				'{@EXPLICACIONCAMBIOS}'					--	28jun23
+					);
+
+				END IF;
+
+				MantenimientoProductos_PCK.MostrarProducto (v_IDProducto, US_ID);
+
+			ELSE
+	
+				MantenimientoProductos_PCK.MostrarProducto ('{@PRO_ID}', US_ID);
+			
+			END IF;
+
+
+		END IF;	
+	END;
+]]>
+</xsql:include-owa>
+</Form>
+</MantenimientoProductos>

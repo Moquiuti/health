@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para las noticias, FAQs, consejos, etc.
+		
+	(c) 10/9/2001 E.Torrellas
+-->
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VerTodasNoticiasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VerTodasNoticiasHTML.xsl"?>
+
+
+<Noticias xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="TIPO"/>
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+			SELECT
+				NOTG_ID			ID,
+				NOTG_NOMBRE		NOMBRE,
+				CURSOR
+				(
+					SELECT 
+						NOT_ID				ID,
+						NOT_IDTIPO 			TIPO,
+						to_char(NOT_FECHAENTRADA,'dd/mm/yyyy')	FECHAENTRADA,
+						NOT_TITULO			TITULO
+					FROM NOTICIAS
+					WHERE NOT_IDGRUPO=NOTG_ID
+					AND NOT_STATUS IS NULL
+					AND ((NOT_FECHASALIDA>SYSDATE)OR(NOT_FECHASALIDA IS NULL))
+					AND NOT_PUBLICA='S'
+					ORDER BY NOT_FECHAENTRADA DESC
+				)	AS NOTICIAS
+			FROM NOTICIASGRUPOS
+			WHERE NOTG_ID IN (SELECT DISTINCT NOT_IDGRUPO 
+								FROM NOTICIAS
+								WHERE NOT_STATUS IS NULL
+								AND ((NOT_FECHASALIDA>SYSDATE)OR(NOT_FECHASALIDA IS NULL))
+								AND NOT_PUBLICA='S')
+			ORDER BY NOTG_NOMBRE
+    ]]>
+  </xsql:query>
+  <Mantenimiento>
+  	0
+  </Mantenimiento>
+  <button label="Cancelar" alt="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button> 
+  <returnHome/>
+</Noticias>
+

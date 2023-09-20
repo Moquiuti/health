@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="FacturaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="FacturaHTML.xsl"?>
+
+<Factura xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Factura');
+
+	 		IF US_ID > 0 THEN
+				FACTURACION_PCK.Factura_XML(
+					US_ID,
+          '{@IDFACTURA}'
+				);
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</Factura>

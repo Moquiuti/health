@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="UltimaRefFamiliaPorCatJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="UltimaRefFamiliaPorCatJSON.xsl"?>
+
+<UltimaReferencia xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','UltimaRefFamiliaPorCat');
+		IF US_ID > 0 THEN
+			Catalogoprivado_Mant_Pck.UltimaRefFamiliaPorCat_XML(
+				'{@IDEMPRESA}',
+				'{@IDCATEGORIA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</UltimaReferencia>

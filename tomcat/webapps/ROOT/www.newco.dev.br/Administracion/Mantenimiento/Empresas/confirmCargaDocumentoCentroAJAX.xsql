@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+-->
+<?xml-stylesheet type="text/xsl" href="confirmCargaDocumentoCentroJSON.xsl"?>
+
+<confirmCargaDocumento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  
+<!--    <xsql:include-param name="TIPO"/>
+    <xsql:include-param name="PRO_BUSQUEDA"/>
+    <xsql:include-param name="ID_USUARIO"/>
+    <xsql:include-param name="HISTORY"/>
+	<xsql:include-param name="ID_PROVEEDOR"/>
+    <xsql:include-param name="STYLE"/>
+	<xsql:include-param name="CADENA_DOCUMENTOS"/>
+	<xsql:include-param name="DOCUMENTOS_BORRADOS"/>
+	<xsql:include-param name="BORRAR_ANTERIORES"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>-->
+
+    
+   
+	<xsql:include-owa>
+	  <![CDATA[
+	    DECLARE
+		        US_ID		NUMBER;
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','confirmCargaDocumentoCentro');
+				IF US_ID>0 THEN
+	   
+				DOCUMENTOS_PCK.GuardarDocumentos(
+					 '{@CADENA_DOCUMENTOS}', 
+					 '{@DOCUMENTOS_BORRADOS}', 
+					 US_ID, 
+					 NULL,
+					 '{@BORRAR_ANTERIORES}',
+					 '{@TIPO_DOC}',
+					 '{@CEN_ID}'					--	13set16
+					);
+				END IF;
+			END;
+	
+       ]]>	  
+	</xsql:include-owa>
+    
+  
+</confirmCargaDocumento>
+

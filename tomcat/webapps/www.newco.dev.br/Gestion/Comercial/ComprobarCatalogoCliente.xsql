@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Comprueba el catalogo del cliente y muestra mensajes de aviso
+ *	Si el usuario luego acepta, se llama a InsertarEnPlantilla.xsql
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ComprobarCatalogoClienteJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ComprobarCatalogoClienteJSON.xsl"?>
+
+<CompruebaCatClient xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaUsuariosLic');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.ComprobarCatalogoCliente(
+				US_ID,
+				'{@LIC_ID}',
+				'S'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			HTP.P('<RES>'||v_res||'</RES>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CompruebaCatClient>

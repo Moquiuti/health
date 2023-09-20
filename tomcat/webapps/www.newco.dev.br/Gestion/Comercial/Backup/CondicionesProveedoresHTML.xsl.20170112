@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="http://www.newco.dev.br/General/General.xsl"/>
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+<xsl:param name="lang" select="@lang"/>
+<xsl:param name="usuario" select="@US_ID"/>
+
+<xsl:template match="/CondicionesProv">
+
+<html>
+<head>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+			<xsl:when test="//LANG"><xsl:value-of select="//LANG"/></xsl:when>
+			<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+
+	<META Http-Equiv="Cache-Control" Content="no-cache" />
+
+	<title><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_proveedores']/node()"/></title>
+
+	<!--style-->
+	<xsl:call-template name="estiloIndip"/>
+	<!--fin de style-->
+
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+
+</head>
+<body>
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:choose>
+		<xsl:when test="//LANG"><xsl:value-of select="//LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+<xsl:choose>
+	<xsl:when test="//SESION_CADUCADA">
+		<xsl:apply-templates select="//SESION_CADUCADA"/>
+	</xsl:when>
+	<xsl:when test="//Sorry">
+		<xsl:apply-templates select="//Sorry"/>
+	</xsl:when>
+	<xsl:otherwise>
+    
+   
+     <div class="divLeft" style="border:1px solid #939494; border-bottom:0;">
+        <table id="PestanasInicio" border="0" >
+            <tr>
+                <th class="trenta" style="background:#C3D2E9;">
+                        <a href="http://www.newco.dev.br/Gestion/Comercial/CondicionesProveedores.xsql" style="text-decoration:none;"> 
+                            <xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_proveedores']/node()"/>
+                        </a>
+                </th>
+                <th class="trenta pestanaInicio">
+                    <a href="http://www.newco.dev.br/Gestion/EIS/ClasificacionProveedoresEIS.xsql" style="text-decoration:none;">
+                        <xsl:value-of select="document($doc)/translation/texts/item[@name='clasificacion_proveedores']/node()"/>
+                    </a>
+                </th>
+                <th>&nbsp;</th> 
+            </tr>
+        </table>
+        </div>
+        
+        
+        <div class="divLeft" style="border:1px solid #939494;border-top:0;">
+		<table class="grandeInicio" border="0">
+		<thead>
+			<tr class="tituloTabla">
+				<th>
+					<xsl:attribute name="colspan">
+						<xsl:choose>
+						<xsl:when test="//PROVEEDORES/CDC">12</xsl:when>
+						<xsl:otherwise>9</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+					<xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_pago_centro']/node()"/>&nbsp;
+					"<xsl:value-of select="/CondicionesProv/PROVEEDORES/FORMA_PAGO/CEN_NOMBRE"/>":&nbsp;
+					<xsl:value-of select="/CondicionesProv/PROVEEDORES/FORMA_PAGO/CEN_FORMAPAGO_TXT"/>&nbsp;-&nbsp;
+					<xsl:value-of select="/CondicionesProv/PROVEEDORES/FORMA_PAGO/CEN_PLAZOPAGO_TXT"/>
+				</th>
+			</tr>
+			<tr class="subTituloTabla">
+				<th>&nbsp;</th>
+				<th class="ocho"><xsl:copy-of select="document($doc)/translation/texts/item[@name='num_prod_farmacia_2line']/node()"/></th>
+				<th class="ocho"><xsl:copy-of select="document($doc)/translation/texts/item[@name='num_prod_material_2line']/node()"/></th>
+                                <xsl:if test="//PROVEEDORES/CDC">
+				<th class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='num_ofertas']/node()"/></th>
+				<th class="ocho"><xsl:copy-of select="document($doc)/translation/texts/item[@name='num_fichas_tecnicas_2line']/node()"/></th>
+                                </xsl:if>
+				<th class="ocho"><xsl:copy-of select="document($doc)/translation/texts/item[@name='pedido_minimo_2line']/node()"/></th>
+				<th class="doce"><xsl:copy-of select="document($doc)/translation/texts/item[@name='forma_pago']/node()"/></th>
+                                <th class="doce"><xsl:copy-of select="document($doc)/translation/texts/item[@name='plazo_pago']/node()"/></th>
+				<th class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='plazo_entrega']/node()"/></th>
+				<th class="cinco"><xsl:value-of select="document($doc)/translation/texts/item[@name='caducidades']/node()"/><br />
+                                                <xsl:value-of select="document($doc)/translation/texts/item[@name='otras_cond']/node()"/>
+                                </th>
+			</tr>
+		</thead>
+                <xsl:choose>
+		<xsl:when test="PROVEEDORES/PROVEEDOR">
+			<xsl:for-each select="PROVEEDORES/PROVEEDOR">
+				<xsl:variable name="ProvID"><xsl:value-of select="ID"/></xsl:variable>
+				<tr style="border-bottom:1px solid #A7A8A9;">
+					<!-- Nombre Proveedor -->
+					<td style="text-align:left;">
+						&nbsp;<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalle.xsql?EMP_ID={ID}&amp;ESTADO=CABECERA','DetalleEmpresa',100,80,0,0)">
+                                                    <xsl:value-of select="NOMBRE"/>
+                                                </a>
+					</td>
+					<!-- Numero Productos Farmacia -->
+					<td><xsl:value-of select="PRODUCTOS_FARMACIA"/></td>
+					<!-- Numero Productos Material Sanitario -->
+					<td><xsl:value-of select="PRODUCTOS_MATS"/></td>
+			<xsl:if test="//PROVEEDORES/CDC">
+					<!-- Numero Ofertas -->
+					<td><xsl:value-of select="OFERTAS"/></td>
+					<!-- Numero Fichas Tecnicas -->
+					<td><xsl:value-of select="FICHASTECNICAS"/></td>
+			</xsl:if>
+					<!-- Pedido Minimo -->
+					<td>
+					<xsl:choose>
+					<xsl:when test="CONDICIONES/PEDIDOMINIMO/EMPRESA and CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_ACTIVO != 'N'">
+						<xsl:choose>
+						<xsl:when test="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_ACTIVO = 'E'">
+							<xsl:value-of select="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_IMPORTE"/>
+<!--
+							<xsl:if test="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_DETALLE != ''">
+								&nbsp;
+								<a href="#" class="tooltip">
+									<img src="http://www.newco.dev.br/images/info.gif" class="static"/>
+									<span class="classic">
+										<xsl:value-of select="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_DETALLE"/>
+									</span>
+                		                                </a>
+							</xsl:if>
+-->
+						</xsl:when>
+						<xsl:when test="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_ACTIVO = 'S'">
+							<xsl:value-of select="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_IMPORTE"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='no']/node()"/>
+						</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:when test="CONDICIONES/PEDIDO_MINIMO_GENERAL">
+						<xsl:choose>
+						<xsl:when test="CONDICIONES/PEDIDO_MINIMO_GENERAL/EMP_PEDMINIMO_ACTIVO = 'E'">
+							<xsl:value-of select="CONDICIONES/PEDIDO_MINIMO_GENERAL/EMP_PEDMINIMO_IMPORTE"/>
+<!--
+							<xsl:if test="CONDICIONES/PEDIDO_MINIMO_GENERAL/EMP_PEDMINIMO_DETALLE != ''">
+								&nbsp;
+								<a href="#" class="tooltip">
+									<img src="http://www.newco.dev.br/images/info.gif" class="static"/>
+									<span class="classic">
+										<xsl:value-of select="CONDICIONES/PEDIDO_MINIMO_GENERAL/EMP_PEDMINIMO_DETALLE"/>
+									</span>
+                		                                </a>
+							</xsl:if>
+-->
+						</xsl:when>
+						<xsl:when test="CONDICIONES/PEDIDO_MINIMO_GENERAL/EMP_PEDMINIMO_ACTIVO = 'S'">
+							<xsl:value-of select="CONDICIONES/PEDIDO_MINIMO_GENERAL/EMP_PEDMINIMO_IMPORTE"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='no']/node()"/>
+						</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='no']/node()"/>
+					</xsl:otherwise>
+					</xsl:choose>
+<!--
+					<xsl:if test="CONDICIONES/PEDIDOMINIMO/CENTROS/CENTRO or CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_ACTIVO = 'S'">
+-->
+					<xsl:if test="CONDICIONES/PEDIDOMINIMO/CENTROS/CENTRO">
+						&nbsp;
+						<div class="tooltip">
+						<!--14dic16	Cambioamops a nuevas clases tooltip	-->
+						<!--<a href="#" class="tooltip">-->
+							<img src="http://www.newco.dev.br/images/info.gif" class="static"/>
+							<!--<span class="classic">-->
+							<span class="tooltiptext">
+<!--
+							<xsl:if test="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_ACTIVO = 'S'">
+								<xsl:value-of select="document($doc)/translation/texts/item[@name='pedido_minimo_no_estricto']/node()"/>:<br />
+								<xsl:value-of select="CONDICIONES/PEDIDOMINIMO/EMPRESA/PME_PEDMINIMO_DETALLE"/><br /><br />
+							</xsl:if>
+-->
+							<xsl:if test="CONDICIONES/PEDIDOMINIMO/CENTROS/CENTRO">
+								<xsl:for-each select="CONDICIONES/PEDIDOMINIMO/CENTROS/CENTRO">
+									<xsl:value-of select="NOMBRE"/>:&nbsp;
+								<xsl:choose>
+								<xsl:when test="PMC_PEDMINIMO_ACTIVO = 'E'">
+									<xsl:value-of select="PMC_PEDMINIMO_IMPORTE"/>
+								</xsl:when>
+								<xsl:when test="PMC_PEDMINIMO_ACTIVO = 'S'">
+									<xsl:value-of select="PMC_PEDMINIMO_IMPORTE"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='no_estricto']/node()"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='no']/node()"/>
+								</xsl:otherwise>
+								</xsl:choose>
+									<br />
+								</xsl:for-each>
+							</xsl:if>
+							</span>
+                         <!--</a>-->
+						 </div>
+					</xsl:if>
+					</td>
+					<!-- Forma de Pago -->
+					<td>
+                                            <xsl:value-of select="CONDICIONES/FORMASPAGO/field/dropDownList/listElem[ID = ../../@current]/listItem"/>
+					</td>
+                                        <!-- Plazos de Pago -->
+					<td>
+                                            <xsl:value-of select="CONDICIONES/PLAZOSPAGO/field/dropDownList/listElem[ID = ../../@current]/listItem"/>
+					</td>
+					<!-- Plazo de entrega -->
+					<td>
+					<xsl:choose>
+					<xsl:when test="CONDICIONES/PLAZOENTREGA/PLANTILLA">
+						<xsl:value-of select="CONDICIONES/PLAZOENTREGA/PLANTILLA/PL_PLAZOENTREGA"/>
+						<xsl:if test="count(CONDICIONES/PLAZOENTREGA/PLANTILLA) > 1">
+							&nbsp;
+							<a href="#" class="tooltip">
+								<img src="http://www.newco.dev.br/images/info.gif" class="static"/>
+								<span class="classic">
+								<xsl:for-each select="CONDICIONES/PLAZOENTREGA/PLANTILLA">
+									<xsl:value-of select="CATEGORIA"/>:&nbsp;<xsl:value-of select="PL_PLAZOENTREGA"/><br />
+								</xsl:for-each>
+								</span>
+							</a>
+						</xsl:if>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='no_informado']/node()"/>
+					</xsl:otherwise>
+					</xsl:choose>
+					</td>
+                                        
+					<!-- Gestion Caducidades -->
+					<td>
+					<xsl:choose>
+					<xsl:when test="CONDICIONES/COP_GESTIONCADUCIDADES">
+						<xsl:choose>
+						<!-- Texto largo => mostramos pop-up -->
+						<xsl:when test="string-length(CONDICIONES/COP_GESTIONCADUCIDADES) > 50">
+							<a href="#" class="tooltip">
+								<xsl:value-of select="substring(CONDICIONES/COP_GESTIONCADUCIDADES,0,50)"/><xsl:text>...</xsl:text>
+								<span class="classic"><xsl:value-of select="CONDICIONES/COP_GESTIONCADUCIDADES"/></span>
+							</a>
+						</xsl:when>
+						<!-- Texto cortio => no hace falta pop-up -->
+						<xsl:otherwise>
+							<xsl:value-of select="CONDICIONES/COP_GESTIONCADUCIDADES"/>
+						</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					</xsl:choose>
+					<!-- Otras condiciones -->
+					<xsl:choose>
+					<xsl:when test="CONDICIONES/COP_OTRASLICITACIONES">
+                                            <br />
+						<xsl:choose>
+						<!-- Texto largo => mostramos pop-up -->
+						<xsl:when test="string-length(CONDICIONES/COP_OTRASLICITACIONES) > 50">
+							<a href="#" class="tooltip">
+								<xsl:value-of select="substring(CONDICIONES/COP_OTRASLICITACIONES,0,50)"/><xsl:text>...</xsl:text>
+								<span class="classic"><xsl:value-of select="CONDICIONES/COP_OTRASLICITACIONES"/></span>
+							</a>
+						</xsl:when>
+						<!-- Texto cortio => no hace falta pop-up -->
+						<xsl:otherwise>
+							<xsl:value-of select="CONDICIONES/COP_OTRASLICITACIONES"/>
+						</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					</xsl:choose>
+					</td>
+				</tr>
+			</xsl:for-each>
+                </xsl:when>
+		<xsl:otherwise>
+			<tr>
+				<td align="center">
+					<xsl:attribute name="colspan">
+						<xsl:choose>
+						<xsl:when test="//PROVEEDORES/CDC">12</xsl:when>
+						<xsl:otherwise>9</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+					<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='proveedores_sin_resultados']/node()"/></strong>
+				</td>
+			</tr>
+		</xsl:otherwise>
+		</xsl:choose>
+		</table>
+        </div>
+		<br /><br />
+	</xsl:otherwise>
+</xsl:choose>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Marca un pedido como "Prepago"
+	Ultima revision ET 20nov17
+-->
+<?xml-stylesheet type="text/xsl" href="MarcarPrepagoJSON.xsl"?>
+
+<MarcarPrepago xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ControlPedidos');
+		IF US_ID>=0 THEN
+			PedidosProblematicos_Pck.RequierePrepago_XML(
+				US_ID,
+				'{@MO_ID}'
+				--'{@REQUIEREPREPAGO}'
+			);
+			
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</MarcarPrepago>

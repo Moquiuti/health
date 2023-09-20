@@ -1,0 +1,86 @@
+@charset "utf-8";
+/* CSS Document */
+table.calendario{
+
+}
+/*calendario de pedidos programados*/
+		table.diasVacaciones {background-color:red; color: white; font-weight:bold} 
+		table.diasVacacionesCliente {background-color:#FDD61F; color: black; font-weight:bold} 
+		table.diasVacacionesProveedor {background-color: red; color: white; font-weight:bold} 
+		table.diasLanzamientosCorrectos {background-color:blue; color: white; font-weight:bold} 
+		table.diasLanzamientosConflictos {background-color:blue; color: white; font-weight:bold} 
+		table.diasAnteriores { background-color:#EBEBEB; color: black; font-weight:normal; text-decoration: line-through;} 
+		
+		
+		table.claroDiasVacacionesCliente {background-color: #FDD61F; color: black; font-weight:bold}
+		table.oscuroDiasVacacionesCliente {background-color: #FDD61F; color: black; font-weight:bold}
+		
+		table.claroDiasVacacionesProveedor {background-color: red; color: white; font-weight:bold}
+		table.oscuroDiasVacacionesProveedor {background-color: red; color: white; font-weight:bold}
+		
+		table.diaActual {color: blue; font-weight:bold} 
+		table.claro {background-color: #D6E0F8}
+		table.medio {background-color: #d0f8f7}
+		table.oscuro {background-color: #B5C8F2}
+		table tr.oscuro:hover {background-color: #B5C8F2}
+		table.muyoscuro {background-color: #015E4B}
+		table.gris {background-color: #CCCCCC}
+		table.grisclaro {background-color: #EBEBEB}
+		table td { padding:3px;}
+		
+		tr.blanco {background-color: #FFFFFF} 
+		tr.blancoAlerta {background-color: #FFFFFF; color:red;}
+		tr.rojo {background-color: #ff8888} /*	10mar10	suavizamos el rojo, antes "red" */
+		tr.claro {background-color: #D6E0F8}
+		tr.claroAlerta {background-color: #D6E0F8; color:red;}
+		tr.muyclaro {background-color: #F5FFFF}
+		tr.medio {background-color: #d0f8f7}
+		
+		tr.diasVacaciones {background-color:red; color: white; font-weight:bold} 
+		tr.diasVacacionesCliente {background-color:#FDD61F; color: black; font-weight:bold} 
+		tr.diasVacacionesProveedor {background-color:red;color:white; font-weight:bold} 
+		tr.diasLanzamientosCorrectos {background-color:blue; color: white; font-weight:bold} 
+		tr.diasLanzamientosConflictos {background-color:blue; color: white; font-weight:bold} 
+		tr.diasAnteriores {background-color:#EBEBEB; color: black; font-weight:normal; text-decoration: line-through;}
+		
+		tr.claroDiasVacacionesCliente {background-color: #FDD61F; color: black; font-weight:bold}
+		tr.oscuroDiasVacacionesCliente {background-color: #FDD61F; color: black; font-weight:bold}
+		
+		tr.claroDiasVacacionesProveedor {background-color: red; color: white; font-weight:bold}
+		tr.oscuroDiasVacacionesProveedor {background-color: red; color: white; font-weight:bold}
+		
+		tr.diaActual {color: blue; font-weight:bold} 
+		tr.letrasRojas {background-color: #d0f8f7; color:#CCCCCC;}
+		tr.oscuro {background-color: #B5C8F2;}
+		tr.muyoscuro {background-color: #015E4B}
+		tr.gris {background-color: #CCCCCC}
+		tr.grisclaro {background-color: #EBEBEB}
+		
+		td.blanco {background-color: #FFFFFF} 
+		td.rojo {background-color: red} 
+		td.claro {background-color: #D6E0F8}
+		td.medio {background-color: #d0f8f7}
+		
+		td.diasVacaciones {background-color:red; color: white; font-weight:bold} 
+		td.diasVacacionesCliente {background-color:#FDD61F; color: black; font-weight:bold} 
+		td.diasVacacionesProveedor {background-color: red; color: white; font-weight:bold} 
+		td.diasLanzamientosCorrectos {background-color:blue; color: white; font-weight:bold} 
+		td.diasLanzamientosConflictos {background-color:blue; color: white; font-weight:bold} 
+		td.diasAnteriores {background-color:#EBEBEB; color: black; font-weight:normal; text-decoration: line-through;}
+		
+		td.claroDiasVacacionesCliente {background-color: #FDD61F; color: black; font-weight:bold}
+		td.oscuroDiasVacacionesCliente {background-color: #FDD61F; color: black; font-weight:bold}
+		
+		td.claroDiasVacacionesProveedor {background-color: red; color: white; font-weight:bold}
+		td.oscuroDiasVacacionesProveedor {background-color: red; color: white; font-weight:bold}
+
+		 
+		td.diaActual {color: blue; font-weight:bold} 
+
+		td.letrasRojas {background-color: #d0f8f7; color: red;}
+		td.oscuro {background-color: #B6B9E2; height:20px; font-weight:bold; padding:3px;}
+		td.muyoscuro {background-color: #015E4B}
+		td.gris {background-color: #CCCCCC}
+		td.grisclaro {background-color: #EBEBEB}
+
+/*fin calendario de pedidos programados*/

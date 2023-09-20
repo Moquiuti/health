@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->  
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AutorizacionClientesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AutorizacionClientesHTML.xsl"?>
+
+<AutorizacionClientes xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="US_ID"/>	
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+ <![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AutorizacionClientes');
+		IF US_ID>=0 THEN
+ 			IF '{@AUTORIZACIONES}' IS NOT NULL THEN
+				EMPRESAS_PCK.GuardarAutorizacionesClientes
+				(
+           			US_ID,
+           			'{@IDPROVEEDOR}',
+           			'{@AUTORIZACIONES}'
+         		);
+			END IF;
+
+			Empresas_Pck.AutorizacionClientes_XML(US_ID,'{@IDPROVEEDOR}');
+			
+		END IF;			   
+    END;
+   ]]>        
+</xsql:include-owa>
+
+</AutorizacionClientes>

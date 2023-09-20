@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PROPListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PROPListaHTML.xsl"?>
+
+<!--
+    Es una copia de P3Lista.xsql
+
+  ** L'enganyem dient-li quin es el namespace xsl perque tenim una instrucció XSL
+     dins del XSQL.
+
++-->
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  
+  <xsql:include-param name="xml-stylesheet"/>
+
+  <form name="BuscaProductos" method="post" action="PROPLista.xsql">
+   <!--
+    //[[ Copiamos los parametros dentro del form para volver a enviar la consulta ]]//
+   +-->
+  <!--
+   |  Parametros de estado de la consulta
+   +-->
+  <xsql:include-param name="EMPRESATOTAL"/>
+  <xsql:include-param name="FAMILIATOTAL"/>  
+  <xsql:include-param name="SUBFAMILIATOTAL"/>  
+   
+  <!--
+   |   Parametros de seleccion
+   +-->
+  <xsql:include-param name="LLP_CATEGORIA"/>
+  <xsql:include-param name="LLP_FAMILIA"/>  
+  <xsql:include-param name="LLP_SUBFAMILIA"/>  
+  <xsql:include-param name="LLP_NOMBRE"/>    
+  <xsql:include-param name="LLP_DESCRIPCION"/>  
+  <xsql:include-param name="LLP_FABRICANTE"/>      
+  <xsql:include-param name="LLP_MARCA"/>
+  <xsql:include-param name="LLP_TIPO_PRODUCTO"/>
+  <xsql:include-param name="LLP_REFERENCIA"/>  
+    
+  <xsql:include-param name="EMP_ID"/>   <!-- Codigo de empresa que usamos para las tarifas -->
+  
+<!--  
+  <xsql:include-param name="LLP_PROVEEDOR"/>        
+  <xsql:include-param name="LLP_HOMOLOGADO"/>        
+  <xsql:include-param name="LLP_CERTIFICACION"/>            
+  <xsql:include-param name="LLP_NIVEL_CALIDAD"/>            
+  <xsql:include-param name="LLP_PROV_HABITUALES"/>            
+  <xsql:include-param name="LLP_PRODUCTO_DETERMINADO"/>            
+-->  
+  <xsql:include-param name="LLP_ORDERBY"/>              
+<!--  <xsql:include-param name="LLP_LISTAR"/>             -->
+<!--  <xsql:include-param name="OPERACION"/>  
+  <xsql:include-param name="LLP_ID"/>
+  <xsql:include-param name="LP_ID"/>  
+  <xsql:include-param name="TCV_ID"/>    
+-->  
+  <xsql:include-param name="REGISTROSPORPAGINA"/>
+  <!-- ULTIMAPAGINA es defineix a partir dels butons -->
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PrecioReferenciaProducto');
+    		IF US_ID > 0 THEN
+				PRODUCTOS_PCK.BuscaProductosEmpresa(
+						p_USUARIO => US_ID,
+						p_ULTIMAPAGINA => '{@ULTIMAPAGINA}',
+						p_REGISTROSPORPAGINA => 20,
+						p_CATEGORIA => '{@LLP_CATEGORIA}',
+						p_FAMILIA => '{@LLP_FAMILIA}',
+						p_SUBFAMILIA => '{@LLP_SUBFAMILIA}',
+						p_NOMBRE => '{@LLP_NOMBRE}',
+						p_DESCRIPCION => '{@LLP_DESCRIPCION}',
+						p_FABRICANTE => '{@LLP_FABRICANTE}',
+						p_MARCA => '{@LLP_MARCA}',
+						p_TIPO_PRODUCTO => '{@LLP_TIPO_PRODUCTO}',
+						p_REFERENCIA_PROVEEDOR => '{@LLP_REFERENCIA}',
+						p_ORDERBY => '{@LLP_ORDERBY}'
+					);
+			END IF;
+     END;
+    ]]>
+  </xsql:include-owa>    
+    <!-- Volver a la busqueda. -->
+    <button label="Buscar" caption="P3-0480">
+      <name_function>Linka</name_function>
+      <param>'PROPManten.xsql'</param>                
+    </button>
+    
+    <!-- Editar tarifa publica -->
+    <buttonPublicaPrivada label="Editar">
+      <name_function>LinkaPublica</name_function>
+      <param>'../Tarifas/TRFManten.xsql'</param>
+    </buttonPublicaPrivada>
+    
+    <!-- Editar tarifa privada -->
+    <!--
+    <buttonPublicaPrivada label="PrecioPeq">
+      <name_function>LinkaPrivada</name_function>
+      <param>'PROPBuscaEmp.xsql'</param>
+    </buttonPublicaPrivada>                            
+    -->
+    <buttonPublicaPrivada label="PrecioPeq">
+      <name_function>LinkaPublica</name_function>
+      <param>'../Tarifas/TRFManten.xsql'</param>
+    </buttonPublicaPrivada>
+    
+    <button label="Ampliadas" caption="IMG-0200">  
+      <name_function>Amplia_fichas</name_function>
+      <param>document.forms[0]</param>                
+    </button>
+    
+    <button label="Reducidas" caption="IMG-0210">  
+      <name_function>Reduce_fichas</name_function>
+      <param>document.forms[0]</param>               
+    </button>          
+</form>  
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>     
+ 
+</Lista>

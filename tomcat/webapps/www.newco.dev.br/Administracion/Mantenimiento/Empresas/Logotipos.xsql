@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Logotipos de logotipos
+	Ultima revisión: 25nov19 15:05
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="LogotiposHTML.xsl"?>
+
+<Logotipos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+        <xsql:include-owa>
+          <![CDATA[
+          	DECLARE
+          		US_ID		NUMBER;
+				v_Res		VARCHAR2(100);
+            BEGIN
+          	  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Logotipos');
+          	  if US_ID>=0 then
+
+				--solodebug utilidades_pck.debug('Logotipos. US_ID:'||US_ID||' IDEMPRESA:{@IDEMPRESA} IDCENTRO:{@IDCENTRO} IDLOGOTIPO:{@IDLOGOTIPO} ACCION:{@ACCION}');
+
+				--	Devuelve los datos para el formulario de edición del lugar de entrega	
+				IF '{@ACCION}'='GUARDAR' THEN
+					v_Res:=Personalizacion_pck.CambiaLogotipoCentro
+							(
+							  US_ID,
+							  '{@IDEMPRESA}',
+							  '{@IDCENTRO}',
+							  '{@IDLOGOTIPO}'
+					  		);
+				END IF;
+				  
+                Personalizacion_pck.Logotipos_XML('{@IDEMPRESA}');
+              end if;	
+            END;
+          ]]>	  
+        </xsql:include-owa>
+ 
+</Logotipos>
+

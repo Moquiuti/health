@@ -1,0 +1,246 @@
+/*
+
+Início página ACESSO/ACCESO/LOGIN
+
+*/
+
+.menu_login{
+	position: absolute;
+	width: 100%;
+	height: 24px;
+	left: 0px;
+	top: 40px;
+	margin-left: 10%;
+	color: #3D5F90;
+}
+
+.menu_login a {
+	position: relative;
+	float: left;
+	outline: none;
+	cursor: indicadores;
+	padding: 14px 16px;
+	transition: 0.3s;
+	box-sizing: border-box;
+	text-decoration:none; 
+	color: #3D5F90;
+}
+
+.menu_login a:before {
+	content: "";
+	position: relative;
+	width: 100%;
+	height: 3px;
+	bottom: 0;
+	left: 0;
+	background-color: #3D5F90;
+	visibility: hidden;
+	-webkit-transform: scaleX(0);
+	transform: scaleX(0);
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+}
+
+.menu_login a:hover:before {
+	visibility: visible;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
+}
+
+.logo_login {	
+	width: 60%;
+	height: 8%;
+	background: url(img/logo_login.png);
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:  40px;
+	background-size:cover;
+	background-repeat:no-repeat;
+}
+
+.coluna_esquerda_interna_login{
+	width: 100%;
+	height: 755px;
+	display: block;
+	background: #FFFFFF;
+	background-position: left;
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	background-size: contain;
+	-o-background-size: contain;
+}
+
+.coluna_esquerda_login{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	position: absolute;
+	width: 370px;
+	height: 450px;
+	left: calc(53% - 400px/2 - 360px);
+	top: calc(45% - 492px/2 - 4px);
+
+	background: #FFFFFF;
+	box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+	border-radius: 16px;
+}
+
+.coluna_direita_login{
+	width: 100%;
+	height: 755px;
+	display: block;
+	background: url(img/background_login.png) no-repeat scroll;
+	background-position: right;
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	background-size: contain;
+	-o-background-size: contain;
+}
+
+.botao_acessar{
+	width: 288px;
+	height: 58px;
+	left: 0px;
+	top: 283px;
+	background: #56CCF2;
+	border-radius: 30px;
+	align-self: stretch;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	float:left;
+	text-decoration: none;
+	cursor: pointer;
+	color: #3D5F90;
+	font-size: 16px;
+	line-height: 19px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.coluna_login {
+	padding-right: 40px;
+	padding-left: 40px;
+	width: 78%;
+	margin-top: 28px;
+}
+
+.esqueci_senha{
+	width: 153px;
+	height: 19px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #3D5F90;
+	display: block;
+	margin-left: 42px;
+	margin-right: auto;
+	margin-top:  128px;
+	text-decoration: none;
+}
+
+.logo_login_mvm{
+	position: absolute;
+	width: 214px;
+	height: 36px;
+	left: 77px;
+	top: 473px;
+	background: url(img/logo_login_mvm.png) no-repeat ;
+}
+
+.barra_superior_login{
+	position: absolute;
+	width: 100%;
+	height: 24px;
+	left: 0px;
+	top: 0px;
+
+	background: #6D8CC1;
+	mix-blend-mode: multiply;
+}
+
+.header_login {
+	background-color: #FFFFFF;
+	overflow-y:hidden;
+	overflow-x:hidden;
+}
+
+.slogan_login{
+	position: absolute;
+	width: 457px;
+	height: 214px;
+	left: 804px;
+	top: 150px;
+	font-family: railroad-gothic-atf, sans-serif;
+	font-style: normal;
+	font-weight: 800;
+	font-size: 45px;
+	line-height: 100%;
+	color: #FFFFFF;
+	text-transform: uppercase;
+}
+
+.slogan_login_destaque{
+	position: absolute;
+	width: 457px;
+	height: 214px;
+	left: 804px;
+	top: 263px;
+	font-family: railroad-gothic-atf, sans-serif;
+	font-style: normal;
+	font-weight: 800;
+	font-size: 27px;
+	line-height: 100%;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	color: #56CCF2;
+}
+
+.dados_telefonico_login{
+	position: absolute;
+	width: 457px;
+	height: 214px;
+	left: 804px;
+	top: 530px;
+
+	font-size: 18px;
+	line-height: 21px;
+	color: #FFFFFF;
+}
+
+.dados_telefonico_login_destaque{
+	position: absolute;
+	width: 457px;
+	height: 214px;
+	left: 804px;
+	top: 560px;
+
+	font-size: 18px;
+	line-height: 21px;
+	color: #56CCF2;
+	font-weight: bold;
+}
+
+.direito_autoral{
+	position: absolute;
+	width: 403px;
+	height: 16px;
+	left: 7px;
+	top: 515px;
+	font-size: 12px;
+	line-height: 16px;
+	color: #6D8CC1;
+	margin: 0px 10px;
+	text-decoration: none;
+}
+/*
+
+Fim página ACESSO/ACCESO/LOGIN
+
+*/

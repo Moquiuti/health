@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- 
+	Pagina de inicio del EIS, utilizando chart.js en lugar de las APIs de Google
+	Ultima revision ET 29ene20
+-->
+<?xml-stylesheet type="text/xsl" href="EISConsultasHTML2022.xsl"?>
+
+<EIS_CONSULTAS xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-request-params/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISBasico');
+		IF US_ID>=0 THEN
+			EIS_PCK.CuadroPrincipalEIS_XML(US_ID);
+			--HTP.P('<OK/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<returnHome/>
+</EIS_CONSULTAS>

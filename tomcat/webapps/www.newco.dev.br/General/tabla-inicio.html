@@ -1,0 +1,748 @@
+ <xsl:template match="COMPRADOR">
+  		<input type="hidden" name="ORDEN" value="{./ORDEN}" />
+  		<input type="hidden" name="SENTIDO" value="{./SENTIDO}" />
+    	
+        <table class="grandeInicio">
+		<tr class="tituloTabla" >
+       		 <th>
+         	<xsl:attribute name="colspan">
+         	<xsl:choose>
+            <xsl:when test="ADMIN='MVM'">14</xsl:when>
+            <xsl:otherwise>19</xsl:otherwise>
+            </xsl:choose>
+            </xsl:attribute>
+			<p>Pedidos retrasados o parcialmente entregados</p>
+          </th>           
+				<xsl:if test="ADMIN='MVM'">
+				<th colspan="5">
+				<a href="http://www.newco.dev.br/Personal/BandejaTrabajo/PedidosAPuntoDeEntregar.xsql">Pedidos a punto de entregar</a>
+                </th>
+			    </xsl:if>
+       </tr>
+        <tr class="subTituloTabla">
+			<xsl:if test="ADMIN='MVM'">
+	    		<tr>
+					<!--<xsl:if test="../../MOSTRARCENTRO">-->
+					<td>
+						<xsl:attribute name="colspan">
+								<xsl:choose>
+									<xsl:when test="MOSTRARCENTRO">
+										7
+									</xsl:when>
+									<xsl:otherwise>     
+										6
+									</xsl:otherwise>     
+								</xsl:choose>
+						</xsl:attribute>
+						Información del sistema
+					</td>
+					<xsl:if test="ADMIN='MVM'">
+						<td align="center" colspan="3" class="claro">
+							Información del proveedor
+						</td>
+					</xsl:if>
+					<td align="center" colspan="3">
+						Seguimiento MVM
+					</td>
+					<xsl:if test="ADMIN='MVM'"><!--24mar10	or ../ADMIN='EMPRESA'-->
+						<td align="center" width="40px" class="claro">
+							Info<br/>Cliente
+						</td>
+					</xsl:if>
+					<xsl:if test="ADMIN='MVM'">
+						<td align="center" colspan="5">
+							Información Privada
+						</td>
+					</xsl:if>
+				</tr>
+			</xsl:if>
+	    	<tr class="claro" onMouseOver="this.className='claro'" onMouseOut="this.className='blanco'">
+				<xsl:if test="ADMIN='MVM' or ADMIN='EMPRESA'">
+					<td align="center" width="20px">
+						Pos.
+					</td>
+				</xsl:if>
+				<td align="center" width="60px">
+					<u><a href="javascript:OrdenarPor('NUMERO_PEDIDO');">Núm.Pedido
+							<xsl:choose>
+								<xsl:when test="ORDEN='NUMERO_PEDIDO'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+					</a></u>
+				</td>
+				<xsl:if test="MOSTRARCENTRO">
+					<td align="center" width="140px">
+						<u><a href="javascript:OrdenarPor('CENTRO');">Centro&nbsp;
+							<xsl:choose>
+								<xsl:when test="ORDEN='CENTRO'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</a></u>
+					</td>
+				</xsl:if>
+				<td align="center" width="100px">
+					<u><a href="javascript:OrdenarPor('PROVEEDOR');">Proveedor&nbsp;
+							<xsl:choose>
+								<xsl:when test="ORDEN='PROVEEDOR'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+					</a></u>
+				</td>
+				<td align="center" width="80px">
+					<u><a href="javascript:OrdenarPor('FECHA_EMISION');">Emisión&nbsp;
+							<xsl:choose>
+								<xsl:when test="ORDEN='FECHA_EMISION'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+					</a></u>
+				</td>
+				<td align="center" width="80px">
+					<u><a href="javascript:OrdenarPor('FECHA_ENTREGA');">Entrega Prevista&nbsp;
+							<xsl:choose>
+								<xsl:when test="ORDEN='FECHA_ENTREGA'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+					</a></u>
+				</td>
+				<td align="center" width="90px">
+					<u><a href="javascript:OrdenarPor('ESTADO');">Estado
+							<xsl:choose>
+								<xsl:when test="ORDEN='ESTADO'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+					</a></u>
+				</td>
+				<xsl:if test="ADMIN='MVM'">
+					<td align="center" width="100px" class="claro">
+						Situación<!--Causa de la incidencia-->
+					</td>
+					<td align="center" width="80px" class="claro">
+						Salida
+					</td>
+					<td align="center" width="60px" class="claro">
+						<u><a href="javascript:OrdenarPor('ALBARAN');">Albarán
+								<xsl:choose>
+									<xsl:when test="ORDEN='ALBARAN'">
+										<xsl:choose>
+											<xsl:when test="SENTIDO='DESC'">
+												<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+									</xsl:otherwise>
+								</xsl:choose>
+						</a></u>
+					</td>
+				</xsl:if>
+				<td align="center" width="40px">
+					<u><a href="javascript:OrdenarPor('CONTROL_MVM');">Control&nbsp;
+							<xsl:choose>
+								<xsl:when test="ORDEN='CONTROL_MVM'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+					</a></u>
+				</td>
+				<td align="center" width="60px">
+					<u><a href="javascript:OrdenarPor('FECHA_ENVIADO_DIA');">Enviado
+							<xsl:choose>
+								<xsl:when test="ORDEN='FECHA_ENVIADO_DIA'">
+									<xsl:choose>
+										<xsl:when test="SENTIDO='DESC'">
+											<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+								</xsl:otherwise>
+							</xsl:choose>
+					</a></u>
+				</td>
+				<xsl:choose>
+					<xsl:when test="ADMIN='MVM'">
+						<td align="center" width="30px">
+						Com.
+						</td>
+					</xsl:when>
+					<xsl:otherwise>
+						<td align="center" width="200px">
+						Comentarios
+						</td>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:if test="ADMIN='MVM'"><!--24mar10	or ../ADMIN='EMPRESA'-->
+					<td align="center" width="40px" class="claro">
+						<u><a href="javascript:OrdenarPor('CLINICA_AGUANTA');">Clínica aguanta
+								<xsl:choose>
+									<xsl:when test="ORDEN='CLINICA_AGUANTA'">
+										<xsl:choose>
+											<xsl:when test="SENTIDO='DESC'">
+												<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+									</xsl:otherwise>
+								</xsl:choose>
+						</a></u>
+					</td>
+				</xsl:if>
+				<xsl:if test="ADMIN='MVM'">
+					<td align="center" width="40px" >
+						<u><a href="javascript:OrdenarPor('RIESGO');">Riesgo
+								<xsl:choose>
+									<xsl:when test="ORDEN='RIESGO'">
+										<xsl:choose>
+											<xsl:when test="SENTIDO='DESC'">
+												<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+									</xsl:otherwise>
+								</xsl:choose>
+						</a></u>
+					</td>
+					<td align="center" width="40px" >
+						<u><a href="javascript:OrdenarPor('CAMBIOS_PROVEEDOR');">Cambios Prov.
+								<xsl:choose>
+									<xsl:when test="ORDEN='CAMBIOS_PROVEEDOR'">
+										<xsl:choose>
+											<xsl:when test="SENTIDO='DESC'">
+												<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+									</xsl:otherwise>
+								</xsl:choose>
+						</a></u>
+					</td>
+					<td align="center" width="40px" >
+						<u><a href="javascript:OrdenarPor('CAMBIOS_MVM');">Cambios MVM
+								<xsl:choose>
+									<xsl:when test="ORDEN='CAMBIOS_MVM'">
+										<xsl:choose>
+											<xsl:when test="SENTIDO='DESC'">
+												<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+									</xsl:otherwise>
+								</xsl:choose>
+						</a></u>
+					</td>
+					<td align="center" width="40px" >
+						<u><a href="javascript:OrdenarPor('RESPONSABLE_MVM');">Resp.
+								<xsl:choose>
+									<xsl:when test="ORDEN='RESPONSABLE_MVM'">
+
+										<xsl:choose>
+											<xsl:when test="SENTIDO='DESC'">
+												<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+									</xsl:otherwise>
+								</xsl:choose>
+						</a></u>
+					</td>
+					<td align="center" width="40px" >
+						<u><a href="javascript:OrdenarPor('FECHA_MVM');">Fecha
+								<xsl:choose>
+									<xsl:when test="ORDEN='FECHA_MVM'">
+										<xsl:choose>
+											<xsl:when test="SENTIDO='DESC'">
+												<img src="http://www.newco.dev.br/images/order_a.gif" border="false"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<img src="http://www.newco.dev.br/images/order_d.gif" border="false"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<img src="http://www.newco.dev.br/images/ordenar.gif" border="false"/>
+									</xsl:otherwise>
+								</xsl:choose>
+						</a></u>
+					</td>
+				</xsl:if>
+			</tr>
+			<!--	Filtros Desplegables - 21abr08: Los ponemos en la parte superior de la tabla - 24mar10 solo admin MVM o Empresa	-->
+			<xsl:if test="ADMIN='MVM' or ADMIN='EMPRESA'">
+	    	<tr class="grisclaro"><td>
+					<xsl:attribute name="colspan">
+							<xsl:choose>
+								<xsl:when test="ADMIN='MVM'">
+									19
+								</xsl:when>
+								<xsl:otherwise>     
+									14
+								</xsl:otherwise>     
+							</xsl:choose>
+					</xsl:attribute>
+            	<table width="50%" border="0" cellspacing="1" align="center">
+	    			<tr>
+						
+						<td>
+							<xsl:choose>
+								<xsl:when test="FILTROS/IDEMPRESA">
+									&nbsp;Empresa:
+									<xsl:call-template name="desplegable">
+        								<xsl:with-param name="path" select="FILTROS/IDEMPRESA/field">
+        								</xsl:with-param>
+      								</xsl:call-template>
+								</xsl:when>
+								<xsl:otherwise>
+									<input type="hidden" name="IDEMPRESA" value="{IDEMPRESA}" />
+								</xsl:otherwise>
+							</xsl:choose>
+						</td>			
+						<td>
+							<xsl:if test="FILTROS/IDCENTRO">
+								&nbsp;Centro:
+								<xsl:call-template name="desplegable">
+        							<xsl:with-param name="path" select="FILTROS/IDCENTRO/field">
+        							</xsl:with-param>
+      							</xsl:call-template>
+							</xsl:if>
+						</td>			
+						<td>
+						</td>			
+						<td>
+							&nbsp;Proveedor:
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="FILTROS/IDPROVEEDOR/field">
+        						</xsl:with-param>
+      						</xsl:call-template>
+						</td>
+						<xsl:if test="ADMIN='MVM'">
+						<td>
+							&nbsp;Motivo:
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="FILTROS/IDFILTROMOTIVO/field">
+        						</xsl:with-param>
+      						</xsl:call-template>
+						</td>			
+						<td>
+							&nbsp;Responsable:
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="FILTROS/IDFILTRORESPONSABLE/field">
+        						</xsl:with-param>
+      						</xsl:call-template>
+						</td>
+						</xsl:if>
+						<td>
+							&nbsp;Situacion:
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="FILTROS/IDFILTROSEMAFORO/field">
+        						</xsl:with-param>
+      						</xsl:call-template>
+						</td>			
+						<td>
+							<table cellpadding="1" cellspacing="1" border="0" width="100px" class="medio">
+								<tr class="medio">
+									<td align="center" valign="middle" class="claro"><u><a href="javascript:AplicarFiltro();">Aplicar Filtro</a></u></td>
+								</tr>
+							</table>
+				    	</td>
+					</tr>
+				</table>
+			</td></tr>
+			</xsl:if>
+	    	<!--el buscador hace innecesario este separador <tr class="medio" height="3px"><td class="medio" colspan="7"></td></tr>-->
+      		<xsl:for-each select="PEDIDO">
+	    			<tr class="blanco" onMouseOver="this.className='claro'" onMouseOut="this.className='blanco'">
+						<xsl:if test="../ADMIN='MVM' or ../ADMIN='EMPRESA'">
+				   			<td align="center">
+								<xsl:value-of select="POSICION"/>
+				    		</td>
+						</xsl:if>
+				   		<td align="center">
+                			  <u>
+								<a>
+									<xsl:attribute name="href">javascript:MostrarPag('<xsl:value-of select="ENLACETAREA"/>&amp;SES_ID=<xsl:value-of select="//SES_ID"/>','Multioferta')</xsl:attribute>
+									<xsl:attribute name="onMouseOver">window.status='Ver tarea';return true;</xsl:attribute>
+									<xsl:attribute name="onMouseOut">window.status='';return true;</xsl:attribute>
+									<xsl:value-of select="NUMERO_PEDIDO"/><!--&nbsp;(<xsl:value-of select="PED_ID"/>)-->
+								</a>
+							  </u>
+				    	</td>
+						<xsl:if test="../MOSTRARCENTRO">
+							<td align="left" width="*">
+								&nbsp;&nbsp;<xsl:value-of select="NOMBRE_CENTRO"/>
+							</td>
+						</xsl:if>
+				   		<td align="left">
+							&nbsp;&nbsp;<xsl:value-of select="PROVEEDOR"/>
+				    	</td>
+				   		<td align="center">
+							<xsl:value-of select="FECHA_PEDIDO"/>
+				    	</td>
+				   		<td align="center">
+							<xsl:value-of select="FECHA_ENTREGA"/>
+				    	</td>
+				   		<td align="center">
+
+                			  <u>
+								<a>
+									<xsl:attribute name="href">javascript:MostrarPag('<xsl:value-of select="ENLACETAREA"/>&amp;SES_ID=<xsl:value-of select="//SES_ID"/>','Multioferta')</xsl:attribute>
+									<xsl:attribute name="onMouseOver">window.status='Ver tarea';return true;</xsl:attribute>
+									<xsl:attribute name="onMouseOut">window.status='';return true;</xsl:attribute>
+									<xsl:value-of select="ESTADO"/>
+								</a>
+							  </u>
+				    	</td>
+						<xsl:if test="../ADMIN='MVM'">
+				   			<td align="center" class="claro">
+								<xsl:choose>
+									<xsl:when test="BLOQUEAR='S'">
+										<img src="../../images/SemaforoRojo.gif"/>&nbsp;
+									</xsl:when>
+									<xsl:when test="BLOQUEAR='N'">
+										<img src="../../images/SemaforoAmbar.gif"/>&nbsp;
+									</xsl:when>
+								</xsl:choose>
+								<xsl:choose>
+									<xsl:when test="IDMOTIVO='NO_INFORMADA'">
+										Pendiente
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:choose>
+											<xsl:when test="IDMOTIVOPROVEEDOR='NOENVIADO'">
+												No Enviado
+											</xsl:when>
+											<xsl:when test="IDMOTIVOPROVEEDOR='PARCIAL'">
+												Parcial
+											</xsl:when>
+											<xsl:when test="IDMOTIVOPROVEEDOR='ENVIADO'">
+												Enviado
+											</xsl:when>
+											<xsl:otherwise>
+												No informado
+											</xsl:otherwise>
+										</xsl:choose>	
+										<!--<xsl:value-of select="IDMOTIVO/field/dropDownList/listElem[/ID=IDMOTIVO/field/dropDownList/@current]/listItem" />--> 
+										<!--
+										19abr10	Mostramos "Enviado", "Parcial" o "No enviado"
+										<xsl:for-each select="IDMOTIVO/field/dropDownList/listElem">
+											<xsl:if test="ID=../../@current">
+												< ! - -	en caso de estado 'entregado' enlazamos al pedido	- - >
+												<xsl:choose>
+													<xsl:when test="listItem='Entregado'">
+                									  <u>
+														<a>
+															<xsl:attribute name="href">javascript:MostrarPag('<xsl:value-of select="../../../../ENLACETAREA"/>&amp;SES_ID=<xsl:value-of select="//SES_ID"/>','Multioferta')</xsl:attribute>
+															<xsl:attribute name="onMouseOver">window.status='Ver tarea';return true;</xsl:attribute>
+															<xsl:attribute name="onMouseOut">window.status='';return true;</xsl:attribute>
+															Entregado. Por favor, confirme la recepción del pedido
+														</a>
+													  </u>
+
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:value-of select="listItem"/>
+													</xsl:otherwise>
+												</xsl:choose> 
+											</xsl:if>
+										</xsl:for-each>
+										-->
+									</xsl:otherwise>     
+								</xsl:choose>
+				    		</td>
+				   			<td align="center" class="claro">
+								<xsl:value-of select="FECHA_CORREGIDA"/>
+				    		</td>
+				   			<td align="center" class="claro">
+								<xsl:if test="NUMENTRADASCONTROL>0">
+									<xsl:if test="SITUACION>=2">
+										<xsl:value-of select="ALBARAN"/>
+									</xsl:if>
+								</xsl:if>
+				    		</td>
+						</xsl:if>
+				   		<td align="center">
+							<xsl:choose>
+								<!--<xsl:when test="NUMENTRADASCONTROL>0">
+									<xsl:if test="SITUACION>=0">
+										<img src="../../images/Situacion{SITUACION}de3.gif" border="0"/>
+									</xsl:if>
+								</xsl:when>
+								<xsl:otherwise> 
+								Pendiente
+								</xsl:otherwise>-->
+								<xsl:when test="SITUACION!=''">
+									<img src="../../images/Situacion{SITUACION}de3.gif" border="0"/>
+								</xsl:when>
+								<xsl:otherwise> 
+								Pendiente
+								</xsl:otherwise>							
+							</xsl:choose>
+				    	</td>
+				   		<td align="center">
+							<xsl:value-of select="FECHAENVIOPROVEEDOR"/>
+				    	</td>
+				   		<td align="left">
+							<xsl:choose>
+								<xsl:when test="../ADMIN='MVM'">
+									<xsl:if test="COMENTARIOSPARACLINICA!=''">
+										&nbsp;<img src="http://www.newco.dev.br/images/info.gif" >
+											<xsl:attribute name="alt">
+												<xsl:value-of select="COMENTARIOSPARACLINICA"/>
+											</xsl:attribute>
+											<xsl:attribute name="title">
+												<xsl:value-of select="COMENTARIOSPARACLINICA"/>
+											</xsl:attribute>
+										</img>
+									</xsl:if>
+								</xsl:when>
+								<xsl:otherwise>
+									&nbsp;<xsl:value-of select="COMENTARIOSPARACLINICA"/>
+								</xsl:otherwise>
+							</xsl:choose>
+				    	</td>
+						<xsl:if test="../ADMIN='MVM' "><!--24mar10	or ../ADMIN='EMPRESA'-->
+							<td align="center" class="claro">
+								<xsl:choose>
+									<xsl:when test="ACEPTASOLUCION='N'">
+										<img src="../../images/SemaforoRojo.gif"/>
+									</xsl:when>
+									<xsl:when test="ACEPTASOLUCION='S'">
+										<img src="../../images/SemaforoVerde.gif"/>
+									</xsl:when>
+								</xsl:choose>
+							</td>
+						</xsl:if>
+						<xsl:if test="../ADMIN='MVM'">
+							<!--	columna de datos unicamente para administrador MVM	-->
+							<!--<td align="center">
+								<xsl:value-of select="CONSTOCK"/> 
+							</td>
+							<td align="center">
+								<xsl:value-of select="ENTREGAENFECHA"/> 
+							</td>-->
+							<td align="center">
+                			  <u>
+								<a>
+									<xsl:attribute name="href">javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Personal/BandejaTrabajo/ControlRiesgo.xsql?PED_ID=<xsl:value-of select="PED_ID"/>&amp;SES_ID=<xsl:value-of select="//SES_ID"/>','ControlRiesgo',90,45,0,0)</xsl:attribute>
+									<xsl:attribute name="onMouseOver">window.status='Ver tarea';return true;</xsl:attribute>
+									<xsl:attribute name="onMouseOut">window.status='';return true;</xsl:attribute>
+									<xsl:value-of select="VALORACIONRIESGO"/>
+								</a>
+							  </u>
+					    	</td>
+							<td align="center">
+								<xsl:if test="CAMBIOSPROVEEDOR='S'">
+									<img src="../../images/SemaforoAmbar.gif"/>&nbsp;
+								</xsl:if>
+					    	</td>
+							<td align="center">
+								<xsl:if test="CAMBIOSMVM='S'">
+									<img src="../../images/SemaforoAmbar.gif"/>&nbsp;
+								</xsl:if>
+					    	</td>
+							<xsl:if test="CONTROL">
+								<xsl:choose>
+									<xsl:when test="NUMENTRADASCONTROL>0">
+										<!--<td align="center" class="claro">
+											<xsl:if test="SEGUIMIENTOESPECIAL='S'">
+												<img src="../../images/SeguimientoEspecial.gif" border="0"/>&nbsp;
+											</xsl:if>
+										</td>
+										<td align="center">
+											<xsl:if test="NUEVOERROR='S'">
+												<img src="../../images/NoCumplen.gif" border="0"/>
+											</xsl:if>
+										</td>-->
+										<td align="center">
+											<a>
+												<!--<xsl:attribute name="href">javascript:MostrarPag('ControlPedidos.xsql?IDPEDIDO=<xsl:value-of select="PED_ID"/>','ControlPedidos')</xsl:attribute>-->
+												<xsl:attribute name="href">javascript:ControlPedidos('<xsl:value-of select="PED_ID"/>');</xsl:attribute>
+												<xsl:attribute name="onMouseOver">window.status='Editar la informacion de control';return true;</xsl:attribute>
+												<xsl:attribute name="onMouseOut">window.status='';return true;</xsl:attribute>
+											<u><xsl:value-of select="USUARIOCONTROL"/></u></a>
+										</td>
+										<td align="center">
+											<xsl:choose>
+												<xsl:when test="PROXIMAACCIONCADUCADA='S'">
+													<b><font color="red">
+													<xsl:value-of select="PROXIMAACCION"/>
+													</font></b>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="PROXIMAACCION"/>
+												</xsl:otherwise>
+											</xsl:choose>
+										</td>
+									</xsl:when>
+									<xsl:otherwise> 
+										<td align="center" colspan="3">
+											<a>
+												<!--<xsl:attribute name="href">javascript:MostrarPag('ControlPedidos.xsql?IDPEDIDO=<xsl:value-of select="PED_ID"/>','ControlPedidos')</xsl:attribute>-->
+												<xsl:attribute name="href">javascript:ControlPedidos('<xsl:value-of select="PED_ID"/>');</xsl:attribute>
+												<xsl:attribute name="onMouseOver">window.status='Editar la informacion de control';return true;</xsl:attribute>
+												<xsl:attribute name="onMouseOut">window.status='';return true;</xsl:attribute>
+											<u>Pendiente</u></a>
+										</td>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:if>
+						</xsl:if>
+					</tr>
+      		</xsl:for-each>
+			</table>
+        </td></tr>
+	    <tr class="medio"><td class="claro" colspan="7" align="left">
+			<br/>
+			&nbsp;Leyenda de Control MVM:<br/><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/Situacion0de3.gif" border="0"/>&nbsp;No Enviado<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/Situacion1de3.gif" border="0"/>&nbsp;Enviado (según el proveedor)<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/Situacion2de3.gif" border="0"/>&nbsp;Enviado, con albarán de salida (según el proveedor)<br/>
+		<!--	&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/Situacion3de3.gif" border="0"/>&nbsp;Entregado (según el proveedor)<br/>-->
+			&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/Situacion4de3.gif" border="0"/>&nbsp;Recibido (según el cliente)<br/>
+			<br/>
+        </td></tr>
+		<!-- Solo al admin mostramos estadisticas	-->
+		<xsl:if test="./ESTADISTICAS">	<!--	MOSTRARCENTRO	-->
+	    	<tr class="grisclaro"><td colspan="7">
+			<br/>
+			<br/>
+            <table width="50%" border="0" cellspacing="1" class="medio" align="center">
+	    	<tr class="medio" onMouseOver="this.className='claro'" onMouseOut="this.className='medio'">
+				<td align="center" width="60%">
+					Motivo
+				</td>
+				<td align="center" width="20%">
+					Total
+				</td>
+				<td align="center" width="20%">
+					Porcentaje
+				</td>
+			</tr>
+      		<xsl:for-each select="TOTALESPORMOTIVO/MOTIVO">
+	    		<tr class="claro" onMouseOver="this.className='blanco'" onMouseOut="this.className='claro'">
+				   	<td align="center">
+						<xsl:value-of select="NOMBRE"/>
+				    </td>
+				   	<td align="center">
+						<xsl:value-of select="TOTAL"/>
+				    </td>
+				   	<td align="center">
+						<xsl:value-of select="PORCENTAJE"/>%
+				    </td>
+				</tr>
+    		</xsl:for-each>
+			</table>
+			<br/>
+			<br/>
+			</td></tr>
+		</xsl:if>
+		</table>
+  </xsl:template>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Buscador de productos en cat.proveedores
+	Ultima revisión: ET 12jul18 11:40
+ -->
+<?xml-stylesheet type="text/xsl" href="PROBuscadorHTML.xsl"?>
+
+<MantenimientoProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROBuscador');
+			IF US_ID>=0 THEN
+				-- Filtros del buscador de productos
+				MantenimientoProductos_seg_PCK.Buscador_XML(US_ID);
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+<returnHome/>
+</MantenimientoProductos>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Cambio de anno el resumen mensual del EIS
+	Ultima revision: ET 28mar22 10:30
+-->
+<?xml-stylesheet type="text/xsl" href="EISDatosHTML2022.xsl"?>
+
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="SES_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISCambioAnyo.xsql');
+		IF US_ID>=0 THEN
+			EIS_PCK.CuadroDeMando(
+				US_ID,
+				'{@IDCUADROMANDO}',
+				'{@ANNO}',
+				'-1',			-- IDEMPRESA
+				'-1',			-- IDCENTRO
+				'-1',			-- IDUSUARIO
+				'-1',			-- IDEMPRESA2
+				'-1',			-- IDCENTRO2
+				'-1',			-- IDPRODUCTO
+				'-1',			-- IDGRUPO
+				'-1',			-- IDSUBFAMILIA
+				'-1',			-- IDFAMILIA
+				'-1',			-- IDCATEGORIA
+				--16abr13	'{@IDNOMENCLATOR}',
+				--16abr13	'{@URGENCIA}',
+				'-1',			-- IDESTADO
+				--16abr13	'{@IDTIPOINCIDENCIA}',
+				--16abr13	'{@IDGRAVEDAD}',
+				NULL,			-- REFERENCIA
+				NULL,			-- CODIGO
+				'{@AGRUPARPOR}',
+				'{@IDRESULTADOS}',
+				null,
+				'TABLADATOS',
+				'{@IDRATIO}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</EIS_XML>

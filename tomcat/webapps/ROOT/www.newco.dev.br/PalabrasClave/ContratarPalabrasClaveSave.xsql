@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL la contratacion de banners
+	
+	(c) 12/9/2001 E.Torrellas
+
+-->
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ContratarPalabrasClaveSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ContratarPalabrasClaveSaveHTML.xsl"?>
+
+<ActualizarPalabrasClave xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		PalabrasClave_PCK.ActualizarPalabrasClave('{@US_ID}','{@Parametros}');
+	END;
+    ]]>
+  </xsql:include-owa>
+  <returnHome/>
+
+  <!-- Volver -->
+ <button label="Anterior" caption="IMG-0040">
+      <name_function_msg>G-0011</name_function_msg>
+ </button>
+
+</ActualizarPalabrasClave>
+

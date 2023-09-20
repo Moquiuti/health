@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="EstadoDelSistemaHTML.xsl"?>
+
+<Estado xmlns:xsql="urn:oracle-xsql" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+</Estado>

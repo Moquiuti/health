@@ -1,0 +1,231 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+	Nueva pagina principal de medicalvm.com
+	17dic16	ET
+	Ultima revision: 18dic16 10:45
+-->
+<head>
+	<title>Plataforma de compras hospitalarias&nbsp;-&nbsp;MedicalVM.com</title>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/login_16dic16.js"></script>
+	<!--<script type="text/javascript" src="./General/login_16dic16.js"></script>-->
+	<link rel="shortcut icon" href="http://www.newco.dev.br/images/MedicalVM.ico">
+	<meta name="description" content="Medical Virtual Market es la mayor central de compras virtual para las empresas del sector sanitario español.">
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/areapublica.css" type="text/css">
+	<!--<link rel="stylesheet" href="./General/areapublica.css" type="text/css">-->
+	<script type="text/javascript">
+		var errorLogin = 'Se ha producido un error al entrar el usuario o la contraseña.';
+
+        function CompruebaCookie(){
+
+			var aceptoCookie = GetCookie('ACEPTO_COOKIE');
+
+			if (aceptoCookie == '' || aceptoCookie == null) {
+				//si no ha aceptado la cookie pongo aviso
+				document.getElementById("avisoCookieBox").style.display = 'block';
+				document.getElementById("separador").style.display = 'none';
+			}
+			else
+			{
+				document.getElementById("separador").style.display = 'block';
+				document.getElementById("avisoCookieBox").style.display = 'none';
+			}
+		}
+            
+        function AceptaCookie(){
+
+			SetCookie('ACEPTO_COOKIE','S');
+			CompruebaCookie();
+		}
+            
+	</script>
+</head>
+<body onload="CompruebaCookie();">
+    <div class="todo">
+		<a name="MedicalVM"/>
+		<div class="avisoCookie" id="avisoCookieBox" style="display:none;">
+			<div class="avisoCookieBox">
+                    <p class="textoCookie">Al acceder al área privada de MedicalVM.com se crearán únicamente las "cookies" necesarias para navegar en nuestra 
+plataforma con seguridad, guardando la identificación de la sesión y algunos datos de configuración del usuario.</p>
+                    <p class="textoCookie">Además, nuestro analizador de tráfico del site utiliza "cookies" y seguimientos de IPs que nos permiten recoger datos a
+ efectos estadísticos: fecha de la primera visita, número de veces que se ha visitado, fecha de la última visita, URL y dominio de la que 
+proviene, explorador utilizado y resolución de la pantalla. No obstante,  el usuario si lo desea puede desactivar y/o eliminar estas cookies 
+siguiendo las instrucciones de su navegador de Internet.</p>
+                    <p class="textoCookie">Si continúas navegando en la página entenderemos que aceptas nuestra <a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/PoliticaCookies.html','Politica%20Cookies',60,60,20,20);">política de cookies</a>&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a id="aceptaCookie" class="btnOscuro" href="javascript:AceptaCookie();">Acepta</a>
+                    </p>
+                </div>
+      	</div>
+    	<div class="cabecera">
+    		<div class="logo">
+				<a href="http://www.newco.dev.br/" title="Medical Virtual Market"><img src="http://www.newco.dev.br/images/login2017/medical-vm-logo.png" alt="Medical Virtual Market"></a>
+			</div>
+				<nav>
+					<ul>
+						<li>
+							<a href="#MedicalVM">&nbsp;MedicalVM</a>
+						</li>
+						<li>
+							<a href="#Servicios">&nbsp;Servicios</a>
+						</li>
+						<li>
+							<a href="#Clientes">&nbsp;Clientes</a>
+						</li>
+						<li>
+							<a href="#Clientes">&nbsp;Proveedores</a>
+						</li>
+						<li>
+							<a href="#Contacto">&nbsp;Contacto</a>
+						</li>
+					</ul>
+				</nav>
+		</div>
+    	<div class="separador" id="separador" style="display:none;"></div>
+    	<div class="centro">
+    		<div class="textocentro">
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<h1>Medical Virtual Market<h1>
+				<p>MedicalVM es una innovadora plataforma para la creaci&oacute;n de centrales de compra.<p>
+				<p>MedicalVM aporta ahorros inmediatos y una gran rentabilidad a corto, medio y largo plazo para hospitales, clínicas quirúrgicas, clínicas odontológicas, centros sociosanitarios y otras empresas de salud.<p>
+				<p>MedicalVM incluye procedimientos para Catalogación, Evaluación de proveedores, Negociación, Seguimiento de pedidos, Gestión de incidencias.<p>
+				<p>MedicalVM es muy escalable y puede ser adaptada para el uso desde peque&ntilde;os centros, a grandes grupos hospitalarios.<p>
+				<p>M&aacute;s de 300 clientes y 5.000 proveedores trabajan con MedicalVM en Espa&ntilde;a y Latinoam&eacute;rica.</p>
+			</div>
+			<!--<div>
+				<img src="ImagenConFondoAzul.png"/>
+			</div>-->
+    		<div class="login">
+    			<div class="loginBox">
+				<!--<form name="frmLogin" method="post" action="http://www.newco.dev.br/MenusYDerechos/Main.xsql">-->
+				<form name="frmLogin" method="post" action="http://www.newco.dev.br/MenusYDerechos/Main.xsql">
+					<input type="hidden" name="PARAMETRO" value=""/>
+        			<input type="hidden" name="ERROR_LOGIN" value="{document($doc)/translation/texts/item[@name='error_login']/node()}"/>
+					<div class="usuario">
+            			<span class="textoLogin">Usuario:</span><br />
+            			<input type="text" name="USER" class="intext" onClick="this.select();" onFocus="this.select();" />
+        			</div><!--fin de login-->
+        			<div class="clave">
+            			<span class="textoLogin">Contrase&ntilde;a:</span><br />
+            			<input type="password" name="PASS" class="intext" onClick="this.select();" onFocus="this.select();" />
+        			</div><!--fin de login-->
+					<br/>
+					<a id="btnLogin" class="btnClaro" href="javascript:procesarLogin();">Entrar</a>
+					</form>
+        			<a class="textoLogin" href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/RecuperarClave.xsql','Recuperar Clave',30,20,-20,0);" title="Recuperar clave" class="recuperarClaveLink">Recuperar contrase&ntilde;a</a>
+    			</div><!--fin de loginBox-->
+			</div>
+		</div>
+		<a name="Servicios"/>
+    	<div class="zonados">
+   			<div class="servicios">
+    			<div class="servicio">
+					<img src="http://www.newco.dev.br/images/login2017/icone-software-de-compras.png" alt="Plataforma de compras">
+					<h3 class="textoOscuro">Plataforma de compras</h3>
+					<p class="textoOscuro">Cat&aacute;logo personalizado y optimizado, env&iacute;o de pedidos, potentes estad&iacute;sticas.</p>
+				</div>
+    			<div class="servicio">
+					<img src="http://www.newco.dev.br/images/login2017/icone-follow-up-medical-vm.png" alt="Seguimiento de pedidos">
+					<h3 class="textoOscuro">Seguimiento de pedidos</h3>
+					<p class="textoOscuro">Seguimiento de pedidos, resoluci&oacute;n de incidencias, an&aacute;lisis de proveedores.</p>
+				</div>
+    			<div class="servicio">
+					<img src="http://www.newco.dev.br/images/login2017/icone-central-de-compras.png" alt="Central de compras">
+					<h3 class="textoOscuro">Central de compras</h3>
+					<p class="textoOscuro">Creaci&oacute;n de una central de compras optimizada a medida del cliente.</p>
+				</div>
+    			<div class="servicio">
+					<img src="http://www.newco.dev.br/images/login2017/icone-compras-agregadas.png" alt="Agregaci&oacute;n de compras">
+					<h3 class="textoOscuro">Agregaci&oacute;n de compras</h3>
+					<p class="textoOscuro">Negociaciones conjuntas con condiciones consensuadas por los participantes.</p>
+				</div>
+			</div>
+		</div>
+		<a name="Clientes"/>
+    	<div class="zonatres">
+    		<div class="cliente">
+				<h3>Cliente</h3>
+				<ul class="listaHome">
+				<li class="textoClaro">Optimizaci&oacute;n de los procedimientos de compras</li>
+				<li class="textoClaro">Ahorro en precio de producto</li>
+				<li class="textoClaro">Gesti&oacute;n de proveedores: calidad y servicio</li>
+				<li class="textoClaro">Potentes informes para la direcci&oacute;n: gran transparencia</li>
+				<li class="textoClaro">Reducci&oacute;n radical de costes administrativos</li>
+				<li class="textoClaro">Integraci&oacute;n opcional con el ERP</li>
+				</ul>
+			</div>
+    		<div class="proveedor">
+				<h3>Proveedor</h3>
+				<ul>
+				<li class="textoClaro">Sin costes (MVM s&oacute;lo cobra al cliente)</li>
+				<li class="textoClaro">Acuerdos comerciales a largo plazo, fidelizaci&oacute;n de clientes</li>
+				<li class="textoClaro">Presencia comercial en todos los clientes MedicalVM</li>
+				<li class="textoClaro">Reducci&oacute;n de costes comerciales</li>
+				<li class="textoClaro">Mayores ingresos, menos gastos, sin ning&uacute;n coste a&ntilde;adido</li>
+				<li class="textoClaro">Integraci&oacute;n opcional con el ERP</li>
+				</ul>
+			</div>
+		</div>
+		<a name="Contacto"/>
+    	<div class="zonacuatro">
+    		<div class="contacto">
+ 			<h3 class="textoOscuro"><span class="textoDestacado">Contacte</span> o solicite una presentaci&oacute;n:</h3>
+			<form name="Contacto" method="Post" enctype="text/plain" class="formEstandar">
+				<input type="hidden" name="CONTACTO_CARGO">
+				<input type="hidden" name="PAIS" id="PAIS" value="34">
+				<ul>
+					<li>
+						<label><span class="textoDestacado">&gt;</span>&nbsp;Empresa:</label>
+						<input maxLength="50" name="CONTACTO_EMPRESA">
+					</li>
+					<li>
+						<label><span class="textoDestacado">&gt;</span>&nbsp;Actividad:</label>
+						<input maxLength="50" name="CONTACTO_TIPO_EMP">
+					</li>
+					<li>
+						<label><span class="textoDestacado">&gt;</span>&nbsp;Nombre contacto:</label>
+						<input type="text" maxLength="50" name="CONTACTO_NOMBRE">
+					</li>
+					<li>
+						<label><span class="textoDestacado">&gt;</span>&nbsp;Teléfono:</label>
+						<input type="tel" maxLength="50" name="CONTACTO_TEL">
+					</li>
+					<li>
+						<label><span class="textoDestacado">&gt;</span>&nbsp;E-Mail:</label>
+						<input maxLength="50" name="CONTACTO_MAIL">
+					</li>
+					<li>
+						<label><span class="textoDestacado">&gt;</span>&nbsp;Comentarios:</label>
+						<textarea name="CONTACTO_TEXT"></textarea>
+					</li>
+					<li>
+						<a class="btnOscuro" id="botonContacto" href="javascript:EnviaContacto(document.forms['Contacto']);">Solicitar info</a>
+					</li>
+				</ul>
+			</form>
+			<div id="confirmBox" class="confirmBoxInfo" style="display:none;" align="center">Gracias por contactar con MedicalVM. Le responderemos lo antes posible.</div>
+			<div id="waitBox" style="display:none;">&nbsp;</div><br><br>
+            <form name="mensajeJS">
+				<input type="hidden" name="CNTC_NOMBRE_OBL" value="El nombre y apellido son obligatorios.">
+				<input type="hidden" name="CNTC_EMAIL_OBL" value="Un e-mail de contacto es obligatorio.">
+				<input type="hidden" name="CNTC_TLFN_OBL" value="Un teléfono de contacto es obligatorio.">
+				<input type="hidden" name="CNTC_NOM_EMPRESA_OBL" value="El nombre de la empresa es obligatorio.">
+				<input type="hidden" name="CNTC_TIPO_EMPRESA_OBL" value="El tipo de empresa es obligatorio.">
+				<input type="hidden" name="CNTC_CARGO_OBL" value="El cargo es obligatorio.">
+				<input type="hidden" name="CNTC_INFO_OBL" value="Díganos qué información solicita.">
+            </form>
+			</div>
+			<div class="logosClientes">
+				<img src="http://www.newco.dev.br/images/login2017/logosClientes.png" width="250px" height="400px" alt="Logotipos de algunos clientes">
+			</div>
+		</div>
+    	<div class="pie">
+			<p>Contáctanos: comercial[@]medicalvm.com&nbsp;&nbsp;|&nbsp;&nbsp;  Tel: 902.10.31.61</p>
+			<p>Medical Virtual Market 2016 - Todos los derechos reservados</p>
+		</div>
+	</div>
+</body>
+</html>

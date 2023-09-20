@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- 
+	Historico de tarifas para un producto
+	Ultima revision ET 12jun23 12:12
+-->
+<?xml-stylesheet type="text/xsl" href="HistoricoTarifasProductoHTML2022.xsl"?>
+
+<Tarifas xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','HistoricoTarifasProducto');
+		IF US_ID>=0 THEN
+			AnalisisTarifas_Pck.HistoricoTarifas_XML(US_ID,'{@IDEMPRESA}','{@IDPRODUCTO}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<returnHome/>
+</Tarifas>

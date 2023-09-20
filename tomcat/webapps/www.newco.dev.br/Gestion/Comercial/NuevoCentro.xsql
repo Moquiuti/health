@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Inserta nuevo centro en la licitacion
+	Ultima revision: ET 3ago20 16:41
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="NuevoCentroJSON.xsl"?>
+
+<NuevoCentro xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="IDCENTRO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		--3ago20	v_IDCentroLic	LIC_CENTROS.LICC_ID%TYPE;
+		v_Res	VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoCentro');
+		IF US_ID>=0 THEN
+			--3ago20	v_IDCentroLic:=LICITACIONESAGREGADAS_PCK.NuevoCentro(
+			v_Res:=LICITACIONESAGREGADAS_PCK.NuevoCentro(
+				US_ID,
+				'{@LIC_ID}',
+				'{@IDCENTRO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			--3ago20	IF v_IDCentroLic > 0 THEN
+			
+			IF v_Res NOT LIKE 'ERROR%' THEN
+			
+				--3ago20	HTP.P('<OK>'||v_IDCentroLic||'</OK>');
+			
+				HTP.P('<OK>'
+					||'<IDCENTRO>'||utilidades_pck.Piece(v_Res,'|',0)|| '</IDCENTRO>'
+					||'<REFERENCIASPROPIAS>'||utilidades_pck.Piece(v_Res,'|',1)|| '</REFERENCIASPROPIAS>'
+					||'</OK>');
+			
+			
+			ELSIF v_Res='ERROR|Centro existe' THEN
+				HTP.P('<ERROR_CENTRO_YA_EXISTE/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevoCentro>

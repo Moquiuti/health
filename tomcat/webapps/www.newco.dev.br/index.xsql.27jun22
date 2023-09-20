@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="indexHTML.xsl"?>
+<!--
+	Area publica de MVM, version multiidioma, multiportal
+	Ultima revision 18oct21 16:30
+-->
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="mvmnucleo" lang="spanish">
+	<LANG>spanish</LANG>
+	<PORTAL>PVM</PORTAL><!-- PVM en desarrollo, MVM en produccion	-->
+	<IDPAIS>34</IDPAIS>
+</AreaPublica>

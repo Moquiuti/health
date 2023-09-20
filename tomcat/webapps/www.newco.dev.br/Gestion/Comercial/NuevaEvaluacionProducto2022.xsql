@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Nueva Evaluacion de producto. Nuevo disenno 2022.
+	Ultima revision ET 11may22 15:30
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="NuevaEvaluacionProductoHTML2022.xsl"?>
+
+<NuevaEvaluacionProducto xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="ID_PROD_ESTANDAR"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="LIC_OFE_ID"/>
+<xsql:include-param name="REF_CLIENTE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Nueva Evaluacion');
+		IF US_ID>=0 THEN
+			EVALUACIONPRODUCTOS_PCK.PrepararEvaluacion_XML(
+				US_ID,
+				'{@PRO_ID_ESTANDAR}',
+				'{@PRO_ID}',
+                '{@LIC_OFE_ID}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+</NuevaEvaluacionProducto>
+
+
+ 
+	
+	
+		
+	

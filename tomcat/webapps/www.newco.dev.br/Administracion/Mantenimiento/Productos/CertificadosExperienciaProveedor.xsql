@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Recupera los Certificados Experiencia de Uso de Producto de un proveedor
+	Ultima revision: ET 22nov21 11:20
+-->
+<?xml-stylesheet type="text/xsl" href="CertificadosExperienciaProveedorJSON.xsl"?>
+
+
+<FichasProveedor xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+     <xsql:include-owa>
+    	<![CDATA[
+		DOCUMENTOS_PCK.ListaOfertasDelProveedor_XML ('{@IDPROVEEDOR}',NULL,0,'OFERTAS','','{@IDDOC_ACTUAL}','CE','S');
+        ]]>   					
+    </xsql:include-owa>
+	
+</FichasProveedor>
+
+

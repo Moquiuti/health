@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guarda los datos generales de la licitacion desde la nueva pagina de la licitacion
+	Ultima revisión: ET 26ene22 12:21
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="LicDatosGeneralesJSON.xsl"?>
+
+<DatosGenerales xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+
+	<![CDATA[
+	DECLARE
+		US_ID				NUMBER;
+		v_IDLicitacion		LICITACIONES.LIC_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DatosGenerales');		
+		
+		IF US_ID>=0 THEN
+			v_IDLicitacion:=Licitaciones_seg_pck.CondicionesGenerales(
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_TITULO}',
+				'{@LIC_DESCRIPCION}',
+				'{@LIC_CONDENTREGA}',
+				'{@LIC_CONDPAGO}',
+				'{@LIC_CONDOTRAS}',
+				'{@LIC_MESES}',
+				--'{@LIC_CONSUMO}',
+				--'{@LIC_FECHADECISION}',
+				'{@LIC_PORPRODUCTO}',
+                --'{@LIC_FARMACIA}',
+                '{@LIC_IDUSUARIOPEDIDO}',
+                '{@LIC_IDLUGARENTREGA}',
+                '{@LIC_CODIGOPEDIDO}',
+                '{@LIC_OBSPEDIDO}',
+                '{@LIC_IDFORMAPAGO}',
+                '{@LIC_IDPLAZOPAGO}',
+				'{@LIC_FECHAADJUDICACION}',
+				--'{@LIC_HORADECISION}',
+				--'{@LIC_MINUTODECISION}',
+				'{@LIC_CONTINUA}',
+				'{@LIC_URGENTE}',
+				'{@LIC_SOLICDATOSPROV}'	,
+				'{@LIC_MULTIOPCION}',
+				'{@LIC_IDDOCUMENTO}',
+				'{@LIC_FECHAENTREGAPEDIDO}',
+				'{@LIC_FRETECIFOBLIGATORIO}',
+				'{@LIC_PAGOAPLAZODOOBLIGATORIO}',
+				'{@LIC_PRECIOOBJETIVOESTRICTO}'
+			);
+			
+			IF v_IDLicitacion<0 THEN
+				HTP.P('<ERROR msg="Error desconocido"/>');
+			ELSE
+				HTP.P('<OK/>');
+			END IF;
+			
+		ELSE
+			HTP.P('<ERROR msg="Usuario no autorizado"/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</DatosGenerales>

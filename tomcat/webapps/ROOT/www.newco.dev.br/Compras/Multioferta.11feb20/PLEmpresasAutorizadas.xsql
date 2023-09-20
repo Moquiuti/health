@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PLEmpresasAutorizadasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PLEmpresasAutorizadasHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="PL_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<!--	Lista de empresas autorizadas para esta plantilla		-->
+
+        <xsql:include-owa>
+          <![CDATA[
+          	DECLARE
+				US_ID		NUMBER;
+            BEGIN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PLEmpresasAutorizadas');
+				IF us_id>=0 THEN
+                	CARPETASYPLANTILLAS_PCK.EmpresasPorPlantillaXML('{@PL_ID}','S');
+                END IF;		   
+            END;
+          ]]>	  
+        </xsql:include-owa>
+
+        <!--<xsql:include-owa>
+          <![CDATA[
+				Empresas_Pck.ListaEmpresasXML('{@PL_ID}','S');
+          ]]>	  
+        </xsql:include-owa>-->
+	
+		
+     <button label="Cerrar" caption="IMG-0190">
+        <name_function>CerrarVentana</name_function>
+      </button>
+      
+      <button label="Insertar" caption="IMG-1520">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'INSERTAR'</param>
+      </button>
+      
+      <button label="Borrar" caption="IMG-1450">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'ELIMINAR'</param>
+      </button>
+      <!--
+      <button label="PorDefecto" caption="IMG-1540">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'ACTUALIZAR'</param>
+      </button>
+  -->
+ 
+</Mantenimiento>
+

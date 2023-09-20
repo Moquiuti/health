@@ -1,0 +1,60 @@
+Log de cambios en las páginas MultiofertaFrameHTML, MultiofertaTemplateUnic.xsl
+
+
+21nov16 Adaptación al nuevo diseño de Breno, recuperando código desde WFStatusHTML
+		Cabecera
+		
+22nov16	Cambio formato botones
+		Incluir botones en la cabecera
+		Siguen al final de la página los botones para MVM: <xsl:template name="botonesMVM"> 
+
+24nov16	Reducir e igualar fuentes en datos cliente/proveedor/pedido
+		Ajustes varios
+
+25nov16	Ajustes varios
+
+
+
+PENDIENTE: Formato tabla y botones
+
+		Falta revisar la cabecera, fijando el ancho de los labels.
+
+		Falta revisar estos "templates"
+		<xsl:template name="botonesCuatroMultioferta">    
+		<xsl:template name="botonesMultioferta"> 
+		
+		FALTA INCORPORAR EL TEXTO DE PEDIDO PARCIAL: text_expli_boton_pedido_parcial
+		
+		EN EL CASO DE PEDIDO PENDIENTE DE ENTREGA, SI ES PARCIAL NO MOSTRAR (AHORA SE MUESTRA DISABLED) EL BOTON DE RECIBIDO Y VICEVERSA
+
+		El botón "Pendiente" muestra el texto cortado: "Pend"
+
+		REVISION GENERAL DE TODO EL PROCESO, TODOS LOS ESTADOS
+
+
+21abr17	No mostramos la forma y plazo de pago si no están informados
+
+29jun17 Utilizar diferente tipo de código de cliente según usuario
+30jun17	Incluir documento adjunto
+
+6set17	Incluir nota proveedor y posibilidad de realizar valoración
+7set17	Enlazar el proveedor a la ficha de proveedor (solo para compradores)
+<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID=11456&amp;VENTANA=NUEVA','Detalle Empresa',90,80,0,-50);">
+
+10nov17	El usuario "de empresa" no puede aprobar pedidos de otro usuario
+
+18dic17	Botón "Mantenimiento pedido" para usuarios aprobadores en el estado "pendiente de aprobación (40_RW)
+
+20dic17	Incluir pedido mínimo para simplificar toma de decisiones
+18ene18	Incluir botones de gestión (Manten pedido, enviar pdf) para usuarios con derechos de mantenimiento de pedido
+18ene18 Incluir botón "Recibir PDF" para enviar PDF del pedido al usuario que está conectado (solo para usuarios con derechos de control o mantenimiento)
+18ene18 Incluir botón "Recibir PDF" para enviar PDF del pedido al usuario que está conectado (para todos los usuarios)
+30ene18	En estado 40 (pedido rechazado por el responsable), no permite cerrar. creado MOFS/MOF_41_RW_js
+2feb18	En estado 12 (pedido rechazado por el proveedor), no permite cerrar. creado MOFS/MOF_41_RW_js
+13feb18	En estado 11 (pedido pendiente de aceptar por el proveedor) incluir botón consulta, y desplegable de motivo de rechazo o consulta 
+22feb18	Se duplican los comentarios
+25abr18	Crear back order a partir de pedido parcial
+7may18	En el caso de pedido de elementos especiales, el nombre del pack debe mostrarse bien diferenciado
+7may18	El icono de "recibido/no recibido" sirve para cambiar el estado de la linea
+8may18	Crear back order a partir de pedido parcial
+

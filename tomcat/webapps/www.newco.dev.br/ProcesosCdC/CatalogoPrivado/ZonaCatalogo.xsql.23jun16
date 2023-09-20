@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ZonaCatalogoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ZonaCatalogoHTML.xsl"?>
+
+<ZonaCatalogo xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="TIPOVENTANA" value="{@TIPOVENTANA}"/>
+	<xsql:include-param name="PROPAGAR" value="{@PROPAGAR}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaFamilias');
+		IF US_ID>=0 THEN
+			CATALOGOPRIVADO_PCK.zonacatalogoprivado(
+				US_ID,
+				'{@IDNUEVACATEGORIA}',
+				'{@IDNUEVAFAMILIA}',
+				'{@IDNUEVASUBFAMILIA}',
+				'{@IDNUEVOGRUPO}',
+				'{@IDNUEVOPRODUCTOESTANDAR}',
+				-- '{@IDPRODUCTO}',
+				'{@ANCHODESPLEGABLE}',
+				'{@ACCION}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<botones>
+	<button label="NuevaFamilia" caption="CATPRIV-0040">
+		<name_function>NuevaFamilia</name_function>
+		<param>''</param>
+		<param>'NUEVAFAMILIA'</param>
+	</button>
+
+	<button label="ModificarFamilia" caption="CATPRIV-0050">
+		<name_function>ModificarFamilia</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDFAMILIA'].value</param>
+		<param>'MODIFICARFAMILIA'</param>
+	</button>
+
+	<button label="ConsultarFamilia" caption="CATPRIV-0050">
+		<name_function>ModificarFamilia</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDFAMILIA'].value</param>
+		<param>'CONSULTARFAMILIA'</param>
+	</button>
+
+	<button label="BorrarFamilia" caption="CATPRIV-0060">
+		<name_function>BorrarFamilia</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDFAMILIA'].value</param>
+		<param>'BORRARFAMILIA'</param>
+	</button>
+
+	<button label="NuevaSubfamilia" caption="CATPRIV-0092">
+		<name_function>NuevaSubfamilia</name_function>
+		<param>''</param>
+		<param>document.forms[0].elements['CATPRIV_IDFAMILIA'].value</param>
+		<param>'NUEVASUBFAMILIA'</param>
+	</button>
+
+	<button label="ModificarSubfamilia" caption="CATPRIV-0094">
+		<name_function>ModificarSubfamilia</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+		<param>document.forms[0].elements['CATPRIV_IDFAMILIA'].value</param>
+		<param>'MODIFICARSUBFAMILIA'</param>
+	</button>
+
+	<button label="ConsultarSubfamilia" caption="CATPRIV-0094">
+		<name_function>ModificarSubfamilia</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+		<param>document.forms[0].elements['CATPRIV_IDFAMILIA'].value</param>
+		<param>'CONSULTARSUBFAMILIA'</param>
+	</button>
+
+	<button label="BorrarSubfamilia" caption="CATPRIV-0096">
+		<name_function>BorrarSubfamilia</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+		<param>'BORRARSUBFAMILIA'</param>
+	</button>
+
+	<button label="NuevoProductoEstandar" caption="CATPRIV-0070">
+		<name_function>NuevoProductoEstandar</name_function>
+		<param>''</param>
+		<param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+		<param>'NUEVOPRODUCTOESTANDAR'</param>
+	</button>
+
+	<button label="ModificarProductoEstandar" caption="CATPRIV-0080">
+		<name_function>ModificarProductoEstandar</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value</param>
+		<param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+		<param>'MODIFICARPRODUCTOESTANDAR'</param>
+	</button>
+
+	<button label="ConsultarProductoEstandar" caption="CATPRIV-0080">
+		<name_function>ModificarProductoEstandar</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value</param>
+		<param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+		<param>'CONSULTARPRODUCTOESTANDAR'</param>
+	</button>
+
+	<button label="BorrarProductoEstandar" caption="CATPRIV-0090">
+		<name_function>BorrarProductoEstandar</name_function>
+		<param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+		<param>document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value</param>
+		<param>'BORRARPRODUCTOESTANDAR'</param>
+	</button>
+</botones>
+</ZonaCatalogo>

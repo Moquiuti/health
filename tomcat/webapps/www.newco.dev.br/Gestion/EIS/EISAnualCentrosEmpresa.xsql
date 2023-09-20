@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EISListaCentrosEmpresaJSON.xsl"?>
+
+<ListaCentros xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="IDIndicador"/>
+<xsql:include-param name="FiltroSQL"/>
+<xsql:include-param name="IDEmpresa"/>
+
+<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+                        IDIOMA_ID	NUMBER;
+		BEGIN
+			IF '{@LANG}' = 'spanish' THEN
+				IDIOMA_ID := 0;
+			ELSIF '{@LANG}' = 'portugues' THEN
+				IDIOMA_ID := 2;
+			END IF;
+
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISBasico - EISListaCentrosEmpresa');
+			IF US_ID>=0 THEN
+				EIS_ANUAL_PCK.DesplegableDinamico_XML('{@IDEmpresa}', '{@IDIndicador}', '{@FiltroSQL}', '{@IDEmpresa}', 'CEN', IDIOMA_ID, US_ID);
+			END IF;
+		END;
+	]]>
+</xsql:include-owa>
+</ListaCentros>

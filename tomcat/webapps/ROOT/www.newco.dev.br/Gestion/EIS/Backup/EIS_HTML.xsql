@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EIS_HTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EIS_HTML.xsl"?>
+
+
+<IndicadoresMVM xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="STYLE"/>
+
+	<!-- A partir de aqui, Indicadores de Comisiones.... -->
+  <BLOQUE name="Indicadores en Pesetas"> 
+  <ROW name="Importe Comisiones (Pesetas - IVA no incluido)" link="ComisionesRealizadas.xsql">
+  <xsql:query tag-case="upper" row-element="ANNO" rowset-element="">
+    <![CDATA[
+    	SELECT formato.formato(ROUND(SUM (CLC_COMISION),0),1) AS VALOR, 365 AS PERIODO
+		FROM COM_LINEASCOMISIONES
+		WHERE CLC_FECHA >= SYSDATE-365
+   ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="SEMANA" rowset-element="">
+    <![CDATA[
+    	SELECT formato.formato(ROUND(SUM (CLC_COMISION),0),1) AS VALOR, 7 AS PERIODO
+		FROM COM_LINEASCOMISIONES
+		WHERE CLC_FECHA >= SYSDATE-7
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="DIA" rowset-element="">
+    <![CDATA[
+    	SELECT formato.formato(ROUND(SUM (CLC_COMISION),0),1) AS VALOR, 1 AS PERIODO
+		FROM COM_LINEASCOMISIONES
+		WHERE CLC_FECHA>=SYSDATE-1
+    ]]>
+  </xsql:query>
+  </ROW>
+	<!-- A partir de aqui, Indicadores de Pedidos.... -->
+   <ROW name="Importe Pedidos (Pesetas - IVA no incluido)" link="PedidosRealizados.xsql">
+  <xsql:query tag-case="upper" row-element="ANNO" rowset-element="">
+    <![CDATA[
+    	SELECT formato.formato(ROUND(SUM (PED_SUBTOTAL),0),1) AS VALOR, 365 AS PERIODO
+	FROM PEDIDOS,DIVISAS
+	WHERE PED_IDDIVISA=DIV_ID
+	AND PED_FECHA >= SYSDATE-365
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="SEMANA" rowset-element="">
+    <![CDATA[
+    	SELECT formato.formato(ROUND(SUM (PED_SUBTOTAL),0),1) AS VALOR, 7 AS PERIODO 
+	FROM PEDIDOS,DIVISAS
+	WHERE PED_FECHA >= SYSDATE-7
+	AND PED_IDDIVISA=DIV_ID
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="DIA" rowset-element="">
+    <![CDATA[
+    	SELECT formato.formato(ROUND(SUM (PED_SUBTOTAL),0),1) AS VALOR, 1 AS PERIODO  
+	FROM PEDIDOS,DIVISAS
+	WHERE PED_FECHA>=SYSDATE-1
+	AND PED_IDDIVISA=DIV_ID
+    ]]>
+  </xsql:query>
+  </ROW>
+	<!-- A partir de aqui, Indicadores de Ofertas.... -->
+   <ROW name="Importe Ofertas (Pesetas - IVA no incluido)" link="OfertasRealizadas.xsql">
+  <xsql:query tag-case="upper" row-element="ANNO" rowset-element="">
+    <![CDATA[
+    SELECT formato.formato(ROUND(SUM(lmo_cantidad*lmo_precio),0),1) AS VALOR, 365 AS PERIODO  
+	FROM MULTIOFERTAS, LINEASMULTIOFERTA
+	WHERE MO_FECHA>=SYSDATE-365
+	AND LMO_IDMULTIOFERTA = MO_ID
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="SEMANA" rowset-element="">
+    <![CDATA[
+    SELECT formato.formato(ROUND(SUM(lmo_cantidad*lmo_precio),0),1) AS VALOR, 7 AS PERIODO  
+	FROM MULTIOFERTAS, LINEASMULTIOFERTA
+	WHERE MO_FECHA>=SYSDATE-7
+	AND LMO_IDMULTIOFERTA = MO_ID
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="DIA" rowset-element="">
+    <![CDATA[
+    SELECT formato.formato(ROUND(SUM(lmo_cantidad*lmo_precio),0),1) AS VALOR, 1 AS PERIODO  
+	FROM MULTIOFERTAS, LINEASMULTIOFERTA
+	WHERE MO_FECHA>=SYSDATE-1
+	AND LMO_IDMULTIOFERTA = MO_ID
+    ]]>
+  </xsql:query>
+  </ROW>  </BLOQUE>
+  <BLOQUE name="Contadores">
+  <ROW name="Número de Pedidos" link="PedidosRealizados.xsql">
+  <xsql:query tag-case="upper" row-element="ANNO" rowset-element="">
+    <![CDATA[
+    	SELECT COUNT (PED_ID) AS VALOR, 365 AS PERIODO FROM PEDIDOS
+		WHERE PED_FECHA >= SYSDATE-365
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="SEMANA" rowset-element="">
+    <![CDATA[
+    	SELECT COUNT (PED_ID) AS VALOR, 7 AS PERIODO 
+	FROM PEDIDOS WHERE PED_FECHA >= SYSDATE-7
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="DIA" rowset-element="">
+    <![CDATA[
+    	SELECT COUNT (PED_ID) AS VALOR, 1 AS PERIODO
+	FROM PEDIDOS WHERE PED_FECHA>=SYSDATE-1
+    ]]>
+  </xsql:query>
+  </ROW>
+  <ROW name="Número de ofertas" link="OfertasRealizadas.xsql">
+  <xsql:query tag-case="upper" row-element="ANNO" rowset-element="">
+    <![CDATA[
+    	SELECT COUNT (MO_ID) AS VALOR, 365 AS PERIODO
+		FROM MULTIOFERTAS, LISTAPRODUCTOS 
+	WHERE MO_IDLISTAPRODUCTOS = LP_ID
+	AND LP_FECHAEMISION >= SYSDATE -365
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="SEMANA" rowset-element="">
+    <![CDATA[
+    	SELECT COUNT (MO_ID) AS VALOR, 7 AS PERIODO
+	FROM MULTIOFERTAS, LISTAPRODUCTOS 
+	WHERE MO_IDLISTAPRODUCTOS = LP_ID
+	AND LP_FECHAEMISION >= SYSDATE-7
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="DIA" rowset-element="">
+    <![CDATA[
+    	SELECT COUNT (MO_ID) AS VALOR, 1 AS PERIODO
+	FROM MULTIOFERTAS, LISTAPRODUCTOS 
+	WHERE MO_IDLISTAPRODUCTOS = LP_ID
+	AND LP_FECHAEMISION>=SYSDATE-1
+    ]]>
+  </xsql:query>
+  </ROW>
+  </BLOQUE>
+  <returnHome/>
+</IndicadoresMVM>

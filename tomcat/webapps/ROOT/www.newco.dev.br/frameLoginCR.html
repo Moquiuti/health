@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>frameLogin</title>
+  <script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+  <!--<script type="text/javascript" src="http://www.newco.dev.br/recoletas/login_21jun17.js"></script>-->
+  <script type="text/javascript" src="http://www.newco.dev.br/General/login_21jun17.js"></script>
+  <!--<link rel="stylesheet" href="http://www.newco.dev.br/General/areapublica443.css" type="text/css"/>-->
+  <style type="text/css">
+  	.btnClaro {
+		font-family: Open Sans Regular, sans-serif;
+		color: #3d5d95;
+		font-size: 13px;
+		padding: 5px 20px 5px 20px;
+		background: #F0F0F0;
+		text-decoration: none;
+		border-style: solid;
+		border-width: 1px;
+	}
+.textHeader{
+    float:left;
+    margin-left:130px;
+    margin-right:24px;
+    background: #A7A8A9;
+    border-bottom-right-radius:3px;
+    border-bottom-left-radius:3px;
+}
+.textHeader h2{
+   font-size: 22px;
+   color:#FFF;
+   padding:4px 8px;
+   font-weight: normal;
+   font-family:"BebasNeue", sans-serif;
+}
+
+  </style>
+</head>
+<body>
+	<div>
+		<div align="right">
+			<img src="http://www.comprasresidencias.com/images/logoComprasResidencias.jpg" align="left" width="479" height="89" alt="CR">
+<!--<div class="textHeader"><h2>Optimizamos su proceso de compras</h2></div>-->
+			<form name="frmLogin">
+
+				<input type="hidden" name="DOMINIO" value="www.mvmnucleo.com"/>
+				<input type="hidden" name="PARAMETRO" value=""/>
+				<!--<div style=" font-family: Open Sans Regular, Verdana, Arial, sans-serif; font-size=13px;">-->
+				Usuario: <input type="text" name="USER">
+				Clave:   <input type="password" name="PASS">
+				<a id="btnLoginDirecto" value="Enviar" class="btnClaro" href="javascript:loginPopup();">Entrar</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

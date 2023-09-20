@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="UsuariosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="UsuariosHTML.xsl"?>
+
+<Usuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	
+ 
+</Usuarios>
+

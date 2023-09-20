@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Convocatorias especiales: buscador de productos. Nuevo disenno 2022. 
+	Ultima revision ET 27may22 10:40 BuscadorProductos2022_230522.js
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="BuscadorProductosHTML2022.xsl"?>
+
+<Productos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Conv.Esp.Mant.Productos');
+		IF US_ID>=0 THEN
+			ConvocatoriasEspeciales_pck.Productos_XML(
+				US_ID,
+                '{@FIDCONVOCATORIA}',
+                '{@FIDPROVEEDOR}',
+                '{@FTEXTO}',
+				'{@PLAZOCONSULTA}',
+                '{@ORDEN}',
+                '{@SENTIDO}',
+                '{@FLINEASPORPAGINA}',
+                '{@PAGINA}',
+				'S'
+			);
+                        
+                     
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Productos>

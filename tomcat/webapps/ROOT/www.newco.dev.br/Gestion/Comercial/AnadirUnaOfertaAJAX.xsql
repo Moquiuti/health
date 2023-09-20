@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Anyade/modifica una entrada en la tabla LIC_PRODUCTOSOFERTAS
+	Ultima revisión: ET 26ene23 15:30
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="AnadirUnaOfertaJSON.xsl"?>
+<AnyadeUnaOferta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AnyadeUnaOferta');
+		IF US_ID>=0 THEN
+		
+			IF '{@ACCION}'='NUEVAOFERTA' THEN
+				v_Res:=LICITACIONES_SEG_PCK.PrepararProveedorExterno
+				(
+					US_ID,
+					'{@LIC_ID}',
+					'{@LIC_PROV_ID}',
+					'{@LIC_PROD_ID}'
+				);
+			END IF;
+		
+			LICITACIONES_PCK.CrearOActualizarOferta_XML
+			(
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_PROD_ID}',
+				'{@LIC_PROV_ID}',
+				'{@REFPROV}',
+				'{@DESC}',
+				'{@MARCA}',
+				'{@UDSXLOTE}',
+				'{@CANTIDAD}',
+				'{@PRECIO}',
+				'{@TIPOIVA}',
+				'{@IDFICHA}',
+				'{@IDMOTIVO}',
+				'{@MOTIVO}',
+				'{@ALTERNATIVA}',				--01mar19 Alternativa, para permitir varias ofertas por producto
+				'{@IDREGSANITARIO}',			--05nov21 Documento registro sanitario
+				'{@REGSANITARIO}',				--19nov21 Texto registro sanitario
+				'{@IDCERTEXPERIENCIA}',			--21nov21 Certificado de experiencia
+				'{@IDOFERTALIC}',				--26ene23 ID de la oferta. Opcional. Permite localizar la oferta sin buscar el proveedor/producto
+				'{@IDFICHASEG}',				--01feb23 Ficha de seguridad
+				'{@CODEXPEDIENTE}',				--01feb23 Cod.Expediente
+				'{@CODCUM}',					--01feb23 Cod.CUM
+				'{@CODIUM}',					--01feb23 Cod.IUM
+				'{@CODINVIMA}',					--01feb23 Cod.Invima
+				'{@FECHACADINVIMA}',			--01feb23 Fecha Cad. Invima
+				'{@CLASRIESGO}'					--01feb23 Clas.Riesgo
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</AnyadeUnaOferta>

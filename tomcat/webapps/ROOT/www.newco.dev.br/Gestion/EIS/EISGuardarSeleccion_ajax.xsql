@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EISGuardarSeleccionJSON.xsl"?>
+
+<GuardarSeleccion xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-param name="SES_ID"/>
+
+
+<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISBasico - GuardarSeleccion');
+			IF US_ID>=0 THEN
+				EIS_PCK.GuardarSeleccion_XML(
+					US_ID,
+					'{@IDEMPRESA_SELECCION}',
+					'{@NOMBRE_SELECCION}',
+					'{@TIPO_SELECCION}',
+					'{@STRING_SELECCION}',
+					'{@EXCLUIR_SELECCION}'
+				);
+			END IF;
+		END;
+	]]>
+</xsql:include-owa>
+</GuardarSeleccion>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ultima revision ET 27nov21 18:05
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ExcelesHTML.xsl"?>
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="IDLIC"/>
+<xsql:include-param name="IDPROVEEDORLIC"/>
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="IDINFORME" value="{@IDINFORME}"/>
+        
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		PRODUCTO_ID	NUMBER := NULL;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LicitacionesExcel');
+		IF US_ID>=0 THEN
+			
+			utilidades_pck.debug('LicitacionesExcel XSL. IDLic: {@IDLIC}. IDCOnvocatoria:{@IDCONVOCATORIA}');
+		
+			LICITACIONESEXCEL_PCK.ListadoLicitacion_Excel
+			(
+				US_ID,
+				'{@IDLIC}',
+				'{@IDPROVEEDORLIC}',
+				'{@SOLOADJUDICADAS}',
+				'{@IDCONVOCATORIA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</DescargaExcel>

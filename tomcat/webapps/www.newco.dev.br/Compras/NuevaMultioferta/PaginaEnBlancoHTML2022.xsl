@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!--   
+	Página central del menú de "Enviar pedidos". Incluye info de interes para el comprador. Nuevo disenno 2022.
+	Ultima revision: ET 16may22 10_08
+-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" />
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>
+  <xsl:template match="/">
+
+	<!--	Todos los documentos HTML deben empezar con esto	-->
+	<xsl:text disable-output-escaping='yes'>&lt;!doctype html></xsl:text>
+
+	<html>
+	<head>
+        <!--idioma-->
+        <xsl:variable name="lang">
+        	<xsl:choose>
+            <xsl:when test="/PaginaEnBlanco/LANG"><xsl:value-of select="/PaginaEnBlanco/LANG" /></xsl:when>
+            <xsl:otherwise>spanish</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+		<!--idioma fin-->
+		<title><xsl:value-of select="document($doc)/translation/texts/item[@name='medicalVM']/node()"/>&nbsp;-&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='listado_de_cambios_en_catalogo_privado']/node()"/></title>
+
+		<!--style-->
+		<xsl:call-template name="estiloIndip"/>
+		<!--fin de style-->
+
+		<!--	11ene22 nuevos estilos -->
+		<!--<link rel="stylesheet" href="http://www.newco.dev.br/General/basicMVM2022.css"/>-->
+		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'/>
+		<!--	11ene22 nuevos estilos -->
+
+
+		<!--<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+		<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>-->
+		<script src="http://www.newco.dev.br/General/jquery-3.6.0.js"></script>	
+		<script type="text/javascript" src="http://www.newco.dev.br/General/basic2022_010822.js"></script>
+
+	<xsl:text disable-output-escaping="yes">
+	<![CDATA[
+
+		<script type="text/javascript">
+		  <!--
+          //
+
+	    function EjecutarFuncionDelFrame(nombreFrame,idPlantilla){
+	    	  var objFrame=new Object();
+	    	  objFrame=obtenerFrame(window.parent.parent, nombreFrame);
+	    	  objFrame.CambioPlantillaExterno(idPlantilla);
+	    	}
+
+        //estamos en el listado de cambios y volvemos a paginaEnBlanco.xsql
+        function VolverPaginaEnBlanco(){
+        	  var objFrame=new Object();
+     	      objFrame=obtenerFrame(top,'areaTrabajo');
+     	      objFrame.location.href='http://www.newco.dev.br/Compras/NuevaMultioferta/PaginaEnBlanco.xsql';
+
+            }
+
+            //vemos si hay mas cambios, listado intero
+		function VerListaCambios(tipo){
+
+            	var objFrame=new Object();
+                //alert('top '+top.name);
+                //alert('mi '+window.parent.parent.name);
+     	        objFrame=obtenerFrame(window.parent.parent,'areaTrabajo');
+
+				if (tipo=='NUEVOS_PRODUCTOS')
+				{
+					objFrame.location.href='http://www.newco.dev.br/Compras/NuevaMultioferta/ListaCambios.xsql?CAMBIOS_CATALOGO=N&CAMBIOS_PRECIOS=N&CAMBIOS_PRECIOS_PUBLICOS=N&NUEVOS_PRODUCTOS=S';
+
+				}
+				else
+				{
+					if (tipo=='PRECIOS')
+					{
+						objFrame.location.href='http://www.newco.dev.br/Compras/NuevaMultioferta/ListaCambios.xsql?CAMBIOS_CATALOGO=N&CAMBIOS_PRECIOS=S&CAMBIOS_PRECIOS_PUBLICOS=N&NUEVOS_PRODUCTOS=N';
+					}
+					else
+					{
+						if (tipo=='PRECIOSPUBLICOS')
+						{
+							objFrame.location.href='http://www.newco.dev.br/Compras/NuevaMultioferta/ListaCambios.xsql?CAMBIOS_CATALOGO=N&CAMBIOS_PRECIOS=N&CAMBIOS_PRECIOS_PUBLICOS=S&NUEVOS_PRODUCTOS=N';
+						}
+						else		//CATALOGO
+						{
+
+							objFrame.location.href='http://www.newco.dev.br/Compras/NuevaMultioferta/ListaCambios.xsql?CAMBIOS_CATALOGO=S&CAMBIOS_PRECIOS=N&CAMBIOS_PRECIOS_PUBLICOS=N&NUEVOS_PRODUCTOS=N';
+
+						}
+					}
+				}
+
+				//MostrarPag(pagina, titulo);
+			}
+
+
+			//	Envï¿½a las respuestas a una encuesta
+			function EnviarEncuesta()
+			{
+				var form=document.forms[0],
+					listaIDs=document.getElementById('IDENCUESTASCONCATENADOS').value,
+					numeroEncuestas=parseInt(document.getElementById('NUMEROENCUESTAS').value),
+					Encuesta='',
+					ID,
+					msgError='',
+					hayCambios='N';;
+
+				//MostrarCampos(form);
+
+				for (i=0;i<numeroEncuestas;i++)
+				{
+					ID=Piece(listaIDs,'|',i);
+
+					if (Encuesta!='') Encuesta=Encuesta+'#';
+
+					Encuesta=Encuesta+ID+'|'
+							+CompruebaCheck(form,'CHK_PLANTILLA_'+ID)+'|'
+							+CompruebaCheck(form,'CHK_MUESTRA_'+ID)+'|'
+							+CompruebaCheck(form,'CHK_NOINTERESA_'+ID)+'|'
+							+form.elements['COMENTARIOS_'+ID].value;
+
+					if ((CompruebaCheck(form,'CHK_NOINTERESA_'+ID)=='S')&&(form.elements['COMENTARIOS_'+ID].value==''))
+					{
+						msgError=msgError+'Si el producto "'+form.elements['PRODUCTO_'+ID].value+'" no interesa, por favor, informe del motivo.';
+					}
+
+					if ((CompruebaCheck(form,'CHK_PLANTILLA_'+ID)=='S')
+						||(CompruebaCheck(form,'CHK_MUESTRA_'+ID)=='S')
+						||(CompruebaCheck(form,'CHK_NOINTERESA_'+ID)=='S'))
+					{
+						hayCambios='S';
+					}
+				}
+
+				document.getElementById('DATOSENCUESTASCONCATENADOS').value = Encuesta
+
+				if ((hayCambios=='N')&&(form.elements['IDCLIENTE'].value!=1))
+				{
+					msgError=msgError+'No hay cambios en la encuesta, no se pueden enviar los datos.';
+				}
+
+				//alert('Guardar encuesta IDs:'+listaIDs+' Total:'+numeroEncuestas+' Res:'+Encuesta);
+				//MostrarCampos(form);
+
+				if (msgError!='')
+				{
+					alert(msgError);
+				}
+				else
+				{
+					SubmitForm(form);
+				}
+			}
+
+            //emplantillar solecitud
+             function EnviarSolicitud(IDProducto){
+                    var form=document.forms[0];
+                    jQuery(".botonEmplantillar").hide();
+                    form.elements['EMPLANTILLAR'].value=IDProducto;
+                    form.action = 'ConfirmSolEmplantillar.xsql';
+                    SubmitForm(form);
+                }
+
+            //informa la marca en el buscador
+            function informaMarca(marca){
+                var busqueda = window.parent.frames[0];
+                var formBusque = busqueda.document.forms['Busqueda'];
+                if (formBusque){
+                	formBusque.elements['LLP_PROVEEDOR'].value = marca;
+                    }
+            }
+            //informa la ref en el buscador
+            function informaProd(ref){
+                var busqueda = window.parent.frames[0];
+                var formBusque = busqueda.document.forms['Busqueda'];
+                 if (formBusque){
+                	formBusque.elements['LLP_NOMBRE'].value = ref;
+                   }
+            }
+			
+		  //-->
+		</script>
+	]]>
+	</xsl:text>
+		</head>
+		<body>
+        <!--<xsl:attribute name="onload">
+        	<xsl:if test="//AUTORIZACIONESPROVEEDORES/TOTAL = 1">alert('MedicalVM le informa que el proveedor <xsl:value-of select="//AUTORIZACIONESPROVEEDORES/PROVEEDOR/NOMBRE"/> le ha autorizado a consultar su catï¿½logo de productos');</xsl:if>
+
+            <xsl:if test="//AUTORIZACIONESPROVEEDORES/TOTAL &gt; 1">alert('MedicalVM le informa que los proveedores <xsl:for-each select="//AUTORIZACIONESPROVEEDORES/PROVEEDOR"><xsl:value-of select="NOMBRE"/>,&nbsp;</xsl:for-each>le han autorizado a consultar sus catï¿½logo de productos.');</xsl:if>
+        </xsl:attribute>-->
+
+         <!--idioma-->
+        <xsl:variable name="lang">
+          <xsl:choose>
+            <xsl:when test="/PaginaEnBlanco/LANG"><xsl:value-of select="/PaginaEnBlanco/LANG" /></xsl:when>
+            <xsl:otherwise>spanish</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+      <!--idioma fin-->
+
+		<xsl:if test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/SOLICITUDCATALOGACION">
+		<div class="textRight">
+			<br/>
+       		<a class="btnDestacado" href="javascript:NuevaSolicitudCat()"><!--16may22-->
+            	<xsl:value-of select="document($doc)/translation/texts/item[@name='solicitar_catalogacion_productos']/node()"/>
+        	</a>&nbsp;&nbsp;
+		</div>
+		</xsl:if>
+
+    <div style="clear:both;">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+		<form action="EncuestaSave.xsql" method="POST" name="form1">
+			<input type="hidden" id="IDCLIENTE" name="IDCLIENTE" value="{/PaginaEnBlanco/INICIO/ENCUESTAS/IDCENTRO}" />
+			<input type="hidden" id="DATOSENCUESTASCONCATENADOS" name="DATOSENCUESTASCONCATENADOS" value="" />
+			<input type="hidden" id="IDENCUESTASCONCATENADOS" name="IDENCUESTASCONCATENADOS" value="{/PaginaEnBlanco/INICIO/ENCUESTAS/IDENCUESTASCONCATENADOS}" />
+			<input type="hidden" id="NUMEROENCUESTAS" name="NUMEROENCUESTAS" value="{/PaginaEnBlanco/INICIO/ENCUESTAS/NUMEROENCUESTAS}" />
+            <input type="hidden" name="EMPLANTILLAR" value="" />
+
+			<!-- Aviso en caso de emplantillamiento		-->
+      		<xsl:if test="PaginaEnBlanco/INICIO/MENSAJE">
+        		<div class="problematicos">
+					<p><xsl:value-of select="PaginaEnBlanco/INICIO/MENSAJE" /></p>
+				</div>
+            	<br />
+			</xsl:if>
+            <!--productos destacados-->
+			<xsl:if test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/PRODUCTOS_DESTACADOS">
+				  <!--<table class="grandeInicio">-->
+				<div class="textCenter">
+   					<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='mvm_recomienda']/node()"/></strong>
+				</div>
+				<div class="linha_separacao_cotacao_y"></div>
+				<div class="tabela tabela_redonda">
+					<table cellspacing="10px" cellpadding="10px">
+					<thead class="cabecalho_tabela">
+					<tr>
+                        <th class="dies">&nbsp;</th>
+    					<th class="textLeft">
+                             <xsl:value-of select="document($doc)/translation/texts/item[@name='producto']/node()"/>
+						</th>
+						<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+    						<th class="dies textLeft">
+                                <xsl:value-of select="document($doc)/translation/texts/item[@name='ref_proveedor']/node()"/>
+							</th>
+                            <th class="catorce textLeft">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/>
+							</th>
+						</xsl:if>
+                        <th class="doce textLeft">
+                             <xsl:value-of select="document($doc)/translation/texts/item[@name='marca']/node()"/>
+						</th>
+                        <th class="doce textLeft">
+                             <xsl:value-of select="document($doc)/translation/texts/item[@name='ud_basica']/node()"/>
+						</th>
+    					<th class="dies textRight">
+						<xsl:choose>
+						<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+                             <xsl:value-of select="document($doc)/translation/texts/item[@name='precio_final_iva']/node()"/>
+    					</xsl:when>
+						<xsl:otherwise>
+                             <xsl:value-of select="document($doc)/translation/texts/item[@name='precio_sin_iva']/node()"/>
+						</xsl:otherwise>
+						</xsl:choose>
+						</th>
+                        <th class="tres">&nbsp;</th>
+					</tr>
+                  	</thead>
+                    <tbody class="corpo_tabela">
+					<xsl:for-each select="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/PRODUCTOS_DESTACADOS/CAMBIO">
+    				<tr class="conhover">
+                        <td>
+                            <a class="btnDiscreto" href="javascript:EnviarSolicitud('{PROVEEDOR/IDPRODUCTO}');">CAT
+                            <!--<span class="botonEmplantillar">
+                            <xsl:choose>
+                                <xsl:when test="/PaginaEnBlanco/LANG = 'spanish'">
+                                    <img src="http://www.newco.dev.br/images/emplantillar.gif" alt="Emplantillar" title="Emplantillar"/>
+                                </xsl:when>
+                                <xsl:when test="/PaginaEnBlanco/LANG = 'br'">
+                                    <img src="http://www.newco.dev.br/images/emplantillar-br.gif" alt="Catalogar" title="Catalogar"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <img src="http://www.newco.dev.br/images/emplantillar.gif" alt="Emplantillar" title="Emplantillar"/>
+                                </xsl:otherwise>
+                             </xsl:choose>
+                             </span>-->
+                            </a>
+                        </td>
+        				<td class="textLeft">
+                            <a style="text-decoration:none;">
+	    	 					<xsl:attribute name="href">javascript:MostrarPagPersonalizada('../../Administracion/Mantenimiento/Productos/PRODetalle.xsql?PRO_ID=<xsl:value-of select="PROVEEDOR/IDPRODUCTO"/>','producto',100,70,0,-50);</xsl:attribute>
+                            	<xsl:value-of select="PROVEEDOR/PRODUCTO"/>
+							</a>
+						</td>
+						<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+       					<td class="textLeft">
+							<a style="text-decoration:none;">
+								<xsl:attribute name="href">javascript:informaProd('<xsl:value-of select="PROVEEDOR/REFERENCIA"/>');</xsl:attribute>
+								<xsl:value-of select="PROVEEDOR/REFERENCIA"/>
+							</a>
+						</td>
+                        <td class="textLeft">
+                        <a style="text-decoration:none;">
+                             <xsl:attribute name="href">javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID=<xsl:value-of select="PROVEEDOR/IDPROVEEDOR"/>&amp;VENTANA=NUEVA','DetalleEmpresa',100,70,0,-50)</xsl:attribute>
+                             <xsl:value-of select="PROVEEDOR/NOMBRE"/>
+                        </a>
+                        </td>
+						</xsl:if>
+                        <td class="textLeft">
+                            <a style="text-decoration:none;">
+                            <xsl:attribute name="href">javascript:informaMarca('<xsl:value-of select="PROVEEDOR/MARCA"/>');</xsl:attribute>
+                            <xsl:value-of select="PROVEEDOR/MARCA"/>
+                            </a>
+                        </td>
+                        <td class="textLeft"><xsl:value-of select="PROVEEDOR/UNIDADBASICA"/></td>
+        				<td class="textRight">
+							<xsl:choose>
+							<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+								<xsl:value-of select="TARIFA/IMPORTETOTAL"/>&nbsp;&nbsp;&nbsp;&nbsp;<!--(<xsl:value-of select="TARIFA/IMPORTE"/>)-->
+    						</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="TARIFA/IMPORTE"/>&nbsp;&nbsp;&nbsp;&nbsp;
+							</xsl:otherwise>
+							</xsl:choose>
+						</td>
+                        <td>&nbsp;</td>
+    				</tr>
+					</xsl:for-each>
+                    </tbody>
+					<tfoot class="rodape_tabela">
+					<xsl:choose>
+					<xsl:when test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/PRODUCTOS_DESTACADOS/HAY_MAS">
+						<tr>
+    						<td colspan="8" height="25px">
+                                <strong>
+								<a href="javascript:VerListaCambios('NUEVOS_PRODUCTOS');" onMouseOver="window.status='Abrir el listado completo';return true;" onMouseOut="window.status='';return true;">
+                                <xsl:value-of select="document($doc)/translation/texts/item[@name='existen_mas_cambios']/node()"/>
+								</a></strong>
+							</td>
+						</tr>
+					</xsl:when>
+					<xsl:otherwise>
+    					<tr><td colspan="8" height="25px">&nbsp;</td></tr>
+					</xsl:otherwise>
+					</xsl:choose>
+					</tfoot>
+				</table>
+				</div>
+				<br/><br/>
+			</xsl:if>
+
+           <!--	Cambios en precios publicos
+			<xsl:if test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_PRECIOS_PUBLICOS/CAMBIO">
+
+				 <table class="grandeInicio">
+                 <thead>
+					<tr class="tituloTablaPeq">
+    					<th colspan="6">
+        					Bajadas de precios en productos NO emplantillados
+						</th>
+					</tr>
+					<tr class="subTituloTabla">
+                    	<td class="cinco">&nbsp;</td>
+    					<td class="trenta textLeft">
+							Proveedor
+						</td>
+    					<td>
+							Referencia
+						</td>
+    					<td class="trenta textLeft">
+							Producto
+						</td>
+    					<td class="doce textRight">
+							<xsl:choose>
+							<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+									Precio Final<br/>
+									(con IVA)
+    						</xsl:when>
+							<xsl:otherwise>
+									Precio<br/>(s/IVA)
+							</xsl:otherwise>
+							</xsl:choose>
+						</td>
+    					<td>
+							Diferencia
+						</td>
+					</tr>
+                    </thead>
+                    <tbody>
+					<xsl:for-each select="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_PRECIOS_PUBLICOS/CAMBIO">
+    				<tr>
+                    	<td>&nbsp;</td>
+        				<td class="textLeft">
+							<xsl:value-of select="PROVEEDOR/NOMBRE"/>
+						</td>
+        				<td>
+							<xsl:value-of select="PROVEEDOR/REFERENCIA"/>
+						</td>
+        				<td class="textLeft">
+							<xsl:value-of select="PROVEEDOR/PRODUCTO"/>
+						</td>
+        				<td class="textRight">
+							<xsl:choose>
+								<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+										<xsl:value-of select="TARIFA/IMPORTETOTAL"/>&nbsp;
+    							</xsl:when>
+								<xsl:otherwise>
+										<xsl:value-of select="TARIFA/IMPORTE"/>&nbsp;
+								</xsl:otherwise>
+							</xsl:choose>
+							<xsl:choose>
+								<xsl:when test="TARIFA/CAMBIO='MAYOR'"><img src="http://www.newco.dev.br/images/order_a.gif"/>
+								</xsl:when>
+								<xsl:when test="TARIFA/CAMBIO='IGUAL'"><img src="http://www.newco.dev.br/images/ordenar.gif"/>
+								</xsl:when>
+								<xsl:when test="TARIFA/CAMBIO='MENOR'"><img src="http://www.newco.dev.br/images/order_d_verde.gif"/>
+								</xsl:when>
+							</xsl:choose>
+						</td>
+        				<td>
+							<xsl:value-of select="TARIFA/DIFERENCIA"/>
+						</td>
+    				</tr>
+					</xsl:for-each>
+                    </tbody>
+
+					<xsl:if test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_PRECIOS_PUBLICOS/HAY_MAS">
+						 <tfoot>
+                         <tr>
+    						<td colspan="6" height="25px"><strong>
+								<a href="javascript:VerListaCambios('PRECIOSPUBLICOS');" onMouseOver="window.status='Abrir el listado completo';return true;" onMouseOut="window.status='';return true;">
+									Existen mï¿½s cambios, pulse este enlace para ver la lista completa
+								</a></strong>
+							</td>
+						</tr>
+                        </tfoot>
+					</xsl:if>
+                      <xsl:if test="not(PaginaEnBlanco/INICIO/ENCUESTAS)">
+                             <tfoot>
+                             <tr>
+                           		<td colspan="6" height="25px">
+                                	<strong><a href="javascript:VolverPaginaEnBlanco();">Volver</a></strong>
+								</td>
+                             </tr>
+                            </tfoot>
+                            </xsl:if>
+
+				</table>
+				<br/><br/>
+			</xsl:if>-->
+
+
+
+			<xsl:choose>
+                            <xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/SIN_CAMBIOS">
+                            <br/><br/><br/>
+
+                            <div class="divLeft90 problematicos" style="margin-left:5%;">
+                                <p style="text-align:center;font-size:12px;">
+                                    <xsl:value-of select="document($doc)/translation/texts/item[@name='no_cambios_catalogo']/node()"/>
+                                    <xsl:value-of select="PaginaEnBlanco/LISTA_CAMBIOS/@antiguedad"/> <xsl:value-of select="document($doc)/translation/texts/item[@name='dias']/node()"/>
+                                </p>
+                            </div>
+			</xsl:when>
+			<xsl:otherwise>
+					<!--	Cambios en el catï¿½logo privado	-->
+					<xsl:if test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_CATALOGO/CAMBIO">
+					  <!--<table class="grandeInicio">-->
+					  <table class="buscador">
+                      <thead>
+						<tr class="tituloTablaPeq">
+    							<th colspan="7">
+                                	<xsl:value-of select="document($doc)/translation/texts/item[@name='alta_productos_plantilla']/node()"/>
+                                </th>
+						</tr>
+							 <tr class="subTituloTabla">
+                             	<td class="cinco">&nbsp;</td>
+    							<td class="trentacinco textLeft">
+                                	<xsl:value-of select="document($doc)/translation/texts/item[@name='producto']/node()"/>
+								</td>
+    							<td class="dies">
+                                	<xsl:value-of select="document($doc)/translation/texts/item[@name='ref_privada']/node()"/>
+								</td>
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+    							<td class="dies">
+                                	<xsl:value-of select="document($doc)/translation/texts/item[@name='ref_proveedor']/node()"/>
+								</td>
+								</xsl:if>
+								<td class="dies textRight">
+								<xsl:choose>
+								<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='precio_final_iva']/node()"/>&nbsp;&nbsp;
+    							</xsl:when>
+								<xsl:otherwise>
+                                	<xsl:value-of select="document($doc)/translation/texts/item[@name='precio_sin_iva']/node()"/>&nbsp;&nbsp;
+								</xsl:otherwise>
+								</xsl:choose>
+								</td>
+								<xsl:if test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/MOSTRAR_AHORRO">
+    								<td class="dies">
+                                    <xsl:value-of select="document($doc)/translation/texts/item[@name='ahorro']/node()"/>&nbsp;&nbsp;
+									</td>
+								</xsl:if>
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+                                    <td class="veinte textLeft">
+                                        <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='plantilla']/node()"/>-->
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/>
+                                    </td>
+								</xsl:if>
+							</tr>
+                            </thead>
+                            <tbody>
+							<xsl:for-each select="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_CATALOGO/CAMBIO">
+    						<tr>
+                            	<td>&nbsp;</td>
+        						<td class="textLeft">
+									<xsl:value-of select="PRODUCTOESTANDAR/NOMBRE"/>
+								</td>
+        						<td>
+									&nbsp;<xsl:value-of select="PRODUCTOESTANDAR/REFERENCIA"/>
+								</td>
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+        						<td>
+									&nbsp;<xsl:value-of select="PROVEEDOR/REFERENCIA"/>
+								</td>
+								</xsl:if>
+        						<td class="textRight">
+								<xsl:choose>
+								<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+									<xsl:value-of select="TARIFA/IMPORTETOTAL"/>&nbsp;&nbsp;
+    							</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="TARIFA/IMPORTE"/>&nbsp;&nbsp;
+								</xsl:otherwise>
+								</xsl:choose>
+								</td>
+								<xsl:if test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/MOSTRAR_AHORRO">
+    								<td>
+										<xsl:value-of select="TARIFA/AHORRO"/>&nbsp;&nbsp;
+									</td>
+								</xsl:if>
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+        						<td class="textLeft">
+            						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;<a href="javascript:EjecutarFuncionDelFrame('zonaPlantilla',{PLANTILLA/ID});" onMouseOver="window.status='Activa la plantilla';return true;" onMouseOut="window.status='';return true;">
+										<!--* Pedidos por proveedor--><xsl:value-of select="PLANTILLA/NOMBRE"/>
+									</a>
+        						</td>
+								</xsl:if>
+    						</tr>
+							</xsl:for-each>
+                            </tbody>
+
+
+							<xsl:if test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_CATALOGO/HAY_MAS">
+								<tr>
+    								<td colspan="7" height="25px">
+                                    <strong>
+										<a href="javascript:VerListaCambios('CATALOGO');" onMouseOver="window.status='Abrir el listado completo';return true;" onMouseOut="window.status='';return true;">
+                                        <xsl:value-of select="document($doc)/translation/texts/item[@name='existen_mas_cambios']/node()"/>
+										</a></strong>
+
+									</td>
+								</tr>
+							</xsl:if>
+
+
+						</table>
+						 <br/><br/>
+					</xsl:if>
+
+					<!--	Cambios en precios privados	-->
+					<xsl:if test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_PRECIOS/CAMBIO">
+					  <!--<table class="grandeInicio">-->
+					  <table class="buscador">
+                      <thead>
+						<tr class="tituloTablaPeq">
+                        	<th colspan="6">
+        							   <xsl:value-of select="document($doc)/translation/texts/item[@name='variaciones_precios_productos']/node()"/>
+							</th>
+							</tr>
+							<tr class="subTituloTabla">
+                            	<td class="cinco">&nbsp;</td>
+    							<td class="trentacinco textLeft">
+                                	   <xsl:value-of select="document($doc)/translation/texts/item[@name='producto']/node()"/>
+
+								</td>
+    							<td class="dies">
+                                   <xsl:value-of select="document($doc)/translation/texts/item[@name='ref_privada']/node()"/>
+								</td>
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+    							<td class="dies">
+                                   <xsl:value-of select="document($doc)/translation/texts/item[@name='ref_proveedor']/node()"/>
+								</td>
+								</xsl:if>
+    							<td class="dies textRight">
+								<xsl:choose>
+								<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+                                   <xsl:value-of select="document($doc)/translation/texts/item[@name='precio_final_iva']/node()"/>&nbsp;&nbsp;
+    							</xsl:when>
+								<xsl:otherwise>
+                                   <xsl:value-of select="document($doc)/translation/texts/item[@name='precio_sin_iva']/node()"/>&nbsp;&nbsp;
+								</xsl:otherwise>
+								</xsl:choose>
+								</td>
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+    							<td class="veinte textLeft">
+									<!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='plantilla']/node()"/>-->
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/>
+								</td>
+								</xsl:if>
+							</tr>
+                            </thead>
+                            <tbody>
+							<xsl:for-each select="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_PRECIOS/CAMBIO">
+    						<tr>
+                            	<td>&nbsp;</td>
+        						<td class="textLeft"><xsl:value-of select="PRODUCTOESTANDAR/NOMBRE"/>
+								</td>
+        						<td><xsl:value-of select="PRODUCTOESTANDAR/REFERENCIA"/>
+								</td>
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+        						<td><xsl:value-of select="PROVEEDOR/REFERENCIA"/>
+								</td>
+								</xsl:if>
+        						<td class="textRight">
+									<xsl:choose>
+									<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+										<xsl:value-of select="TARIFA/IMPORTETOTAL"/>&nbsp;&nbsp;&nbsp;&nbsp;<!--(<xsl:value-of select="TARIFA/IMPORTE"/>)-->
+    								</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="TARIFA/IMPORTE"/>&nbsp;&nbsp;&nbsp;&nbsp;
+									</xsl:otherwise>
+									</xsl:choose>
+									<xsl:choose>
+										<xsl:when test="TARIFA/CAMBIO='MAYOR'"><img src="http://www.newco.dev.br/images/order_a_rojo.gif"/>&nbsp;&nbsp;
+										</xsl:when>
+										<xsl:when test="TARIFA/CAMBIO='IGUAL'"><img src="http://www.newco.dev.br/images/ordenar.gif"/>&nbsp;&nbsp;
+										</xsl:when>
+										<xsl:when test="TARIFA/CAMBIO='MENOR'"><img src="http://www.newco.dev.br/images/order_d_verde.gif"/>&nbsp;&nbsp;
+										</xsl:when>
+									</xsl:choose>
+
+								</td>
+
+								<xsl:if test="not(/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PROVEEDOR)">
+        						<td class="textLeft">
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;<a href="javascript:EjecutarFuncionDelFrame('zonaPlantilla',{PLANTILLA/ID});" onMouseOver="window.status='Activa la plantilla';return true;" onMouseOut="window.status='';return true;">
+													<!--* Pedidos por proveedor--><xsl:value-of select="PLANTILLA/NOMBRE"/>
+												</a>
+        						</td>
+								</xsl:if>
+    						</tr>
+							</xsl:for-each>
+                            </tbody>
+							<xsl:if test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_CAMBIOS_PRECIOS/HAY_MAS">
+								<tr>
+    								<td colspan="6" height="25px">
+                                    	<strong>
+										<a href="javascript:VerListaCambios('PRECIOS');" onMouseOver="window.status='Abrir el listado completo';return true;" onMouseOut="window.status='';return true;">
+                                        <xsl:value-of select="document($doc)/translation/texts/item[@name='existen_mas_cambios']/node()"/>
+										</a></strong>
+									</td>
+								</tr>
+							</xsl:if>
+
+						</table>
+                        <br/><br/>
+					</xsl:if>
+
+
+
+                    <!--	Cambios en precios privados
+					<xsl:if test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_NUEVOS_PRODUCTOS/CAMBIO">
+						<table class="grandeInicio">
+							<tr class="tituloTablaPeq">
+    							<th colspan="6">
+        							Nuevos productos incorporados en MedicalVM NO emplantillados
+								</th>
+							</tr>
+							<tr class="subTitulotabla">
+                            	<td class="cinco">&nbsp;</td>
+    							<td class="trentacinco textLeft">
+									Proveedor
+								</td>
+    							<td class="dies">
+									Ref.Proveedor
+								</td>
+    							<td class="trenta">
+									Producto
+								</td>
+    							<td class="textRight">
+								<xsl:choose>
+								<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+										Precio Final<br/>
+										(con IVA)
+    							</xsl:when>
+								<xsl:otherwise>
+										Precio (s/IVA)
+								</xsl:otherwise>
+								</xsl:choose>
+								</td>
+                                <td class="cinco">&nbsp;</td>
+							</tr>
+							<xsl:for-each select="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_NUEVOS_PRODUCTOS/CAMBIO">
+    						<tr>
+                            	<td>&nbsp;</td>
+        						<td class="textLeft"><xsl:value-of select="PROVEEDOR/NOMBRE"/></td>
+        						<td><xsl:value-of select="PROVEEDOR/REFERENCIA"/></td>
+        						<td><xsl:value-of select="PROVEEDOR/PRODUCTO"/></td>
+        						<td class="textRight">
+									<xsl:choose>
+									<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+										<xsl:value-of select="TARIFA/IMPORTETOTAL"/>
+    								</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="TARIFA/IMPORTE"/>
+                                    </xsl:otherwise>
+									</xsl:choose>
+								</td>
+                                <td>&nbsp;</td>
+    						</tr>
+							</xsl:for-each>
+							<xsl:if test="PaginaEnBlanco/INICIO/LISTA_CAMBIOS/LISTA_NUEVOS_PRODUCTOS/HAY_MAS">
+                            <tfoot>
+								<tr>
+    								<td colspan="6" height="25px">
+										<strong><a href="javascript:VerListaCambios('NUEVOS_PRODUCTOS');" onMouseOver="window.status='Abrir el listado completo';return true;" onMouseOut="window.status='';return true;">
+											Existen mï¿½s cambios, pulse este enlace para ver la lista completa
+
+										</a></strong>
+									</td>
+								</tr>
+                             </tfoot>
+							</xsl:if>
+                              <xsl:if test="not(PaginaEnBlanco/INICIO/ENCUESTAS)">
+                             <tfoot>
+                             <tr>
+                           		<td colspan="6" height="25px">
+                                	<strong><a href="javascript:VolverPaginaEnBlanco();">Volver</a></strong>
+								</td>
+                             </tr>
+                            </tfoot>
+                            </xsl:if>
+						</table>
+                        <br /><br />
+					</xsl:if>-->
+				</xsl:otherwise><!--fin de otherwise de inicio-->
+			</xsl:choose>
+
+
+            	<xsl:if test="/PaginaEnBlanco/INICIO/ENCUESTAS/ENCUESTA">
+				<!--	23feb10	MVM presentamos tareas, no encuestas	-->
+				<xsl:choose>
+				<xsl:when test="/PaginaEnBlanco/INICIO/ENCUESTAS/IDCENTRO=1">
+					  <!--<table class="grandeInicio">-->
+					  <table class="buscador">
+                     <thead>
+						<tr class="tituloTablaPeq">
+    						<th colspan="9">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='tareas_mvm']/node()"/>
+        						<br/>
+                                <xsl:value-of select="document($doc)/translation/texts/item[@name='lista_tareas_comercial']/node()"/>
+
+							</th>
+						</tr>
+						<tr class="subTitulotabla">
+    						<td class="dies">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='cliente']/node()"/>
+							</td>
+    						<td class="dies textLeft">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='producto']/node()"/>
+							</td>
+    						<td class="trentacinco">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='tarea']/node()"/>
+							</td>
+    						<td class="dies">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/>
+							</td>
+    						<td class="trentacinco">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='comentarios_prov_actual']/node()"/>
+							</td>
+						</tr>
+                        </thead>
+                        <tbody>
+						<xsl:for-each select="/PaginaEnBlanco/INICIO/ENCUESTAS/ENCUESTA">
+    					<tr>
+        					<td>
+								<xsl:value-of select="REFERENCIA"/>
+							</td>
+        					<td>
+								<xsl:value-of select="UNIDADBASICA"/>
+							</td>
+        					<td class="textLeft">
+								<xsl:value-of select="PRODUCTO"/>
+								<input type="hidden" name="PRODUCTO_{ID}" value="{PRODUCTO}"/>
+							</td>
+        					<td class="textLeft">
+								<xsl:value-of select="PROVEEDOR"/>
+							</td>
+
+							<input type="hidden" name="CHK_PLANTILLA_{ID}" value="no"/>
+							<input type="hidden" name="CHK_MUESTRA_{ID}" value="no"/>
+							<input type="hidden" name="CHK_NOINTERESA_{ID}" value="no"/>
+        					<td class="textLeft">
+								<input type="text" name="COMENTARIOS_{ID}" maxlength="100" size="60" value="" />
+							</td>
+    					</tr>
+						</xsl:for-each>
+                        </tbody>
+    					<tr>
+        					<td colspan="9">
+                                <strong>
+                                	<a href="javascript:EnviarEncuesta();" onMouseOver="window.status='Enviar la encuesta a MedicalVM';return true;" onMouseOut="window.status='';return true;"><xsl:value-of select="document($doc)/translation/texts/item[@name='enviar_datos_mvm']/node()"/>
+                                   </a>
+                                </strong>
+							</td>
+    					</tr>
+					</table>
+				</xsl:when>
+				<xsl:otherwise>
+					  <!--<table class="grandeInicio">-->
+					  <table class="buscador">
+                    	<thead>
+						<tr class="tituloTablaPeq">
+    						<th colspan="9">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='novedades_mvm']/node()"/>
+							</th>
+						</tr>
+						<tr class="subTituloTabla">
+    						<td class="cinco">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='referencia']/node()"/>
+							</td>
+    						<td class="veintecinco textLeft">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='producto']/node()"/>
+							</td>
+    						<td class="quince">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/>
+							</td>
+    						<td class="dies">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='unidad_basica']/node()"/>
+							</td>
+    						<td class="ocho textRight">
+								<xsl:choose>
+								<xsl:when test="/PaginaEnBlanco/INICIO/LISTA_CAMBIOS/OCULTAR_PRECIO_REFERENCIA">
+                                	<xsl:value-of select="document($doc)/translation/texts/item[@name='precio_final_iva']/node()"/>
+    							</xsl:when>
+								<xsl:otherwise>
+                                	<xsl:value-of select="document($doc)/translation/texts/item[@name='precio_prov_sin_iva']/node()"/>
+								</xsl:otherwise>
+								</xsl:choose>
+							</td>
+    						<td class="cinco">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='incluir_plantillas']/node()"/>
+							</td>
+    						<td class="cinco">
+                            	<xsl:copy-of select="document($doc)/translation/texts/item[@name='solicitar_muestras_2line']/node()"/>
+							</td>
+    						<td class="cinco">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='no_interesa']/node()"/>
+							</td>
+    						<td class="veinte textLeft">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='comentarios_prov_actual']/node()"/>
+							</td>
+						</tr>
+                        </thead>
+                        <tbody>
+						<xsl:for-each select="/PaginaEnBlanco/INICIO/ENCUESTAS/ENCUESTA">
+    					<tr>
+        					<td>
+								<xsl:value-of select="REFERENCIA"/>
+							</td>
+        					<td class="textLeft">
+								<xsl:value-of select="PRODUCTO"/>
+								<input type="hidden" name="PRODUCTO_{ID}" value="{PRODUCTO}"/>
+							</td>
+        					<td>
+								<xsl:value-of select="PROVEEDOR"/>
+							</td>
+        					<td>
+								<xsl:value-of select="UNIDADBASICA"/>
+							</td>
+        					<td class="textRight">
+								<xsl:value-of select="PRECIO"/>
+							</td>
+        					<td>
+								<input type="checkbox" name="CHK_PLANTILLA_{ID}"/>
+							</td>
+        					<td>
+								<input type="checkbox" name="CHK_MUESTRA_{ID}"/>
+							</td>
+        					<td>
+								<input type="checkbox" name="CHK_NOINTERESA_{ID}"/>
+							</td>
+        					<td>
+								<input type="text" name="COMENTARIOS_{ID}" maxlength="100" size="40" value="" />
+							</td>
+    					</tr>
+                        </xsl:for-each>
+                        </tbody>
+    					<tr>
+        					<td  colspan="9">
+                            	<strong>
+                                	<a href="javascript:EnviarEncuesta();" onMouseOver="window.status='Enviar la encuesta a MedicalVM';return true;" onMouseOut="window.status='';return true;"><xsl:value-of select="document($doc)/translation/texts/item[@name='enviar_datos_mvm']/node()"/></a>
+                                </strong>
+							</td>
+    					</tr>
+					</table>
+				</xsl:otherwise>
+				</xsl:choose>
+				<br/><br/>
+			</xsl:if>
+
+			</form>
+    </div>
+		</body>
+		</html>
+</xsl:template>
+
+
+</xsl:stylesheet>

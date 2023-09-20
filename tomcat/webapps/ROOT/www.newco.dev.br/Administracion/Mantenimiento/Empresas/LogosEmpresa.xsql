@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Devuelve una lista con los logos de la empresa seleccionada
+	Ultima revision: ET 27feb23 12:30
+--> 
+<!---->
+<?xml-stylesheet type="text/xsl" href="LogosEmpresaJSON.xsl"?>
+
+<OfertasProveedor xmlns:xsql="urn:oracle-xsql" connection="newco" >
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  
+     <xsql:include-owa>
+    	<![CDATA[
+		DOCUMENTOS_PCK.ListaOfertasDelProveedor_XML 
+			(
+				'{@IDPROVEEDOR}',				--p_IDProveedor
+				NULL,							--p_IDCliente
+				NULL,							--p_IDIdioma
+				'OFERTAS',						--p_Marca
+				'',								--p_NombreCampo
+				NULL,							--p_Actual
+				'LOGO',							--p_TipoDocumento
+				'S'								--p_Cabecera
+			);
+        ]]>   					
+    </xsql:include-owa>
+	
+</OfertasProveedor>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para el buscador de correos de usuarios
+	11may10	ET
+
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListadoCentrosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListadoCentrosHTML.xsl"?>
+
+
+<Correos xmlns:xsql="urn:oracle-xsql" connection="newco">
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+        <xsql:include-owa>
+          <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CorreosUsuarios');
+		  IF US_ID>=0 THEN
+               CORREOSUSUARIOS_PCK.ListaUsuarios_XML(
+			   US_ID,
+			   '{@IDPAIS}',
+			   '{@US_NOMBRE}',
+			   '{@FIDTIPO}',
+			   '{@FDERECHOS}',
+			   '{@FDERECHOSEIS}',
+			   '{@FCDC}',
+			   '{@FNAVEGARPROVEEDORES}',
+			   '{@FPEDIDOSCONTROLADOS}',
+			   '{@FAVISOSCATALOGOS}',
+			   '{@FCONTROLACCESOS}',
+			   '{@FVEROFERTAS}',
+			   '{@FBLOQUEAROCULTOS}',
+			   '{@LISTAEMPRESAS}',
+			   '{@LISTACENTROS}',
+				'{@FLINEASPORPAGINA}',
+				'{@PAGINA}',
+			   'S'
+			   );
+          END IF;				   
+        END;
+        ]]>
+        </xsql:include-owa>
+
+</Correos>
+

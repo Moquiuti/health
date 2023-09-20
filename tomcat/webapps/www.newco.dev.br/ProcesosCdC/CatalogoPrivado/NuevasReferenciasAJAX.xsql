@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Inserta nuevas referencias en historicos por centro
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevasReferenciasJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevasReferenciasJSON.xsl"?>
+
+<NuevasRefs xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2 (1000);
+		v_SQL		VARCHAR2 (1000);
+		v_res2		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevasReferencias');
+		IF US_ID>=0 THEN
+			v_res:=HISTORICOSPORCENTRO_PCK.IncluirProductosPorReferencia(
+				US_ID,
+				'{@LISTA_REFERENCIAS}'
+			);
+
+			v_SQL := 'SELECT INSTR('''||v_res||''',''productos repetidos'',1) from dual';
+			EXECUTE IMMEDIATE v_SQL INTO v_res2;
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res2 > 0 THEN
+				HTP.P('<ERROR>'||v_res||'</ERROR>');
+			ELSE
+				HTP.P('<OK>'||v_res||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevasRefs>

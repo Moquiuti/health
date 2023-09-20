@@ -1,0 +1,11 @@
+22mar20	ET Nueva página de indicadores sobre servicio de proveedores
+24mar20 ET Primera versión en producción: IndicadoresProveedoresEIS_240320a.js
+25mar20 ET Múltiples mejoras: desplegable meses, proceso de licitación, botón "otra página". IndicadoresProveedoresEIS_250320.js
+27mar20	ET Los datos de pedidos y licitaciones aplican únicamente al proveedor seleccionado. IndicadoresProveedoresEIS_270320.js
+29mar20 ET Ocultar algunos botones si la petición se hace desde la ficha de empresa
+07abr20	ET Usuarios MULTIEMPRESA
+14abr20 ET Enlazar entre Condiciones, Indicadores y Clasificacion manteniendo el cliente seleccionado. IndicadoresProveedoresEIS_140420.js
+28abr20 ET Solucionado problema al cambiar a la clasificación de proveedores (document.forms.frmFiltro.elements.IDCLIENTE is undefined).
+19abr21 ET Seleccionar fecha manualmente. IndicadoresProveedoresEIS_190421.js
+27abr21 ET Incluir opcion "ultimos 3 meses", "ultimos 6 meses"
+

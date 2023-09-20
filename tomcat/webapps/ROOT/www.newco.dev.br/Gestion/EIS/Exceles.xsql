@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="ExcelesHTML.xsl"?>
+ 
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG"/>
+<xsql:include-param name="ORIGEN"/>
+<xsql:include-param name="SQL"/>
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+                  
+                
+	BEGIN
+		US_ID := SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','{@ORIGEN}');
+
+		IF US_ID>=0 THEN
+			--LISTADOSEXCEL_PCK.DescargaExcel(
+			LISTADOSEXCEL_PCK.DescargaCSV(
+				US_ID,
+				'{@ORIGEN}',
+                '{@SQL}',
+				'N'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</DescargaExcel>

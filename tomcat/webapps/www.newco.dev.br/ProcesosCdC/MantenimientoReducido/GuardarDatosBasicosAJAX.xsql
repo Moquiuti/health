@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="GuardarDatosBasicosJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="GuardarDatosBasicosJSON.xsl"?>
+
+<DatosBasicos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="IDEMPRESA"/>
+<xsql:include-param name="IDPRODESTANDAR"/>
+<xsql:include-param name="UDBASICA"/>
+<xsql:include-param name="PRECIOMVM"/>
+
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','GuardarDatosInfoHistorico');
+ 		IF US_ID>0 THEN
+			v_Res := HISTORICOSPORCENTRO_PCK.GuardarDatosBasicos(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDPRODESTANDAR}',
+				'{@UDBASICA}',
+				'{@PRECIOMVM}'
+			);
+
+			IF v_Res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		ELSE
+			HTP.P('<ERROR  msg="Sin derechos" />');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</DatosBasicos>

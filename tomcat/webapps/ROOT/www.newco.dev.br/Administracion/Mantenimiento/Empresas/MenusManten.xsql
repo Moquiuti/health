@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MenusMantenHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MenusMantenHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--16oct12	<xsql:include-param name="EMP_ID"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param name="ID_USUARIO"/>-->
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+    <xsql:include-owa>
+      <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MenusManten');
+			IF US_ID>=0 THEN
+				USUARIOS_PCK.MantenimientoMenusPorUsuario(US_ID, '{@ID_USUARIO}', '{@EMP_ID}', NULL, NULL);
+        	END IF;				   
+        END;
+        ]]>
+    </xsql:include-owa>
+
+ 
+	<boton label="Aceptar" caption="IMG-0020">
+		<name_function>ValidaySubmit</name_function>
+		<param>document.forms[0]</param>      
+	</boton>
+
+	<boton label="Cancelar" caption="IMG-0050">
+		<name_function>window.close</name_function>
+	</boton>
+</Mantenimiento>
+

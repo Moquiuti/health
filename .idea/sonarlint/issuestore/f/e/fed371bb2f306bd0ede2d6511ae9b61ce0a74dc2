@@ -1,0 +1,29 @@
+
+n
+java:S2293z"YReplace the type specification in this constructor call with the diamond operator ("<>").(õ·×F
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Àèžö
+h
+java:S3776W"RRefactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.(ß¹¶¼
+E	java:S106e"+Replace this use of System.out by a logger.(ã¬Íòøÿÿÿÿ
+@	java:S106f"+Replace this use of System.out by a logger.(Ñ¡¶
+E	java:S106q"+Replace this use of System.out by a logger.(ô„Ðÿÿÿÿÿ
+@	java:S106r"+Replace this use of System.out by a logger.(Œ–ž»
+Z
+java:S1155„">Use isEmpty() to check whether the collection is empty or not.(ßû•Õÿÿÿÿÿ
+F	java:S106‹"+Replace this use of System.out by a logger.(û–§¥úÿÿÿÿ
+i
+java:S3776®"RRefactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.(¾ä¾ä
+2
+java:S3626î"Remove this redundant jump.(ûÁÝ…
+2
+java:S3626õ"Remove this redundant jump.(ûÁÝ…
+F	java:S106²"+Replace this use of System.out by a logger.(õè¶òÿÿÿÿÿ
+A	java:S106·"+Replace this use of System.out by a logger.(ÙÉà²
+F	java:S106À"+Replace this use of System.out by a logger.(ëÉÒÖüÿÿÿÿ
+A	java:S106Ç"+Replace this use of System.out by a logger.(ÄÊßß
+A	java:S106Ó"+Replace this use of System.out by a logger.(ˆ«´¢
+F	java:S106Ø"+Replace this use of System.out by a logger.(ƒÖÕ¯ÿÿÿÿÿ
+@	java:S106ç"+Replace this use of System.out by a logger.(ÏÎé
+A	java:S106ò"+Replace this use of System.out by a logger.(¿•¯¸
+Ü
+java:S6541®"ÄA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 66 to 64, Complexity from 16 to 14, Nesting Level from 4 to 2, Number of Variables from 8 to 6.(¾ä¾ä

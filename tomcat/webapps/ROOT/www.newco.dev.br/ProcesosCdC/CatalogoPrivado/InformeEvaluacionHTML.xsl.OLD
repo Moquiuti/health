@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" />
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>  
+  <xsl:template match="/">
+
+<html>
+<head>
+<title>Informe de Evaluación</title>
+  <xsl:text disable-output-escaping="yes"><![CDATA[
+    <link rel="stylesheet" href="http://www.newco.dev.br/General/Estilos.css" type="text/css">
+    <link rel="stylesheet" href="http://www.newco.dev.br/General/EstilosImprimir.css" type="text/css" media="print">
+    <script language="javascript" src="http://www.newco.dev.br/General/general.js"></script>
+    <script language="javascript">
+      <!--
+      
+      var msgCerrarInforme='¿Finalizar el informe de evaluación?';
+      var msgFechaRecepcion='Debe introducir una fecha válida con el formato dd/mm/aaaa en el campo \" Muestras Recibidas \"' ;
+      var msgFechaPrevision='Debe introducir una fecha válida con el formato dd/mm/aaaa en el campo \" Prevision cierre \"';
+      var msgEvaluacionFuncional='Debe introducir comentarios en el campo \" Evaluación Funcional \"';
+      var msgEvaluacionEnvoltorio='Debe introducir comentarios en el campo \" Evaluación Envoltorio \"';
+      var msgApto='Debe marcar el informe como Apto / No apto';     
+
+      
+      
+      function CerrarVentana(){
+           window.close();
+           if(top.opener){
+             if(top.opener.document.forms[0]){
+               top.opener.document.forms[0].submit();
+             }
+             else{
+               Refresh(top.opener.document);
+             }
+           }	
+      }
+      
+
+      
+
+      function ActualizarDatos(form, accion){   
+        
+        if(ValidarFormulario(form, accion)){
+          form.elements['ACCION'].value=accion;
+          SubmitForm(form);
+        }
+      }
+      
+      function ValidarFormulario(form,accion){
+        var errores=0;
+ 
+        /* quitamos los espacios sobrantes  */
+        
+        for(var n=0;n<form.length;n++){
+          if(form.elements[n].type=='text'){
+            form.elements[n].value=quitarEspacios(form.elements[n].value);
+          }
+        }
+        
+        if(form.elements['CHK_CONCLUSION_OK'].checked==true){
+              form.elements['CHK_CONCLUSION'].value='S';
+            }
+            else{
+              if(form.elements['CHK_CONCLUSION_NOOK'].checked==true){ 
+                form.elements['CHK_CONCLUSION'].value='N';
+              }
+              else{
+                form.elements['CHK_CONCLUSION'].value='P';
+              }
+            }
+        
+        /* si la accion es cerrar el formulario validamos todos las fechas*/
+        
+         if(accion=='CERRARINFORME'){
+          if((!errores) && (test2(form.elements['FECHANO_REC_INF']))){
+            errores++;
+             alert(msgFechaRecepcion);
+            form.elements['FECHANO_REC_INF'].focus();
+           
+          }   
+          
+          if((!errores) && (test2(form.elements['FECHANO_PRE_INF']))){
+            errores++;
+            alert(msgFechaPrevision);
+            form.elements['FECHANO_PRE_INF'].focus();
+            
+          } 
+          
+          if((!errores) && (esNulo(form.elements['EVALUACIONFUNCIONAL'].value))){
+            errores++;
+            alert(msgEvaluacionFuncional);
+            form.elements['EVALUACIONFUNCIONAL'].focus();
+          }
+          
+          if((!errores) && (esNulo(form.elements['EVALUACIONENVOLTORIO'].value))){
+            errores++;
+            alert(msgEvaluacionEnvoltorio);
+            form.elements['EVALUACIONENVOLTORIO'].focus();
+          }    
+          
+          if(!errores){
+          
+            if(form.elements['CHK_CONCLUSION'].value=='P'){
+              errores++;
+              alert(msgApto);
+              form.elements['CHK_CONCLUSION_OK'].focus();
+            }
+          }
+
+        }
+        
+
+        if(!errores){          
+          return true;
+        }
+        else{
+          return false;
+        } 
+      }
+      
+      function validarChecks(form, objName){
+        var opcion=obtenerNombre(objName,'_',2,'DESPUES');
+        var nombreChk=obtenerNombre(objName,'_',2,'ANTES');
+        
+        var opcionContraria;
+        
+        if(opcion=='OK'){
+          opcionContraria='NOOK';
+        }
+        else{
+          opcionContraria='OK';
+        };
+        
+        if(form.elements[objName].checked==true)
+          form.elements[nombreChk+opcionContraria].checked=false;
+        
+      }
+      
+      function obtenerNombre(nombre, separador, posicion, lado){
+        
+        var apariciones=0;
+        var subCadena='';
+        
+        for(var n=0;n<nombre.length;n++){
+          if(nombre.substring(n,n+1)==separador){
+            apariciones++;
+          }
+          if(apariciones==posicion){
+            if(lado=='DESPUES'){
+              return subCadena=nombre.substring(n+1,nombre.length);
+            }
+            else{
+              return subCadena=nombre.substring(0,n+1);
+            }
+          }
+        }
+        return null;
+      }
+      
+      function CerrarInforme(form,accion){
+        if(confirm(msgCerrarInforme)){
+          ActualizarDatos(form,accion);
+        }
+      }
+      
+      
+      /*
+         archivamos los datos
+         los unico que se actualiza es el estado.
+         no hace falta validacion de formulario
+      */
+      
+      function ArchivarInforme(form,accion){
+        form.elements['ACCION'].value=accion;
+        SubmitForm(form);
+      }
+      
+      
+  
+     //-->
+    </script>
+    ]]></xsl:text>
+  </head>
+
+<body bgcolor="#FFFFFF">
+  <xsl:choose>
+  <xsl:when test="//SESION_CADUCADA">
+    <xsl:apply-templates select="//SESION_CADUCADA"/> 
+  </xsl:when>
+  <xsl:when test="//ROWSET/ROW/Sorry">
+    <xsl:apply-templates select="//ROWSET/ROW/Sorry"/> 
+  </xsl:when>
+  <xsl:when test="//Status/CERRADO">
+    <xsl:apply-templates select="//Status/CERRADO"/> 
+  </xsl:when>
+  <xsl:when test="//Status/ARCHIVADO">
+    <xsl:apply-templates select="//Status/ARCHIVADO"/> 
+  </xsl:when>
+  <xsl:otherwise>
+<p align="center" class="tituloPag">Informe de Evaluación</p>
+<form method="post" action="InformeEvaluacion.xsql">
+  <input type="hidden" name="ACCION"/>
+  <input type="hidden" name="CHK_CONCLUSION"/>
+  <input type="hidden" name="IDINFORME" value="{Mantenimiento/INFORME_EVALUACION/IDINFORME}"/>
+  <table width="100%" align="center">
+    <tr>
+      <td>
+        <table width="100%" border="0" cellspacing="1" cellpadding="1" class="gris">
+          <tr class="claro"> 
+            <td height="18"  class="claro">
+              <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+                <tr>
+                  <td> 
+                    <table width="95%" border="0" cellspacing="1" cellpadding="3" class="gris" align="center">
+                      <tr  class="claro">
+                        <td width="25%" align="right" class="medio">
+                          <b>
+                          Número de Informe:
+                          </b>
+                        </td>
+                        <td width="40%" class="claro">
+                          <font color="NAVY" size="2">
+                            <b>
+          	                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/NUMEROINFORME"/>
+          	              </b>
+          	            </font>
+                        </td>
+                        <td width="20%" align="20%" class="medio">
+                          <b>
+                          Fecha Inicio:
+                          </b>
+                        </td>
+                        <td width="*"  class="claro">
+                          <font color="NAVY" size="2">
+                            <b>
+          	                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/FECHAINICIO"/>
+          	              </b>
+          	            </font>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td> 
+                    <table width="95%" border="0" cellspacing="0" cellpadding="0" class="gris" align="center">
+                      <tr  class="grisClaro">
+                        <td width="26%"  class="claro">
+                          <table width="100%" border="0" cellspacing="1" cellpadding="1" class="gris">
+                            <tr class="grisClaro"> 
+                              <td class="grisClaro">
+                                <b>Responsable:</b>
+                                <br/>
+                                <br/>
+                              </td>
+                              <td class="grisClaro">
+                                <b>Centro:</b>
+                                <br/>
+                                <br/>
+                              </td>
+                            </tr>
+                            <tr class="claro"> 
+                              <td valign="top">
+                                <br/>
+                                <b><xsl:value-of select="Mantenimiento/INFORME_EVALUACION/RESPONSABLEINFORME"/></b><br/></td>
+                                <br/>
+                                <br/>
+                              <td valign="top">
+                                <br/>
+                                <b><xsl:value-of select="Mantenimiento/INFORME_EVALUACION/CENTRORESPONSABLEINFORME"/></b>
+                                <br/>
+                                <br/>
+                              </td>
+                            </tr>
+                            <tr class="claro"> 
+                              <td colspan="2">
+                                <table width="100%" class="medio" cellspacing="1" cellpadding="0">
+                                  <tr>
+                                    <td width="20%" align="right" class="oscuro">
+                                      Evaluador:
+                                    </td>
+                                    <td class="claro">
+                                      <xsl:choose>
+                                        <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                                          <xsl:choose>
+                                            <xsl:when test="Mantenimiento/INFORME_EVALUACION/EVALUADOR!=''">
+                                              &nbsp;<xsl:value-of select="Mantenimiento/INFORME_EVALUACION/EVALUADOR"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                              &nbsp;<xsl:value-of select="Mantenimiento/INFORME_EVALUACION/RESPONSABLEINFORME"/>
+                                            </xsl:otherwise>
+                                          </xsl:choose>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                          &nbsp;<input name="EVALUADORINFORME" type="text" maxlength="100" size="100" value="{Mantenimiento/INFORME_EVALUACION/EVALUADOR}"/>
+                                        </xsl:otherwise>
+                                      </xsl:choose>  
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="20%" align="right" class="oscuro">
+                                      Cargo:
+                                    </td>
+                                    <td class="claro">
+                                      <xsl:choose>
+                                        <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                                          <xsl:choose>
+                                            <xsl:when test="Mantenimiento/INFORME_EVALUACION/CARGOEVALUADOR!=''">
+                                              &nbsp;<xsl:value-of select="Mantenimiento/INFORME_EVALUACION/CARGOEVALUADOR"/>&nbsp;
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                              &nbsp;<xsl:value-of select="Mantenimiento/INFORME_EVALUACION/CARGORESPONSABLEINFORME"/>
+                                            </xsl:otherwise>
+                                          </xsl:choose> 
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                          &nbsp;<input name="CARGOEVALUADORINFORME" type="text" maxlength="100" size="50" value="{Mantenimiento/INFORME_EVALUACION/CARGOEVALUADOR}"/>
+                                        </xsl:otherwise>
+                                      </xsl:choose> 
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="gris">
+                      <tr  class="grisClaro">
+                        <td><b>Producto:</b><br/><br/></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table width="100%" border="0" cellspacing="1" cellpadding="1" class="medio">
+                            <tr class="oscuro" align="center">
+                              <td class="oscuro">Ref.ASISA</td>
+                              <td class="oscuro">Descripción producto</td>
+                              <td class="oscuro">Unidad Embalaje</td>
+                            </tr>
+                            <tr class="claro" align="center">
+                              <td class="claro">
+                                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/REFERENCIAPRIVADA"/>
+                              </td>
+                              <td class="claro">
+                                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/NOMBREPRIVADO"/>
+                              </td>
+                              <td class="claro">
+                                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/UNIDADBASICA"/>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="3" class="gris" align="center">
+                      <tr class="claro">
+                        <td align="right" class="claro" width="25%">
+                          Número de muestras a evaluar:     
+                        </td>
+                        <td class="claro">
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                              <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/NUMEROMUESTRAS"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <input type="text" name="NUMEROMUESTRAS" value="{Mantenimiento/INFORME_EVALUACION/NUMEROMUESTRAS}"/>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="gris">
+                      <tr class="grisClaro"> 
+                        <td>
+                        <b>Fechas:</b>
+                        <br/><br/> 
+                        </td>
+                      </tr>
+                      <tr class="grisClaro"> 
+                        <td> 
+                          <table width="100%" border="0" cellspacing="1" cellpadding="3" class="medio">
+                            <tr class="claro" align="center"> 
+                              <td width="20%" class="oscuro" align="right">
+                                Informe Enviado:
+                              </td>
+                              <td width="20%" class="claro" align="left">
+                                &nbsp;<xsl:value-of select="Mantenimiento/INFORME_EVALUACION/FECHAENVIO"/>
+                              </td>
+                              <td  width="20%" class="oscuro" align="right">
+                                Informe entregado:
+                              </td>
+                              <td class="claro" align="left" width="20%">
+                                <xsl:choose>
+                                  <xsl:when test="Mantenimiento/INFORME_EVALUACION/FECHACIERRE=''">
+                                    Pendiente
+                                  </xsl:when>
+                                  <xsl:otherwise>
+                                    &nbsp;<xsl:value-of select="Mantenimiento/INFORME_EVALUACION/FECHACIERRE"/>
+                                  </xsl:otherwise>
+                                </xsl:choose>
+                              </td>
+                            </tr>
+                            <tr class="claro" align="center"> 
+                              <td width="20%" class="oscuro" align="right">
+                                Muestras recibidas:<span class="camposObligatorios">**</span>
+                              </td>
+                              <td class="claro" align="left">
+                                <xsl:choose>
+                                  <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                                    <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/FECHARECEPCION"/>
+                                  </xsl:when>
+                                  <xsl:otherwise>
+                                    <input type="text" size="12" maxlength="10" name="FECHANO_REC_INF" value="{Mantenimiento/INFORME_EVALUACION/FECHARECEPCION}"/>
+                                  </xsl:otherwise>
+                                </xsl:choose>
+                              </td>
+                              <td class="oscuro" align="right">
+                                Previsión cierre:<span class="camposObligatorios">**</span>
+                              </td>
+                              <td class="claro" align="left">
+                                <xsl:choose>
+                                  <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                                    <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/FECHAPREVISION"/>
+                                  </xsl:when>
+                                  <xsl:otherwise>
+                                    <input type="text" size="12" maxlength="10" name="FECHANO_PRE_INF" value="{Mantenimiento/INFORME_EVALUACION/FECHAPREVISION}"/>
+                                  </xsl:otherwise>
+                                </xsl:choose>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="gris">
+                      <tr  class="grisClaro">
+                        <td><b>Evaluación funcional:<span class="camposObligatorios">**</span></b><br/><br/></td>
+                      </tr>
+                      <tr class="claro" align="center">
+                        <td>
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                              <table width="75%">
+                                <tr>
+                                  <td>
+                                    <xsl:copy-of select="Mantenimiento/INFORME_EVALUACION/EVALUACIONFUNCIONAL_HTML"/>&nbsp;
+                                  </td>
+                                </tr>
+                              </table>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <textarea name="EVALUACIONFUNCIONAL" cols="70" rows="5">
+                                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/EVALUACIONFUNCIONAL"/>
+                              </textarea>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="gris">
+                      <tr  class="grisClaro">
+                        <td><b>Evaluación del envoltorio:<span class="camposObligatorios">**</span></b><br/><br/></td>
+                      </tr>
+                      <tr class="claro" align="center">
+                        <td>
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                              <table width="75%">
+                                <tr>
+                                  <td>
+                                    <xsl:copy-of select="Mantenimiento/INFORME_EVALUACION/EVALUACIONENVOLTORIO_HTML"/>&nbsp;
+                                  </td>
+                                </tr>
+                              </table>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <textarea name="EVALUACIONENVOLTORIO" cols="70" rows="5">
+                                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/EVALUACIONENVOLTORIO"/>
+                              </textarea>
+                             </xsl:otherwise>
+                          </xsl:choose>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="gris">
+                      <tr  class="grisClaro">
+                        <td><b>Comentarios:</b><br/><br/></td>
+                      </tr>
+                      <tr class="claro" align="center">
+                        <td>
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">
+                              <table width="75%">
+                                <tr>
+                                  <td>
+                                    <xsl:copy-of select="Mantenimiento/INFORME_EVALUACION/COMENTARIOS_HTML"/>&nbsp;
+                                  </td>
+                                </tr>
+                              </table>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <textarea name="COMENTARIOS" cols="70" rows="5">
+                                <xsl:value-of select="Mantenimiento/INFORME_EVALUACION/COMENTARIOS"/>
+                              </textarea>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="gris">
+                      <tr class="claro">
+                        <td height="20" class="claro"><b>Conclusión:<span class="camposObligatorios">**</span></b></td>
+                      </tr>
+                      <tr class="claro">
+                        <td class="claro" align="center">
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/INFORME_EVALUACION/STATUS>=40 or Mantenimiento/READ_ONLY='S'">    
+                              <xsl:choose>
+                                <xsl:when test="Mantenimiento/INFORME_EVALUACION/APTO='S'">
+                                  <font color="NAVY" size="2">
+                                    <b>
+                                      APTO
+                                    </b>
+                                  </font>
+                                </xsl:when>
+                                <xsl:when test="Mantenimiento/INFORME_EVALUACION/APTO='N'">
+                                  <font color="RED" size="2">
+                                    <b>
+                                      NO APTO
+                                    </b>
+                                  </font>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                  <font size="2">
+                                    <b>
+                                      PENDIENTE
+                                    </b>
+                                  </font>
+                                </xsl:otherwise>
+                              </xsl:choose>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr align="center">
+                                  <td valign="middle">Apto
+                                    <input type="checkbox" name="CHK_CONCLUSION_OK"  onClick="validarChecks(document.forms[0], this.name);">
+                                      <xsl:if test="Mantenimiento/INFORME_EVALUACION/APTO='S'">
+                                        <xsl:attribute name="checked">checked</xsl:attribute>
+                                      </xsl:if>
+                                    </input>
+                                  </td>
+                                  <td valign="middle">No Apto
+                                    <input type="checkbox" name="CHK_CONCLUSION_NOOK"  onClick="validarChecks(document.forms[0], this.name);">
+                                      <xsl:if test="Mantenimiento/INFORME_EVALUACION/APTO='N'">
+                                        <xsl:attribute name="checked">checked</xsl:attribute>
+                                      </xsl:if>
+                                    </input>
+                                  </td>
+                                </tr>
+                              </table>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <!--
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="gris">
+                      <tr class="claro"> 
+                        <td class="claro" width="15%"><b>Fecha de Cierre:</b></td>
+                        <td class="claro">
+                          <input type="text" size="12" maxlength="10" name="FECHANOCIERRE"/>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                -->
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Los campos marcados con (<span class="camposObligatorios">**</span>) son obligatorios al cerrar el informe.
+      </td>
+    </tr>
+  </table>
+  <br/>
+  <br/>
+      <table width="100%">
+        <tr align="center">
+          <td>
+            <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Cancelar']"/>
+            </xsl:call-template>
+          </td>
+          <xsl:if test="Mantenimiento/INFORME_EVALUACION/IDRESPONSABLEACTA=Mantenimiento/US_ID and Mantenimiento/INFORME_EVALUACION/STATUS=40">
+            <td>
+            <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Archivar']"/>
+            </xsl:call-template>
+          </td>
+          </xsl:if>
+          <td>
+            <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Imprimir']"/>
+            </xsl:call-template>
+          </td>
+        <xsl:if test="Mantenimiento/INFORME_EVALUACION/STATUS&lt;40">
+          <td>
+            <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Guardar']"/>
+            </xsl:call-template>
+          </td>
+          <td>
+            <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='CerrarInforme']"/>
+            </xsl:call-template>
+          </td>
+        </xsl:if>
+        </tr>
+      </table>
+  
+</form>
+<p>&nbsp; </p>
+</xsl:otherwise>
+</xsl:choose>
+  </body>
+  </html>
+</xsl:template>
+
+
+<xsl:template match="Status/CERRADO">
+
+
+  <p class="tituloPag">
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0660' and @lang=$lang]" disable-output-escaping="yes"/>
+  </p>
+  <hr/>
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0670' and @lang=$lang]" disable-output-escaping="yes"/>
+  <br/> 
+  <br/> 
+  <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="//Mantenimiento/botones/button[@label='Cerrar']"/>
+            </xsl:call-template>
+   
+</xsl:template>  
+
+<xsl:template match="Status/ARCHIVADO">
+
+
+  <p class="tituloPag">
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0662' and @lang=$lang]" disable-output-escaping="yes"/>
+  </p>
+  <hr/>
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0672' and @lang=$lang]" disable-output-escaping="yes"/>
+  <br/> 
+  <br/> 
+  <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="//Mantenimiento/botones/button[@label='Cerrar']"/>
+            </xsl:call-template>
+   
+</xsl:template>  
+
+
+
+</xsl:stylesheet>

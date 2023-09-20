@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NoConformidadProductoSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NoConformidadProductoSaveHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="VENTANA"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		  DECLARE
+		    US_ID		NUMBER;
+      BEGIN
+		    US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NoConformidadProducto');	
+		    IF US_ID>=0 THEN
+          NOCONFORMIDADPRODUCTO_PCK.NOCONFORMIDADPRODUCTO(
+            US_ID,
+            '{@IDINFORME}',
+            '{@NUMERO}',
+            '{@FECHAINICIO}',
+            '{@IDRESPONSABLEANALISIS}',
+            '{@IDRESPONSABLECENTRO}',
+            '{@RECLAMANTE}',
+            '{@CARGORECLAMANTE}',
+            '{@PRODUCTOSESTANDAR}',
+            '{@PROVEEDORES}',
+            '{@LOTE}',
+            '{@MUESTRAS}',
+            '{@COMENTARIOS_FUNCIONALES}',
+            '{@ANALISIS_FUNCIONALES}',
+            '{@ACCIONES_FUNCIONALES}',
+            '{@COMENTARIOS_SERVICIOS}',
+            '{@ANALISIS_SERVICIOS}',
+            '{@ACCIONES_SERVICIOS}',
+            '{@IDCONCLUSION}',
+            '{@COMENTARIOS_CONCLUSIONES}',
+            '{@STATUS}',
+            '{@ACCION}'
+          );
+        END IF;
+      END;
+    ]]>
+  </xsql:include-owa>
+
+ 
+  <botones>    
+    <button label="Cerrar" caption="IMG-0030">
+      <name_function>CerrarVentana</name_function>
+    </button> 
+  </botones>
+
+</Mantenimiento>

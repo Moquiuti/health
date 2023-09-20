@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Analisis de pedidos, línea a línea
+	Ultima revision 7jul23 12:05 AnalisisPedidos2022_170322.js
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="AnalisisPedidosContratoHTML2022.xsl"?>
+
+<AnalisisPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDPRODUCTO" />
+  <xsql:include-param name="IDEMPRESA" />
+
+	<!--	Analisis de lineas de pedidos	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Analisis Pedidos');
+					IF US_ID>=0 THEN
+						AnalisisPedidos_Pck.Lista_XML
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDPRODESTANDAR}',
+							'{@IDPRODUCTO}',
+							'{@CODIGOPEDIDO}',
+							'{@PRODUCTO}',
+							'{@FINALIZADOS}',
+							'{@PENDIENTES}',
+							'{@URGENTES}',
+							'{@INVERTIRABONOS}',
+                            '{@FECHA_INICIO}', 
+                            '{@FECHA_FINAL}',
+                            '{@TOTAL_LINEA_MIN}',
+                            '{@TOTAL_LINEA_MAX}',
+                            '{@PORC_AHORRO_MIN}',
+                            '{@PORC_AHORRO_MAX}',
+                            '{@PAGINA}',
+                            '{@LINEA_POR_PAGINA}',
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+                            'S',                             --CABECERA
+                            '{@UTILFECHAENTREGA}',
+							'{@IDMULTIOFERTA}',
+							'{@IDCENTROCONSUMO}',
+							'{@IDLICITACION}',
+							'CON_CONTRATO'
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</AnalisisPedidos>

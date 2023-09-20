@@ -1,0 +1,1 @@
+22oct21 ET Limitamos las opciones de tipo si el usuario es de SPDATA o UNIMED

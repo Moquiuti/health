@@ -1,0 +1,91 @@
+<!--
+    Pruebas de conexión SOAP - Nombre, Clave, Centro, Sesión
+    20180906
+-->
+
+<html>
+ <head>
+    <title>Prueba SOAP por jQuery</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.newco.dev.br/WebServices/mvm.jquery.soap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnCallWebService").click(function (event) {
+
+                var wsUrl = "http://www.newco.dev.br/WebServices/CloseRFQSession.xsql"; 
+
+                var soapRequest =
+                '<?xml version="1.0" encoding="utf-8"?>'
+                +'<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'
+                +'<soap:Body>'
+                +'<getNombreUser>'
+                +'<user>'+$("#txtNombre").val()+'</user>'
+                +'</getNombreUser>'
+                +'<getPasswordUser>'
+                +'<password>'+$("#txtPassword").val()+'</password>'
+                +'</getPasswordUser>'
+                +'<getSession>'
+                +'<IDRFQSession>'+$("#txtSession").val()+'</IDRFQSession>'
+                +'</getSession>'
+                +'<getLineTotal>'
+                +'<LineTotal>'+$("#txtLineTotal").val()+'</LineTotal>'
+                +'</getLineTotal>'
+                +'<getEstado>'
+                +'<RFQSessionStatus>'+$("#txtEstado").val()+'</RFQSessionStatus>'
+                +'</getEstado>'
+                +'</soap:Body>'
+                +'</soap:Envelope>';
+
+                console.log("soapRequest: " + soapRequest);
+                
+		$.ajax({
+                    type: "POST",
+                    url: wsUrl,
+                    contentType: "text/xml",
+                    dataType: "text/xml",
+                    data: soapRequest,
+                    success: processSuccess,
+                    error: processError
+                });
+
+            });
+        });
+
+        function processSuccess(data, status, req) {
+            if (status == "success")
+			{
+                $("#response").text(data);
+		console.log("data: " + data);	
+                var varRes = data;
+                console.log("varRes: " + varRes);
+                console.log("inicio pedirProductos");
+		var url="http://www.newco.dev.br/WebServices/pedirProductos.html";
+                //window.open("http://www.newco.dev.br/WebServices/pedirProductos.html");
+		console.log("FIN pedirProductos");
+			} 
+        } 
+
+        function processError(data, status, req) {
+            alert('ERROR:'+req + " " + status);
+        } 
+
+    </script>
+</head>
+<body>
+    <h3>
+        Prueba SOAP por jQuery, 7jul18 09:05
+    </h3>
+    Nombre:
+    <input id="txtNombre" type="text" />
+    Clave:
+    <input id="txtPassword" type="text" />
+    Sesion:
+    <input id="txtSession" type="text" />
+    Line Total:
+    <input id="txtLineTotal" type="text" />
+    Estado:
+    <input id="txtEstado" type="text" />
+    <input id="btnCallWebService" value="Call web service" type="button" />
+    <div><p id="response" />RESPUESTA</div>
+</body>
+</html>

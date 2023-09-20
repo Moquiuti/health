@@ -1,0 +1,3336 @@
+/*
+	MedicalVM - Disenno 2022
+	Ultima revision: ET 12jun23 12:35
+	
+	Lanzar script si se cambia el nombre del fichero
+	/home/mvm/scripts/changefilename.sh [Origen] [Destino]
+	
+*/
+@import url('http://fonts.googleapis.com/css?family=Roboto');
+
+:root {
+	--fundo_paginas:  #F7F7F7; 
+	--color_menu: #6C757D;    
+	--color_principal: #3D5F90;   	
+	--color_destacado: #56CCF2;    
+	--logo_login: url(/images/2022/img/logo_login.png); 
+	--logo:  url(/images/2022/img/logo.png); 
+	--background_img: url(/images/2022/img/background_login.png);
+	--background_img_es: url(/images/2022/img/background_login_es.png);
+}
+
+/*
+
+Inicio Gerais/General/Generic
+
+*/
+
+body { 
+	margin: 0;
+	position: relative;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	background-color: var(--fundo_paginas);
+	/*	ET 29mar22 overflow-x: hidden;*/
+}
+
+
+.header {
+	overflow: hidden;
+	background-color: #FFFFFF;
+}
+
+
+/*	3feb22 Modificado por Daniel. Se puede quitar cuando todos los usuarios ya usen logoPers	*/
+.logo {
+	float: left;
+	width: 350px;
+	height: 60px;
+	left: 40px;
+	top: 2px;
+	background: var(--logo);
+	background-repeat: no-repeat;
+	margin-left: 20px;
+	margin-top:  8px;
+}
+
+.logo_es {
+	position: absolute;
+	width: 299.72px;
+	height: 53px;
+	left: 100px;
+	top: 30px;
+	background: var(--logo);
+	background-repeat: no-repeat;
+	margin-left: 20px;
+}
+
+
+/*	5dic22 Nuevo logo personalizable	*/
+.logoPers {
+	float: left;
+	width: 350px;
+	height: 60px;
+	left: 40px;
+	top: 2px;
+	margin-left: 20px;
+	margin-top:  8px;
+}
+
+
+
+
+
+/*	3feb22 Modificado por Daniel	*/
+.header-right {
+	float: right;
+	text-align: right;
+	margin-right: 1%;
+}
+
+/*	3feb22 Modificado por Daniel	*/
+.header-right-t {
+	position: relative;
+	float: right;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/* 3feb22 nuevos iconos cabecera	*/
+.key{
+	float: left;
+	width:  20px;
+	height: 20px;
+	margin-top: 18px;
+	margin-bottom: 1%;
+	margin-right: 10px;
+	margin-left: 10px;
+	display: inline-block;
+	background: url(/images/2022/icones/user.svg) no-repeat;
+}
+
+/* 3feb22 nuevos iconos cabecera	*/
+.key:hover{
+	-webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+/* 3feb22 nuevos iconos cabecera	*/
+.sair{
+	float: right;
+	width:  20px;
+	height: 20px;
+	margin-top: 18px;
+	margin-bottom: 1%;
+	margin-right: 10px;
+	margin-left: 10px;
+	background: url(/images/2022/icones/sair.svg) no-repeat;
+}
+
+/* 3feb22 nuevos iconos cabecera	*/
+.sair:hover{
+	-webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+/* 3feb22 nuevos iconos cabecera	*/
+.usuario{
+	display: inline-block;
+	text-align: center;
+	float: left;
+
+}
+
+/* 3feb22 nuevos iconos cabecera	*/
+.usuario p{
+	font-weight: bold;
+	color:var(--color_principal);
+	margin-top: 22px;
+}
+
+.circulo.uma-linha{line-height:40px;}
+/******************************************/
+
+/*Texto da cor Azul e negrito MVM .texto_negrito*/
+.texto_negrito{
+	color: var(--color_principal);	
+	font-weight: bold;
+}
+
+/*Texto da cor Azul MVM .texto_padrao*/
+.texto_padrao{
+	color: var(--color_principal);	
+}
+
+/*Linha da cor Azul que separa o TOPO do corpo da pÃ¡gina .linha_separacao*/
+.linha_separacao{
+	width: 100%;
+	height: 0px;
+	left: 0px;
+	border: 1px solid var(--color_principal);
+}
+
+.menu {
+	overflow: hidden;
+	margin-left: 20px;
+	color: var(--color_menu);
+}
+
+.menu a {
+	position: relative;
+	float: left;
+	outline: none;
+	/*30may22 cursor: indicadores;*/
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	box-sizing: border-box;
+	text-decoration:none; 
+	color: var(--color_principal);
+	background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 6px;
+    transition: background-size .3s;
+}
+
+.menu a:hover, a:focus {
+    background-size: 100% 6px;
+}
+
+
+/*BOX seletora da empresa/filial .empresa_filial*/
+/*	Actualizado 4feb22 Daniel*/
+.empresa_filial{
+	width: 100%;
+	height: 30px;
+	left: 1269px;
+	top: 296px;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px 10px;
+}
+
+/*	Creado 4feb22 Daniel*/
+input.empresa_filial{
+	background: #3D5F90;
+}
+
+
+/*BOX seletora da empresa/filial .empresa_filial*/
+select{
+	width: 130px;
+	height: 30px;
+	left: 1269px;
+	top: 296px;
+	background: #3D5F90 url(/images/2022/icones/seta.svg) 95.5% 50% no-repeat;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	/*	con esto se perdia el scroll	overflow:hidden;*/
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px 10px;
+	text-overflow: ellipsis;		/*3oct22 Cortamos el texto que sobresale poniendo puntos suspensivos*/
+}
+
+
+
+/*DIV que ficarÃ¡ seleÃ§Ã£o da empresa e filial .coluna_empresa*/
+.coluna_empresa{
+	margin-top:20px;
+}
+
+.botao_salvar{
+	height: 30px;
+	width: 73px;
+	left: 787px;
+	top: 170px;
+	border-radius: 3px;
+	background: var(--color_principal);
+	text-align: center;
+	text-decoration: none;
+	font-weight: 750;
+	font-size: 13px;
+	line-height: 16px;
+	color: #FFFFFF;
+	border: none;
+	float:left;
+	display: inline-block;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.botao_subir{
+	height: 30px;
+	width: 39px;
+	left: 958px;
+	top: 200px;
+	border-radius: 3px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 750;
+	font-size: 13px;
+	line-height: 16px;
+	color: #FFFFFF;
+	border: none;
+	background:#3D5F90 url(/images/2022/icones/up.svg) no-repeat center;
+	float:left;
+	margin-right: 7px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.botao_esquerda{
+	height: 30px;
+	width: 39px;
+	left: 968px;
+	top: 170px;
+	border-radius: 3px;
+	border: none;
+	background:#e6e6e6 url(/images/2022/icones/left.svg) no-repeat center;
+	float:left;
+	margin-right: 7px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.botao_direita{
+	height: 30px;
+	width: 39px;
+	left: 1056px;
+	top: 200px;
+	border-radius: 3px;
+	transform: rotate(-180deg);
+	border: none;
+	background:#3D5F90 url(/images/2022/icones/right.svg) no-repeat center;
+	float:left;
+	margin-right: 7px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.div_pesquisa{
+	height: 30px;
+	width: 87px;
+	left: 1066px;
+	top: 170px;
+	border-radius: 3px;
+	background: #FFFFFF;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	display:inline;
+	float:left;
+	margin-right: 7px;
+}
+
+.div_pesquisa_lg{
+	width: 231px;
+	height: 30px;
+	left: 516px;
+	top: 21px;
+
+	border-radius: 3px;
+	background: #FFFFFF;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	display:inline;
+	float:left;
+	margin-right: 7px;
+	margin-left: 280px;
+}
+
+
+/*BOTÃƒO OK dentro do INPUT de pesquisa*/
+.botao_pesquisa_ok{
+	height: 15px;
+	font-style: normal;
+	font-weight: 900;
+	font-size: 13px;
+	line-height: 15px;
+	text-align: right;
+	color: var(--color_principal);
+	float: right;
+	border: none;
+	background-color: transparent;
+	margin-top:  6px;
+	margin-right: 2px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.botao_abc{
+	height: 30px;
+	width: 50px;
+	left: 1210px;
+	top: 178px;
+	border-radius: 3px;
+	background: var(--color_destacado);
+	text-align: center;
+	text-decoration: none;
+	font-weight: 750;
+	font-size: 13px;
+	line-height: 16px;
+	color: #FFFFFF;
+	border: none;
+	float:left;
+	margin-right: 5px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.alert_danger{
+	color: #FF0000;
+	margin-top: 1%;
+}
+
+/*Inicio estrutura da TABELA/GRID*/
+.tabela {
+	border-collapse: collapse;
+	text-align: center;
+	margin-top: 20px;
+	overflow:scroll;			/*4oct22 Sin esto no hay scroll en algunos estados de la licitacion para la matriz	*/
+	width:98%;					/*21oct22 bajamos de 100% a 98%*/
+}
+
+/* 27ene22 INCLUSAO DE background NA table, revisado 4feb22 por Daniel*/
+table {
+	border-collapse: collapse;
+	width:  100%;
+	background: var(--fundo_paginas);
+}
+
+
+
+.corpo_tabela3l tr:nth-child(6n+1){background-color: #F9F9F9;}
+.corpo_tabela3l tr:nth-child(6n+2){background-color: #F9F9F9;}
+.corpo_tabela3l tr:nth-child(6n+3){background-color: #F9F9F9;}
+.corpo_tabela3l tr:nth-child(6n+4){background-color: #E0E0E0;}
+.corpo_tabela3l tr:nth-child(6n+5){background-color: #E0E0E0;}
+.corpo_tabela3l tr:nth-child(6n+6){background-color: #E0E0E0;}
+.corpo_tabela3l tr:hover {background-color: #ddd;}
+
+
+
+.corpo_tabela tr:nth-child(even){background-color: #F9F9F9;}
+.corpo_tabela tr:nth-child(odd) {background-color: #E0E0E0;}		/*	27abr22 antes: #f2f2f2;*/
+.corpo_tabela tr:hover {background-color: #ddd;}
+
+.corpo_tabela th {
+	text-align: center;
+	background-color: #ffffff;
+	color: black;
+}
+
+/* 27ene22 PADDING 12PX PARA 4PX E INCLUSÃO FONT-SIZE 14PX*/
+.corpo_tabela td 
+{
+	padding: 6px; 				/* 4px->6px ET 31mar22	*/
+	font-size: 14px;
+	height:28px;				/*	Fijamos altura minima ET 5abr22	*/	
+}	
+
+
+/* 27ene22 EFEITO DEGRADE TABELA 4N+1*/
+.corpo_tabela_oculto tr:nth-child(4n+1){
+    background-color: #FFF;
+}
+
+/* 27ene22 CLASSE .corpo_tabela_reclamar LINHA OCULTA TABELA*/
+.corpo_tabela_oculto tr:hover {background-color: #ddd;}
+
+/* 27ene22 CLASSE .corpo_tabela_reclamar LINHA OCULTA TABELA */
+.corpo_tabela_oculto th {
+	text-align: center;
+	background-color: #ffffff;
+	color: black;
+}
+
+/* 27ene22 PADDING 12PX PARA 4PX E INCLUSÃO FONT-SIZE 14PX*/
+.corpo_tabela_oculto td {padding: 6px; font-size: 14px;}		/* 4px->6px ET 31mar22	*/
+
+
+/* 27ene22 margin right e left 1%*/
+.tabela_redonda {
+	border: none;
+	margin-right: 1%;
+	margin-left: 1%;
+}
+
+/* 27ene22 nuevo estilo */
+thead th {
+	font-size: 14px;
+	padding: 6px;												/* 3px->6px ET 31mar22	*/
+}
+
+.tabela_redonda {
+	border: none;
+}
+.tabela_redonda thead th {
+	background-color: #ffffff;
+	border: none;
+	color: #333;
+}
+.tabela_redonda thead th:first-child {
+	border-radius: 20px 0 0 0;
+}
+.tabela_redonda thead th:last-child {
+	border-radius: 0 20px 0 0;
+}
+
+.tabela_redonda tfoot td {
+	border: none;
+	background-color: var(--color_principal);
+}
+
+
+.paddingPeq {		/*	ET 3feb23, para forzar paading en el primer paso del pedido	*/
+	padding: 3px  !important;  
+}
+
+
+.rodape_tabela td {
+/*	ET 3feb22 text-align: center;*/
+	color: #ffffff;
+	padding: 12px 6px 12px 6px;  
+}
+
+/*	ET 17feb22 para mostrar los totales en el pie de tabla*/
+.rodape_tabela input.noinput {
+	color: #ffffff;
+	padding: 12px 12px 6px 6px;
+}
+
+
+
+.tabela_redonda tfoot tr:last-child td:first-child {
+	border-radius: 0 0 0 20px;
+}
+
+.tabela_redonda tfoot tr:last-child td:last-child {
+	border-radius: 0 0 20px 0;
+}
+
+/*Fim da estrutura da TABELA/GRID*/
+
+
+/*INPUT detro da TABELA/GRID .valor_campo_selecionar_tabela*/
+.valor_campo_selecionar_tabela {
+	width: 65%;
+	overflow:hidden;
+	outline: 0;
+	border-radius: 5px;
+	border: 1px solid #E0E0E0;
+	align-items: center;
+	text-align: center;
+	box-sizing: border-box;
+	-webkit-box-shadow: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	box-shadow: none;
+	appearance: none;
+}
+
+/*CHECKBOX para habilitar INPUT dentro da TABELA/GRID .valor_campo_selecionar_tabela*/
+.habilita_valor_tabela{
+	width: 12px;
+	height: 12px;
+}
+
+/*ICONES das TABELA/GRID*/
+.ico_obs {background: url(/images/2022/icones/obs.svg) no-repeat center;}
+.ico_include {background: url(/images/2022/icones/include.svg) no-repeat center;}
+.ico_action_car {background: url(/images/2022/icones/car.svg) no-repeat center;}
+.ico_action_del {background: url(/images/2022/icones/del.svg) no-repeat center;}
+.ico_include_footer {background: url(/images/2022/icones/ico_footer.svg) no-repeat center;}
+
+/*Alinhamento dos textos e numeros .alinhamento_texto e .alinhamento_numero*/
+.alinhamento_texto {text-align: left;}
+.alinhamento_numero {text-align: right;}
+
+/* 27ene22 COR AZUL da primeira TD da TABELA/GRID .color_status*/
+.color_status{background-color: var(--color_principal); color:  #ffffff;padding: 0px 0px !important;}
+
+/*BOX seletora no rodape da TABELA/GRID .select_tabela*/
+.select_tabela{
+	color: #ffffff;
+	box-sizing: border-box;
+	border: 1px solid #FFFFFF;
+	border-radius: 5px;
+	background: #3D5F90 url(/images/2022/icones/seta.svg) 95.5% 50% no-repeat;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 100%;
+	height:30px;
+	padding: 0px 10px;
+}
+
+/*DIV de NAVEGACAO localizada na pagina fornecedores com links,botÃµes,pesquisa e empresa/filial .navegacao_externo*/
+.navegacao_externo{
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	position: static;
+	width: 95%;
+	height: 72px;
+	left: 50px;
+	top: 69px;
+
+	background: #FFFFFF;
+
+	border: 0.5px solid #E0E0E0;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.04);
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+/*DIV utilizada dentro da .navegacao_externo contendo os links .navegacao_interno_parte1*/
+.navegacao_interno_parte1{
+	width: 14%;
+	height: 21px;
+	left: 32px;
+	top: 25px;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 32px;
+	text-decoration-line: underline;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	margin-left: 50px;
+}
+
+.navegacao_interno_parte1 p{
+	display:inline;
+	float:left;
+	margin-right: 5px;
+}
+
+.navegacao_interno_parte1 a:link{
+	color: var(--color_principal);
+}
+
+/*DIV utilizada dentro da .navegacao_externo contendo os botÃµes,pesquisa e empresa/filial .navegacao_interno_parte2*/
+.navegacao_interno_parte2{
+	width: 83%;
+	height: 21px;
+	margin-left: 15%;
+	top: 25px;
+
+}
+
+/*TAMANHO DAS COLUNAS dos formularios PARDÃƒO BOOTSTRAP .col-sm-1 atÃ© .col-sm-12*/
+.col-sm-1{
+	width: 6.3333333333%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;
+}
+
+.col-sm-2{
+	width: 15.6666666666%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;
+}
+
+.col-sm-3{
+	width: 21.9999999999%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;
+}
+
+.col-sm-4{
+	width: 31.3333333333%;
+	height: 59px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+
+.col-sm-5{
+	width: 37.6666666666%;
+	height: 59px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+
+.col-sm-6{
+	width: 45.9999999999%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+
+.col-sm-7{
+	width: 56.3333333333%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+
+.col-sm-8{
+	width: 64.6666666666%;
+	height: 79px;
+	left: 10px;
+	top: 40px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+
+.col-sm-9{
+	width: 73.9999999999%;
+	height: 79px;
+	left: 10px;
+	top: 40px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+.col-sm-10{
+	width: 81.3333333333%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+
+.col-sm-11{
+	width: 89.6666666666%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+.col-sm-12{
+	width: 100%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+
+	box-sizing: border-box;
+	border-radius: 10px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+
+	display: inline-block;	
+}
+
+/******************************************************************************************/
+
+.input_formulario{ 
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 14px 10px;
+	background: #FFFFFF;
+	border: 1px solid #6D8CC1;
+	box-sizing: border-box;
+	border-radius: 10px;
+	color: var(--color_principal);
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin: 4px 0px;
+	outline: 0;
+	width: 100%;
+	font-size: 18px;
+}
+
+/*CARACTERÃSTICAS da LABEL .label*/
+.label{
+	width: 59px;
+	height: 16px;
+	left: 16px;
+	top: 0px;
+	color: #6D8CC1;
+	margin-left: 15px;
+}
+
+/*LINHA DE SEPARAÃ‡ÃƒO VERTICAL pequena utilizada na DIV NAVEGAÃ‡ÃƒO*/
+.linha_separacao_vertical{
+	height: 0px;
+	width: 40px;
+	left: 891px;
+	top: 165px;
+	border: 1px solid var(--color_principal);
+	transform: rotate(90deg);
+	display:inline;
+	float:left;
+	margin-right: 5px;
+	margin-top: 13px;
+}
+
+/*LINHA DE SEPARAÃ‡ÃƒO VERTICAL*/
+.linha_separacao_eixo_x{
+	height: 0px;
+	width: 85%;
+	left: 40px;
+	top: 88px;
+	border: 0.5px solid #b3b3b3;
+	margin-left: 20px;
+}
+
+/*LINHA DE SEPARAÃ‡ÃƒO HORIZONTAL*/
+.linha_separacao_eixo_y{
+	height: 180px;
+	border-left: 1px solid #000000;
+	margin-top: 15px;		/* ET 6abr22 antes 35px	*/
+	margin-right: 7px;
+	float:left;
+}
+/*
+
+Fim Gerais/General/Generic
+
+*/
+
+/*
+
+Inicio pagina COTACAO/PRECIO/PRICE
+
+*/
+
+/*CABEÇALHO COTAÇÃO entre o menu e a TABELA/GRID  */
+.cabecalho_cotacao{
+	height: 110px;
+	/*width: 1440px;*/
+	left: 0px;
+	top: 64px;
+	border-radius: 0px;
+}
+
+a:link.cotacao_link{
+	color: var(--cor_principal);
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+	text-decoration-line: underline;
+}
+
+a:hover.cotacao_link{
+	color: #0f2a8c;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+
+a:active.cotacao_link{
+	color: var(--cor_destaque);
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+a:visited.cotacao_link{
+	color: var(--cor_principal);
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+/*CABEÇALHO COTAÇÃO primeira linha  */
+.cabecalho_cotacao_linha_1{
+	height: 16px;
+	/*width: 634px;*/
+	left: 56px;
+	top: 129px;
+	border-radius: nullpx;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+	color: var(--cor_principal);
+	margin-left: 40px;
+}
+
+/*CABEÇALHO COTAÇÃO segunda linha  */
+.cabecalho_cotacao_linha_2{
+	height: 16px;
+	/*	ET 6abr22 width: 500px;*/
+	left: 56px;
+	top: 152px;
+	border-radius: nullpx;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	/*	ET 6abr22 text-decoration: underline;*/
+	margin-left: 40px;
+}
+
+/*CABEÇALHO COTAÇÃO terceira linha  */
+.cabecalho_cotacao_linha_3{
+	height: 18px;
+	/* 21abr22 provoca desbordamiento width: 100%;*/
+	left: 57px;
+	top: 177px;
+	border-radius: nullpx;
+	font-size: 14px;
+	line-height: 60px;
+	margin-left: 38px;
+}
+
+.cabecalho_cotacao_linha_3 p{
+	display:inline;
+	/*float:left;*/
+	margin-right: 25px;
+}
+
+
+/*DIV para incapsular as informções e a TABELA/GRID*/
+.div_coluna_tabela_cotacao{
+	position: relative;
+	/*height: 519px;*/
+	width: 98%;
+	left: 0px;
+	top: 0px;
+	border-radius: 20px;
+	margin-top: 40px;
+	margin-right: 1%;
+	margin-left: 1%;
+	background-color: #ffffff;
+}
+
+/*DIV com informações antes da TABELA/GRID*/
+.div_coluna_1_cotacao{
+	position: relative;
+	/*	ET 6abr22	height: 250px;*/
+	width: 58%;
+	margin-top: 10px;
+	margin-left: 20px;
+	display: inline-block;
+	float:left;
+}
+
+/*DIV com informações antes da TABELA/GRID*/
+.div_coluna_1_cotacao_titulo{
+	font-size: 18px;
+	line-height: 20px;
+	color: #6D8CC1;
+	margin-left: 30px;
+}
+
+/*DIV com informações antes da TABELA/GRID*/
+.informacao_produto_cotacao{
+	color: #000000;
+	margin-top: -15px;
+}
+
+/*DIV com informações antes da TABELA/GRID*/
+.div_coluna_1_cotacao_detalhes{
+	height: 24px;	/* 11jun22 ET antes 18px	*/
+	width: 97%;
+	left: 57px;
+	top: 177px;
+	border-radius: 0 px;
+	font-size: 14px;
+	line-height: 18px;
+	margin-left: 30px;
+}
+
+/*	20jun22 Para vencedores no utilizamos el mismo estilo de div_coluna_1_cotacao_detalhes */
+.div_coluna_1_vencedores_detalhes{
+	height: 24px;
+	width: 97%;
+	left: 57px;
+	top: 177px;
+	border-radius: 0 px;
+	font-size: 14px;
+	line-height: 34px;	/* 11jun22 ET antes 18px	*/
+	margin-left: 30px;
+}
+
+
+.marca_cotacao_detalhes{
+	margin-top: 25px;
+}
+
+.historico_cotacao_detalhes{
+	/*	ET 13jun22	margin-top: 15px;*/
+}
+
+.historico_cotacao_detalhes p{
+	display:inline;
+	margin-right: 25px;
+}
+
+.div_coluna_2_cotacao{
+	position: relative;
+	height: 208px;
+	width: 19%;
+	/*	ET 6abr22	margin-top: 20px;*/
+	margin-right: 10px;
+	font-size: 12px;
+	display: inline-block;
+	float:left;
+}
+
+.titulo_cotacao_detalhes{
+	font-size: 24px;
+	color: #6D8CC1;
+}
+
+.div_coluna_3_cotacao{
+	position: relative;
+	height: 208px;
+	width: 19%;
+	/*	ET 6abr22	margin-top: 20px;*/
+	font-size: 12px;
+	display: inline-block;
+	float:left;
+}
+
+.td_selecionar{
+	width: 10%;
+}
+
+/*
+
+Fim página COTACAO/PRECIO/PRICE
+
+/* Cabecera en pagina general  */
+.cabecalho_general{
+	height: 110px;
+	width: 1440px;
+	left: 0px;
+	top: 64px;
+	border-radius: 0px;
+}
+
+a:link.general_link{
+	color: var(--color_principal);
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+	text-decoration-line: underline;
+}
+
+a:hover.general_link{
+	color: #0f2a8c;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+
+a:active.general_link{
+	color: var(--color_destacado);
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+a:visited.general_link{
+	color: var(--color_principal);
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+
+/*Cabecera terceira linha  */
+.cabecalho_general_linha_3{
+	height: 18px;
+	width: 1640px;
+	left: 57px;
+	top: 177px;
+	border-radius: nullpx;
+	font-size: 14px;
+	line-height: 24px;
+	margin-left: 38px;
+}
+
+.cabecalho_general_linha_3 p{
+	display:inline;
+	float:left;
+	margin-right: 25px;
+}
+
+
+/* Fim pÃ¡gina COTACAO/PRECIO/PRICE*/
+/* Inicio pagina FORNECEDORES/PROVEEDORES/PROVIDERS*/
+
+.formulario_fornecedores{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px;
+	position: static;
+	width: 95%;
+	height: 100%;
+	left: 50px;
+	top: 189px;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin-left: 20px;
+	margin-top: 40px;
+}
+
+.abas_fornecedores button {
+	width: 250px;
+	height: 51px;
+	left: 175px;
+	top: 0px;
+	background: #FFFFFF;
+	border: 1px solid #E0E0E0;
+	border-radius: 10px 10px 0px 0px;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin: 0px 0px;
+	color: #6D8CC1;
+}
+
+.abas_fornecedores button.active {
+	width: 250px;
+	height: 51px;
+	left: 175px;
+	top: 0px;
+	background: var(--color_principal);
+	border-radius: 10px 10px 0px 0px;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	margin: 0px 0px;
+	color: white;
+}
+.formulario_dados_basicos{
+	position: relative;
+	width: 100%;
+	height: 500px;
+
+}
+
+.dados_basicos {
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 15px;
+	position: static;
+	width: 100%;
+	height: 100%;
+	background: #FFFFFF;
+	border: 0.5px solid #E0E0E0;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.04);
+	border-radius: 0px 0px 20px 20px;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+}
+
+.coluna_fornecedor{
+	position: relative;
+	min-height: 1px;
+	padding-right: 10px;
+	padding-left: 10px;
+	float: left;
+	width: 100%;
+	margin-top: 2%;
+}
+
+.coluna_esquerda_fornecedor{
+	position: absolute;
+	width: 35%;
+	height: 100%;
+}
+
+.coluna_esquerda_interna_fornecedor{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	width: 100%;
+	height: 100%;
+	top: 5%;
+	border-radius: 16px;
+
+}
+
+.coluna_direita_fornecedor{
+	position: absolute;
+	width: 63%;
+	height: 100%;
+	margin-left: 32%;
+	left: 5%;
+}
+
+.coluna_direita_interna_parte1_fornecedor{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	width: 100%;
+	height: 76%;
+	top: 5%;
+	border-radius: 16px;
+
+}
+
+.coluna_direita_interna_parte2_fornecedor{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	width: 100%;
+	height: 100%;
+	top: -23%;
+	border-radius: 16px;
+
+}
+
+/*.coluna_direita_fornecedor {
+	display: inline-block;
+	width: 100px;
+	border-radius: 5px;
+	float: left;
+	margin-left: -350px;
+}*/
+
+.coluna_4_titulo {
+	width: 100%;
+	height: 10%;
+	font-size: 18px;
+	line-height: 19px;
+
+	background: var(--color_principal);
+	color: #FFFFFF;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+	border-radius: 10px 10px 0px 0px;
+
+	flex: none;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.coluna_4{
+	position: static;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	flex-direction: column;
+	align-items: flex-start;
+
+	background: #FFFFFF;
+	border: 0.5px solid #E0E0E0;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.04);
+	border-radius: 0px 0px 20px 20px;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	display: inline-block;
+}
+
+.coluna_8_titulo {
+	width: 100%;
+	height: 10%;
+	font-size: 18px;
+	line-height: 19px;
+
+	background: var(--color_destacado);
+	color: #FFFFFF;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+	border-radius: 10px 10px 0px 0px;
+
+	flex: none;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	display: inline-block;
+}
+.coluna_8{
+	position: static;
+	width: 100%;
+	height: 50%;
+	left: 0px;
+	flex-direction: column;
+	align-items: flex-start;
+
+	background: #FFFFFF;
+	border: 0.5px solid #E0E0E0;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.04);
+	border-radius: 0px 0px 20px 20px;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	display: inline-block;
+}
+
+.coluna_9{
+	position: static;
+	width: 100%;
+	height: 52%;
+	left: 0px;
+	flex-direction: column;
+	align-items: flex-start;
+
+	background: #FFFFFF;
+	border: 0.5px solid #E0E0E0;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.04);
+	border-radius: 0px 0px 20px 20px;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	display: inline-block;
+}
+
+.coluna_9 .coluna_fornecedor{
+	width: 95%;
+	margin-top: 5px;
+	margin-left: 1%;
+	left: 1%;
+	margin-right: 1%;
+	right: 1%;
+}
+
+.coluna_4 .coluna_fornecedor{
+	margin-top: 16px;
+	margin-left: 1%;
+	left: 1%;
+	margin-right: 1%;
+	right: 1%;
+}
+
+ul.select_checkbox {
+	list-style: none;
+}
+ul.select_checkbox li{
+	display: inline;
+}
+ul.select_checkbox li label{
+	display: inline-block;
+	background-color: rgba(255, 255, 255, .9);
+	border: 2px solid rgba(139, 139, 139, .3);
+	color: #000000;
+	border-radius: 25px;
+	white-space: nowrap;
+	margin: 3px 0px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	transition: all .2s;
+}
+
+ul.select_checkbox li label {
+	padding: 8px 12px;
+	cursor: pointer;
+}
+
+ul.select_checkbox li label::before {
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 12px;
+	padding: 2px 6px 2px 2px;
+	content: "\f067";
+	transition: transform .3s ease-in-out;
+}
+
+ul.select_checkbox li input[type="checkbox"]:checked + label::before {
+	content: "\f00c";
+	transform: rotate(-360deg);
+	transition: transform .3s ease-in-out;
+}
+
+ul.select_checkbox li input[type="checkbox"]:checked + label {
+	border: 2px solid var(--color_principal);
+	background-color: #3970bf;
+	color: #fff;
+	transition: all .2s;
+}
+
+ul.select_checkbox li input[type="checkbox"] {
+	display: absolute;
+}
+ul.select_checkbox li input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+}
+ul.select_checkbox li input[type="checkbox"]:focus + label {
+	border: 2px solid #6a8c99;
+}
+
+.label_fornecedor{
+	position: static;
+	width: 81px;
+	height: 16px;
+	left: 16px;
+
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+
+	color: #6D8CC1;
+}
+
+
+/*
+
+Fim pÃ¡gina FORNECEDORES/PROVEEDORES/PROVIDERS
+
+*/
+
+/*
+
+Inicio pagina INDEX
+
+*/
+
+/* DIV esquerda com logo,empresa e filial .coluna_esquerda*/
+.coluna_esquerda {
+	display: inline-block;
+	/*ET	height: 400px;*/
+	width: 300px;
+	border-radius: 5px;
+	float: left;
+}
+
+/* DIV lateral esquerda com logo .coluna_logo_empresa*/
+.coluna_logo_empresa {
+	max-width: 200px;
+	/* ET12abr22	height: 350px;*/
+	padding: 15px;
+	margin: 0 auto;
+}
+
+/* LOGO lateral esquerda com empresa e filial .logo_empresa*/
+.logo_empresa {
+	padding-top: 15px;
+	width: 75%;
+	display: grid;
+	justify-content: center; 
+}
+
+.logo_empresa img {max-width: 100%;}
+
+/* DIV lado direito com indicadores,noticias e dashboard, revisado 4feb22 por Daniel  */
+.coluna_direita {
+	display: inline-block;
+	/*height: 400px;*/
+	width: 78%;
+	margin-top: 28px;
+	border-radius: 5px;
+	float: left;
+	background-color: var(--fundo_paginas);
+}
+
+
+.indicadores {
+	height: 130px;
+	width: 160px;
+	background: #FFFFFF;
+	border: 1px solid #E0E0E0;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	margin-right: 3px;
+	display: inline-block;
+}
+
+.titulo_indicadores{
+	margin-top: 10px;
+	font-weight: bold;
+	text-align: center;
+	color: var(--color_principal);	
+}
+
+/* InformaÃ§Ã£o no centro dos indicadores */
+.meio_indicadores{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 40px;
+	line-height: 47px;
+	text-align: center;
+}
+
+.meio_indicadores.positivo{color: #27AE60;}
+.meio_indicadores.negativo{color: #EB5757;}
+.meio_indicadores.neutro{color: var(--color_principal);}
+
+.rodape_indicadores{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+}
+
+.rodape_indicadores.positivo{color: #27AE60;}
+.rodape_indicadores.negativo{color: #EB5757;}
+.rodape_indicadores.neutro{color: var(--color_principal);}
+
+/* LINHA no eixo x de saparaÃ§Ã£o das notÃ­cias  */
+.linha_separacao_noticias{
+	width: 90%;
+	height: 0px;
+	left: 0px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid rgba(61, 95, 144, 0.25);
+}
+
+.titulo_noticias{
+	margin-top: 25px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: left;
+	color: var(--color_principal);	
+}
+
+/*DIV com inÃ­cio das notÃ­cias */
+.conteudo_noticias{
+	width: 1360px;
+	left: calc(50% - 1360px/2);
+	top: 54.55%;
+	bottom: 0%;
+	color: var(--color_principal);
+	margin-top: 10px;
+}
+
+/* Circulo informativo das noticas importante,lido e nÃ£o lido */
+.circulo_noticia {
+	left: 0px;
+	top: 5.25px;
+	width:9.49px;
+	height:9.49px;
+	border-radius:100%;
+	color:#fff;
+	text-align:center;
+	font-size:25px;
+	overflow:hidden;
+	display: inline-block;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	margin: 0px 8px;
+}
+
+.circulo_noticia.importante {background-color:#EB5757;}
+.circulo_noticia.lido {background-color:var(--color_destacado);}
+.circulo_noticia.nao_lido {background-color:var(--color_principal);}
+
+.titulo_negrito{
+	margin-top: 25px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: left;
+	color: var(--color_principal);	
+	display: inline-block;
+}
+
+.titulo_padrao{
+	margin-top: 25px;
+	font-size: 20px;
+	text-align: left;
+	color: var(--color_principal);	
+	display: inline-block;
+}
+
+.dashboard_grafico {
+	width: 1035px;
+	height:500px;
+}
+
+/* Creado,pro Daniel 4feb 22 background-color: var(--fundo_paginas); SLIDE INDICADORES PADRONIZACAO COR*/
+.no-js .owl-carousel, .owl-carousel.owl-loaded{
+	background-color: var(--fundo_paginas);
+}
+
+
+
+/*
+
+	ESTILOS INCORPORADOS POR ET
+	
+*/
+
+a {
+	color:var(--color_principal);
+	text-decoration: none;
+}
+
+/*	ancho de columna en porcentaje	*/
+.zerouno {width:0.1%;}
+.uno {width:1%; }
+.dos {width:2%; }
+.tres {width:3%; }
+.cinco {width:5%; }
+.seis {width:6%; }
+.ocho {width:8%; }
+.diez {width:10%; }
+.quince {width:15%; }
+.veinte {width:20%; }
+.w25 {width:25%; }
+.w30 {width:30%; }
+.w40 {width:40%; }
+.w50 {width:50%; }
+.w60 {width:60%; }
+.w70 {width:70%; }
+.w80 {width:80%; }
+.w90 {width:90%; }
+.w95 {width:95%; }
+.w98 {width:98%; }
+.w100 {width:100%; }
+
+/*	ancho de columna en pixels	*/
+.w1px {width:1px;}							/*	Para marcar con color la columna izquierda de las tablas	*/
+.w10px {width:10px;}
+.w20px {width:20px;}
+.w30px {width:30px;}
+.w40px {width:40px;}
+.w50px {width:50px;}
+.w60px {width:60px;}
+.w70px {width:70px;}
+.w80px {width:80px;}
+.w90px {width:90px;}
+.w100px {width:100px;}
+.w110px {width:110px;}
+.w120px {width:120px;}
+.w130px {width:130px;}
+.w140px {width:140px;}
+.w150px {width:150px;}
+.w160px {width:160px;}
+.w170px {width:170px;}
+.w180px {width:180px;}
+.w190px {width:190px;}
+.w200px {width:200px;}
+.w210px {width:210px;}
+.w220px {width:220px;}
+.w225px {width:225px;}
+.w240px {width:240px;}
+.w250px {width:250px;}
+.w300px {width:300px;}
+.w350px {width:350px;}
+.w400px {width:400px;}
+.w430px {width:430px;}						/* 17ene23 utilizado en la licitacion para proveedor	*/
+.w450px {width:450px;}
+.w500px {width:500px;}
+.w600px {width:600px;}
+.w800px {width:800px;}
+.w1000px {width:1000px;}
+.w1100px {width:1100px;}
+.w1200px {width:1200px;}
+.w1400px {width:1400px;}
+.w1600px {width:1600px;}
+
+
+/*	Altura de fila	*/
+.h1px { height:1px;}						/*	utilizado en licitaciones	*/
+.h20px { height:20px;}						/*	utilizado en la matriz del EIS	*/
+.h25px { height:25px;}						/*	utilizado en la liciatcion para proveedor	*/
+.h30px { height:30px;}						/*	utilizado en la matriz del EIS	*/
+.h40px { height:40px;}						/*	utilizado en buscador cat.prov. en Enviar Pedidos	*/
+.h60px { height:60px;}						/*	utilizado en Mant.LugaresEntrega	*/
+.h50px { height:50px;}						/*	16jun22 utilizado en Licitacion por producto	*/
+.h300px { height:300px;}					/*	utilizado en mantenimiento de Seleccion	*/
+
+.pad10px { padding:10px}					/*	utilizado en CENManten para poner un titulo sobre una tabla con fondo gris y altura	*/
+
+.textLeft{text-align:left !important;}
+.textCenter{text-align:center !important;}
+.textRight{text-align:right !important;}
+
+.avanceProv{ overflow:auto; float:left; width:100%; clear:both; height:50px; margin-top: 40px; margin-left:200px; }		/*	utilizado en alta de proveedores (area publica)	*/
+.expliProvLic {width:1000px;margin:0 auto;background-color:#BCF5A9;border:1px solid #488214;height:65px;padding:10px;}	/*	utilizado en licitacion, lado proveedor (explicaciones)	*/
+
+/*	Para destacar últimos cambios en listados	*/
+.amarillo {background:#F6F6C9}
+
+/*	Colores textos EIS	*/
+.celdaconrojo { color:#e40e3c }
+.celdaconverde { color:#36970b }
+
+/*	Colores licitacion	*/
+.azul { color:#1922E9; font-weight:bold; }
+.verde { color:#36970b; font-weight:bold; }
+.rojo{ color:#FF0000 !important; font-weight:bold;}
+.naranja { color:#FF9900; font-weight:bold; }
+
+.verdeNormal { color:#36970b; font-weight:normal; }		/*	para destacar compras en matriz EIS	*/
+.rojo2 { color:#fb0d40;	font-weight:bold;} 				/*	para destacar compras en matriz EIS	*/
+
+/*	Marca para el asteríco de "campos obligatorios" utilizado en varios formularios	*/
+span.camposObligatorios{color:#FF0000;}
+
+/*	Centrar tabla	*/
+.tableCenter
+{ 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*	Tabla con bordes, utilizada en los informes del EIS	*/
+.ConBordes
+{
+	border: 1px 1px 1px 1px solid var(--color_principal);
+}
+
+/*	Titulo a presentar SOBRE la tabla	*/
+.tituloTabla
+{
+	font-size:18px;
+	font-weight:bold;
+}
+
+/*	Titulo en la primera fila de la tabla	*/
+.subTituloTabla
+{
+	font-size:14px;
+	font-weight:bold;
+	background:#E0E0E0;
+	height:20px;
+}
+
+.valignM {vertical-align:middle}
+.valignT {vertical-align:top}
+
+/*	20px de espacio vertical con el siguiente DIV	*/
+.space20px{ margin-bottom: 20px;}
+.space40px{ margin-bottom: 40px;}
+.space60px{ margin-bottom: 60px;}
+
+.marginTop20{ margin-top: 20px !important;}
+.marginTop30{ margin-top: 30px !important;}
+.marginTop40{ margin-top: 40px !important;}
+.marginTop50{ margin-top: 50px !important;}
+.marginTop80{ margin-top: 80px !important;}
+.marginTop120{ margin-top: 120px !important;}
+.marginTop300{ margin-top: 300px !important;}	/* 22abr22 utilizado en las licitaciones por producto	*/
+
+.marginBottom50{ margin-bottom: 50px;}	/*	27may22 Utilizado en WFStatusHTML2022	*/
+
+
+.marginLeft20{ margin-left:20px !important}
+.marginLeft50{ margin-left:50px !important}
+.marginLeft100{ margin-left:100px !important}
+.marginLeft200{ margin-left:200px !important}
+.marginLeft300{ margin-left:300px !important}
+
+.marginRight20{ margin-right:20px !important}
+.marginRight50{ margin-right:50px !important}
+.marginRight200{ margin-right:200px !important}
+
+
+/*	altura de linea para DIV	*/
+.lineHeight30{ line-height:30px}
+
+/*	Posicioamiento absoluto: utilizado en liciatciones por produto	*/
+.absPosLeft50{  position: absolute;  left: 50px; }
+.absPosLeft100{  position: absolute;  left: 100px; }
+
+
+/*	float left para compartir linea	*/
+.floatLeft { float:left}
+.floatRight { float:right}
+
+/*	fijar el tamanno de un elemento ancho, requiere display:inline-block	*/
+.btn120px{ display:inline-block; width:120px; }
+.btn150px{ display:inline-block; width:150px; }
+.btn300px{ display:inline-block; width:300px; }
+
+/* para ocultar un elemento	*/
+.oculto{ display:none;}
+
+/*	para que no fuerce salto de linea, utilizado en ManLicitacion	*/
+.inline { display:inline-block;}
+
+/*	Titulo de la pagina	*/
+p.TituloPagina{
+	font-size: 18px;
+	padding:5px;
+	margin-left:50px;
+	font-weight: bold;
+	line-height: 16px;
+	color: var(--color_principal);
+}
+
+/*	Para copiar el aspecto del select	*/
+input.fondoAzul {
+	height: 30px;
+	background: #3D5F90;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px 10px;
+}
+
+/*	Para copiar el aspecto del select	*/
+input.campopesquisa {
+	height: 30px;
+	background: #FFFFFF;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: var(--color_principal);
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px 10px;
+	/*	27abr22 Forzamos el estilo del texto	*/
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+
+/*	textarea con mismo aspecto que el campopesquisa	*/
+textarea {
+	background: #FFFFFF;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: var(--color_principal);
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px 10px;
+	/*	27abr22 Forzamos el estilo del texto	*/
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+
+
+/*	Boton destacado, 3feb22 revisado por Daniel para mantener alto de inputs	*/
+a.btnDestacado {
+	padding: 8px 9px;
+	background: var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size:14px;
+	/*11jun22	font-weight: lighter;*/
+	font-weight: 750;
+	font-size: 14px;	/*	ET	11jun22	*/
+}
+
+/*	Boton rojo, para acciones peligrosas: por ejemplo, borrar pedido desde el mantenimiento	*/
+a.btnRojo {
+	padding: 8px 9px;
+	background: #F0B2B2;
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #101010;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size:14px;
+	/*11jun22	font-weight: lighter;*/
+	font-weight: 750;
+	font-size: 14px;	/*	ET	11jun22	*/
+}
+
+/*	Boton normal, 3feb22 revisado para mantener alto de inputs	*/
+a.btnNormal {
+	padding: 8px 9px;
+	background: #FFFFFF;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: var(--color_principal);
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-weight: lighter;
+	font-size: 14px;	/*	ET	11jun22	*/
+}
+
+/*	Boton discreto	*/
+a.btnDiscreto {
+	padding: 2px 2px;
+	background: #FFFFFF;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #3D5F90;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size:10px
+}
+
+/*	Boton destacado	pequenno*/
+a.btnDestacadoPeq {
+	padding: 4px 4px;
+	background: var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size:10px
+}
+
+/*	Boton destacado	pequenno*/
+a.btnRojoPeq {
+	padding: 4px 4px;
+	background: #F0B2B2;
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #101010;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size:10px
+}
+
+/*	Boton gris: desactivado. Utilizado en la oferta de la licitacion, lado proveedor, si no hay cambios		*/
+.btnGris {
+	padding: 8px 9px;
+	background: #999999;
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size:14px;
+	font-weight: lighter;
+	cursor: not-allowed;
+}
+
+.btnGris:hover {
+	background: #eeeeee;
+	color: #999999;
+	text-decoration: none;
+}
+
+
+
+/*	PAGINA DE INICIO	*/
+/*	Tabla para las opciones avanzadas	*/
+table.tbBuscAvanzado{border: 1px solid black; font-size:12px}
+
+
+
+/*
+
+	ESTILOS RECUPERADOS DESDE basicMVM2019.css
+
+*/
+
+/*	Espacio para bones en la cabecera de las paginas, junto a los titulos	*/
+
+span.CompletarTitulo1200{
+	width:1200px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:20px;
+}
+
+span.CompletarTitulo900{
+	width:900px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:20px;
+}
+
+span.CompletarTitulo800{
+	width:800px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:20px;
+}
+
+span.CompletarTitulo{
+	width:700px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:20px;
+}
+
+span.CompletarTitulo640{		/*	27set22 utilizado en la nueva version de la licitacion	*/
+	width:640px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:50px;
+}
+
+span.CompletarTitulo500{
+	width:500px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:50px;
+}
+
+span.CompletarTitulo400{
+	width:400px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:50px;
+}
+
+span.CompletarTitulo300{
+	width:300px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:50px;
+}
+
+
+span.CompletarTitulo200{
+	width:200px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:50px;
+}
+
+
+/*	Fuente pequena, para textos poco destacados	*/
+.fuentePeq{ font-size:12px !important; color:#808080 !important}
+
+/*	Fuente pequena, oscura, utilizada en el listado de licitaciones por solicitud de Unimed	*/
+.fuentePeqOsc{ font-size:12px !important}
+
+/*	2jun22 Fuente destacada, utilizada en alarmas	*/
+.fuenteDest{ font-size:18px !important}
+
+/*	Fuente grande para desplegables como titulos (por ejemplo, ficha de empresa o centro	*/
+.fuenteGrande{ font-size:20px;height:28px !important}
+
+/*	Fuentes para "label"	*/
+label{
+	color:#808080;
+/*10may22 prueba ET		font-weight:bold;*/
+}
+
+.labelLeft{
+	text-align:left;
+	color:#808080;
+/*10may22 prueba ET		font-weight:bold;*/
+}
+.labelRight{
+	text-align:right;
+	color:#808080;
+/*10may22 prueba ET	font-weight:bold;*/
+}
+.labelCenter{
+	text-align:center;
+	color:#808080;
+/*10may22 prueba ET		font-weight:bold;*/
+}
+
+/*	imagen centrada HORIZONTALMENTE, por ejemplo dentro de un td	*/
+.imgCenter
+{
+	margin:0 auto;
+	text-align:center;
+}
+
+/*	imagen centrada VERTICALMENTE, por ejemplo dentro de un td	*/
+.imgMiddle
+{
+	vertical-align: middle;
+}
+
+
+/*	por defecto:sin hover, para evitar efectos en mantenimientos	*/
+table tr.conhover:hover { background:#BABDB6;}
+
+/*	Fuente pequena, con separacion minima, para la tabla del EIS	*/
+td.tdEIS{ font-size:13px; padding:2px }
+
+/*	Fondos destacados para filas o columnas en tablas	*/
+.fondoRojo { background:#F85E5E !important; }	
+.fondoNaranja { background:#FF9900 !important;}
+.fondoAmarillo { background:#FFFF99 !important;}
+.fondoGris { background:#E0E0E0 !important;}
+.fondoGrisClaro { background:#F0F0F0 !important;}
+.fondoVerde { background:#BCF5A9 !important; }
+.fondoAzul	{background-color: var(--color_principal) !important; color:  #ffffff;}
+
+/*	Colores destacados. Utilizado para diferenciar precios en FichaProductoLicitacion	*/
+.colorNaranja { color: #FF9900;font-weight:bold; }
+.colorRojo { color:#F85E5E;font-weight:bold; }
+.colorVerde { color:#4E9A06;font-weight:bold; }
+.colorAzul { color:var(--color_principal);font-weight:bold; }
+
+
+/*	8nov19 Recuperamos esta clase para destacar textos urgentes, utilizado en pedidos */
+.urgente
+{
+	color:#FF0000;
+	font-weight:bold;
+	font-size:16px;
+	background:#FFFF99;
+	/*	ET 6abr22	float:left;	Esto complicaba centrar el span	*/
+	border:1px solid #FF0000;
+	padding:5px;
+}
+
+/*	27abr23 Utilizado en el texto de ayuda para proveedores */
+.destacado
+{
+	width:1000px;
+	margin:10px auto;
+	padding:10px 10px 10px 10px;
+	background-color:#BCF5A9;
+	border:1px solid #488214; 
+}
+
+
+/*	colocacion de div, incluimos scroll cuando sea necesario	*/
+.divLeft{ /*ET 5jul22 overflow:auto;*/ float:left; width:100%; clear:both; }		/*	Ocupa 100% del ancho	*/
+.divLeftw{ float:left; }											/*	Permite limitar ancho, y poner otro divLeftw a continuacion	*/
+.divCenter{ overflow:auto; margin: 0 auto;}
+.divRightw{ float:right; }		/*	Ocupa 100% del ancho	*/
+.conScroll{ overflow:auto; }	/*	ET 14nov22 Fuerza un DIV a tener scroll	*/>
+
+.borde2 {border:2px solid #D6D6D6;}				/*	utilizado en USManten para el div de derechos avanzados	*/
+.bordeIzqGris {border-left:1px solid #999999;}		/*	utilizado en la licitacion para separar proveedores	*/
+
+
+/*	Utilizados en MultiofertaFrame2022	*/
+.divLeft35{ float:left; width:35%; border:0px solid red; padding:0px;}
+.divLeft30nopa{ float:left; width:30%; border:0px; padding:0px;}
+.divLeft40nopa{ float:left; width:40%; border:0px; padding:0px;}		/* ET 21feb22 Utilizado en control de pedidos	*/
+.divLeft60nopa{ float:left; width:60%; border:0px; padding:0px;}		/* ET 21feb22 Utilizado en control de pedidos	*/
+.divLeft70nopa{ float:left; width:60%; border:0px; padding:0px;}		/* ET 21feb22 Utilizado en control de pedidos	*/
+/*	Estilos utilizados en mantenimiento reducido	*/
+.divLeft25nopa{ float:left; width:25%; border:0px; }
+.divLeft50nopa{ float:left; width:49.5%; margin:0px 0px; border:0px; }
+
+/*	Campos "input" utilizados como texto normal	calculado/consultado desde JS	*/
+input.noinput, textarea.noinput, select.noinput{
+	border:none;
+	background:transparent;
+	color:#000000;
+	font-size:14px;		/*	29abr22	*/
+	font-weight:bold;	/*	29abr22	*/	
+}
+
+
+/*	13feb23 Para cualquier tipo de lista quitamos los "bullets"	*/
+ul {
+  list-style-type: none;
+}
+
+
+/*	Pestañas dentro de formularios (por ejemplo, ficha de licitación	*/
+div.pestannas {
+    background-color: #D6D6D6;
+	width:100%;
+}
+
+nav.pestannas ul {
+	border:0;
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute; 
+   	background:none;
+}
+
+nav.pestannas ul li { 
+	min-width: 70px;
+    margin: 10px -7px 0 0;
+    display:inline-block;
+    background-color: #D6D6D6; /*#F5F5F5; /*#4D4D4A; /*#F5F5F5;*/
+}
+
+
+/*	Menú de pestannas en la licitación	*/
+a.MenuLic{
+	background-color:#FFFFFF;
+}
+
+
+
+
+/*	Formularios simples: "label:input" (fijar el width en cada formulario)	*/
+form.formEstandar{
+/*	font-size: 13px;*/
+	color:#333333;
+}
+
+.formEstandar ul {
+    /*width: 700px;*/
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 60px;
+    padding: 0px;
+}
+
+.formEstandar li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.formEstandar li.sinSeparador {
+    padding: 10px;
+    border-bottom: none;
+    position: relative;
+}
+
+/*	30jun22 Formulario estrecho, creado a partir de formEstandar. Utilizado en mantenimiento Seleccion	*/
+form.formEstrecho{
+	color:#333333;
+}
+
+.formEstrecho ul {
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 10px;
+    padding: 0px;
+}
+
+.formEstrecho li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.formEstrecho li.sinSeparador {
+    padding: 10px;
+    border-bottom: none;
+    position: relative;
+}
+
+
+/*	utilizado para destacar el fondo en la ficha de producto de la licitacion */
+li.fondoDest {
+	background:var(--fondo-dest-form);
+	text-align:center;
+}
+
+.formEstandar label {
+    width: 250px;
+    margin-top: 3px;
+    display: inline;
+    float: left; 
+    padding: 3px;
+	font-weight:bold;
+	color:#A0A0A0;
+	vertical-align: middle;
+}
+
+/*	4may22  este estilo permite alinear mejor el check-box en mant.seleccion quitando float: left;*/
+.formEstandar label.labelCheck {
+    width: 250px;
+    margin-top: 3px;
+    display: inline;
+    padding: 3px;
+	font-weight:bold;
+	color:#A0A0A0;
+	vertical-align: middle;
+}
+
+/*	Los estilos de los controles los asignaremos con clases
+.formEstandar label.leyenda {
+	width:100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;			
+	font-weight:bold;
+	color:#A0A0A0;
+	text-align: center;
+	border-bottom:0px;
+	vertical-align: middle;
+}
+
+.formEstandar input {
+    height: 28px;
+    width: 220px;
+    padding: 0px 8px;
+	vertical-align: middle;
+}
+
+.formEstandar input.corto {
+    width: 100px;
+}
+
+.formEstandar input.largo {
+    width: 500px;
+}
+
+.formEstandar textarea {
+    padding: 8px;
+    width: 500px;
+	vertical-align: middle;
+}
+
+.formEstandar select {
+    height: 28px;
+	vertical-align: middle;
+}
+*/
+
+/*	Formularios complejos: "label:input	label:input" (fijar el width en cada formulario)	*/
+form.formComplejo{
+	color:#333333;
+}
+
+.formComplejo ul {
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 0px;
+}
+
+.formComplejo li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.formComplejo li.sinSeparador {
+    padding: 10px;
+    border-bottom: none;
+    position: relative;
+}
+
+/*	estilos generales	*/
+input.muypeq{	/*	utilizado para checkbox	*/
+	width:15px;			/* antes 30px*/
+	height:15px;
+}
+
+/*	Pestañas dentro de formularios (por ejemplo, ficha de licitación	*/
+div.pestannas {
+    background-color: #D6D6D6;
+	width:100%;
+}
+
+nav.pestannas ul {
+	border:0;
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute; 
+   	background:none;
+}
+
+nav.pestannas ul li { 
+	min-width: 70px;
+    margin: 10px -7px 0 0;
+    display:inline-block;
+    background-color: #D6D6D6; /*#F5F5F5; /*#4D4D4A; /*#F5F5F5;*/
+}
+
+/* menu horizontal sin NAV navegable basado en CSS: recomendaciones no oficiales indican utilizar un único nav por página */
+ul.pestannas {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute; /*relative;*/
+    background:#E6E6E6;
+    font-size:15px;
+	width:100%;
+	display:block;
+}
+
+ul.pestannas li {
+    display:inline-block;
+	padding:0;
+	/*padding:5px 10px 5px 10px;*/
+    background-color: #E6E6E6;
+}
+
+ul.pestannas a {
+	display:block;
+	padding:5px 10px 5px 10px;
+	margin-right: 15px;
+	color:#555555;
+	font-size:15px; /*13px;*/
+	text-decoration:none;
+	background-color: #E6E6E6;
+	cursor:pointer;
+}
+
+ul.pestannas a.MenuActivo
+{
+	background:var(--color_principal);
+	color:#E6E6E6;
+}
+
+ul.pestannas a.MenuInactivo
+{
+	background:#E6E6E6;
+	color:#555555;
+}
+
+/*	Pestañas dentro de formularios (por ejemplo, ficha de licitación	*/
+div.pestannas {
+    background-color: #D6D6D6;
+	width:100%;
+}
+
+nav.pestannas ul {
+	border:0;
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute; 
+   	background:none;
+}
+
+nav.pestannas ul li { 
+	min-width: 70px;
+    margin: 10px -7px 0 0;
+    display:inline-block;
+    background-color: #D6D6D6; /*#F5F5F5; /*#4D4D4A; /*#F5F5F5;*/
+}
+
+/*	Página de Licitaciones	*/
+/*	contenedores para las pestañas	*/
+div.posContenedorLic {
+	position:absolute; 
+	margin-top:30px;
+	width:100%;
+}
+/*	zona de datos sobre tabla productos	*/
+div.posCabTablaProd {
+	float:left;
+		width:100%;
+	text-align:left;
+	padding-left:20px;
+	line-height:30px; 
+	background-color: #F0F0F0;
+}
+
+div.posCabTablaProd a{
+	position: relative;
+	text-align:right;
+	padding-left:0px;
+	line-height:30px; 
+	background-color: #F0F0F0;
+}
+
+
+/* 28mar22 Floating box utilizado en licitaciones	*/
+.FBox
+{
+	position: absolute;
+	top: 0px;
+	left: 700px;					/* 24oct22. Antes 1200px	*/
+	right: 10px;
+	border: 1px solid #CCC;
+	background-color: #F2F2F2;
+	width:300px;
+}
+
+table.TablaFBox
+{
+	width:100%;
+}
+
+
+table.TablaFBox th
+{
+	font-size:11px;
+	text-align:center;
+	font-weight:bold;
+}
+
+table.TablaFBox td
+{
+	font-size:11px;
+	text-align:center;
+}
+
+
+
+/*	28mar22 Tooltip, utilizado en licitaciones. Se deberia poder sustituir por title, pero requiere cambios compliados en el JS	*/
+.tooltip {
+	outline: none;
+	cursor: help; text-decoration: none;
+	position: relative;
+}
+.tooltip span {
+	margin-left: -999em;
+	position: absolute;
+	text-align: left;
+}
+.tooltip:hover span.classic {
+	border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+	position: absolute; left: 1em; top: 2em; z-index: 99;
+	margin-left: 0; width: 250px;
+	/*ET	25jul18*/
+    background-color: #D0D0D0;
+    color: #333333;
+}
+.tooltip:hover span {
+	border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+	position: absolute; left: 1em; top: 2em; z-index: 99;
+	margin-left: 0; width: 250px;
+	/*ET	25jul18*/
+    background-color: #D0D0D0;
+    color: #333333;
+}
+.tooltip:hover span.spanEIS {
+	position: absolute; left: -10em; top: 2em; z-index: 99;
+	margin-left: 0; width: 150px;
+}
+.tooltip:hover img {
+	border: 0; margin: -10px 0 0 -55px;
+	float: left; position: absolute;
+}
+.tooltip:hover img.static {
+	vertical-align: middle;
+	margin: 0; padding: 0; float: none; position: static;
+}
+.tooltip:hover em {
+	font-family: Candara, Tahoma, Geneva, sans-serif; font-size: 1.2em; font-weight: bold;
+	display: block; padding: 0.2em 0 0.6em 0;
+}
+
+
+/*	13abr22 Utilizado en la licitacion para marcar los mejores precios	*/
+td.mejorPrecio { background-color: #FFFF99;}
+
+
+
+/*	30may22 cuadro abajo para pedidos problematicos, también utilizado en otros mensajes de aviso	*/
+.problematicos{
+	width:800px;
+	margin:auto;
+    border:1px dotted #FF0000;
+	background-color:#FFFF99;
+}
+.problematicos p{
+	text-align:justify;
+	font-weight:bold;
+	color:#666666;
+	margin:5px;
+	font-size:11px;
+}
+.problematicos img{ vertical-align: middle;}
+.problematicos select{
+	font-size:12px;
+}
+
+/*	31may22 noticias en la página de inicio*/
+table.noticiasMvm{
+	width:100%;
+	border-collapse:collapse;
+	margin-left:0px;
+	font-size:12px;
+	background:#FFFFFF;
+	border:2px solid #f9b247;
+}
+table.noticiasMvm td { padding:3px 4px; color:#6d6e6f;}
+table.noticiasMvm p{ color:#6d6e6f; padding:5px 4px; text-align:left;}
+table.noticiasMvm img{ padding:0px 4px 0px 3px; vertical-align:middle;}
+table.noticiasMvm tr.tituloTabla p{
+	text-align:left;
+	color:#f9b247;
+	font-size:16px;
+	font-size:20px;
+	/*font-family:"BebasNeue", sans-serif;*/
+}
+
+
+/*TODOS OS CODIGOS ABAIXO SAO NOVOS DANIEL 06/2022*/
+/*TABELA COTACAO INICIO DANIEL 06/2022*/
+.tabela_cotacao {
+	border: none;
+}
+
+thead th {
+	font-size: 14px;
+	padding: 6px;												
+}
+
+.tabela_cotacao {
+	border: none;
+}
+
+.tabela_cotacao thead th {
+	background-color: #ffffff;
+	border: none;
+	color: #333;
+}
+
+.tabela_cotacao tfoot td {
+	border: none;
+	background-color: var(--color_principal);
+}
+
+.rodape_cotacao td {
+	color: #ffffff;
+	padding: 12px;  
+}
+
+.rodape_cotacao input.noinput {
+	color: #ffffff;
+	padding: 12px;  
+}
+
+.tabela_cotacao tfoot tr:last-child td:first-child {
+	border-radius: 0 0 0 20px;
+}
+
+.tabela_cotacao tfoot tr:last-child td:last-child {
+	border-radius: 0 0 20px 0;
+}
+
+.ico_action_add {background: url(images/2022/icones/add.svg) no-repeat center;}
+.ico_action_calendario {background: url(images/2022/icones/calendario.svg) no-repeat center;}
+.alinhamento_center {text-align: center;}
+
+.input_cotacao_marca {
+	height: 32px;
+	width: 198px;
+	left: 24px;
+	top: 0px;
+	outline: 0;
+	border-radius: 4px;
+	border: 1px solid #3D5F90;
+	padding: 9px, 16px, 9px, 16px;
+	align-items: center;
+	text-align: center;
+	box-sizing: border-box;
+	-webkit-box-shadow: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	box-shadow: none;
+	appearance: none;
+}
+
+.input_cotacao_qtd_emb {
+	height: 32px;
+	width: 68px;
+	left: 24px;
+	top: 10px;
+	outline: 0;
+	border-radius: 4px;
+	border: 1px solid #3D5F90;
+	padding: 9px, 16px, 9px, 16px;
+	align-items: center;
+	text-align: center;
+	box-sizing: border-box;
+	-webkit-box-shadow: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	box-shadow: none;
+	appearance: none;
+}
+
+.info_percentual_cotacao{
+	height: 10px;
+	top: calc(50% - 10px/2);
+	line-height: 10px;
+	color: #00E676;
+	font-size: 10px;
+	display: inline;
+}
+
+.quantidade_cotacao{
+	font-size: 20px;
+	color: #6D8CC1;
+}
+
+.qtd_produto_cotacao{
+	margin-top: 20px;
+}
+
+.qtd_produto_cotacao p{
+	display:inline;
+	margin-right: 25px;
+	margin-top: 30px;
+}
+
+.botao_catalogo{
+	width: 90px;
+	height: 32px;
+	border-radius: 3px;
+	background: #FFFFFF;
+	border: 1px solid #3D5F90;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 750;
+	font-size: 13px;
+	line-height: 16px;
+	color: #3D5F90;
+	display: inline;
+	cursor: pointer;
+	margin-right: 5%;
+	float: right;
+	margin-top: -8px;
+}
+
+.botao_filiais_cotacao{
+	height: 30px;
+	width: 73px;
+	border-radius: 3px;
+	background: #56CCF2;
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 750;
+	font-size: 13px;
+	line-height: 16px;
+	color: #3D5F90;
+	display: inline;
+	cursor: pointer;
+	margin-right: 5%;
+	float: right;
+	margin-top: -8px;
+}
+
+.cotacao_fechado{
+	/* ET 15jun22 position: absolute;*/
+	width: 98%;
+	height: 100px;
+	border-radius: 20px;
+	margin-top: 40px;
+	margin-right: 1%;
+	margin-left: 1%;
+	background: #FFFFFF;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+}
+
+.quantidade_cotacao_fechado{
+	font-size: 20px;
+	color: #6D8CC1;
+	margin-top: 16px;
+	display:inline-block;
+	width: 200px; 		/* ET 16jun22	*/
+}
+
+.informacao_produto_cotacao_fechado{
+	position: relative;
+	/*height: 230px;*/
+	width: 80%;			/*	ET	29jun22 antes 70%	*/
+	margin-top: 10px;
+	display: inline-block;
+	float: left;
+}
+
+.informacao_produto_cotacao_fechado p{
+	display:inline;
+	margin-right: 25px;
+	font-size: 20px;
+}
+
+.info_cotacao_fechado{
+	width: 64px;
+	height: 14px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 14px;
+	text-align: center;
+	color: #00E676;
+	flex: none;
+	display: inline-block;
+	margin-left: 30px;
+	margin-top: -10px;
+}
+
+.info_cotacao_fechado_salvar{
+	width: 90px;
+	margin-left: 89%;
+	position: relative;
+	margin-top: -34px;
+}
+
+.input_cotacao_preco_uni {
+	height: 32px;
+	width: 137px;
+	border-radius: 4px;
+	border: 1px solid #3D5F90;
+	padding: 9px, 16px, 9px, 16px;
+	text-align: center;
+	box-sizing: border-box;
+	-webkit-box-shadow: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	box-shadow: none;
+	appearance: none;
+}
+
+.data_cotacao{
+	background: #FFFFFF;
+	border: 1px solid #6D8CC1;
+	border-radius: 10px;
+	color: var(--color_principal);
+	width: 110px;
+	font-size: 14px;
+	display:inline-flex;
+	margin-top:  -3px;
+}
+
+.hora_cotacao{
+	background: #FFFFFF;
+	border: 1px solid #6D8CC1;
+	border-radius: 10px;
+	color: var(--color_principal);
+	width: 80px;
+	font-size: 14px;
+	display:inline-flex;
+	margin-top:  -3px;
+	padding: 0px 3px;
+}
+
+.submenu-cotacao{
+/*	width: 140px;
+	height: 30px;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px 10px;*/
+	float: right;
+	margin-right:30px;
+}
+
+
+.informacao_geral_cotacao{
+	position: relative;
+	width: 98%;
+	left: 0px;
+	top: 0px;
+	border-radius: 20px;
+	margin-right: 1%;
+	margin-left: 1%;
+	/*background-color: #ffffff;*/
+}
+
+.informacao_geral_cotacao_1{
+	position: relative;
+	height: 300px;			/*ET 22jun22 antes 190px; 22ago22 aumentamos de 220 a 300 */
+	width: 98%;
+	margin-top: 10px;
+	display: inline-block;
+	float:left;
+	overflow: hidden;		/*	13jun22	*/
+}
+
+.informacao_geral_cotacao_1_titulo{
+	line-height: 20px;
+	margin-left: 30px;
+}
+
+.informacao_geral_cotacao_empresa{
+	font-size: 16px;
+	color: #6D8CC1;
+	display:inline-flex;
+	width: 104%;
+	font-weight: bold;
+}
+
+.informacao_geral_cotacao_detalhes{
+	height: 18px;
+	width: 97%;
+	left: 57px;
+	border-radius: nullpx;
+	font-size: 14px;
+	line-height: 40px;
+	margin-left: 30px;
+}
+
+.contador_carrinho{
+	height: 20px;
+	width: 45px;
+	border-radius: 10px;
+	/* ET 16jun22 background: #56CCF2;*/
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 750;
+	font-size: 12px;
+	line-height: 16px;
+	color: #FFFFFF;
+	display: inline;
+	cursor: pointer;
+	margin-right: 2%;
+	float: right;
+	margin-top: -2px;
+}
+/*FIM TELA DE COTACAO DANIEL 06/2022*/
+
+/*MODAL FILIAIS INICIO DANIEL 06/2022*/
+.div_coluna_tabela_filiais{
+	position: relative;
+	width: 98%;
+	left: 0px;
+	top: 0px;
+	border-radius: 20px;
+	margin-top: 40px;
+	margin-right: 1%;
+	margin-left: 1%;
+	background-color: #ffffff;
+}
+
+.tabela_filiais {
+	border: none;
+}
+
+thead th {
+	font-size: 14px;
+	padding: 6px;												
+}
+
+.tabela_filiais {
+	border: none;
+}
+
+.tabela_filiais thead th {
+	background-color: #56CCF2;
+	border: none;
+	color: #3D5F90;
+}
+
+.tabela_filiais tfoot td {
+	border: none;
+	height: 5px;
+	background-color: #56CCF2;
+}
+
+.rodape_filiais td {
+	color: #ffffff;
+	padding: 12px;  
+}
+
+.rodape_filiais input.noinput {
+	color: #ffffff;
+	padding: 12px;  
+}
+
+.tabela_filiais thead tr:last-child th:first-child {
+	border-radius: 20px 0 0 0;
+}
+
+.tabela_filiais thead tr:last-child th:last-child {
+	border-radius: 0 20px 0 0;
+}
+
+.tabela_filiais tfoot tr:last-child td:first-child {
+	border-radius: 0 0 0 20px;
+}
+
+.tabela_filiais tfoot tr:last-child td:last-child {
+	border-radius: 0 0 20px 0;
+}
+
+
+.cabecalho_tabela_filiais{
+	height: 50px;
+	box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.08);
+	border-radius: 16px;
+}
+
+.input_qtd_filiais {
+	height: 32px;
+	width: 100px;
+	border-radius: 4px;
+	border: 1px solid #3D5F90;
+	padding: 9px, 16px, 9px, 16px;
+	text-align: center;
+	box-sizing: border-box;
+	-webkit-box-shadow: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	box-shadow: none;
+	appearance: none;
+}
+
+
+/* ET 16jun22 Basado en div_coluna_1_cotacao_titulo */
+/*DIV com informações antes da TABELA/GRID*/
+.div_coluna_1_cotacaoprodutos_titulo{
+	font-size: 18px;
+	line-height: 20px;
+	/*color: #6D8CC1;*/
+	margin-left: 30px;
+	margin-top: 30px;		/* ET 16jun22 */
+}
+
+
+/*MODAL FILIAIS FIM*/
+
+/*TELA DE VENCEDORES DANIEL 06/2022*/
+.filial_vencedores{
+	width: 750px;
+	height: 33px;
+	left: 1269px;
+	top: 296px;
+	border: 1px solid var(--color_principal);
+	box-sizing: border-box;
+	border-radius: 3px;
+	color: #FFFFFF;
+	overflow:hidden;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 0px 10px;
+	margin-left: 2%;
+	margin-right: 20px;
+	margin-top: 9px;
+}
+
+.div_coluna_1_vencedores{
+	position: relative;
+	height: 205px;
+	width: 98%;
+	margin-top: 10px;
+	display: inline-block;
+	float:left;
+}
+
+.div_coluna_1_vencedores p{
+	/*font-size: 16px;*/
+}
+
+
+
+/*	Valoración mediante estrellas	*/
+.rating-holder {
+  /*display: inline-block;*/
+  vertical-align: middle;
+}
+
+.rating-holder ul {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+
+.rating-holder ul li {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.rating-holder li {
+	margin: 0 3px 0;
+	float:left;
+}
+
+.rating-holder li a {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("http://www.newco.dev.br/images/ico-stars02.png");
+    background-origin: padding-box;
+    background-position: -22px 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 19px;
+    width: 20px;
+	display: block;
+	font-size: 0;
+	line-height: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-indent: -9999px;
+}
+
+.rating-holder ul li.active a, .rating-holder ul li a:hover {
+    background-position: 0 0;
+}
+
+.rating-holder .rating {
+    font-size: 14px;
+    line-height: 16px;
+	vertical-align: middle;
+}
+
+
+
+/* Pruebas para ajustar scroll bar	*/
+::-webkit-scrollbar-track {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .
+    .
+    .
+}
+
+
+
+
+/*	20feb23 Estilo para las librerías PARSLEY.JS*/
+.l-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+/* Parsley CSS */
+.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  color: #B94A48;  
+  opacity: 0;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+

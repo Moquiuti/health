@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de un contrato
+	Ultima revision: ET 5set18 11:43
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ModeloContratoHTML.xsl"?>
+
+<ModeloContrato xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<!--
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="CON_ID"/>
+-->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER(6);
+		IDModelo		NUMBER(12);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Modelo');
+		IF US_ID > 0 THEN
+		
+			utilidades_pck.debug('Modelo.xsql Ses:{@SES_ID}. IDUsuario:'||US_ID||' Accion:{@ACCION} IDModelo:{@CON_MOD_ID}');
+		
+			IF '{@ACCION}'='GUARDAR' THEN
+				IDModelo:=CONTRATOS_MODELOS_PCK.Modelo(
+					US_ID,
+					'{@CON_MOD_ID}',
+					'{@CON_MOD_CODIGO}',
+					'{@CON_MOD_NOMBRE}',
+					'{@CON_MOD_DESCRIPCION}'
+				);
+			ELSE
+				IDModelo:='{@CON_MOD_ID}';			--	Si está vacío, sin '' dará error
+			END IF;
+
+			IF IDModelo IS NULL OR IDModelo > 0 THEN
+				CONTRATOS_MODELOS_PCK.Modelo_XML(
+					US_ID,
+					IDModelo,
+					'S'
+				);
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModeloContrato>

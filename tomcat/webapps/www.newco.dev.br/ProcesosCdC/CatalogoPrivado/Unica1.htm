@@ -1,0 +1,21 @@
+<!--
+	EStá pagina crea los frames y framesets necesarios, pero el buscador y los resultados se cargan desde ZonaCatalogo
+-->
+<html>
+	<head>
+		<title>Mantenimiento Catalogo Privado</title>
+	</head>
+	<frameset cols="290px,*" frameborder="no" border="0" framespacing="0">
+		<frameset rows="400px,*" frameborder="no" border="0" framespacing="0">			
+			<frame name="zonaCatalogo" src="ZonaCatalogo.xsql" scrolling="auto" noresize="yes"/>
+			<frame name="zonaProducto" src="about:blank" scrolling="auto" noresize="yes"/>	
+		</frameset>		
+		
+		<frameset rows="80px,*" frameborder="no" border="0" framespacing="0">
+    		<frame name="Cabecera" scrolling="auto" noresize="yes" src="Buscador.xsql"/>
+	    	
+		</frameset>
+		
+	</frameset>
+
+</html>

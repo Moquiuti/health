@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+    Mostrar documentos de producto. Creado a partir de PRODocs.
+ 	Ultima revision: ET 9mar22 17:30
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="PROPackHTML2022.xsl"?>
+
+<Pack xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenPack');
+		IF US_ID>0 THEN
+			Productos_packs_pck.Inicio_XML(US_ID, '{@PRO_ID}', '{@ACCION}', '{@PARAMETROS}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Pack>

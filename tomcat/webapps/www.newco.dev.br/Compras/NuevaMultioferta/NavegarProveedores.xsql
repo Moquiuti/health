@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NavegarProveedoresHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NavegarProveedoresHTML.xsl"?>
+
+
+<!--
+   Mostramos la lista de proveedores del usuario
+-->
+
+<NavegarProveedores xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="STYLE"/>
+
+	<xsql:include-owa>
+        <![CDATA[
+			DECLARE
+				US_ID		NUMBER;
+			BEGIN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NavegarProveedores');	
+				IF US_ID>=0 THEN   
+					NavegarProveedores_Pck.NavegarProveedores_XML(US_ID,'{@IDPROVEEDOR}','{@IDFAMILIA}','{@NOMBREFAMILIA}','{@IDSUBFAMILIA}','{@NOMBRESUBFAMILIA}');
+				END IF;
+			END;
+        ]]>
+	</xsql:include-owa>
+</NavegarProveedores>
+
+

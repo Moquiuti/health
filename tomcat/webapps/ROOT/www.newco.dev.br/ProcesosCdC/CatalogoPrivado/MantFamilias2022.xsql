@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Catalogo Privado. Mantenimiento de FAMILIA
+	Ultima revisión: ET 7mar22 17:08 MantFamilias2022_070322.js
+-->
+<?xml-stylesheet type="text/xsl" href="MantFamiliasHTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param  name="CATPRIV_IDEMPRESA"/>
+	<xsql:include-param  name="ACCION"/>
+	<xsql:include-param  name="TIPO"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantFamilias');
+		IF US_ID>=0 THEN
+		  	IF 	'{@ACCION}' IS NOT NULL THEN	   
+				v_Res:=CATALOGOPRIVADO_MANT_PCK.MODIFICARFAMILIA(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDCATEGORIA}',
+					'{@CATPRIV_IDFAMILIA}',
+					'{@CATPRIV_REFERENCIAFAMILIA}',
+					'{@CATPRIV_NOMBRE}',
+					'{@CATPRIV_REFCLIENTE}',
+					'{@CP_FAM_IDSELECCION}',
+					'{@ACCION}'
+				);
+
+				CATALOGOPRIVADO_MANT_PCK.FAMILIA_XML(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDCATEGORIA}',
+					utilidades_pck.Piece(v_Res,'|',0),
+					utilidades_pck.Piece(v_Res,'|',1)
+				);
+			ELSE
+				CATALOGOPRIVADO_MANT_PCK.FAMILIA_XML(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDCATEGORIA}',
+					'{@CATPRIV_IDFAMILIA}'
+				);
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

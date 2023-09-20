@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISMatriz.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISMatriz.xsl"?>
+
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<!--
+	Devuelve una matriz con los totales de pedidos por centro (columna) y proveedor (fila)
+-->
+
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-param name="SES_ID"/>
+
+<xsql:include-request-params/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISMatriz');
+		IF US_ID>=0 THEN
+			EIS_MATRIZ_PCK.MatrizPrecalculada_XML(US_ID,'{@IDPRECALCULADA}','{@PERIODO}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</EIS_XML>

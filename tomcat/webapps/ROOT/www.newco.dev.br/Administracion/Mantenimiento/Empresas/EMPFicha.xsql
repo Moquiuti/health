@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--  	
+	Ficha normal de empresa
+	Ultima revision: ET 10jul19 14:00
+-->
+<?xml-stylesheet type="text/xsl" href="EMPFichaHTML.xsl"?>
+
+<Ficha xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<!--  obtenemos el vendedor para el usuario que esta visualizando la pagina de empresa -->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','FichaEmpresa');
+		IF US_ID>0 THEN
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			EMPRESAS_PCK.FichaCompleta_XML(US_ID,'{@EMP_ID}','EMPRESA', 'N');					--Antes, "EMPRESAS_PCK.Mostrar" y 'EMPRESA DESDE="Manten"'
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Ficha>

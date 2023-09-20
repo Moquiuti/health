@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Mantenimiento de los datos de control de pedidos problematicos
+	12abr07	ET	
+
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ControlPedidosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ControlPedidosHTML.xsl"?>
+
+<ControlPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="IDEMPRESA" value="{@IDEMPRESA}"/><!--	necesario para recuperar el filtro en la pagina de inicio-->
+  <xsql:include-param name="IDCENTRO" value="{@IDCENTRO}"/>
+  <xsql:include-param name="IDPEDIDO" value="{@IDPEDIDO}"/>
+  <xsql:include-param name="IDPROVEEDOR" value="{@IDPROVEEDOR}"/>
+  <xsql:include-param name="IDFILTROMOTIVO" value="{@IDFILTROMOTIVO}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<!--	Muestra los datos de seguimiento por parte de MVM de un pedido		-->
+	<xsql:include-owa>
+         
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarComentarioSave');
+					IF US_ID>=0 THEN
+						PedidosProblematicos_Pck.EliminarControl_XML (US_ID, '{@IDPEDIDO}', '{@ELIMINAR_ENTRADA}');
+					END IF;
+				END;
+        
+        </xsql:include-owa>
+	
+  
+  <!-- 
+       botones nueva version
+  -->
+  
+	<button label="Enviar" caption="IMG-0100">
+		<name_function>Enviar</name_function>
+	</button> 
+  
+	<button label="Salir" caption="IMG-0070">
+		<name_function>Salir</name_function>
+	</button> 
+  
+</ControlPedidos>

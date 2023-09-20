@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!--
+ |   Mostrar detalle de la empresa.
+ |
+ +-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" /> 
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>
+  <xsl:template match="/">
+    <html> 
+      <head> 
+        <!--style-->
+      <xsl:call-template name="estiloIndip"/>
+      <!--fin de style-->
+       
+	<xsl:text disable-output-escaping="yes"><![CDATA[
+        
+        <script type="text/javascript">
+          <!--
+
+
+			function Siguiente(){
+            
+				var form=document.forms[0];
+                
+                document.location='ControlPedidos.xsql?IDPEDIDO='+form.elements['IDPEDIDO'].value; }
+              
+               /*
+document.location='WFStatus.xsql?IDEMPRESA='+form.elements['IDEMPRESA'].value+'&IDCENTRO='+form.elements['IDCENTRO'].value
+																+'&IDPROVEEDOR='+form.elements['IDPROVEEDOR'].value+'&IDFILTROMOTIVO='+form.elements['IDFILTROMOTIVO'].value;
+              */
+			}
+
+			
+          //-->
+        
+        </script>
+        
+        
+        ]]></xsl:text>			
+      </head>
+      <body bgcolor="#FFFFFF" onload="javascript:Siguiente();">
+		<form method="post" name="Cabecera" action="ControlPedidosSave.xsql">
+			<input type="hidden" name="IDEMPRESA" value="{/ControlPedidos/IDEMPRESA}" />
+			<input type="hidden" name="IDCENTRO" value="{/ControlPedidos/IDCENTRO}" />
+			<input type="hidden" name="IDPROVEEDOR" value="{/ControlPedidos/IDPROVEEDOR}" />
+			<input type="hidden" name="IDFILTROMOTIVO" value="{/ControlPedidos/IDFILTROMOTIVO}" />
+            <input type="hidden" name="IDPEDIDO" value="{/ControlPedidos/IDPEDIDO}" />
+		</form>
+      </body>
+    </html>
+  </xsl:template>
+
+</xsl:stylesheet>

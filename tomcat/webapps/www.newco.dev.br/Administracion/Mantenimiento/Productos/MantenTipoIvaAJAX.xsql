@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Cargas catalogos CSV: actualizar el tipo de IVA de un producto
+	ultima revision 4jul22 15:37
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="MantenTipoIvaJSON.xsl"?>
+
+<EnvioLineaFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NUMLINEA" value="NUMLINEA"/>
+	<xsql:include-param name="TEXTO" value="{@TEXTO}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	
+	<!--	Datos que devolvera el PL/SQL	
+	<OK/>
+	-->	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','TipoIva');
+
+	 		IF US_ID > 0 THEN
+				--utilidades_pck.debug('XSQL: IntegracionRecepcion_pck.RecepcionProducto {@IDFICHERO},{@NUMLINEA},{@TEXTO}');
+
+				v_Res:=CatProveedores_fic_pck.TipoIva
+				(
+					US_ID,
+					'{@INTF_ID}',
+					'{@NUMLINEA}',
+					'{@CODNITPROVEEDOR}',
+					'{@REFERENCIA}',
+					'{@NOMBRE}',
+					'{@TIPOIVA}'
+				);
+				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P(	'<OK>'
+						||	'<NUMLINEA>{@NUMLINEA}</NUMLINEA>'
+						||	'<IDPRODUCTO>'||utilidades_pck.Piece(v_Res,'|',1)||'</IDPRODUCTO>'
+						||	'</OK>');
+				ELSE
+
+					HTP.P(utilidades_pck.CabeceraXML||'<ERROR msg="'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'"/>');
+				
+				END IF;
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnvioLineaFichero>

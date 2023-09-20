@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para la busqueda de productos en la plantilla
+	
+	(c) 29/8/2001 E.Torrellas
+
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BuscadorCatalogoPrivadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BuscadorCatalogoPrivadoHTML.xsl"?>
+
+<ProductosEnPlantillas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  	 <xsql:include-owa>
+    <![CDATA[
+         DECLARE
+		  US_ID		NUMBER;
+          BEGIN
+		 	 US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CatPrivProveedor');
+		  IF US_ID>=0 THEN
+             ProductosEnPlantilla_PCK.ListaProductosParaProveedor(US_ID,'{@LLP_NOMBRE}','{@LLP_CLIENTE}','{@PAGINA}');
+          END IF;
+     END;
+    ]]>
+  </xsql:include-owa>	
+
+  <returnHome/>
+  
+     <botones_nuevo>
+       <button label="NavegarAtras" caption="PRO-0480">
+         <name_function>Enviar</name_function> 
+         <param>document.forms[0]</param>  
+         <param>'ANTERIOR'</param>
+       </button>
+       
+       <button label="NavegarAdelante" caption="PRO-0490">
+         <name_function>Enviar</name_function> 
+         <param>document.forms[0]</param>  
+         <param>'SIGUIENTE'</param>
+       </button>
+
+     </botones_nuevo>
+     
+</ProductosEnPlantillas>
+

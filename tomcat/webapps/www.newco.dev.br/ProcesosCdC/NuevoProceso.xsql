@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TareaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TareaHTML.xsl"?>
+
+<Tarea xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+ 
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProceso');
+		  IF US_ID>=0 THEN
+                    Procesos_PCK.NuevoProceso_XML
+			(
+				US_ID,
+				'{@TIPO}'
+			);
+                  end if;
+					   
+        END;
+        ]]>
+  </xsql:include-owa>
+
+  <button label="Enviar" caption="IMG-0100">
+    <name_function>Guardar</name_function>
+    <param>'F'</param>
+  </button>
+
+  <button label="Pendiente" caption="IMG-0060">
+    <name_function>Guardar</name_function>
+    <param>'C'</param>
+  </button>
+
+  <button label="Cancelar" caption="IMG-0050">
+    <name_function>Guardar</name_function>
+    <param>'B'</param>
+  </button>
+  
+  <returnHome/>
+</Tarea>

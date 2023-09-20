@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantenimientoReducidoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantenimientoReducidoHTML.xsl"?>
+-->
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="ORIGEN"/>
+<xsql:include-param name="SOL_PROD_ID"/>
+<xsql:include-param name="EMP_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDEmpresa	NUMBER;
+  BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','FichaCatalogacion');
+		IF US_ID>=0 THEN
+
+			IF '{@ACTION}'='BORRAR' THEN
+		    MVM_V3_PCK.BorrarProd_PlantEnEmp(
+					US_ID,
+					'{@EMP_ID}',
+					'{@PRO_ID}'
+				);
+			END IF;
+
+			IF NVL('{@EMP_ID}',0) = 0  THEN
+				v_IDEmpresa	:= UTILIDADES_PCK.EmpresaDelUsuario(US_ID);
+			ELSE
+				v_IDEmpresa	:= '{@EMP_ID}';
+			END IF;
+
+			CATALOGOPRIVADO_V4_PCK.infoProducto_XML(
+				US_ID,
+				'{@PRO_ID}',
+--			utilidades_pck.empresaDelUsuario(US_ID),	-- DC - 22abr14 - Hay que pasar el ID de la empresa consultada
+--			'{@EMP_ID}',					-- DC - 23abr14 - Parche para poder abrir la ficha de catalogacion desde buscador en enviar pedidos ya que no se pasa el EMP_ID ahi
+				v_IDEmpresa,
+				'{@DERECHOS_PLANTILLAS}',
+				'S',
+				'S',
+				'N',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

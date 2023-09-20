@@ -1,0 +1,77 @@
+6jul16	Quitamos el control de precio sospechoso, que se informará en el XML
+
+Set16: multiples cambios:
+	- Botones "vencedores" y "resumen proveedores"
+	- Documentacion proveedores
+	- Mostrar pedido minimo proveedor
+	- Enlace a la ficha de proveedor
+	- Actualizacion javascript lic_170916.js
+	
+Oct16:
+	- Motivos para seleccionar un producto que no sea el más barato
+	- Datos de la última compra
+	- Actualizacion javascript lic_251016.js
+	
+	
+11nov16: Aparecia el texto "producto_sin_pedidos_anteriores" concatenada al	texto correcto
+	
+
+20abr17	ET En la ficha de producto, en estado "CONT" permitir también incluir en el catálogo de clientes cualquier oferta
+20abr17	ET Actualizacion javascript licFichaProd_200417.js
+2may17	ET Limpieza bloques grandes de comentarios
+10may17	ET Pestannas basadas en UL/LI -> licFichaProd_100517.js
+10may17	ET Lic.multipedidos: Información de pedidos en la ficha de producto
+11may17	ET Licitaciones multipedido: incluir las líneas de pedido en la ficha de producto
+12may17	ET Licitaciones multipedido: guardar cambios en las líneas de pedido en la ficha de producto
+12may17	ET Licitaciones multipedido: crear nuevas líneas de pedido en la ficha de producto
+23may17	ET Licitaciones: al acceder a la ficha, marcar la pestaña "Proveedores"
+16mar18	ET Revisar campo consumo, incluir campo compra media mensual, alinear "?" y aplicar clase correcta cuando el precio es sospechoso
+19mar18	ET Volvemos al javascript anterior licFichaProd_200417.js, el de mayo17 no estaba subido a producción
+3abr18	ET Botón para eliminar oferta (¿Alternar con botón para recuperar oferta?). Actualizamos a licFichaProd_040418.js
+5abr18	ET Incluir motivo al eliminar oferta 
+2may18	ET Permitir a usuarios MVM modificar los datos de la oferta del proveedor para corregir errores
+22may18	ET Incluir resumen de consumo del producto en los últimos 3 meses 
+6jul18	ET Adjudicación múltiple: licFichaProd_060718.js
+9nov18	ET Usuarios no CDC no deben ver opción de evaluar + si no es adjudicación múltiple, no mostrar enlace "Orden"
+30nov18 ET Mostrar también la marca del último pedido
+30nov18 ET Solicitar confirmacion si no hay ninguna oferta seleccionada al pulsar el botón "incluir en pedido". Actualizamos a licFichaProd_301118.js
+30nov18 ET Mostrar interrogante rojo junto al empaquetamiento si es mayor que la cantidad
+7dic18	ET No se podía abrir correctamente la ficha de empresa (faltaba la función JS) licFichaProd_071218.js
+13dic18	ET Permitir a los compradores (de Brasil) cambiar el precio de la oferta licFichaProd_141218.js
+19dic18	ET Permitir a los compradores (de Brasil) cambiar también las unidades por lote de la oferta
+24abr19	ET Incluir cantidad de última compra 
+25abr19	ET Incluir marcas aceptables a nivel de empresa y centro. Mejoras a nivel de diseño. licFichaProd_250419.js
+15may19	ET Separar cantidad de compra entre varios proveedores. licFichaProd_150519.js
+22may19 ET Botón para volver a la licitación si está cerrada
+05jun19 ET Desde el nombre de producto estándar, abrir histórico de consumos
+05jun19 ET Desde "último pedido", abrir el último pedido con este producto
+20jun19 ET Al cambiar la cantidad de producto, corregir la cantidad adjudicada
+17jul19 ET Pedido directo desde oferta licFichaProd_170719.js
+24jul19 ET En licitaciones multicentro, se permitía mantener marcados varios checkboxes
+29jul19 ET Pedido desde ofertas para licitaciones multicentro licFichaProd_290719.js
+04set19 ET Solucionado problema para seleccionar alternativa más cara: licFichaProd_040919.js
+22oct19 ET Solucionado error al cambiar precio por parte del usuario MVM: licFichaProd_221019.js
+24oct19 ET Solucionado error al lanzar pedido desde oferta si no existe el centro
+06nov19 ET El comprador puede añadir ofertas de proveedores a la licitación: licFichaProd_061119.js
+25nov19 ET Diferenciar las ofertas originadas por producto adjudicado
+16dic19 ET SOlucionado problema al repartir cantidades entre varios productos, si no era licitación multiopción solo permitía marcar uno: licFichaProd_161219.js
+07ene20 ET Solucionado problema, usuarios no MVM no podían añadir ofertas
+13ene20 ET Aplicar caso de producto/proveedor bloqueado por pedido
+07feb20 ET Cambiar estilos para Unimed
+20feb20 ET Abrir ficha proveedor en pestaña documentos, incluir plazo de entrega en tabla de ofertas licFichaProd_200220.js
+16jul20 ET Incluir ref. centro cuando sea diferente a la ref empresa en la ficha de producto
+27ago20 ET Solucionados problemas en caso de licitación agregada. licFichaProd_270820
+14oct20 ET No se está mostrando la ficha técnica de la oferta
+29mar21 ET Permitir separar cantidad por proveedor en licitaciones agregadas FichaProductoLicitacion_290321.js
+08abr21 ET Mejoras en la presentacion de resultados
+09abr21 ET Control de las unidades por lote a nivel de cantidad adjudicada, corregir error al mostrar el total de linea
+19ago21 ET Sustituir el producto estandar asociado al producto de la licitacion. FichaProductoLicitacion_190821.js
+07set21 ET Se producen problemas debido a un cambio de normas de seguridad de Chrome, que no permite abrir el dialogo en la pagina. FichaProductoLicitacion_070921.js
+29set21 ET No esta permitiendo guardar las cantidades en un aalicitacion de Unimed. FichaProductoLicitacion_290921.js
+17nov21 ET Si estamos en el ultimo producto, se produce un error si la cantidad esta repartida entre varios proveedores. FichaProductoLicitacion_171121
+23nov21 ET Mostrar el principio activo en icono (i)
+08dic21 ET Incluir columna documentos para FT, RS, CE
+17dic21 ET Ampliar espacio botones
+07feb22 ET Solucionado error al guardar seleccion multiopcion FichaProductoLicitacion_070222.js
+10feb22 ET Solucionado error al guardar seleccion multiple FichaProductoLicitacion_100222.js
+

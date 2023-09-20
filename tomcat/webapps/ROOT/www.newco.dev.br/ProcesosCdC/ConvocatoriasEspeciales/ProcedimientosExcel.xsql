@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Listado excel de procedimientos para convocatorias especiales
+	Ultima revision ET 26oct18 12:30
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ExcelesHTML.xsl"?>
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="IDCONVOCATORIA"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+        
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		PRODUCTO_ID	NUMBER := NULL;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ConvElEspProcedimientosExcel');
+		IF US_ID>=0 THEN
+			ConvocatoriasEspeciales_pck.ListadoProcedimientos_Excel
+			(
+				US_ID,
+				'{@IDCONVOCATORIA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</DescargaExcel>

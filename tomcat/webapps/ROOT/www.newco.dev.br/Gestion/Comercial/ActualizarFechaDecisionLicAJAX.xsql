@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Actualiza la fecha de decision de la licitacion. Devuelve OK y el estado de la licitacion
+	Ultima revision: ET 14jun22 10:40
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ActualizarFechaDecisionLicJSON.xsl"?>
+
+<Licitacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID				NUMBER(12);
+      		IDLicitacion		NUMBER(12);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ActualizarFechaDecisionLic');
+
+	 		IF US_ID>0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				IDLicitacion:=LICITACIONES_PCK.ModificarFechaDecision
+				(
+					US_ID,
+					'{@LIC_ID}',
+					'{@FECHADECISION}',
+					'{@HORADECISION}',
+					'{@MINUTODECISION}'
+				);
+				
+				IF IDLicitacion>0 THEN
+					HTP.P('<OK/>');
+				ELSE
+					HTP.P('<ERROR  msg="No se han podido actualizar los datos" />');
+				END IF;
+				
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</Licitacion>

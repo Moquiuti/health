@@ -1,0 +1,38 @@
+//	22/2/16 ET Prueba problemas adjudicacion, eliminadas del código
+//	6/7/16	ET Cambios necesarios para Brasil
+//	7/7/16	ET Pedidos sin pasos previos de catalogacion
+//	15/7/16 ET Multiples cambios para licitaciones agregadas
+//	12/8/16 ET Cambios para permitir licitaciones agregadas y no agregadas desntro de asociaciones
+//	16/8/16 ET Cambio por nuevo estado COMP para informar compras en licitaciones agregadas
+//	29/8/16	ET Incluir info documentación proveedor
+//	31/8/16 ET Reducir columnas en pestaña proveedores, incluir linea de separación, varios cambios menores
+//	1/9/16	ET Error muy grave al entrar los datos de productos por centro debido a que el array de productos es independiente del array de productos por centro
+//	9/9/16	ET Mostrar únicamente los proveedores con ofertas en la pestaña de productos
+//	17/9/16 ET Al editar línea a línea (cantidades por centro o oferta proveedor) solo mostrar el botón de "guardar" si hay cambios en la línea
+//	17/9/16 ET Recargamos toda la página si hay cambios importantes en los productos
+//	20/9/16 ET la recarga anteriro solo la hacemos si son muchos los proveedores que han informado la licitacion
+//	21/9/16 ET Solucionamos varios problemas debidos al cambio del día 20
+//	22/9/16 ET Solucionamos varios problemas debidos al cambio del día 20
+//	28/9/16 ET Bucle al corregir las cantidades en función de las unidades por lote
+//	30/9/16 ET No se actualiza correctamente el ceontador de número de ofertas por producto
+//	6/10/16	ET Problema de redondeo al corregir las unidades por lote
+//	16nov16	ET Ajustes para el cambio de diseño
+//	16dic16	ET Problema en la ficha de producto al guardar sin oferta seleccionada
+//	19dic16 ET El proveedor estaba viendo el producto seleccionado ANTES de la adjudicacion
+//	5ene17	ET Resolución de varios errores
+//	11ene17	ET No se borran correctamente productos
+//	11ene17 ET Eliminamos el botón de conversaciones proveedores, es innecesario ya que existe el icono de conversación en la pestaña proveedores para esto
+//	12ene17 ET Al enviar productos por referencia, ocultamos el botón para evitar doble-clic
+//	13ene17	ET Cambiamos nombre a lic_130117.js para forzar recarga
+//	16ene17	ET El cambio de usuario proveedor no funciona en el estado "Estudio previo" (correcciones solo a nivel XSL)
+//	16ene17	ET Se habían perdido los colores. Corregido JS y PL/SQL
+//	23ene17	ET No se actualizaba bien la matriz de productos tras guardar cambios en cantidad o precio (historico u objetivo) 
+//	23ene17	ET Al añadir nuevos productos, los insertamos en paquetes de 20 y vamos informando del avance al usuario
+//	1feb17	ET Si se modifica el usuario de un proveedor, ya no se muestra el botón guardar al abrir otros proveedores
+//	2feb17	ET Error grave al actualizar los datos de los productos: no se tiene en cuenta el cambio de orden de los productos
+//	24feb17	ET Permitir al proveedor publicar ofertas vacias
+//	2mar17	ET Enlazar proveedores a EMPDetalleFrame.xsql en lugar de EMPDetalle.xsql
+
+
+
+

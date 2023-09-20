@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CENNuevoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CENNuevoHTML.xsl"?>
+
+<BusquedaEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="ADMINISTRADORMVM"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDUSUARIO"/>
+  <xsql:include-param name="SES_ID"/>
+  
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CENNuevo, nuevo');
+		  IF US_ID>=0 THEN
+            MantenimientoEmpresas_PCK.AreaEmpresa(US_ID , '{@IDNUEVAEMPRESA}', '{@IDNUEVOCENTRO}','{@ACCION}','{@IDUSUARIO}' );
+          end if;
+        END;
+        ]]>
+  </xsql:include-owa>
+
+  <BuscForm name="BuscaEmpresa"  method="post">
+  
+    <!-- 
+     |   Tipos de empresa
+     +-->
+  
+    <field name="EMP_IDTIPO">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+          select 0 as ID,
+                '[Seleccione opcion]' as "listItem"
+          FROM DUAL
+          UNION        
+	  select TE_ID, TE_DESCRIPCION
+	  from tiposempresas
+        ]]>
+
+       <xsql:no-rows-query rowset-element="dropDownList" row-element="listElem">
+	  select 0 AS ID,
+                '[No existen tipos]' AS "listItem"
+	  from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    
+    <!--
+     |  Listado de los Tipos de Usuario
+     +-->
+    <field name="US_IDTIPO">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+                select TU_ID as "ID",  
+                       TU_DESCRIPCION as "listItem"
+                from TIPOSUSUARIOS
+        ]]>
+       <xsql:no-rows-query>
+          Select 'Sorry' "Sorry" from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    
+    <!--
+     |	Listado de las provincias
+     +-->
+    <field name="EMP_PROVINCIA">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+                select ZON_NOMBRE as "ID",  
+                       ZON_NOMBRE as "listItem"
+                from GEO_ZONAS
+                where ZON_IDPAIS = (
+	                select emp_idpais 
+			from usuarios,centros,empresas 
+			where us_id='{@IDUSUARIO}' and us_idcentro=cen_id and cen_idempresa=emp_id
+		) AND	((ZON_IDPADRE != '0') or (ZON_IDPAIS <> 34))
+		order by zon_nombre
+
+        ]]>
+       <xsql:no-rows-query>
+          Select 'Sorry' "Sorry" from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    
+
+     <!--	Listado de las especialidades. Ya no se utiliza.
+    <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPNueva, especialidades');
+		  IF US_ID>=0 THEN
+                    ESPECIALIDADES_PCK.Listar ('EMP_ESPECIALIDAD');
+                  end if;
+					   
+        END;
+        ]]>
+    </xsql:include-owa>
+	-->
+    <button label="Aceptar" caption="IMG-0470">       
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'EMPNuevaSave.xsql?EMP_ID=0&amp;DESDE=Alta'</param>
+    </button>
+    
+    <button label="Cancelar" caption="IMG-0050">       
+      <name_location>javascript:document.location='about:blank'</name_location>
+    </button>
+    
+    <jumpTo>
+      <picture-on>Cancelar</picture-on>
+      <picture-off>Cancelar_mov</picture-off>   
+      <page>G-0010</page>
+      <caption>IMG-0050</caption>
+    </jumpTo>
+    
+    <!--
+    <button label="Buscar" caption="IMG-0480">
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'EMPLista.xsql'</param>
+    </button>
+    -->
+    
+    
+  </BuscForm>
+
+<!--
+  
+-->
+</BusquedaEmpresas>
+

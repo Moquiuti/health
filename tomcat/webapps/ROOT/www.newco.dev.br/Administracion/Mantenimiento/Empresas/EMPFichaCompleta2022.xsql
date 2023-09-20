@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ficha completa de proveedor, para proveedores OHSJD
+	ultima revision: ET 25set18 08:45
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EMPFichaCompletaHTML2022.xsl"?>
+
+<FichaEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<xsql:include-owa>
+	  <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPFichaCompleta');
+			IF US_ID>=0 THEN
+			
+				utilidades_pck.debug('EMPFichaCompleta.xsql. US_ID:'||US_ID||' IDEmpresa:'||'{@EMP_ID}'||' Accion:'||'{@ACCION}');
+			
+			
+				IF NVL('{@ACCION}','N')='PUBLICAR' THEN
+					v_Res:=Empresas_FicComp_Pck.CambiarEstadoFicha
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'PEND'
+					);
+				
+				ELSIF NVL('{@ACCION}','N')='APROBAR' THEN
+					v_Res:=Empresas_FicComp_Pck.CambiarEstadoFicha
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'OK'
+					);
+				
+				ELSIF NVL('{@ACCION}','N')='RECHAZAR' THEN
+					v_Res:=Empresas_FicComp_Pck.CambiarEstadoFicha
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'ERR'
+					);
+				
+				ELSIF NVL('{@ACCION}','N')='SOL.ACT.' THEN
+					v_Res:=Empresas_FicComp_Pck.CambiarEstadoFicha
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'REV'
+					);
+				
+				ELSIF NVL('{@ACCION}','N')='APR_ACT' THEN
+					v_Res:=Empresas_FicComp_Pck.CambiarEstadoFicha
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'CURS'
+					);
+				
+				ELSIF NVL('{@ACCION}','N')='RECH_ACT' THEN
+					v_Res:=Empresas_FicComp_Pck.CambiarEstadoFicha
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'OK'
+					);
+				
+				ELSIF '{@EMP_ID}' IS NOT NULL AND '{@EMP_NOMBRECORTO}' IS NOT NULL THEN
+				
+					v_Res:=Empresas_FicComp_Pck.GuardarFicha
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'{@EMP_NIF}',
+						'{@EMP_CONTROLNIF}',
+						'{@EMP_NOMBRE}',
+						'{@EMP_NOMBRECORTO}',
+						'{@EMP_DIRECCION}',
+						'{@PROVINCIA}',						--	Desplegable, no lleva EMP_ en el nombre
+						'{@EMP_CPOSTAL}',
+						'{@EMP_POBLACION}',
+						'{@EMP_BARRIO}',
+						'{@EMP_TELEFONO}',
+						'{@EMP_TELEFONO2}',
+						'{@EMP_EMAIL}',
+						'{@EMP_URL}',
+						'{@EMP_EXPEDICIONCAMARA}'
+					);
+				
+				END IF;
+			
+				Empresas_FicComp_Pck.Empresa_XML(US_ID,'{@EMP_ID}');
+			END IF;				   
+		END;
+	]]>
+	</xsql:include-owa>
+  
+</FichaEmpresa>
+

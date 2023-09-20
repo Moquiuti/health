@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockDemandaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockDemandaHTML.xsl"?>
+
+<StockDemanda xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="SD_ID" value="{@SD_ID}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockDemanda');
+		IF US_ID>=0 THEN
+			IF '{@SD_ID}' IS NOT NULL THEN
+				ANUNCIOSSTOCKS_PCK.Demanda_XML(
+					US_ID,
+					'{@SD_ID}',
+					'S'
+				);
+			ELSE
+				HTP.P('<DATOS_USUARIO>'
+					|| '<IDUSUARIO>'||US_ID||'</IDUSUARIO>'
+					|| '</DATOS_USUARIO>'
+				);
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</StockDemanda>

@@ -1,0 +1,7 @@
+03abr20 ET Separamos el mantenimiento del buscador
+14abr20 ET Permitimos cambiar la clasificacion de la selección. EISSeleccion_150420.js
+16mar21 ET Selecciones de tipos de documentos EISSeleccion_160321.js
+26abr21 ET Ocultar el desplegable de tipo de documento cuando estemos en una seleccion de tipo de documento
+19nov21 ET Recuperada funcion extraviada en cambio de version JS. EISSeleccion_191121
+27nov21 ET Se produce error en la carga de un CNPJ, permitimos buscar con y sin el numero tras el guion EISSeleccion_271121.js
+04feb22 ET Nuevos cmapos de portal incluido o portal excluido para separa SALUD y VET EISSeleccion_040222.js

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="USDERListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="USDERListaHTML.xsl"?>
+
+<ListaDerechosUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <!--
+   |  Nombre de la pagina. Parametro para guardar el error en caso de xsql-error
+   +--> 
+  <pagename>USDERLista</pagename>
+  <xsql:query tag-case="upper">
+    <![CDATA[
+    	SELECT  US_ID AS IDUSUARIO, 
+    		US_APELLIDO1 || ' ' || US_APELLIDO2 || ', ' || US_NOMBRE AS NOMBREUSUARIO,
+    		TM_NOMBRE AS TIPOMENU,
+    		ME_ID AS IDMENU,
+    		ME_NOMBRE AS NOMBREMENU,
+    		DECODE (DM_AUTORIZADO, 1, 'Si', 'No' ) AS AUTORIZADO
+    		FROM DERECHOSMENUS, USUARIOS, MENUS, TIPOSMENUS
+    		WHERE DM_IDUSUARIO=US_ID AND DM_IDMENU=ME_ID AND ME_IDTIPO=TM_ID AND US_ID={@US_ID}
+    		ORDER BY TM_ID, ME_ID
+    ]]>
+    <xsql:no-rows-query>
+      Select 'Sorry' "Sorry" from dual
+    </xsql:no-rows-query>
+  </xsql:query>
+
+  <jumpTo>
+    <picture-on>DB-002</picture-on>
+    <picture-off>DB-001</picture-off>
+    <id>uno</id>    
+    <page>G-0010</page>
+  </jumpTo>
+</ListaDerechosUsuarios>

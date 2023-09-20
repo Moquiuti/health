@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de empresas: desplegables de empresas, centros, usuarios
+	ultima revision 21mar22 11:30
+-->
+<?xml-stylesheet type="text/xsl" href="ZonaEmpresaHTML2022.xsl"?>
+
+
+<ZonaEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="US_ID"/>
+   <xsql:include-param name="STYLE"/>
+  <!--<xsql:include-param name="LANG" value="{@PRMLANG}"/>-->
+  <xsql:include-param name="LANG" value="{@LANG}"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaEmpresa');
+			IF US_ID>=0 THEN
+				MantenimientoEmpresas_PCK.AreaEmpresa(US_ID, '{@IDNUEVAEMPRESA}', '{@IDNUEVOCENTRO}','{@ACCION}','{@IDUSUARIO}', NULL, NULL, NULL, '{@IDNUEVOPAIS}' );
+			END IF;
+		END;
+        ]]>
+  </xsql:include-owa>
+
+</ZonaEmpresa>  
+
+        

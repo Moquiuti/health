@@ -1,0 +1,33 @@
+ET 11nov16	Fichero de instrucciones y cambios para la página principal del EIS
+
+nov16: multiples cambios solicitados por Breno
+- Botones
+
+12feb18	ET perfil "Admin CENTRO" (pendiente: MULTICENTRO)
+11jul18 ET Botón "Análisis" -> "Mensual"
+14ago18 ET Activar botón "Anual" para usuarios MULTICENTRO
+25oct18	ET Listados precalculados
+22mar19 ET Listados precalculados para proveedores
+
+
+29ene20	ET Nuevo diseño utilizando charts.js EISConsultasNew_290120
+03feb20	ET Actualizamos nuevo diseño utilizando charts.js EISConsultas_290120
+04feb20 ET Desplegable de indicadores EISConsultas_040220
+15set20 ET Incluir Analisis por proveedor y centro (solo para empresas con varios centros, o con derechos sobre varias empresas)
+24feb21 ET Incluir Analisis ABC
+26jul21 ET Incluir Resumen por proveedor
+09dic21 ET Para la pagina reducida, no abrir los enlaces en una nueva pagina, si no en la actual. EISConsultas_091221.js
+17dic21 ET Varios cambios solicitados por Brasil: ampliar fuentes, ocultar columna Informes predefinidos si no hay, abrir buscador de pedidos en lugar de listado
+18dic21 ET Separar en templates la pagina principal del EIS
+21dic21 ET Ampliar fuentes tambien para usuario COMPRADOR
+28ene22 ET Se mostraba la tabla de INFORMES aunque no hubieran. Se desmontaba la presentacion.
+28ene22 ET Incluir noticias para proveedores. EISConsultas_280122.js
+31ene22 ET Corregir en noticias: no se muestra el nombre del Portal, aparece el boton "Leida" en espannol.
+14feb22 ET Nuevo informe "resumen por producto" solicitado por ITA Salud Mental
+30may22 ET Noticias destacadas para proveedores de Brasil: fondo naranja, sin boton de leido, alert con el mensaje para confirmarlo.
+
+
+
+
+
+

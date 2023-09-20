@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevaFacturaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevaFacturaJSON.xsl"?>
+
+<NuevaFactura xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="FESTADO"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		    NUMBER;
+      v_IDFactura NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Nueva Factura');
+
+	 		IF US_ID > 0 THEN
+				v_IDFactura := FACTURACION_PCK.NuevaFactura(
+					US_ID,
+          '{@IDCENTRO}',
+          '{@IDEMPRESA}',
+          '{@MES}',
+          '{@ANNO}',
+          '{@CODIGO}',
+          '{@IMPORTE}',
+          '{@COMENTARIOS}',
+          '{@DESCRIPCIONREMESA}',
+          '{@FECHAREMESA}',
+          '{@FECHACOBROPREVISTO}',
+          '{@FECHACOBROREAL}',
+          '{@ENVIADA}',
+          '{@TEXTOFACTURA}',
+          '{@FECHAFACTURA}'
+				);
+
+        IF v_IDFactura > 0 THEN
+          HTP.P('<OK>'||v_IDFactura||'</OK>');
+        ELSE
+          HTP.P('<ERROR/>');
+        END IF;
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</NuevaFactura>

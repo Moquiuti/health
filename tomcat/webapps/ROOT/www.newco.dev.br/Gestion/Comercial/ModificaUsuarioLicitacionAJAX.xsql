@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Inserta nuevo usuario que firma para la licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" href="ModificaUsuarioLicitacionJSON.xsl"?>
+
+<ModificaUsuario xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_Res			NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambiarUsuarioLicitacion');
+		IF US_ID>=0 THEN
+			
+			v_Res:=LICITACIONES_PCK.CambiarUsuarioLicitacion(
+				US_ID,
+				'{@LIC_ID}',
+				'{@IDUSUARIO}',
+				'{@TIPO}'
+			);
+			
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Res > 0 THEN
+				HTP.P('<OK>'||v_Res||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModificaUsuario>

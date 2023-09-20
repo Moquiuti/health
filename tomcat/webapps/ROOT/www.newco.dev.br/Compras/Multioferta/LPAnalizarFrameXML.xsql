@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	ultima revision 3nov17
+-->
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="LPAnalizarFrameHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="LPAnalizarFrameHTML.xsl"?>
+-->
+<Analizar xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="PL_ID"/>
+<xsql:include-param name="LP_ID"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+
+<!--
+ |	Parametros para soportar el reload cuando se cambia de escalado.
++-->
+<xsql:include-param name="FECHA_PAGO"/>
+<xsql:include-param name="STRING_SELECCIONADOS"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		
+		v_IDMultioferta		NUMBER;
+		
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LPAnalizarFrame');
+		IF US_ID>=0 THEN
+			v_IDMultioferta:=Multiofertas_PCK.CrearListaDeProductos('{@PL_ID}', US_ID);
+			
+			--utilidades_pck.debug('Multiofertas_Pck.LPAnalizarFrame LP_ID:'||'{@PL_ID}'||' IDMultioferta:'||v_IDMultioferta);
+			
+			ANALIZAR.Analizar(
+				v_IDMultioferta,
+				US_ID,
+				'DIRECTO',			-- 28may15 - DC - Se pasa siempre como 'DIRECTO'		'{@ACCION}',
+				'0'					-- 28may15 - DC - Siempre se utiliza la propia del pais ('0')	'{@IDDIVISA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<!--
+<xsql:include-owa>
+	BEGIN
+		ANALIZAR.AnalBot('{@LP_ID}','{@ACCION}');
+	END;
+</xsql:include-owa>
+-->
+
+<field name="COMBO_ENTREGA">
+	<dropDownList>
+		<listElem>
+			<ID>1</ID>
+			<listItem>1</listItem>
+		</listElem>
+		<listElem>
+			<ID>2</ID>
+			<listItem>2</listItem>
+		</listElem>
+		<listElem>
+			<ID>3</ID>
+			<listItem>3</listItem>
+		</listElem>
+		<listElem>
+			<ID>4</ID>
+			<listItem>4</listItem>
+		</listElem>
+		<listElem>
+			<ID>5</ID>
+			<listItem>5</listItem>
+		</listElem>
+		<listElem>
+			<ID>6</ID>
+			<listItem>6</listItem>
+		</listElem>
+		<listElem>
+			<ID>7</ID>
+			<listItem>7</listItem>
+		</listElem>
+		<listElem>
+			<ID>10</ID>
+			<listItem>10</listItem>
+		</listElem>
+		<listElem>
+			<ID>11</ID>
+			<listItem>11</listItem>
+		</listElem>
+		<listElem>
+			<ID>15</ID>
+			<listItem>15</listItem>
+		</listElem>
+		<listElem>
+			<ID>30</ID>
+			<listItem>30</listItem>
+		</listElem>
+		<listElem>
+			<ID>999</ID>
+			<listItem>Otros</listItem>
+		</listElem>
+	</dropDownList>
+</field>
+<!-- 03jun15 - DC - Ya no se usan estos botones
+<button label="Seleccionar" caption="IMG-0110">
+	<name_function>Seleccionar</name_function>
+	<param>'SELECCION'</param>
+</button>
+
+<button label="Siguiente" caption="G-0005">
+	<name_function>Actua</name_function>
+	<param>document.forms['formBot']</param>
+	<param>document.forms</param>
+	<param>'LPAnalizarSave.xsql'</param>
+</button>
+
+<button label="Anterior" caption="IMG-0040">
+	<name_function>VolverLista</name_function>
+	<param></param>
+</button>
+
+<button label="Cancelar" caption="IMG-0050">
+	<name_function_msg>G-0010</name_function_msg> 
+</button>
+-->
+</Analizar>

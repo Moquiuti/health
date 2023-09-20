@@ -1,0 +1,1423 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Revisado ET 11oct16 09:55	-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+
+<!-- Tabla Datos Generales Nueva Licitacion -->
+<xsl:template name="Tabla_Datos_Generales_Nuevo">
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:value-of select="/Mantenimiento/LANG"/>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+
+<form id="form1" name="form1" action="MantLicitacionSave.xsql" method="post">
+	<input type="hidden" name="LIC_IDUSUARIO" value="{/Mantenimiento/US_ID}"/>
+	<input type="hidden" name="LIC_IDEMPRESA" value="{/Mantenimiento/NUEVALICITACION/IDEMPRESA}"/>
+	<input type="hidden" name="LIC_ID"/>
+	<input type="hidden" name="ACCION" value="NUEVO"/>
+	<input type="hidden" name="LIC_AGREGADA" id="LIC_AGREGADA" value="N"/>
+
+	<table class="infoTable incidencias" border="0" cellspacing="5">
+		<tr><td colspan="5">&nbsp;</td></tr>
+
+		<tr>
+			<td class="veinte labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='titulo']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="text" name="LIC_TITULO" size="50" maxlength="100"/>
+			</td>
+			<td class="dies labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_decision']/node()"/>:</td>
+			<td class="veinte datosLeft">
+				<input type="text" name="LIC_FECHADECISION" size="15" maxlength="10"/>
+				<xsl:call-template name="desplegable">
+					<xsl:with-param name="path" select="/Mantenimiento/NUEVALICITACION/LIC_HORADECISION/field"/>
+				</xsl:call-template>
+				&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+			</td>
+			<td class="veinte">&nbsp;</td>
+			<input type="hidden" name="LIC_PORPRODUCTO" id="LIC_PORPRODUCTO" value="S"/>
+			<input type="hidden" name="LIC_FARMACIA" id="LIC_FARMACIA" value="N"/>
+		</tr>
+		<xsl:choose>
+		<xsl:when test="/Mantenimiento/NUEVALICITACION/EMP_LICITACIONESAGREGADAS='S'">
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_multicentro']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="checkbox" name="CHK_LIC_AGREGADA" id="CHK_LIC_AGREGADA" unchecked="unchecked"/>
+			</td>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		</xsl:when>
+		<xsl:otherwise>
+			<input type="hidden" name="CHK_LIC_AGREGADA" id="CHK_LIC_AGREGADA" value="unchecked"/>
+		</xsl:otherwise>
+		</xsl:choose>
+		<!--
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_por_producto']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="checkbox" name="LIC_PORPRODUCTO" id="LIC_PORPRODUCTO" value="S"/>
+			</td>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='productos_farmacia']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="checkbox" name="LIC_FARMACIA" id="LIC_FARMACIA" value="S"/>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		-->
+	</table>
+
+	<table class="infoTable divLeft incidencias lDatosGenerales" style="padding-top:10px;display:block;border-top:1px solid #999;" cellspacing="5">
+		<tr>
+			<td class="veinte labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='descripcion']/node()"/>:</td>
+			<td class="trenta datosLeft">
+				<textarea name="LIC_DESCRIPCION" rows="4" cols="120"/>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_entrega']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea name="LIC_CONDENTREGA" rows="4" cols="120" value="{/Mantenimiento/NUEVALICITACION/LIC_CONDICIONESENTREGA}"/>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_pago']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea name="LIC_CONDPAGO" rows="4" cols="120" value="{/Mantenimiento/NUEVALICITACION/LIC_CONDICIONESPAGO}"/>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_otras']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea name="LIC_CONDOTRAS" rows="4" cols="120" value="{/Mantenimiento/NUEVALICITACION/LIC_OTRASCONDICIONES}"/>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">
+				<table class="infoTable divLeft" style="border-collapse:separate;margin-left:-4px;">
+					<tr>
+						<td class="labelRight grisMed veinte"><xsl:value-of select="document($doc)/translation/texts/item[@name='meses_duracion']/node()"/>:</td>
+						<td class="datosLeft quince">
+							<!--<select name="LIC_MESES" id="LIC_MESES">
+								<option value="0"><xsl:value-of select="document($doc)/translation/texts/item[@name='lic_pedido_puntual']/node()"/></option>
+								<option value="1">1 <xsl:value-of select="document($doc)/translation/texts/item[@name='mes']/node()"/></option>
+								<option value="2">2 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="3">3 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="4">4 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="5">5 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="6">6 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="12">12 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="18">18 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="24">24 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+							</select>-->
+							<xsl:call-template name="desplegable">
+								<xsl:with-param name="path" select="/Mantenimiento/NUEVALICITACION/LIC_MESES/field"/>
+								<!--<xsl:with-param name="nombre">LIC_MESES</xsl:with-param>
+								<xsl:with-param name="id">LIC_MESES</xsl:with-param>-->
+							</xsl:call-template>
+						</td>
+						<td class="cinco">&nbsp;</td>
+
+					<xsl:choose>
+					<xsl:when test="/Mantenimiento/NUEVALICITACION/IDPAIS = 55">
+						<td colspan="2" class="cuaranta">&nbsp;</td>
+					</xsl:when>
+					<xsl:otherwise>
+						<td class="labelRight grisMed veinte"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_adjudicacion']/node()"/>:</td>
+						<td class="datosLeft veinte">
+							<input type="text" name="LIC_FECHAADJUDICACION" id="LIC_FECHAADJUDICACION" size="15" maxlength="10"/>
+							&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+						</td>
+					</xsl:otherwise>
+					</xsl:choose>
+
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuario']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDUSUARIOPEDIDO" id="LIC_IDUSUARIOPEDIDO">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/NUEVALICITACION/field[@name='IDUSUARIOPEDIDO']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:if test="ID = ../../SelectedElement"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='lugar_entrega']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDLUGARENTREGA" id="LIC_IDLUGARENTREGA">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/NUEVALICITACION/field[@name='IDLUGARENTREGA']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<!--	15set16	EL plazo y forma de pago los mantenemos ocultos, se informarán desde los datos del cliente y/o proveedor	-->
+		<input type="hidden" name="LIC_IDFORMAPAGO" id="LIC_IDFORMAPAGO" value=""/>
+		<input type="hidden" name="LIC_IDPLAZOPAGO" id="LIC_IDPLAZOPAGO" value=""/>
+		<!--
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='forma_pago']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDFORMAPAGO" id="LIC_IDFORMAPAGO">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/NUEVALICITACION/FORMASPAGO/field[@name='IDFORMAPAGO']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='plazo_pago']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDPLAZOPAGO" id="LIC_IDPLAZOPAGO">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/NUEVALICITACION/PLAZOSPAGO/field[@name='IDPLAZOPAGO']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		-->
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='codigo_pedido']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="text" id="LIC_CODIGOPEDIDO" name="LIC_CODIGOPEDIDO"/>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='observaciones_pedido']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea id="LIC_OBSPEDIDO" name="LIC_OBSPEDIDO" rows="4" cols="120" />
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr><td colspan="3">&nbsp;</td></tr>
+
+		<tr>
+			<td colspan="3">
+				<table class="infoTable veinte">
+					<tr>
+						<td class="veinte labelRight">&nbsp;</td>
+						<td class="veinte">
+							<div class="boton">
+								<a href="javascript:ValidarFormulario(document.forms['form1'],'datosGenerales');">
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+								</a>
+							</div>
+						</td>
+						<td class="veinte">
+							<div class="boton">
+								<a href="javascript:ComprobarDatosGenerales(document.forms['form1']);" title="Volver">
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='cancelar']/node()"/>
+								</a>
+							</div>
+						</td>
+						<td>&nbsp;</td>
+
+						<input type="hidden" name="LIC_DESCRIPCION_OLD" value="{/Mantenimiento/NUEVALICITACION/LIC_DESCRIPCION}"/>
+						<input type="hidden" name="LIC_CONDENTREGA_OLD" value="{/Mantenimiento/NUEVALICITACION/LIC_CONDICIONESENTREGA}"/>
+						<input type="hidden" name="LIC_CONDPAGO_OLD" value="{/Mantenimiento/NUEVALICITACION/LIC_CONDICIONESPAGO}"/>
+						<input type="hidden" name="LIC_CONDOTRAS_OLD" value="{/Mantenimiento/NUEVALICITACION/LIC_OTRASCONDICIONES}"/>
+						<input type="hidden" name="LIC_MESES_OLD" value="{/Mantenimiento/NUEVALICITACION/LIC_MESESDURACION}"/>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr><td colspan="3">&nbsp;</td></tr>
+	</table>
+</form>
+
+</xsl:template>
+<!-- FIN Tabla Datos Generales Nueva Licitacion -->
+
+
+<!-- Tabla Datos Generales Estudio Previo -->
+<xsl:template name="Tabla_Datos_Generales_Estudio_Previo">
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:value-of select="/Mantenimiento/LANG"/>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+
+<form id="form1" name="form1" action="MantLicitacionSave.xsql" method="post">
+	<input type="hidden" name="LIC_IDUSUARIO" value="{Mantenimiento/US_ID}"/>
+	<input type="hidden" name="LIC_IDEMPRESA" value="{/Mantenimiento/LICITACION/LIC_IDEMPRESA}"/>
+	<input type="hidden" name="LIC_ID" value="{/Mantenimiento/LICITACION/LIC_ID}"/>
+	<input type="hidden" name="ACCION" value="MODIFICAR"/>
+	<input type="hidden" name="LIC_AGREGADA" id="LIC_AGREGADA" value="{/Mantenimiento/LICITACION/LIC_AGREGADA}"/>
+
+	<table class="infoTable incidencias" border="0" cellspacing="5">
+		<tr><td colspan="5">&nbsp;</td></tr>
+
+		<tr>
+			<td class="quince labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='titulo']/node()"/>:</td>
+			<td class="quince datosLeft">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+					<input type="text" name="LIC_TITULO" value="{Mantenimiento/LICITACION/LIC_TITULO}" size="50" maxlength="100"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<input type="text" name="LIC_TITULO" value="{Mantenimiento/LICITACION/LIC_TITULO}" size="50" maxlength="100" disabled="disabled"/>
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			<td class="dies labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_decision']/node()"/>:</td>
+			<td class="doce datosLeft">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+					<input type="text" name="LIC_FECHADECISION" value="{Mantenimiento/LICITACION/LIC_FECHADECISIONPREVISTA}" size="10" maxlength="10"/>
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Mantenimiento/LICITACION/LIC_HORADECISION/field"/>
+					</xsl:call-template>
+					&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<input type="text" name="LIC_FECHADECISION" value="{Mantenimiento/LICITACION/LIC_FECHADECISIONPREVISTA}" size="10" maxlength="10" disabled="disabled"/>
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Mantenimiento/LICITACION/LIC_HORADECISION/field"/>
+						<xsl:with-param name="disabled">disabled</xsl:with-param>
+					</xsl:call-template>
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			<td rowspan="4" class="veinte datosLeft botonesLic" style="padding-right:10px;">
+			<!-- cuando el centro está informando sus cantidades de compra, le permitimos publicar  -->
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/COMPLETAR_COMPRA_CENTRO">
+				<div class="botonLargoVerdadNara clear" id="botonPublicarCompra">
+					<a href="javascript:PublicarDatosCompra();">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='publicar_datos_compra']/node()"/>
+					</a>
+				</div>
+			</xsl:if>
+			<!-- Indicamos en el XML si debe mostrarse el botón de iniciar licitación
+			<xsl:if test="/Mantenimiento/LICITACION/AUTOR">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/PROVEEDORESLICITACION/PROVEEDOR and /Mantenimiento/LICITACION/PRODUCTOSLICITACION/TODOS_VALIDADOS">
+					< ! - - paso id lic, estado, proveedor conectado - - >
+					<div class="botonLargoVerdadNara clear" id="botonIniciarLici">
+						<a href="javascript:CambioEstadoLicitacion('CURS');">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='iniciar_licitacion']/node()"/>
+						</a>
+					</div>
+				</xsl:when>
+				<xsl:otherwise>
+					<div class="botonLargoVerdadNara clear" id="botonIniciarLici">
+						<a href="javascript:NoIniciarLicitacion('CURS');">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='iniciar_licitacion']/node()"/>
+						</a>
+					</div>
+				</xsl:otherwise>
+				</xsl:choose>
+			</xsl:if>-->
+			<xsl:if test="/Mantenimiento/LICITACION/INFORMAR_COMPRAS">
+				<div class="botonLargoVerdadNara clear" id="botonInformarCompras">
+					<a href="javascript:NoInformacionCompras();">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='informar_compras']/node()"/>
+					</a>
+				</div>
+			</xsl:if>
+			<xsl:if test="/Mantenimiento/LICITACION/INICIAR_LICITACION">
+				<div class="botonLargoVerdadNara clear" id="botonIniciarLici">
+					<a href="javascript:NoIniciarLicitacion('CURS');">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='iniciar_licitacion']/node()"/>
+					</a>
+				</div>
+			</xsl:if>
+            </td>
+			<input type="hidden" name="LIC_PORPRODUCTO" id="LIC_PORPRODUCTO" value="{/Mantenimiento/LICITACION/LIC_PORPRODUCTO}"/>
+			<input type="hidden" name="LIC_FARMACIA" id="LIC_FARMACIA" value="{/Mantenimiento/LICITACION/LIC_FARMACIA}"/>
+		</tr>
+		<!--
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_por_producto']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="checkbox" name="LIC_PORPRODUCTO" id="LIC_PORPRODUCTO" value="S">
+					<xsl:if test="/Mantenimiento/LICITACION/LIC_PORPRODUCTO = 'S'">
+						<xsl:attribute name="checked">checked</xsl:attribute>
+					</xsl:if>
+				</input>
+			</td>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='productos_farmacia']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="checkbox" name="LIC_FARMACIA" id="LIC_FARMACIA" value="S">
+					<xsl:if test="/Mantenimiento/LICITACION/LIC_FARMACIA = 'S'">
+						<xsl:attribute name="checked">checked</xsl:attribute>
+					</xsl:if>
+				</input>
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_alta']/node()"/>:</td>
+			<td class="datosLeft"><strong><xsl:value-of select="Mantenimiento/LICITACION/LIC_FECHAALTA"/></strong></td>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/>:</td>
+			<td class="datosLeft"><strong><span id="idEstadoLic"><xsl:value-of select="Mantenimiento/LICITACION/ESTADO"/></span></strong></td>
+		</tr>
+
+		<tr><td colspan="4">&nbsp;</td></tr>
+    </table>
+
+	<!-- Pestanyas -->
+	<div id="pestanas" class="divLeft" style="border-bottom:0px solid #3B5998;">
+		&nbsp;&nbsp;
+		<xsl:choose>
+		<xsl:when test="/Mantenimiento/LANG = 'spanish'">
+			<a href="#" id="pes_lDatosGenerales" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonDatosGenerales1.gif" alt="Condiciones de la licitación" title=""/></a>&nbsp;
+			<a href="#" id="pes_lProductos" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProductos.gif" alt="Productos" title=""/></a>&nbsp;
+			<xsl:if test="/Mantenimiento/LICITACION/ROL != 'VENDEDOR'">
+				<a href="#" id="pes_lProveedores" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProveedores.gif" alt="Proveedores" title=""/></a>&nbsp;
+				<a href="#" id="pes_lUsuarios" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonUsuarios.gif" alt="Usuarios" title=""/></a>
+				<xsl:if test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">
+					<a href="#" id="pes_lCentros" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonCentros.gif" alt="Centros" title=""/></a>
+				</xsl:if>
+			</xsl:if>
+		</xsl:when>
+		<xsl:otherwise>
+			<a href="#" id="pes_lDatosGenerales" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonDatosGenerales1-BR.gif" alt="Condições da cotação" title=""/></a>&nbsp;
+			<a href="#" id="pes_lProductos" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProductos-BR.gif" alt="Produtos" title=""/></a>&nbsp;
+			<xsl:if test="/Mantenimiento/LICITACION/ROL != 'VENDEDOR'">
+				<a href="#" id="pes_lProveedores" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProveedores-BR.gif" alt="Fornecedores" title=""/></a>&nbsp;
+				<a href="#" id="pes_lUsuarios" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonUsuarios-BR.gif" alt="Usuários" title=""/></a>
+				<xsl:if test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">
+					<a href="#" id="pes_lCentros" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonCentros.gif" alt="Centros" title=""/></a>
+				</xsl:if>
+			</xsl:if>
+		</xsl:otherwise>
+		</xsl:choose>
+	</div>
+	<!-- FIN Pestanyas -->
+
+	<table class="infoTable divLeft lDatosGenerales incidencias" style="padding-top:10px;display:block;border-top:1px solid #999;" cellspacing="5">
+		<tr><td colspan="3">&nbsp;</td></tr>
+
+		<tr>
+			<td class="veinte labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='descripcion']/node()"/>:</td>
+			<td class="trenta datosLeft">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+					<textarea name="LIC_DESCRIPCION" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_DESCRIPCION/node()"/></textarea>
+				</xsl:when>
+				<xsl:otherwise>
+					<textarea name="LIC_DESCRIPCION" rows="4" cols="120" disabled="disabled"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_DESCRIPCION/node()"/></textarea>
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_entrega']/node()"/>:</td>
+			<td class="datosLeft">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+					<textarea name="LIC_CONDENTREGA" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESENTREGA/node()"/></textarea>
+				</xsl:when>
+				<xsl:otherwise>
+					<textarea name="LIC_CONDENTREGA" rows="4" cols="120" disabled="disabled"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESENTREGA/node()"/></textarea>
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_pago']/node()"/>:</td>
+			<td class="datosLeft">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+					<textarea name="LIC_CONDPAGO" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESPAGO/node()"/></textarea>
+				</xsl:when>
+				<xsl:otherwise>
+					<textarea name="LIC_CONDPAGO" rows="4" cols="120" disabled="disabled"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESPAGO/node()"/></textarea>
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_otras']/node()"/>:</td>
+			<td class="datosLeft">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+					<textarea name="LIC_CONDOTRAS" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_OTRASCONDICIONES/node()"/></textarea>
+				</xsl:when>
+				<xsl:otherwise>
+					<textarea name="LIC_CONDOTRAS" rows="4" cols="120" disabled="disabled"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_OTRASCONDICIONES/node()"/></textarea>
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">
+				<table class="infoTable divLeft" style="border-collapse:separate;margin-left:-4px;">
+					<tr>
+						<td class="labelRight grisMed veinte"><xsl:value-of select="document($doc)/translation/texts/item[@name='meses_duracion']/node()"/>:</td>
+						<td class="datosLeft quince">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+							<!--
+							<select name="LIC_MESES" id="LIC_MESES">
+								<option value="0"><xsl:value-of select="document($doc)/translation/texts/item[@name='lic_pedido_puntual']/node()"/></option>
+								<option value="1">1 <xsl:value-of select="document($doc)/translation/texts/item[@name='mes']/node()"/></option>
+								<option value="2">2 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="3">3 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="4">4 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="5">5 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="6">6 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="12">12 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="18">18 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="24">24 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+							</select>
+							-->
+							<xsl:call-template name="desplegable">
+								<xsl:with-param name="path" select="/Mantenimiento/LICITACION/LIC_MESES/field"/>
+								<!--<xsl:with-param name="nombre">LIC_MESES</xsl:with-param>
+								<xsl:with-param name="id">LIC_MESES</xsl:with-param>-->
+							</xsl:call-template>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:call-template name="desplegable">
+								<xsl:with-param name="path" select="/Mantenimiento/LICITACION/LIC_MESES/field"/>
+								<!--<xsl:with-param name="nombre">LIC_MESES</xsl:with-param>
+								<xsl:with-param name="id">LIC_MESES</xsl:with-param>-->
+								<xsl:with-param name="disabled">disabled</xsl:with-param>
+							</xsl:call-template>
+						</xsl:otherwise>
+						</xsl:choose>
+						</td>
+						<td class="cinco">&nbsp;</td>
+						<td colspan="3">&nbsp;</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!--	13jul16	Los campos avanzados para pedido solo los mostramos al autor	-->
+		<xsl:if test="/Mantenimiento/LICITACION/AUTOR">
+			<xsl:if test="/Mantenimiento/LICITACION/IDPAIS != 55">
+				<tr class="campoPedidoPuntual_Inv">
+					<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_adjudicacion']/node()"/>:</td>
+					<td class="datosLeft">
+						<input type="text" name="LIC_FECHAADJUDICACION" id="LIC_FECHAADJUDICACION" value="{Mantenimiento/LICITACION/LIC_FECHAADJUDICACION}" size="15" maxlength="10"/>
+						&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+			</xsl:if>
+
+			<tr class="campoPedidoPuntual" style="display:none;">
+				<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuario']/node()"/>:</td>
+				<td class="datosLeft">
+					<select name="LIC_IDUSUARIOPEDIDO" id="LIC_IDUSUARIOPEDIDO">
+						<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+						<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDUSUARIOPEDIDO']/dropDownList/listElem">
+							<option value="{ID}">
+								<xsl:if test="ID = ../../SelectedElement"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+								<xsl:value-of select="listItem"/>
+							</option>
+						</xsl:for-each>
+					</select>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+
+			<tr class="campoPedidoPuntual" style="display:none;">
+				<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='lugar_entrega']/node()"/>:</td>
+				<td class="datosLeft">
+					<select name="LIC_IDLUGARENTREGA" id="LIC_IDLUGARENTREGA">
+						<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+						<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDLUGARENTREGA']/dropDownList/listElem">
+							<option value="{ID}">
+								<xsl:if test="ID = ../../SelectedElement"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+								<xsl:value-of select="listItem"/>
+							</option>
+						</xsl:for-each>
+					</select>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			
+			<!--	15set16	EL plazo y forma de pago los mantenemos ocultos, se informarán desde los datos del cliente y/o proveedor	-->
+			<input type="hidden" name="LIC_IDFORMAPAGO" id="LIC_IDFORMAPAGO" value=""/>
+			<input type="hidden" name="LIC_IDPLAZOPAGO" id="LIC_IDPLAZOPAGO" value=""/>
+			<!--
+			<tr class="campoPedidoPuntual" style="display:none;">
+				<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='forma_pago']/node()"/>:</td>
+				<td class="datosLeft">
+					<select name="LIC_IDFORMAPAGO" id="LIC_IDFORMAPAGO">
+						<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+						<xsl:for-each select="/Mantenimiento/LICITACION/FORMASPAGO/field[@name='IDFORMAPAGO']/dropDownList/listElem">
+							<option value="{ID}">
+								<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+								<xsl:value-of select="listItem"/>
+							</option>
+						</xsl:for-each>
+					</select>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+
+			<tr class="campoPedidoPuntual" style="display:none;">
+				<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='plazo_pago']/node()"/>:</td>
+				<td class="datosLeft">
+					<select name="LIC_IDPLAZOPAGO" id="LIC_IDPLAZOPAGO">
+						<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+						<xsl:for-each select="/Mantenimiento/LICITACION/PLAZOSPAGO/field[@name='IDPLAZOPAGO']/dropDownList/listElem">
+							<option value="{ID}">
+								<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+								<xsl:value-of select="listItem"/>
+							</option>
+						</xsl:for-each>
+					</select>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			-->
+
+			<tr class="campoPedidoPuntual" style="display:none;">
+				<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='codigo_pedido']/node()"/>:</td>
+				<td class="datosLeft">
+					<input type="text" id="LIC_CODIGOPEDIDO" name="LIC_CODIGOPEDIDO" value="{/Mantenimiento/LICITACION/LIC_CODIGOPEDIDO}"/>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+
+			<tr class="campoPedidoPuntual" style="display:none;">
+				<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='observaciones_pedido']/node()"/>:</td>
+				<td class="datosLeft">
+					<textarea id="LIC_OBSPEDIDO" name="LIC_OBSPEDIDO" rows="4" cols="120">
+						<xsl:value-of select="/Mantenimiento/LICITACION/LIC_COMENTARIOSPEDIDO"/>
+                    </textarea>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+
+			<tr><td colspan="3">&nbsp;</td></tr>
+
+			<tr>
+				<td colspan="3">
+					<table class="infoTable veinte">
+						<tr>
+							<td class="veinte labelRight">&nbsp;</td>
+							<td class="veinte">
+								<div class="boton">
+									<a href="javascript:ValidarFormulario(document.forms['form1'],'datosGenerales');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+									</a>
+								</div>
+							</td>
+							<td class="veinte">
+								<div class="boton">
+									<a href="javascript:ComprobarDatosGenerales(document.forms['form1']);" title="Volver">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='cancelar']/node()"/>
+									</a>
+								</div>
+							</td>
+							<td>&nbsp;</td>
+
+							<input type="hidden" name="LIC_DESCRIPCION_OLD" value="{/Mantenimiento/LICITACION/LIC_DESCRIPCION}"/>
+							<input type="hidden" name="LIC_CONDENTREGA_OLD" value="{/Mantenimiento/LICITACION/LIC_CONDICIONESENTREGA}"/>
+							<input type="hidden" name="LIC_CONDPAGO_OLD" value="{/Mantenimiento/LICITACION/LIC_CONDICIONESPAGO}"/>
+							<input type="hidden" name="LIC_CONDOTRAS_OLD" value="{/Mantenimiento/LICITACION/LIC_OTRASCONDICIONES}"/>
+							<input type="hidden" name="LIC_MESES_OLD" value="{/Mantenimiento/LICITACION/LIC_MESESDURACION}"/>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr><td colspan="3">&nbsp;</td></tr>
+		</xsl:if>
+	</table>
+</form>
+</xsl:template>
+<!-- FIN Tabla Datos Generales Estudio Previo -->
+
+
+<!-- Tabla Datos Generales -->
+<xsl:template name="Tabla_Datos_Generales">
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:value-of select="/Mantenimiento/LANG"/>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+
+<table class="infoTable incidencias" border="0" cellspacing="5">
+	<tr>
+		<td colspan="6">&nbsp;</td>
+		<td rowspan="3" class="datosLeft botonesLic" style="padding-right:10px;">
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'VENDEDOR' and /Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_IDESTADO != 'CURS'">
+				<div class="botonLargo clear" id="botonImprimirOferta">
+					<a href="javascript:imprimirOferta({/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_ID});">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='imprimir_oferta']/node()"/>
+					</a>
+				</div>
+			</xsl:if>
+
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'VENDEDOR' and /Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_IDESTADO = 'CURS'">
+				<p id="txtCondLicitacion">
+					<xsl:attribute name="style">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/TODOS_INFORMADOS and /Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_PEDIDOMINIMO != ''">
+							<xsl:text>font-size:12px;margin-bottom:5px;</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>font-size:12px;margin-bottom:5px;display:none;</xsl:text>
+						</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+
+					<input type="checkbox" name="condLicitacion" id="condLicitacion" value="accepted"/>&nbsp;
+					<xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_licitacion']/node()"/>
+				</p>
+				<div class="botonLargoVerdadNara clear" id="botonPublicarOferta">
+					<a href="javascript:ValidarFormulario(document.forms['PublicarOfertas'],'provPublicarOferta');">
+						<xsl:if test="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_PEDIDOMINIMO = '' or not(/Mantenimiento/LICITACION/PRODUCTOSLICITACION/TODOS_INFORMADOS)">
+							<xsl:attribute name="class">grey</xsl:attribute>
+						</xsl:if>
+
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='publicar_oferta']/node()"/>
+					</a>
+				</div>
+			</xsl:if>
+
+			<xsl:choose>
+			<!-- cuando lici esta adjudicada, boton para el proveedor para firmarla -->
+			<xsl:when test="/Mantenimiento/LICITACION/ROL = 'VENDEDOR' and /Mantenimiento/LICITACION/BOTON_FIRMA">
+				<div class="botonLargoVerdadNara clear" id="botonFirmarLici">
+					<xsl:attribute name="style">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/LIC_IDESTADO = 'ADJ'">display:block;</xsl:when>
+						<xsl:otherwise>display:none;</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+
+					<a href="javascript:modificaEstadoProveedor({/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_ID},'FIRM');">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='firmar_licitacion']/node()"/>
+					</a>
+				</div>
+			</xsl:when>
+			<!-- cuando lici esta contratada, boton para el usuario autor para informar en catalogo proveedor -->
+			<!--	7jul16	<xsl:when test="/Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/LIC_IDESTADO = 'CONT' and /Mantenimiento/LICITACION/LIC_FECHA_ACTCATPROV = ''">-->
+			<xsl:when test="/Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/BOTON_CATALOGO_PROVEEDOR">
+				<div class="botonLargoVerdadNara clear" id="botonInsCatProv" style="margin-bottom:10px;">
+					<a href="javascript:ComprobarCatalogoProveedor();">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='boton_insertar_catalogo_proveedor']/node()"/>
+					</a>
+				</div><div id="waitBotonInsCatProv" style="display:none;" class="clear"><img src="http://www.newco.dev.br/images/loading.gif"/></div>
+				<div class="botonLargoVerdadNara clear" id="botonInsEnPlant" style="display:none;margin-bottom:10px;">
+					<a href="javascript:ComprobarCatalogoCliente({/Mantenimiento/LICITACION/LIC_ID});">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='boton_insertar_en_plantillas']/node()"/>
+					</a>
+				</div><div id="waitBotonInsEnPlant" style="display:none;" class="clear"><img src="http://www.newco.dev.br/images/loading.gif"/></div>
+			</xsl:when>
+			<!-- cuando lici esta contratada, boton para el usuario autor para incluir en plantillas -->
+			<!--	7jul16	<xsl:when test="/Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/LIC_IDESTADO = 'CONT' and /Mantenimiento/LICITACION/LIC_FECHA_ACTCATPROV != '' and /Mantenimiento/LICITACION/LIC_FECHA_ACTCATPRIV = ''">-->
+			<xsl:when test="/Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/BOTON_CATALOGO_PRIVADO">
+				<div class="botonLargoVerdadNara clear" id="botonInsEnPlant" style="margin-bottom:10px;">
+					<a href="javascript:ComprobarCatalogoCliente({/Mantenimiento/LICITACION/LIC_ID});">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='boton_insertar_en_plantillas']/node()"/>
+					</a>
+				</div><div id="waitBotonInsEnPlant" style="display:none;" class="clear"><img src="http://www.newco.dev.br/images/loading.gif"/></div>
+			</xsl:when>
+			<!-- cuando lici esta caducada, boton para el autor para renovarla -->
+			<xsl:when test="/Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/LIC_IDESTADO = 'CAD'">
+				<div class="botonLargo clear" id="botonRenovarLic">
+					<a href="javascript:RenovarLicitacion();">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='boton_renovar_licitacion']/node()"/>
+					</a>
+				</div>
+			</xsl:when>
+			</xsl:choose>
+
+			<xsl:if test="/Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/BOTON_PEDIDO">
+				<div class="botonLargoVerdadNara clear" id="botonGenerarPedido">
+					<a href="javascript:GenerarPedido();">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='boton_generar_pedido']/node()"/>
+                    </a>
+				</div><div id="waitBotonGenPedido" style="display:none;" class="clear"><img src="http://www.newco.dev.br/images/loading.gif"/></div>
+			</xsl:if>
+
+			<!-- 13jul16 Descarga el fichero con la OC de la licitacion. 8ago16 Desactivo: descargaremos desde la integración
+			<xsl:if test="/Mantenimiento/LICITACION/BOTON_DESCARGAR_OC">
+				<div class="botonLargoVerdadNara clear" id="botonDescargarOC">
+					<a href="javascript:DescargarOC();">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='boton_descargarOC']/node()"/>
+                    </a>
+				</div>
+			</xsl:if>
+			-->
+			<xsl:if test="/Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/BOTON_LICITACIONPRODUCTOSSINOFERTA">
+				<div class="botonLargoVerdadNara clear" id="botonLicitacionHija">
+					<a href="javascript:CrearLicitacionHija();">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='boton_licitar_productos_no_adjudicados']/node()"/>
+                    </a>
+				</div><div id="waitBotonLicHija" style="display:none;" class="clear"><img src="http://www.newco.dev.br/images/loading.gif"/></div>
+			</xsl:if>
+
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/PROVEEDORESLICITACION/PROVEEDOR/CONVERSACION">
+				<div class="botonLargo clear">
+					<a href="#" id="ConversacionProv">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='existe_conversacion_proveedor']/node()"/>
+					</a>
+				</div>
+			</xsl:if>
+
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'VENDEDOR'">
+				<div class="botonLargo clear" style="margin:10px 0 0 0;">
+<!--					<a href="javascript:conversacionProveedor({/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_IDPROVEEDOR},{/Mantenimiento/LICITACION/LIC_IDUSUARIO},{/Mantenimiento/LICITACION/IDUSUARIO_PROVEEDOR},'{/Mantenimiento/LICITACION/EMPRESALICITACION/NOMBRE}');">-->
+					<a href="javascript:conversacionProveedor2(null);">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/CONVERSACION">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='ver_conversacion']/node()"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='escribe_mensaje_cliente']/node()"/>
+						</xsl:otherwise>
+						</xsl:choose>
+					</a>
+				</div>
+			</xsl:if>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="doce labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_alta']/node()"/>:</td>
+		<td class="quince datosLeft"><strong><xsl:value-of select="Mantenimiento/LICITACION/LIC_FECHAALTA"/></strong></td>
+		<td class="doce labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_decision']/node()"/>:</td>
+		<td class="quince datosLeft">
+			<xsl:choose>
+			<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+				<input type="text" id="LIC_FECHADECISION" name="LIC_FECHADECISION" value="{Mantenimiento/LICITACION/LIC_FECHADECISIONPREVISTA}" size="8" maxlength="8"/>
+				&nbsp;<a href="javascript:ActualizarFechaDecision();" style="text-decoration:none;">
+					<img src="http://www.newco.dev.br/images/modificar.gif">
+						<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='actualizar_fecha']/node()"/></xsl:attribute>
+						<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='actualizar_fecha']/node()"/></xsl:attribute>
+					</img>
+				</a>
+				<xsl:call-template name="desplegable">
+					<xsl:with-param name="path" select="/Mantenimiento/LICITACION/LIC_HORADECISION/field"/>
+				</xsl:call-template>
+				&nbsp;
+            	<span style="font-size:12px;">
+                	<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+            	</span>
+			</xsl:when>
+			<xsl:otherwise>
+                <strong>
+                    <xsl:value-of select="/Mantenimiento/LICITACION/LIC_FECHADECISIONPREVISTA"/>
+                </strong>
+			</xsl:otherwise>
+			</xsl:choose>
+		</td>
+		<td class="doce labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/>:</td>
+		<td class="doce datosLeft">
+				<span id="idEstadoLic">
+					<strong><xsl:value-of select="/Mantenimiento/LICITACION/ESTADO"/></strong>
+					<xsl:if test="/Mantenimiento/LICITACION/MULTIOFERTAS/MO_ID != ''">
+						<xsl:text></xsl:text>, <xsl:value-of select="document($doc)/translation/texts/item[@name='lic_pedido_s']/node()"/>:<br/>
+							<xsl:for-each select="/Mantenimiento/LICITACION/MULTIOFERTAS/MO_ID">
+								<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Compras/Multioferta/MultiofertaFrame.xsql?MO_ID={.}','Multioferta',100,80,0,0)">
+									<xsl:value-of select="./@Pos"/>
+								</a>
+								<xsl:if test="position() != last()">
+									<xsl:text>,&nbsp;</xsl:text>
+								</xsl:if>
+							</xsl:for-each>
+						<xsl:text></xsl:text>
+<!--
+						&nbsp;(<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Compras/Multioferta/MultiofertaFrame.xsql?MO_ID={/Mantenimiento/LICITACION/MULTIOFERTAS/MO_ID}','Multioferta',100,80,0,0)"><xsl:value-of select="document($doc)/translation/texts/item[@name='lic_pedido_s']/node()"/></a>)
+-->
+					</xsl:if>
+				</span>
+		</td>
+   </tr>
+
+	<xsl:if test="/Mantenimiento/LICITACION/LIC_IDESTADO = 'ADJ' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'FIRM' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'CONT'">
+	<tr>
+		<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_real_adj']/node()"/>:</td>
+		<td class="datosLeft">
+			<xsl:choose>
+			<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+				<input type="text" id="LIC_FECHAREALADJUDICACION" name="LIC_FECHAREALADJUDICACION" value="{Mantenimiento/LICITACION/LIC_FECHAREALADJUDICACION}" size="8" maxlength="8"/>
+				&nbsp;<a href="javascript:ActualizarFechasReales();" style="text-decoration:none;">
+					<img src="http://www.newco.dev.br/images/modificar.gif">
+						<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='actualizar_fecha']/node()"/></xsl:attribute>
+						<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='actualizar_fecha']/node()"/></xsl:attribute>
+					</img>
+				</a>
+				&nbsp;
+                <span style="font-size:12px;">
+                    <xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+                </span>
+			</xsl:when>
+			<xsl:otherwise>
+                <strong>
+                    <xsl:value-of select="/Mantenimiento/LICITACION/LIC_FECHAREALADJUDICACION"/>
+                </strong>
+			</xsl:otherwise>
+			</xsl:choose>
+		</td>
+		<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_real_cad']/node()"/>:</td>
+		<td class="datosLeft">
+			<xsl:choose>
+			<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+				<input type="text" id="LIC_FECHAREALCADUCIDAD" name="LIC_FECHAREALCADUCIDAD" value="{Mantenimiento/LICITACION/LIC_FECHAREALCADUCIDAD}" size="8" maxlength="8"/>
+				&nbsp;<a href="javascript:ActualizarFechasReales();" style="text-decoration:none;">
+					<img src="http://www.newco.dev.br/images/modificar.gif">
+						<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='actualizar_fecha']/node()"/></xsl:attribute>
+						<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='actualizar_fecha']/node()"/></xsl:attribute>
+					</img>
+				</a>
+				&nbsp;
+                                <span style="font-size:12px;">
+                                    <xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+                                </span>
+			</xsl:when>
+			<xsl:otherwise>
+                            <strong>
+                                <xsl:value-of select="/Mantenimiento/LICITACION/LIC_FECHAREALCADUCIDAD"/>
+                            </strong>
+			</xsl:otherwise>
+			</xsl:choose>
+		</td>
+		<td colspan="2">&nbsp;</td>
+	</tr>
+	</xsl:if>
+
+	<tr><td colspan="6">&nbsp;</td></tr>
+</table>
+
+<!-- Pestanyas -->
+<div id="pestanas" class="divLeft" style="border-bottom:0px solid #3B5998;">
+	&nbsp;&nbsp;
+	<xsl:choose>
+	<xsl:when test="/Mantenimiento/LANG = 'spanish'">
+		<a href="#" id="pes_lDatosGenerales" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonDatosGenerales1.gif" alt="Condiciones de la licitación" title=""/></a>&nbsp;
+		<xsl:if test="/Mantenimiento/LICITACION/ROL != 'VENDEDOR' and /Mantenimiento/LICITACION/LIC_MESESDURACION = 0 and not /Mantenimiento/LICITACION/LICITACION_AGREGADA">
+			<a href="#" id="pes_lInfoPedido" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInfoPedido.gif" alt="Información del pedido" title=""/></a>&nbsp;
+		</xsl:if>
+		<a href="#" id="pes_lProductos" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProductos.gif" alt="Productos" title=""/></a>&nbsp;
+		<xsl:if test="/Mantenimiento/LICITACION/ROL != 'VENDEDOR'">
+<!--			<a href="#" id="pes_lProductosCompacta" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonAnalisis.gif" alt="Análisis" title=""/></a>&nbsp;-->
+			<a href="#" id="pes_lProveedores" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProveedores.gif" alt="Proveedores" title=""/></a>&nbsp;
+			<a href="#" id="pes_lUsuarios" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonUsuarios.gif" alt="Usuarios" title=""/></a>
+			<xsl:if test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">
+				<a href="#" id="pes_lCentros" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonCentros.gif" alt="Centros" title=""/></a>
+			</xsl:if>
+			<a href="#" id="pes_lInforme" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInforme.gif" alt="Informe" title=""/></a>
+		</xsl:if>
+	</xsl:when>
+	<xsl:otherwise>
+		<a href="#" id="pes_lDatosGenerales" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonDatosGenerales1-BR.gif" alt="Condições da cotação" title=""/></a>&nbsp;
+		<xsl:if test="/Mantenimiento/LICITACION/ROL != 'VENDEDOR' and /Mantenimiento/LICITACION/LIC_MESESDURACION = 0 and not /Mantenimiento/LICITACION/LICITACION_AGREGADA">
+			<a href="#" id="pes_lInfoPedido" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInfoPedido-BR.gif" alt="Informação do pedido" title=""/></a>&nbsp;
+		</xsl:if>
+		<a href="#" id="pes_lProductos" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProductos-BR.gif" alt="Produtos" title=""/></a>&nbsp;
+		<xsl:if test="/Mantenimiento/LICITACION/ROL != 'VENDEDOR'">
+<!--			<a href="#" id="pes_lProductosCompacta" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonAnalisis-BR.gif" alt="Análise" title=""/></a>&nbsp;-->
+			<a href="#" id="pes_lProveedores" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProveedores-BR.gif" alt="Fornecedores" title=""/></a>&nbsp;
+			<a href="#" id="pes_lUsuarios" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonUsuarios-BR.gif" alt="Usuários" title=""/></a>
+			<xsl:if test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">
+				<a href="#" id="pes_lCentros" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonCentros.gif" alt="Centros" title=""/></a>
+			</xsl:if>
+			<a href="#" id="pes_lInforme" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInforme-BR.gif" alt="Relatório" title=""/></a>
+		</xsl:if>
+	</xsl:otherwise>
+	</xsl:choose>
+</div>
+<!-- FIN Pestanyas -->
+
+<table class="infoTable divLeft lDatosGenerales incidencias" style="border-top:1px solid #999;" cellspacing="5">
+
+	<!-- Si es proveedor y el estado de la licitacion es 'en curso' mostramos explicacion para que sepan informar ofertas -->
+	<xsl:choose>
+	<xsl:when test="/Mantenimiento/LICITACION/ROL = 'VENDEDOR' and /Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_IDESTADO = 'CURS'">
+		<tr style="height:45px;">
+			<td colspan="3">
+				<span style="padding:10px;background-color:#BCF5A9;border:2px solid #488214">
+					<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='lic_proveedores_expli']/node()"/></strong>
+				</span>
+			</td>
+		</tr>
+	</xsl:when>
+	<xsl:otherwise>
+		<tr style="height:5px;"><td colspan="3">&nbsp;</td></tr>
+	</xsl:otherwise>
+	</xsl:choose>
+
+	<tr>
+		<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='descripcion']/node()"/>:</td>
+		<td class="cuarenta datosLeft borderGris" style="padding:15px 10px;">
+			<xsl:copy-of select="/Mantenimiento/LICITACION/LIC_DESCRIPCION/node()"/>
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_entrega']/node()"/>:</td>
+		<td class="datosLeft borderGris" style="padding:15px 10px;">
+			<xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESENTREGA/node()"/>
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_pago']/node()"/>:</td>
+		<td class="datosLeft borderGris" style="padding:15px 10px;">
+			<xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESPAGO/node()"/>
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_otras']/node()"/>:</td>
+		<td class="datosLeft borderGris" style="padding:15px 10px;">
+			<xsl:copy-of select="/Mantenimiento/LICITACION/LIC_OTRASCONDICIONES/node()"/>
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='meses_duracion']/node()"/>:</td>
+		<td class="datosLeft borderGris" style="padding:15px 10px;">
+			<xsl:choose>
+			<xsl:when test="/Mantenimiento/LICITACION/LIC_MESESDURACION = 0">
+				<xsl:value-of select="document($doc)/translation/texts/item[@name='lic_pedido_puntual']/node()"/>
+			</xsl:when>
+			<xsl:when test="/Mantenimiento/LICITACION/LIC_MESESDURACION = 1">
+				<xsl:value-of select="/Mantenimiento/LICITACION/LIC_MESESDURACION"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='mes']/node()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="/Mantenimiento/LICITACION/LIC_MESESDURACION"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/>
+			</xsl:otherwise>
+			</xsl:choose>
+
+<!-- 06mar15 - Edu decide quitar esta funcionalidad para replantearla en un futuro
+
+		<!- solo mostramos info del contrato a usuarios cliente y licitaciones por paquete (estados ADJ, FIRM y CONT) ->
+		<xsl:if test="(/Mantenimiento/LICITACION/LIC_IDESTADO = 'ADJ' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'FIRM' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'CONT') and /Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/MARCADOCUMENTO != '' and /Mantenimiento/LICITACION/LIC_PORPRODUCTO != 'S'">
+
+			<span id="contratoLinkBox" style="float:right;">
+				<span id="contratoLink">
+				<xsl:if test="/Mantenimiento/LICITACION/CONTRATO">
+					<xsl:value-of select="document($doc)/translation/texts/item[@name='contrato']/node()"/>:&nbsp;<a href="http://www.newco.dev.br/Documentos/{/Mantenimiento/LICITACION/CONTRATO/URL}" target="_blank"><xsl:value-of select="/Mantenimiento/LICITACION/CONTRATO/NOMBRE"/></a>
+				</xsl:if>
+				</span>
+
+			<!- Subir Contrato ->
+			<xsl:if test="/Mantenimiento/LICITACION/AUTOR">
+				&nbsp;<a id="IMGSubirContrato" href="javascript:SubirContrato();" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/subirContrato.gif"/></a>
+			</xsl:if>
+			</span>
+		</xsl:if>
+-->
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+
+	<xsl:if test="/Mantenimiento/LICITACION/IDPAIS != 55 and /Mantenimiento/LICITACION/LIC_MESESDURACION != 0">
+	<tr>
+		<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_adjudicacion']/node()"/>:</td>
+		<td class="datosLeft borderGris" style="padding:15px 10px;"><xsl:value-of select="/Mantenimiento/LICITACION/LIC_FECHAADJUDICACION"/></td>
+		<td>&nbsp;</td>
+	</tr>
+	</xsl:if>
+
+
+<!-- 06mar15 - Edu decide quitar esta funcionalidad para replantearla en un futuro
+	<!- solo mostramos form para subir contrato a usuario autor en licitaciones por paquete (estados ADJ, FIRM y CONT) ->
+	<xsl:if test="(/Mantenimiento/LICITACION/LIC_IDESTADO = 'ADJ' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'FIRM' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'CONT') and /Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/MARCADOCUMENTO != '' and /Mantenimiento/LICITACION/LIC_PORPRODUCTO != 'S'">
+	<tr id="ROWSubirContrato" style="display:none;">
+		<form name="SubirContrato" id="SubirContrato" method="post">
+		<input type="hidden" name="LIC_PROV_IDPROVEEDOR" value="{/Mantenimiento/LICITACION/LIC_IDPROVEEDORSELECCIONADO}"/>
+		<input type="hidden" name="TIPO_DOC" value="{/Mantenimiento/LICITACION/MARCADOCUMENTO}"/>
+		<input type="hidden" name="DOCUMENTOS_BORRADOS"/>
+		<input type="hidden" name="BORRAR_ANTERIORES"/>
+		<input type="hidden" name="CADENA_DOCUMENTOS"/>
+
+		<td>&nbsp;</td>
+		<td class="datosLeft borderGris" style="padding:15px 10px;">
+			<xsl:call-template name="CargaDocumentos">
+				<xsl:with-param name="tipo"><xsl:value-of select="/Mantenimiento/LICITACION/MARCADOCUMENTO"/></xsl:with-param>
+				<xsl:with-param name="LicID"><xsl:value-of select="/Mantenimiento/LICITACION/LIC_ID"/></xsl:with-param>
+			</xsl:call-template>
+		</td>
+		<td>&nbsp;</td>
+                </form>
+	</tr>
+	</xsl:if>
+-->
+	<tr><td colspan="3">&nbsp;</td></tr>
+</table>
+<!--
+<div id="uploadFrameBox" style="display:none;"><iframe src="" id="uploadFrame" name="uploadFrame" style="width: 100%;"></iframe></div>
+<div id="uploadFrameBoxDoc" style="display:none;"><iframe src="" id="uploadFrameDoc" name="uploadFrameDoc" style="width: 100%;"></iframe></div>
+-->
+</xsl:template>
+<!-- FIN Tabla Datos Generales -->
+
+
+<!-- Tabla Datos Generales Autor -->
+<xsl:template name="Tabla_Datos_Generales_Autor">
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:value-of select="/Mantenimiento/LANG"/>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+
+<form id="form1" name="form1" action="MantLicitacionSave.xsql" method="post">
+	<input type="hidden" name="LIC_IDUSUARIO" value="{Mantenimiento/US_ID}"/>
+	<input type="hidden" name="LIC_IDEMPRESA" value="{/Mantenimiento/LICITACION/LIC_IDEMPRESA}"/>
+	<input type="hidden" name="LIC_ID" value="{/Mantenimiento/LICITACION/LIC_ID}"/>
+	<input type="hidden" name="ACCION" value="MODIFICAR"/>
+
+	<table class="infoTable incidencias" border="0" cellspacing="5">
+		<tr><td colspan="5">&nbsp;</td></tr>
+		<tr>
+			<td class="ocho labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='titulo']/node()"/>:</td>
+			<td class="quince datosLeft">
+				<input type="text" name="LIC_TITULO" value="{Mantenimiento/LICITACION/LIC_TITULO}" size="50" maxlength="100"/>
+			</td>
+			<td class="ocho labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_decision']/node()"/>:</td>
+			<td class="doce datosLeft">
+				<input type="text" name="LIC_FECHADECISION" value="{Mantenimiento/LICITACION/LIC_FECHADECISIONPREVISTA}" size="10" maxlength="10"/>
+				<xsl:call-template name="desplegable">
+					<xsl:with-param name="path" select="/Mantenimiento/LICITACION/LIC_HORADECISION/field"/>
+				</xsl:call-template>
+				&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+			</td>
+			<td rowspan="4" class="veinte datosLeft botonesLic" style="padding-right:10px;">
+				<xsl:if test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/PROVEEDORESLICITACION/PROVEEDOR/CONVERSACION">
+					<div class="botonLargo clear">
+						<a href="#" id="ConversacionProv">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='existe_conversacion_proveedor']/node()"/>
+						</a>
+					</div>
+				</xsl:if>
+			</td>
+			<input type="hidden" name="LIC_PORPRODUCTO" id="LIC_PORPRODUCTO" value="{/Mantenimiento/LICITACION/LIC_PORPRODUCTO}"/>
+			<input type="hidden" name="LIC_FARMACIA" id="LIC_FARMACIA" value="{/Mantenimiento/LICITACION/LIC_FARMACIA}"/>
+		</tr>
+		<!--
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_por_producto']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="checkbox" name="LIC_PORPRODUCTO" id="LIC_PORPRODUCTO" value="S">
+					<xsl:if test="/Mantenimiento/LICITACION/LIC_PORPRODUCTO = 'S'">
+						<xsl:attribute name="checked">checked</xsl:attribute>
+					</xsl:if>
+				</input>
+			</td>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='productos_farmacia']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="checkbox" name="LIC_FARMACIA" id="LIC_FARMACIA" value="S">
+					<xsl:if test="/Mantenimiento/LICITACION/LIC_FARMACIA = 'S'">
+						<xsl:attribute name="checked">checked</xsl:attribute>
+					</xsl:if>
+				</input>
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_alta']/node()"/>:</td>
+			<td class="datosLeft"><strong><xsl:value-of select="Mantenimiento/LICITACION/LIC_FECHAALTA"/></strong></td>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/>:</td>
+			<td class="datosLeft"><strong><span id="idEstadoLic"><xsl:value-of select="Mantenimiento/LICITACION/ESTADO"/>
+				(<xsl:value-of select="Mantenimiento/LICITACION/LIC_NUMEROLINEAS"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='productos']/node()"/>, 
+				<xsl:value-of select="Mantenimiento/LICITACION/PROVEEDORESLICITACION/TOTAL"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedores']/node()"/>)
+				</span></strong>
+			</td>
+		</tr>
+
+		<tr><td colspan="4">&nbsp;</td></tr>
+        </table>
+
+		<!-- Pestanyas -->
+		<div id="pestanas" class="divLeft" style="border-bottom:0px solid #3B5998;">
+			&nbsp;&nbsp;
+			<xsl:choose>
+			<xsl:when test="/Mantenimiento/LANG = 'spanish'">
+				<a href="#" id="pes_lDatosGenerales" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonDatosGenerales1.gif" alt="Condiciones de la licitación" title=""/></a>&nbsp;
+				<xsl:if test="/Mantenimiento/LICITACION/LIC_MESESDURACION = 0 and not /Mantenimiento/LICITACION/LICITACION_AGREGADA">
+					<a href="#" id="pes_lInfoPedido" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInfoPedido.gif" alt="Información del pedido" title=""/></a>&nbsp;
+				</xsl:if>
+				<a href="#" id="pes_lProductos" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProductos.gif" alt="Productos" title=""/></a>&nbsp;
+				<a href="#" id="pes_lProveedores" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProveedores.gif" alt="Proveedores" title=""/></a>&nbsp;
+				<a href="#" id="pes_lUsuarios" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonUsuarios.gif" alt="Usuarios" title=""/></a>
+				<xsl:if test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">
+					<a href="#" id="pes_lCentros" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonCentros.gif" alt="Centros" title=""/></a>
+				</xsl:if>
+				<a href="#" id="pes_lInforme" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInforme.gif" alt="Informe" title=""/></a>
+			</xsl:when>
+			<xsl:otherwise>
+				<a href="#" id="pes_lDatosGenerales" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonDatosGenerales1-BR.gif" alt="Condições da cotação" title=""/></a>&nbsp;
+				<xsl:if test="/Mantenimiento/LICITACION/LIC_MESESDURACION = 0 and not /Mantenimiento/LICITACION/LICITACION_AGREGADA">
+					<a href="#" id="pes_lInfoPedido" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInfoPedido-BR.gif" alt="Informação do pedido" title=""/></a>&nbsp;
+				</xsl:if>
+				<a href="#" id="pes_lProductos" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProductos-BR.gif" alt="Produtos" title=""/></a>&nbsp;
+				<a href="#" id="pes_lProveedores" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonProveedores-BR.gif" alt="Fornecedores" title=""/></a>&nbsp;
+				<a href="#" id="pes_lUsuarios" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonUsuarios-BR.gif" alt="Usuários" title=""/></a>
+				<xsl:if test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">
+					<a href="#" id="pes_lCentros" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonCentros.gif" alt="Centros" title=""/></a>
+				</xsl:if>
+				<a href="#" id="pes_lInforme" style="text-decoration:none;"><img src="http://www.newco.dev.br/images/botonInforme-BR.gif" alt="Relatório" title=""/></a>
+			</xsl:otherwise>
+			</xsl:choose>
+		</div>
+		<!-- FIN Pestanyas -->
+
+	<table class="infoTable divLeft lDatosGenerales incidencias" style="padding-top:10px;display:block;border-top:1px solid #999;" cellspacing="5">
+		<tr><td colspan="3">&nbsp;</td></tr>
+
+		<tr>
+			<td class="veinte labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='descripcion']/node()"/>:</td>
+			<td class="trenta datosLeft">
+				<textarea name="LIC_DESCRIPCION" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_DESCRIPCION/node()"/></textarea>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_entrega']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea name="LIC_CONDENTREGA" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESENTREGA/node()"/></textarea>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_pago']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea name="LIC_CONDPAGO" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_CONDICIONESPAGO/node()"/></textarea>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='condiciones_otras']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea name="LIC_CONDOTRAS" rows="4" cols="120"><xsl:copy-of select="/Mantenimiento/LICITACION/LIC_OTRASCONDICIONES/node()"/></textarea>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">
+				<table class="infoTable divLeft" style="border-collapse:separate;margin-left:-4px;">
+					<tr>
+						<td class="labelRight grisMed veinte"><xsl:value-of select="document($doc)/translation/texts/item[@name='meses_duracion']/node()"/>:</td>
+						<td class="datosLeft quince">
+							<!--<select name="LIC_MESES" id="LIC_MESES">
+								<option value="0"><xsl:value-of select="document($doc)/translation/texts/item[@name='lic_pedido_puntual']/node()"/></option>
+								<option value="1">1 <xsl:value-of select="document($doc)/translation/texts/item[@name='mes']/node()"/></option>
+								<option value="2">2 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="3">3 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="4">4 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="5">5 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="6">6 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="12">12 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="18">18 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+								<option value="24">24 <xsl:value-of select="document($doc)/translation/texts/item[@name='meses']/node()"/></option>
+							</select>-->
+							<xsl:call-template name="desplegable">
+								<xsl:with-param name="path" select="/Mantenimiento/LICITACION/LIC_MESES/field"/>
+								<!--<xsl:with-param name="nombre">LIC_MESES</xsl:with-param>
+								<xsl:with-param name="id">LIC_MESES</xsl:with-param>-->
+							</xsl:call-template>
+						</td>
+						<td class="cinco">&nbsp;</td>
+						<td colspan="3">&nbsp;</td>
+<!--
+						<td class="labelRight grisMed veinte"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_adjudicacion']/node()"/>:</td>
+						<td class="datosLeft veinte">
+							<input type="text" name="LIC_FECHAADJUDICACION" id="LIC_FECHAADJUDICACION" value="{Mantenimiento/LICITACION/LIC_FECHAADJUDICACION}" size="15" maxlength="10"/>
+							&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+						</td>
+						<td>&nbsp;</td>
+-->
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<xsl:if test="/Mantenimiento/LICITACION/IDPAIS != 55">
+			<tr class="campoPedidoPuntual_Inv">
+				<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_adjudicacion']/node()"/>:</td>
+				<td class="datosLeft">
+					<input type="text" name="LIC_FECHAADJUDICACION" id="LIC_FECHAADJUDICACION" value="{Mantenimiento/LICITACION/LIC_FECHAADJUDICACION}" size="15" maxlength="10"/>
+					&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='formato_fecha']/node()"/>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+		</xsl:if>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuario']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDUSUARIOPEDIDO" id="LIC_IDUSUARIOPEDIDO">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDUSUARIOPEDIDO']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:if test="ID = ../../SelectedElement"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='lugar_entrega']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDLUGARENTREGA" id="LIC_IDLUGARENTREGA">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDLUGARENTREGA']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:if test="ID = ../../SelectedElement"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<!--	15set16	EL plazo y forma de pago los mantenemos ocultos, se informarán desde los datos del cliente y/o proveedor	-->
+		<input type="hidden" name="LIC_IDFORMAPAGO" id="LIC_IDFORMAPAGO" value=""/>
+		<input type="hidden" name="LIC_IDPLAZOPAGO" id="LIC_IDPLAZOPAGO" value=""/>
+		<!--
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='forma_pago']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDFORMAPAGO" id="LIC_IDFORMAPAGO">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/LICITACION/FORMASPAGO/field[@name='IDFORMAPAGO']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='plazo_pago']/node()"/>:</td>
+			<td class="datosLeft">
+				<select name="LIC_IDPLAZOPAGO" id="LIC_IDPLAZOPAGO">
+					<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+					<xsl:for-each select="/Mantenimiento/LICITACION/PLAZOSPAGO/field[@name='IDPLAZOPAGO']/dropDownList/listElem">
+						<option value="{ID}">
+							<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+							<xsl:value-of select="listItem"/>
+						</option>
+					</xsl:for-each>
+				</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		-->
+		
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='codigo_pedido']/node()"/>:</td>
+			<td class="datosLeft">
+				<input type="text" id="LIC_CODIGOPEDIDO" name="LIC_CODIGOPEDIDO" value="{/Mantenimiento/LICITACION/LIC_CODIGOPEDIDO}"/>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr class="campoPedidoPuntual" style="display:none;">
+			<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='observaciones_pedido']/node()"/>:</td>
+			<td class="datosLeft">
+				<textarea id="LIC_OBSPEDIDO" name="LIC_OBSPEDIDO" rows="4" cols="120">
+					<xsl:value-of select="/Mantenimiento/LICITACION/LIC_COMENTARIOSPEDIDO"/>
+        </textarea>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr><td colspan="3">&nbsp;</td></tr>
+
+		<tr>
+			<td colspan="3">
+				<table class="infoTable veinte">
+					<tr>
+						<td class="veinte labelRight">&nbsp;</td>
+						<td class="veinte">
+							<div class="boton">
+								<a href="javascript:ValidarFormulario(document.forms['form1'],'datosGenerales');">
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+								</a>
+							</div>
+						</td>
+						<td class="veinte">
+							<div class="boton">
+								<a href="javascript:ComprobarDatosGenerales(document.forms['form1']);" title="Volver">
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='cancelar']/node()"/>
+								</a>
+							</div>
+						</td>
+						<td>&nbsp;</td>
+
+						<input type="hidden" name="LIC_DESCRIPCION_OLD" value="{/Mantenimiento/LICITACION/LIC_DESCRIPCION}"/>
+						<input type="hidden" name="LIC_CONDENTREGA_OLD" value="{/Mantenimiento/LICITACION/LIC_CONDICIONESENTREGA}"/>
+						<input type="hidden" name="LIC_CONDPAGO_OLD" value="{/Mantenimiento/LICITACION/LIC_CONDICIONESPAGO}"/>
+						<input type="hidden" name="LIC_CONDOTRAS_OLD" value="{/Mantenimiento/LICITACION/LIC_OTRASCONDICIONES}"/>
+						<input type="hidden" name="LIC_MESES_OLD" value="{/Mantenimiento/LICITACION/LIC_MESESDURACION}"/>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr><td colspan="3">&nbsp;</td></tr>
+	</table>
+</form>
+</xsl:template>
+<!-- FIN Tabla Datos Generales Autor -->
+</xsl:stylesheet>

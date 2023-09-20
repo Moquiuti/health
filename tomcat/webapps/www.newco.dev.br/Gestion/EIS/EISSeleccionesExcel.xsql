@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Selecciones/agrupaciones para consultas: exportacion a Excel
+	Ultima revision: ET 7may19 09:19
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ExcelesHTML.xsl"?>
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISSeleccionesExcel');
+		  IF US_ID>=0 THEN
+			EISSelecciones_PCK.Listado_Excel
+			(
+				US_ID,
+				'{@IDEMPRESA}'
+			);
+          END IF;
+					   
+        END;
+        ]]>
+</xsql:include-owa>
+</DescargaExcel>

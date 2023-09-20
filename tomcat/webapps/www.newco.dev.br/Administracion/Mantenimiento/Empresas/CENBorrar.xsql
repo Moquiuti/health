@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CenBorrarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CenBorrarHTML.xsl"?>
+
+<MantenimientoBorrar xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+BEGIN
+   CENTROS_PCK.CEN_Borrar({@CEN_ID});
+END;
+]]>	  
+</xsql:include-owa>
+
+<!-- End booking stuff -->
+  <jumpTo>
+    <picture-off>DB-001</picture-off>
+    <picture-on>DB-002</picture-on>
+    <id>uno</id>   
+    <page>G-0015</page>
+  </jumpTo>
+</MantenimientoBorrar>
+

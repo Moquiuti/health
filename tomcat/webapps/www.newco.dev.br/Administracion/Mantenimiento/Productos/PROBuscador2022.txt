@@ -1,0 +1,3 @@
+08mar22 ET Buscador del catalogo de proveedores, para mantenimiento. nuevo disenno 2022.  PROBuscador2022_080322.js
+06mar23 ET Revision del disenno. Ocultar desplegable clientes para Colombia.
+06jun23 ET Se producia un error del lado del proveedor al descargar CSV. PROBuscador2022_060623.js

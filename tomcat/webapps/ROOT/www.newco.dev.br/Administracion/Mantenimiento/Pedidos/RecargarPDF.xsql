@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="RecargarPDF.xsl"?>
+<?xml-stylesheet type="text/xsl" href="RecargarPDF.xsl"?>
+
+<RecargarPDF xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="US_ID"/>	
+  <xsql:include-param name="PRO_ID"/>	
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_PDF	VARCHAR(20);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecargarPDF');
+		IF US_ID>=0 THEN
+			
+			v_PDF:= INTEGRACION_PCK.MultiofertaAProveedor_11(
+				'{@MO_ID}',
+                'S'
+			);
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_PDF = 'OK' THEN
+				HTP.P('<OK>'||v_PDF||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+			
+			
+				
+			
+		END IF;			   
+    END;
+        ]]>  
+</xsql:include-owa>
+
+</RecargarPDF>

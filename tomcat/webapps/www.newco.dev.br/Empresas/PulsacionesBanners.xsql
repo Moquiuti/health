@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PulsacionesBannersHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PulsacionesBannersHTML.xsl"?>
+
+<Pusaciones xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:include-param name="LA_URL"/>
+  <xsql:include-param name="EL_BANNER"/>
+   
+  <xsql:include-owa>
+    <![CDATA[
+     BANNERS_PCK.PULSACION_BANNER('{@EL_BANNER}');
+    ]]>
+  </xsql:include-owa>
+</Pusaciones>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	COmprueba si la sesion esta activa. Se lanza desde la Cabecera cada 15 minutos
+	ultima revision ET 03set21 12:30
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="CompruebaSesionJSON.xsl"?>
+
+<CompruebaSesion xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;	
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CompruebaSesion');
+		IF US_ID>=0 THEN
+			
+			HTP.P('<OK/>');
+			
+		ELSE
+		
+			HTP.P('<SIN_SESION/>');
+			
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+</CompruebaSesion>

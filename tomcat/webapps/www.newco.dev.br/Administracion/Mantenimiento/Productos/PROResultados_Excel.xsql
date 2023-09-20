@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Busqueda de productos en catálogo proveedor, devuelve fichero excel
+	Ultima revision: ET 11jul18 11:15
+ -->
+
+<?xml-stylesheet type="text/xsl" href="PROResultados_Excel_JSON.xsl"?> 
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROBuscador');
+		IF US_ID>=0 THEN
+
+			HTP.P(utilidades_pck.CabeceraXML);
+
+			--9jul18 MantenimientoProductos_PCK.ListaProductos_PROV_XML(
+			MantenimientoProductos_seg_PCK.Listado_Excel(
+				US_ID,
+				'{@PRODUCTO}',
+				'{@IDCLIENTE}',
+				'{@IDCLIENTES}',
+				'{@IDPROVEEDOR}',
+				'{@CAMBIOS}',
+				'{@SINPRIVADOS}',
+				'{@SINEMPLANTILLAR}',
+				'{@SOLODESTACADOS}',
+				'{@MODIFICADOSPROV}',
+				'{@SOLOFNCP}',
+				'{@RECHAZADOS}',
+				'{@SINPRECIOMVM}',
+				'{@SINOFERTAMVM}',
+				'{@SINOFERTAFNCP}',
+				'{@SINOFERTARECOLETAS}',
+				'{@DOC_OK}',							--	23ago18
+				'{@DOC_PEND_APROBAR}',					--	23ago18
+				'{@DOC_PENDIENTE}',						--	17jun18
+				'{@ESPACK}',							--	5jul18
+				'{@ENPACK}'								--	5jul18
+			);
+
+		END IF;
+	END;
+
+]]>
+</xsql:include-owa>
+
+</DescargaExcel>

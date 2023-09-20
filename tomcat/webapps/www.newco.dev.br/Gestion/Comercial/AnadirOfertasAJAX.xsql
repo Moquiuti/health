@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Inserta nuevas ofertas para la licitacion que han sido introducidas por el proveedor 
+	Ultima revisio: ET 19nov21 11:30
++-->
+<?xml-stylesheet type="text/xsl" href="AnadirOfertasJSON.xsl"?>
+
+<NuevasOfertas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="LIC_PROV_ID"/>
+<xsql:include-param name="LISTA_OFERTAS"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_count		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProveedor');
+		IF US_ID>=0 THEN
+			v_count:=LICITACIONES_PCK.ActualizarOfertas(
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_PROV_ID}',
+				'{@LISTA_OFERTAS}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_count > 0 THEN
+				HTP.P('<OK>'||v_count||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevasOfertas>

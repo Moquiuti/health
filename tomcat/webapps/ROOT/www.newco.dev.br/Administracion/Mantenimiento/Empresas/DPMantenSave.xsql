@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="DPMantenSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="DPMantenSaveHTML.xsl"?>
+
+<MantenimientoSave xmlns:xsql="urn:oracle-xsql" connection="newco">
+ <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+<xsql:include-owa>
+
+<![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DPMantenSave');
+		if us_id>=0 then
+                  DEPARTAMENTOS_PCK.DP_Alta({@EMP_ID},'{@DP_ID}',
+	  '{@DP_NOMBRE}', '{@DP_IDRESPONSABLE}');
+		end if;		   
+        END;
+        ]]>	  
+</xsql:include-owa>
+  
+  <boton label="Cerrar" caption="IMG-0190">
+    <name_function>tienePadre</name_function> 
+  </boton>
+  
+</MantenimientoSave>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="InvitacionNoAfiliadosSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="InvitacionNoAfiliadosSaveHTML.xsl"?>
+
+<Invitacion xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+   <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		InvitacionProveedores_PCK.EnviarInvitaciones
+			(	
+				'{@US_ID}',
+				'{@LISTAEMPRESAS}',
+				'{@MENSAJE}'
+			);
+	END;
+    ]]>
+  </xsql:include-owa>
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption> 
+  </jumpTo>  
+  
+  <button label="Volver" caption="G-0001">
+    <name_function_msg>G-0011</name_function_msg>
+  </button>  
+  
+  <returnHome/>
+</Invitacion>

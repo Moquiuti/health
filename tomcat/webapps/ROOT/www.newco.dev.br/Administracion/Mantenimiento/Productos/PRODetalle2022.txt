@@ -1,0 +1,3 @@
+07mar22 ET Nuevo disenno 2022.ET 7mar22 12:00 PRODetalle2022_070322.js
+19may22 ET Incluir documentos
+10jun22 ET No se mostraba correctamente el boton "Pack"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Datos necesarios para el Área Pública
+ *		Estadistica agregada de afiliados
+ *		Ofertas
+ *
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ContactoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ContactoHTML.xsl"?>
+
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" name="US_ID" value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="SES_ID"  value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="MVMCOOKIE"  value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com.br" path="" names="LANG"  value="spanish"/>
+
+	<LANG>spanish</LANG>
+        <STYLE>basic.11.04.14.css</STYLE>
+
+</AreaPublica>

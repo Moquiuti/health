@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Buscador en catálogo proveedores
+	Ultima revision: ET 1oct18 14:24
+-->
+
+<?xml-stylesheet type="text/xsl" href="ListaProductosHTML.xsl"?>
+
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco">
+ <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="TITULO" />
+  <form name="BuscaProductos" method="post" action="P3Lista.xsql">
+
+  <!-- En caso de xsql-error, definimos el salto una vez guardado el error -->
+  <ERR_JUMPTO_LINK>G-0011</ERR_JUMPTO_LINK>
+  <JUMPTO_LINK>G-0011</JUMPTO_LINK>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			v_IDUsuario		NUMBER;
+    	BEGIN
+			v_IDUsuario:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListaProductos');
+
+			IF v_IDUsuario>=0 THEN
+
+				IF '{@STOCKS_ACCION}'='SIN_STOCKS' THEN
+					CONTROLSTOCKS_PCK.SinStocks(
+						'{@STOCKS_IDPRODUCTO}',
+						'{@STOCKS_TIPO}',
+						'{@STOCKS_COMENTARIOS}',
+						'{@STOCKS_REF_ALT}',
+						'{@STOCKS_PROD_ALT}'
+					);
+				END IF;
+
+				IF '{@STOCKS_ACCION}'='CON_STOCKS' THEN
+					CONTROLSTOCKS_PCK.ConStocks('{@STOCKS_IDPRODUCTO}');
+				END IF;
+
+				NUEVOBUSCADOR_PCK.Buscador
+				(
+					v_IDUsuario,
+					TRIM('{@ULTIMAPAGINA}'),
+					20,
+					'{@LLP_NOMBRE}',
+					'{@LLP_PROVEEDOR}',
+					'{@ORDEN}',
+					'{@SENTIDO}',
+					'{@LLP_LISTAPROVEEDORES}',
+					'{@EMPLANTILLAR}',
+					'{@SIN_STOCKS}',
+					'{@SOLO_VISIBLES}',
+					'{@IDPRODUCTO}',
+					'{@FIDProveedor}',
+					'{@FMarca}',
+					'{@GRUPOPRODUCTOS}'
+				);
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+
+	<button label="NavegarAtras" caption="PRO-0480">
+	<name_function>Navega</name_function>
+	<param>document.forms[0]</param>
+	<param>'CANTIDAD_UNI'</param>
+	</button>
+
+	<button label="NavegarAdelante" caption="PRO-0490">
+	<name_function>Navega</name_function>
+	<param>document.forms[0]</param>
+	<param>'CANTIDAD_UNI'</param>
+	</button>
+
+<!--	28set10	Elimino botones que parecen no utilizados
+    <button label="EliminarPeq" status="IMG-0250" alt="IMG-0250">
+      <name_function>Resetea</name_function>
+      <param>document.forms[0]</param>
+    </button>
+
+    <button label="EditarPeq" status="IMG-0230" alt="IMG-0235">
+      <name_function>AsignarReferencia</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3AsignarRef.xsql'</param>
+    </button>
+
+    <button label="BuscarFino" caption="IMG-1140">
+      <name_function>Catalogo</name_function>
+      <param>'http://www.newco.dev.br/Nomenclator/nomenclatorFrame.xsql?HISTORY='+history.length</param>
+    </button>
+
+    <button label="Proveedores" alt="IMG-0710" status="IMG-0710" caption="IMG-1120">
+	<name_function>MostrarPag</name_function>
+	<param>'http://www.newco.dev.br/Empresas/Proveedores.xsql?OPCION=P'</param>
+	</button>
+
+	<button label="CatalogoProductos" alt="IMG-1010" status="IMG-1010" caption="IMG-1130">
+	<name_function>MostrarPag</name_function>
+	<param>'http://www.newco.dev.br/files/AyudaProductos/Plantillas.html'</param>
+	</button>
+
+
+ -->
+ <!-- ********* estos botones se utilizan para la MULTIOFERTA *********
+	    <button label="Insertar" caption="IMG-0222" alt="IMG-0225">
+
+	      <name_function>InsertarProductos</name_function>
+	      <param>document.forms[0]</param>
+	      <param>'CANTIDAD_UNI'</param>
+	      <param>'P3Insertar.xsql'</param>
+	      <param>'NO'</param>
+	    </button>
+
+	    <button label="InsertarVarios" caption="IMG-0221" alt="IMG-0227">
+	      <name_function>InsertarProductos</name_function>
+	      <param>document.forms[0]</param>
+	      <param>'CANTIDAD_UNI'</param>
+	      <param>'P3Insertar.xsql'</param>
+	      <param>'SI'</param>
+	    </button>
+
+   ********* estos botones se utilizan para la MULTIOFERTA *********  -->
+<!--    -->
+    <button label="Insertar" caption="IMG-0223" alt="IMG-0223">
+      <name_function>InsertarProductos</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3Insertar.xsql'</param>
+      <param>'SI'</param>
+	  </button> <!--  LLP_VARIAS_LINEAS  -->
+    </form>
+
+    <jumpTo label="AmpliadasPeq" status="IMG-0200" alt="IMG-0205">G-0013<picture-off>G-0001</picture-off>
+  <picture-on>document.forms[0]>
+
+
+
+</picture-on>
+<page>
+    </page>
+    <caption label="Reducidas" caption="IMG-0210" alt="IMG-0215">Anterior_mov</caption>
+    </jumpTo>
+</Lista>

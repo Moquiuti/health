@@ -1,0 +1,277 @@
+@charset 'UTF-8';
+
+@import url('http://fonts.googleapis.com/css?family=Roboto');
+
+:root {
+	--fundo_paginas:  #F7F7F7; 
+	--cor_fonte_menu: #6C757D;    
+	--cor_principal: #00988F;   	
+	--cor_destaque: #144E8B;    
+	--logo_login: url(images/2022/img/logo_login.png); 
+	--logo:  url(images/2022/img/logo.png); 
+	--background_img: url(images/2022/img/background_login.png);
+	--background_img_es: url(images/2022/img/background_login_es.png);
+	--background_img_abhv: url(images/2022/img/background_login_abhv.png);
+	--logo_login_abhv: url(images/2022/img/logo_abhv.png); 
+}
+
+body { 
+	margin: 0;
+	position: relative;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	background-color: var(--fundo_paginas);
+	overflow-x: hidden;
+}
+
+.header_login {
+	background-color: #FFFFFF;
+	overflow-y: hidden;
+}
+
+.barra_superior_login{
+	position: absolute;
+	width: 100%;
+	height: 24px;
+	left: 0px;
+	top: 0px;
+	background: var(--cor_destaque);
+	mix-blend-mode: multiply;
+}
+
+/* A tela de login e dividida em 2 partes .coluna_esquerda_login com informaÃ§Ãµes:  menu, login, senha, logo e etc..*/
+.coluna_esquerda_login{
+	position: absolute;
+	width: 50%;
+	height: 100%;
+}
+
+/* DIV com as informaÃ§Ãµes de login: usuÃ¡rio e senha */
+/*ALTERACAO DANIEL width E height RETIRADA DE display: flex; flex-direction: column; align-items: flex-start; */
+/*ALTERACAO DANIEL height DE PX PARA %*/
+.coluna_esquerda_interna_login{
+    padding: 0px;
+    position: absolute;
+    width: 57%;
+    height: 76%;
+    left: 20%;
+    top: 7%;
+    background: #FFFFFF;
+    box-shadow: 0px 8px 24px rgb(0 0 0 / 8%);
+    border-radius: 16px;
+}
+
+.coluna_direita_login{
+	position: relative;
+	width: 50%;
+	height: 100%;
+	left: 50%;
+}
+
+/* A tela de login e dividida em 2 partes .coluna_direita_interna_login com imagem/propaganda*/
+.coluna_direita_interna_login{
+	height: 700px;
+	width: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	background: var(--background_img_abhv) no-repeat scroll;
+	object-fit: cover;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	mix-blend-mode: multiply;
+}
+
+.menu_login{
+	position: absolute;
+	width: 100%;
+	height: 24px;
+	left: 0px;
+	top: 40px;
+	margin-left: 8%;
+	color: var(--cor_principal);
+}
+
+.menu_login a {
+	float: left;
+	outline: none;
+	cursor: indicadores;
+	padding: 14px 16px;
+	transition: 0.3s;
+	box-sizing: border-box;
+	text-decoration:none; 
+	color: var(--cor_principal);
+}
+
+.menu_login a:before {
+	content: "";
+	width: 100%;
+	height: 3px;
+	bottom: 0;
+	left: 0;
+	background-color: var(--cor_principal);
+	visibility: hidden;
+	-webkit-transform: scaleX(0);
+	transform: scaleX(0);
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+}
+
+.menu_login a:hover:before {
+	visibility: visible;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
+}
+
+/* LOGO localizada na parte superior da DIV de login  */
+/*ALTERACAO DANIEL width, height E margin-left RETIRADA display: inline-block; INCLUSAO position: relative;*/
+.logo_login {	
+    width: 210px;
+    height: 104px;
+    background: var(--logo_login_abhv);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 21%;
+    margin-top: 3%;
+    position: relative;
+}
+
+.botao_acessar{
+	width: 98%;
+	height: 58px;
+	background: var(--cor_destaque);
+	border-radius: 30px;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 60px; 
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 4%;
+	display: block;
+}
+
+/* DIV para separar formulario de login */
+/*ALTERACAO DANIEL margin-top */
+.coluna_login {
+	padding-left: 40px;
+	width: 81%;
+	margin-top: 16px;
+}
+
+.esqueci_senha{
+	width: 100%;
+	height: 19px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: var(--cor_destaque);
+	display: block;
+	text-decoration: none;
+	margin-top: 1%;
+	margin-bottom:1%;
+	text-align:center;
+}
+
+/*ALTERACAO DANIEL left E top*/
+.coluna_esquerda_rodape_login{
+	position: absolute;
+	width: 370px;
+	height: 450px;
+	left: 24%;
+	top: 76%;
+
+}
+
+/*ALTERACAO DANIEL EXCLUSAO position, left E top ALTERACAO DE PX PARA % width*/
+.logo_rodape_login_mvm{
+	width: 65%;
+	height: 36px;
+	margin-left: 35%;
+	background: url(images/2022/img/logo_login_mvm.png) no-repeat;
+}
+
+/*ALTERACAO DANIEL EXCLUSAO position,top E margin ALTERACAO DE PX PARA % width*/
+.direito_autoral{
+	width: 100%;
+	height: 16px;
+	font-size: 12px;
+	line-height: 16px;
+	color: #6D8CC1;
+	text-decoration: none;
+}
+
+.col-sm-12{
+	width: 100%;
+	height: 79px;
+	left: 10px;
+	top: 0px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	margin-right: 1.5%;
+	display: inline-block;	
+}
+
+.input_formulario{ 
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 14px 10px;
+	background: #FFFFFF;
+	border: 1px solid var(--cor_destaque);
+	box-sizing: border-box;
+	border-radius: 10px;
+	color: var(--cor_principal);
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin: 4px 0px;
+	outline: 0;
+	width: 100%;
+	font-size: 18px;
+}
+
+/*CARACTERÃSTICAS da LABEL .label*/
+.label{
+	width: 59px;
+	height: 16px;
+	left: 16px;
+	top: 0px;
+	color: var(--cor_principal);
+	margin-left: 15px;
+}
+
+.botao_fornecedores{
+	width: 66%;
+	height: 19px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #ffffff;
+	text-decoration: none;
+	margin-top: 7%;
+	margin-bottom:1%;
+	background: var(--cor_principal);
+	border-radius: 10px;
+	text-align: center;
+	display: block;
+	margin-left:16%;
+}
+
+/*ALTERACAO DANIEL INCLUSAO TAG footer*/
+footer {
+    position: absolute;
+    bottom: 0;
+    color: #FFF;
+    width: 100%;
+    height: 100px;    
+    text-align: center;
+    line-height: 100px;
+}

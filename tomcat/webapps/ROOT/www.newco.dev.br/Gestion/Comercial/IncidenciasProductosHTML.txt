@@ -1,0 +1,18 @@
+Log de cambios en las páginas Incidencias de producto (Buscador, nueva incidencia, ficha incidencia)
+
+
+28nov16 Adaptación al nuevo diseño de Breno, recuperando código desde Evaluacion
+		Cabecera
+
+
+
+
+PENDIENTE: 
+
+- FICHA INCIDENCIA
+- INTEGRACION EN FICHA PRODUCTO
+- POPUP PARA BUSQUEDA DE PRODUCTOS (en cat.priv Y en cat.prov.) (REMAQUETAR, INCLUIR EN UN DIV INTERNO)
+
+
+- PROBAR PROCEDIMIENTO COMPLETO
+- LIMPIAR CODIGO

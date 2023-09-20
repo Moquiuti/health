@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmReclamacion.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmReclamacion.xsl"?>
+
+<confirmReclamacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EnviarReclamacion');
+		IF US_ID>0 THEN
+			PedidosProblematicos_Pck.IncidenciaAlProveedor_XML(
+				US_ID,
+				'{@ID_PEDIDO}',
+				'{@RECLAMAR_TEXT}',
+				'{@RECLAMACION}'
+			);
+		END IF;
+	END;
+</xsql:include-owa>
+</confirmReclamacion>

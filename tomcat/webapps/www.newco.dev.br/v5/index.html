@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+	<script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+	<script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('.owl-carousel').owlCarousel({
+				margin:10,
+				loop:true,
+				autoWidth:true,
+				items:4
+			})
+
+		});
+	</script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
+
+</head>
+<body>
+	<div class="header">
+		<a href="#default" class="logo"></a>
+		<div class="header-right">
+			<div class="circulo uma-linha">D</div>
+		</div>
+		<div class="header-right-t">
+			<span class="texto_negrito">MVMBR | </span><span class="texto_padrao">Comprador 13806</span>
+		</div>
+	</div>
+	<div class="linha_separacao"> </div>
+	<div class="menu">
+		<a href="index.html" class="itens_menu">Início</a>
+		<a href="#" class="itens_menu">Catálogo</a>
+		<a href="#" class="itens_menu">Registro de Preço</a>
+		<a href="#" class="itens_menu">Relatórios</a>
+		<a href="#" class="itens_menu">Gestão Comercial</a>
+		<a href="cotacao.html" class="itens_menu">Cotações</a>
+		<a href="#" class="itens_menu">Integração</a>
+		<a href="#" class="itens_menu">Documentação</a>
+		<a href="fornecedores.html" class="itens_menu">Fornecedores</a>
+		<a href="#" class="itens_menu">Gestão</a>
+		<a href="#" class="itens_menu">Pedido</a>
+		<a href="#" class="itens_menu">Central de Compras</a>
+	</div>
+	<div class="coluna_esquerda">
+		<div class="coluna_logo_empresa">
+			<div class="logo_empresa">
+				<img src="img/logo_empresa.png" />
+			</div>
+
+
+			<div class="coluna_empresa">
+				<span class="texto_padrao">Selecione uma empresa:</span>
+			</div>
+
+			<div class="coluna_empresa">	
+				<select class="empresa_filial">
+					<option value="1">Empresa</option>
+					<option value="2">Medical Virtual Market</option>
+				</select>
+			</div>
+			<div class="coluna_empresa">
+				<select class="empresa_filial">
+					<option value="1">Filial</option>
+					<option value="2">Rio de Janeiro</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="coluna_direita">
+		<div class="owl-carousel owl-theme">
+			<div class="indicadores">
+				<div class="titulo_indicadores">Entregas Hoje</div>
+				<div class="meio_indicadores positivo">458</div>
+				<div class="rodape_indicadores positivo">R$2.042.062</div>
+			</div>
+			<div class="indicadores">
+				<div class="titulo_indicadores">Pedidos (12h)</div>
+				<div class="meio_indicadores neutro">0</div>
+				<div class="rodape_indicadores neutro">R$0</div>
+			</div>
+			<div class="indicadores">
+				<div class="titulo_indicadores">Ped. Atrasado (30d)</div>
+				<div class="meio_indicadores negativo">330</div>
+				<div class="rodape_indicadores negativo">37%</div>
+			</div>
+			<div class="indicadores">
+				<div class="titulo_indicadores">Ped. Emerg. (30d)</div>
+				<div class="meio_indicadores negativo">39</div>
+				<div class="rodape_indicadores negativo">3%</div>
+			</div>
+			<div class="indicadores">
+				<div class="titulo_indicadores">Entregas Hoje</div>
+				<div class="meio_indicadores positivo">458</div>
+				<div class="rodape_indicadores positivo">R$2.042.062</div>
+			</div>
+			<div class="indicadores">
+				<div class="titulo_indicadores">Pedidos (12h)</div>
+				<div class="meio_indicadores neutro">0</div>
+				<div class="rodape_indicadores neutro">R$0</div>
+			</div>
+		</div>
+
+		<div class="noticias">
+			<span class="titulo_negrito">Notícias de Medical VM</span>
+			<div class="linha_separacao_interna"> </div>
+			<div class="circulo_noticia importante"></div><span class="texto_padrao">17/07/2021 | </span><span class="texto_negrito">Importante – Atualização</span>
+			<div class="conteudo_noticias">Prezado Cliente, estamos atualizando nossas funcionalidades e é importante que você leia com atenção as novas instruções contidas no manual que segue.</div>
+
+			<div class="linha_separacao_interna"> </div>
+			<div class="circulo_noticia nao_lido"></div><span class="texto_padrao">17/07/2021 | </span><span class="texto_negrito">Novidades</span>
+			<div class="conteudo_noticias">Prezado Cliente, em breve nosso portal estará de cara nova para que sua experiência com a Medical VM seja transformadora.
+			Aguardem!</div>
+
+			<div class="linha_separacao_interna"> </div>
+			<div class="circulo_noticia lido"></div><span class="texto_padrao">17/07/2021 | </span><span class="texto_negrito">Importante – Atualização</span>
+			<div class="conteudo_noticias">Prezado Cliente, estamos atualizando nossas funcionalidades e é importante que você leia com atenção as novas instruções contidas no manual que segue.</div>
+		</div>
+
+		<div class="dashboard">
+			<span class="titulo_negrito">Dashboard | </span><span class="titulo_padrao">&nbsp;Comparativo entre empresas</span>
+			<div class="linha_separacao_interna"> </div>
+			<div class="dashboard_grafico">
+				<canvas id="line-chart"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		new Chart(document.getElementById("line-chart"), {
+			type: 'line',
+
+			data: {
+				labels: ['10:59AM','10:59AM','12:59PM','13:59PM'],
+				datasets: [{ 
+					data: [1,1141,15,1061],
+					label: "MVM",
+					borderColor: "#3e95cd",
+					backgroundColor: "rgba(0,0,0,0)",
+					fill: false,
+
+					pointBorderWidth: 3,
+					pointBackgroundColor: "#ffffff",
+					pointBorderColor: "#3e95cd",
+					pointRadius: 5,
+
+					pointHoverBorderWidth: 3,
+					pointHoverBackgroundColor: "#ffffff",
+					pointHoverBorderColor: "#3e95cd",
+					pointHoverRadius: 5		
+
+				}, { 
+					data: [282,600,411,502],
+					label: "UNM",
+					fill: false,
+					pointRadius: 0,
+					borderColor: "#008000",
+					backgroundColor: "rgba(0,0,0,0)",
+
+					pointBorderWidth: 3,
+					pointBackgroundColor: "#ffffff",
+					pointBorderColor: "#008000",
+					pointRadius: 5,
+
+					pointHoverBorderWidth: 3,
+					pointHoverBackgroundColor: "#ffffff",
+					pointHoverBorderColor: "#008000",
+					pointHoverRadius: 5		
+					
+				}, { 
+					data: [230,110,750,490],
+					label: "SOS",
+					fill: false,
+					pointRadius: 0,
+					borderColor: "#FFD700",
+					backgroundColor: "rgba(0,0,0,0)",
+
+					pointBorderWidth: 3,
+					pointBackgroundColor: "#ffffff",
+					pointBorderColor: "#FFD700",
+					pointRadius: 5,
+
+					pointHoverBorderWidth: 3,
+					pointHoverBackgroundColor: "#ffffff",
+					pointHoverBorderColor: "#FFD700",
+					pointHoverRadius: 5		
+				}]
+			},
+			options: {
+				title: {
+					display: true
+				},
+				legend: {
+					display: false
+				}
+			}
+		});
+	</script>
+
+</body>
+</html>

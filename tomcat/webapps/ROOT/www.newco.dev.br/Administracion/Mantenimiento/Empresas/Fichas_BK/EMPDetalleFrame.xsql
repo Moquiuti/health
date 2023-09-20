@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EMPDetalleFrameHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EMPDetalleFrameHTML.xsl"?>
+<!--
+ |  Parametros de entrada EMP_ID
+ |
+ +-->
+<Empresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<!--
+ |  Indica el modo en que hemos abierto la ventana.
+ |
+ |   VENTANA
+ |		ANTIGUA
+ |	  NUEVA
+ +-->
+<xsql:include-param name="VENTANA"/>
+
+</Empresa>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Accion sobre una licitacion, nueva version
+	ultima revision: ET 1set22 16:05
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="LicitacionV2_HTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID				NUMBER;
+		v_IDLicitacion		LICITACIONES.LIC_ID%TYPE;
+		v_Res				VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantLicitacion');
+
+		--solodebug		
+		utilidades_pck.debug('MantLicitacionAcciones[XSQL] IDSesion:{@SES_ID} Accion:{@ACCION}');
+		
+		IF US_ID>=0 THEN
+			IF '{@ACCION}'='AGREGARLIC' THEN
+			
+				v_Res:=Licitacionesagregadas_pck.Fusionar
+				(
+					US_ID, 
+					'{@LIC_ID}', 
+					'{@IDLICITACIONSEC}'
+				);
+			
+			ELSIF '{@ACCION}' = 'BORRARPRODUCTOS' THEN
+
+				LICITACIONES_SEG_PCK.BorrarProductos
+				(
+					US_ID,
+					'{@LIC_ID}'
+				);
+	
+			ELSIF '{@ACCION}' = 'BORRARPROVEEDORES' THEN
+	
+				LICITACIONES_SEG_PCK.BorrarProveedores
+				(
+					US_ID,
+					'{@LIC_ID}'
+				);
+				
+			ELSIF '{@ACCION}' = 'PASARACONTRATO' THEN
+	
+				LICITACIONES_SEG_PCK.PasarAContrato
+				(
+					US_ID,
+					'{@LIC_ID}'
+				);
+				
+			ELSIF '{@ACCION}' = 'PERMITIRDESCARGA' THEN
+	
+				LICITACIONES_SEG_PCK.PermitirDescarga
+				(
+					US_ID,
+					'{@LIC_ID}'
+				);
+				
+			END IF;
+
+			LICITACIONES_PCK.Licitacion_XML(
+				US_ID,
+				'{@LIC_ID}',
+				NULL,
+				NULL,												--	'{@IDCENTROAINFORMAR}'
+				'N'													--	Solo proveedores informados, hasta 20jun22 'S'
+			);
+			
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

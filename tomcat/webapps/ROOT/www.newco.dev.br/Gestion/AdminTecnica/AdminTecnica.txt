@@ -1,0 +1,4 @@
+20dic21 ET Nuevo indicador de puntas de actividad en LOGACCESOS.
+20dic21 ET Permitir definir el ancho de la tabla de LOG en pantalla
+19ene22 ET Permitir recarga automatica de las consultas de logs AdminTecnica_190122.js
+ 

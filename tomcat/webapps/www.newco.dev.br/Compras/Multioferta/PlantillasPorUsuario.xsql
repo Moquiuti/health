@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PlantillasPorUsuarioHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PlantillasPorUsuarioHTML.xsl"?>
+
+<PlantillasPorUsuario xmlns:xsql="urn:oracle-xsql" connection="newco">
+ <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+       	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PlantillasPorUsuario');
+			IF US_ID>=0 THEN
+				CARPETASYPLANTILLAS_PCK.PlantillasPorUsuario_XML(US_ID);
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+  
+</PlantillasPorUsuario>
+

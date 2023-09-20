@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISSeleccionesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISSeleccionesHTML.xsl"?>
+-->
+<EISSelecciones xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <!--
+  	Listado de centros cliente asignados a los vendedores de la empresa
+  -->
+
+   <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISSelecciones');
+			IF US_ID>=0 THEN
+
+				HTP.P(utilidades_pck.CabeceraXML||'<SEL>');
+				IF '{@ACCION}' = 'MODIFICA' OR '{@ACCION}' = 'NUEVA' THEN
+    				EISSelecciones_pck.GuardarSeleccion_XML(
+        				US_ID,
+        				'{@IDEMPRESA}',
+        				'{@SEL_NOMBRE}',
+        				'{@TIPO}',
+        				'{@SELECCION}',
+        				'{@EXCLUIR}',
+        				'{@ID_SEL}',
+        				'{@TODOS_ADMIN}'
+    				);
+
+				ELSIF '{@ACCION}' = 'BORRAR' THEN
+    				EISSelecciones_PCK.BorrarSeleccion_XML(
+        				US_ID,
+        				'{@IDSELECCION}'
+    				);
+				END IF;
+
+				EISSelecciones_PCK.Selecciones_XML(
+    				US_ID,
+    				'N'
+				);
+
+				EISSelecciones_PCK.Seleccion_XML(
+    				US_ID,
+    				NULL,
+    				'N'
+				);
+
+				HTP.P('</SEL>');
+
+
+           END IF;
+
+        END;
+        ]]>
+  </xsql:include-owa>
+
+</EISSelecciones>

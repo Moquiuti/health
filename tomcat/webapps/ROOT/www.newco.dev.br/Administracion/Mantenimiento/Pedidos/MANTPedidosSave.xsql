@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ultima revisión: ET 8ene20 10:00
+-->
+<?xml-stylesheet type="text/xsl" href="MANTPedidosHTML.xsl"?>
+
+<MantenimientoPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="MO_ID"/>
+  
+   <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoPedidosSave');
+			IF US_ID>=0 THEN
+			
+				IF '{@IDLINEAPEDIDO}' IS NOT NULL THEN
+				
+					CONTROLSTOCKS_PCK.OcultarAlternativa
+					(
+						US_ID,
+						'{@IDLINEAPEDIDO}',
+						'{@OCULTAR}'
+					);
+					
+				END IF;
+				
+				MANTENIMIENTOPEDIDOS_PCK.MantenimientoPedidos_XML
+				(
+					US_ID,
+					'{@MO_ID}',			/*	MO_ID del pedido, NULL para validar	*/
+					'{@IDCLIENTE}',		
+					'{@IDPROVEEDOR}',
+					'{@ACCION}',
+					'{@PARAMETROS}'
+				);
+				
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+    
+</MantenimientoPedidos>

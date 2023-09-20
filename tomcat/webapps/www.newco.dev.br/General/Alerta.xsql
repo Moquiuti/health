@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AlertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AlertaHTML.xsl"?>
+
+<Alerta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="TITULO"/>
+  <xsql:include-param name="CODIGO_MENSAJE"/>
+  <xsql:include-param name="MENSAJE"/>
+  
+  <button label="Cerrar" caption="IMG-0190">
+    <name_function>CerrarVentana</name_function>
+  </button>
+   
+</Alerta>

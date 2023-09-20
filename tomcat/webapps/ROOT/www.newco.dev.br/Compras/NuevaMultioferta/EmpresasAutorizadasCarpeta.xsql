@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PedidoMinimoPorClienteHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PedidoMinimoPorClienteHTML.xsl"?>
+
+
+<MantenimientoEmpresas xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="EMP_PEDMINIMO_ACTIVO"/>
+  <xsql:include-param name="EMP_PEDMINIMO_IMPORTE"/>
+  <xsql:include-param name="EMP_PEDMINIMO_DETALLE"/>
+  
+<!--<xsql:ref-cursor-function>-->
+<xsql:include-owa>
+                    EMPRESAS_PCK.EMP_Busca(p_emp_nif => '{@EMP_NIF}',
+                             p_emp_nombre => '{@EMP_NOMBRE}',
+                             p_emp_direccion => '{@EMP_DIRECCION}',
+                             p_emp_cpostal => '{@EMP_CPOSTAL}',                             
+                             p_emp_poblacion => '{@EMP_POBLACION}',                                                          
+                             p_emp_provincia => '{@EMP_PROVINCIA}',                             
+                             p_emp_idtipo => '{@EMP_IDTIPO}',
+                             p_emp_telefono => '{@EMP_TELEFONO}',
+                             p_emp_fax => '{@EMP_FAX}',                             
+                             p_emp_referencias => '{@EMP_REFERENCIAS}',                                                          
+                             p_ORDERBY => 'EMP_CPOSTAL, EMP_POBLACION');
+</xsql:include-owa>
+  <!--</xsql:ref-cursor-function>-->
+
+<xsql:include-owa>
+<![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedMinPorEmpresa');
+		  IF US_ID>=0 THEN
+                    EMPRESAS_PCK.PedidoMinimoPorCLiente(
+                                '{@EMP_ID}',
+                                '{@NUEVO_CLIENTE}',
+                                '{@EMP_PEDMINIMOACTIVO}',
+				'{@EMP_PEDIDOMINIMO}',	
+				'{@EMP_DESCRIPCIONPEDIDOMINIMO}',
+				'{@ACCION}'
+                                );
+                  end if;			   
+        END;
+        ]]>  
+</xsql:include-owa>
+
+      <button label="Cerrar" caption="IMG-0190">
+        <name_function>CerrarVentana</name_function>
+      </button>
+      
+      <button label="Insertar" caption="IMG-1520">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'ACTUALIZARCAMBIOS'</param>
+      </button>
+     
+
+</MantenimientoEmpresas>

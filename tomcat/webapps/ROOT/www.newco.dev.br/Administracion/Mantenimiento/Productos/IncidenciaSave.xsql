@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="Incidencia.xsl"?>
+<?xml-stylesheet type="text/xsl" href="Incidencia.xsl"?>
+
+<Incidencia xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Incidencia	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IncidenciaSave');
+		IF US_ID>=0 THEN
+			v_Incidencia:=INCIDENCIASPRODUCTOS_PCK.ModificarIncidencia(
+				US_ID,
+				'{@ID_INC}',
+				'{@INCIDENCIA}',
+				'{@DIAGNOSTICO}',
+                                '{@PROPUESTA_SOLUCION}',
+                                '{@TEXTO_RESP_HOSPITAL}',
+				'{@SOLUCION}',
+				'{@PROD_INC_IDDOCINCIDENCIA}',
+				'{@PROD_INC_IDDOCDIAGNOSTICO}',
+                                '{@PROD_INC_IDDOCPROPSOLUCION}',
+				'{@PROD_INC_IDDOCSOLUCION}',
+                                '{@IDESTADO}',
+                                NVL('{@SEGUIR_UTILIZANDO}',NULL),
+                                NVL('{@SEGUIR_UTILIZANDO_CDC}',NULL),
+                                '{@NUM_LOTE}'          --VARCHAR2 DEFAULT NULL 13nov15 
+			);
+
+			--HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Incidencia > 0 THEN
+                            HTP.P('<OK>'||v_Incidencia||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Incidencia	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IncidenciaSave');
+		IF US_ID>=0 THEN
+                            INCIDENCIASPRODUCTOS_PCK.Incidencia_XML(
+                                    US_ID,
+                                    '{@ID_INC}',
+                                    'S'
+                            );
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Incidencia>

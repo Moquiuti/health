@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EliminarProductosManualesJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EliminarProductosManualesJSON.xsl"?>
+
+<EliminarProductosManuales xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="US_ID"/>	
+  <xsql:include-param name="PRO_ID"/>	
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EliminaProd		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EliminarProductosManuales');
+		IF US_ID>=0 THEN
+			
+			v_EliminaProd:= MULTIOFERTAS_PCK.BorrarProductoManual(
+				'{@ID_PRODMAN}'
+				
+			);
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_EliminaProd > 0 THEN
+				HTP.P('<OK>'||v_EliminaProd||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+			
+			
+				
+			
+		END IF;			   
+    END;
+        ]]>  
+</xsql:include-owa>
+
+</EliminarProductosManuales>

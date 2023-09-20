@@ -1,0 +1,105 @@
+198.98.58.175 - - [29/Aug/2023:00:02:06 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+185.36.81.33 - - [29/Aug/2023:00:03:02 +0000] "GET / HTTP/1.1" 200 11217
+128.199.78.231 - - [29/Aug/2023:00:26:56 +0000] "GET /cdn-cgi/trace HTTP/1.1" 404 761
+128.199.78.231 - - [29/Aug/2023:00:29:04 +0000] "-" 400 -
+82.84.170.214 - - [29/Aug/2023:00:29:38 +0000] "GET / HTTP/1.0" 200 11197
+162.243.151.39 - - [29/Aug/2023:00:47:32 +0000] "GET /manager/text/list HTTP/1.1" 401 2499
+88.182.73.55 - - [29/Aug/2023:00:56:35 +0000] "GET / HTTP/1.0" 200 11197
+152.172.36.47 - - [29/Aug/2023:01:07:01 +0000] "GET / HTTP/1.0" 200 11197
+35.203.210.215 - - [29/Aug/2023:01:09:04 +0000] "GET / HTTP/1.1" 200 11217
+78.108.177.54 - - [29/Aug/2023:01:26:59 +0000] "GET / HTTP/1.0" 200 11197
+83.97.73.87 - - [29/Aug/2023:01:56:27 +0000] "GET /?XDEBUG_SESSION_START=phpstorm HTTP/1.1" 200 11217
+84.54.51.27 - - [29/Aug/2023:02:01:18 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+83.97.73.87 - - [29/Aug/2023:02:13:52 +0000] "GET /actuator/gateway/routes HTTP/1.1" 404 771
+205.210.31.165 - - [29/Aug/2023:02:17:34 +0000] "GET / HTTP/1.1" 200 11217
+161.35.236.158 - - [29/Aug/2023:02:30:21 +0000] "-" 400 -
+104.168.96.242 - - [29/Aug/2023:02:35:28 +0000] "GET /config/getuser?index=0 HTTP/1.1" 404 762
+141.98.11.60 - - [29/Aug/2023:02:37:03 +0000] "GET / HTTP/1.1" 200 11217
+109.205.213.94 - - [29/Aug/2023:02:47:25 +0000] "GET / HTTP/1.1" 200 11217
+138.68.137.43 - - [29/Aug/2023:02:54:47 +0000] "-" 400 -
+103.143.196.9 - - [29/Aug/2023:03:21:59 +0000] "GET / HTTP/1.1" 200 11217
+45.128.232.140 - - [29/Aug/2023:04:35:58 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+64.62.197.71 - - [29/Aug/2023:04:38:23 +0000] "-" 400 -
+198.235.24.97 - - [29/Aug/2023:04:49:07 +0000] "GET / HTTP/1.0" 200 11197
+45.128.232.152 - - [29/Aug/2023:05:37:37 +0000] "CONNECT duckduckgo.com:443 HTTP/1.1" 400 -
+167.172.89.248 - - [29/Aug/2023:06:01:26 +0000] "GET /aaa9 HTTP/1.1" 404 752
+167.172.89.248 - - [29/Aug/2023:06:01:31 +0000] "GET /aab8 HTTP/1.1" 404 752
+167.172.89.248 - - [29/Aug/2023:06:01:36 +0000] "GET / HTTP/1.1" 200 11217
+45.128.232.140 - - [29/Aug/2023:06:14:20 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+198.98.58.175 - - [29/Aug/2023:06:22:09 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+193.35.18.33 - - [29/Aug/2023:06:44:59 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+209.141.40.248 - - [29/Aug/2023:07:40:15 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+184.105.247.244 - - [29/Aug/2023:08:14:59 +0000] "GET / HTTP/1.1" 200 11217
+184.105.247.235 - - [29/Aug/2023:08:15:34 +0000] "GET /favicon.ico HTTP/1.1" 200 21630
+184.105.247.254 - - [29/Aug/2023:08:16:00 +0000] "GET /?format=json HTTP/1.1" 200 11217
+184.105.247.254 - - [29/Aug/2023:08:16:26 +0000] "CONNECT www.shadowserver.org:443 HTTP/1.1" 400 -
+46.174.191.30 - - [29/Aug/2023:08:25:05 +0000] "GET / HTTP/1.0" 200 11197
+191.240.254.238 - - [29/Aug/2023:08:41:32 +0000] "GET / HTTP/1.1" 200 11217
+207.180.223.28 - - [29/Aug/2023:08:46:09 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+193.35.18.33 - - [29/Aug/2023:09:08:49 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+179.43.191.194 - - [29/Aug/2023:09:37:37 +0000] "-" 400 -
+185.225.28.7 - - [29/Aug/2023:09:46:05 +0000] "GET / HTTP/1.1" 200 11217
+205.210.31.137 - - [29/Aug/2023:09:57:41 +0000] "-" 400 -
+90.167.86.104 - - [29/Aug/2023:11:32:15 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+90.167.86.104 - - [29/Aug/2023:11:32:15 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+90.167.86.104 - - [29/Aug/2023:11:32:15 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+90.167.86.104 - - [29/Aug/2023:11:32:23 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=nIeZqZo_zva HTTP/1.1" 200 23
+90.167.86.104 - - [29/Aug/2023:11:32:24 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 2088
+90.167.86.104 - - [29/Aug/2023:11:32:24 +0000] "GET /www.newco.dev.br/MenusYDerechos/Cabecera2022.xsql?SES_ID=2413716129&LANG=portugues&STYLE=basicMVM2022.css&ACCION= HTTP/1.1" 200 9848
+90.167.86.104 - - [29/Aug/2023:11:32:24 +0000] "GET /www.newco.dev.br/images/2022/icones/user.svg HTTP/1.1" 304 -
+90.167.86.104 - - [29/Aug/2023:11:32:25 +0000] "GET /www.newco.dev.br/images/2022/icones/sair.svg HTTP/1.1" 304 -
+90.167.86.104 - - [29/Aug/2023:11:32:26 +0000] "GET /www.newco.dev.br/Personal/BandejaTrabajo/WFStatus2022.xsql?SES_ID=2413716129&LANG=portugues&STYLE=basicMVM2022.css HTTP/1.1" 200 32461
+90.167.86.104 - - [29/Aug/2023:11:32:26 +0000] "GET /www.newco.dev.br/images/2022/icones/seta.svg HTTP/1.1" 304 -
+172.93.111.122 - - [29/Aug/2023:11:35:03 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+90.167.86.104 - - [29/Aug/2023:11:37:32 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=nIeZqZo_zva HTTP/1.1" 200 23
+90.167.86.104 - - [29/Aug/2023:11:37:33 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 2088
+90.167.86.104 - - [29/Aug/2023:11:37:33 +0000] "GET /www.newco.dev.br/MenusYDerechos/Cabecera2022.xsql?SES_ID=2725416129&LANG=portugues&STYLE=basicMVM2022.css&ACCION= HTTP/1.1" 200 9848
+90.167.86.104 - - [29/Aug/2023:11:37:35 +0000] "GET /www.newco.dev.br/Personal/BandejaTrabajo/WFStatus2022.xsql?SES_ID=2725416129&LANG=portugues&STYLE=basicMVM2022.css HTTP/1.1" 200 32461
+90.167.86.104 - - [29/Aug/2023:11:39:22 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=nIeZqZo_zva HTTP/1.1" 200 23
+90.167.86.104 - - [29/Aug/2023:11:39:22 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 2088
+90.167.86.104 - - [29/Aug/2023:11:39:23 +0000] "GET /www.newco.dev.br/MenusYDerechos/Cabecera2022.xsql?SES_ID=2379116129&LANG=portugues&STYLE=basicMVM2022.css&ACCION= HTTP/1.1" 200 9848
+90.167.86.104 - - [29/Aug/2023:11:39:24 +0000] "GET /www.newco.dev.br/Personal/BandejaTrabajo/WFStatus2022.xsql?SES_ID=2379116129&LANG=portugues&STYLE=basicMVM2022.css HTTP/1.1" 200 32461
+90.167.86.104 - - [29/Aug/2023:13:08:25 +0000] "GET /www.newco.dev.br/EstadoDelSistema.xsql HTTP/1.1" 200 210
+64.227.97.195 - - [29/Aug/2023:13:17:06 +0000] "-" 400 -
+164.160.21.12 - - [29/Aug/2023:13:24:19 +0000] "GET / HTTP/1.1" 200 11217
+198.98.58.175 - - [29/Aug/2023:13:30:55 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+90.167.86.104 - - [29/Aug/2023:13:34:00 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=nIeZqZo_zva HTTP/1.1" 200 22
+90.167.86.104 - - [29/Aug/2023:13:34:00 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 2086
+90.167.86.104 - - [29/Aug/2023:13:34:01 +0000] "GET /www.newco.dev.br/MenusYDerechos/Cabecera2022.xsql?SES_ID=625516129&LANG=portugues&STYLE=basicMVM2022.css&ACCION= HTTP/1.1" 200 9848
+90.167.86.104 - - [29/Aug/2023:13:34:02 +0000] "GET /www.newco.dev.br/Personal/BandejaTrabajo/WFStatus2022.xsql?SES_ID=625516129&LANG=portugues&STYLE=basicMVM2022.css HTTP/1.1" 200 32461
+90.167.86.104 - - [29/Aug/2023:13:34:19 +0000] "GET /www.newco.dev.br/Personal/BandejaTrabajo/WFStatus2022.xsql?SOLOPEDIDOS=S HTTP/1.1" 200 400676
+90.167.86.104 - - [29/Aug/2023:13:34:24 +0000] "GET /www.newco.dev.br/Administracion/Mantenimiento/Empresas/CENDetalle2022.xsql?ID=31830 HTTP/1.1" 200 16018
+90.167.86.104 - - [29/Aug/2023:13:34:34 +0000] "GET /www.newco.dev.br/Compras/NuevaMultioferta/Busqueda2022.xsql HTTP/1.1" 200 3146
+90.167.86.104 - - [29/Aug/2023:13:34:34 +0000] "GET /www.newco.dev.br/Compras/NuevaMultioferta/PaginaEnBlanco2022.xsql HTTP/1.1" 200 6036
+90.167.86.104 - - [29/Aug/2023:13:34:34 +0000] "GET /www.newco.dev.br/Personal/BandejaTrabajo/WFStatus2022.xsql HTTP/1.1" 200 32461
+90.167.86.104 - - [29/Aug/2023:13:34:35 +0000] "GET /www.newco.dev.br/Compras/NuevaMultioferta/ZonaPlantilla2022.xsql HTTP/1.1" 200 7233
+90.167.86.104 - - [29/Aug/2023:13:34:35 +0000] "GET /www.newco.dev.br/Compras/NuevaMultioferta/ZonaProducto2022.xsql?IDCARPETA=3588&IDPLANTILLA=77472&IDPRODUCTO=&ACCION= HTTP/1.1" 200 1957
+90.167.86.104 - - [29/Aug/2023:13:34:39 +0000] "GET /www.newco.dev.br/Personal/BandejaTrabajo/WFStatus2022.xsql HTTP/1.1" 200 32461
+82.165.7.130 - - [29/Aug/2023:14:07:19 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+193.35.18.33 - - [29/Aug/2023:14:35:48 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+207.90.244.6 - - [29/Aug/2023:15:00:16 +0000] "GET / HTTP/1.1" 200 11217
+207.90.244.6 - - [29/Aug/2023:15:00:17 +0000] "GET /favicon.ico HTTP/1.1" 200 21630
+45.128.232.183 - - [29/Aug/2023:15:08:49 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+45.128.232.140 - - [29/Aug/2023:15:23:58 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+128.199.111.208 - - [29/Aug/2023:15:25:55 +0000] "GET /cdn-cgi/trace HTTP/1.1" 404 761
+128.199.111.208 - - [29/Aug/2023:15:27:58 +0000] "-" 400 -
+128.14.134.134 - - [29/Aug/2023:15:34:31 +0000] "GET / HTTP/1.1" 200 11217
+88.206.43.233 - - [29/Aug/2023:16:27:03 +0000] "GET / HTTP/1.1" 200 11217
+45.128.232.183 - - [29/Aug/2023:16:50:56 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+192.241.226.54 - - [29/Aug/2023:17:06:59 +0000] "GET /actuator/health HTTP/1.1" 404 763
+192.99.9.171 - - [29/Aug/2023:17:36:33 +0000] "GET /cdn-cgi/trace HTTP/1.1" 404 761
+209.141.40.248 - - [29/Aug/2023:17:39:37 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+182.92.6.25 - - [29/Aug/2023:17:50:10 +0000] "-" 400 -
+192.241.195.114 - - [29/Aug/2023:18:36:51 +0000] "GET / HTTP/1.1" 200 11217
+107.170.239.12 - - [29/Aug/2023:19:01:41 +0000] "-" 400 -
+157.230.113.170 - - [29/Aug/2023:19:21:55 +0000] "CONNECT example.com:443 HTTP/1.1" 400 -
+157.230.113.170 - - [29/Aug/2023:19:21:56 +0000] "-" 400 -
+157.230.113.170 - - [29/Aug/2023:19:21:56 +0000] "-" 400 -
+157.230.113.170 - - [29/Aug/2023:19:21:56 +0000] "-" 400 -
+205.210.31.26 - - [29/Aug/2023:19:22:41 +0000] "GET / HTTP/1.0" 200 11197
+172.104.11.51 - - [29/Aug/2023:19:44:50 +0000] "-" 400 -
+78.108.177.54 - - [29/Aug/2023:20:12:02 +0000] "GET / HTTP/1.0" 200 11197
+45.128.232.125 - - [29/Aug/2023:20:12:13 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+45.128.232.140 - - [29/Aug/2023:20:27:48 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+198.98.58.175 - - [29/Aug/2023:20:31:05 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+35.203.210.166 - - [29/Aug/2023:20:52:05 +0000] "GET / HTTP/1.1" 200 11217

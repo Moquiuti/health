@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Lista de los usuarios de un proveedor
+ *
++-->
+<?xml-stylesheet type="text/xsl" href="CambiarFormaPagoJSON.xsl"?>
+
+<CambiarFormaPago xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ControlPedidos');
+		IF US_ID>=0 THEN
+			PedidosProblematicos_Pck.CambiarFormaPagoPedido_XML(
+				US_ID,
+				'{@IDMULTIOFERTA}',
+				'{@IDFORMAPAGO}',
+				'{@IDPLAZOPAGO}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CambiarFormaPago>

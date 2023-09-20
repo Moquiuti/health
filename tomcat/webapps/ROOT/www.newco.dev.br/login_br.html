@@ -1,0 +1,75 @@
+<!--
+	Pagina de inicio MVM para Brasil
+	Ultima revision: ET 18ene22 09:00
+-->
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+	<title>Plataforma de compras hospitalarias&nbsp;-&nbsp;MedicalVM.com.</title>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/login2022_050122.js"></script>
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/loginbrMVM2022.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+</head>
+<body class="header_login" onload="CompruebaHTTP('');">
+	<div class="barra_superior_login"></div>
+             
+		<div id="coluna_esquerda_login" class="coluna_esquerda_login">
+                
+		<div class="menu_login">
+		</div>
+		<div id="coluna_esquerda_interna_login" class="coluna_esquerda_interna_login">
+			<form name="frmLogin">
+                <input type="hidden" name="DOMINIO" value="{document($doc)/translation/texts/item[@name=$AP_Dominio]/node()}"/><!-- necesario para la cookie    -->
+                <input type="hidden" name="PARAMETRO" value=""/>
+                <a href="#default" class="logo_login"></a>
+
+			<div id="coluna_login" class="coluna_login">
+				<div class="col-sm-12">
+					<label class="label">Usu&aacute;rio</label>
+					<input name="USER" class="input_formulario" type="text">
+				</div>
+			</div>
+			<div id="coluna_login" class="coluna_login">
+				<div class="col-sm-12">
+					<label class="label">Senha</label>
+					<input name="PASS" class="input_formulario" type="password">
+					<div id="textoKO" class="alert_danger" style="display:none;">
+						Usuario ou senha incorreto.
+					</div>
+					<div id="textoOK" style="display:none;">
+						Usuario correto, entrando...
+					</div>
+				</div>
+			</div>
+
+			<div id="coluna_login" class="coluna_login">
+                <a class="botao_acessar" href="javascript:loginDirecto();">ACESSAR PLATAFORMA</a>
+				<a class="esqueci_senha" href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/RecuperarClave.xsql?LANG=portugues','Recuperar Clave',30,20,-20,0);">Esqueci minha senha</a>
+				<a class="botao_fornecedores"  href="http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPNuevaSimple.xsql?IDPAIS=55&amp;PORTAL=MVMB&amp;INDEXLANG=portugues">Cadastro de fornecedor</a>
+			</div>
+		</div>
+		<div id="coluna_esquerda_rodape_login" class="coluna_esquerda_rodape_login">
+			<a href="#default" id="logo_rodape_login_mvm" class="logo_rodape_login_mvm"></a>
+			<a href="#default" id="direito_autoral" class="direito_autoral">
+				MVM | Medical Virtual Market (c) Todos os direitos reservados.
+			</a>
+		</div>
+	</div>
+	<div id="coluna_direita_login" class="coluna_direita_login">
+		<div id="coluna_direita_interna_login" class="coluna_direita_interna_login" style="background-image: url(/images/2022/img/login_mvm_br.png)"></div>
+	</div>
+	<script>
+
+		if( window.screen.height > 768){
+			coluna_direita_interna_login.style.height = window.screen.height+'px';	
+		}
+
+
+		if( window.screen.width < 750){
+			coluna_direita_interna_login.style.display = 'none';
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Recupera lista de centros de coste de un centro
+	Ultima revision: ET 5ago22
++-->
+<?xml-stylesheet type="text/xsl" href="RecuperaCentrosConsumoJSON.xsl"?>
+
+<CentrosConsumo xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaCentrosConsumo');
+		IF US_ID>=0 THEN
+			Centros_pck.DesplegableCentrosConsumo_XML(
+				'{@IDCENTRO}',
+				NULL,
+				'S',
+				'{@IDIDIOMA}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CentrosConsumo>

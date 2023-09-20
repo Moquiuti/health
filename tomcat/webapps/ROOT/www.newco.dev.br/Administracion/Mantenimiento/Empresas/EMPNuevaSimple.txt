@@ -1,0 +1,6 @@
+Alta y mantenimiento rapido de proveedor, para poder ser realizado por el propio proveedor, o por clientes
+
+14jun21 ET Seguimos con el desarrollo, solicitado por Brasil y Colombia
+20set21 ET Retomamos este desarrollo, una vez cambiada la ficha de documentos de empresa para actualizarse mediante AJAX
+02nov21 ET Avanzar etapa a etapa, boton "siguiente" en lugar de guardar EMPNuevaSimple_031121.js
+

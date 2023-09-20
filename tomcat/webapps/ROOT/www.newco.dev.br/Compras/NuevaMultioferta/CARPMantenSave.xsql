@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CARPMantenSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CARPMantenSaveHTML.xsl"?>
+
+<Plantilla xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+<!--
+ |  Nombre de la página. Parametro para guardar el error en caso de xsql-error
+ +-->  
+<pagename>CARPMantenSave</pagename>
+<!--
+ |  Incluimos en el XML el parametro DESDE. Que indica desde donde se ha llamado al
+ |    mantenimiento. Valores posibles: Alta | Manten.
+ +-->  
+<xsql:include-param name="BOTON"/>
+
+<xsql:include-owa>
+    <![CDATA[
+         DECLARE
+		  USER_ID		NUMBER;
+                BEGIN
+		  USER_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CARPMantenSave');
+		  IF USER_ID>=0 THEN
+	            CarpetasYPlantillas_PCK.ModificarCarpeta
+				(
+					USER_ID,
+					'{@ID}',
+					'{@IDEMPRESA}',
+					'{@IDCENTRO}',
+					'{@IDUSUARIO}',
+					'{@NOMBRE}',
+					'{@DESCRIPCION}',
+					'{@ACCESO}',
+					'{@DERECHOS}',
+					'{@PUBLICA}'
+				);
+		end if;
+END;   
+]]>	  
+</xsql:include-owa>
+
+<!-- 
+ |   Este XSQL devuelve el LP_ID
+ +-->
+ 
+ 
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption> 
+  </jumpTo>
+   
+</Plantilla>
+

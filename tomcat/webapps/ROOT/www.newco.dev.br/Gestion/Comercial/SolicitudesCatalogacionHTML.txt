@@ -1,0 +1,6 @@
+
+24nov16	Nuevo diseño según propuesta Breno
+31ene17	Incluimos desplegable de plazo de tiempo de consulta
+
+
+

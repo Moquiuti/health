@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--	
+	Asignacion de lugar de entrega especial a centro para algun proveedor. Nuevo disenno 2022.
+	Ultima revision: ET 17may22 15:52
+-->
+<?xml-stylesheet type="text/xsl" href="FacturacionEspecialHTML2022.xsl"?>
+
+<FacturacionEspecial xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+	<xsql:include-param name="IDEMPRESA" value="{@IDEMPRESA}"/>
+  
+	<xsql:include-request-params/>
+
+	<xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','FacturacionEspecial');
+			IF US_ID>=0 THEN
+				--IF '{@ACCION}' IS NOT NULL AND '{@IDCENTROCLIENTE}' IS NOT NULL AND '{@IDPROVEEDOR}' IS NOT NULL AND '{@IDLUGARENTREGA}' IS NOT NULL THEN
+					FacturacionEspecial_Pck.EjecutarAccion(US_ID, '{@ACCION}', '{@IDCENTROCLIENTE}', '{@IDPROVEEDOR}', '{@IDLUGARENTREGA}');
+				--END IF;
+				FacturacionEspecial_Pck.Listado_XML(US_ID, {@IDEMPRESA});
+          END IF;					   
+        END;
+        ]]>
+	</xsql:include-owa>
+</FacturacionEspecial>
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Recupera lista de proveedores de una licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="RecuperaDatosProductoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="RecuperaDatosProductoJSON.xsl"?>
+
+<RecuperaDatosProducto xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="ID_PROD"/>
+<xsql:include-param name="REF_PROD_ESTANDAR"/>
+<xsql:include-param name="ID_PROD_ESTANDAR"/>
+
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaDatosProducto');
+		IF US_ID>=0 THEN
+                    IF '{@REF_PROD_ESTANDAR}' IS NOT NULL THEN
+
+			EVALUACIONPRODUCTOS_PCK.DatosProductosPorRef_XML(
+				'{@ID_EMP}',
+				'{@REF_PROD_ESTANDAR}',
+				'{@ID_PROV}',
+				'{@REF_PROD}',
+				'S'
+			);
+                        
+                    ELSIF '{@ID_PROD}'  IS NOT NULL OR  '{@ID_PROD_ESTANDAR}' IS NOT NULL OR  '{@LIC_OFE_ID}' IS NOT NULL THEN 
+
+                        EVALUACIONPRODUCTOS_PCK.DatosProductos_XML(
+				'{@ID_EMP}',
+				'{@ID_PROD_ESTANDAR}',
+				'{@ID_PROD}',
+                                '{@LIC_OFE_ID}',                    --si prod de oferta licitación
+				'S'
+			);
+                  
+                    END IF;                    
+    
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</RecuperaDatosProducto>

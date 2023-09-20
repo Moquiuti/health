@@ -1,0 +1,13 @@
+Log de cambios en las páginas de solicitud de catalogación (Buscador, nueva solicitud, ficha solicitud)
+
+
+21nov16 Adaptación al nuevo diseño de Breno, recuperando código desde WFStatusHTML
+		Cabecera
+
+24nov16 Nueva solicitud, ficha solicitud
+
+
+PENDIENTE: 
+
+- PROBAR PROCEDIMIENTO COMPLETO
+- LIMPIAR CODIGO

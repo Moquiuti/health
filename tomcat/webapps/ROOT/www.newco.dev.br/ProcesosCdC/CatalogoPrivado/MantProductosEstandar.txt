@@ -1,0 +1,18 @@
+06nov17	ET Mostrar el mensaje "Guardado" y fecha de último cambio en la parte superior derecha de la cabecera.
+03ene18	ET Incluir las referencias a nivel de centro según la tabla CATPRIV_PRODUCTOSESTANDAR_DER
+03ene18	ET PENDIENTE:Separar el javaascript MantProductosEstandar_3ene18.js. Da errores, por XSL mezclado con el JS
+10ene18	ET Mostrar botones para abrir los datos de variantes por centro
+16mar18	ET Incluir nuevo campo compra media mensual en unidades: PENDIENTE: PODER MODIFICAR LAS CANTIDADES DE COMPRA DESDE EL MANTENIMIENTO
+29may18	ET Mostrar tipo de IVA para clientes de Colombia
+02jul18	ET Precio referencia a nivel de centro
+20mar19	ET Nuevos campos unimed: CP_PRO_REGISTRO,CP_PRO_FECHACADREGISTRO,CP_PRO_ONCOLOGICO
+17abr19	ET Incluir marca a nivel de centro (solicitado por Unimed). Actualizar JS: MantProductosEstandar_170419.js
+26nov19 ET Incluir unidad básica a nivel de centro (solicitado por Unimed). Actualizar JS: MantProductosEstandar_261119.js
+20abr20 ET Para HealthTime no se estaban mostrando los derechos por centro
+05jun20 ET Botón "todos" en caso de derechos por centro. MantProductosEstandar_050620.js
+02oct20 ET Enlace a la catalogación rápida
+03oct20 ET Incluir ref. cliente además de ref MVM
+21dic20 ET Nuevo campo: Principio_activo (solicitado por Unimed)
+04ene21 ET Nuevo campo: grupo de stock (solicitado por Unimed)
+08set21 ET Desactivar/bloquear el boton de guardar tras pulsarlo. MantProductosEstandar_080921.js
+25oct21 ET Para empresas con EMP_CAT_FORZARCODIGOS='S', n o permitir cambiar el codigo propuesto por plataforma (solicitado por OHSJD)

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Administracion Tecnica. Nuevo disenno 2022.
+	Ultima revision: ET 8mar22 11:07
+-->
+<?xml-stylesheet type="text/xsl" href="AdminTecnicaHTML2022.xsl"?>
+
+<Administracion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdminTecnica');
+
+			IF US_ID > 0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				ADMINISTRACIONTECNICA_PCK.Inicio_XML(US_ID,'{@ACCION}', '{@PARAMETROS}', '{@PERIODO}');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</Administracion>

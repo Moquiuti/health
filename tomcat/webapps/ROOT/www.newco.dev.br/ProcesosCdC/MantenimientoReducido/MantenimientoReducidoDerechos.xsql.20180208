@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantenimientoReducidoDerechosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantenimientoReducidoDerechosHTML.xsl"?>
+
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+		<![CDATA[
+			DECLARE
+				US_ID	NUMBER;
+      BEGIN
+		  	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoReducidoDerechos');
+		  	IF US_ID>=0 THEN
+					CATALOGOPRIVADO_V4_PCK.DerechosPlantillas_XML(
+						US_ID, 
+						'{@IDEMPRESA}',					--2set17	utilidades_pck.empresaDelUsuario(US_ID),
+						'{@IDPRODUCTO}',
+						'{@LISTA_PLANTILLAS}',
+						'S'
+					);
+	
+				END IF;
+			END;
+		]]>
+ 	</xsql:include-owa>	
+ 	
+</Mantenimiento>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISMatrizConcursos.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISMatrizConcursos.xsl"?>
+
+
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  
+  <!--
+  	Devuelve una matriz con los totales de pedidos por centro (columna) y proveedor (fila)
+  -->
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="SES_ID"/>
+  
+  <xsql:include-request-params/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISMatriz');
+		  IF US_ID>=0 THEN
+                    EIS_MATRIZCONCURSOS_PCK.Matriz_XML(US_ID,'{@INDICADOR}','{@AGRUPARPOR}','{@MESINICIO}','{@ANNOINICIO}', '{@MESFINAL}','{@ANNOFINAL}', '{@IDEMPRESA}','{@IDRESULTADOS}');
+          END IF;
+					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</EIS_XML>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CVGenerarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CVGenerarHTML.xsl"?>
+
+<Generar xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <xsql:include-param name="LP_ID"/>
+  <xsql:include-param name="FECHA_PAGO"/>
+  <xsql:include-param name="FORMA_PAGO"/>
+  <xsql:include-param name="COMBO_ENTREGA"/>
+  <xsql:include-param name="LP_PLAZOENTREGA"/>
+  <xsql:include-param name="FECHA_ENTREGA"/>
+  <xsql:include-param name="IDFORMAPAGO"/>
+  <xsql:include-param name="IDPLAZOPAGO"/>
+  <xsql:include-param name="IDCENTRO"/>
+  <xsql:include-param name="IDLUGARENTREGA"/>
+  <xsql:include-param name="IDCENTROCONSUMO"/>
+  <xsql:include-param name="COSTE_LOGISTICA"/>
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:include-owa>
+   <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CVGenerar');
+		  
+		  IF US_ID>=0 AND '{@LP_ID}' IS NOT NULL THEN
+			MULTIOFERTAS_SEGUIMIENTO_PCK.MostrarMultiOfertas('{@LP_ID}','{@IDDIVISA}',US_ID);
+          END IF;
+					   
+        END;
+        ]]>
+    
+   </xsql:include-owa>
+  
+  <button label="Aceptar" caption="IMG-0100">
+    <name_function>GuardarComentarios</name_function>
+    <param>document.forms['Principal']</param>
+    <param>'CVGenerarSave.xsql'</param>
+    <param>document.forms['PedidoMinimo']</param>
+  </button>
+  
+  <button label="Programar" caption="IMG-0103">
+    <name_function>ProgramarPedido</name_function>
+    <param>document.forms['Principal']</param>
+    <param>'CVGenerarSave.xsql'</param>
+    <param>document.forms['PedidoMinimo']</param>
+  </button>
+  
+  <button label="Volver" caption="IMG-0040">
+    <!--<name_function_msg>G-0013</name_function_msg>-->
+    <name_function>history.go</name_function>
+    <param>-2-historia</param>
+  </button>
+  
+     
+	 <!--	13mar07	ET	nueva opcion de imprimir	-->
+     <button label="Imprimir" caption="IMG-1490">
+      <name_function>window.print</name_function> 
+     </button> 
+     
+  <!-- Volver -->
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>       
+    <page>G-0013</page>
+    <caption>IMG-0040</caption>    
+  </jumpTo>
+  
+  <field name="COMBO_ENTREGA">
+    <dropDownList>
+      <listElem>
+        <ID>1</ID>
+        <listItem>1</listItem>
+      </listElem>
+      <listElem>
+        <ID>2</ID>
+        <listItem>2</listItem>
+      </listElem>
+      <listElem>
+        <ID>3</ID>
+        <listItem>3</listItem>
+      </listElem>
+      <listElem>
+        <ID>4</ID>
+        <listItem>4</listItem>
+      </listElem>
+      <listElem>
+        <ID>5</ID>
+        <listItem>5</listItem>
+      </listElem>
+      <listElem>
+        <ID>7</ID>
+        <listItem>7</listItem>
+      </listElem>
+      <listElem>
+        <ID>15</ID>
+        <listItem>15</listItem>
+      </listElem>
+      <listElem>
+        <ID>30</ID>
+        <listItem>30</listItem>
+      </listElem>
+      <listElem>
+        <ID>999</ID>
+        <listItem>Otros</listItem>
+      </listElem>
+    </dropDownList>
+  </field>
+
+  
+</Generar>

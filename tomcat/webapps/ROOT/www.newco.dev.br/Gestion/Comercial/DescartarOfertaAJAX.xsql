@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Descarta una oferta desde la ficha de licitacion
+ 	Ultima revision: ET 4abr18 14:22
+ -->
+<?xml-stylesheet type="text/xsl" href="DescartarOfertaJSON.xsl"?>
+
+<DescartarOferta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DescartarOfertaAJAX');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.Oferta_CambiarEstado(
+				US_ID,
+				'{@IDOFERTALIC}',
+				'D',
+				'{@IDMOTIVO}',
+				'{@MOTIVO}'
+			);
+
+			IF v_res = 'ERROR' THEN
+				HTP.P('<ERROR/>');
+			ELSE
+				HTP.P('<OK/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</DescartarOferta>

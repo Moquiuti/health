@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockOfertaHTML.xsl"?>
+
+<StockOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="GUARDAR" value="{@GUARDAR}"/>
+<xsql:include-param name="STOCK_ESTADO" value="{@STOCK_ESTADO}"/>
+<xsql:include-param name="STOCK_ID" value="{@STOCK_ID}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		CT_OFE_ID	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockOfertaSave');
+		IF US_ID > 0 THEN
+                        
+                        CT_OFE_ID := ANUNCIOSSTOCKS_PCK.EstadoOferta(
+					US_ID,
+					'{@OFERTA_STOCK}',
+                                        '{@ESTADO}'
+				);
+				
+                        IF CT_OFE_ID > 0 THEN
+				ANUNCIOSSTOCKS_PCK.Oferta_XML(
+					US_ID,
+					CT_OFE_ID,
+					'S'
+				);
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+                        
+            END IF; --end if us_id mayor 0
+	END;
+]]>
+</xsql:include-owa>
+</StockOferta>

@@ -1,0 +1,11 @@
+7jun17	ET Incluir filtro de busqueda "con contrato"
+8jun17	ET Incluir campo "con contrato" en el listado excel
+3nov17	ET Error en el catálogo clientes por no incluir campo "con contrato"
+16ene19	ET Incluir filtros de búsqueda para Colombia "Regulados" y "Orden 1"
+16ene19	ET Incluir filtros de búsqueda "Sin stock" y "Bloq.cartera"
+15nov19 ET Incluir filtro de búsqueda "traspasado", poner los filtros "Solamente productos" y "primeros pedidos" en la parte superior
+27ene20 ET Para brasil, por defecto no marcaremos el check-box de "adjudicado"
+05mar20 ET Buscar productos con clasificación provisional. Buscador_050320.js
+14jul20 ET La llamada al listado excel no maneja correctamente los caracteres especiales. Buscador_140720.js
+07ene21 ET Nuevo campo "grupo de stock" (Unimed).  Buscador_0701210.js
+08oct21 ET Nuevo campo, solo para usuarios CdC de clientes con ref.por centro. "Centro de consulta".

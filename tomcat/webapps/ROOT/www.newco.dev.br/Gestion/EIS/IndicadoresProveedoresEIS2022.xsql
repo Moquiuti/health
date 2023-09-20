@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Clasificacion proveedores interna. Nuevo disenno 2022.
+	Ultima revision: ET 22feb22 10:20
+-->
+<?xml-stylesheet type="text/xsl" href="IndicadoresProveedoresEISHTML2022.xsl"?>
+
+<IndicadoresProveedores xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG"/>
+	<xsql:include-param name="SIN_CABECERA"/><!--Oculta algunos elementos de la cabecera al abrir desde ficha de empresa-->
+    <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IndicadoresProveedores');
+
+				EIS_PROVEEDORES_PCK.Indicadores_XML(
+					US_ID,
+					'{@IDCLIENTE}',
+					'{@IDCENTRO}',
+					'{@IDPROVEEDOR}',
+					'{@PERIODO}',
+					'{@FECHA_INICIO}',
+					'{@FECHA_FINAL}',
+					'S'
+					);
+
+		END;
+    ]]>
+  </xsql:include-owa>	
+	
+  
+</IndicadoresProveedores>

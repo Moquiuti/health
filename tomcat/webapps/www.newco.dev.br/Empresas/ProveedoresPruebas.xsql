@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ProveedoresHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ProveedoresHTML.xsl"?>
+
+ <Proveedores lang="spanish">
+ <EMPRESA NUM="1">
+  <EMP_ID>275</EMP_ID> 
+  <EMP_NOMBRE>ATP</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="2">
+  <EMP_ID>166</EMP_ID> 
+  <EMP_NOMBRE>Abelloll, S.L</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="3">
+  <EMP_ID>248</EMP_ID> 
+  <EMP_NOMBRE>AlconCusí</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="4">
+  <EMP_ID>256</EMP_ID> 
+  <EMP_NOMBRE>Ambulancias Domingo,S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="5">
+  <EMP_ID>228</EMP_ID> 
+  <EMP_NOMBRE>Antiguo ""Bloss, S.A.""</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="6">
+  <EMP_ID>171</EMP_ID> 
+  <EMP_NOMBRE>Aprovisionamiento de Hospitales, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="7">
+  <EMP_ID>277</EMP_ID> 
+  <EMP_NOMBRE>Apósitos Venex, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="8">
+  <EMP_ID>221</EMP_ID> 
+  <EMP_NOMBRE>Assut Europe</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="9">
+  <EMP_ID>222</EMP_ID> 
+  <EMP_NOMBRE>BED Barcelonesa d'Exclusives i Distribució, SL</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="10">
+  <EMP_ID>339</EMP_ID> 
+  <EMP_NOMBRE>Barna Textil</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="11">
+  <EMP_ID>504</EMP_ID> 
+  <EMP_NOMBRE>Basfer</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="12">
+  <EMP_ID>168</EMP_ID> 
+  <EMP_NOMBRE>Caters S.A</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="13">
+  <EMP_ID>245</EMP_ID> 
+  <EMP_NOMBRE>Comercial Médico Quirúrgica, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="14">
+  <EMP_ID>220</EMP_ID> 
+  <EMP_NOMBRE>Comercial Penta, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="15">
+  <EMP_ID>10</EMP_ID> 
+  <EMP_NOMBRE>Comercox Industrias / Fabricox</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="16">
+  <EMP_ID>219</EMP_ID> 
+  <EMP_NOMBRE>Copeplas, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="17">
+  <EMP_ID>225</EMP_ID> 
+  <EMP_NOMBRE>DIMESA, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="18">
+  <EMP_ID>3</EMP_ID> 
+  <EMP_NOMBRE>Distribuciones Medicas 2000</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="19">
+  <EMP_ID>29</EMP_ID> 
+  <EMP_NOMBRE>Distribuciones Ortopedicas, SL</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="20">
+  <EMP_ID>250</EMP_ID> 
+  <EMP_NOMBRE>EME, Electromedicina y Equipamiento</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="21">
+  <EMP_ID>227</EMP_ID> 
+  <EMP_NOMBRE>EMERX</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="22">
+  <EMP_ID>268</EMP_ID> 
+  <EMP_NOMBRE>EMERX  CATALUNYA.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="23">
+  <EMP_ID>216</EMP_ID> 
+  <EMP_NOMBRE>EOPrim, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="24">
+  <EMP_ID>542</EMP_ID> 
+  <EMP_NOMBRE>Empresa</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="25">
+  <EMP_ID>2</EMP_ID> 
+  <EMP_NOMBRE>Fabrica Optica Universal</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="26">
+  <EMP_ID>223</EMP_ID> 
+  <EMP_NOMBRE>Garric Medica S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="27">
+  <EMP_ID>217</EMP_ID> 
+  <EMP_NOMBRE>Grúpo Picking Packàá</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="28">
+  <EMP_ID>174</EMP_ID> 
+  <EMP_NOMBRE>HPS International, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="29">
+  <EMP_ID>170</EMP_ID> 
+  <EMP_NOMBRE>Importaciones Sanitarias, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="30">
+  <EMP_ID>173</EMP_ID> 
+  <EMP_NOMBRE>International Hospital Supplier, Inc</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="31">
+  <EMP_ID>299</EMP_ID> 
+  <EMP_NOMBRE>J. Herrera</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="32">
+  <EMP_ID>276</EMP_ID> 
+  <EMP_NOMBRE>J. Mainat</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="33">
+  <EMP_ID>162</EMP_ID> 
+  <EMP_NOMBRE>Jeringol, S.A</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="34">
+  <EMP_ID>167</EMP_ID> 
+  <EMP_NOMBRE>Kodark, S.A</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="35">
+  <EMP_ID>172</EMP_ID> 
+  <EMP_NOMBRE>Logistica Hospitalaria Española, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="36">
+  <EMP_ID>244</EMP_ID> 
+  <EMP_NOMBRE>MEDICAL-MIX, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="37">
+  <EMP_ID>25</EMP_ID> 
+  <EMP_NOMBRE>Material de Oficina, SL</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="38">
+  <EMP_ID>266</EMP_ID> 
+  <EMP_NOMBRE>Nedella Medical S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="39">
+  <EMP_ID>273</EMP_ID> 
+  <EMP_NOMBRE>Orbis Médica</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="40">
+  <EMP_ID>257</EMP_ID> 
+  <EMP_NOMBRE>Oxigen Salud, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="41">
+  <EMP_ID>252</EMP_ID> 
+  <EMP_NOMBRE>Pans and Company</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="42">
+  <EMP_ID>253</EMP_ID> 
+  <EMP_NOMBRE>Pans and Company</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="43">
+  <EMP_ID>254</EMP_ID> 
+  <EMP_NOMBRE>Pans and Company</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="44">
+  <EMP_ID>269</EMP_ID> 
+  <EMP_NOMBRE>Peroxidos Farmaceuticos, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="45">
+  <EMP_ID>20</EMP_ID> 
+  <EMP_NOMBRE>Picking Pack (antiguo)</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="46">
+  <EMP_ID>251</EMP_ID> 
+  <EMP_NOMBRE>Prhoinsa, Proyectos Hospitalarios Internacional, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="47">
+  <EMP_ID>27</EMP_ID> 
+  <EMP_NOMBRE>Prim</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="48">
+  <EMP_ID>169</EMP_ID> 
+  <EMP_NOMBRE>RKH Distribuidor Sanitario, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="49">
+  <EMP_ID>274</EMP_ID> 
+  <EMP_NOMBRE>Sonmedica</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="50">
+  <EMP_ID>503</EMP_ID> 
+  <EMP_NOMBRE>Sucontesa Textil</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="51">
+  <EMP_ID>603</EMP_ID> 
+  <EMP_NOMBRE>Sucontesa Textil</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="52">
+  <EMP_ID>395</EMP_ID> 
+  <EMP_NOMBRE>Suministres Médics Lleida</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="53">
+  <EMP_ID>270</EMP_ID> 
+  <EMP_NOMBRE>Surgest Medical, S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="54">
+  <EMP_ID>246</EMP_ID> 
+  <EMP_NOMBRE>TECIL, S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="55">
+  <EMP_ID>163</EMP_ID> 
+  <EMP_NOMBRE>Telmarx, S.A</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="56">
+  <EMP_ID>243</EMP_ID> 
+  <EMP_NOMBRE>Unitex-Hartmann S.A.</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="57">
+  <EMP_ID>164</EMP_ID> 
+  <EMP_NOMBRE>Valvulex, S.A</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="58">
+  <EMP_ID>165</EMP_ID> 
+  <EMP_NOMBRE>Vendux, S.A</EMP_NOMBRE> 
+  </EMPRESA>
+ <EMPRESA NUM="59">
+  <EMP_ID>384</EMP_ID> 
+  <EMP_NOMBRE>Vica Logistica Hospitalaria S.L.</EMP_NOMBRE> 
+  </EMPRESA>
+  <returnHome /> 
+  </Proveedores> 
+

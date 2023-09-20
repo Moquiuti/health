@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	Listado en formato XML de los pedidos recibidos por una empresa
+	(c) 2003 MedicalVM
+-->
+
+<PedidosEmitidos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+
+   <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		Integracion_PCK.PedidosRecibidos_XML('{@IDENTIFICACION}','{@PERIODO}');
+	END;
+    ]]>
+  </xsql:include-owa>
+</PedidosEmitidos>

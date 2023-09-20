@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Pedidos generados desde la licitación. Nuevo disenno 2022
+	Revisado ET 1abr22 10:51
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="licInformePedidosHTML2022.xsl"?>
+
+<InformePedidos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="STYLE"/>
+ 
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(6);
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','licInformePedidos');
+
+		IF US_ID>=0 and '{@LIC_ID}' IS NOT NULL THEN
+		
+			LICITACIONESINFORMES_PCK.Pedidos_XML(
+				US_ID,
+				'{@LIC_ID}'
+			);
+
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</InformePedidos>

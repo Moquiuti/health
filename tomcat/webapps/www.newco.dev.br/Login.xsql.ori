@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="LoginJSON.xsl"?>
+
+<Login xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="PARAMETRO" value="{@PARAMETRO}"/>
+    <xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			SES_ID		VARCHAR2(100);
+		BEGIN
+			--seguridad_pck.Login('{@PARAMETRO}'||'{@PARAMETROBR}','{@MVMCOOKIE}','{@RESOLUCION}'||'{@RESOLUCIONBR}','http://www.newco.dev.br/');
+			SES_ID:=seguridad_pck.Login('{@PARAMETRO}'||'{@PARAMETROBR}',NULL,NULL,NULL,'IDSESION');
+			HTP.P('<SES_ID>'||SES_ID||'</SES_ID>');
+		END;
+	]]>
+	</xsql:include-owa>
+</Login>

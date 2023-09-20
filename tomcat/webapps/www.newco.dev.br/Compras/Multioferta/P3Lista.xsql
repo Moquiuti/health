@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListaProductosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListaProductosHTML.xsl"?>
+
+
+<Lista xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" connection="newco" lang="spanish">
+ <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   
+  <xsql:include-param name="xml-stylesheet"/>
+  
+  <form name="BuscaProductos" method="post" action="P3Lista.xsql">
+   <!--
+    //[[ Copiamos los parametros dentro del form para volver a enviar la consulta ]]//
+   +-->
+  <!--
+      Parametros de estado de la consulta
+   +-->
+  <xsql:include-param name="EMPRESATOTAL"/>
+  <xsql:include-param name="FAMILIATOTAL"/>  
+  <xsql:include-param name="SUBFAMILIATOTAL"/>  
+   
+  <!--
+      Parametros de seleccion
+   +-->
+  <xsql:include-param name="LLP_CATEGORIA"/>
+  <xsql:include-param name="LLP_FAMILIA"/>  
+  <xsql:include-param name="LLP_SUBFAMILIA"/>  
+  <xsql:include-param name="LLP_NOMBRE"/>    
+  <xsql:include-param name="LLP_DESCRIPCION"/>  
+  <xsql:include-param name="LLP_FABRICANTE"/>      
+  <xsql:include-param name="LLP_MARCA"/>        
+  <xsql:include-param name="LLP_TIPO_PRODUCTO"/>          
+  
+  <xsql:include-param name="LLP_PROVEEDOR"/>        
+  <xsql:include-param name="LLP_HOMOLOGADO"/>        
+  <xsql:include-param name="LLP_CERTIFICACION"/>            
+  <xsql:include-param name="LLP_NIVEL_CALIDAD"/>            
+  <xsql:include-param name="LLP_TIPO_PRODUCTO"/>            
+  <xsql:include-param name="LLP_PROV_HABITUALES"/>              
+  <xsql:include-param name="LLP_PRODUCTO_DETERMINADO"/>         
+  <xsql:include-param name="LLP_IDESPECIALIDAD"/>   
+  
+  <xsql:include-param name="LLP_REFERENCIA_CLIENTE"/>              
+  <xsql:include-param name="LLP_REFERENCIA_PROVEEDOR"/>                
+     
+  <xsql:include-param name="LLP_ORDERBY"/>              
+  <xsql:include-param name="TIPO_BUSQUEDA"/>                
+  <xsql:include-param name="LLP_LISTAR"/>            
+  <xsql:include-param name="OPERACION"/>  
+  <xsql:include-param name="LLP_ID"/>
+  <xsql:include-param name="LP_ID"/>  
+  <xsql:include-param name="TCV_ID"/>
+  <xsql:include-param name="REGISTROSPORPAGINA"/>
+  <xsql:include-param name="LLP_VARIAS_LINEAS"/>
+  
+  <xsql:include-param name="EMPRESATOTAL"/>
+  
+  <!-- ULTIMAPAGINA es defineix a partir dels butons -->
+  
+  <!--
+   |		 Nos indica si el usuario desea selección de 
+   |		  predeterminado de forma automatica. 
+   +-->
+  <xsql:include-param name="LLP_PRODUCTO_AUTOMATICO"/>
+
+  <!-- En caso de xsql-error, definimos el salto una vez guardado el error -->
+  <ERR_JUMPTO_LINK>G-0011</ERR_JUMPTO_LINK>
+  <JUMPTO_LINK>G-0011</JUMPTO_LINK>
+  
+<!--  
+  <xsl:choose>
+    <xsl:when test="LLP_LISTAR[.='PRO']"><JUMPTO_LINK>G-0010</JUMPTO_LINK></xsl:when>
+    <xsl:otherwise><JUMPTO_LINK>G-0011</JUMPTO_LINK></xsl:otherwise>
+  </xsl:choose>
+-->  
+  
+  <xsql:include-owa>
+    <![CDATA[
+         DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','P3Lista');
+		  IF US_ID>=0 THEN
+           PRODUCTOS_PCK.BuscaPaginas(       
+           	    p_US_ID 	      => US_ID,
+                    p_ULTIMAPAGINA    => TRIM('{@ULTIMAPAGINA}'),
+                    p_REGISTROSPORPAGINA => 8,
+                    p_CATEGORIA       => '{@LLP_CATEGORIA}',
+		    p_FAMILIA         => '{@LLP_FAMILIA}',
+		    p_SUBFAMILIA      => '{@LLP_SUBFAMILIA}',
+		    p_NOMBRE          => '{@LLP_NOMBRE}',
+		    p_DESCRIPCION     => '{@LLP_DESCRIPCION}',
+		    p_FABRICANTE      => '{@LLP_FABRICANTE}',
+		    p_MARCA           => '{@LLP_MARCA}',
+		    p_TIPO_PRODUCTO   => '{@LLP_TIPO_PRODUCTO}',
+		    p_PROVEEDOR       => '{@LLP_PROVEEDOR}',
+		    p_HOMOLOGADO      => '{@HOMOLOGADO}',
+		    p_CERTIFICACION   => '{@CERTIFICACION}',
+		    p_NIVEL_CALIDAD   => '{@LLP_NIVEL_CALIDAD}',
+	            p_REFERENCIA_CLIENTE => '{@LLP_REFERENCIA_CLIENTE}',
+	            p_REFERENCIA_PROVEEDOR => '{@LLP_REFERENCIA_PROVEEDOR}',		    
+		    p_PROV_HABITUALES => '{@LLP_PROV_HABITUALES}',
+		    p_LLP_IDESPECIALIDAD=> '{@LLP_IDESPECIALIDAD}',
+                    p_ORDERBY         => '{@LLP_ORDERBY}',
+                    p_TIPO_BUSQUEDA   => '{@TIPO_BUSQUEDA}',
+                    p_TCV_ID          => '{@TCV_ID}',
+                    p_LLP_ID          => '{@LLP_ID}',
+                    p_LLP_PRODUCTO_DETERMINADO => '{@LLP_PRODUCTO_DETERMINADO}',
+                    p_REGISTROS_ANTES => '{@CONTROLREGISTRES}',
+                    p_REGISTROS_DESPUES => '{@SELECCIONARTOTAL}',
+                    p_EMPRESAS_SELECCIONADAS => '{@EMPRESATOTAL}',
+                    p_FAMILIAS_SELECCIONADAS => '{@FAMILIATOTAL}',  
+                    p_SUBFAMILIAS_SELECCIONADAS => '{@SUBFAMILIATOTAL}'
+                    );
+              end if;
+     END;
+    ]]>
+  </xsql:include-owa>
+    <button label="EliminarPeq" status="IMG-0250" alt="IMG-0250">
+      <name_function>Resetea</name_function>
+      <param>document.forms[0]</param>           
+    </button>
+    
+    <button label="EditarPeq" status="IMG-0230" alt="IMG-0235">    
+      <name_function>AsignarReferencia</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3AsignarRef.xsql'</param>     
+    </button>
+   
+ <!-- ********* estos botones se utilizan para la MULTIOFERTA *********
+	    <button label="Insertar" caption="IMG-0222" alt="IMG-0225">  
+	      
+	      <name_function>InsertarProductos</name_function>
+	      <param>document.forms[0]</param>
+	      <param>'CANTIDAD_UNI'</param>
+	      <param>'P3Insertar.xsql'</param>                  
+	      <param>'NO'</param>              
+	    </button>
+	    
+	    <button label="InsertarVarios" caption="IMG-0221" alt="IMG-0227">  
+	      <name_function>InsertarProductos</name_function>
+	      <param>document.forms[0]</param>
+	      <param>'CANTIDAD_UNI'</param>
+	      <param>'P3Insertar.xsql'</param>                        
+	      <param>'SI'</param>             
+	    </button>
+      
+   ********* estos botones se utilizan para la MULTIOFERTA *********  -->
+    
+    <button label="Insertar" caption="IMG-0223" alt="IMG-0223">  
+      <name_function>InsertarProductos</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3Insertar.xsql'</param>                        
+      <param>'SI'</param>  <!-- LLP_VARIAS_LINEAS -->               
+    </button>
+   
+    <button label="AmpliadasPeq" status="IMG-0200" alt="IMG-0205">  
+      <name_function>Amplia_fichas</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>                 
+    </button>
+    
+    <button label="Reducidas" caption="IMG-0210" alt="IMG-0215">  
+      <name_function>Reduce_fichas</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>                 
+    </button>
+    
+  <!-- Catalogo -->
+    <button label="BuscarFino" caption="IMG-0660">
+      <name_function>Catalogo</name_function>
+      <param>'http://www.newco.dev.br/Nomenclator/nomenclatorFrame.xsql'</param>
+    </button>
+ <!--   
+    <button label="BuscarFino" caption="IMG-0220">
+      <name_function>Catalogo</name_function>
+      <param>'LLPManten.xsql'</param>
+    </button>
+  
+-->
+
+<button label="Proveedores" alt="IMG-0710" status="IMG-0710" caption="IMG-0286">
+      <name_function>MostrarPag</name_function> 
+      <param>'http://www.newco.dev.br/Empresas/Proveedores.xsql?OPCION=P'</param>
+    </button>
+     
+</form>
+<jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>  
+    <page>G-0013</page>
+    <caption>G-0001</caption>
+  </jumpTo>  
+</Lista>

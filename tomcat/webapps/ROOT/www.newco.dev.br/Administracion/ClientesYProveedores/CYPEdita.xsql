@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CYPEditaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CYPEditaHTML.xsl"?>
+
+<!--
+   Usamos el campo NAVEGA para: 
+    YES : Deseamos continuar navegando
+    NO  : Deseamos guardar la información y volver a la pantalla de busqueda
+
+ +-->
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   <xsql:include-param name="STYLE"/>    
+  <JUMPTO_LINK>CYP-0320</JUMPTO_LINK>
+  <NAVEGA>YES</NAVEGA>
+  
+   <xsql:include-xsql href="CYPComun.xsql"/> 
+
+</Lista>

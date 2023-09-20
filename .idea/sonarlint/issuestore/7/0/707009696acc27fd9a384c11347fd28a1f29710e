@@ -1,0 +1,8 @@
+
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¶³öšøÿÿÿÿ
+1
+java:S1700"Rename field "entries"(ƒ»¦Ÿýÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÎÈÚ†ùÿÿÿÿ
+q
+java:S1149"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(ƒ»¦Ÿýÿÿÿÿ

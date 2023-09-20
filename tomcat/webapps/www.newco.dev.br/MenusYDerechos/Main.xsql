@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="MainHTML.xsl"?>
+
+<Main xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="LANG" value="{@LANG}"/>
+    <xsql:include-param name="PORTAL" value="{@PORTAL}"/>
+	<xsql:include-param name="PARAMETRO" value="{@PARAMETRO}"/>
+	<xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+    <xsql:include-owa>
+	<![CDATA[
+		BEGIN
+			seguridad_pck.Login('{@PARAMETRO}'||'{@PARAMETROBR}','{@MVMCOOKIE}','{@RESOLUCION}'||'{@RESOLUCIONBR}','http://www.newco.dev.br/');
+		END;
+	]]>
+	</xsql:include-owa>
+	<jumpToClose>
+		<picture-off>Anterior</picture-off>
+		<picture-on>Anterior_mov</picture-on>  
+		<page>window.close();</page>
+		<caption>cerrar</caption>
+	</jumpToClose>
+
+	<button label="Enviar" caption="IMG-0100">
+		<name_function>Envia</name_function>
+		<param>document.forms['contactar']</param>
+		<param>'http://www.newco.dev.br/General/GError.xsql'</param>
+	</button>
+</Main>

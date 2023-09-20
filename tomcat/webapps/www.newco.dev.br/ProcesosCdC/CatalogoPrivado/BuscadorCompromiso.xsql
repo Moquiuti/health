@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BuscadorCompromisoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BuscadorCompromisoHTML.xsl"?>
+
+<Buscador xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="VENTANA"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BuscCompromiso');
+			IF US_ID>=0 THEN
+				CATALOGOPRIVADO_SEG_PCK.Buscador_XML(US_ID);
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</Buscador>
+

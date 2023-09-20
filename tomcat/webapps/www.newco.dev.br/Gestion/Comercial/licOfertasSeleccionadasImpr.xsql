@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Pagina con datos de la oferta de un proveedor para imprimir
+	Revisado ET 30mar20 15:00
+-->
+
+<?xml-stylesheet type="text/xsl" href="licOfertasSeleccionadasImprHTML.xsl"?>
+
+<OfertasSeleccionadas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="IDCENTROCOMPRAS"/>
+<xsql:include-param name="STYLE"/>
+ 
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','OfertasSel');
+
+		IF US_ID>=0 and '{@LIC_ID}' IS NOT NULL THEN
+			--LICITACIONES_PCK.LicitacionOfertasSel_XML(
+			LICITACIONESINFORMES_PCK.Vencedores_XML(
+				US_ID,
+				'{@LIC_ID}',
+				'S',					--	Incluir datos ofertas
+				'{@IDCENTROCOMPRAS}',
+				NULL					--21ago20
+			);
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</OfertasSeleccionadas>

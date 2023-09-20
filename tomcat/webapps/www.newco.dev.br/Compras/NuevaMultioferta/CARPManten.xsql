@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de Carpeta
+	ltima revision: ET 31oct18 14:25
+-->
+<?xml-stylesheet type="text/xsl" href="CARPMantenHTML.xsl"?>
+
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="BOTON"/>
+	<xsql:include-owa>
+    <![CDATA[
+         DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CARPManten');
+		  IF US_ID>=0 THEN
+	CarpetasYPlantillas_PCK.Carpeta(US_ID,'{@CARP_ID}');
+	end if;
+     END;
+    ]]>
+  </xsql:include-owa>	
+ 
+</Mantenimiento>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SolicitudMuestrasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SolicitudMuestrasHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="READ_ONLY"/>
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaFamilias');	
+		  IF US_ID>=0 THEN
+                    EVAL_solicitudmuestras_PCK.solicitudmuestras_XML(
+                      US_ID,
+                      '{@IDSOLICITUD}'
+	            );
+        	  END IF;
+        	  
+                END;
+        ]]>
+  </xsql:include-owa>
+  
+  <botones>
+    
+    <button label="Cancelar" caption="IMG-0060">
+      <name_function>CerrarVentana</name_function>
+    </button>
+
+    <button label="Recibidas" caption="CATPRIV-0750">
+      <name_function>FinalizarSolicitud</name_function>
+        <param>document.forms[0]</param>
+        <param>'RECIBIDAS'</param>
+    </button>
+    
+    <button label="Archivar" caption="CATPRIV-0740">
+      <name_function>FinalizarSolicitud</name_function>
+        <param>document.forms[0]</param>
+        <param>'FINALIZAR'</param>
+    </button>
+    
+       
+      <button label="Guardar" caption="CATPRIV-0720">
+        <name_function>AceptarSolicitud</name_function>
+        <param>document.forms[0]</param>
+        <param>'ENVIAR'</param>
+      </button>
+      
+      <button label="Imprimir" caption="IMG-1490">
+        <name_function>window.print</name_function> 
+     </button>
+     
+     <button label="Cerrar" caption="CATPRIV-0115">
+      <name_function>CerrarVentana</name_function>
+    </button>
+    
+    
+  </botones>
+  
+ 
+</Mantenimiento>

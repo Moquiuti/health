@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Área pública de MedicalVM -->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="http://www.newco.dev.br/General/General.xsl"/>
+<xsl:output method="html" encoding="iso-8859-1" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" indent="yes"/>
+<xsl:param name="usuario" select="@US_ID"/>
+
+<xsl:template match="/">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="/AreaPublica/LANG"><xsl:value-of select="/AreaPublica/LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--fin idioma-->
+
+	<title>
+		<xsl:value-of select="document($doc)/translation/texts/item[@name='central_compras_material_sanitario']/node()"/>&nbsp;-&nbsp;
+		<xsl:value-of select="document($doc)/translation/texts/item[@name='medicalvm']/node()"/>
+	</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta content="ALL" name="ROBOTS"/>
+	<meta name="keywords" content="central, compras, sanidad, sanitario, clínica, hospital, equipamiento, médico, farmacia, farmacéutico, ASPIRADOR, BATA, BISTURI, BOLSA, BOMBA, CANULA, CATETER, CEPILLO, COMPRESA, CUCHILLETE, DESFIBRILADOR, ECG, ELECTROCARDIOGRAFO, ELECTRODO, ESPECULO, ESPONJA, EXTRACTOR, FOLEY, GEL, GRAPADORA, GUANTE, INFUSION, JABON, JERINGUILLA, LIPOSUCTOR, LOGO, LUER, LUMEN, LUZ, MASCARILLA, MESA, MONITOR, MONOFILAMENTO, NASAL, NYLON, OMNIPOR, PAPEL, PARCHE, PERLADO, PILAS, PINZA, PROTESIS, RECOLECTOR, SILICONA, SONDA, SUTURA, TERMOMETRO"/>
+	<meta name="description" content="Medical Virtual Market es la mayor central de compras virtual para las empresas del sector sanitario español."/>
+
+	<link rel="shortcut icon" href="http://www.newco.dev.br/images/MedicalVM.ico"/>
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/basicPublic.css" type="text/css"/>
+
+ 	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-ui.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-ui-tabs-rotate.js"></script>
+        <script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+	<script type="text/javascript" src="http://demo.plataformadecompras.es/General/demoLogin.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/utilidades.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/loginNew_200315.js"></script>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			if(window.location.host == 'demo.plataformadecompras.es'){
+				searchURLParameters();
+			}
+		});
+	</script>
+
+	<script type="text/javascript">
+		var errorLogin = '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_login']/node()"/>';
+            
+                function AceptaCookie(){
+                        var aceptoCookie = GetCookie('ACEPTO_COOKIE');
+                        if (aceptoCookie == '' || aceptoCookie == null) {
+                                   //si no ha aceptado lo de los coockie pongo aviso
+                                   document.getElementById("avisoCookieBox").style.display = 'block';
+                           }
+		}
+            
+	</script>
+
+    <!--slider-->
+
+    <link rel="stylesheet" href="http://www.newco.dev.br/General/featured-content-slider/style.css" type="text/css" media="screen"/>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery("#featured").tabs({
+				fx: {opacity: "toggle"},
+				active: 0,
+				beforeLoad: function(event, ui){
+					if(jQuery(ui.panel.selector).html()){    // If content already there...
+						event.preventDefault();      // ...don't load it again.
+					}
+				}
+			}).tabs("rotate", 5000, true);
+
+			jQuery("#featured").hover(
+				//bloquea slide cuando raton encima
+                                /*function() {
+					jQuery("#featured").tabs("rotate",0,true);
+				},*/
+				function() {
+					jQuery("#featured").tabs("rotate",5000,true);
+				}
+			);
+
+		});
+	</script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64519488-3', 'auto');
+  ga('send', 'pageview');
+
+</script> 
+</head>
+<!--antes habia EliminaCookie que no esta mas en el js-->
+<body onLoad="AceptaCookie(); MenuExplorerPublic();">
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="/AreaPublica/LANG"><xsl:value-of select="/AreaPublica/LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+ 
+	<xsl:choose>
+	<!-- Error en alguna sentencia del XSQL -->
+	<xsl:when test="AreaPublica/xsql-error">
+		<xsl:apply-templates select="AreaPublica/xsql-error"/>
+	</xsl:when>
+	<xsl:otherwise>
+		<!--	/AreaPublica	-->
+        
+        <div class="avisoCookieBox" id="avisoCookieBox" style="display:none;">
+            <div class='avisoCookie'>
+                    <xsl:copy-of select="document($doc)/translation/texts/item[@name='aviso_cookies']/node()"/>
+            </div>
+        </div><!--fin de avisoCookieBox-->
+        
+      	<div class="todo">
+            
+            <div class="header">
+                <div class="logo">
+                        <a href="http://www.newco.dev.br" title="Medical Virtual Market">
+                            <img src="http://www.newco.dev.br/images/logoMVM.gif" alt="Medical Virtual Market"/>
+                        </a>
+                    </div>
+                    <div class="textHeader">
+                        <h2><xsl:value-of select="document($doc)/translation/texts/item[@name='optimizamos_su_proceso_de_compras']/node()"/></h2>
+                    </div>
+            </div><!--fin de header-->
+        	
+            <xsl:call-template name="menuPublic"><!--en general.xsl-->
+                <xsl:with-param name="select">inicio</xsl:with-param>
+            </xsl:call-template>
+            
+            <div class="todoInside">
+            	
+                <div class="arribaBox">
+                
+                <div class="slideBox">
+                	<div id="idInicio"></div>
+                    <!-- inicio SLIDER -->
+                    <div id="slider-wrapper">
+                        <div id="featured" >
+                        	<ul class="ui-tabs-nav" style="display:none;">  
+                            <li class="ui-tabs-nav-item" id="nav-ui-tabs-1"><a href="#ui-tabs-1"><img src="http://www.newco.dev.br/images/clinicaHome.jpg"/></a></li>
+                            <li class="ui-tabs-nav-item" id="nav-ui-tabs-2"><a href="#ui-tabs-2"><img src="http://www.newco.dev.br/images/productosHome.jpg"/></a></li>
+                            <li class="ui-tabs-nav-item" id="nav-ui-tabs-3"><a href="#ui-tabs-3"><img src="http://www.newco.dev.br/images/catalogoHome.jpg"/></a></li>
+							<li class="ui-tabs-nav-item" id="nav-ui-tabs-4"><a href="#ui-tabs-4"><img src="http://www.newco.dev.br/images/pedidosHome.jpg"/></a></li>
+                            <li class="ui-tabs-nav-item" id="nav-ui-tabs-5"><a href="#ui-tabs-5"><img src="http://www.newco.dev.br/images/ahorroHome.jpg"/></a></li>
+							</ul>
+                        <!-- First Content -->
+						<div id="ui-tabs-1" class="ui-tabs-panel">
+							<img src="http://www.newco.dev.br/images/clinicaHome.jpg" alt="Clinica" />
+							<div class="info">
+								<h2><xsl:value-of select="document($doc)/translation/texts/item[@name='slide_text1']/node()"/></h2>
+							</div>
+						</div>
+                        <!-- Second Content -->
+						<div id="ui-tabs-2" class="ui-tabs-panel">
+							<img src="http://www.newco.dev.br/images/productosHome.jpg" alt="Informes precios" />
+							<div class="info">
+								<h2><xsl:value-of select="document($doc)/translation/texts/item[@name='slide_text2']/node()"/></h2>
+							</div>
+						</div>
+
+						<!-- Third Content -->
+						<div id="ui-tabs-3" class="ui-tabs-panel">
+							<img src="http://www.newco.dev.br/images/catalogoHome.jpg" alt="Seguimiento pedidos" />
+							<div class="info">
+								<h2><xsl:value-of select="document($doc)/translation/texts/item[@name='slide_text3']/node()"/></h2>
+							</div>
+						</div>
+
+                        <!-- Fourth Content -->
+						<div id="ui-tabs-4" class="ui-tabs-panel">
+							<img src="http://www.newco.dev.br/images/pedidosHome.jpg" alt="Seguimiento pedidos" />
+							<div class="info">
+								<h2><xsl:value-of select="document($doc)/translation/texts/item[@name='slide_text4']/node()"/></h2>
+							</div>
+						</div>
+                        
+                        <!-- Fifth Content -->
+						<div id="ui-tabs-5" class="ui-tabs-panel">
+							<img src="http://www.newco.dev.br/images/ahorroHome.jpg" alt="Informes" />
+							<div class="info">
+								<h2><xsl:value-of select="document($doc)/translation/texts/item[@name='slide_text5']/node()"/></h2>
+							</div>
+						</div>
+                        </div><!--fin de featured-->
+					</div><!--fin de slider-wrapper-->
+				<!-- fin SLIDER -->
+                </div><!--fin de slideBox-->
+                    
+                    <div class="loginBox">
+						<form name="Login"  method="post" target="_top">
+						<input type="hidden" id="RESOLUCION" name="RESOLUCION" value=""/>
+						<input type="hidden" name="LANG" value="{/AreaPublica/LANG}"/>
+						<input type="hidden" name="STYLE" value="{/AreaPublica/STYLE}"/>
+						<input type="hidden" name="PARAMETRO"/>
+                        <input type="hidden" name="ERROR_LOGIN" value="{document($doc)/translation/texts/item[@name='error_login']/node()}"/>
+
+						<div class="login">
+                            <span class="textLogin"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuario']/node()"/></span><br />
+                            <input type="text" name="USER" class="intext" onClick="this.select();" onFocus="this.select();" />
+                        </div><!--fin de login-->
+                        <div class="login">
+                            <span class="textLogin"><xsl:value-of select="document($doc)/translation/texts/item[@name='password']/node()"/></span><br />
+                            <input type="password" name="PASS" class="intext" onClick="this.select();" onFocus="this.select();" />
+                        </div><!--fin de login-->
+						<input type="image" name="Submit" id="Submit" class="buttonLogin" value="Entrar" src="http://www.newco.dev.br/images/buttonEntrarNara.gif"/>
+						</form>
+                        <a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/RecuperarClave.xsql','Recuperar Clave',30,20,-20,0);" title="Recuperar clave" class="recuperarClaveLink"><xsl:value-of select="document($doc)/translation/texts/item[@name='recuperar_clave']/node()"/></a>
+                                                
+                    </div><!--fin de loginBox-->
+                	
+                </div><!--fin de arriba Box-->
+                
+                <div class="medioBox">
+                
+                    <div class="clientesBox">
+                    	<div class="medioBoxInside">
+                             <h2><a href="http://www.newco.dev.br/MVMClientes.xsql" title="Clientes MVM">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='clientes']/node()"/>
+                            </a></h2>
+                            <xsl:copy-of select="document($doc)/translation/texts/item[@name='clientes_text_home']/node()"/>
+                        </div>
+                        <div class="linkClientesBox" style="background:#dbe4f2;">
+                        	<p>
+                                <xsl:copy-of select="document($doc)/translation/texts/item[@name='clientes_link_home']/node()"/>
+                            </p>
+                        </div>
+                    </div><!--fin de clientesBox-->
+                    
+                    <div class="proveedoresBox">
+                    	<div class="medioBoxInside">
+                    		<h2><a href="http://www.newco.dev.br/ClasificacionProveedores.xsql" title="Proveedores MVM">
+                            	<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedores']/node()"/>
+                            </a></h2>
+                            <xsl:copy-of select="document($doc)/translation/texts/item[@name='proveedores_text_home']/node()"/>
+                        </div>
+                        <div class="linkProveedoresBox" style="background:#b0c2e5;">
+                        	<p>
+                            <a href="http://www.newco.dev.br/ClasificacionProveedores.xsql" title="Proveedores">
+                                <xsl:value-of select="document($doc)/translation/texts/item[@name='proveedores_link_home']/node()"/>
+                            </a></p>
+                        </div>
+                    </div><!--fin de proveedoresBox-->
+                	
+                </div><!--fin de medio Box-->
+                
+                
+                <!--<div class="bajoBox">
+                
+                    <div class="contactoBox">
+                    	<h2><a href="http://www.newco.dev.br/Contacto.xsql" title="Contacto MVM">
+                        	<xsl:value-of select="document($doc)/translation/texts/item[@name='contacto']/node()"/>
+                        </a></h2>
+                        
+                        <form name="mail" method="Post" enctype="text/plain">
+                		<input type="hidden" name="PAIS" id="PAIS" value="55" />
+                        
+                        <div class="contactoMidi">
+                        <p>
+                        <input maxLength="80" size="25" name="CONTACTO_NOMBRE">
+                        	<xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='nombre_apellidos']/node()"/></xsl:attribute>
+                        </input>
+                        </p>
+                        <p>
+						<input maxLength="50" size="25" name="CONTACTO_EMPRESA">
+                        	<xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='empresa']/node()"/></xsl:attribute>
+                        </input>	
+                        </p>
+						<p>
+                        <input maxLength="50" size="25" name="CONTACTO_MAIL">
+                        	<xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='e_mail']/node()"/></xsl:attribute>
+                        </input>
+                        </p>
+                        </div>
+                        <div class="contactoMidi">
+                        <p>
+						<select name="CONTACTO_TIPO_EMP">
+									<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='tipo_empresa']/node()"/></option>
+									<option value="clinica"><xsl:value-of select="document($doc)/translation/texts/item[@name='clinica']/node()"/></option>
+									<option value="proveedor"><xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/></option>
+						</select>
+						</p>
+                        <p>
+						<input maxLength="50" size="25" name="CONTACTO_TEL">
+                        	<xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='telefono']/node()"/></xsl:attribute>
+                        </input>
+                        </p>
+                        <p>
+						<input maxLength="50" size="25" name="CONTACTO_CARGO">
+                        	<xsl:attribute name="value"><xsl:value-of select="document($doc)/translation/texts/item[@name='cargo']/node()"/></xsl:attribute>
+                        </input>
+                        </p>
+                        </div>
+						<p>
+						<textarea name="CONTACTO_TEXT" rows="2" cols="82" style="font-size:12px;"><xsl:value-of select="document($doc)/translation/texts/item[@name='informacion_solicitada']/node()"/></textarea>
+						</p>
+                        
+						<p>
+							<a href="javascript:EnviaContacto(document.forms['mail']);">
+								<img src="http://www.newco.dev.br/images/botonEnviarGris.gif" alt="Enviar" />
+							</a>
+						</p>
+						
+						<div id="confirmBox" style="display:none;" align="center">
+							<p><xsl:value-of select="document($doc)/translation/texts/item[@name='gracias_por_contactar']/node()"/></p>
+						</div>
+
+						<div id="waitBox" style="display:none;">&nbsp;</div>
+                        </form>
+                        
+                        <form name="mensajeJS">
+                            <input type="hidden" name="CNTC_NOMBRE_OBL">
+                                <xsl:attribute name="value">
+                                    <xsl:value-of select="document($doc)/translation/texts/item[@name='cntc_nombre_obl']/node()"/>
+                                </xsl:attribute>
+                                                </input>
+                            <input type="hidden" name="CNTC_EMAIL_OBL" value="{document($doc)/translation/texts/item[@name='cntc_email_obl']/node()}"/>
+                            <input type="hidden" name="CNTC_TLFN_OBL" value="{document($doc)/translation/texts/item[@name='cntc_tlfn_obl']/node()}"/>
+                            <input type="hidden" name="CNTC_NOM_EMPRESA_OBL" value="{document($doc)/translation/texts/item[@name='cntc_nom_empresa_obl']/node()}"/>
+                            <input type="hidden" name="CNTC_TIPO_EMPRESA_OBL" value="{document($doc)/translation/texts/item[@name='cntc_tipo_empresa_obl']/node()}"/>
+                            <input type="hidden" name="CNTC_CARGO_OBL" value="{document($doc)/translation/texts/item[@name='cntc_cargo_obl']/node()}"/>
+                            <input type="hidden" name="CNTC_INFO_OBL" value="{document($doc)/translation/texts/item[@name='cntc_info_obl']/node()}"/>
+                        </form>
+                        
+                    </div>--><!--fin de contactoBox-->
+                    
+                   <!-- <div class="testimoniosBox">
+                    	<h2><a href="http://www.newco.dev.br/Testimonios.xsql" title="Testimonios MVM">
+                        	<xsl:value-of select="document($doc)/translation/texts/item[@name='testimonios']/node()"/>
+                        </a></h2>
+                        
+                        <xsl:copy-of select="document($doc)/translation/texts/item[@name='testimonios_home_text']/node()"/>
+                        
+                      
+                        
+                    </div>
+                	
+                </div>--><!--fin de medio Box-->
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </div><!--fin de todoInside-->
+            
+            
+            
+        </div><!--fin de todo-->
+        
+         <div class="footerBox">
+        	<div class="footer">
+            	<xsl:copy-of select="document($doc)/translation/texts/item[@name='footer_text']/node()"/>
+            </div><!--fin de footer-->
+        </div><!--fin de footerBox-->
+        
+        </xsl:otherwise>
+      </xsl:choose>
+      <br/>    
+</body>
+</html>
+</xsl:template>
+
+<xsl:template match="Sorry">
+	<xsl:apply-templates select="Noticias/ROW/Sorry"/>
+</xsl:template>
+</xsl:stylesheet>

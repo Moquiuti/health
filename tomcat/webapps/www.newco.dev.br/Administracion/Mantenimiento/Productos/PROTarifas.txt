@@ -1,0 +1,6 @@
+20oct20 ET Separamos el mantenimiento de tarifas del mantenimiento normal. Simplificará el funcionamiento, permitirá ampliar funcionalidad PROTarifas_201020.js
+05nov11 ET Nuevos campos a nivel de tarifa
+06nov20 ET Nuevo campo para tarifas geográficas PROTarifas_061120.js
+07dic20 ET Divisas + producto bonificacion PROTarifas_071220.js
+21dic20 ET Avances con las divisas PROTarifas_211220.js (volvemos a ocultar desplegable productos)
+21set21 ET Se produce un problema al recuperar la tarifa para un producto de OHSJD. Faltaba crear hidden IDCLIENTE. PROTarifas_210921

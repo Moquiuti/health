@@ -1,0 +1,26 @@
+30mar22 ET Ficha de producto de la licitacion. Nuevo disenno 2022. FichaProductoLicitacion2022_300322.js
+14jul22 ET Retorno directo a la licitacion V2, al producto seleccionado.
+31jul22 ET Columna ref.proveedor duplicada
+12ago22 ET Cabecera de columnas no coinciden para licitacion de Unimed Central RS
+23ago22 ET Retorno directo a VENCEDORES
+16nov22 ET Incluir precio objetivo y precio maximo
+03feb23 ET Incluir Ficha de Seguridad (solicitado por OHSJ)
+06feb23 ET Incluir CodExpediente, CodCum, etc (solicitado por OHSJ)
+08mar22 ET No se mostraba boton "guardar"
+21abr23 ET Incluir valoracion con estrellas del proveedor en cada oferta. LicitacionV2_2022_190423.js (no actualizado)
+02may23 ET Programacion de entregas. LicitacionV2_2022_020523.js
+29may23 ET Cambios esteticos solicitados por Blumenau. Volver a la pagina correcta de Vencedores.
+
+	Incluye cambios de disenno solicitados por Blumenau no actualizados
+	Incluye cambios para programacion de pedidos no actualizados
+	Pendiente guardar automaticamente los cambios en selecciones
+	Pendiente guardar automaticamente los cambios en ofertas
+	Pendiente volver a vencedores al producto correspondiente
+	Pendiente guardar y salir en un unico paso al venir desde liciatcion o vencedores
+	
+06jun23 ET Solucionado error en caso de que las cantidades de la programacion de entregas incluyan decimales	
+08jun23 ET Solucionado error en caso de que las cantidades de la programacion de entregas incluya menos entregas que el caso anterior. FichaProductoLicitacion2022_080623.js
+16jun23 ET En el "title" mostrar las cantidades de programacion SIN DECIMALES. FichaProductoLicitacion2022_160623.js
+22jun23 ET Mostrar icono en lugar de "!", aplicar leyenda solicitada por Unimed Blumenau
+	
+	

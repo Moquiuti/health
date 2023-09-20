@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for file in uploads/dbmvm/*
+do
+#	echo ${file}
+	scp ${file} mvm@10.12.50.33:/home/mvm/temp
+	rm -f ${file}
+done

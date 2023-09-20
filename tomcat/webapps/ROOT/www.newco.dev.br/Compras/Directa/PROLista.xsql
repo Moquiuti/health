@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PROListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PROListaHTML.xsl"?>
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+  <form name="BuscaProductos"  method="post" action="PROManten.xsql">
+
+<!--  <xsql:ref-cursor-function>-->
+<xsql:include-owa>
+    <![CDATA[
+      PRODUCTOS_PCK.Busca(
+                    p_US_ID => '{@US_ID}',
+                    p_CATEGORIA => '{@CATEGORIA}',
+		    p_FAMILIA => '{@FAMILIA}',
+		    p_SUBFAMILIA => '{@SUBFAMILIA}',
+		    p_NOMBRE => '{@NOMBRE}',
+		    p_DESCRIPCION => '{@DESCRIPCION}',
+		    p_FABRICANTE => '{@FABRICANTE}',
+		    p_MARCA => '{@MARCA}',
+		    p_PROVEEDOR => '{@PROVEEDOR}',
+                    p_ORDERBY => 'CAT_NOMBRE, FAM_NOMBRE, SFA_NOMBRE, PRO_NOMBRE');
+    ]]>
+  <!--</xsql:ref-cursor-function>-->
+</xsql:include-owa>
+  
+    <sendRequest name="btnSubmit" label="Seleccionar Productos"/>
+  </form>
+  
+  <jumpTo>
+    <picture-on>DB-002</picture-on>
+    <picture-off>DB-001</picture-off>
+    <id>uno</id>
+    <page>PRO-0210</page>
+  </jumpTo>
+  
+</Lista>

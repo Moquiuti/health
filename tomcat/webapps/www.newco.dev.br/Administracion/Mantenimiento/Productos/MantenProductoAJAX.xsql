@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	ultima revision 23may18 13:18
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="MantenProductoJSON.xsl"?>
+
+<EnvioLineaFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NUMLINEA" value="NUMLINEA"/>
+	<xsql:include-param name="TEXTO" value="{@TEXTO}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	
+	<!--	Datos que devolvera el PL/SQL	
+	<OK/>
+	-->	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecepcionProducto');
+
+	 		IF US_ID > 0 THEN
+				--utilidades_pck.debug('XSQL: IntegracionRecepcion_pck.RecepcionProducto {@IDFICHERO},{@NUMLINEA},{@TEXTO}');
+
+				v_Res:=CatProveedores_fic_pck.Producto
+				(
+					US_ID,
+					'{@INTF_ID}',
+					'{@NUMLINEA}',
+					'{@IDCLIENTE}',
+					'{@CODNITPROVEEDOR}',
+					'{@REFERENCIA}',
+					'{@NOMBRE}',
+					'{@MARCA}',
+					'{@UDBASICA}',
+					'{@UDESLOTE}',
+					'{@PRECIO}',
+					'{@TIPOIVA}',
+					'{@OTROS}',
+					'{@REFPACK}',
+					'{@CANTIDAD}',
+					'{@FORZARNOMBRE}'				--	4jun18 Forzar nombre en lugar de comprobarlo
+				);
+				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P(	'<OK>'
+						||	'<NUMLINEA>{@NUMLINEA}</NUMLINEA>'
+						||	'<IDPRODUCTO>'||utilidades_pck.Piece(v_Res,'|',1)||'</IDPRODUCTO>'
+						||	'</OK>');
+				ELSE
+
+					HTP.P(utilidades_pck.CabeceraXML||'<ERROR msg="'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'"/>');
+				
+				END IF;
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnvioLineaFichero>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CookieTotalHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CookieTotalHTML.xsl"?>
+
+<Main xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+
+<!--
+ |      Forzamos la cookie.
+ |		only-if-unset = "no"
+ |      
+ +-->
+<xsql:set-cookie host="www.mvmnucleo.com" path="/" name="MVMCOOKIE" max-age="315360000" only-if-unset="no">
+  select MVM.CookieTotal from dual
+</xsql:set-cookie>    
+
+<xsql:include-owa>
+   Mvm.ValidarCookieTotal ( '{@MVMCOOKIE}' );
+</xsql:include-owa>
+
+<!--
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>  
+    <page>G-0030</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+  <button label="Enviar" caption="IMG-0100">
+    <name_function>Envia</name_function>
+    <param>document.forms['contactar']</param>
+    <param>'http://www.newco.dev.br/General/GError.xsql'</param>
+  </button>
+-->  
+</Main>
+

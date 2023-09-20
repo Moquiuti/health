@@ -1,0 +1,357 @@
+//	JS para manten. Contrato
+//	Ultima revisión: ET 12set18 13:03
+
+var Dominio='http://www.newco.dev.br/';
+
+//	Activar Parsley
+jQuery(function () {
+  jQuery('#Contrato').parsley().on('field:validated', function() {
+    var ok = jQuery('.parsley-error').length === 0;
+    jQuery('.bs-callout-info').toggleClass('hidden', !ok);
+    jQuery('.bs-callout-warning').toggleClass('hidden', ok);
+  })
+  .on('form:submit', function() {
+	console.log("submit");
+  });
+});
+
+
+//	Validar y enviar ficha básica
+function ValidarYEnviar()
+{
+	jQuery('#Contrato').parsley().validate();
+
+    var ok = jQuery('.parsley-error').length === 0;
+
+	//console.log("Provincia:"+document.forms['frmFicha'].elements['PROVINCIA'].value);
+	//
+	console.log("ValidarYEnviar: IDForm:Contrato. val:"+ok);
+
+	if (ok) 
+	{
+    	jQuery('.bs-callout-info').show();
+    	jQuery('.bs-callout-warning').hide();
+		
+		document.forms['Contrato'].action=Dominio+'ProcesosCdC/Contratos/Contrato.xsql';
+		document.forms['Contrato'].target='_self';
+		document.forms['Contrato'].method='post';
+		document.forms['Contrato'].enctype='text/plain';
+		document.forms['Contrato'].elements['ACCION'].value='GUARDAR';	
+		
+		//solodebug	
+		alert('Antes del submit: Accion:'+document.forms['Contrato'].elements['ACCION'].value+' IDCOntrato:'+document.forms['Contrato'].elements['CON_ID'].value+ ' IDDocumento:'+document.forms['Contrato'].elements['CON_IDDOCUMENTO'].value);
+		
+		//solodebug alert("submit"); 
+		jQuery('#Contrato').submit();
+	}
+	else
+	{
+    	jQuery('.bs-callout-info').hide();
+    	jQuery('.bs-callout-warning').show();
+	}
+
+}
+
+
+//	Publica la ficha para ser revisada por la central de compras
+function CambioEstado(Estado)
+{
+	document.forms['Contrato'].elements['ACCION'].value='CAMBIOESTADO';
+	jQuery('#Contrato').submit();
+}
+
+
+//	Publica la ficha para ser revisada por la central de compras
+function PublicarContrato()
+{
+	CambioEstado('PUBLICAR');
+}
+
+
+//	Publica la ficha para ser revisada por la central de compras
+function EliminarDocumento()
+{
+	document.forms['Contrato'].elements['ACCION'].value='QUITARDOC';
+	jQuery('#Contrato').submit();
+}
+
+
+//
+//	Gestión del contrato escaneado, adaptado desde EMPDocs_120618.js
+//
+
+//carga de un documento
+var uploadFilesDoc = new Array();
+var periodicTimerDoc = 0;
+var form_tmp;
+var MAX_WAIT_DOC = 1000;
+
+function cargaDoc(form){
+  var tipo = form.elements['TIPO_DOC'].value;
+  
+  //	COmprueba que el tipo esté informado
+  if (tipo == -1)
+  {
+  	alert(document.forms["MensajeJS"].elements['TIPO_OBLIGATORIO'].value);
+	return;
+  }
+  
+
+  if(uploadFrameDoc && uploadFrameDoc.document && uploadFrameDoc.document.getElementsByTagName("body")[0]){
+    uploadFrameDoc.document.getElementsByTagName("body")[0].innerHTML = "";
+  }
+
+  if(hasFilesDoc(form,tipo)){
+  
+    var target = 'uploadFrameDoc';
+    var action = 'http://' + location.hostname + '/cgi-bin/uploadDocsMVM.pl';
+    var enctype = 'multipart/form-data';
+    form.target = target;
+    form.encoding = enctype;
+    form.action = action;
+    waitDoc("Please wait...");
+    form_tmp = form;
+    man_tmp = true;
+    periodicTimerDoc = 0;
+    periodicUpdateDoc();
+
+	form.submit();
+	
+  }
+}//fin cargaDoc
+
+//Veo si hay un input file en el form
+function hasFilesDoc(form){
+  for(var i = 1; i < form.length; i++){
+    if(form.elements[i].type == 'file' && (form.elements[i].name == 'inputFileDoc') && form.elements[i].value != '' ){
+      return true;
+    }
+  }
+  return false;
+}
+
+//function que dice al usuario de esperar
+function waitDoc(text){
+  jQuery('#waitBoxDoc').html ('<img src="'+Dominio+'/images/loading.gif" />');
+  jQuery('#waitBoxDoc').show();
+  return false;
+}
+
+function periodicUpdateDoc(){
+  if(periodicTimerDoc >= MAX_WAIT_DOC){
+    alert(document.forms['mensajeJS'].elements['HEMOS_ESPERADO'].value + MAX_WAIT_DOC + document.forms['mensajeJS'].elements['LA_CARGA_NO_TERMINO'].value);
+    return false;
+  }
+  periodicTimerDoc++;
+
+  if(uploadFrameDoc && uploadFrameDoc.document && uploadFrameDoc.document.getElementsByTagName("p")[0]){
+    document.getElementById('waitBoxDoc').style.display = 'none';
+    var uFrame = uploadFrameDoc.document.getElementsByTagName("p")[0];
+
+    if(uFrame.innerHTML.substr(0, 1) != '{' && uFrame.innerHTML.substr(0, 1) != '['){
+      alert(document.forms['mensajeJS'].elements['ERROR_SIN_DEFINIR'].value);
+      return false;
+    }else{
+      var response = eval('(' + uFrame.innerHTML + ')');
+
+      handleFileRequestDoc(response);
+      return true;
+    }
+  }else{
+    window.setTimeout(periodicUpdateDoc, 1000);
+    return false;
+  }
+  return true;
+}
+
+//request json carga doc
+function handleFileRequestDoc(resp){
+  var lang = new String('');
+
+  if(document.getElementById('myLanguage') && document.getElementById('myLanguage').innerHTML.length > 0){
+    lang = document.getElementById('myLanguage').innerHTML;
+  }
+
+  var form = form_tmp;
+  var msg = '';
+  //var target = '_top';
+  //var enctype = 'application/x-www-form-urlencoded';
+  var documentChain = new String('');
+  //var action = Dominio+'Administracion/Mantenimiento/Empresas/confirmCargaDocumentoEmpresa.xsql';
+  var docNombre = '';
+  var docDescri = '';
+  var nombre = '';
+
+  if(resp.documentos){
+    if(resp.documentos && resp.documentos.length > 0){
+      for(var i = 0; i < resp.documentos.length; i++){
+        if(resp.documentos[i].error && resp.documentos[i].error != ''){
+          msg += resp.documentos[i].error;
+        }else{
+          if(resp.documentos[i].size){
+            // En lugar del elemento nombre del form cojo el nombre del fichero diretamente, si hay espacios el sistema pone guion bajo, entonces cuento cuantos guiones son, divido al penultimo y añado la ultima palabra, si la ultima palabra esta vacï¿½a implica que hay 2 ghiones bajos, entonces divido a los 2 ghiones bajos y cojo la primera parte.
+            var sinEspacioNombre = '';
+            var lastWord = '';
+            var sinEspacioNombre = resp.documentos[i].nombre.replace('__','_');
+            var numSep = PieceCount(sinEspacioNombre,'_');
+            var numSepOk = numSep -1;
+
+            if(Piece(sinEspacioNombre,'_',numSepOk) == ''){
+              if(sinEspacioNombre.search('__')){
+                lastWord = 	sinEspacioNombre.split('__');
+                docNombre = lastWord[0];
+              }
+            }else{
+              lastWord = Piece(sinEspacioNombre,'_',numSepOk);
+              nombre = sinEspacioNombre.split(lastWord);
+              docNombre = nombre[0].concat(lastWord);
+            }
+
+            documentChain += resp.documentos[i].nombre + '|'+ docNombre+'|'+ resp.documentos[i].size +'|'+ docDescri + '#';
+          }
+        }
+      }
+
+      if(msg == ''){
+        document.getElementsByName('CADENA_DOCUMENTOS')[0].value = documentChain;
+        cadenaDoc= document.getElementsByName('CADENA_DOCUMENTOS')[0].value;
+      }
+    }
+  }
+
+  var borrados = document.forms['Contrato'].elements['DOCUMENTOS_BORRADOS'].value;
+  var borr_ante = document.forms['Contrato'].elements['BORRAR_ANTERIORES'].value;
+  var tipoDoc = document.forms['Contrato'].elements['TIPO_DOC'].value;
+  var prove = document.forms['Contrato'].elements['IDEMPRESA'].value;
+  
+
+  if(msg != '')
+  {
+    alert(msg);
+    return false;
+  }
+  else
+  {
+    
+    //form.encoding = enctype;
+    //form.action = action;
+    //form.target = target;
+
+    jQuery.ajax({
+      url: Dominio+'Administracion/Mantenimiento/Empresas/confirmCargaDocumentoEmpresa.xsql',
+      data: "ID_PROVEEDOR="+prove+"&DOCUMENTOS_BORRADOS="+borrados+"&BORRAR_ANTERIORES="+borr_ante+"&TIPO_DOC="+tipoDoc+"&CADENA_DOCUMENTOS="+cadenaDoc,
+      type: "GET",
+      async: false,
+      contentType: "application/xhtml+xml",
+      beforeSend:function(){
+        document.getElementById('confirmBoxDocEmpresa').style.display = 'none';
+        document.getElementById('waitBoxDoc').src = Dominio+'images/loading.gif';
+      },
+      error:function(objeto, quepaso, otroobj){
+        alert("objeto:"+objeto);
+        alert("otroobj:"+otroobj);
+        alert("quepaso:"+quepaso);
+      },
+      success:function(data){
+        //var doc=eval("(" + data + ")");
+		
+		var doc=JSON.parse(data);
+       
+		//solodebug	alert("handleFileRequestDoc. success. inicio.");
+
+        //Informamos el campo CON_IDDocumento con el ID del documento subido
+		//solodebug		console.log('confirmCargaDocumentoEmpresa. CADENA_DOCUMENTOS:'+ cadenaDoc+'//data:'+data+'//doc:'+doc+'//IDDoc:'+doc[0].id_doc);
+        document.forms['Contrato'].elements['CON_IDDOCUMENTO'].value = doc[0].id_doc;
+
+        //	Recargamos para que quede asociado el documento al registro
+	    //	form.action = Dominio+'ProcesosCdC/Contratos/Contrato.xsql';
+
+		ValidarYEnviar();
+
+/*
+        //vaciamos la carga documentos
+        document.getElementById('confirmBoxDocEmpresa').style.display = 'block';
+		
+        //reinicializo los campos del form
+        document.forms['Contrato'].elements['inputFileDoc'].value = '';
+
+        //vaciamos la carga documentos
+        document.forms['Contrato'].elements['inputFileDoc'] = '';
+
+        uploadFrameDoc.document.getElementsByTagName("p")[0].innerHTML = '';
+        uploadFrameDoc.document.getElementsByTagName("body")[0].innerHTML = "";
+
+		document.location.reload(true); 
+
+        //reseteamos los input file, mismo que removeDoc
+        var clearedInput;
+        var uploadElem = document.getElementById("inputFileDoc");
+
+        uploadElem.value = '';
+        clearedInput = uploadElem.cloneNode(false);
+
+        uploadElem.parentNode.insertBefore(clearedInput, uploadElem);
+        uploadElem.parentNode.removeChild(uploadElem);
+        document.getElementById("docLine").removeChild(document.getElementById("inputDocLink"));
+
+		//solodebug	alert("handleFileRequestDoc. success. final.");
+
+*/
+        return undefined;
+      }
+    });
+  }
+
+  return true;
+}//fin handleFileRequestDoc
+
+
+function addDocFile(id){
+  var remove = document.forms['Contrato'].elements['REMOVE'].value;
+  var uploadElem = document.getElementById("inputFileDoc");
+
+  if(uploadElem.value != ''){
+    uploadFilesDoc[uploadFilesDoc.length] = uploadElem.value;
+
+    if(!document.getElementById("inputDocLink")){
+      var rmLink = document.createElement('div');
+      rmLink.setAttribute("class","remove");
+
+      jQuery('Element').append(rmLink);
+      rmLink.setAttribute('id', 'inputDocLink');
+      rmLink.innerHTML = '<a href="javascript:removeDoc(\'' + id + '\');">'+ remove +'</a>';
+      document.getElementById("docLine").appendChild(rmLink);
+    }
+  }else{
+    uploadFilesDoc.splice(id, 1);
+    document.getElementById("docLine").removeChild(document.getElementById("inputDocLink"));
+  }
+
+  return true;
+}
+
+
+//	Elimina el documento asociado
+function removeDoc(){
+	var clearedInput;
+	var uploadElem = document.getElementById("inputFileDoc");
+
+	uploadElem.value = '';
+	clearedInput = uploadElem.cloneNode(false);
+
+	uploadElem.parentNode.insertBefore(clearedInput, uploadElem);
+	uploadElem.parentNode.removeChild(uploadElem);
+	document.getElementById("docLine").removeChild(document.getElementById("inputDocLink"));
+
+	return undefined;
+}
+
+
+
+
+
+
+
+
+
+

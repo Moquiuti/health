@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EliminarEmpaquetamientosJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EliminarEmpaquetamientosJSON.xsl"?>
+
+<EliminarEmpaquetamientos xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="US_ID"/>	
+  <xsql:include-param name="PRO_ID"/>	
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EliminarEmpa	VARCHAR2(20);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EliminarEmpaquetamientos');
+		IF US_ID>=0 THEN
+			
+			v_EliminarEmpa:= MantenimientoProductos_Pck.EliminarEmpaquetamiento(
+                US_ID,
+				'{@PRO_ID}',
+				'{@IDCLIENTE}'
+			);
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_EliminarEmpa = 'OK' THEN
+				HTP.P('<OK>'||v_EliminarEmpa||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+			
+			
+				
+			
+		END IF;			   
+    END;
+        ]]>  
+</xsql:include-owa>
+
+</EliminarEmpaquetamientos>

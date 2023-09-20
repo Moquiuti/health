@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Listado/buscador de Licitaciones
+	ultima revision: ET 30ene20 10:30
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="LicitacionesHTML.xsl"?>
+-->
+<Licitaciones xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Licitaciones');
+		IF US_ID>=0 THEN
+		
+			LICITACIONES_SEG_PCK.licitaciones_xml(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTROPEDIDO}',
+				'{@FIDCONVOCATORIA}',
+				'{@FIDRESPONSABLE}',
+				'{@FPROVEEDORSEL}',
+				'{@FPROVEEDOR}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+				'{@PLAZOCONSULTA}',
+				'{@ORDEN}',
+				'{@SENTIDO}',
+				10,
+				0,
+				'S',
+				'{@FIDCATEGORIA}',
+				'{@FIDAREAGEOGRAFICA}',
+				'{@BUSQUEDASESPECIALES}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Licitaciones>

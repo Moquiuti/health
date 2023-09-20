@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CVAnalisisDetalleHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CVAnalisisDetalleHTML.xsl"?>
+
+  <Generar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+    <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+    
+    <xsql:include-param name="LP_ID"/>
+    <xsql:include-param name="US_ID"/>
+    <pagename>CVAnalisisDetalle</pagename>
+
+  <xsql:include-owa>
+    MULTIOFERTAS_SEGUIMIENTO_PCK.DetalleCompra('{@LP_ID}'); 
+  </xsql:include-owa>
+
+ <!--<button label="Analizar" caption="IMG-0300">
+   <name_function>Envia</name_function>
+   <param>document.forms[0]</param>
+   <param>'CVAnalizar.xsql'</param>   
+ </button>-->
+
+ <!--<button label="Seleccionar" caption="IMG-0440">
+   <name_function>Envia</name_function>
+   <param>document.forms[0]</param>
+   <param>'CVAnalizar.xsql'</param>
+ </button>-->
+ 
+  <button label="Cancelar" caption="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button>
+  
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption> 
+  </jumpTo>  
+</Generar>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PaginaEnBlanco.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PaginaEnBlanco.xsl"?>
+
+
+<!--
+ |   Mostramos la lista de plantillas con una plantilla seleccionada por defecto.
+ +-->
+
+<PaginaEnBlanco xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+          BEGIN
+			  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaPlantilla');	
+			  IF US_ID>=0 THEN   
+					HTP.P(Utilidades_Pck.CabeceraXML
+							||'<INICIO>');
+
+		            	  Catalogoprivado_Seg_Pck.UltimosCambiosCatalogo_XML
+						  (
+						  	US_ID,
+							'{@CAMBIOS_CATALOGO}',
+							'{@CAMBIOS_PRECIOS}',
+							'{@CAMBIOS_PRECIOS_PUBLICOS}',
+							'{@NUEVOS_PRODUCTOS}',
+							300,
+							1000);
+					HTP.P('</INICIO>');
+        	  END IF;
+          END;
+        ]]>
+	</xsql:include-owa>
+</PaginaEnBlanco>
+
+

@@ -1,0 +1,7 @@
+5abr18	ET	Se perdía el identificado de empresa al borrar productos/grupos/etc
+5nov18	ET	Error en las funciones "CambioSubfamiliaActual" y similares
+28nov18	ET	"Nueva categoría" abre la categoría seleccionada, igual que si se pulsara "Propiedades". Cambio versión JS a ZonaCatalogo_28nov18.js
+29nov18	ET	Problemas al borrar registros. Además, los textos de aviso dan provlemas con los nombres de niveles. Cambio versión JS a ZonaCatalogo_291118.js
+04jun20 ET	Permitir a empresas con catalogo hijo modificar los registros que no dependean del padre
+29jul20 ET	Siempre debe permitir crear nuevas categorías
+05may21 ET	Se producia un error en la carga si no esta informado document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value. ZonaCatalogo_050521.js

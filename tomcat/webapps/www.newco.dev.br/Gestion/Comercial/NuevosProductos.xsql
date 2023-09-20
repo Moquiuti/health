@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Inserta nuevos productos dada una referencia para la licitacion
+	Ultima revision: ET 13jul20 18:10
++-->
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevosProductosJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevosProductosJSON.xsl"?>
+
+<NuevosProductos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2 (1000);
+		v_SQL		VARCHAR2 (1000);
+		v_res2		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProducto');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.IncluirProductosPorReferencia(
+				US_ID,
+				'{@LIC_ID}',
+				'{@LISTA_REFERENCIAS}',
+				'{@TIPOIVA}',
+				'{@TIPO_CODIFICACION}'
+			);
+
+			--27set16	SQL := 'SELECT INSTR('''||v_res||''',''productos repetidos'',1) from dual';
+			--27set16	EXECUTE IMMEDIATE v_SQL INTO v_res2;
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			--27set16	IF v_res2 > 0 THEN
+			IF INSTR(v_res,'Errores') > 0 THEN
+				HTP.P('<ERROR>'||v_res||'</ERROR>');
+			ELSE
+				HTP.P('<OK>'||v_res||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevosProductos>

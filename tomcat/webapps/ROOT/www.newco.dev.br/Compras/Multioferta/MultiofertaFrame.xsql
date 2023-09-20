@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ficha de MULTIOFERTA
+	Ultima revision: ET 16jul19 08:49
+-->
+<?xml-stylesheet type="text/xsl" href="MultiofertaFrameHTML.xsl"?>
+
+<Multioferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="ROL"/>
+	<xsql:include-param name="TIPO"/>
+	<xsql:include-param name="BOTON_IMPRIMIR_ARRIBA"/>
+	<xsql:include-param name="DATOSACTUALES"/>
+	<xsql:include-param name="VENTANA"/>
+	<xsql:include-param name="ESMODELO"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param name="ORIGEN"/>
+
+<!--
+	Read-Only: S|N - Mostramos la multioferta sin posibilidad de modificarla.
++-->
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MultiofertaFrame');
+		IF US_ID>=0 THEN
+			MULTIOFERTAS_PCK.Multioferta('{@MO_ID}',US_ID, '{@READ_ONLY}', '{@IDDIVISA}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+
+<BOTONS_NUEVO>
+	<!-- Botones para el estado 6 -->
+	<button label="Cerrar" caption="IMG-0190">
+		<name_function>parent.window.close</name_function>
+	</button>
+
+	<button label="Imprimir" caption="IMG-1490">
+		<name_function>window.print</name_function>
+	</button>
+
+	<button label="Pendiente" caption="IMG-0060">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=PENDIENTE'</param>
+	</button>
+
+	<button label="Enviar" caption="IMG-0100">
+		<name_function>Actua_Check_Number</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=ENVIAR'</param>
+	</button>
+
+	<!-- Botones para el estado 7 -->
+	<button label="Responder" caption="IMG-0260">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=NEGOCIAR'</param>
+	</button>
+
+	<button label="PrepararPedido" caption="IMG-0450">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=CONFIRMAR'</param>
+	</button>
+
+	<button label="TerminarOferta" caption="IMG-1380">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=CANCELAR'</param>
+	</button>
+
+	<!--botones estado 10 -->
+	<button label="PedidoPendiente" caption="IMG-0060">
+		<name_function>Actua</name_function>
+		<param>document.forms['anadir']</param>
+		<param>'MultiofertaSave.xsql?BOTON=PENDIENTE'</param>
+	</button>
+
+	<button label="EnviarPedido" caption="IMG-0460">
+		<name_function>Actua</name_function>
+		<param>document.forms['anadir']</param>
+		<param>'MultiofertaSave.xsql?BOTON=ENVIAR'</param>
+	</button>
+
+	<button label="CancelarPedido" caption="IMG-1040">
+		<name_function>CancelarPedido</name_function>
+		<param>document.forms['anadir']</param>
+		<param>'MultiofertaSave.xsql?BOTON=CANCELAR'</param>
+	</button>
+
+	<!-- botones estado 9 -->
+	<button label="AceptarCancelacion" caption="IMG-0410">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=OK'</param>
+	</button>
+
+	<!--botones estado 11-->
+	<button label="AceptacionPendiente" caption="IMG-0060">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=PENDIENTE'</param>
+	</button>
+
+	<button label="AceptarPedido" caption="IMG-0030">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=CONFIRMAR'</param>
+	</button>
+
+	<button label="RechazarPedido" caption="IMG-0150">
+		<name_function>Rechazar</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=RECHAZAR'</param>
+	</button>
+
+	<!--botones estado 12-->
+	<button label="RechazoPendiente" caption="IMG-0060">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=PENDIENTE'</param>
+	</button>
+
+	<button label="AceptarRechazo" caption="IMG-0030">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=OK'</param>
+	</button>
+
+	<!-- botones estado13 -->
+	<button label="EntregaPendiente" caption="IMG-0060">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=PENDIENTE'</param>
+	</button>
+
+	<button label="AceptarEntrega" caption="IMG-0380">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=RECEPCION_OK'</param>
+	</button>
+
+	<button label="AceptarEntregaParcial" caption="IMG-0381">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=RECEPCION_PARCIAL'</param>
+	</button>
+
+	<button label="CrearAbono" caption="IMG-0382">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=ABONO'</param>
+	</button>
+
+	<!--	28mar07	ET	Solicitud Muestras	-->
+	<button label="AceptarEntregaMuestras" caption="IMG-0385">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=RECEPCION_OK'</param>
+	</button>
+
+	<!-- botones estado 15 -->
+	<button label="CobroPendiente" caption="IMG-0060">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=PENDIENTE&amp;RELOAD=N'</param>
+	</button>
+
+	<button label="AceptarCobro" caption="IMG-0400">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=COBRO_OK'</param>
+	</button>
+
+	<!-- botones estado 16 -->
+	<button label="PedidoCobrado" caption="IMG-0400">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=OK'</param>
+	</button>
+
+	<!-- botones estado 21 -->
+	<button label="AbonoAceptado" caption="IMG-0405">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=OK'</param>
+	</button>
+
+	<!-- programacion de pedidos -->
+	<!-- botones estado 29 -->
+	<!--<button label="PrepararPrograma" caption="IMG-1650">
+		<name_function>ProgramarPedido</name_function>
+		<param>document.forms['form1']</param>
+	</button>
+
+	<button label="EliminarPrograma" caption="IMG-1660">
+		<name_function>EliminarPrograma</name_function>
+		<param>document.forms['form1']</param>
+		<param>'http://www.newco.dev.br/Compras/PedidosProgramados/BorrarPedidoProgramado.xsql'</param>
+	</button>-->
+
+	<button label="GuardarCambiosPedidoProgramado" caption="IMG-0465">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=OK'</param>
+	</button>
+
+	<!-- botones estado 30 -->
+	<button label="EnviarPedidoDesdePrograma" caption="IMG-0460">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=OK'</param>
+	</button>
+
+	<button label="RechazarPedidoDesdePrograma" caption="MO-0163">
+		<name_function>Actua</name_function>
+		<param>document.forms['form1']</param>
+		<param>'MultiofertaSave.xsql?BOTON=RECHAZAR'</param>
+	</button>
+</BOTONS_NUEVO>
+
+<field name="COMBO_ENTREGA">
+	<dropDownList>
+		<listElem>
+			<ID>1</ID>
+			<listItem>1</listItem>
+		</listElem>
+		<listElem>
+			<ID>2</ID>
+			<listItem>2</listItem>
+		</listElem>
+		<listElem>
+			<ID>3</ID>
+			<listItem>3</listItem>
+		</listElem>
+		<listElem>
+			<ID>4</ID>
+			<listItem>4</listItem>
+		</listElem>
+		<listElem>
+			<ID>7</ID>
+			<listItem>7</listItem>
+		</listElem>
+		<listElem>
+			<ID>15</ID>
+			<listItem>15</listItem>
+		</listElem>
+		<listElem>
+			<ID>30</ID>
+			<listItem>30</listItem>
+		</listElem>
+		<listElem>
+			<ID>999</ID>
+			<listItem>Otros</listItem>
+		</listElem>
+	</dropDownList>
+</field>
+   
+<field name="COMBO_ENTREGA_REAL">
+	<dropDownList>
+		<listElem>
+			<ID>0</ID>
+			<listItem>Hoy</listItem>
+		</listElem>
+		<listElem>
+			<ID>-1</ID>
+			<listItem>Ayer</listItem>
+		</listElem>
+		<listElem>
+			<ID>-2</ID>
+			<listItem>Hace dos días</listItem>
+		</listElem>
+		<listElem>
+			<ID>999</ID>
+			<listItem>Otros</listItem>
+		</listElem>
+	</dropDownList>
+</field>
+</Multioferta>

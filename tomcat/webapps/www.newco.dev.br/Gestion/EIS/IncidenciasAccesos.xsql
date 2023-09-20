@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="IncidenciasAccesos.xsl"?>
+<?xml-stylesheet type="text/xsl" href="IncidenciasAccesos.xsl"?>
+
+<AccesosUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT	LA_USUARIO AS USUARIO, 
+				to_char(LA_FECHA, 'dd/mm/yyyy hh24:mi') AS FECHA,
+ 				LA_DIRECC_IP AS DIRECCIONIP,
+				decode(LA_CORRECTO,'P','Primer Acceso', 
+					'C', 'El navegador ya tiene cookie',
+					'I', '*****  Intruso   *****',
+					'E', '*****  Intruso   *****',
+					'U', '** Clave Incorrecta **',
+					'*** Error en estado ***')
+
+	AS ESTADO
+		FROM LOGACCESOS
+		WHERE LA_FECHA>SYSDATE-7
+		AND LA_CORRECTO<>'N'
+		AND LA_CORRECTO<>'T'
+		AND LA_CORRECTO<>'D'
+		ORDER BY LA_FECHA DESC
+    ]]>
+  </xsql:query>
+  <returnHome/>
+</AccesosUsuarios>
+

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Informar procedimientos en convocatoria de elementos especiales. Nuevo disenno 2022.
+	Ultima revision ET 23may22 11:23.
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="ProcedimientoYOfertasHTML2022.xsl"?>
+
+<Procedimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Conv.Esp.ProcYOfertas');
+		IF US_ID>=0 THEN
+		
+			utilidades_pck.debug('Conv.Esp.ProcYOfertas: IDConvocatoria:{@FIDCONVOCATORIA}. IDEspecialidad{@FIDESPECIALIDAD}. IDProc:{@FIDPROCEDIMIENTO}');
+			utilidades_pck.debug('Conv.Esp.ProcYOfertas:'||'{@ORDEN}');
+			
+			IF '{@ACCION}'='GUARDAR' THEN
+				v_Res:=ConvocatoriasEspeciales_pck.SeleccionarProcedimientos
+				(
+					US_ID,
+                	'{@FIDCONVOCATORIA}',
+                	'{@FIDPROCEDIMIENTO}',			--	Modelo de procedimiento
+                	'{@PARAMETROS}'
+				);
+			END IF;
+		
+			ConvocatoriasEspeciales_pck.ProcedimientoYOfertas_XML(
+				US_ID,
+                '{@FIDCONVOCATORIA}',
+                '{@FIDESPECIALIDAD}',
+                '{@FIDPROCEDIMIENTO}',				--	Modelo de procedimiento
+                '{@ORDEN}',
+                '{@SENTIDO}'		
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Procedimiento>

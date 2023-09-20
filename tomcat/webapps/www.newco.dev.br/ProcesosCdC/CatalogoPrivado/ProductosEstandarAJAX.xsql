@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ProductosEstandarJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ProductosEstandarJSON.xsl"?>
+
+<ProductosEstandar xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	BEGIN
+		CATALOGOPRIVADO_SEG_PCK.DesplegableProductos_XML ('{@IDGRUPO}');
+	END;
+]]>
+</xsql:include-owa>
+</ProductosEstandar>

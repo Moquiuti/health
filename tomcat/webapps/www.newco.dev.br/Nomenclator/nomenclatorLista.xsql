@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" href="nomenclatorListaHTML.xsl"?>
+
+
+<BusquedaProductos xmlns:xsql="urn:oracle-xsql" connection="newco"  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <!--
+  	OP = EDICION - Cuando queremos editar una linea
+  	OP = ALTA    - Cuando queremos añadir una linea
+  +-->
+  <xsql:include-param name="OP"/> 
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="HISTORY"/>
+
+  
+  <xsql:include-owa>
+   <![CDATA[
+        ESPECIALIDADES_PCK.Listar ('LLP_ESPECIALIDADES');
+   ]]>
+  </xsql:include-owa>  
+
+  <BuscForm name="BuscaProductos"  method="post" action="../Compras/Multioferta/LLPMantenSave.xsql">
+  <xsql:include-owa>
+   <![CDATA[
+        BUSCADOR_PCK.UltimaConsulta('{@US_ID}');
+   ]]>
+  </xsql:include-owa> 
+  <!-- 
+     <xsql:query null-indicator="yes">
+      <![CDATA[
+        SELECT 
+          LLP_ID,
+          LLP_IDLISTA,
+          LLP_DESCRIPCION_LINEA,
+          LLP_REFERENCIACLIENTE LLP_REFERENCIA_CLIENTE,
+          LLP_CATEGORIA,
+          LLP_FAMILIA,
+          LLP_SUBFAMILIA,
+          LLP_MARCA,
+          LLP_FABRICANTE,
+          LLP_PROVEEDOR,
+          LLP_NOMBRE,
+          LLP_NOMBREINTERNACIONAL,
+          LLP_REFERENCIA LLP_REFERENCIA_PROVEEDOR, 
+          LLP_HOMOLOGADO,
+          LLP_CERTIFICACION,
+          SUBSTR(LLP_CERTIFICACION,1,INSTR(LLP_CERTIFICACION,'-')-1) LLP_TIPO_CERTIFICACION,
+          SUBSTR(LLP_CERTIFICACION,INSTR(LLP_CERTIFICACION,'-')+1) LLP_VALOR_CERTIFICACION,
+          LLP_TIPO_PRODUCTO LLP_TIPO_PRODUCTO_ACTUAL,
+          LLP_CANTIDAD,
+          LLP_PRECIO_MAXIMO,
+          LLP_IDDIVISA,
+          LLP_NIVEL_CALIDAD LLP_NIVEL_CALIDAD_ACTUAL,
+          LLP_PROV_HABITUALES,
+          LLP_PRESENTACION LLP_PRESENTACION_ACTUAL,
+          LLP_ORDERBY LLP_ORDERBY_ACTUAL,
+          LLP_LISTAR LLP_LISTAR_ACTUAL,
+          LLP_IDESPECIALIDAD LLP_IDESPECIALIDAD_ACTUAL
+        FROM 
+          lineaslistaproductos
+        where llp_ID = {@LLP_ID}
+        ]]>
+                <xsql:no-rows-query null-indicator="yes">
+                SELECT 
+                  {@LLP_ID} LLP_ID,
+                  {@LP_ID} LLP_IDLISTA,
+                  null LLP_DESCRIPCION_LINEA,
+                  null LLP_REFERENCIA_CLIENTE,
+                  null LLP_CATEGORIA,
+                  null LLP_FAMILIA,
+                  null LLP_SUBFAMILIA,
+                  null LLP_MARCA,
+                  null LLP_FABRICANTE,
+                  null LLP_PROVEEDOR,
+                  null LLP_NOMBRE,
+                  null LLP_NOMBREINTERNACIONAL,
+                  null LLP_REFERENCIA_PROVEEDOR,  
+                  null LLP_HOMOLOGADO,
+                  null LLP_CERTIFICACION,
+                  null LLP_TIPO_CERTIFICACION,
+                  null LLP_VALOR_CERTIFICACION,
+                  null LLP_TIPO_PRODUCTO_ACTUAL,                  
+                  null LLP_CANTIDAD,
+                  null LLP_PRECIO_MAXIMO,
+                  null LLP_IDDIVISA,
+                  null LLP_NIVEL_CALIDAD_ACTUAL,
+                  null LLP_PROV_HABITUALES,
+                  null LLP_PRESENTACION_ACTUAL,
+                  null LLP_ORDERBY_ACTUAL,
+                  null LLP_LISTAR_ACTUAL,
+                  null LLP_IDESPECIALIDAD_ACTUAL
+                FROM 
+                  dual
+                
+                </xsql:no-rows-query>
+     </xsql:query>
+-->    
+        <!-- El elemento actual del combo es LLP_TIPO_CERTIFICACION -->
+        <field name="TIPOS_CERTIFICACIONES">
+        <dropDownList>
+          <listElem>  
+                <ID>SIN</ID>
+                <listItem>[Tipo Cert.]</listItem>
+          </listElem>
+          <listElem>  
+                <ID>CE</ID>
+                <listItem>CE</listItem>
+          </listElem>
+          <listElem>
+                <ID>EU</ID>
+                <listItem>EU</listItem>
+          </listElem> 
+          </dropDownList>    
+        </field>
+ 
+        <!-- El elemento actual del combo es LLP_ORDERBY_ACTUAL -->
+        <field name="LLP_ORDERBY">
+        <dropDownList>
+        <!--
+          <listElem>  
+                <ID>DEF</ID>
+                <listItem>Por defecto</listItem>
+          </listElem>
+          -->
+          <listElem>  
+                <ID>ALF</ID>
+                <listItem>Alfabetico</listItem>
+          </listElem>
+          <listElem>
+                <ID>PRO</ID>
+                <listItem>Por Distribuidor</listItem>
+          </listElem>
+          <listElem>  
+                <ID>FAB</ID>
+                <listItem>Por Fabricante</listItem>
+          </listElem>
+          <!--
+            Pendiente de Implementar
+          <listElem>
+                <ID>PRE</ID>
+                <listItem>Por Precio</listItem>
+          </listElem>           
+          -->
+          </dropDownList>    
+        </field>
+
+        <!-- El elemento actual del combo es LLP_LISTAR_ACTUAL -->
+        <field name="LLP_LISTAR">
+        <dropDownList>
+          <listElem>  
+                <ID>PRO</ID>
+                <listItem>Productos</listItem>
+          </listElem>
+          <listElem>  
+                <ID>EMP</ID>
+                <listItem>Proveedores</listItem>
+          </listElem>
+          <!--
+          <listElem>
+                <ID>Pro</ID>
+                <listItem>Familias</listItem>
+          </listElem>
+          <listElem>  
+                <ID>Fab</ID>
+                <listItem>Subfamilias</listItem>
+          </listElem>           
+          -->
+          </dropDownList>    
+        </field>
+            
+        <!-- El elemento actual del combo es LLP_NIVEL_CALIDAD_ACTUAL -->
+        <!--
+            El nivel de calidad se introduce como texto.
+          
+        <field name="LLP_NIVEL_CALIDAD">                             
+         <xsql:query rowset-element="dropDownList"          
+                   row-element="listElem">                  
+           <![CDATA[                                        
+          select -1 AS "ID",                          
+                 'Seleccione nivel' AS "listItem"              
+          from TIPOSCALIDADES
+          union           
+          select TC_ID AS "ID",                          
+                 TC_DESCRIPCION AS "listItem"              
+          from TIPOSCALIDADES
+           ]]>                                              
+                                                            
+          <xsql:no-rows-query>                              
+             Select 'No existen calidades' "Sorry" from dual 
+          </xsql:no-rows-query>                             
+         </xsql:query>                                      
+        </field>          
+        -->
+       
+        <!-- El elemento actual del combo es LLP_TIPO_PRODUCTO_ACTUAL -->
+        <field name="LLP_TIPO_PRODUCTO">                             
+         <xsql:query rowset-element="dropDownList" row-element="listElem">                  
+           <![CDATA[    
+          select -1 AS "ID",                          
+                 'Tipos de Productos' AS "listItem"              
+          from dual
+	  UNION           
+          select TPR_ID AS "ID",                          
+                 TPR_NOMBRE AS "listItem"              
+          from TIPOSPRODUCTOS
+           ]]>                                              
+          <xsql:no-rows-query>                              
+          select 1 AS "ID",                          
+                 'Tipos de Productos' AS "listItem"              
+          from TIPOSPRODUCTOS
+          </xsql:no-rows-query>                             
+         </xsql:query>                                      
+        </field>                 
+    
+    <button label="Buscar" caption="IMG-0490">
+      <name_function>Actua</name_function>
+      <param>document.forms['BuscaProductos']</param>
+    </button>
+      
+  </BuscForm>
+  
+  <!--  modificado por Nacho
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>LP-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+  --> 
+  
+  <button label="CatalogoProductos" alt="IMG-1010" status="IMG-1010" caption="IMG-1020">
+      <name_function>MostrarPag</name_function>
+      <param>'http://www.newco.dev.br/files/AyudaProductos/Plantillas.html'</param>
+    </button>
+  
+ <button_Extended label="Subir" caption="IMG-0700">
+      <name_function>subirNivel</name_function>
+      <param>parent.frames['frameListas'].document.form1.LISTA1</param>
+      <param>parent.frames['frameListas'].document.form1.LISTA2</param>
+    </button_Extended>
+  
+  <jumpTo name="anterior">
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>LP-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+  
+  <button label="Volver" caption="G-0001"> 
+    <name_function>VolverBusquedaHistoria</name_function>
+  </button>
+  
+  
+  <Form name="AltaProductos"  method="post">
+    <!--<xsql:include-owa>
+    <![CDATA[
+    	PRODUCTOSMANTEN_PCK.MostrarProducto ( '{@PRO_ID}',
+    					      '{@US_ID}'
+    					      );
+    ]]>            					
+    </xsql:include-owa>-->
+  
+	<!--<xsql:include-owa>
+		<![CDATA[
+          NOMENCLATOR_PCK.EstructuraProductos;
+		]]>        
+	</xsql:include-owa>    -->
+	
+	<xsql:include-owa>
+		<![CDATA[	          
+          TIPOSIVA_PCK.ListarTiposIVA('PRO_IDTIPOIVA');
+		]]>        
+	</xsql:include-owa>      
+    
+    <!--
+     |
+     |  Listado de los tipos de Productos.
+     +-->
+	<xsql:include-owa>
+		<![CDATA[
+			TIPOSPRODUCTOS_PCK.ListadoTipos('LLP_TIPO_PRODUCTO');
+		]]>        
+	</xsql:include-owa>    
+    
+     <!--
+     |	Listado de las especialidades
+     +-->
+    <xsql:include-owa>
+    <![CDATA[
+        ESPECIALIDADES_PCK.Listar ('LLP_ESPECIALIDADES');
+    ]]>
+    </xsql:include-owa> 
+        
+    <button label="Aceptar" caption="IMG-0680">       
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'PROMantenSave.xsql.'</param>
+    </button>
+    
+    <jumpTo name="cancelar">
+      <picture-on>Cancelar</picture-on>
+      <picture-off>Cancelar_mov</picture-off>   
+      <page>G-0010</page>
+      <caption>IMG-0050</caption>
+    </jumpTo>
+    
+
+    
+    
+  </Form>
+  
+  
+  
+
+</BusquedaProductos>     
+
+
+
+            
+     

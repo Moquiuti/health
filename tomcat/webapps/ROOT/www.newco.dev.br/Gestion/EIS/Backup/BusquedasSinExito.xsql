@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BusquedasSinExito.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BusquedasSinExito.xsl"?>
+
+<Busquedas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+<![CDATA[
+	SELECT to_char(LGC_TIMESTAMP,'dd/mm/yyyy') AS FECHA, EMP_ID AS IDEMPRESA, EMP_NOMBRE AS EMPRESA,
+		'[N]:' || LGC_NOMBRE  || ' [P]: ' || LGC_PROVEEDOR  AS CADENA
+	FROM LOG_CONSULTAS, EMPRESAS
+	WHERE EMP_ID=LGC_IDEMPRESACONSULTA
+		AND LGC_NUM_ROWS=0
+		AND LGC_TIMESTAMP>SYSDATE-365
+		AND LGC_IDEMPRESACONSULTA<>1
+	ORDER BY LGC_TIMESTAMP DESC
+]]>
+</xsql:query>
+<returnHome/>
+</Busquedas>

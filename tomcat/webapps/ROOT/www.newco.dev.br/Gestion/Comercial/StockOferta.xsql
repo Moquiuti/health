@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockOfertaHTML.xsl"?>
+
+<StockOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="SO_ID" value="{@SO_ID}"/>
+<xsql:include-param name="ORIGEN"/>
+<xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+
+<!-- Guardamos una cookie que informe que ficha de producto se esta consultando	-->
+<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="STOCK_ID"  value="'{@SO_ID}'" />
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockOferta');                
+		IF US_ID>=0 THEN
+            IF '{@SO_ID}' IS NOT NULL THEN
+				ANUNCIOSSTOCKS_PCK.Oferta_XML
+				(
+					US_ID,
+					'{@SO_ID}',
+					'S'
+				);
+			ELSE
+                            
+                ANUNCIOSSTOCKS_PCK.NuevaOferta_XML
+				(
+					US_ID
+				);
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</StockOferta>

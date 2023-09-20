@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PoliticaProteccionDatosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PoliticaProteccionDatosHTML.xsl"?>
+
+
+<!--
+	Acceso a la zona privada
+-->
+
+<ProteccionDatos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="CLAS_IDPAIS"/>
+        <xsql:include-param name="CLAS_NAMEPAIS"/>
+	<xsql:include-param name="ORIGEN"/>
+	<xsql:include-param name="DESDE"/>
+	<xsql:include-param name="TITULO"/>
+	<xsql:include-param name="DESTINO"/>
+        <xsql:include-param name="LANG"/>   
+        
+	<xsql:include-request-params/>
+<!--	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID := ACCESOS_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MensajeAnuncio, Usuario_XML', 'Cang');
+			IF US_ID >= 0 THEN
+				ACCESOS_PCK.DatosBasicosUsuario_XML (US_ID, 'S', 'Cang');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+-->
+</ProteccionDatos>
+

@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="http://www.newco.dev.br/General/General.xsl"/>
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+<xsl:param name="lang" select="@lang"/>
+<xsl:template match="/Seguimiento">
+
+<html>
+<head>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="LANG != ''"><xsl:value-of select="LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--fin idioma-->
+
+	<title><xsl:value-of select="document($doc)/translation/texts/item[@name='seguimiento_titulo']/node()"/></title>
+
+	<!--style-->
+	<xsl:call-template name="estiloIndip"/>
+	<!--fin de style-->
+  <link href="http://www.newco.dev.br/General/Tabla-popup.150715.css" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/Comercial/seguimiento_18may16.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/Tabla-popup.150715.js"></script>
+  <script type="text/javascript">
+		var crearCentro	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='crear_centro']/node()"/>';
+    var textoObli	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='descripcion_obli']/node()"/>';
+  </script>
+</head>
+
+<body>
+<xsl:choose>
+<!-- Error en alguna sentencia del XSQL -->
+<xsl:when test="//xsql-error">
+	<xsl:apply-templates select="//xsql-error"/>
+</xsl:when>
+<xsl:when test="//SESION_CADUCADA">
+	<xsl:for-each select="//SESION_CADUCADA">
+		<xsl:if test="position()=last()">
+			<xsl:apply-templates select="."/>
+		</xsl:if>
+	</xsl:for-each>
+</xsl:when>
+<xsl:otherwise>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="LANG != ''"><xsl:value-of select="LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--fin idioma-->
+
+  <form name="form1" action="Seguimiento.xsql" method="post">
+	<input type="hidden" name="IDPAIS" value="{ENTRADAS_SEGUIMIENTO/TITULOS/IDPAIS}"/>
+	<input type="hidden" name="IDEMPRESAUSUARIO" value="{ENTRADAS_SEGUIMIENTO/IDEMPRESAUSUARIO}"/>
+	<input type="hidden" name="IDEMPRESA" value="{ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current}"/>
+	<input type="hidden" name="FIDEMPRESA" value="{ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current}"/>
+	<input type="hidden" name="SOLO_CLIENTES"/>
+	<input type="hidden" name="SOLO_PROVEE"/>
+	<input type="hidden" name="ACCION" id="ACCION"/>
+	<input type="hidden" name="PARAMETROS" id="PARAMETROS"/>
+
+<!-- DC - 16dic15 - Ahora el desplegable está en el iframe superior
+		<table class="infoTable" style="margin-bottom:10px;">
+			<tr style="background:#C3D2E9;border-bottom:0px solid #3B5998;">
+				<td>
+					<p style="font-weight:bold;">
+            <xsl:call-template name="desplegable">
+							<xsl:with-param name="path" select="ENTRADAS_SEGUIMIENTO/EMPRESAS/field"/>
+							<xsl:with-param name="onChange">javascript:CambiarEmpresa();</xsl:with-param>
+              <xsl:with-param name="claSel">selectFont18</xsl:with-param>
+            </xsl:call-template>
+            &nbsp;&nbsp;
+            <input type="checkbox" name="SOLO_CLIENTES_CK" onchange="soloClientes(document.forms['form1']);"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='solo_clientes']/node()"/>&nbsp;&nbsp;
+            <input type="checkbox" name="SOLO_PROVEE_CK" onchange="soloProvee(document.forms['form1']);"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='solo_proveedores']/node()"/>
+          </p>
+				</td>
+			</tr>
+		</table>
+-->
+		<!--fin desplegable empresas, para saber de que empresa veo los datos-->
+
+<!-- DC - 16dic15 - Ahora las pestañas estan en el iframe superior
+		<div style="background:#fff;float:left;">
+      &nbsp;
+      <xsl:if test="ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA != ''">
+        <a href="http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalle.xsql?EMP_ID={ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA}&amp;ESTADO=CABECERA" style="text-decoration:none;">
+        <xsl:choose>
+        <xsl:when test="LANG = 'spanish'">
+          <img src="http://www.newco.dev.br/images/botonFicha.gif" alt="FICHA"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <img src="http://www.newco.dev.br/images/botonFicha.gif" alt="FICHA"/>
+        </xsl:otherwise>
+        </xsl:choose>
+        </a>&nbsp;
+      </xsl:if>
+
+      <xsl:if test="ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA != '' and (ENTRADAS_SEGUIMIENTO/COMERCIAL or ENTRADAS_SEGUIMIENTO/MVM or ENTRADAS_SEGUIMIENTO/MVMB or ENTRADAS_SEGUIMIENTO/USUARIO_CDC)">
+				<a href="http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalle.xsql?EMP_ID={ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA}&amp;ESTADO=CABECERA&amp;ZONA=COND_COMERC_PROV" style="text-decoration:none;">
+				<xsl:choose>
+				<xsl:when test="LANG = 'spanish'">
+					<img src="http://www.newco.dev.br/images/botonCondicionesComerciales.gif" alt="CONDICIONES COMERCIALES" id="COND_COMERC"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<img src="http://www.newco.dev.br/images/botonCondicionesComerciales-BR.gif" alt="CONDIÇÕES COMERCIAIS" id="COND_COMERC"/>
+				</xsl:otherwise>
+				</xsl:choose>
+				</a>&nbsp;
+      </xsl:if>
+
+      <xsl:if test="ENTRADAS_SEGUIMIENTO/COMERCIAL or ENTRADAS_SEGUIMIENTO/MVM or ENTRADAS_SEGUIMIENTO/MVMB">
+        <a href="http://www.newco.dev.br/Gestion/Comercial/Seguimiento.xsql?FIDEMPRESA={ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA}" style="text-decoration:none;">
+        <xsl:choose>
+        <xsl:when test="LANG = 'spanish'">
+        	<img src="http://www.newco.dev.br/images/botonSeguimiento1.gif" alt="SEGUIMIENTO"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <img src="http://www.newco.dev.br/images/botonSeguimiento1-Br.gif" alt="SEGUIMENTO"/>
+        </xsl:otherwise>
+        </xsl:choose>
+        </a>&nbsp;
+
+        <a href="http://www.newco.dev.br/Gestion/Comercial/Tareas.xsql?FIDEMPRESA={ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA}&amp;FIDRESPONSABLE=-1" style="text-decoration:none;">
+        <xsl:choose>
+        <xsl:when test="LANG = 'spanish'">
+          <img src="http://www.newco.dev.br/images/botonTareas.gif" alt="TAREAS"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <img src="http://www.newco.dev.br/images/botonTareas-Br.gif" alt="TAREFAS"/>
+        </xsl:otherwise>
+        </xsl:choose>
+        </a>&nbsp;
+      </xsl:if>
+
+      <xsl:if test="ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA != '' and (ENTRADAS_SEGUIMIENTO/MVM or ENTRADAS_SEGUIMIENTO/MVMB)">
+        <a href="http://www.newco.dev.br/Gestion/Comercial/Meddicc.xsql?FIDEMPRESA={ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA}" style="text-decoration:none;">
+        <xsl:choose>
+        <xsl:when test="LANG = 'spanish'">
+          <img src="http://www.newco.dev.br/images/botonMeddicc.gif" alt="MEDDICC"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <img src="http://www.newco.dev.br/images/botonMeddicc.gif" alt="MEDDICC"/>
+        </xsl:otherwise>
+        </xsl:choose>
+        </a>&nbsp;
+
+        <a href="http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalle.xsql?EMP_ID={ENTRADAS_SEGUIMIENTO/TITULOS/IDEMPRESA}&amp;ESTADO=CABECERA&amp;ZONA=DOCS" style="text-decoration:none;">
+					<img src="http://www.newco.dev.br/images/botonDocumentos.gif" alt="DOCUMENTOS" id="DOCUMENTOS"/>
+				</a>&nbsp;
+			</xsl:if>
+    </div>
+
+    <xsl:if test="ENTRADAS_SEGUIMIENTO/MVM or ENTRADAS_SEGUIMIENTO/MVMB">
+      <div style="background:#fff;float:right;">
+        <a href="http://www.newco.dev.br/Gestion/Comercial/BuscadorEmpresas.xsql"  style="text-decoration:none;">
+          <img src="http://www.newco.dev.br/images/botonBuscador.gif" alt="BUSCADOR"/>
+        </a>
+      </div>
+    </xsl:if>
+-->
+		<div class="divLeft">
+			<h1 class="titlePage" style="float:left;width:50%;padding-left:20%;">
+        <xsl:if test="ENTRADAS_SEGUIMIENTO/EMPRESAS/field/dropDownList/listElem[ID = ../../@current]/listItem != 'Todas'">
+        	<xsl:value-of select="ENTRADAS_SEGUIMIENTO/EMPRESAS/field/dropDownList/listElem[ID = ../../@current]/listItem"/>:&nbsp;
+        </xsl:if>
+        <xsl:value-of select="document($doc)/translation/texts/item[@name='seguimiento_titulo']/node()"/>&nbsp;
+        <xsl:text>&nbsp;&nbsp;&nbsp;</xsl:text>
+				<select name="NumLineas" id="NumLineas" onchange="mostrarLineas(this.value);">
+					<option value="10">
+						10 <xsl:value-of select="document($doc)/translation/texts/item[@name='lineas']/node()"/>
+					</option>
+					<option value="20" selected="selected">
+						20 <xsl:value-of select="document($doc)/translation/texts/item[@name='lineas']/node()"/>
+					</option>
+					<option value="50">
+						50 <xsl:value-of select="document($doc)/translation/texts/item[@name='lineas']/node()"/>
+					</option>
+					<option value="todas">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='todas']/node()"/>
+					</option>
+				</select>
+				&nbsp;&nbsp;&nbsp;
+        <a href="javascript:window.print();" style="text-decoration:none;">
+	        <img src="http://www.newco.dev.br/images/imprimir.gif"/>
+          <xsl:value-of select="document($doc)/translation/texts/item[@name='imprimir']/node()"/>
+        </a>
+			</h1>
+			<h1  class="titlePage" style="float:left;width:10%;">
+			<xsl:if test="ENTRADAS_SEGUIMIENTO/COMERCIAL and ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current != ''">
+				<div class="botonLargo" style="padding:0 0 5px 0;">
+					<strong><a href="javascript:AbrirNuevo();"><xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/></a></strong>
+				</div>
+			</xsl:if>
+			</h1>
+      <h1 class="titlePage" style="float:left;width:20%;">
+        <xsl:if test="(ENTRADAS_SEGUIMIENTO/MVM or ENTRADAS_SEGUIMIENTO/MVMB or ENTRADAS_SEGUIMIENTO/ADMIN) and ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current != ''">
+          <span style="float:right; padding:5px;" class="amarillo">EMP_ID: <xsl:value-of select="ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current"/></span>
+        </xsl:if>
+      </h1>
+
+			<!-- Pop-up para nueva entrada de seguimiento -->
+			<xsl:if test="ENTRADAS_SEGUIMIENTO/COMERCIAL and ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current != ''">
+				<div class="overlay-container" id="NuevoSeguimientoWrap">
+					<div class="window-container zoomout">
+						<p style="text-align:right;">
+				      <a href="javascript:showTabla(false);" style="text-decoration:none;">
+				        <xsl:value-of select="document($doc)/translation/texts/item[@name='cerrar']/node()"/>
+				      </a>&nbsp;
+				      <a href="javascript:showTabla(false);" style="text-decoration:none;">
+				        <img src="http://www.newco.dev.br/images/cerrar.gif" alt="Cerrar" />
+				      </a>
+				    </p>
+
+						<p id="tableTitle">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='nueva_entrada_de_seguimiento']/node()"/>&nbsp;
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='para']/node()"/>&nbsp;
+							<xsl:value-of select="ENTRADAS_SEGUIMIENTO/EMPRESAS/field/dropDownList/listElem[ID = ../../@current]/listItem"/>,&nbsp;
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='dia']/node()"/>&nbsp;
+							<xsl:value-of select="ENTRADAS_SEGUIMIENTO/FECHA"/>
+						</p>
+
+						<div id="mensError" class="divLeft" style="display:none;">
+							<p><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_tiene_derechos']/node()"/></strong></p>
+						</div>
+
+						<form name="NuevoSeguimientoForm" method="post" id="NuevoSeguimientoForm">
+						<input type="hidden" name="NS_IDEmpresa" id="NS_IDEmpresa" value="{ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current}"/>
+
+						<table id="NuevoSeguimiento" style="width:100%;">
+						<thead>
+							<th colspan="4">&nbsp;</th>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td class="quince"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='centro']/node()"/>:</strong></td>
+		            <td class="trenta" style="text-align:left; padding-left:3px;">
+		              <select name="NS_IDCENTRO" id="NS_IDCENTRO" class="select200">
+		                <xsl:for-each select="ENTRADAS_SEGUIMIENTO/LISTACENTROS/field/dropDownList/listElem">
+		                  <option value="{ID}"><xsl:value-of select="listItem" /></option>
+		                </xsl:for-each>
+		              </select>
+		            </td>
+		            <td class="quince"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='tipo']/node()"/>:</strong></td>
+		            <td style="text-align:left; padding-left:3px;">
+		              <xsl:call-template name="desplegable">
+										<xsl:with-param name="path" select="ENTRADAS_SEGUIMIENTO/TIPO/field"/>
+		                <xsl:with-param name="claSel">select200</xsl:with-param>
+										<xsl:with-param name="nombre">NS_IDTIPO</xsl:with-param>
+		                <xsl:with-param name="id">NS_IDTIPO</xsl:with-param>
+									</xsl:call-template>
+		            </td>
+							</tr>
+
+							<tr>
+		            <td><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='visibilidad']/node()"/>:</strong></td>
+		            <td colspan="3" style="text-align:left; padding-left:3px;">
+		              <input type="radio" name="NS_IDVISIBILIDAD" id="NS_VIS_PRIVADA" value="P"></input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='priv']/node()"/>&nbsp;&nbsp;
+		              <input type="radio" name="NS_IDVISIBILIDAD" id="NS_VIS_CENTRO" value="C" checked="checked"></input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='cen']/node()"/>&nbsp;&nbsp;
+		              <input type="radio" name="NS_IDVISIBILIDAD" id="NS_VIS_EMPRESA" value="E"></input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='emp']/node()"/>&nbsp;&nbsp;
+		            </td>
+		          </tr>
+
+							<tr>
+		            <td><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='descripcion']/node()"/>:</strong></td>
+		            <td colspan="3" style="text-align:left; padding-left:3px;">
+									<textarea name="NS_TEXTO" id="NS_TEXTO" cols="80" rows="10" style="float:left;margin-right:10px;"/>&nbsp;
+								</td>
+		          </tr>
+						</tbody>
+
+						<tfoot>
+							<tr>
+								<td>&nbsp;</td>
+								<td>
+									<div class="boton" id="botonNuevoSeguimiento">
+										<a href="javascript:nuevoSeguimiento();">
+											<xsl:value-of select="document($doc)/translation/texts/item[@name='nueva']/node()"/>
+										</a>
+									</div>
+								</td>
+								<td id="Respuesta" colspan="2" style="text-align:left;"></td>
+							</tr>
+						</tfoot>
+						</table>
+						</form>
+					</div>
+				</div>
+			</xsl:if>
+			<!-- FIN Pop-up para editar las entradas de tareas -->
+
+			<!-- Pop-up para editar las entradas de seguimiento -->
+			<div class="overlay-container" id="EditarSeguimientoWrap">
+				<div class="window-container zoomout">
+					<p style="text-align:right;">
+			      <a href="javascript:showTabla(false);" style="text-decoration:none;">
+			        <xsl:value-of select="document($doc)/translation/texts/item[@name='cerrar']/node()"/>
+			      </a>&nbsp;
+			      <a href="javascript:showTabla(false);" style="text-decoration:none;">
+			        <img src="http://www.newco.dev.br/images/cerrar.gif" alt="Cerrar" />
+			      </a>
+			    </p>
+
+					<p id="tableTitle">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='modificar']/node()"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='seguimiento']/node()"/>&nbsp;
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='para']/node()"/>&nbsp;
+						<span id="NombreEmpresa"></span>,&nbsp;
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='dia']/node()"/>&nbsp;
+						<span id="FechaSeguimiento"></span>
+					</p>
+
+					<div id="mensError" class="divLeft" style="display:none;">
+						<p><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_tiene_derechos']/node()"/></strong></p>
+					</div>
+
+					<form name="EditarSeguimientoForm" method="post" id="EditarSeguimientoForm">
+					<input type="hidden" name="ES_IDEntrada" id="ES_IDEntrada"/>
+					<input type="hidden" name="ES_IDEmpresa" id="ES_IDEmpresa"/>
+					<input type="hidden" name="ES_IDCentro" id="ES_IDCentro"/>
+
+					<table id="EditarSeguimiento" style="width:100%;">
+					<thead>
+						<th colspan="3">&nbsp;</th>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td class="quince"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='centro']/node()"/>:</strong></td>
+							<td class="trenta" style="text-align:left; padding-left:3px;" id="ES_Centro"></td>
+							<td class="quince"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='tipo']/node()"/>:</strong></td>
+							<td style="text-align:left; padding-left:3px;">
+								<select name="ES_IDTipo" id="ES_IDTipo" class="select200"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='visibilidad']/node()"/>:</strong></td>
+							<td colspan="3" style="text-align:left; padding-left:3px;">
+								<input type="radio" name="ES_IDVisibilidad" id="ES_VIS_PRIVADA" value="P"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='priv']/node()"/>&nbsp;&nbsp;
+								<input type="radio" name="ES_IDVisibilidad" id="ES_VIS_CENTRO" value="C"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='cen']/node()"/>&nbsp;&nbsp;
+								<input type="radio" name="ES_IDVisibilidad" id="ES_VIS_EMPRESA" value="E"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='emp']/node()"/>&nbsp;&nbsp;
+							</td>
+						</tr>
+
+						<tr>
+							<td><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='descripcion']/node()"/>:</strong></td>
+							<td colspan="3" style="text-align:left; padding-left:3px;">
+								<textarea name="ES_TEXTO" id="ES_TEXTO" cols="80" rows="10" style="float:left;margin-right:10px;"/>&nbsp;
+							</td>
+						</tr>
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<td>&nbsp;</td>
+							<td>
+								<div class="boton" id="botonGuardar">
+									<a href="javascript:guardarSeguimiento();">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+									</a>
+								</div>
+							</td>
+							<td id="Respuesta" style="text-align:left;"></td>
+						</tr>
+					</tfoot>
+					</table>
+					</form>
+				</div>
+			</div>
+      <!-- FIN Pop-up para editar las entradas de seguimiento -->
+
+
+
+
+			<table id="ListaSeguimiento" class="infoTable" border="0">
+      <xsl:choose>
+      <xsl:when test="/Seguimiento/ENTRADAS_SEGUIMIENTO/SEGUIMIENTO/ENTRADA">
+			<thead>
+        <!--buscador-->
+        <tr class="subTituloTablaNoB">
+					<td class="cinco">&nbsp;</td>
+          <td class="ocho">&nbsp;</td>
+					<td class="datosLeft ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='tipo']/node()"/></td>
+          <td class="datosLeft dies">
+              <xsl:value-of select="document($doc)/translation/texts/item[@name='centro']/node()"/>
+          </td>
+          <td class="datosLeft dies"><xsl:value-of select="document($doc)/translation/texts/item[@name='texto']/node()"/></td>
+          <td class="datosLeft quince"><xsl:value-of select="document($doc)/translation/texts/item[@name='autor']/node()"/></td>
+					<td class="datosLeft">&nbsp;</td>
+					<td class="tres">&nbsp;</td>
+                                        <td>&nbsp;</td>
+				</tr>
+        <tr class="subTituloTablaNoB">
+					<td colspan="2">&nbsp;</td>
+					<td class="datosLeft">
+						<xsl:call-template name="desplegable">
+							<xsl:with-param name="path" select="ENTRADAS_SEGUIMIENTO/FTIPO/field"/>
+              <xsl:with-param name="defecto" select="ENTRADAS_SEGUIMIENTO/TITULOS/FTIPO"/>
+						</xsl:call-template>
+					</td>
+          <td class="datosLeft">
+            <xsl:if test="ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current != ''">
+              <select name="FIDCENTRO" id="FIDCENTRO" class="select140 centroBox">
+                <xsl:for-each select="ENTRADAS_SEGUIMIENTO/LISTACENTROS/field/dropDownList/listElem">
+                  <option value="{ID}"><xsl:value-of select="listItem"/></option>
+                </xsl:for-each>
+              </select>
+            </xsl:if>
+					</td>
+          <td>
+                <input type="text" name="FTEXTO" size="30" value="{TEXTO}" style="float:left;"/>
+          </td>
+          <td>&nbsp;</td>			
+					<td class="center" colspan="3">
+						<div class="boton" style="margin-left:20px;">
+							<strong>
+								<a href="javascript:Buscador();">	<!--	18may16	GuardarEntrada	-->
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='buscar']/node()"/>
+								</a>
+							</strong>
+						</div>
+					</td>
+				</tr>
+        <!--fin buscador-->
+
+				<tr class="subTituloTablaNoB line5"><td colspan="9" height="5px"></td></tr>
+			</thead>
+
+			<tbody>
+			<xsl:for-each select="ENTRADAS_SEGUIMIENTO/SEGUIMIENTO/ENTRADA">
+				<xsl:variable name="id" select="ID"/>
+				<xsl:choose>
+				<xsl:when test="/Seguimiento/ENTRADAS_SEGUIMIENTO/IDUSUARIO=IDAUTOR or /Seguimiento/ENTRADAS_SEGUIMIENTO/SUPERUSUARIO">
+          <tr>
+            <xsl:choose>
+            <xsl:when test="MODIFICADO_1HORA">
+              <xsl:attribute name="style">background:#ff9900;</xsl:attribute>
+            </xsl:when>
+            <xsl:when test="MODIFICADO_24HORAS">
+              <xsl:attribute name="style">background:FFFF99;</xsl:attribute>
+            </xsl:when>
+            </xsl:choose>
+
+            <td>&nbsp;</td>
+            <td class="datosCenter"><strong><xsl:value-of select="FECHA"/></strong></td>
+						<td style="text-align:left;">
+							<xsl:value-of select="TIPO"/>
+						</td>
+            <!--<td style="text-align:left;">
+							<a href="javascript:CambiarEmpresaID({IDEMPRESA});">
+									<xsl:value-of select="EMPRESA"/>
+							</a>
+                                                </td>-->
+            <td style="text-align:left;font-weight:bold;" colspan="2">
+              <xsl:value-of select="CENTRO" />&nbsp;
+              &nbsp;(<a href="javascript:CambiarEmpresaID({IDEMPRESA});">
+                    <xsl:value-of select="EMPRESA"/>
+		</a>)
+            </td>
+						<td style="text-align:left;" colspan="2">
+              <span style="font-weight:bold;">
+                  <!--visibilidad-->
+                    <xsl:choose>
+                        <xsl:when test="VISIBILIDAD = 'P'"><img src="http://www.newco.dev.br/images/iconPrivada.gif" alt="Privada" style="vertical-align:top;" /></xsl:when>
+                        <xsl:when test="VISIBILIDAD = 'C'"><img src="http://www.newco.dev.br/images/iconCentro.gif" alt="Centro"  style="vertical-align:top;"/></xsl:when>
+                        <xsl:when test="VISIBILIDAD = 'E'"><img src="http://www.newco.dev.br/images/iconEmpresa.gif" alt="Empresa"  style="vertical-align:top;"/></xsl:when>
+                    </xsl:choose>&nbsp;
+                  <xsl:value-of select="AUTOR"/>
+              </span>&nbsp;&nbsp;
+              (<xsl:value-of select="CENTROAUTOR"/>)
+            </td>
+						<td style="padding-left:50px;text-align:left;">
+							<a href="javascript:Editar({ID});" style="text-decoration:none;">
+								<img src="http://www.newco.dev.br/images/modificar.gif"/>
+							</a>
+							<a href="javascript:Borrar({ID});" style="text-decoration:none;">
+								<img src="http://www.newco.dev.br/images/borrar.gif"/>
+							</a>
+						</td>
+						<td>&nbsp;</td>
+          </tr>
+          <tr class="subTareasTot">
+						<td colspan="2">&nbsp;</td>
+						<td colspan="5" style="text-align:left;padding:5px 0px;"><xsl:copy-of select="TEXTO" /></td>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+				</xsl:when>
+				<xsl:otherwise>
+          <tr>
+            <td>&nbsp;</td>
+						<td class="datosCenter"><strong><xsl:value-of select="FECHA"/></strong></td>
+						<td style="text-align:left;font-weight:bold;">
+              <xsl:value-of select="TIPO"/>
+						</td>
+            <td style="text-align:left;font-weight:bold;" colspan="2">
+              <xsl:value-of select="CENTRO" />
+            </td>
+           <!-- <td style="text-align:left;">
+              <input type="radio" name="VISIBILIDAD_{ID}" id="VIS_PRIVADA_{ID}" value="P" disabled="disabled">
+                <xsl:if test="VISIBILIDAD = 'P'">
+                  <xsl:attribute name="checked">checked</xsl:attribute>
+                </xsl:if>
+              </input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='priv']/node()"/>&nbsp;&nbsp;
+              <input type="radio" name="VISIBILIDAD_{ID}" id="VIS_CENTRO_{ID}" value="C" disabled="disabled">
+                <xsl:if test="VISIBILIDAD = 'C'">
+                  <xsl:attribute name="checked">checked</xsl:attribute>
+                </xsl:if>
+              </input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='cen']/node()"/>&nbsp;&nbsp;
+              <input type="radio" name="VISIBILIDAD_{ID}" id="VIS_EMPRESA_{ID}" value="E" disabled="disabled">
+                <xsl:if test="VISIBILIDAD = 'E'">
+                  <xsl:attribute name="checked">checked</xsl:attribute>
+                </xsl:if>
+              </input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='emp']/node()"/>&nbsp;&nbsp;
+            </td>-->
+            <td colspan="2" style="text-align:left;font-weight:bold;">
+              <span style="font-weight:bold;">
+                  <!--visibilidad-->
+                    <xsl:choose>
+                        <xsl:when test="VISIBILIDAD = 'P'"><img src="http://www.newco.dev.br/images/iconPrivada.gif" alt="Privada" style="vertical-align:top;" /></xsl:when>
+                        <xsl:when test="VISIBILIDAD = 'C'"><img src="http://www.newco.dev.br/images/iconCentro.gif" alt="Centro"  style="vertical-align:top;"/></xsl:when>
+                        <xsl:when test="VISIBILIDAD = 'E'"><img src="http://www.newco.dev.br/images/iconEmpresa.gif" alt="Empresa"  style="vertical-align:top;"/></xsl:when>
+                    </xsl:choose>&nbsp;
+                  <xsl:value-of select="AUTOR"/>
+              </span>&nbsp;&nbsp;&nbsp;
+              <!--empresa, la oculto si hay una seleccionada arriba-->
+              <xsl:if test="/Seguimiento/ENTRADAS_SEGUIMIENTO/EMPRESAS/field/@current = ''">
+                <a href="javascript:CambiarEmpresaID({IDEMPRESA});"><xsl:value-of select="EMPRESA"/></a>
+              </xsl:if>
+            </td>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+          <tr class="subTareasTot">
+            <td colspan="2">&nbsp;</td>
+						<td colspan="5" style="text-align:left;padding:5px 0px;"><xsl:copy-of select="TEXTO"/></td>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+				</xsl:otherwise>
+				</xsl:choose>
+			</xsl:for-each>
+			</tbody>
+
+    	</xsl:when>
+      <xsl:otherwise>
+        <tr style="border-bottom:2px solid #D7D8D7;"><td colspan="6" align="center"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='seguimiento_sin_resultados']/node()"/></strong></td></tr>
+      </xsl:otherwise>
+      </xsl:choose>
+    	</table>
+
+      <br /><br />
+		</div>
+
+		<!--form de mensaje de error de js-->
+		<form name="mensajeJS">
+			<input type="hidden" name="FALTA_INFORMAR_GESTION_BORRAR" value="{document($doc)/translation/texts/item[@name='falta_informar_gestion_borrar']/node()}"/>
+			<input type="hidden" name="FALTA_INFORMAR_DESCRIPCION" value="{document($doc)/translation/texts/item[@name='falta_informar_descripcion']/node()}"/>
+		</form>
+
+	</form>
+</xsl:otherwise>
+</xsl:choose>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,17 @@
+Log de cambios en las páginas Evaluaciones de producto (Buscador, nueva evaluacion, ficha evaluacion)
+
+
+21nov16 Adaptación al nuevo diseño de Breno, recuperando código desde WFStatusHTML
+		Cabecera
+
+
+25nov16	NuevaEvaluacion
+
+
+PENDIENTE: 
+
+- POPUP PARA BUSQUEDA DE PRODUCTOS (en cat.priv Y en cat.prov.) (REMAQUETAR, INCLUIR EN UN DIV INTERNO)
+
+
+- PROBAR PROCEDIMIENTO COMPLETO
+- LIMPIAR CODIGO

@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="http://www.newco.dev.br/General/General.xsl"/>
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+<xsl:param name="lang" select="@lang"/>
+<xsl:param name="usuario" select="@US_ID"/>
+
+<xsl:template match="/Licitaciones">
+
+<html>
+<head>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="LANG"><xsl:value-of select="LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+
+	<meta http-equiv="Cache-Control" content="no-cache"/>
+
+	<title><xsl:value-of select="document($doc)/translation/texts/item[@name='licitaciones']/node()"/></title>
+
+	<!--style-->
+	<xsl:call-template name="estiloIndip"/>
+	<!--fin de style-->
+
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+<!-- DC - 07sep15 - Comentado para actualizacion sobre novedades -->
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/Comercial/gantt.140915.js"></script>
+
+	<script type="text/javascript">
+        var nuevaLici = 'N';
+		var errorNuevoEstadoLicitacion = '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevo_estado_licitacion']/node()"/>';
+
+		var arrLicitaciones	= new Array();
+		<xsl:for-each select="LICITACIONES/LICITACION">
+			var items		= [];
+			items['Linea']			= '<xsl:value-of select="LINEA"/>';
+			items['Titulo']			= '<xsl:value-of select="LIC_TITULO"/>';
+			items['FechaAlta']	= '<xsl:value-of select="LIC_FECHAALTA"/>';
+			items['FechaMod']		= '<xsl:value-of select="LIC_FECHAMODIFICACION"/>';
+			items['FechaIni']		= '<xsl:value-of select="FECHAINICIO"/>';
+			items['FechaFin']		= '<xsl:value-of select="FECHAFINAL"/>';
+			items['IDEstado']		= '<xsl:value-of select="IDESTADO"/>';
+
+			arrLicitaciones.push(items);
+		</xsl:for-each>
+
+
+		function NuevaLicitacion(){
+			//	12jul16	ET abrimos en ventana nueva: window.open('MantLicitacion.xsql','_self',false);
+			window.open('MantLicitacion.xsql','_blank','scrollbars=yes');
+		}
+
+		function BuscarLicitaciones(oForm){
+			SubmitForm(oForm);
+		}
+
+		function CambiarEstadoLicitacion(IDLic, IDEstado){
+			var d = new Date();
+
+			jQuery.ajax({
+				cache:	false,
+				url:	'http://www.newco.dev.br/Gestion/Comercial/CambiarEstadoLicitacion.xsql',
+				type:	"GET",
+				data:	"ID_LIC="+IDLic+"&amp;ID_ESTADO="+IDEstado+"&amp;_="+d.getTime(),
+				contentType: "application/xhtml+xml",
+				success: function(objeto){
+					var data = eval("(" + objeto + ")");
+
+					if(data.NuevoEstado.estado == 'OK'){
+						BuscarLicitaciones(document.forms['Buscador']);
+					}else{
+						alert(errorNuevoEstadoLicitacion);
+					}
+				},
+				error: function(xhr, errorString, exception) {
+					alert("xhr.status="+xhr.status+" error="+errorString+" exception="+exception);
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="LANG"><xsl:value-of select="LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+<xsl:choose>
+<xsl:when test="//SESION_CADUCADA">
+	<xsl:apply-templates select="//SESION_CADUCADA"/>
+</xsl:when>
+<xsl:when test="//Sorry">
+	<xsl:apply-templates select="//Sorry"/>
+</xsl:when>
+<xsl:otherwise>
+
+	<h1 class="titlePage" style="float:left;width:70%;padding-left:10%;">
+		<xsl:value-of select="document($doc)/translation/texts/item[@name='licitaciones']/node()"/>
+			<span style="margin-left:30px;font-size:12px;">
+				&nbsp;<input type="checkbox" name="GRAFICO" id="GRAFICO"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='ver_grafico']/node()"/>
+			</span>
+  </h1>
+
+	<h1 class="titlePage" style="float:left;width:20%">
+            <xsl:if test="LICITACIONES/CREARLICITACIONES">
+                <a href="javascript:NuevaLicitacion();"> 
+                    <div class="botonNara">
+				<xsl:value-of select="document($doc)/translation/texts/item[@name='nueva']/node()"/>
+                    </div>
+		</a>
+            </xsl:if>
+	</h1>
+
+  <div class="divLeft">
+
+		<xsl:choose>
+		<xsl:when test="LICITACIONES/VENDEDOR"><xsl:call-template name="Licitaciones_Proveedor"/></xsl:when>
+		<xsl:otherwise><xsl:call-template name="Licitaciones_Cliente"/></xsl:otherwise>
+		</xsl:choose>
+
+		<table style="width:100%;display:none;" id="tblGantt">
+			<thead></thead>
+			<tbody></tbody>
+			<tfoot></tfoot>
+		</table>
+
+  </div>
+</xsl:otherwise>
+</xsl:choose>
+</body>
+</html>
+</xsl:template>
+
+<!-- Template para los clientes -->
+<xsl:template name="Licitaciones_Cliente">
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:choose>
+		<xsl:when test="/Licitaciones/LANG"><xsl:value-of select="/Licitaciones/LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+
+<form name="Buscador" method="post" action="Licitaciones.xsql">
+    <input type="hidden" name="lici" id="lici" value="LISTA"/>
+<table class="buscador">
+	<tr class="select" height="50px">
+		<th class="uno">&nbsp;</th>
+		<th>
+		<xsl:choose>
+		<xsl:when test="/Licitaciones/LICITACIONES/MVM or /Licitaciones/LICITACIONES/MVMB">
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='empresa']/node()"/><br />
+			<xsl:call-template name="desplegable"><xsl:with-param name="path" select="/Licitaciones/LICITACIONES/FIDEMPRESA/field"/></xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+			<input type="hidden" name="FIDEMPRESA" value="-1"/>
+		</xsl:otherwise>
+		</xsl:choose>
+		</th>
+		<th>
+			&nbsp;
+			<!--	5jul16 quitamos este desplegable para simplificar el buscador
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='responsable']/node()"/><br />
+			<xsl:call-template name="desplegable"><xsl:with-param name="path" select="/Licitaciones/LICITACIONES/FIDRESPONSABLE/field"/></xsl:call-template>
+			-->
+		</th>
+		<th>
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/><br />
+			<xsl:call-template name="desplegable"><xsl:with-param name="path" select="/Licitaciones/LICITACIONES/FPROVEEDOR/field"/></xsl:call-template>
+		</th>
+		<th>
+			&nbsp;
+			<!--	5jul16 quitamos este desplegable para simplificar el buscador
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor_adjudicado']/node()"/><br />
+			<xsl:call-template name="desplegable"><xsl:with-param name="path" select="/Licitaciones/LICITACIONES/FPROVEEDORSEL/field"/></xsl:call-template>
+			-->
+		</th>
+		<th>
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='texto']/node()"/><br />
+			<input type="text" name="FTEXTO" size="20">
+				<xsl:attribute name="value"><xsl:value-of select="/Licitaciones/FTEXTO"/></xsl:attribute>
+			</input>
+		</th>
+		<th>
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/><br />
+			<xsl:call-template name="desplegable"><xsl:with-param name="path" select="/Licitaciones/LICITACIONES/FESTADO/field"/></xsl:call-template>
+		</th>
+		<th><br />
+			<div class="botonLargo">
+			<strong>
+				<a href="javascript:BuscarLicitaciones(document.forms['Buscador']);">
+					<xsl:value-of select="document($doc)/translation/texts/item[@name='buscar']/node()"/>
+				</a>
+			</strong>
+			</div>
+		</th>
+		<th class="uno">&nbsp;</th>
+	</tr>
+</table>
+</form>
+
+<table class="grandeInicio" id="tblData">
+<thead>
+	<tr class="subTituloTabla">
+		<th class="zerouno">&nbsp;</th>
+		<th class="dos"><xsl:value-of select="document($doc)/translation/texts/item[@name='pos']/node()"/>.</th><!-- Numero de linea -->
+		<th class="zerouno">&nbsp;</th><!-- Iconos bolas de colores -->
+		<th class="tres"><xsl:value-of select="document($doc)/translation/texts/item[@name='cod_abbr']/node()"/></th><!-- Codigo licitacion -->
+        <xsl:if test="/Licitaciones/LICITACIONES/MVM or /Licitaciones/LICITACIONES/MVMB or /Licitaciones/LICITACIONES/ADMIN">
+        	<th align="left" class="doce"><xsl:value-of select="document($doc)/translation/texts/item[@name='empresa']/node()"/></th>
+        </xsl:if>
+        <th align="left" class="veinte">&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='titulo']/node()"/></th>
+<!-- 19mar15 - DC - Eduardo pide quitar esta info y anyadirla en 'Cond.Licitacion'
+		<th align="left"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuario']/node()"/></th>
+-->
+		<th class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='num_productos']/node()"/></th>
+		<th class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='num_proveedores']/node()"/></th>
+		<th class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_alta_abbr']/node()"/></th>
+		<th class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_modificacion']/node()"/></th>
+		<th class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_decision_abbr']/node()"/></th>
+		<th align="left"><xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/></th>
+		<xsl:if test="/Licitaciones/LICITACIONES/IDPAIS = 34"><!--	para Brasil no mostramos la columna de consumo 	-->
+		<th class="seis">
+			<xsl:choose>
+			<xsl:when test="not(/Licitaciones/LICITACIONES/MOSTRAR_PRECIO_IVA)">
+				<xsl:copy-of select="document($doc)/translation/texts/item[@name='consumo_obj_sIVA_2line']/node()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:copy-of select="document($doc)/translation/texts/item[@name='consumo_obj_cIVA_2line']/node()"/>
+			</xsl:otherwise>
+			</xsl:choose>
+		</th>
+		</xsl:if>
+		<th class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='porcentage_negociado']/node()"/></th>
+		<th class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='porcentage_ahorro']/node()"/></th>
+		<!--4oct16	<th class="cinco" align="left"><xsl:value-of select="document($doc)/translation/texts/item[@name='prov_adj']/node()"/></th>-->
+		<th class="zerouno">&nbsp;</th>
+		<th class="zerouno">&nbsp;</th>
+	</tr>
+</thead>
+
+<xsl:choose>
+<xsl:when test="/Licitaciones/LICITACIONES/LICITACION">
+	<xsl:for-each select="/Licitaciones/LICITACIONES/LICITACION">
+		<xsl:variable name="LicID"><xsl:value-of select="ID"/></xsl:variable>
+		<tr style="border-bottom:1px solid #A7A8A9;">
+			<xsl:choose>
+			<xsl:when test="MODIFICADO_1HORA">
+				<xsl:attribute name="class">fondoNaranja</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="MODIFICADO_24HORAS">
+				<xsl:attribute name="class">fondoAmarillo</xsl:attribute>
+			</xsl:when>
+			</xsl:choose>
+
+			<td>&nbsp;</td>
+			<td><xsl:value-of select="LINEA"/></td>
+			<td>
+				<xsl:choose>
+				<xsl:when test="MODIFICADA_MENOS24HORAS">
+					<img src="http://www.newco.dev.br/images/bolaVerde.gif"/>
+				</xsl:when>
+				<xsl:when test="RETRASADA">
+					<img src="http://www.newco.dev.br/images/bolaRoja.gif"/>
+				</xsl:when>
+				<xsl:when test="ADJUDICADA_MENOS24HORAS">
+					<img src="http://www.newco.dev.br/images/bolaVerde.gif"/>
+				</xsl:when>
+				<xsl:when test="CADUCA30DIAS">
+					<img src="http://www.newco.dev.br/images/bolaAmbar.gif"/>
+				</xsl:when>
+				</xsl:choose>
+			</td>
+			<td><xsl:value-of select="LIC_CODIGO"/></td>
+			<xsl:if test="/Licitaciones/LICITACIONES/MVM or /Licitaciones/LICITACIONES/MVMB">
+    			<td style="text-align:left;"><a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID={IDEMPRESA}&amp;VENTANA=NUEVA','Cliente',100,80,0,-20);"><xsl:value-of select="EMPRESA"/></a></td>
+			</xsl:if>
+			<td style="text-align:left;">
+				<strong>
+				<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Gestion/Comercial/MantLicitacion.xsql?LIC_ID={$LicID}','Licitacion',100,100,0,0)" title="{LIC_TITULO}">
+    			<xsl:choose>
+				<xsl:when test="string-length(LIC_TITULO) > 30">
+					<xsl:value-of select="substring(LIC_TITULO, 1, 30)"/>...
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="LIC_TITULO"/>
+				</xsl:otherwise>
+				</xsl:choose>
+				</a>
+			</strong>
+			</td>
+<!-- 19mar15 - DC - Eduardo pide quitar esta info y anyadirla en 'Cond.Licitacion'
+			<td style="text-align:left;"><xsl:value-of select="RESPONSABLE"/></td>
+-->
+			<td><xsl:value-of select="PRODUCTOSADJUDICADOS"/>&nbsp;/&nbsp;<xsl:value-of select="PRODUCTOSCONOFERTA"/>&nbsp;/&nbsp;<xsl:value-of select="LIC_NUMEROLINEAS"/></td>
+			<td><xsl:value-of select="LIC_PROVEEDORESADJUDICADOS"/>&nbsp;/&nbsp;<xsl:value-of select="LIC_NUMEROPROVEEDORESINF"/>&nbsp;/&nbsp;<xsl:value-of select="LIC_NUMEROPROVEEDORES"/></td>
+			<td><xsl:value-of select="LIC_FECHAALTA"/></td>
+			<td><xsl:value-of select="LIC_FECHAMODIFICACION"/></td>
+			<td><xsl:value-of select="LIC_FECHADECISIONPREVISTA"/></td>
+			<td style="text-align:left;"><xsl:value-of select="ESTADO"/></td>
+			<xsl:if test="/Licitaciones/LICITACIONES/IDPAIS = 34"><!--	para Brasil no mostramos la columna de consumo 	-->
+			<td>
+				<xsl:choose>
+				<xsl:when test="not(/Licitaciones/LICITACIONES/MOSTRAR_PRECIO_IVA)">
+					<xsl:value-of select="LIC_CONSUMO"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="LIC_CONSUMOIVA"/>
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			</xsl:if>
+			<td><xsl:value-of select="CONSUMO"/></td>
+			<td><xsl:value-of select="AHORRO"/></td>
+
+			<!--<td style="text-align:left;"><a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID={LIC_IDPROVEEDORSELECCIONADO}&amp;VENTANA=NUEVA','Proveedor',100,80,0,-20);"><xsl:value-of select="PROVEEDORSELECCIONADO"/></a></td>-->
+			<td>
+				<!-- 5jul16	<xsl:if test="IDRESPONSABLE = /Licitaciones/US_ID">	-->
+				<xsl:if test="AUTOR">
+					<xsl:choose>
+					<xsl:when test="IDESTADO = 'SUS'">
+						<a href="javascript:CambiarEstadoLicitacion({ID},'B');">
+							<img src="http://www.newco.dev.br/images/borrar.gif">
+								<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/></xsl:attribute>
+								<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/></xsl:attribute>
+							</img>
+						</a>
+					</xsl:when>
+					<xsl:when test="IDESTADO != 'B' and IDESTADO != 'SUS' and IDESTADO != 'CON' and IDESTADO != 'FIRM' and IDESTADO != 'ADJ'">
+						<a href="javascript:CambiarEstadoLicitacion({ID},'SUS');">
+							<img src="http://www.newco.dev.br/images/standBy.gif">
+								<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='suspender']/node()"/></xsl:attribute>
+								<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='suspender']/node()"/></xsl:attribute>
+							</img>
+						</a>
+					</xsl:when>
+					</xsl:choose>
+				</xsl:if>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+	</xsl:for-each>
+
+		<tr style="color:black;line-height:14px;">
+			<td style="text-align:right;height:30px;">
+			<xsl:choose>
+                        <xsl:when test="/Licitaciones/LICITACIONES/MVM or /Licitaciones/LICITACIONES/MVMB">
+				<xsl:attribute name="colspan">12</xsl:attribute>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:attribute name="colspan">11</xsl:attribute>
+			</xsl:otherwise>
+			</xsl:choose>
+                            <strong>
+                                <xsl:value-of select="document($doc)/translation/texts/item[@name='total']/node()"/>:
+                            </strong>
+                        </td>
+			<td><strong>
+			<xsl:choose>
+			<xsl:when test="/Licitaciones/LICITACIONES/MOSTRAR_PRECIO_IVA">
+				<xsl:value-of select="/Licitaciones/LICITACIONES/LIC_CONSUMOTOTALIVA"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="/Licitaciones/LICITACIONES/LIC_CONSUMOTOTAL"/>
+			</xsl:otherwise>
+			</xsl:choose>
+			</strong></td>
+			<td colspan="5">&nbsp;</td>
+		</tr>
+		<tr><td>
+			<xsl:choose>
+                        <xsl:when test="/Licitaciones/LICITACIONES/MVM or /Licitaciones/LICITACIONES/MVMB">
+				<xsl:attribute name="colspan">18</xsl:attribute>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:attribute name="colspan">17</xsl:attribute>
+			</xsl:otherwise>
+			</xsl:choose>
+                    </td>
+                </tr>
+</xsl:when>
+<xsl:otherwise>
+	<tr>
+		<td align="center">
+			<xsl:attribute name="colspan">
+				<xsl:choose>
+				<xsl:when test="/Licitaciones/LICITACIONES/MVM or /Licitaciones/LICITACIONES/MVMB">18</xsl:when>
+				<xsl:otherwise>17</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+
+			<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='licitaciones_sin_resultados']/node()"/></strong>
+		</td>
+	</tr>
+</xsl:otherwise>
+</xsl:choose>
+</table>
+
+</xsl:template>
+
+
+<!-- Template para los proveedores -->
+<xsl:template name="Licitaciones_Proveedor">
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:choose>
+		<xsl:when test="/Licitaciones/LANG"><xsl:value-of select="/Licitaciones/LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+
+<form name="Buscador" method="post" action="Licitaciones.xsql">
+<table class="buscador">
+	<tr class="select" height="50px">
+		<th class="uno">&nbsp;</th>
+		<th>
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='empresa']/node()"/><br />
+			<xsl:call-template name="desplegable"><xsl:with-param name="path" select="/Licitaciones/LICITACIONES/FIDEMPRESA/field"/></xsl:call-template>
+		</th>
+		<th>
+			<input type="hidden" name="FIDRESPONSABLE" value="-1"/>
+		</th>
+		<th>
+			<input type="hidden" name="FPROVEEDOR" value="-1"/>
+		</th>
+		<th>
+			<input type="hidden" name="FPROVEEDORSEL" value="-1"/>
+		</th>
+		<th>
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='texto']/node()"/><br />
+			<input type="text" name="FTEXTO" size="10">
+				<xsl:attribute name="value"><xsl:value-of select="/Licitaciones/FTEXTO"/></xsl:attribute>
+			</input>
+		</th>
+		<th>
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/><br />
+			<xsl:call-template name="desplegable"><xsl:with-param name="path" select="/Licitaciones/LICITACIONES/FESTADO/field"/></xsl:call-template>
+		</th>
+		<th>
+			<div class="botonLargo">
+			<strong>
+				<a href="javascript:BuscarLicitaciones(document.forms['Buscador']);">
+					<xsl:value-of select="document($doc)/translation/texts/item[@name='buscar']/node()"/>
+				</a>
+			</strong>
+			</div>
+		</th>
+		<th class="uno">&nbsp;</th>
+	</tr>
+</table>
+</form>
+
+<table class="grandeInicio" id="tblData">
+<thead>
+	<tr class="subTituloTabla">
+		<th class="zerouno">&nbsp;</th>
+		<th class="tres">&nbsp;</th><!-- Numero de linea -->
+		<th align="left"><xsl:value-of select="document($doc)/translation/texts/item[@name='empresa']/node()"/></th>
+                <th align="left">&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='titulo']/node()"/></th>
+		<th align="left"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuario']/node()"/></th>
+		<th><xsl:value-of select="document($doc)/translation/texts/item[@name='num_productos']/node()"/></th>
+		<th><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_alta_abbr']/node()"/></th>
+		<th><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_decision_abbr']/node()"/></th>
+		<th align="left"><xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/></th>
+		<th><xsl:copy-of select="document($doc)/translation/texts/item[@name='consumo_obj_sIVA_2line']/node()"/></th>
+		<th align="left"><xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor_adjudicado']/node()"/></th>
+		<th class="zerouno">&nbsp;</th>
+	</tr>
+</thead>
+
+<xsl:choose>
+<xsl:when test="/Licitaciones/LICITACIONES/LICITACION">
+	<xsl:for-each select="/Licitaciones/LICITACIONES/LICITACION">
+		<xsl:variable name="LicID"><xsl:value-of select="ID"/></xsl:variable>
+		<tr>
+			<td>&nbsp;</td>
+			<td><xsl:value-of select="LINEA"/></td>
+			<td style="text-align:left;"><a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID={IDEMPRESA}&amp;VENTANA=NUEVA','Cliente',100,80,0,-20);"><xsl:value-of select="EMPRESA_LARGO"/></a></td>
+			<td style="text-align:left;"><a href="MantLicitacion.xsql?LIC_ID={$LicID}"><xsl:value-of select="LIC_TITULO"/></a></td>
+                        <td style="text-align:left;"><xsl:value-of select="RESPONSABLE"/></td>
+			<td><xsl:value-of select="LIC_NUMEROLINEAS"/></td>
+			<td><xsl:value-of select="LIC_FECHAALTA"/></td>
+			<td><xsl:value-of select="LIC_FECHADECISIONPREVISTA"/></td>
+			<td style="text-align:left;"><xsl:value-of select="ESTADO"/></td>
+			<td><xsl:value-of select="LIC_CONSUMO"/></td>
+			<td style="text-align:left;"><a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID={LIC_IDPROVEEDORSELECCIONADO}&amp;VENTANA=NUEVA','Proveedor',100,80,0,-20);"><xsl:value-of select="PROVEEDORSELECCIONADO"/></a></td>
+			<td>&nbsp;</td>
+		</tr>
+	</xsl:for-each>
+
+	<tfoot>
+		<tr style="color:black;line-height:14px;">
+			<td colspan="9" style="text-align:right;height:30px;"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='total']/node()"/>:</strong></td>
+			<td><strong><xsl:value-of select="/Licitaciones/LICITACIONES/LIC_CONSUMOTOTAL"/></strong></td>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr><td colspan="12">&nbsp;</td></tr>
+	</tfoot>
+</xsl:when>
+<xsl:otherwise>
+	<tr>
+		<td align="center" colspan="12">
+			<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='licitaciones_sin_resultados']/node()"/></strong>
+		</td>
+	</tr>
+</xsl:otherwise>
+</xsl:choose>
+</table>
+
+</xsl:template>
+
+
+
+
+
+
+
+</xsl:stylesheet>

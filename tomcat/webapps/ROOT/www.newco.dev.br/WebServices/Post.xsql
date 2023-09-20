@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+    MVM Web Services: connection
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="Post.xsl"?>
+-->
+<page connection="newco" allow-client-style="no"
+	xmlns:xsql="urn:oracle-xsql"
+	xmlns:e="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:s="http://www.newco.dev.br/WebServices/mvmWSPost.wsdl">
+
+<xsql:set-page-param name="user" xpath="e:Envelope/e:Body/getUser/user"/>
+<xsql:set-page-param name="password" xpath="e:Envelope/e:Body/getPassword/password"/>
+<xsql:set-page-param name="operation" xpath="e:Envelope/e:Body/getOperation/operation"/>
+<xsql:set-page-param name="parameters" xpath="e:Envelope/e:Body/getParameters/parameters"/>
+<xsql:set-page-param name="file" xpath="e:Envelope/e:Body/getFile/fileXML"/>
+
+<xsql:include-param name="user"/>
+<xsql:include-param name="password"/>
+<xsql:include-param name="operation"/>
+<xsql:include-param name="parameters"/>
+<xsql:include-param name="file"/>
+
+	<xsql:include-owa>
+		<![CDATA[
+			BEGIN			
+				utilidades_pck.debug('Post.xsql');
+				HTP.P('<OK/>');
+			END;
+		]]>
+	</xsql:include-owa>
+
+
+	<xsql:include-owa bind-params="user password operation parameters file">
+		<![CDATA[
+			DECLARE
+				US_ID NUMBER;
+			BEGIN			
+				WEBSERVICES_PCK.ProcesaPost_XML(?,?,?,?,?);
+			END;
+		]]>
+	</xsql:include-owa>
+
+</page>
+

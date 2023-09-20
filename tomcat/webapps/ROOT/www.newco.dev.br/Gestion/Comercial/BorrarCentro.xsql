@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Modifica estado centro de la licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BorrarCentroJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BorrarCentroJSON.xsl"?>
+
+<BorrarCentro xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EliminarCen	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarCentro');
+		IF US_ID>=0 THEN
+			v_EliminarCen:=LICITACIONESAGREGADAS_PCK.BorrarCentro(
+				US_ID,
+				'{@ID_CENTRO_ELIMINAR}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_EliminarCen > 0 THEN
+				HTP.P('<OK>'||v_EliminarCen||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</BorrarCentro>

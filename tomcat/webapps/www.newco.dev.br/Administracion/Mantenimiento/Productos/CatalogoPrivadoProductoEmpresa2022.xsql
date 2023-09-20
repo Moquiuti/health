@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Catalogo privado, para consultas de proveedores desde el área pública de la página
+	Ultima revisión: ET 7mar22 11:30
+-->
+<?xml-stylesheet type="text/xsl" href="CatalogoPrivadoProductoHTML2022.xsl"?>
+<CatalogoPrivado  xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="ORIGEN"/><!--	Indica desde que página se está llamando a esta funcionalidad	-->
+	<xsql:include-owa>
+      <![CDATA[
+	  	DECLARE
+			US_ID	NUMBER;
+			Res		VARCHAR2(1000);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CatalogoPrivado');
+			IF US_ID>=0 THEN
+			CATALOGOPRIVADO_SEG_PCK.ListadoCatalogo_XML
+			(
+				US_ID,
+				'{@IDEMPRESA}', 
+				'{@REFERENCIA}',
+				'{@DESCRIPCION}',
+				'N',					--	Publico
+				'{@FLINEASPORPAGINA}',	--	17ago16
+				'{@PAGINA}',			--	17ago16
+				'{@GRUPODESTOCK}',		--	11ene21
+				'{@IDPROVEEDOR}',		--	23feb21
+				'{@IDDIVISA}'			--	23feb21
+			);
+			END IF;
+		 END;
+     ]]>
+	</xsql:include-owa>
+  
+</CatalogoPrivado>

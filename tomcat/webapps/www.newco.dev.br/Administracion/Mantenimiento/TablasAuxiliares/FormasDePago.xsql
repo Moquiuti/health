@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--	
+	Mantenimiento de formas de pago, para usuarios MVM
+	Ultima revision: ET 12nov18 10:09
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="FormasDePagoHTML.xsl"?>
+
+<FormasDePago xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantFormasDePago');
+			IF US_ID>=0 THEN
+				TablasAuxiliares_pck.FormasDePago_XML(US_ID, '{@ACCION}', '{@PARAMETROS}');
+          END IF;					   
+        END;
+    ]]>
+	</xsql:include-owa>
+</FormasDePago>
+

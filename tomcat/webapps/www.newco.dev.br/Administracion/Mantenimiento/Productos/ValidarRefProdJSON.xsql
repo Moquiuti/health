@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que comprueba si una referencia de producto -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ValidarRefProdJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ValidarRefProdJSON.xsl"?>
+
+
+<ValidarRefProdJSON xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDEMPRESA"/>
+	<xsql:include-param name="REFERENCIA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_IDProducto	NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ValidarRefProducto');
+			IF US_ID>=0 THEN
+
+				v_IDProducto:=productos_pck.IDProducto( 
+                                    '{@IDPROVE}',
+                                    normalizar_pck.LimpiarCadena('{@REFERENCIA}'),
+                                    'N'
+                                );
+
+				HTP.P(Utilidades_Pck.CabeceraXML);
+				IF v_IDProducto IS NULL THEN
+                                    HTP.P('<NULL>'||v_IDProducto||'</NULL>');
+				ELSE
+                                    HTP.P('<IDPROD>'||v_IDProducto||'</IDPROD>');
+                                   
+                                        
+				END IF;
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ValidarRefProdJSON>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISTablaResumenClienteJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISTablaResumenClienteJSON.xsl"?>
+
+<TablaResumenCliente xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="IDPAIS"/>
+	<xsql:include-param name="IDEMPRESA"/>
+	<xsql:include-param name="TIPO"/>
+	<xsql:include-param name="IDIDIOMA"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','infoDiariaClientes');
+		IF US_ID>=0 THEN
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			HTP.P('<RESUMENES_MENSUALES>');
+			EISSeguimiento_PCK.IndicadoresResumen_XML(
+				'{@IDPAIS}',
+				'{@IDEMPRESA}',
+				'{@TIPO}',
+				'{@IDIDIOMA}'
+			);
+			HTP.P('</RESUMENES_MENSUALES>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</TablaResumenCliente>

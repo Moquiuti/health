@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Marca una linea de la tabla INT_LINEASFICHEROS como comentario
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MarcarComentarioJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MarcarComentarioJSON.xsl"?>
+
+<MarcarComentario xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_LineaFichero	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MarcarLineaComentarios');
+		IF US_ID>=0 THEN
+			v_LineaFichero:=ADMINISTRACIONTECNICA_PCK.MarcarLineaComentarios(
+				US_ID,
+				'{@INTL_IDFICHERO}',
+				'{@INTL_LINEA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_LineaFichero > 0 THEN
+				HTP.P('<OK>'||v_LineaFichero||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</MarcarComentario>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+    Introducción de pedidos soap
+-->
+<!--<?xml-stylesheet type="text/xsl" href="GetRFQItemId.xsl"?>-->
+<page connection="newco" allow-client-style="no"
+                        xmlns:xsql="urn:oracle-xsql"
+                        xmlns:e="http://schemas.xmlsoap.org/soap/envelope/"
+                        xmlns:s="http://www.newco.dev.br/WebServices/mvmWS.wsdl">
+
+<xsql:set-page-param name="user" xpath="e:Envelope/e:Body/getNombreUser/user"/>
+<xsql:set-page-param name="password" xpath="e:Envelope/e:Body/getPasswordUser/password"/>
+<xsql:set-page-param name="session" xpath="e:Envelope/e:Body/getSession/IDRFQSession"/>
+<xsql:set-page-param name="lineNumber" xpath="e:Envelope/e:Body/getLineNumber/LineNumber"/>
+<xsql:set-page-param name="productCode" xpath="e:Envelope/e:Body/getProductCode/ProductCode"/>
+<xsql:set-page-param name="productName" xpath="e:Envelope/e:Body/getProductName/ProductName"/>
+<xsql:set-page-param name="quantity" xpath="e:Envelope/e:Body/getQuantity/Quantity"/>
+<xsql:set-page-param name="price" xpath="e:Envelope/e:Body/getPrice/Price"/>
+<xsql:set-page-param name="entregas" xpath="e:Envelope/e:Body/getEntregas/Entregas"/>
+<xsql:set-page-param name="extraInfo" xpath="e:Envelope/e:Body/getExtraInfo/ExtraInfo"/>
+<xsql:set-page-param name="center" xpath="e:Envelope/e:Body/getCenter/Center"/>
+
+<xsql:set-page-param name="price1" value=""/>
+<xsql:set-page-param name="entregas1" value=""/>
+<xsql:set-page-param name="extraInfo1" value=""/>
+<xsql:set-page-param name="center1" value=""/>
+
+	<xsql:include-param name="product"/>
+	<xsql:include-param name="user"/>
+	<xsql:include-param name="password"/>
+	<xsql:include-param name="session"/>
+	<xsql:include-param name="lineNumber"/>
+	<xsql:include-param name="productCode"/>
+	<xsql:include-param name="productName"/>
+	<xsql:include-param name="quantity"/>
+	<xsql:include-param name="price1"/>
+	<xsql:include-param name="entregas1"/>
+	<xsql:include-param name="extraInfo1"/>
+	<xsql:include-param name="center1"/>
+
+	<!--<xsql:include-owa bind-params="user password session lineNumber productCode quantity price entregas extraInfo center">-->
+	<xsql:include-owa bind-params="user password session lineNumber productCode productName quantity price1 entregas extraInfo center">
+		<![CDATA[
+			DECLARE
+				US_ID NUMBER;
+			BEGIN
+				WEBSERVICES_PCK.GetRFQItemId_XML(?,?,?,?,?,?,?,?,?,?,?);
+			END;
+		]]>
+	</xsql:include-owa>
+
+</page>
+

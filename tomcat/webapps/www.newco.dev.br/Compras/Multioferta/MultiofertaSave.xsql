@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ultima revision: ET 2oct18 12:19
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="MultiofertaSaveHTML.xsl"?>
+
+<Multioferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="ROL"/>
+	<xsql:include-param name="TIPO"/>
+	<xsql:include-param name="MO_STATUS"/>
+	<xsql:include-param name="BOTON"/>
+	<xsql:include-param name="MO_ID"/>
+	<xsql:include-param name="PED_NUMERO"/>
+	<xsql:include-param name="DATOSACTUALES"/>
+	<xsql:include-param name="REFRESCAR_PADRE"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+    <xsql:include-param name="US_ID"/>
+<!--
+	Controlar Status/Salta para que vuelva a Multioferta.xsql
++-->
+
+<!-- Incluimos el comentario para en el estado 7 volver a mostrar el comentario editable
+	<xsql:include-param name="NMU_COMENTARIOS"/>
+-->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		v_IDUsuario	NUMBER;
+	BEGIN
+		v_IDUsuario:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MultiofertaSave');
+		IF v_IDUsuario>=0 AND '{@MO_ID}' IS NOT NULL THEN
+ 
+ 		--DEBUG multiofertas_pck.debug('Multiofertas_v4_Pck.MultiofertaSave LLAMADA XSQL - MO_ID:{@MO_ID} IDUsuario:'||v_IDUsuario||' Estado:{@MO_STATUS} Boton:{@BOTON}');
+
+			MULTIOFERTAS_V4_PCK.MultiofertaSave(
+				'{@MO_ID}',
+				'{@NUMERO_OFERT_PED}',
+				'{@MO_STATUS}',
+				'{@BOTON}',
+				v_IDUsuario,
+				'{@NMU_COMENTARIOS}',
+				'{@MO_COSTELOGISTICA}',
+				'',
+				'{@MO_DESCUENTOGENERAL}',
+				'{@MO_IMPORTEIVA}',
+				'{@IDDIVISA}',
+				'{@LISTAIVAPRODUCTOS}',
+				'{@FECHANO_PAGO}',
+				'{@LPP_IDFORMA}',
+				'{@LPP_IMPORTE}',
+				'',
+				'{@LPP_COMENTARIOS}',
+				'{@FECHANO_ENTREGA}',
+				'{@FECHA_ENTREGA_REAL}',
+				'{@STRING_CANTIDADES}',
+				'{@MO_FORMAPAGO}',
+				'{@STRING_PRECIOS}',
+				'{@IDFORMAPAGO}',
+				'{@IDPLAZOPAGO}',
+				'{@MO_CONDICIONESGENERALES}',
+				'{@RECIBIDO}',
+				'{@SOLO_SIGUIENTE}',
+				'{@OTROSPARAMETROS}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<jumpTo>
+	<picture-on>Cancelar_mov</picture-on>
+	<picture-off>Cancelar</picture-off>
+	<page>MO-0450</page>
+	<caption>IMG-0190</caption>
+</jumpTo>
+
+<boton label="Cerrar" caption="IMG-0190">
+	<name_function>CerrarVentana</name_function>
+</boton>
+
+<!--<JUMPTO_OK>
+	<picture-on>Cancelar_mov</picture-on>
+	<picture-off>Cancelar</picture-off>
+	<page>MO-0450</page>
+	<caption>IMG-0190</caption>
+</JUMPTO_OK>-->
+
+<JUMPTO_DBERROR>
+	<picture-on>Anterior_mov</picture-on>
+	<picture-off>Anterior</picture-off>
+	<page>MO-0450</page>
+	<caption>G-0001</caption>
+</JUMPTO_DBERROR>
+
+<button label="Imprimir" caption="IMG-1490"/>
+
+</Multioferta>

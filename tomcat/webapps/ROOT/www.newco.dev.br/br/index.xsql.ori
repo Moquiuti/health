@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Area publica de MVM, version multiidioma, multiportal
+	Ultima revision 24dic16 17:01
+-->
+
+<?xml-stylesheet type="text/xsl" href="../indexHTML.xsl"?>
+
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<REDUCIDO>S</REDUCIDO>
+	<INDEXLANG>portugues</INDEXLANG>
+</AreaPublica>

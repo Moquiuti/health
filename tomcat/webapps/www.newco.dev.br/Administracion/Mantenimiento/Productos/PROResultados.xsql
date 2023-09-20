@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Busqueda de productos en catálogo proveedor
+	Ultima revision: ET 2jul18 09:41
+ -->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="PROResultadosHTML.xsl"?>
+
+<MantenimientoProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="PRO_BUSQUEDA"/>
+	<xsql:include-param name="HAYPRODUCTOS"/>
+	<xsql:include-param name="HISTORY"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-param name="PRODUCTO"/>
+	<xsql:include-param name="IDCLIENTE"/>
+	<xsql:include-param name="IDCLIENTES"/>
+	<xsql:include-param name="FIDPROVEEDOR"/>
+	<xsql:include-param name="CAMBIOS"/>
+	<xsql:include-param name="SINPRIVADOS"/>
+	<xsql:include-param name="SINEMPLANTILLAR"/>
+	<xsql:include-param name="SOLODESTACADOS"/>
+	<xsql:include-param name="MODIFICADOSPROV"/>
+	<xsql:include-param name="SOLOOCULTOS"/>
+	<xsql:include-param name="SOLOVISIBLES"/>
+	<xsql:include-param name="SOLOFARMACOS"/>
+	<!--<xsql:include-param name="SOLOASISA"/>
+	<xsql:include-param name="SOLOVIAMED"/>
+	<xsql:include-param name="SOLOTEKNON"/>-->
+	<xsql:include-param name="SOLOFNCP"/>
+	<xsql:include-param name="RECHAZADOS"/>
+	<xsql:include-param name="SINPRECIOMVM"/>
+	<!--<xsql:include-param name="PRECIOASISADIFERENTE"/>
+	<xsql:include-param name="SINOFERTAASISA"/>
+	<xsql:include-param name="SINOFERTAVIAMED"/>
+	<xsql:include-param name="SINOFERTATEKNON"/>-->
+	<xsql:include-param name="SINOFERTAMVM"/>
+	<xsql:include-param name="SINOFERTAFNCP"/>
+	<xsql:include-param name="PAGINA"/>
+	<xsql:include-param name="ORDEN"/>
+	<xsql:include-param name="SENTIDO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROBuscador');
+		IF US_ID>=0 THEN
+
+			HTP.P(utilidades_pck.CabeceraXML
+				||'<DATOS>');
+
+			--para eliminar una solicitud desde las rechazadas 30-04-13
+			IF '{@ELIMINAR_SOLICITUD}' IS NOT NULL THEN
+				MantenimientoProductos_PCK.DescartarCambio_XML(
+					US_ID,
+					'{@IDPAIS}',
+					'{@IDPROVEEDOR}',
+					'{@IDPRODUCTO_SOLICITUD}'
+				);
+			END IF;
+
+			--9jul18 MantenimientoProductos_PCK.ListaProductos_PROV_XML(
+			MantenimientoProductos_seg_PCK.Listado_XML(
+				US_ID,
+				'{@PRODUCTO}',
+				'{@IDCLIENTE}',
+				'{@IDCLIENTES}',
+				'{@FIDPROVEEDOR}',
+				'{@CAMBIOS}',
+				'{@SINPRIVADOS}',
+				'{@SINEMPLANTILLAR}',
+				'{@SOLODESTACADOS}',
+				'{@MODIFICADOSPROV}',
+				'{@SOLOFNCP}',
+				'{@RECHAZADOS}',
+				'{@SINPRECIOMVM}',
+				'{@SINOFERTAMVM}',
+				'{@SINOFERTAFNCP}',
+				'{@SINOFERTARECOLETAS}',				--	{@SINOFERTAVIAMED}
+				'{@DOC_OK}',							--	23ago18
+				'{@DOC_PEND_APROBAR}',					--	23ago18
+				'{@DOC_PENDIENTE}',
+				'{@ESPACK}',							--	5jul18
+				'{@ENPACK}',							--	5jul18
+				'{@PAGINA}',
+				'{@ORDEN}',
+				'{@SENTIDO}',
+				'N'
+			);
+
+			HTP.P('</DATOS>');
+		END IF;
+	END;
+
+]]>
+</xsql:include-owa>
+
+<botones_nuevo>
+	<button label="ActualizarCambios" caption="PRO-0500">
+		<name_function>Enviar</name_function>
+		<param>document.forms[1]</param>
+		<param>document.forms[0]</param>
+		<param>'ACTUALIZAR'</param>
+	</button>
+
+	<button label="NavegarAtras" caption="PRO-0480">
+		<name_function>Enviar</name_function>
+		<param>document.forms[1]</param>
+		<param>document.forms[0]</param>
+		<param>'ANTERIOR'</param>
+	</button>
+
+	<button label="NavegarAdelante" caption="PRO-0490">
+		<name_function>Enviar</name_function>
+		<param>document.forms[1]</param>
+		<param>document.forms[0]</param>
+		<param>'SIGUIENTE'</param>
+	</button>
+
+	<button label="BuscarProductos" caption="IMG-0120">
+		<name_function>EnviarBusqueda</name_function>
+	</button>
+</botones_nuevo>
+<returnHome/>
+</MantenimientoProductos>

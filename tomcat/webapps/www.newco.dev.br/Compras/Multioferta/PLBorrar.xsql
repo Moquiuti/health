@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PLBorrarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PLBorrarHTML.xsl"?>
+
+<MantenimientoBorrar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+	BEGIN
+	   PLANTILLAS_PCK.BorrarPlantilla('{@PL_ID}');
+	END;
+	]]>	  
+	</xsql:include-owa>
+
+<!-- End booking stuff -->
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>  
+    <page>G-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+</MantenimientoBorrar>
+

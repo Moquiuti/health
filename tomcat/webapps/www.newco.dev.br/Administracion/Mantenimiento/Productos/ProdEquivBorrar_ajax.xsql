@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+	Llamada ajax - no incluir juego de caracteres en la cabecera xml
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ProdEquivBorrarJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ProdEquivBorrarJSON.xsl"?>
+
+<ProdEquivBorrar xmlns:xsql="urn:oracle-xsql" connection="newco">
+ 
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_EquivalBorr	NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ProductosEquivalentes, Nuevo');
+			IF US_ID>=0 THEN
+				v_EquivalBorr := PRODUCTOSEQUIVALENTES_PCK.CambiarEstado(
+					US_ID,
+					'{@IDPRODEQUIV}',
+					'{@IDESTADOEVAL}',
+					'{@COMENTARIOS}'
+				);
+
+				HTP.P(Utilidades_Pck.CabeceraXML);
+				IF v_EquivalBorr > 0 THEN
+					HTP.P('<OK>'||v_EquivalBorr||'</OK>');
+				ELSE
+					HTP.P('<ERROR/>');
+				END IF;
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ProdEquivBorrar>

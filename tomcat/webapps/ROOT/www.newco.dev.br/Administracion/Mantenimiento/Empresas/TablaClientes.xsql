@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+	Listado de empresas reducido, con filtro
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TablaClientesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TablaClientesHTML.xsl"?>
+
+<Centros xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListadoCentros');
+		  IF US_ID>=0 THEN
+          		CENTROS_PCK.ListadoPublicoCentros_XML(US_ID);
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+			
+</Centros>

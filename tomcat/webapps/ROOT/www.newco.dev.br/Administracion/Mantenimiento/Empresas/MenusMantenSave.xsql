@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MenusMantenSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MenusMantenSaveHTML.xsl"?>
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MenusMantenHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MenusMantenHTML.xsl"?>
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--16oct12	<xsql:include-param name="EMP_ID"/>-->
+	<xsql:include-param name="STYLE"/>
+	<!--<xsql:include-param name="LANG" value="{@PRMLANG}"/>-->
+	<xsql:include-param name="LANG" value="{@LANG}"/>
+
+    <xsql:include-owa>
+      <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+		  	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MenusMantenSave');
+		  	IF US_ID>=0 THEN
+				USUARIOS_PCK.MantenimientoMenusPorUsuario(US_ID, '{@ID_USUARIO}', '{@EMP_ID}', '{@CAMBIOS_MENUS}', '{@ACCION}');
+      		END IF;				   
+     	END;
+        ]]>
+    </xsql:include-owa>
+  
+	<boton label="Aceptar" caption="IMG-0020">
+		<name_function>ValidaySubmit</name_function>
+		<param>document.forms[0]</param>      
+	</boton>
+
+	<boton label="Cerrar" caption="IMG-0190">
+		<name_function>CerrarVentana</name_function> 
+	</boton>
+<!--
+	<JUMPTO_DBERROR>
+		<picture-off>Anterior</picture-off>
+		<picture-on>Anterior_mov</picture-on>   
+		<page>G-0011</page>
+		<caption>G-0001</caption>    
+	</JUMPTO_DBERROR>
+
+	<JUMPTO_DATAERROR>
+		<picture-off>Anterior</picture-off>
+		<picture-on>Anterior_mov</picture-on>   
+		<page>G-0010</page>
+		<caption>G-0001</caption>    
+	</JUMPTO_DATAERROR>
+-->    
+</Mantenimiento>
+

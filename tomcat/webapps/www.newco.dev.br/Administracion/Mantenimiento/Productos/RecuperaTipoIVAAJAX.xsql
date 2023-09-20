@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que devuelve el valor numérico del tipo de IVA -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="RecuperaTipoIVAJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="RecuperaTipoIVAJSON.xsl"?>
+
+<TipoIVA xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDTIPOIVA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_TipoIVA	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaTipoIVAAJAX');
+		IF US_ID>=0 THEN
+			v_TipoIVA := TIPOSIVA_PCK.BuscarTipoIVA('{@IDTIPOIVA}');
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_TipoIVA IS NULL THEN
+      	HTP.P('<ERROR/>');
+			ELSE
+        HTP.P('<TIPOIVA>'||v_TipoIVA||'</TIPOIVA>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</TipoIVA>

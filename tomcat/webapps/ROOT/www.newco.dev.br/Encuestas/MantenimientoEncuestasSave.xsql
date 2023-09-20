@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VerTodasEncuestasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VerTodasEncuestasHTML.xsl"?>
+
+<MantenimientoEncuestas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  
+   <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoEncuestasSave');
+			IF US_ID>=0 THEN
+				Encuestas_PCK.RealizarAccion_XML
+					(
+						US_ID,
+						'{@IDENCUESTA}',	/*	ID de la encuesta, NULL para noticia nueva	*/
+						'{@LISTACENTROS}',	/*	IDs concatenados con '|' de los centros */
+						'{@REFERENCIA}',
+						'{@PRODUCTO}',
+						'{@PROVEEDOR}',
+						'{@PRECIO}',
+						'{@UNIDADBASICA}',
+						'{@ESTADO}',		
+						'{@ACCION}',
+						'{@FIDCENTRO}',		/*	Filtrar por centro		*/
+						'{@FREFERENCIA}',	/*	Filtrar por referencia	*/
+						'{@FPRODUCTO}',		/*	Filtrar por producto	*/
+						'{@FPROVEEDOR}',	/*	Filtrar por proveedor	*/
+						'{@FIDRESPUESTA}',	/*	Filtrar por respuesta: Pendiente, Plantilla, Muestras, etc	*/
+						'{@FIDESTADO}',		/*	Filtrar por estado de la encuesta: Activa, Oculta, Borrada	*/
+						'{@PAGINA}'			/*	Paginación	*/
+					);
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+     <botones>
+       <button label="NavegarAtras" caption="PRO-0480">
+         <name_function>Atras</name_function> 
+          <param>'ANTERIOR'</param>
+       </button>
+       
+       <button label="NavegarAdelante" caption="PRO-0490">
+         <name_function>Adelante</name_function> 
+         <param>'SIGUIENTE'</param>
+       </button>
+     </botones>
+    
+</MantenimientoEncuestas>

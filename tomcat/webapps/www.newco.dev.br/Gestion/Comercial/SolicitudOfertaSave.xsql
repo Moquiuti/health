@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ultima revisión:ET 28jun17
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SolicitudOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SolicitudOfertaHTML.xsl"?>
+
+<SolicitudOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		SO_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SolicitudCatalogacionSave');
+		IF US_ID > 0 THEN
+			SO_ID:=SOLICITUDESOFERTA_PCK.ModificarSolicitud(
+				US_ID,
+				'{@SO_ID}',
+				'{@SO_DESCRIPCION}',
+				'{@SO_DIAGNOSTICO}',
+				'{@SO_OFERTA}',
+				'{@SO_IDDOCSOLICITUD}',
+				'{@SO_IDDOCDIAGNOSTICO}',
+				'{@SO_IDDOCOFERTA}',
+				'{@SO_IDESTADO}'
+			);
+
+			IF SO_ID > 0 THEN
+				HTP.P('<OK>'||SO_ID||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SolicitudCatalogacion');
+		IF US_ID>=0 THEN		   
+			SOLICITUDESOFERTA_PCK.Solicitud_XML(
+				US_ID,
+				'{@SO_ID}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</SolicitudOferta>

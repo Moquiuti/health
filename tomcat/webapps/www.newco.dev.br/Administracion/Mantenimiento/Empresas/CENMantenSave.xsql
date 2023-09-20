@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Guarda cambios en mantenimiento de centro
+	Ultima revision: 8nov22 17:17
+-->
+<?xml-stylesheet type="text/xsl" href="CENMantenHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<ACTUALIZADO/>
+
+<form name="frmManten" action="CENMantenSave.xsql" method="post">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDCentro	CENTROS.CEN_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CENMantenSave');
+		IF US_ID>=0 THEN
+			v_IDCentro:=CENTROS_PCK.Modificar(
+				US_ID,										--	3ene23
+				'{@CEN_ID}',
+				'{@CEN_NOMBRE}',
+				'{@CEN_NOMBRECORTO}',
+				'{@CEN_NIF}',
+				'{@CEN_DIRECCION}',
+				'{@CEN_PROVINCIA}',
+				'{@CEN_CPOSTAL}',
+				'{@CEN_POBLACION}',
+				'{@CEN_TELEFONO}',
+				'{@CEN_FAX}',
+				'{@EMP_ID}',
+				'{@IDFORMASPAGO}',							--	Forma de pago
+				'{@IDPLAZOSPAGO}',							--	Plazo de pago
+				'{@PLAZOENTREGA}',
+				'{@CEN_CAMAS}',
+				'{@CEN_QUIROFANOS}',
+				'{@CEN_PEDIDOSPREVISTOSMES}',
+				'{@ESTADO}',
+				'{@CEN_CDC}',
+				'{@CEN_DISTRIBUIDOR}',
+				'{@CEN_COMPROMISO}',
+				'{@CEN_SINCOMISIONES}',
+				'{@CEN_IDLOGOTIPO}',
+				'{@CEN_DESCRIPCIONCOMERCIAL}',
+				'{@CEN_IDUSUARIOINTEGRACION_PDF}',
+				'{@CEN_IDUSUARIOINTEGRACION_XML}',
+				'{@CEN_LIMITECOMPRASMENSUALES}',
+				'{@CEN_FECHAPRIMERACUOTA}',
+				'{@CEN_FECHACUOTAACTIVA}',
+				'{@CEN_MOSTRARCENTROSCONSUMO}',
+                '{@IDMODELONEGOCIO}',
+                '{@CEN_MODELODENEGOCIO_EXPLIC}',
+                '{@CEN_PRESCRIPTOR}',
+                '{@CEN_COMISIONAHORRO}',
+                '{@CEN_COMISIONTRANSACCIONES}',
+                '{@IDFORMASPAGOMVM}',
+                '{@IDPLAZOSPAGOMVM}',
+                '{@CEN_DETALLEFORMAPAGOAMVM}',
+                '{@CUENTAPAGOAMVM}',
+                '{@TEXTOFACTURAMVM}',
+                '{@CEN_IDUSUARIOFACTURACION}',
+				'{@CEN_INCLUIRENFACTURACION}',
+                '{@CEN_LIC_TITULO}',						--28jun16 Campos para las licitaciones agregadas
+				'{@CEN_LIC_DESCRIPCION}',				
+				'{@CEN_LIC_COND_ENTREGA}',				
+				'{@CEN_LIC_COND_PAGO}',					
+				'{@CEN_LIC_OTRAS_COND}',				
+				'{@CEN_LIC_COMEN_PEDIDOS}',					--12mar20		
+				'{@CEN_LIC_PLAZO_NEG}',					
+				'{@CEN_IDUSUARIOLICITACIONESAUT}',
+				'{@CEN_BARRIO}',							
+				'{@CEN_CODIGO}',							--19ene18
+				'{@CEN_CODIFICACIONPEDIDOS}',				--19ene18
+				'{@CEN_IDMODELOOCINTEGRACION}',				--19ene18
+				'{@CEN_IDCOMPRADORPORDEFECTO}',				--19ene18
+				'{@CEN_REFERENCIAINTEGRACION}',				--7mar19
+				'{@CEN_ULTIMOPEDIDOANNO}',					--7mar19
+				'{@IDCATEGORIA}',							--8mar19
+				'{@CEN_IDSELAREAGEOGRAFICA}',				--09jul19 Area geografica
+				'{@CEN_BLOQUEADO}',							--18set19 Bloqueado
+				'{@CEN_SEPFICCARGAPEDIDOS}',				--14oct19 COnfig.fichero carga pedidos: separador
+				'{@CEN_CABFICCARGAPEDIDOS}',				--14oct19 COnfig.fichero carga pedidos: modelo cabecera
+				'{@CEN_MODELOFICCARGAPEDIDOS}',				--14oct19 COnfig.fichero carga pedidos: modelo campos
+				'{@CEN_NOMBREERP}',							--21oct19 Nombre del ERP del cliente
+				'{@CEN_URLWEBSERVICE}',						--27feb20 URL del webservice
+				'{@CEN_IDMODELOWININTEGRACION}',			--14may21 Modelo de integracion de Vencedores
+				'{@CEN_INT_RETENERDESCARGAOC}',				--07oct21 Retener la descarga de OCs desde integracion
+				'{@CEN_EMAILPUBLICO}'						--08nov22 Email publico
+			);
+            
+			CENTROS_PCK.Mantenimiento (US_ID,v_IDCentro,'{@EMP_ID}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</form>
+</Mantenimiento>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TRFMantenHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TRFMantenHTML.xsl"?>
+
+<Tarifas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+ <xsql:include-param name="EMP_ID"/>
+ <xsql:include-param name="PRO_ID"/>  
+ <xsql:include-param name="MO_ID"/>   
+
+ <!-- Mostramos la empresa actual -->
+ 
+ <xsql:include-owa>
+ 	EMPRESAS_PCK.Mostrar ('{@EMP_ID}','Cliente');
+ </xsql:include-owa>
+ 
+ <!-- Mostramos la lista de empresas -->
+
+ <xsql:include-owa>
+ 	EMPRESAS_PCK.MostrarEmpresasTarifas ('{@PRO_ID}','{@EMP_ID}');
+ </xsql:include-owa>
+
+ <xsql:include-owa>
+        TARIFAS_PCK.ModificarTarifasProducto('{@EMP_ID}','{@PRO_ID}','{@SALTAR}','{@PRMEXTRA}');
+ </xsql:include-owa>
+
+ <xsql:include-xsql href="TRFComun.xsql"/>
+
+</Tarifas>

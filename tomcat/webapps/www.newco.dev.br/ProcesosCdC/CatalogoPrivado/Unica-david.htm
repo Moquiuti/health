@@ -1,0 +1,108 @@
+<!--
+	EStá pagina crea los frames y framesets necesarios, pero el buscador y los resultados se cargan desde ZonaCatalogo
+-->
+<html>
+<head>
+	<title>Mantenimiento Catalogo Privado</title>
+
+	<link rel="stylesheet" type="text/css" href="http://www.newco.dev.br/General/basic.css">
+
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<script language="javascript">
+
+		jQuery(document).ready(resizeFrames);
+
+		function resizeFrames(){
+			var WidthColIzquierda = 225;
+			var HeightZonaCatalogo = 385;
+			var HeightCabecera = 80;
+			var WidthContent = screen.width - WidthColIzquierda - 20;
+			var HeightZonaProducto = screen.height - HeightZonaCatalogo - 130;
+			var HeightResultados = screen.height - HeightCabecera - 130;
+
+			// iFrame ZonaCatalogo
+			jQuery('#ZonaCatalogo').width(WidthColIzquierda);
+			jQuery('#ZonaCatalogo').height(HeightZonaCatalogo);
+			// iFrame ZonaProducto
+			jQuery('#ZonaProducto').width(WidthColIzquierda);
+			jQuery('#ZonaProducto').height(HeightZonaProducto);
+			// iFrame Cabecera (buscador)
+			jQuery('#Cabecera').width(WidthContent);
+			jQuery('#Cabecera').height(HeightCabecera);
+			// iFrame Resultados
+			jQuery('#divResultados').width(WidthContent);
+			jQuery('#divResultados').height(HeightResultados);
+
+
+		}
+
+		function showLoading(){
+			jQuery('#overlay').show();
+			jQuery('#loadingPopup').show();
+			jQuery('#Resultados').hide();
+		}
+
+		function hideLoading(){
+			jQuery('#overlay').hide();
+			jQuery('#loadingPopup').hide();
+			jQuery('#Resultados').show();
+		}
+	</script>
+
+	<style>
+
+		iframe{
+			height:100%;
+			width:100%;
+                }
+
+                #overlay {
+			background: #000000;
+			opacity:0.5;
+			bottom: 0;
+			left: 0;
+			position: fixed;
+			right: 0;
+			top: 0;
+			z-index: 10000;
+		}
+	
+		#loadingPopup {
+			background: none repeat scroll 0 0 #FFFFFF;
+			border: 5px solid #DDDDDD;
+			left: 35%;
+			padding: 10px;
+			position: fixed;
+			text-align: center;
+			top: 20%;
+			width: 380px;
+			z-index: 20000;
+			-moz-border-radius:30px 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="ColIzquierda" style="float:left;">
+		<div id="ZonaCatalogo">
+			<iframe name="zonaCatalogo" src="ZonaCatalogo.xsql" scrolling="auto" frameborder="no" border="0" framespacing="0"></iframe>
+		</div>
+
+		<div id="ZonaProducto">
+			<iframe name="zonaProducto" src="about:blank" scrolling="auto" frameborder="no" border="0" framespacing="0"></iframe>
+		</div>
+	</div>
+	<div id="Content" style="float:left;">
+		<div id="Cabecera">
+			<iframe  name="Cabecera" src="Buscador.xsql" noresize="yes" frameborder="no" border="0" framespacing="0"/></iframe>
+		</div>
+
+		<div id="divResultados">
+			<div id="overlay" style="display:none;"></div>
+			<div id="loadingPopup" style="display:none;">
+				<img src="http://www.newco.dev.br/images/loader-2.gif"/>&nbsp;&nbsp;&nbsp;Cargando...
+			</div>
+			<iframe name="Resultados" id="Resultados" src="about:blank" scrolling="auto" frameborder="no" border="0" framespacing="0" onload="hideLoading();"></iframe>
+		</div>
+	</div>
+</body>
+</html>

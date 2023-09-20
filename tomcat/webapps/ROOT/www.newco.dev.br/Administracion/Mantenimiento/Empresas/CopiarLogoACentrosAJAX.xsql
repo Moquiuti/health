@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	COpia el logo de la empresa a todos sus centros
+	Ultima revision: ET 25nov19 14:10
+-->
+<?xml-stylesheet type="text/xsl" href="CopiarLogoACentrosJSON.xsl"?>
+
+<CopiarLogo xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		RES		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CopiarLogo');
+		IF US_ID>0 THEN
+			RES:=EMPRESAS_PCK.CopiarLogoACentros(US_ID,	'{@EMP_ID}');
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF RES > 0 THEN
+				HTP.P('<OK>'||RES||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CopiarLogo>

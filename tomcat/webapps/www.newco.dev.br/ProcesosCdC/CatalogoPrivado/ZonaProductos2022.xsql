@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Info del producto estandar en la pagina del catalogo privado
+-->
+<?xml-stylesheet type="text/xsl" href="ZonaProductosHTML2022.xsl"?>
+
+
+<ZonaCatalogo xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="TIPOVENTANA" value="{@TIPOVENTANA}"/>
+  <xsql:include-param name="IDCATEGORIA" value="{@IDCATEGORIA}"/>
+  <xsql:include-param name="IDFAMILIA" value="{@IDFAMILIA}"/>
+  <xsql:include-param name="IDGRUPO" value="{@IDGRUPO}"/>
+  <xsql:include-param name="IDSUBFAMILIA" value="{@IDSUBFAMILIA}"/>
+  <xsql:include-param name="IDPRODUCTOESTANDAR" value="{@IDPRODUCTOESTANDAR}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+       BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaProducto');	
+		  IF US_ID>=0 THEN	
+		  
+                  CATALOGOPRIVADO_PCK.ZONACATALOGO_cambioProductos(
+                      US_ID,
+                      '{@IDPRODUCTOESTANDAR}'
+                    );
+					
+				--HTP.P('<PRUEBA/>');
+         END IF;
+       END;
+        ]]>
+  </xsql:include-owa>
+  
+  <botones>
+    
+    <button label="VerMasDetalles" caption="CATPRIV-0100">
+      <name_function>VerDetallesProductoEstandar</name_function>
+      <param>document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value</param>
+	  <param>document.forms[0].elements['CATPRIV_IDCATEGORIA'].value</param>
+      <param>document.forms[0].elements['CATPRIV_IDFAMILIA'].value</param>
+      <param>document.forms[0].elements['CATPRIV_IDGRUPO'].value</param>
+      <param>document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value</param>
+      <param>'VERMASDETALLES'</param>
+    </button>
+    
+  </botones>
+  
+  
+</ZonaCatalogo>

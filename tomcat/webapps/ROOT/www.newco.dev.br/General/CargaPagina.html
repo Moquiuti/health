@@ -1,0 +1,16 @@
+<!doctype html>
+<HTML>
+<HEAD>
+	<SCRIPT>
+		function Carga()
+		{
+			const valores = window.location.search;
+			var Url=valores.replace('?TARGET=','')
+			document.location=Url;
+		}
+	</SCRIPT>
+<HEAD>
+<BODY onLoad="javascript:Carga();">
+<img src="http://www.newco.dev.br/images/2022/img/loading-gif.gif"/>
+</BODY>
+</HTML>

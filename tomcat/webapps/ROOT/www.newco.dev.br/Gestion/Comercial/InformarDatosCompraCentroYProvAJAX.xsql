@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guarda la cantidad de compra de un centro y un proveedor para un producto de la licitacion
+	Ultima revision: ET 7abr21 12:00
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="InformarDatosCompraCentroYProvJSON.xsl"?>
+
+<InformaDatosCompra xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="IDCENTRO"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="CANTIDAD"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InformaDatosCompraCentroYProv');
+		IF US_ID>=0 THEN
+			/*Licitacionesagregadas_pck.InformarCompraCentroYProv_XML(
+				NULL,
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_PROD_ID}',
+				'{@IDCENTRO}',
+				'{@IDPROVEEDOR}',
+				'{@CANTIDAD}'
+			);*/
+			Licitacionesagregadas_pck.InformarCompraCentroYProv_XML(
+				NULL,
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_PROD_ID}',
+				'{@IDCENTRO}',
+				'{@CANTIDADES}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</InformaDatosCompra>

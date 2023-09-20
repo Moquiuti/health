@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Crea una nueva licitacion con los productos no adjudicados de la antigua
+	Ultima revision: ET 28mar18 09:26
++-->
+<?xml-stylesheet type="text/xsl" href="CrearLicitacionHijaJSON.xsl"?>
+
+<LicitacionHija xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CrearLicitacionHija');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONESPEDIDOS_PCK.RenovarLicitacion(
+				US_ID,
+				'{@LIC_ID}',
+				'S'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res > 0 THEN
+				HTP.P('<OK>'||v_res||'</OK>');
+			ELSE
+				HTP.P('</ERROR>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</LicitacionHija>

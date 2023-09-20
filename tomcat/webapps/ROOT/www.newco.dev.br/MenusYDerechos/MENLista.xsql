@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MENListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MENListaHTML.xsl"?>
+
+<MENLista xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+
+<!--
+<xsql:set-session-param name="US_ID"/>
+<xsql:set-session-param name="US_ID" value="{@US_ID}"/>
+-->
+
+<ListaDerechosUsuarios>
+  <xsql:include-owa>
+  <![CDATA[
+     BEGIN
+        MENUS_PCK.MenusUsuarioFull( '{@TM_ID}', '{@US_ID}' );
+     END;
+  ]]>
+  </xsql:include-owa>
+
+
+</ListaDerechosUsuarios>
+</MENLista>

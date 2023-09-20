@@ -1,0 +1,32 @@
+
+n
+java:S1192ß"WDefine a constant instead of duplicating this literal "hexadecimal RGB number" 3 times.(æ‘ÃÜ
+s
+java:S1488Ş"\Immediately return this expression instead of assigning it to the temporary variable "info".(ß¿š
+0
+java:S1220""Move this file to a named package.
+_
+java:S2184["DCast one of the operands of this subtraction operation to a "float".(Ÿù­ÿÿÿÿÿ
+[
+java:S2184["@Cast one of the operands of this integer division to a "double".(Ÿù­ÿÿÿÿÿ
+W
+java:S2184"@Cast one of the operands of this integer division to a "double".(£úÇ
+W
+java:S2184‘"@Cast one of the operands of this integer division to a "double".(É„êà
+X
+java:S1659#"CDeclare "lastys" and all following declarations on a separate line.(øŠ
+=
+java:S1948""'Make "timer" transient or serializable.(×õÃ‰
+:
+java:S1659W"Declare "y" on a separate line.(¡Ê²‘şÿÿÿÿ
+K
+java:S1854n"5Remove this useless assignment to local variable "h".(ÑúŠ†
+K
+java:S1854n"5Remove this useless assignment to local variable "m".(ÑúŠ†
+U
+java:S1659n"?Declare "yh" and all following declarations on a separate line.(ÑúŠ†
+S
+java:S1117r"=Rename "formatter" which hides the field declared at line 37.(òŞß
+u
+java:S2142Ì"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+?	java:S108Ì")Either remove or fill this block of code.(ä ¹€

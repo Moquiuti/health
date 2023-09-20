@@ -1,0 +1,140 @@
+//	22/2/16 ET Prueba problemas adjudicacion, eliminadas del código
+//	6/7/16	ET Cambios necesarios para Brasil
+//	7/7/16	ET Pedidos sin pasos previos de catalogacion
+//	15/7/16 ET Multiples cambios para licitaciones agregadas
+//	12/8/16 ET Cambios para permitir licitaciones agregadas y no agregadas desntro de asociaciones
+//	16/8/16 ET Cambio por nuevo estado COMP para informar compras en licitaciones agregadas
+//	29/8/16	ET Incluir info documentación proveedor
+//	31/8/16 ET Reducir columnas en pestaña proveedores, incluir linea de separación, varios cambios menores
+//	1/9/16	ET Error muy grave al entrar los datos de productos por centro debido a que el array de productos es independiente del array de productos por centro
+//	9/9/16	ET Mostrar únicamente los proveedores con ofertas en la pestaña de productos
+//	17/9/16 ET Al editar línea a línea (cantidades por centro o oferta proveedor) solo mostrar el botón de "guardar" si hay cambios en la línea
+//	17/9/16 ET Recargamos toda la página si hay cambios importantes en los productos
+//	20/9/16 ET la recarga anteriro solo la hacemos si son muchos los proveedores que han informado la licitacion
+//	21/9/16 ET Solucionamos varios problemas debidos al cambio del día 20
+//	22/9/16 ET Solucionamos varios problemas debidos al cambio del día 20
+//	28/9/16 ET Bucle al corregir las cantidades en función de las unidades por lote
+//	30/9/16 ET No se actualiza correctamente el ceontador de número de ofertas por producto
+//	6/10/16	ET Problema de redondeo al corregir las unidades por lote
+//	16nov16	ET Ajustes para el cambio de diseño
+//	16dic16	ET Problema en la ficha de producto al guardar sin oferta seleccionada
+//	19dic16 ET El proveedor estaba viendo el producto seleccionado ANTES de la adjudicacion
+//	5ene17	ET Resolución de varios errores
+//	11ene17	ET No se borran correctamente productos
+//	11ene17 ET Eliminamos el botón de conversaciones proveedores, es innecesario ya que existe el icono de conversación en la pestaña proveedores para esto
+//	12ene17 ET Al enviar productos por referencia, ocultamos el botón para evitar doble-clic
+//	13ene17	ET Cambiamos nombre a lic_130117.js para forzar recarga
+//	16ene17	ET El cambio de usuario proveedor no funciona en el estado "Estudio previo" (correcciones solo a nivel XSL)
+//	16ene17	ET Se habían perdido los colores. Corregido JS y PL/SQL
+//	23ene17	ET No se actualizaba bien la matriz de productos tras guardar cambios en cantidad o precio (historico u objetivo) 
+//	23ene17	ET Al añadir nuevos productos, los insertamos en paquetes de 20 y vamos informando del avance al usuario
+//	1feb17	ET Si se modifica el usuario de un proveedor, ya no se muestra el botón guardar al abrir otros proveedores
+//	2feb17	ET Error grave al actualizar los datos de los productos: no se tiene en cuenta el cambio de orden de los productos
+//	24feb17	ET Permitir al proveedor publicar ofertas vacias
+//	2mar17	ET Enlazar proveedores a EMPDetalleFrame.xsql en lugar de EMPDetalle.xsql
+//	8mar17	ET En el caso de licitaciones agregadas, permitir informar cantidades desde Excel
+//	13mar17	ET En el caso de licitaciones agregadas, controlar las unidades por lote según los pedidos de cada centro
+//	20mar17	ET En Chrome y Explorer no se mostraba correctamente el avance de proveedores al cargar info de ofertas, finalizado 22mar17 -> lic_220317.js
+//	22mar17	ET En Chrome y Explorer no se mostraba correctamente el avance de nuevos productos (requiere quitar ordenaciones previas)
+//	27mar17	ET Multiples ajustes para que funcione bien la carga de proveedores y envío de productos vía función recursiva Ajax
+//	29mar17	ET Bloquear acciones durante la carga de proveedores -> lic_290317.js
+//	31mar17 ET Mostramos el FloatingBox en todos los casos, si no, no aparece sin precio histórico informado
+//	31mar17 ET En el FloatingBox aparece ahorro NaN sin precio histórico informado
+//	3abr17	ET Primeras pruebas lic_030417_PruebasPedidos.js para la creación de licitaciones multipedido
+//	5abr17	ET Incluir nombre corto del cliente en el titulo en la ficha principal lic_050417.js
+//	11abr17	ET Lic.agregada: Botón "Todos" para actualizar los cambios en todas las cantidades modificadas en el paso de completar cantidades lic_110417.js
+//	13abr17	ET Resulto problemas con el FloatingBox de productos al seleccionar mejores precios o checkbox de una oferta
+//	13abr17	ET Comprobar que no hayan errores en el formato de los precios y cantidades introducidos al cargar datos
+//	18abr17	ET Comprobar que no hayan errores en el formato de los precios y cantidades introducidos al cargar datos -> Corregir error -> lic_180417.js
+//	18abr17	ET Permitir al autor insertar productos en estado "CURS" -> lic_180417.js
+//	20abr17	ET Tras cambiar usuario proveedor en estado "CURS", avisar al nuevo usuario por email 
+//	20abr17	ET En licitaciones para pedido, en estado "CONT" permitir también incluir en el catálogo de clientes
+//	24abr17	ET Licitaciones multipedido, pruebas con lic_240417multipedido.js -> EN CURSO
+//	28abr17 ET Licitación para pedido de un único centro: en el titulo mostrar el centro del pedido. En estado CONTRATO, también en las condiciones generales mostrar el centro.
+//	3may17	ET Mostrar/ocultar botón de "aprobar cotaçao" según si hay cambio o no. Idem con guardar cambios ofertas -> lic_030517.js
+//	3may17	ET Volvemos a los desarrollos para licitaciones multipedido: lic_030517multipedido.js
+//	3may17	ET Corregido error al insertar más de 20 productos en una cotaçao "CURS":se recargaba la página al acabar los 20 primeros
+//	5may17	ET Al acabar de insertar más productos en una cotaçao "CURS", mostrar alert informativo.
+//	8may17	ET Al pulsar el botón "actualizar datos" se pierde la selección de ofertas. -> lic_080517.js
+//	9may17	ET Licitaciones multipedido, pruebas con lic_080517multipedido.js -> EN CURSO
+//	10may17	ET Licitaciones multipedido: se comprueba correctamente que el pedido ya exista, borrar entradas asociadas a un producto borrado, trabajar con la fecha de entrega del pedido
+//	11may17	ET Licitaciones multipedido: incluir las líneas de pedido en la ficha de producto
+//	12may17	ET Licitaciones multipedido: guardar cambios en las líneas de pedido en la ficha de producto, borrar líneas de pedido
+//	15may17	ET Licitaciones (TODAS): al guardar selección desde ficha, no marcar la licitación como pendiente de guardar selecciones
+//	[EN PRUEBAS] 17may17	ET Licitaciones (no agregadas): no se comprueban bien las unidades por lote en algunos casos particulares (detectado por Amparo)
+//	15may17	ET Licitaciones multipedido: ficha producto: criterio para filtrar centros solo centros con pedidos
+//	15may17	ET Licitaciones multipedido: ficha producto: poder eliminar lineas de pedido
+//	15may17	ET Licitaciones multipedido: ficha producto: poder insertar lineas de pedido (requiere desplegable de centros)
+//	15may17	ET Licitaciones multipedido: ficha producto: incluir los pedidos en la ficha de producto, permitir modificaciones
+//	15may17	ET Licitaciones multipedido: al introducir las cantidades por centro, también se debe especificar a que pedido (fecha) corresponden
+//	17may17	ET Licitaciones multipedido: permitir entradas sin fecha en licitacion multipedido? => NO, COMPROBAR EN CADA CARGA
+//	18may17	ET Licitaciones multipedido: El pedido estará en estado 40, pendiente de confirmación por parte del comprador
+//	18may17	ET Licitaciones multipedido: La fecha de entrega será la fijada en la licitación. CUIDADO: se verá actualizada al lanzar el pedido
+//	1jun17	ET Areatext para que los proveedores informen las ofertas desde excel
+//	9jun17	ET Areatext para que los proveedores informen las ofertas desde excel: activar botones de "guardar", crear botón de "Guardar todo" (guardarOfertaFila, pero recorriendo todos)
+//	12jun17	ET Incluir extracción excel para los proveedores para que puedan informar más fácilmente el formato excel correcto
+//	27set17	ET No se muestran bien los colores correspondientes al nivel de documentación de los proveedores
+//	6oct17	ET Cambio de versión de JS: lic_061017.js, lic_061017multipedido.js (en desarrollo)
+//	6oct17	ET E710.- [MVM] Licitación: Al insertar un único producto, falla con frecuencia [ET]
+//	6oct17	ET E709.- [MVM] Licitación: Al insertar multiples productos, si hay errores muestra correctamente los mensajes de error pero luego no recarga la página [ET]
+//	6oct17	ET E711.- [MVM] Licitación: Al reabrir la oferta de un proveedor, al redibujar o recargar no se muestran las estrellas. [ET]
+//	6oct17	ET E714.- [MVM] Licitación: permite arrancar la licitación sin tener informada la cantidad de algún producto [ET]
+//	9oct17	ET E718.- [MVM] Licitación: la columna de contador de ofertas siempre mostraba el total de proveedores, no el número de ofertas para un producto dado
+//	9oct17	ET E719.- [MVM] Licitación: al insertar nuevos proveedores, conviene que el estado de evaluación por defecto sea "Apto por histórico".
+//	10oct17	ET Por problemas en la actualización, cambiamos el nombre del javascript lic_101017.js
+//	13oct17	ET E724.- [MVM] Licitación: Informar de forma más precisa el mensaje de error cuando no se puede lanzar la licitación. Cambiamos el nombre del javascript lic_131017.js
+//	24oct17	ET E737.- [MVM] licitación: falla la ordenación por numero de ofertas
+//	25oct17	ET 1028.- [MVM] Licitación: sustituir botón por icono de espera al pulsar el botón de adjudicar
+//	25oct17	ET Al guardar un comentario para proveedor y reabrir el formulario vuelve a aparecer el texto en verde de comentario guardado
+//	14nov17	ET Licitaciones continuas para que los proveedores puedan actualizar sus ofertas
+//	15nov17	ET E757.- [MVM] Licitaciones: los proveedores pueden ofertar una vez pasada la fecha límite si han abierto la licitación antes de dicha fecha
+//	17nov17	ET Exportación completa de la licitación a Excel. Actualizacion javascript lic_171117.js
+//	29nov17	ET/PS E767.- [MVM] Licitación: ERROR GRAVE. NO FUNCIONA EN EXPLORER. (Explorer no admite valores por defecto en los parametros de una funcion tipo prepararTablaProductos(dibujaTabla=true)) [ET]
+//	8feb18	ET Incluir Cantidad, precio ref, precio obj al subir productos. Actualizacion javascript lic_080218.js
+//	21feb18	ET En la exportación a excel, utilizamos el formato separado por ";". Actualizacion javascript lic_200218.js
+//	8mar18	ET Error javascript: se intentan cargar ofertas en estado EST o COMP
+//	8mar18	ET Error en excel en estado "CURS". Solo utilizamos la descarga de todas las ofertas en los estados CURS e INF. Actualizacion javascript lic_080318.js
+//	9mar18	ET OCultar el botón de adjudicar en las licitaciones de OHSJD. Actualizacion javascript lic_160318.js
+//	21mar18 ET En el listado excel para Brasil, incluir las marcas de producto. Actualizacion javascript lic_210318.js
+//	28mar18	ET Nueva funcionalidad de continuar licitación (incluyendo proveedores y ofertas) a partir de una licitación existente lic_280318.js
+//	28mar18	ET Quitar botón proveedores en estado CONT o CAD, etc
+//	4abr18	ET Al ordenar por nombre, debe hacerse por el nombre normalizado 
+//	13abr18	ET No se controla bien que el proveedor informe la marca
+//	23abr18	ET Para usuario que NO ES AUTOR, no mostrar la pestaña de usuarios
+//	30may18	ET Licitaciones urgentes
+//	30may18	ET Hacer opcional la info de proveedor
+//	30may18	ET Mostrar el botón de guardar cuando se sube un documento asociado a un producto
+//	05jun18	ET Corregido error en caracteres especiales al guardar ofertas lic_050618.js
+//	4jul18	ET Nuevo campo LIC_MULTIOPCION para licitaciones multiopcion
+//	9jul18	ET Lic.multiopcion: mostrar orden en lugar de checkbox en pestaña de productos
+//	9jul18	ET Lic.multiopcion: actualizar datos productos desde ficha de producto en caso de lic. adjud. múltiple
+//	11jul18	ET Cambio nomenclatura: AdjudicarProducto/s -> SeleccionaProductos/s (en ficheros AJAX y nombres procesos PL/SQL). lic_110718.js
+//	23jul18 ET Pruebas algoritmo de adjudicación. lic_230718.js
+//	27feb19 ET Botones para borrar todos los productos o todos los proveedores lic_270218.js
+//	4mar19	ET Incluir desplegable de minutos en la fecha/hora de decisión
+//	5mar19	ET Incluir documento en los datos generales de la licitación. lic_040319.js
+
+
+
+
+--	PENDIENTE	E707.- [MVM] Licitación: error no controlado en caso de repetición de nombre de producto [ET]
+
+--	PENDIENTE	Licitaciones multipedido: código de pedido para cada pedido
+--	PENDIENTE	Licitaciones multipedido: COMPROBAR QUE SE ACTUALIZAN BIEN LAS CANTIDADES
+--	PENDIENTE	Licitaciones multipedido: 
+					en las entradas de pedidos siempre debe estar informado el centro, si es para un solo centro, siempre el del pedido o del usuario. Si se cambia el centro del pedido, propagar a las
+					entradas existentes
+--	PENDIENTE	Licitaciones multipedido: incluir los pedidos en la pestaña de centros o en una de pedidos
+--	PENDIENTE	Licitaciones multipedido: control de pedido minimo agregando por fecha pedido además de por proveedor y centro
+--	PENDIENTE	Licitaciones multipedido: generar los pedidos agregando por fecha pedido además de por proveedor y centro
+--	PENDIENTE	Licitaciones multicentro: comprobar que el mantenimiento de cantidades por centro funciona correctamente
+--	PENDIENTE	Licitaciones multicentro: en la página de licitación incluir pestaña "Pedidos"
+--	PENDIENTE	Licitaciones multicentro: MODIFICAR EL LISTADO DE VENCEDORES: agrupar por centro/proveedor/pedido. VERSION PARA IMPRESORA
+--	PENDIENTE	La fecha de entrega será la fijada en la licitación. CUIDADO: se verá actualizada al lanzar el pedido, conservar fecha?
+
+
+--	PENDIENTE
+--	[EN PRUEBAS] 17may17	ET Licitaciones (no agregadas): no se comprueban bien las unidades por lote en algunos casos particulares (detectado por Amparo)
+--	[EN PRUEBAS] en algunos casos, con lista de 3 productos el tercero no se ha enviado al PL/SQL. Quizás no se había saltado a la siguiente línea. Esto no debe fallar.
+--	7set17	ET Incluir nota con estrellas de los proveedores
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guarda cambios a nivel de un pedido
+	Ultima revision: ET 12ene22 12:00
+-->
+<?xml-stylesheet type="text/xsl" href="WFStatusHTML2022.xsl"?>
+<WorkFlowPendientes xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<!--	Pedidos problematicos, alarmas	y bandeja	-->
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','WFStatusSave');
+			IF US_ID>=0 THEN
+				IF '{@IDOFERTA}' IS NOT NULL THEN
+					PEDIDOSPROBLEMATICOS_PCK.GuardarCambios_XML(
+						US_ID,
+						'{@IDOFERTA}',
+						'{@IDMOTIVO}',
+						'{@NUEVAFECHAENTREGA}',
+						'{@COMENTARIOS}',
+						'{@ALBARAN}',
+                        'S',
+                        '{@IDALBARAN}'
+					);
+				END IF;
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</WorkFlowPendientes>

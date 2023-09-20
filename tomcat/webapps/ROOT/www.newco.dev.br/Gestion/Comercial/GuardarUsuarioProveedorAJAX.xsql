@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Guarda el IDDoc en la tabla licitaciones
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="GuardarUsuarioProveedorJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="GuardarUsuarioProveedorJSON.xsl"?>
+
+<NuevoUsuProv xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="IDPROVLIC"/>
+<xsql:include-param name="IDUSUPROV"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InformarNuevoContratoAJAX');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.CambiarVendedorEnProveedor(
+				US_ID,
+				'{@IDPROVLIC}',
+				'{@IDUSUPROV}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = '-1' THEN
+				HTP.P('<\ERROR>');
+			ELSE
+				HTP.P('<OK>'||v_res||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevoUsuProv>

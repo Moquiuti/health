@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="USDetalleHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="USDetalleHTML.xsl"?>
+
+<Usuarios xmlns:xsql="urn:oracle-xsql" connection="newco" >
+ <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   
+        <xsql:include-owa>
+        <![CDATA[
+        BEGIN
+             USUARIOS_PCK.Mostrar('{@CODIGO_USUARIO}');
+        END;
+        ]]>
+        </xsql:include-owa>
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>    
+    <page>G-0010</page>
+    <caption>G-0001</caption>    
+  </jumpTo> 
+</Usuarios>

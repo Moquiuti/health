@@ -1,0 +1,34 @@
+15may17 ET	Resuelto problema con la integración, no se cerraba correctamente el fichero
+24may17	ET	PIONEIRA: Incluye más marcas XML que deben recuperarse: Programacao_Entrega, Campo_Extra
+26may17 ET	[IMPORTANTE] Dejamos la libreria XML.js, pasamos a trabajar con ObjTree.js
+07jun17	ET	Detectado error cuando no está informado campos extra o entregas, actualizamos a AltaLicitacionesAjax_7jun17.js
+08jun17	ET	Mejorado el control de errores por si el fichero no cumple con la sintaxis correcta
+21jun17	ET	Para compatibilidad con el envío de pedidos desde texto, actualizamos JS: AltaLicitacionesAjax_21jun17.js
+23jun17	ET	Cambio en la nomenclatura para referirse de forma genérica a carga de ficheros, no de licitaciones: AltaLicitacionesAjax_21jun17.js
+28jun17	ET	Incluir contador junto a los datos del producto en el envío
+28jun17	ET	ERROR GRAVE CON & EN NOMBRE PRODUCTO O MARCA: AltaLicitacionesAjax_27jun17.js
+09oct17	ET	ERROR GRAVE al introducir un fichero con únicamente un producto
+21dic17	ET	Actualizamos el nombre del fichero javascript tras varios cambios para integracion desde excel AltaLicitacionesAjax_21dic17.js
+03ene18	ET	COntrol de centro informado en la integración desde excel. Fichero javascript: AltaLicitacionesAjax_3ene18.js
+04ene19	ET	Fichero javascript: AltaLicitacionesAjax_4ene18.js (cambios en pedidos desde excel)
+06feb19	ET	Fichero javascript: AltaLicitacionesAjax_6feb19.js
+03abr19	ET	Fichero javascript: AltaLicitacionesAjax_020419.js (varias mejora en carga de pedidos desde fichero)
+08abr19	ET	Fichero javascript: AltaLicitacionesAjax_080419.js (corregido problema, faltaba inicializar array de productos al finalizar un envío)
+28ago19	ET	Fichero javascript: AltaLicitacionesAjax_280819.js (corregido problema en carga de pedidos desde fichero)
+15oct19 ET	Nuevo XML de inicio en IntegracionRecepcion_pck.Inicio_XML
+16oct19 ET	Cambios para cargas desde fichero de texto: AltaLicitacionesAjax_161019.js
+23ene20 ET	Cambiamos separador de campos de la cabecera del fichero de ":" a '#' para evitar problemas con cadenas que utilizan :. Escapear cadenas HTML al enviar. AltaLicitacionesAjax_23ene20.js
+27ene20 ET	Corregido error JS en parámertro observacao. AltaLicitacionesAjax_270120.js
+27ene20 ET	Corregido de sintaxis error JS. AltaLicitacionesAjax_270120b.js
+28ene20 ET	Incluir "Campos extra" a nivel de producto (utilizado por el ERP Gesthos). AltaLicitacionesAjax_280120.js
+06feb20 ET	Corregido error enviando cabecera. AltaLicitacionesAjax_060220
+10feb20 ET	Corregido error enviando cabecera. AltaLicitacionesAjax_100220
+18feb20 ET	Corregido problema por juego de caracteres en la cabecera. AltaLicitacionesAjax_180220 (Dejamos de utilizar LecturaYEnvioLicitacionXML.js.)
+16mar20	ET	Integración vía texto con TOTUS. AltaLicitacionesAjax_160320.js
+20mar20 ET	Corregido problema al descargar OC TXT. AltaLicitacionesAjax_200320
+20mar20 ET	Corregido problema al descargar OC XML, provocado por la corrección del caso TXT. AltaLicitacionesAjax_230320
+05abr20 ET	No se mostraba error si la cantidad estaba en blanco o 0 en la carga desde CSV. AltaLicitacionesAjax_050420.js
+05may20 ET	Corregido problema por juego de caracteres en las descripciones de productos en los envíos desde XML. AltaLicitacionesAjax_050520.js
+21set20 ET Corregido nombre fichero (JS: hay que sumar 1 al número de mes)
+15feb21 ET Nuevo parametro: FECHAPEDIDO. AltaLicitacionesAjax_150221.js
+25feb21 ET En caso de error en el PL/SQL, presentar el mensaje de error en el cliente (antes solo "No se ha podido incluir el producto"). AltaLicitacionesAjax_250221.js

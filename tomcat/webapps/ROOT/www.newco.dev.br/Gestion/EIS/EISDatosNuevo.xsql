@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISDatosNuevoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISDatosNuevoHTML.xsl"?>
+
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@LANG}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@LANG}"/>
+  
+<!--
+	Nueva version de la herramienta de analisis estadistico de medicalvm.com  
+	ago10	ET
+-->
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="SES_ID"/>
+  
+  <!--<xsql:include-request-params/>-->
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISDatos');
+		  IF US_ID>=0 THEN
+                    EIS_PCK.CuadroDeMando(US_ID,'{@IDCUADROMANDO}', '{@ANNO}','{@IDEMPRESA}','{@IDCENTRO}',
+									'{@IDUSUARIO}','{@IDEMPRESA2}','{@IDPRODUCTO}','{@IDFAMILIA}','{@IDNOMENCLATOR}'
+									,'{@URGENCIA}','{@IDESTADO}','{@IDTIPOINCIDENCIA}','{@IDGRAVEDAD}','{@REFERENCIA}','{@CODIGO}',
+									'{@AGRUPARPOR}','{@IDRESULTADOS}',null,'TABLADATOS','{@IDRATIO}');
+                  end if;
+					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</EIS_XML>

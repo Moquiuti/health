@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ContactoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ContactoHTML.xsl"?>
+
+<!--
+	Mostramos los datos de contacto.
+	
+	El mensaje puede tener un maximo de 4.000 caracteres.
+	Es necesario validar que no contiene caracteres extraños para la base de datos.
+
+	DE: Usuario (Empresa)
+	PARA: [ Usuarios ] (Empresa)
+	Mensaje:
+	 [     ]
+	 
+	<Volver> <Enviar>
+
+
+ +-->
+
+<Contacto  xmlns:xsql="urn:oracle-xsql"  connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+ 
+        <xsql:include-owa>
+        <![CDATA[
+        BEGIN
+             CONTACTO_PCK.PrepararContacto(p_IDUsuarioOrigen => '{@US_ID}',
+             			           p_IDEmpresaDestino => '{@EMP_ID}');
+        END;
+        ]]>
+        </xsql:include-owa>
+       
+	  <!-- Volver --> 
+	  <jumpTo>
+	   <picture-on>Anterior_mov</picture-on>
+	    <picture-off>Anterior</picture-off> 
+	    <page>G-0013</page>
+	    <caption>G-0001</caption>    
+	  </jumpTo> 
+	  
+    <!-- Boton Enviar -->
+    <button label="Insertar" caption="IMG-0222" alt="IMG-0225">  
+      <name_function>InsertarProductos</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3Insertar.xsql'</param>                  
+      <param>'NO'</param>   <!-- LLP_VARIAS_LINEAS -->               
+    </button>  
+  
+</Contacto>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Recupera lista de centros de una licitacion
+	Ultima revision: ET 13jul20
++-->
+<?xml-stylesheet type="text/xsl" href="RecuperaCentrosLicJSON.xsl"?>
+
+<Centros xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaCentrosLic');
+		IF US_ID>=0 THEN
+			LICITACIONESAGREGADAS_PCK.Centros_XML(
+				'{@LIC_ID}',
+				NULL,
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Centros>

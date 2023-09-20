@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ficha de incidencia de producto. Nuevo disenno 2022.
+	Ultima revision: ET 10may22 17:46 Incidencia2022_100522.js
+-->
+<?xml-stylesheet type="text/xsl" href="IncidenciaHTML2022.xsl"?>
+
+<Incidencia xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="IDEMPRESA_COMPRADORA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="LIC_OFE_ID"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="ID_INC"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER(12);
+		v_Incidencia	NUMBER(12);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IncidenciaProd');
+		
+		utilidades_pck.debug('IncidenciaProd Accion:{@ACCION}. IDInc:{@ID_INC}');
+		
+		IF US_ID>=0 THEN
+			IF '{@ACCION}' ='NUEVA' THEN
+
+				--si es incidencia de licitacion
+				IF '{@LIC_OFE_ID}' IS NOT NULL THEN
+					v_Incidencia:=INCIDENCIASPRODUCTOS_PCK.NuevaIncidencia(
+						US_ID,
+						'{@PRO_ID}',
+						'{@LIC_OFE_ID}',
+						'{@REF_CLIENTE}',
+						'{@REF_ESTANDAR}',
+						'{@DESC_ESTANDAR}',
+						'{@REF_PROVE}',
+						'{@NOMBRE}',
+						'{@INCIDENCIA}',
+						'{@PROD_INC_IDDOCINCIDENCIA}',
+                        '{@SEGUIR_UTILIZANDO}', 
+                        '{@NUM_LOTE}'
+					);
+				ELSE
+					--si es incidencia normal
+					v_Incidencia:=INCIDENCIASPRODUCTOS_PCK.NuevaIncidencia(
+						US_ID,
+						'{@PRO_ID}',
+						NULL,
+						'{@REF_CLIENTE}',
+						'{@REF_ESTANDAR}',
+						'{@DESC_ESTANDAR}',
+						'{@REF_PROVE}',
+						'{@NOMBRE}',
+						'{@INCIDENCIA}',
+						'{@PROD_INC_IDDOCINCIDENCIA}',
+                    	'{@SEGUIR_UTILIZANDO}', 
+                    	'{@NUM_LOTE}'
+					);
+				END IF;
+
+			ELSIF '{@ACCION}' ='MODIFICAR' THEN
+
+				v_Incidencia:=INCIDENCIASPRODUCTOS_PCK.ModificarIncidencia(
+					US_ID,
+					'{@ID_INC}',
+					'{@INCIDENCIA}',
+					'{@DIAGNOSTICO}',
+                    '{@PROPUESTA_SOLUCION}',
+                    '{@TEXTO_RESP_HOSPITAL}',
+					'{@SOLUCION}',
+					'{@PROD_INC_IDDOCINCIDENCIA}',
+					'{@PROD_INC_IDDOCDIAGNOSTICO}',
+					'{@PROD_INC_IDDOCPROPSOLUCION}',
+					'{@PROD_INC_IDDOCSOLUCION}',
+					'{@IDESTADO}',
+					NVL('{@SEGUIR_UTILIZANDO}',NULL),
+					NVL('{@SEGUIR_UTILIZANDO_CDC}',NULL),
+					'{@NUM_LOTE}' 
+				);
+
+			ELSE
+				v_Incidencia:='{@ID_INC}';
+			END IF;
+			
+			INCIDENCIASPRODUCTOS_PCK.Incidencia_XML(
+				US_ID,
+				v_Incidencia,
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Incidencia>

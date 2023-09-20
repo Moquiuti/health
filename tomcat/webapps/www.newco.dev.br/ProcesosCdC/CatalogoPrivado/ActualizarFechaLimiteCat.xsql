@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ActualizarFechaLimiteCat.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ActualizarFechaLimiteCat.xsl"?>
+
+
+<ActualizarFechaLimite xmlns:xsql="urn:oracle-xsql" connection="newco">
+ 
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="PRO_ID"/>
+  <xsql:include-param name="CLIENTE_ID"/>
+  <xsql:include-param name="CLIENTE"/>
+  <xsql:include-param name="FECHA_LIMITE"/>
+  <xsql:include-param name="USER"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	
+	  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+		  v_FechaLimite	VARCHAR(10);
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ActualizaFechaLimite, Mostrar');
+			IF US_ID>=0 THEN
+				
+				
+				v_FechaLimite:=CatalogoPrivado_Mant_Pck.ActualizaFechaLimite(
+				US_ID, 
+				'{@PRO_ID}',
+				'{@CLIENTE_ID}',
+				'{@FECHA_LIMITE}'
+				);	
+				
+			
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_FechaLimite = 'OK' THEN
+				HTP.P('<OK>'||v_FechaLimite||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+				
+			END IF;					   
+        END;
+        ]]>
+        </xsql:include-owa>   
+      
+  
+</ActualizarFechaLimite>
+
+

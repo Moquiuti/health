@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para el tablon de anuncios.
+	Falta incluir el tipo de anuncio, por ahora solo trabajamos con *Demandas*
+	
+	(c) 29/8/2001 E.Torrellas
+
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ContratarPalabrasClaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ContratarPalabrasClaveHTML.xsl"?>
+
+<ContratarPalabrasClave xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		PalabrasClave_PCK.ContratarPalabrasClave('{@US_ID}');
+	END;
+    ]]>
+  </xsql:include-owa>
+  
+  
+  <!-- Volver -->
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>       
+    <page>G-0013</page>
+    <caption>IMG-0040</caption>    
+  </jumpTo>
+  <!-- Aceptar -->
+ <button label="Aceptar" caption="IMG-0030">
+      <name_function>EnviarForm</name_function>
+      <param>document.forms[0]</param>
+      <param>document.forms[1]</param> 
+ </button>
+  
+  <returnHome/>
+  
+  
+</ContratarPalabrasClave>
+

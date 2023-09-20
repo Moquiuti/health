@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="LogosEmpresa.xsl"?>
+<?xml-stylesheet type="text/xsl" href="LogosEmpresa.xsl"?>
+
+<LogosEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	EMPRESAS_PCK.ListaLogotipos_XML ('{@IDEMPRESA}','1');
+]]>
+</xsql:include-owa>
+</LogosEmpresa>

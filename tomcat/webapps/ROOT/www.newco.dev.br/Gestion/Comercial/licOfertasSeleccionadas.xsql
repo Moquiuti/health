@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Vencedores de la licitación
+	Revisado ET 19may21 08:51 (desactivar debug)
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="licOfertasSeleccionadasHTML.xsl"?>
+
+<OfertasSeleccionadas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="IDCENTROCOMPRAS"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="STYLE"/>
+ 
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(6);
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','OfertasSel');
+
+		IF US_ID>=0 and '{@LIC_ID}' IS NOT NULL THEN
+		
+			--solodebug	utilidades_pck.debug('XSQL OfertasSel Lic_ID:{@LIC_ID} Accion: {@ACCION} Parametros:{@PARAMETROS}. INICIO.');
+		
+			IF '{@ACCION}'='PEDIDO' THEN
+			
+				--solodebug	utilidades_pck.debug('XSQL OfertasSel Lic_ID:{@LIC_ID} Accion: {@ACCION} Parametros:{@PARAMETROS}. CrearPedidosCentro');
+				v_Res:=LICITACIONESPEDIDOS_PCK.CrearPedidosCentro
+				(
+					US_ID,
+					'{@LIC_ID}',
+					'{@IDCENTROPEDIDO}',				--	 27ago20 Para crear el pedido utilizamos el parámetro recibido
+					'{@PARAMETROS}',
+					'{@CODPEDIDO}'	
+				);
+				
+				--solodebug	utilidades_pck.debug('XSQL OfertasSel Accion: {@ACCION} Parametros:{@PARAMETROS} Res:'||v_Res);
+			
+		
+			ELSIF '{@ACCION}'='AJUSTARCANTIDADES' THEN
+			
+				v_Res:=LICITACIONES_SEG_PCK.AjustarCantidades
+				(
+					US_ID,
+					'{@LIC_ID}'
+				);
+				
+			
+			END IF;
+			
+		
+			IF v_Res IS NULL THEN	--	Probamos si el error venía por qué se procesaban en paralelo las peticiones. Al poner condición sobre v_Res será seguro secuencial
+				--utilidades_pck.debug('XSQL OfertasSel Lic_ID:{@LIC_ID}. SIN ACCION. Vencedores_XML');
+				LICITACIONESINFORMES_PCK.Vencedores_XML(
+					US_ID,
+					'{@LIC_ID}',
+					'S',					--	Incluir datos ofertas
+					'{@IDCENTROCOMPRAS}',
+					NULL
+				);
+			ELSE
+				--utilidades_pck.debug('XSQL OfertasSel Lic_ID:{@LIC_ID} Accion: {@ACCION} Parametros:{@PARAMETROS}. Res:'||v_Res||'. Vencedores_XML');
+				LICITACIONESINFORMES_PCK.Vencedores_XML(
+					US_ID,
+					'{@LIC_ID}',
+					'S',					--	Incluir datos ofertas
+					'{@IDCENTROCOMPRAS}',
+					NULL
+				);
+			END IF;
+
+			--utilidades_pck.debug('XSQL OfertasSel Lic_ID:{@LIC_ID} Accion: {@ACCION} Parametros:{@PARAMETROS}. FINAL');
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</OfertasSeleccionadas>

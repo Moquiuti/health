@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CarpetasYPlantillas.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CarpetasYPlantillas.xsl"?>
+
+<CarpetasYPlantillas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-owa>
+    <![CDATA[
+         DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListaCarpYPlant');
+		  IF US_ID>=0 THEN
+	CARPETASYPLANTILLAS_PCK.ListaCarpetasYPlantillasXML(US_ID);
+	end if;
+     END;
+    ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</CarpetasYPlantillas>
+

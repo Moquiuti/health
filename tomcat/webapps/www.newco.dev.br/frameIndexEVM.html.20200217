@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+      <title></title><script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script><script type="text/javascript" src="http://www.newco.dev.br/General/login_06nov18EVM.js"></script>
+      <link rel="shortcut icon" href="http://www.newco.dev.br/images/MedicalVM.ico"></link>
+      <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+      <meta name="description" content=""></meta>
+      <link rel="stylesheet" href="http://www.educationalvm.com.br/css/style.css"></link>
+      <link rel="stylesheet" href="http://www.newco.dev.br/General/areapublica443EVM.css" type="text/css"></link><script type="text/javascript">
+		var errorLogin = 'Se ha producido un error al entrar el usuario o la contraseña.';
+
+        function CompruebaCookie(){
+
+			var aceptoCookie = GetCookie('ACEPTO_COOKIE');
+
+			if (aceptoCookie == '' || aceptoCookie == null) {
+				//si no ha aceptado la cookie pongo aviso
+				document.getElementById("avisoCookieBox").style.display = 'block';
+				
+			}
+			else
+			{
+			
+				document.getElementById("avisoCookieBox").style.display = 'none';
+			}
+		}
+            
+        function AceptaCookie(){
+
+			SetCookie('ACEPTO_COOKIE','S');
+			CompruebaCookie();
+		}
+            
+	</script>
+   </head>
+   <body onload="CompruebaHTTPEVM('');CompruebaCookie();">
+      <form name="frmLogin1"><input type="hidden" name="DOMINIO" value=""></input>
+      </form>
+      <div class="todo"><a name="MedicalVM"></a>
+         <div class="avisoCookie" id="avisoCookieBox" style="display:none;">
+            <div class="avisoCookieBox">
+               <p class="textoCookie"></p>
+               <p class="textoCookie"></p>
+               <p class="textoCookie"><a id="aceptaCookie" class="btnOscuro" href="javascript:AceptaCookie();">Acepta</a>
+               </p>
+            </div>
+         </div>
+         <div class="separador" id="separador" style="display:none;"></div>
+         <div class="centro">
+            <div class="textocentro">
+               <div class="container">
+                  <div class="content first-content">
+                     <div class="second-column"><img width="318px" height="47px" src="http://www.educationalvm.com.br/img/EVM_completa.png" alt="" class="img"></img>
+<br><br><br>
+                        <form class="form" method="post" name="frmLogin" ID="frmLogin">
+                           <div class="inputs"><label for="" class="text">Usuário: <br></br><input type="text" name="USER" placeholder=""></input>
+                              </label><br></br><label for="" class="text">Senha: &nbsp;<br></br><input type="password" name="PASS" placeholder=""></input>
+                              </label><input type="hidden" name="PARAMETRO" value=""></input>
+                              <div id="textoOK" style="display:none">OK</div>
+                              <div id="textoKO" style="display:none">KO</div>
+                           </div><a href="javascript:loginDirecto();"><button class="btn btn-primary" type="submit" onclick="loginDirecto();cerrarVentana();">Entrar </button>
+                           </a><br></br>
+                           <p><a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/RecuperarClave.xsql','Recuperar Clave',30,20,-20,0);">Recuperar senha</a>
+                           </p>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div><br></br>
+         </div><a name="Servicios"></a><a name="Contacto"></a>
+         <div class="zonacuatro"></div>
+      </div>
+   </body>
+</html>

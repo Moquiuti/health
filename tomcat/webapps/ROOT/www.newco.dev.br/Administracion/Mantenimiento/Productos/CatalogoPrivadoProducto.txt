@@ -1,0 +1,8 @@
+14mar19 ET Se pierde la empresa en las búsquedas en el catálogo privado
+24dic20 ET Incluido campo PRINCIPIO ACTIVO (Unimed)
+11ene21 ET Incluido campo GRUPO DE STOCK (Unimed)
+23feb21 ET Filtros de divisa y proveedor
+24mar21 ET No realizar busqueda si no hay filtros activos
+17may21 ET Enviar formulario por "POST" en lugar de "GET"
+19ago21 ET Permitir cambiar el producto estandar asociado al IDProducto
+27set22 ET Incluir la marca de producto cuando exista, si no las marcas aceptables

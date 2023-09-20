@@ -1,0 +1,21 @@
+
+o
+java:S2293/"YReplace the type specification in this constructor call with the diamond operator ("<>").(ΰ
+u
+java:S2293Δ"YReplace the type specification in this constructor call with the diamond operator ("<>").(άο©δύÿÿÿÿ
+_
+java:S1192V"IDefine a constant instead of duplicating this literal "nickname" 5 times.(¦‹Άυ
+B
+java:S1172t",Remove this unused method parameter "event".(Φ—Ψ­
+L
+java:S2446Ν"0"notify" may not wake up the appropriate thread.(‚Έχώÿÿÿÿ
+L
+java:S2446Τ"0"notify" may not wake up the appropriate thread.(‚Έχώÿÿÿÿ
+u
+java:S2142η"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(δ Ή€
+U
+java:S1155δ">Use isEmpty() to check whether the collection is empty or not.(‡όσΪ
+F
+java:S1197"*Move the array designators [] to the type.(“έµψÿÿÿÿ
+s
+java:S2226."XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(ξΰίεωÿÿÿÿ

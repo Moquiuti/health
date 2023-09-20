@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Inserta nuevo usuario que firma para la licitacion
+ *
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ModificaEstadoProductoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ModificaEstadoProductoJSON.xsl"?>
+
+
+<ModificaEstadoProducto xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_ModificaProducto	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EliminarProducto');
+		IF US_ID>=0 THEN
+			v_ModificaProducto:=LICITACIONES_PCK.ModificarProducto(
+				US_ID,
+				'{@ID_PROD_LIC}',
+				'{@ID_PROD}',
+				NULL,	--11ene17	'{@REF_PROD}',
+				NULL,	--11ene17	No permitimos cambiar estos datos con este proceso	'{@DESC_PROD}',
+				NULL,	--11ene17	Marcas aceptables
+				NULL,	--11ene17	'{@UN_BA_PROD}',
+				'{@CANTIDAD_PROD}',
+				'{@PRECIO_PROD}',
+				'{@PRECIO_OBJ}',
+				'{@IVA_PROD}',
+				'{@ESTADO_PROD}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_ModificaProducto > 0 THEN
+				HTP.P('<OK>'||v_ModificaProducto||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModificaEstadoProducto>

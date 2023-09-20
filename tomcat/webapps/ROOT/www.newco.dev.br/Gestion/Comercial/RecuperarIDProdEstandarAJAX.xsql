@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Adjudica una unica oferta en la ficha de producto de la licitacion (FichaProductoLicitacionHTML.xsl)
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="RecuperarIDProdEstandarJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="RecuperarIDProdEstandarJSON.xsl"?>
+
+<RecuperarIDProdEstandar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperarIDProdEstandar');
+		IF US_ID>=0 THEN
+			v_res:=Catalogoprivado_v4_Pck.IDProductoEstandar(
+                                '{@IDEMPRESA}',
+                                '{@REF}'
+                            );
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res > '1' THEN
+				HTP.P('<OK>'||v_res ||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</RecuperarIDProdEstandar>

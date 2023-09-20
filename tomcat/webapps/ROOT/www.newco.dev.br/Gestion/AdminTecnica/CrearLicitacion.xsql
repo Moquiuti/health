@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	ultima revision 2ene17 20:00
+-->
+<?xml-stylesheet type="text/xsl" href="CrearLicitacionJSON.xsl"?>
+
+
+<CrearLicitacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NOMBRE" value="{@NOMBRE}"/>
+	
+	<!--	Datos que devolvera el PL/SQL	
+	<OK/>
+	<INTF_ID>101</INTF_ID>
+	-->	
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID				NUMBER;
+			v_IDLicitacion		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Descarga OC');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL: IntegracionRecepcion_pck.NuevaLicitacion {@US_ID}, {@NOMBRE}');
+
+				--IntegracionRecepcion_pck.NuevoFichero_XML('{@US_ID}','{@NOMBRE}');
+				v_IDLicitacion:=IntegracionRecepcion_pck.NuevaLicitacion
+				(
+					US_ID,					--	p_IDUsuario
+					NULL,					--	p_IDCentro
+					'{@INTF_ID}',			--	p_IDFichero
+					'{@IDSELECCION}'		--	p_IDSeleccion 16mar17
+				);
+				
+				HTP.P('<OK><LIC_ID>'||v_IDLicitacion||'</LIC_ID></OK>');
+			
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</CrearLicitacion>
+

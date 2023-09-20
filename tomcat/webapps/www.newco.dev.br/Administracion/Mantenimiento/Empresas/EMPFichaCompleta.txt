@@ -1,0 +1,4 @@
+18jul18	ET Ficha completa de alta de una empresa, solicitado por OHSJD para sus proveedores
+EMPDatosFinancieros.xsql,EMPUsuario.xsql,EMPCuentaBancaria.xsql,
+
+

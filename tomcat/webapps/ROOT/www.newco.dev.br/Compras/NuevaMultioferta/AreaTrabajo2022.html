@@ -1,0 +1,47 @@
+<!--
+	Area de Trabajo de "Enviar pedidos"
+	Ultima revision: ET 15feb22 12:00
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--	Estilos para colocar los iframes	
+		<style>
+			iframe {
+				display: block;
+				position: fixed;
+				left: 0;
+				border: none;
+				width: 100%;
+			}
+
+			#busqueda {
+			top: 0;
+			height: 52px;
+			}
+
+			#zonaTrabajo {
+			top: 53px;
+			height: 100%;
+			}
+
+		</style>-->
+		<title>MedicalVM</title>
+	</head>
+	<frameset rows="52px,*" frameborder="no" border="0" framespacing="0">
+
+		<!--	Frame que contiene el buscador	-->
+		<frame name="busqueda" src="Busqueda2022.xsql" scrolling="no" noresize="yes"/>
+
+		<!--	La zona de trabajo la deja en blanco	-->
+		<frame name="zonaTrabajo" src="PaginaEnBlanco2022.xsql" scrolling="auto" noresize="yes"/>
+	</frameset><noframes></noframes>
+	<!-- Convertimos de frameset a iframes
+	<body>
+		<iframe id="busqueda"  name="busqueda" scrolling="NO" noresize="noresize" src="Busqueda2022.xsql" />
+		<iframe id="zonaTrabajo" name="zonaTrabajo" noresize="noresize" scrolling="auto" src="PaginaEnBlanco2022.xsql"/>
+	</body>
+	-->
+</html>
+
+

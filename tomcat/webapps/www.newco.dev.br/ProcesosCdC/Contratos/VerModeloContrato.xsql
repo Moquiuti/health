@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de un contrato
+	Ultima revision: ET 10set18 10:23
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="VerModeloContratoHTML.xsl"?>
+
+<ModeloContrato xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<!--
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="CON_ID"/>
+-->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER(6);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Contrato');
+		IF US_ID > 0 THEN
+		
+			CONTRATOS_MODELOS_PCK.VerModeloContrato_XML(
+				US_ID,
+				'{@CON_MOD_ID}',
+				'S'
+			);
+
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModeloContrato>

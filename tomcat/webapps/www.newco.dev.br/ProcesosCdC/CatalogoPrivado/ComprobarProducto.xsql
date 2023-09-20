@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ComprobarProductoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ComprobarProductoHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param  name="IDPROVEEDOR"/>
+  <xsql:include-param  name="REFERENCIA"/>
+  <xsql:include-param  name="DESDE"/>
+  
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ComprobarProducto');	
+		  IF US_ID>=0 THEN	
+                    CATALOGOPRIVADO_PCK.COMPROBARPRODUCTO(
+                      US_ID,
+                      '{@IDPROVEEDOR}',
+                      '{@REFERENCIA}' 
+                    );
+        	  END IF;
+        	  
+                END;
+        ]]>
+  </xsql:include-owa>
+  
+  <botones> 
+    <button label="Cerrar" caption="IMG-0190">
+        <name_function>CerrarVentana</name_function>
+      </button>
+  </botones>
+  
+</Mantenimiento>

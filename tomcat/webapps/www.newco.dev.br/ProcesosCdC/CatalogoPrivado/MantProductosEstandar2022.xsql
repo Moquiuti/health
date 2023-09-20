@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guardar cambios en producto estándar
+	Ultima revisión:ET 24nov22 15:00
+-->
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantProductosEstandarHTML2022.xsl"?>
+
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param name="CATPRIV_IDEMPRESA"/>
+	<xsql:include-param name="VENTANA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="CATPRIV_REFERENCIA"/>
+	<xsql:include-param name="CATPRIV_PRECIOREFERENCIA"/>
+	<xsql:include-param name="CP_PRO_IDTEXTOLICITACION"/>
+	<xsql:include-param name="PRO_IDTIPOIVA"/>
+	<xsql:include-param  name="TIPO"/>	<!--24nov22-->
+	<xsql:include-param  name="STYLE"/>
+	<!--<xsql:include-param name="ACCION"/>-->
+	<ACCION>MODIFICARPRODUCTOESTANDAR</ACCION>
+        
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantProductoEstandar');
+		IF US_ID>=0 THEN
+		
+			utilidades_pck.debug('MantProductoEstandar.US_ID:'||US_ID||'ID:{@CATPRIV_ID}. Accion:{@ACCION}. IDProdTraspaso:{@IDPRODESTANDARTRASPASO} PrecioMax:{@CATPRIV_PRECIOMAXIMO}');
+		
+			IF '{@ACCION}' IS NOT NULL THEN
+			
+				IF '{@ACCION}'='MODIFICAR' OR '{@ACCION}'='MODIFICARPRODUCTOESTANDAR' OR '{@ACCION}'='NUEVOPRODUCTOESTANDAR' OR '{@ACCION}'='COPIARPRODUCTOESTANDAR' THEN
+					v_Res:=CATALOGOPRIVADO_MANT_PCK.MODIFICARPRODUCTOESTANDAR(
+						US_ID,
+						'{@CATPRIV_IDEMPRESA}',
+						'{@CATPRIV_IDSUBFAMILIA}',
+						'{@CATPRIV_IDGRUPO}',
+						'{@CATPRIV_ID}',
+						'{@CATPRIV_REFERENCIA}',
+						'{@CATPRIV_NOMBRE}',
+						'{@CATPRIV_DESCRIPCION}',
+						'{@CATPRIV_PRECIOREFERENCIA}',
+						null,										--'{@CATPRIV_PRECIOREFERENCIA_INVENTADO}',
+						null,										--'{@CATPRIV_PROVEEDOR_ANTERIOR}',
+						'{@CATPRIV_IDDIVISA}',
+						'{@CATPRIV_UNIDADBASICA}',					--28oct16	dato importante, permitimos editarlo de nuevo
+						null,										--'{@CATPRIV_CONSUMOESTIMADO}',
+						null,										--'{@CATPRIV_MUESTRA}',
+						null,										--'{@CATPRIV_COMENTARIOS}',
+						'{@CATPRIV_REFCLIENTE}',
+						'{@ACCION}',
+						'{@CATPRIV_PADRE}',
+						'{@CATPRIV_NOMBRE_PRIVADO}',				--20oct08	ET
+                    	'{@REQUIERELICITACION}',
+                    	'{@CP_PRO_IDTEXTOLICITACION}',
+                    	'{@MARCAS}',                        		--4mar15       mc
+                    	'{@PRO_IDTIPOIVA}',                			--4mar15       mc
+                    	'{@CURVA_ABC}',  			       			--18ene17      ET
+						--	3jul17	Campos avanzados
+						'{@CATPRIV_REFCLIENTE2}',
+						'{@CATPRIV_REFCLIENTE3}',
+						'{@CATPRIV_REFCLIENTE4}',					--17oct17	ET
+						'{@UNIDADMEDIABASE}',
+						'{@UNIDADPEDIDO}',
+						'{@RELACIONBASEPEDIDO}',
+						'{@STOCKMINIMO}',
+						'{@STOCKMAXIMO}',
+						'{@TIPOPRODUCTO}',
+						'{@LISTA_CENTROS}',
+						'{@REGULADO}',						--	24ene18
+						'{@COMPRAMENSUALUNIDADES}',			--	16mar18
+						'{@CP_PRO_ORDEN}',					--	17oct18
+						'{@CP_PRO_REGISTRO}',				--	20mar19
+						'{@CP_PRO_FECHACADREGISTRO}',		--	20mar19
+						'{@CP_PRO_ONCOLOGICO}',				--	20mar19
+						'{@CP_PRO_PRINCIPIOACTIVO}',		--	23dic20	ET
+						'{@CP_PRO_GRUPODESTOCK}',			--	4ene21	ET
+						'{@CATPRIV_PRECIOMAXIMO}',			--	11oct22	ET
+						'{@COMENTARIOSREGULADO}'			--	11oct22	ET
+					);
+
+				ELSIF '{@ACCION}'='MOVER' THEN
+
+					--	25jun12	Mover a otra ref. estándar
+					v_Res:=CATALOGOPRIVADO_MANT_PCK.MoverUnaReferencia(
+						US_ID,
+						'{@CATPRIV_ID}',
+						'{@MOVERAREFESTANDAR}'
+					);
+
+				ELSIF '{@ACCION}'='TRASPASO' THEN
+
+					--	17abr19	Mover a otra ref. estándar y desactivar
+					v_Res:=CATALOGOPRIVADO_MANT_PCK.Traspaso(
+						US_ID,
+						'{@CATPRIV_ID}',
+						'{@IDPRODESTANDARTRASPASO}'			--	sin esto da error en otras acciones
+					);
+
+				ELSIF '{@ACCION}'='REACTIVAR' THEN
+
+					--	23abr19	Reactivar
+					v_Res:=CATALOGOPRIVADO_MANT_PCK.Reactivar(
+						US_ID,
+						'{@CATPRIV_ID}'
+					);
+
+				END IF;
+
+				CATALOGOPRIVADO_MANT_PCK.PRODUCTOESTANDAR_XML(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDSUBFAMILIA}',
+					'{@CATPRIV_IDGRUPO}',
+					TO_NUMBER(utilidades_pck.Piece(v_Res,'|',0)),
+					utilidades_pck.Piece(v_Res,'|',1)
+				);
+
+			ELSE			
+
+				CATALOGOPRIVADO_MANT_PCK.PRODUCTOESTANDAR_XML(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDSUBFAMILIA}',
+					'{@CATPRIV_IDGRUPO}',
+					'{@CATPRIV_IDPRODUCTOESTANDAR}'
+				);
+
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<botones>
+	<button label="Aceptar" caption="CATPRIV-0110">
+		<name_function>GuardarProducto</name_function>
+		<param>document.forms[0]</param>
+	</button>
+
+	<button label="Copiar" caption="CATPRIV-0112">
+		<name_function>CopiarProducto</name_function>
+		<param>document.forms[0]</param>
+		<param>'NUEVOPRODUCTOESTANDAR'</param>
+	</button>
+
+	<button label="Mover" caption="CATPRIV-0117">
+		<name_function>MoverProducto</name_function>
+		<param>document.forms[0]</param>
+	</button>
+
+	<button label="Cancelar" caption="CATPRIV-0120">
+		<name_location>BuscadorFrame.xsql</name_location>
+	</button>
+
+	<button label="Cerrar" caption="CATPRIV-0115">
+		<name_function>window.close</name_function>
+	</button>
+</botones>
+</Mantenimiento>

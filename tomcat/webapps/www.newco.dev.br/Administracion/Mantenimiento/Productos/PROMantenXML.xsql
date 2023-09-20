@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de productos
+	Ultima revision: ET 2abr19 09:46
+ -->
+<!--
+<?xml-stylesheet type="text/xsl" href="PROMantenHTML.xsl"?>
+-->
+<MantenimientoProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="TIPO"/><!--	M: modificar producto existente		-->
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<Form name="AltaProductos"  method="post">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROBuscador');
+		IF US_ID>=0 THEN
+			MANTENIMIENTOPRODUCTOS_PCK.MostrarProducto ('{@PRO_ID}', US_ID);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Form>
+</MantenimientoProductos>

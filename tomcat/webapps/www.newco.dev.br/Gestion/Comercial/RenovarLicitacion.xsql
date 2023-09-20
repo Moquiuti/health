@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Renueva una licitacion en estado 'CONT' o 'CAD'
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="RenovarLicitacionJSON.xsl"?>
+
+<RenovarLic xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDLic		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RenovarLic');
+		IF US_ID>=0 THEN
+			v_IDLic:=LICITACIONESPEDIDOS_PCK.RenovarLicitacion
+			(
+				US_ID,
+				'{@LIC_ID}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDLic = -1 THEN
+				HTP.P('<\ERROR>');
+			ELSE
+				HTP.P('<OK>'||v_IDLic||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</RenovarLic>

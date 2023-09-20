@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+
+	Agenda: Presenta el calendario correspondiente a un Año
+
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="LanzamientosPedidosProgramadosSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="LanzamientosPedidosProgramadosSaveHTML.xsl"?>
+
+<GuardarVacaciones xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="VENTANA"/>
+  <xsql:include-param name="DESDEOFERTA"/>
+  <xsql:include-param name="STYLE"/>
+
+  <xsql:include-owa>
+  	DECLARE
+		US_ID	NUMBER;
+  	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LanzamientosSave');
+  		PEDIDOSPROGRAMADOS_PCK.ActualizarProgramaManual_XML(US_ID,'{@PEDP_ID}','{@RESULTADO}','{@ANYOS_VISITADOS}');
+	END;
+  </xsql:include-owa>
+  
+  
+  
+  <boton label="Cerrar" caption="IMG-0190">
+    <name_function>CerrarVentana</name_function> 
+  </boton> 
+    
+  <returnHome/>
+</GuardarVacaciones>
+

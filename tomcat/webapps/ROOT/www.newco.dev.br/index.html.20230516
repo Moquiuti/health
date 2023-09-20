@@ -1,0 +1,257 @@
+<!--
+	Pagina de inicio MVM para Espanna
+	Ultima revision: ET 18ene22 17:00
+-->
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/loginesMVM2022.css">
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-3.6.0.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/login2022_050122.js"></script>
+	<script type="text/javascript">
+
+	var errorLogin = 'Se ha producido un error al entrar el usuario o la contrasea.';
+
+	function CompruebaCookie(){
+
+    	var aceptoCookie = GetCookie('ACEPTO_COOKIE');
+
+    	if (aceptoCookie == '' || aceptoCookie == null) {
+            	//si no ha aceptado la cookie pongo aviso
+            	document.getElementById("avisoCookieBox").style.display = 'block';
+    	}
+    	else
+    	{
+            	document.getElementById("avisoCookieBox").style.display = 'none';
+    	}
+	}
+
+	function AceptaCookie(){
+
+    	SetCookie('ACEPTO_COOKIE','S');
+    	CompruebaCookie();
+	}
+
+   </script>
+   <title>Plataforma para la creaci&oacute;n de centrales de compra - MedicalVM.com</title>
+</head>
+<body onload="CompruebaHTTP('');CompruebaCookie();">
+	<div class="header">
+		<a href="#default" class="logo_es"></a>
+		<div class="menu_es">
+                     <!--<a href="#" class="itens_menu">MedicalVM</a>-->
+                        <a href="#Servicios" class="itens_menu">Servicios</a>
+                        <!--<a href="#" class="itens_menu">Clientes</a>-->
+                        <a href="#Clientes" class="itens_menu">Clientes / Proveedores</a>
+                        <a href="#Contacto" class="itens_menu">Contacto</a>
+                        <a href="http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPNuevaSimple2022.xsql?IDPAIS=34&PORTAL=MVM&INDEXLANG=spanish" class="itens_menu">Alta de proveedor</a>
+                        <a href="#RGPD" class="itens_menu">Protección de datos</a>
+		</div>
+	</div>
+		<div class="avisoCookie" id="avisoCookieBox" >
+			<div class="avisoCookieBox">
+                    <!--<p class="textoCookie">linea</p>
+                    <p class="textoCookie">2</p>
+                    <p class="textoCookie">3-->
+                    <a id="aceptaCookie" class="btnOscuro" href="javascript:AceptaCookie();">
+                    	<xsl:value-of select="document($doc)/translation/texts/item[@name='acepta']/node()"/>
+                    </a>
+                    </p>
+                </div>
+      	</div>
+	<div class="login_principal_login_es">
+		<div class="login_principal_interno_login_es">
+			<div class="quem_somos_login_es">
+				<h2>Medical Virtual Market</h2>
+				<p>MedicalVM  es una innovadora plataforma para la creaci&oacute;n de centrales de compra.<br><br>
+
+					MedicalVM aporta ahorros inmediatos y una gran rentabilidad a corto, medio y largo plazo a empresas de todos los tama&ntilde;os y sectores. Es especialmente potente para grupos empresariales y asociaciones que quieran ofrecer un servicio de central de compras a sus asociados.<br><br>
+					MedicalVM  incluye procedimientos para Catalogaci&oacute;n, Evaluaci&oacute;n de proveedores, Negociaci&oacute;n, Seguimiento de pedidos, Gesti&oacute;n de incidencias.<br><br>
+					MedicalVM  es muy escalable y puede ser adaptada para el uso desde peque&ntilde;os centros, a grandes grupos hospitalarios.<br><br>
+				M&aacute;s de 300 clientes y 5.000 proveedores trabajan con  MedicalVM en Espa&ntilde;a y Latinoam&eacute;rica.</p>
+			</div>
+			<div class="formulario_login_es">
+			<!--<div id="coluna_dereta_login_es" class="coluna_dereta_login_es">-->
+				<form name="frmLogin">
+				<input type="hidden" name="DOMINIO" value="{document($doc)/translation/texts/item[@name=$AP_Dominio]/node()}"/><!-- necesario para la cookie	-->
+				<input type="hidden" name="PARAMETRO" value=""/>
+				<div class="formulario_interno_login_es">
+					<div id="coluna_login_es" class="coluna_login_es">
+						<div class="col-sm-12">
+							<label class="label">Usuario</label>
+							<input name="USER" class="input_formulario" type="text">
+						</div>
+					</div>
+					<div id="coluna_login_es" class="coluna_login_es">
+						<div class="col-sm-12">
+							<label class="label">Contrase&ntilde;a</label>
+							<input name="PASS" class="input_formulario" type="password">
+							<div id="textoKO" class="alert_danger" style="display:none;">
+								Revise usuario y contrase&ntilde;a.
+							</div>
+							<div id="textoOK" style="display:none;">
+								Usuario correcto, entrando...
+							</div>
+						</div>
+					</div>
+					<div id="coluna_login" class="coluna_login">
+						<a class="botao_acessar" href="javascript:loginDirecto();">ENTRAR</a>
+                        <a class="esqueci_senha" href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/RecuperarClave.xsql?LANG=spanish','Recuperar Clave',30,20,-20,0);">Recuperar contrase&ntilde;a</a>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+        <a name="Servicios"></a>
+	<div class="informativo_login_es">
+		<div class="bloco_flutuante_login_es">
+			<div class="bloco_informativo_login_es">
+				<div class="bloco_informativo_interno_login_es">
+					<img src="images/2022/icones/computer.svg">
+					<h2>Plataforma de compras</h2>
+					<p>Cat&aacute;logo personalizado y optimizado, env&iacute;o de pedidos, potentes estad&iacute;sticas.</p>
+				</div>
+			</div>
+			<div class="bloco_informativo_login_es">
+				<div class="bloco_informativo_interno_login_es">
+					<img src="images/2022/icones/computer.svg">
+					<h2>Seguimiento de pedidos</h2>
+					<p>Seguimiento de pedidos, resoluci&oacute;n de incidencias, an&aacute;lisis de proveedores.</p>
+				</div>
+			</div>
+			<div class="bloco_informativo_login_es">
+				<div class="bloco_informativo_interno_login_es">
+					<img src="images/2022/icones/shopping_center.svg">
+					<h2>Central <br>de compras</h2>
+					<p>Creaci&oacute;n de una central de compras optimizada a medida del cliente.</p>
+				</div>
+			</div>
+			<div class="bloco_informativo_login_es">
+				<div class="bloco_informativo_interno_login_es">
+					<img src="images/2022/icones/aggregation.svg">
+					<h2>Agregaci&oacute;n <br>de compras</h2>
+					<p>Negociaciones conjuntas con condiciones consensuadas por los participantes.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+        <a name="Clientes"></a>
+	<div class="cliente_proveedor_login_es">
+		<div class="coluna_esquerda_login_es">
+			<div class="informativo_cliente_login_es">
+				<h2>Cliente</h2>
+				<ul>
+					<li>Optimizaci&oacute;n de los procedimientos de compras</li>
+					<li>Ahorro en precio de producto</li>
+					<li>Gesti&oacute;n de proveedores: calidad y servicio</li>
+					<li>Potentes informes para la direcci&oacute;n: gran transparencia</li>
+					<li>Reducci&oacute;n radical de costes administrativos</li>
+					<li>Integraci&oacute;n opcional con el ERP</li>
+				</ul>
+			</div>
+		</div>
+		<div class="coluna_direita_login_es">
+			<div class="informativo_proveedor_login_es">
+				<h2>Proveedor</h2>
+				<ul>
+					<li>Sin costes (MVM s&oacute;lo cobra al cliente)</li>
+					<li>Acuerdos comerciales a largo plazo, fidelizaci&oacute;n de clientes </li>
+					<li>Presencia comercial en todos los clientes MedicalVM </li>
+					<li>Presencia comercial en todos los clientes MedicalVM </li>
+					<li>Mayores ingresos, menos gastos, sin ning&uacute;n coste a&ntilde;adido</li>
+					<li>Integraci&oacute;n opcional con el ERP</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+        <a name="Contacto"></a>
+	<div class="logos_contatos_login_es">
+		<!--	Quitamos los logos de referencia
+		<div id="owl-demo" class="owl-carousel">
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+			<div class="item"><img src="img/cliente01.png" alt="Owl Image"></div>
+		</div>
+		-->
+		<div class="formulario_contato_login_es">
+			<div class="contato_login_es">
+				<h2>Contacte o solicite una presentaci&oacute;n:</h2>
+                <form name="Contacto">       
+					<input type="hidden" name="PAIS" value="34"/><!--ET 25abr22-->
+					<input type="hidden" name="PORTAL" value="MVM"/><!--ET 25abr22-->
+					<div id="coluna_formulario_login_es" class="coluna_formulario_login_es">
+						<div class="col-sm-8">
+							<label class="label">Empresa</label>
+							<input name="CONTACTO_EMPRESA" class="input_formulario" type="text">
+						</div>
+						<div class="col-sm-4">
+							<label class="label">Actividad</label>
+							<input name="CONTACTO_TIPO_EMP" class="input_formulario" type="text">
+						</div>
+					</div>
+					<div id="coluna_formulario_login_es" class="coluna_formulario_login_es">
+						<div class="col-sm-4">
+							<label class="label">Nombre</label>
+							<input name="CONTACTO_NOMBRE" class="input_formulario" type="text">
+						</div>
+						<div class="col-sm-4">
+							<label class="label">Telefono</label>
+							<input name="CONTACTO_TEL" class="input_formulario" type="text">
+						</div>
+						<div class="col-sm-4">
+							<label class="label">E-Mail</label>
+							<input name="CONTACTO_MAIL" class="input_formulario" type="text">
+						</div>
+					</div>
+					<div id="coluna_formulario_login_es" class="coluna_formulario_login_es">
+						<div class="col-sm-12">
+							<label class="label">Comentarios</label>
+							<textarea  name="CONTACTO_TEXT" rows="5" class="input_formulario"></textarea>
+						</div>
+					</div>
+					<div id="coluna_formulario_login_es" class="coluna_formulario_login_es">
+						<a id="botonContacto" class="botao_acessar" href="javascript:EnviaContacto(document.forms['Contacto'])">CONTACTE</a>
+					</div>
+					<div id="contactoOK" style="display:none;">
+						EL formulario de contacto se ha enviado correctamente. Le responderemos lo antes posible. Muchas gracias.
+					</div>
+     			</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="rodape_email_direita_login_es">
+			<p><b>Cont&aacute;ctanos:</b>comercial@medicalvm.com</p>
+		</div>
+	</div>
+        <a name="RGPD"></a>
+	<div class="rodape_login_es">
+		<div class="rodape_reservado_login_es">
+			<p><b>Sistemas de Informaci&oacute;n para la Direcci&oacute;n 2021 - Todos los derechos reservados</b></p>
+			<p>Aviso Legal - Registro: Sistemas de Informaci&oacute;n para la Direcci&oacute;n, S.L.. Calle Diagonal 612, 2o 9a - 08021 Barcelona. NIF: B62199906. Registrado en el Registro Mercantil de Barcelona, Tomo 32389, Folio 205, Secci&oacute;n general, Hoja B-209347, Prov. B, Inscripci&oacute;n 1.</p>
+			<br/>
+			<p><b>Informaci&oacute;n RGPD</b></p>
+			<p>Ep&iacute;grafe: Informaci&oacute;n b&aacute;sica</p>
+			<p>Responsable: Sistemas de Informaci&oacute;n para la Direcci&oacute;n, S.L</p>
+			<p>Finalidad: Gesti&oacute;n de clientes y proveedores</p>
+			<p>Legitimaci&oacute;n: Consentimiento del interesado en cumplimiento de una obligaci&oacute;n legal para recoger y tratar datos personales seg&uacute;n RGPD</p>
+			<p>Destinatarios: No se ceder&aacute;n datos a terceros, salvo obligaci&oacute;n legal</p>
+			<p>Derechos: Tiene derechos a acceder, rectificar y suprimir los datos, as&iacute; como no ser objeto de decisiones individuales automatizadas</p>
+			<p>Procedencia: Datos suministrados por el interesado</p>
+			<p>Informaci&oacute;n adicional: Consultar informaci&oacute;n adicional en Pol&iacute;tica Protecci&oacute;n de Datos</p>
+		</div>
+	</div>
+</body>
+</html>

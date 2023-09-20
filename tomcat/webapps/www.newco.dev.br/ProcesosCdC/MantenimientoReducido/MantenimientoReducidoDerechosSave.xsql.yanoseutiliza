@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ultima revision: ET 29mar18 09:31
+-->
+<?xml-stylesheet type="text/xsl" href="MantenimientoReducidoDerechosHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<FichaCatalogacionSave/>
+<xsql:include-param name="STYLE"/>
+
+	<xsql:include-owa>
+		<![CDATA[
+			DECLARE
+				US_ID	NUMBER;
+			BEGIN
+		  		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','FichaCatalogacionSave');
+		  		IF US_ID>=0 THEN
+					IF '{@DERECHOS_PLANTILLAS}' IS NOT NULL THEN
+						CATALOGOPRIVADO_V4_PCK.GuardarDerechosPlantillas2_XML(
+							US_ID, 
+							'{@DERECHOS_PLANTILLAS}',
+							'N',						--	21ago17	No devolvemos XML 'S'
+							'N'							--	'S'
+						);
+					END IF;
+
+					CATALOGOPRIVADO_V4_PCK.DerechosPlantillas_XML(
+						US_ID, 
+						'{@IDEMPRESA}',					--2set17	utilidades_pck.empresaDelUsuario(US_ID),
+						'{@IDPRODUCTO}',
+						NULL,
+						'S'
+					);
+					
+				END IF;
+			END;
+		]]>
+ 	</xsql:include-owa>	
+ 	
+</Mantenimiento>

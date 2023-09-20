@@ -1,0 +1,185 @@
+@import url('http://www.newco.dev.br/General/Fuentes/css?family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ecf0f1;
+}
+
+.content{
+    border-radius: 15px;
+    background-color: #fff;
+    height: 65%;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.first-content{
+    display: flex;
+}
+
+.second-column{
+    text-align: center;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form inputs{
+    height: 40px;
+    border: none;
+    width: 330px;
+    background-color: #ecf0f1;
+    margin: 8px;
+    align-self: center;
+}
+
+/* 2019 MVM */
+/*.img{
+    margin-bottom: 50px;
+}*/
+
+.box img{
+  width: 100%;
+  height: auto;
+}
+@supports(object-fit: cover){
+
+    .content{
+    border-radius: 15px;
+    background-color: #fff;
+    height: 65%;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .first-content{
+      height: 65%;
+      width: 330px; /*35%;*/
+      display: flex;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .second-column{
+      text-align: center;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .box img{
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+.form{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .form inputs{
+      height: 40px;
+      border: none;
+      width: 330px;
+      background-color: #ecf0f1;
+      margin: 8px;
+      align-self: center;
+    }
+}
+
+.btn{
+    border-radius: 4px;
+    color: #fff;
+    font-size:15px;
+    padding: 0px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 40px;
+    width: 330px;
+    font-display: Poppins-Medium;
+    line-height:1.2;
+    align-self: center;
+    border: none;
+    margin-top: 1em;
+}
+
+.btn-primary{
+    background-color: #24A6A5;
+    border: 1px solid #ecf0f1;
+}
+
+.btn-primary:hover{
+    background-color: #fff;
+    border: 1px solid #24A6A5;
+    color: #24A6A5;
+    transition: 0.5s;
+}
+
+.text{
+    text-align: start;
+    display: inline-block;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.text{
+    text-align: start;
+}
+
+div .loginOK{
+        background:#FFFFC8;
+        color: #446BAC;
+        border-style: dotted;
+        border-width:1px;
+        border-color: #446BAC;
+        padding: 5px 10px 5px 10px;
+        font-size:14px;
+        width:400px;
+}
+
+div .loginKO{
+        background:#FFFFC8;
+        color: #fb0d40;
+        border-style: dotted;
+        border-width:1px;
+        border-color: #fb0d40;
+        padding: 5px 10px 5px 10px;
+        font-size:14px;
+        width:400px;
+}
+
+/*
+    #24A6A5
+*/

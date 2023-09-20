@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |   Listado de Departamentos
+ |
+ |
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="DPListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="DPListaHTML.xsl"?>
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  
+  <xsql:query tag-case="upper">
+      <![CDATA[
+        select DP_ID as DP_ID,
+               DP_IDEMPRESA as EMP_ID,
+               DP_NOMBRE,
+               DP_IDRESPONSABLE,
+               NVL(TRIM(US_NOMBRE ||' '||US_APELLIDO1||' '||US_APELLIDO2),'[Sin responsable]') AS NOMBRE
+        from DEPARTAMENTOS, usuarios
+        where DP_idempresa = {@EMP_ID} 
+          and us_id (+) = dp_idresponsable
+        ]]>
+    <xsql:no-rows-query>
+        select 0 DP_ID,
+               {@EMP_ID} EMP_ID,
+               null DP_NOMBRE,
+               null DP_IDRESPONSABLE,
+               null AS NOMBRE
+        from dual
+    </xsql:no-rows-query>
+   </xsql:query>
+   
+ <ExtraButtons>
+    <!-- Para evitar el problema con los FORMS ANIDADOS -->
+    <formu name="dummy" action="none">
+    </formu>
+ 
+    <!-- Para el boton Anyadir -->  
+    <formu name="frmDept" action="DPManten.xsql">
+     <field type="hidden" name="EMP_ID">
+      <xsql:include-param name="EMP_ID"/>
+     </field>
+     <field type="hidden" name="DP_ID"><DP_ID>0</DP_ID> </field>
+     <button label="Insertar" caption="IMG-0540">
+      <name_function>document.forms['frmDept'].submit</name_function>
+     </button>     
+    </formu>
+  </ExtraButtons>   
+
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>    
+    <page>G-0010</page>
+    <caption>G-0001</caption>    
+  </jumpTo>   
+
+</Lista>

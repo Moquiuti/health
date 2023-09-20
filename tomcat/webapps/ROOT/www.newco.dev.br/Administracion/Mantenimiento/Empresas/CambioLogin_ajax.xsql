@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+	Guarda datos en la tabla CONDICIONESPROVEEDORES
+
+	Llamada ajax - no incluir juego de caracteres en la cabecera xml
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CambioLoginJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CambioLoginJSON.xsl"?>
+
+<CambioLogin xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="FORMA_PAGO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambioLogin');
+		IF US_ID>=0 THEN
+			v_res:=USUARIOS_PCK.CambiarLogin(
+				US_ID,
+				'{@ID_USUARIO}',
+				'{@US_USUARIO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+
+			IF v_res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CambioLogin>

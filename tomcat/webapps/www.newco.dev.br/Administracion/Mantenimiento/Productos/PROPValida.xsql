@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PROPValidaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PROPValidaHTML.xsl"?>
+
+<!--
+ |   
+ |  Validación de la Base de datos de Productos Propios
+ |
+ +-->
+
+<BusquedaProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <BuscForm name="frmValida"  method="post" action="PROPValidaSave.xsql">
+     
+    <button label="Aceptar" caption="IMG-0510">
+      <name_function>Linka</name_function>
+      <param>'PROPValidaSave.xsql'</param>
+    </button>  
+           
+  <jumpTo>
+    <picture-on>Cancelar_mov</picture-on>
+    <picture-off>Cancelar</picture-off>    
+    <page>G-0010</page>
+    <caption>G-0001</caption>
+    <status>G-0001</status>  
+  </jumpTo>
+          
+  </BuscForm>
+
+</BusquedaProductos>     

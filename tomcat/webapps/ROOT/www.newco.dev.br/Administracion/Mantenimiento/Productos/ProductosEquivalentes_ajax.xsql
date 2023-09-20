@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+	Llamada ajax - no incluir juego de caracteres en la cabecera xml
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ProductosEquivalentesJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ProductosEquivalentesJSON.xsl"?>
+
+<ProductosEquivalentes xmlns:xsql="urn:oracle-xsql" connection="newco">
+ 
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="IDEMPRESA_COMPRADORA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="LIC_OFE_ID"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="PRO_NOMBRE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_EquivalNew	NUMBER;
+			v_ProvEquiDespl	NUMBER;
+			v_ProvEquiMan	VARCHAR2(50);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ProductosEquivalentes, Nuevo');
+			IF US_ID>=0 THEN
+				IF '{@IDPROVEEDOR}' = 'PROV_MANUAL' THEN
+					v_ProvEquiDespl := NULL;
+				ELSE
+					v_ProvEquiDespl := '{@IDPROVEEDOR}';
+				END IF;
+
+				IF '{@PROVEEDOR}' = '' THEN
+					v_ProvEquiMan := NULL;
+				ELSE
+					v_ProvEquiMan := '{@PROVEEDOR}';
+				END IF;
+
+				--nuevo producto equivalente
+				IF '{@ACCION}' = 'NUEVO' THEN
+					v_EquivalNew := PRODUCTOSEQUIVALENTES_PCK.Nuevo(
+						US_ID,
+						'{@IDPROD}',
+						v_ProvEquiDespl,
+						v_ProvEquiMan,
+						'{@REFERENCIA}',
+						'{@NOMBRE}',
+						'{@MARCA}',
+						'{@COMENTARIOS}',
+						'{@IDESTADOEVAL}',
+						'{@IDFICHA}'
+					);
+
+					HTP.P(Utilidades_Pck.CabeceraXML);
+					IF v_EquivalNew > 0 THEN
+						HTP.P('<OK>'||v_EquivalNew||'</OK>');
+					ELSE
+						HTP.P('<ERROR/>');
+					END IF;
+				END IF;--fin de nuevo producto equivalente
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ProductosEquivalentes>

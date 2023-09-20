@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CVPendienteHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CVPendienteHTML.xsl"?>
+
+<Pendiente xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+<!-- End booking stuff -->
+  <jumpTo>
+    <picture-off>Home</picture-off>
+    <picture-on>Home_mov</picture-on>  
+    <page>G-0015</page>
+    <caption>G-0005</caption>
+  </jumpTo>
+</Pendiente>

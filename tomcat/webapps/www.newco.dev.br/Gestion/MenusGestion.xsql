@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Menus de Gestion y Administracion del Usuario
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MenusGestionHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MenusGestionHTML.xsl"?>
+
+<MenusGestion xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:set-stylesheet-param name="SES_ID" value="{@SES_ID}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MenusGestion');
+		IF US_ID>=0 THEN
+			Menus_PCK.MenusGestion(US_ID,'{@TIPOMENU}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<!--
+<xsql:query tag-case="upper" 
+	row-element="TIPOS" 
+	max-rows=""
+	rowset-element="">
+<![CDATA[
+		select	me_nombre, me_enlace
+		from 	menus, derechosmenus
+		where 	dm_idmenu=me_id
+			and dm_autorizado=1
+			and me_idtipo in (6,7)
+			and me_implementado='S'
+			and dm_idusuario={@US_ID}
+		order by	me_idtipo desc, me_orden
+]]>
+</xsql:query>
+-->
+</MenusGestion>

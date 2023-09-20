@@ -1,0 +1,18 @@
+--	7set17	Destacar estrellas
+--	27set17	Incluir color para indicar valoración documentación
+--	11oct17	Indicar los proveedores "integrados" que reciben PDF automático
+--	13oct17	Filtrar por seleccion
+--	24ene18	Mostrar la divisa correcta
+--	13abr18	Algunos errores en maquetación 
+--	13abr18	Incluir columnas
+--	13abr18	Añadir línea totales
+--	12jun18	Colombia: Mostrar colores nivel documentación, permitir ordenar por el nivel de documentación
+--	17ago18	Colombia: Incluir estado ficha proveedor, permitir ordenar por este campo
+
+
+PENDIENTE: 
+
+- Incluir nota compradores, nota sistema, nota calidad, servicio, precio
+(ordenación)
+- Incluir roturas de stock
+- Incluir formulario de valoración

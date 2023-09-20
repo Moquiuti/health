@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ 	Ultima revision: ET 27oct17 09:50
+-->
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EMPDocsHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EMPDocsHTML.xsl"?>
+-->
+<Docs xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<!--  obtenemos el vendedor para el usuario que esta visualizando la pagina de empresa -->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DocsEmpresa');
+		IF US_ID>0 THEN
+			--	HTP.P(Utilidades_Pck.CabeceraXML);
+			--	EMPRESAS_PCK.Mostrar(US_ID,NVL('{@EMP_ID}',Utilidades_Pck.EmpresaDelUsuario(US_ID)),'EMPRESA DESDE="Manten"', 'N');
+			DOCUMENTOS_PCK.FichaDocumentos(US_ID,NVL('{@EMP_ID}',Utilidades_Pck.EmpresaDelUsuario(US_ID)));
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Docs>

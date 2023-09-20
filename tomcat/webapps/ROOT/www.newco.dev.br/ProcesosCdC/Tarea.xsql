@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TareaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TareaHTML.xsl"?>
+
+<Tarea xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+  
+  <xsql:include-request-params/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Tarea');
+		  IF US_ID>=0 THEN
+                    Procesos_PCK.TareaXML
+			(
+				US_ID,
+				'{@IDTAREA}'
+			);
+                  end if;
+					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</Tarea>

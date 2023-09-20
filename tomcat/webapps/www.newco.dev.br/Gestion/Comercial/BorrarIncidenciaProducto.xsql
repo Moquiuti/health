@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Cambia el estado de la incidencia a 'B'
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BorrarIncidenciaProductoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BorrarIncidenciaProductoJSON.xsl"?>
+
+<BorrarIncidencia xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDIncidencia	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarIncidenciaProducto');
+		IF US_ID>=0 THEN
+			v_IDIncidencia:=INCIDENCIASPRODUCTOS_PCK.BorrarIncidencia(
+				US_ID,
+				'{@IDINCIDENCIA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDIncidencia > 0 THEN
+				HTP.P('<OK>'||v_IDIncidencia||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</BorrarIncidencia>

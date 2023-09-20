@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CatalogosClientesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CatalogosClientesHTML.xsl"?>
+<!--
+
+ |   Parametros de entrada EMP_ID
+ |
+ +-->
+<CatalogosClientes xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="TYPE"/>
+  <xsql:include-param name="VS"/>
+
+  <!--
+   |  Indica el modo en que hemos abierto la ventana.
+   |
+   |   VENTANA
+   |		ANTIGUA
+   |	        NUEVA
+   +-->
+  <xsql:include-param name="VENTANA"/>
+
+</CatalogosClientes>

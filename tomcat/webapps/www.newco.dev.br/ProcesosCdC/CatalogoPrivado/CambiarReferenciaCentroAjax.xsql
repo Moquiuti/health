@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+	Cambia la referencia de centro en el catalogo privado
+	Ultima revision ET 28mar23 11:55
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="CambiarReferenciaCentroJSON.xsl"?>
+
+<CambiarReferenciaCentro xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(12);
+		v_Res		VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DatosProducto');
+		IF US_ID>=0 THEN
+
+			v_res:=CatalogoPrivado_Centros_pck.CambiarReferenciaCentro(
+				US_ID,
+				'{@REFESTANDAR}',
+				'{@IDCENTRO}',
+				'{@REFERENCIA}'
+			);
+
+			HTP.P('<'||v_res||'/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CambiarReferenciaCentro>

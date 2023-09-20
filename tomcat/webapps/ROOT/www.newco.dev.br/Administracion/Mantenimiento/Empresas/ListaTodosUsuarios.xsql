@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListaTodosUsuariosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListaTodosUsuariosHTML.xsl"?>
+
+<ListaTodosUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <!--
+  	Listado de usuarios de una empresa o centro (segun derechos del usuario que realiza la consulta)
+	con el numero de carpetas y plantillas de cada uno.
+  -->
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+  
+  <xsql:include-request-params/>
+  
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISListado');
+		  IF US_ID>=0 THEN
+                    PROCEDURE ListaUsuarios_XML
+					(
+						p_IDUsuario                NUMBER,
+						p_Nombre                VARCHAR2,
+						p_TipoEmpresa            VARCHAR2,
+						p_Derechos                VARCHAR2,
+						p_DerechosEIS            VARCHAR2,
+						p_CDC                    VARCHAR2,
+						p_NavegarProveedores    VARCHAR2,
+						p_PedidosControlados    VARCHAR2,
+						p_AvisosCatalogos        VARCHAR2,
+						p_ControlAccesos        VARCHAR2,
+						p_VerOfertas            VARCHAR2,
+						p_BloquearOcultos        VARCHAR2,
+						p_ListaEmpresas            VARCHAR2,
+						p_ListaCentros            VARCHAR2,
+						p_Cabecera                VARCHAR2 DEFAULT 'S'   
+					)
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</ListaTodosUsuarios>

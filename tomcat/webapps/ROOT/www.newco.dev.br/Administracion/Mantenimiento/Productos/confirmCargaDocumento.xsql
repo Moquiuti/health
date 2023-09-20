@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Guardar documentos en base de datos
+	Ultima revision: ET 11feb20
+-->
+<?xml-stylesheet type="text/xsl" href="confirmCargaDocumento.xsl"?>
+
+<confirmCargaDocumento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<!--
+<xsql:include-param name="TIPO"/>
+<xsql:include-param name="PRO_BUSQUEDA"/>
+<xsql:include-param name="ID_USUARIO"/>
+<xsql:include-param name="HISTORY"/>
+<xsql:include-param name="ID_PROVEEDOR"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="CADENA_DOCUMENTOS"/>
+<xsql:include-param name="DOCUMENTOS_BORRADOS"/>
+<xsql:include-param name="BORRAR_ANTERIORES"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+-->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','confirmCargaDocumento');
+		IF US_ID>=0 THEN
+			DOCUMENTOS_PCK.GuardarDocumentos(
+				'{@CADENA_DOCUMENTOS}',
+				'{@DOCUMENTOS_BORRADOS}',
+				US_ID,
+				'{@ID_PROVEEDOR}',
+				'{@BORRAR_ANTERIORES}',
+				'{@TIPO_DOC}',
+				'{@IDCENTRO}',						--	11feb20
+				'{@PARAMETROS}'						--	11feb20 Para informar directamente el registro afectado
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</confirmCargaDocumento>

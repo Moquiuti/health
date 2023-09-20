@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EmpBuscaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EmpBuscaHTML.xsl"?>
+
+<BusquedaEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+ <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+    
+  <BuscForm name="BuscaEmpresa"  method="post">
+  
+    <!-- 
+     |   Tipos de empresa
+     +-->
+  
+    <field name="EMP_IDTIPO">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+          select 0 as ID,
+                '[Seleccione opcion]' as "listItem"
+          FROM DUAL
+          UNION        
+	  select *
+	  from tiposempresas
+        ]]>
+
+       <xsql:no-rows-query rowset-element="dropDownList" row-element="listElem">
+	  select 0 AS ID,
+                '[No existen tipos]' AS "listItem"
+	  from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    
+    <!--
+     |  Listado de los Tipos de Usuario
+     +-->
+    <field name="US_IDTIPO">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+                select TU_ID as "ID",  
+                       TU_DESCRIPCION as "listItem"
+                from TIPOSUSUARIOS
+        ]]>
+       <xsql:no-rows-query>
+          Select 'Sorry' "Sorry" from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    
+    <!--
+     |	Listado de las provincias
+     +-->
+    <field name="EMP_PROVINCIA">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+                select ZON_NOMBRE as "ID",  
+                       ZON_NOMBRE as "listItem"
+                from GEO_ZONAS
+                where ZON_IDPADRE IN (
+	                SELECT ZON_IDZONA
+	                from GEO_ZONAS
+	                where ZON_IDPADRE = 0
+		)
+		order by zon_nombre
+
+        ]]>
+       <xsql:no-rows-query>
+          Select 'Sorry' "Sorry" from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    
+  <!--
+     |	Listado de las especialidades
+     +-->
+    <xsql:include-owa>
+   <![CDATA[
+        ESPECIALIDADES_PCK.Listar ('EMP_ESPECIALIDAD');
+   ]]>
+  </xsql:include-owa> 
+        
+    <button label="Aceptar" caption="IMG-0470">       
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'EMPMantenSave.xsql?EMP_ID=0&amp;DESDE=Alta'</param>
+    </button>
+    
+    <jumpTo>
+      <picture-on>Cancelar</picture-on>
+      <picture-off>Cancelar_mov</picture-off>   
+      <page>G-0010</page>
+      <caption>IMG-0050</caption>
+    </jumpTo>
+    
+    <!--
+    <button label="Buscar" caption="IMG-0480">
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'EMPLista.xsql'</param>
+    </button>
+    -->
+    
+    
+  </BuscForm>
+
+<!--
+  
+-->
+</BusquedaEmpresas>
+

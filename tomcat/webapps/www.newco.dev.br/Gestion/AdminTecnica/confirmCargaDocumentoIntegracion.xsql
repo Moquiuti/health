@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmCargaDocumentoIntegracion.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmCargaDocumentoIntegracion.xsl"?>
+ 
+
+<confirmCargaDocumento xmlns:xsql="urn:oracle-xsql" connection="newco">
+     
+	<xsql:include-owa>
+	  <![CDATA[
+	    DECLARE
+		        US_ID		NUMBER;
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DetalleEmpresa');
+				IF US_ID>0 THEN
+					
+					utilidades_pck.debug('XSQL: llamando a INTEGRACION_PCK.NuevoFichero_XML. IDUsuario:'||US_ID||' Doc:'||'{@CADENA_DOCUMENTOS}');
+	   
+				   INTEGRACION_PCK.NuevoFichero_XML
+				   (
+			   			US_ID,
+						'{@CEN_ID}',
+						NULL,
+			   			'{@CADENA_DOCUMENTOS}'
+				   );
+	   		/*
+				DOCUMENTOS_PCK.GuardarDocumentos(
+					 '{@CADENA_DOCUMENTOS}', 
+					 '{@DOCUMENTOS_BORRADOS}', 
+					 US_ID, 
+					 '{@ID_PROVEEDOR}',
+					 '{@BORRAR_ANTERIORES}',
+					 '{@TIPO_DOC}'
+					);*/
+				END IF;
+				
+			END;
+	
+       ]]>	  
+	</xsql:include-owa>
+  
+</confirmCargaDocumento>
+

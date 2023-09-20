@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de comentarios para pedidos
+	Ultima revisión: ET 18may22 08:53
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="UltimosComentariosHTML.xsl"?>
+
+<Comentarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="NOMBRE_FORM" value="{@NOMBRE_FORM}"/>		<!--18may22 Para mostrar el boton de copiar comentario-->
+  <xsql:include-param name="NOMBRE_OBJETO" value="{@NOMBRE_OBJETO}"/>	<!--18may22 Para mostrar el boton de copiar comentario-->
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RepositorioComentarios');
+			
+			IF US_ID>=0 THEN
+			
+				--	11oct21 Acciones
+				IF '{@ACCION}'='GUARDARPORDEFECTO' THEN
+			 		REPOSITORIOCOMENTARIOS_PCK.GuardarPorDefecto
+					(
+			   			US_ID,
+			    		'{@DEFECTO_SEL}'
+			    	);
+					
+			 		REPOSITORIOCOMENTARIOS_PCK.Inicio_XML
+					(
+			    		US_ID,
+			    		'{@IDEMPRESA}',
+			    		'{@IDCENTRO}',
+			    		NULL,						--	'{@COMENTARIO}',
+			    		NULL,						--	'{@TIPO}',
+			    		NULL,						--	'{@ACCION}',
+			    		NULL,						--	'{@CAMBIOS}'
+			    		NULL,						--	'{@CLAUSULALEGAL}',
+			    		NULL						--	'{@INCLUIRSIEMPRE}',
+			    	);
+				ELSE
+					REPOSITORIOCOMENTARIOS_PCK.Inicio_XML(
+			    		US_ID,
+			    		'{@IDEMPRESA}',
+			    		'{@IDCENTRO}',
+			    		'{@IDCATEGORIA}',
+			    		'{@COMENTARIO}',
+			    		'{@CODIGO}',
+			    		'{@CLAUSULALEGAL}',
+			    		'{@INCLUIRSIEMPRE}',
+			    		'{@TIPO}',
+			    		'{@ACCION}',
+			    		'{@CAMBIOS}'
+			    		--,'20'
+			    	);
+				END IF;
+			END IF;
+		END;
+        ]]>
+  </xsql:include-owa>
+  
+  
+</Comentarios>  
+
+        

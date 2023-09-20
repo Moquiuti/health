@@ -1,0 +1,83 @@
+16nov16	ET Fichero de instrucciones y cambios para WFStatusHTML
+
+16nov16 ET multiples cambios propuestos por Breno: Cambio en colores y fuentes, Cambio en la distribución de los textos
+12dic16 ET Cambios para usuario de proveedor
+12dic16	ET Pedidos problematicos
+12dic16	ET Estado "Entregado" se muestra con link para el centro
+12dic16	ET Algunos cambios para adaptarse a cambios en los procedimientos
+12dic16	ET Resumen de ahorros para usuarios no ASISA (EMP_CATPRIV_PADRE=1)
+12dic16	ET Permitir a algunos clientes o proveedores realizar el seguimiento de pedidos
+12dic16	ET Adaptación nuevo diseño Breno
+4ene17	ET Quitar desplegable "tipo de pedido"
+13ene17	ET Más cambios para usuarios proveedor: reducir ancho "input", alinear textos largos a la izquierda,incluir fecha oferta en la tabla de licitaciones
+8feb17	ET Para usuarios "Empresa" o "MVM" incluir tabla de tareas para ver tareas recientes
+17mar17	ET No se están mostrando los abonos para los proveedores: incluir tabla de tareas
+7jun17	ET Los "pedidos pendientes de aprobación superior" tienen algunos problemas de formato: se muestra nombre largo en lugar de corto, titulo no traducido, etc
+23jun17	ET Mostrar el botón de enviar solo cuando hay cambios: más claro para el proveedor.
+21jul17 ET Incluir apartado de solicitud de oferta para proveedores
+25oct17	ET Columna de reclamaciones y ultima reclamación por pedido
+2nov17	ET Recuperar la divisa desde el XML
+8nov17	ET Incluir el usuario de control en el listado de pedidos pendientes de aprobación
+20dic17	ET Incluir total, marca de urgente, marca de "No llega a pedido minimo" en el listado de pedidos pendientes de aprobación
+28dic17	ET Incluir filtro y estado "REQUIERE ENVIO"
+29dic17	ET Permitir enviar reclamaciones a usuarios con control de pedidos
+4ene18	ET Ajustar colspan para el titulo de la bandeja de pedidos, ajustar anchos columnas
+11ene18	ET No se mostraba la divisa en el total final de pedidos
+22ene18 ET Permitir enviar información "consulta" con la funcionalidad de reclamaciones -> INICIO
+13feb18 ET Permitir enviar información "consulta" con la funcionalidad de reclamaciones -> FINAL, cambio javascript WFStatus_220118.js
+14mar18	ET Recuperar columna de fecha de pedido
+15mar18	ET Nuevo filtro "Incumple pedido mínimo". Quitar filtros farmacia y material.
+15mar18	ET Inclusión de indicadores en la cabecera de la página de inicio
+28may18 ET Licitaciones: icono de urgente cuando corresponda
+24jul18	ET Corregido error al preparar excel, no llegaba bien el parámetro "todos12meses", ni resto de checks por varios errores en la validación de los campos.
+13ago18 ET No se muestra correctamente el estado de los pedidos borrados
+2oct18	ET Resaltar "strong" el numero de pedido y en enlace al control de pedidos
+3dic18	ET Mejorar info de licitaciones para proveedores
+10dic18	ET Revisión info de licitaciones para proveedores: incluir leyenda estado
+17dic18 ET Quitar la divisa de los precios, incluirla en el encabezado
+10feb18 ET Pefil de usuario con proveedor oculto (solicitado por Center Group)
+18feb19 ET Incluir nombre del usuario aprobador para pedidos pendientes de aprobación
+20feb19	ET No suben bien los albaranes de proveedor. WFStatus_200919.js
+21feb19	ET Incluir nota "con IVA" en el total de pedidos en el caso de clientes que quieren ver el total con IVA
+25feb19 ET Textos personalizados (solicitado por CG)
+13jun19 ET Incluir documento en noticias
+29jul19 ET Botón gráfico "Leída" -> botón de texto
+30ago19 ET Cambios de terminología solicitados desde Brasil requieren crear nuevas entradas en texts*
+02set19 ET Cambios de terminología solicitados desde Brasil requieren crear nuevas entradas en texts*
+02set19 ET utilizar la página de WFStatusHTML para consultar únicamente pedidos, sin otros bloques de datos
+05set19 ET En caso de consultar "SOLO PEDIDOS", quitar los indicadores
+04oct19 ET Semáforo de aviso a los proveedores si no han publicado la oferta
+11oct19 ET Falta mostrar el centro en lugar de la empresa cuando sea posible
+16oct19 ET En el listado de PEDIDOS del proveedor, mostrar el buscador (adaptado para proveedor)
+24oct19 ET Mejoras en la presentación del documento albarán, aprovechando corrección de errores subiendo albarán en control de pedidos
+08ene20 ET Al realizar una búsqueda, pasar al modo "SOLO PEDIDOS". WFStatus_080120.js
+08ene20 ET En el modo "SOLO PEDIDOS" no mostrar abonos y pedidos pendientes de aceptación
+09ene20 ET Problemas en las buquedas para usuarios MULTICENTRO
+09ene20 ET El botón de "marcar como recibidos" permite filtrar por cliente y proveedor. WFStatus_090120.js
+17ene20 ET Indicador de entregas
+20ene20 ET Los indicadores hacen una búsqueda por el criterio correspondiente WFStatus_200120
+29ene20 ET Indicador de pedidos pendientes de aprobar. En las consultas desde indicador aumentar a 1000 pedidos por página. WFStatus_290120
+30ene20 ET Indicadores de licitaciones (activas, para cerrar hoy, con pedidos pendientes) WFStatus_300120.js
+05mar20 ET Información con la situiación del proceso de aprobación. WFStatus_050320.js
+11mar20 ET Quitar contacto email
+15may20 ET Para proveedores, incluso con "SOLO_PEDIDOS='S'" se mostraban los bloques de licitaciones, etc.
+19jun20 ET Cambiar texto para proveedores de "Enviado" a "Dt.Envio"
+15jul20 ET Marcar pedidos CONECTA/FEDERASSANTAS
+27ene21 ET Para proveedores, abrir pagina de documentos del pedido en lugar de subir directamente el albaran WFStatus_270121.js
+14jul21 ET Para proveedores, mostrar un texto en caso de documentacion incompleta WFStatus_160721.js
+30ago21 ET Incluir desplegable de cnetros de consumo (solicitado por Imbanaco)
+21dic21 ET Ocultar filtro motivo. Ampliar tamanno controles.
+10ene22 ET Multiples cambios solicitados por MVMB para proveedores: desplegable region, campo de texto para empresa/nif, quitar busqueda por producto, etc WFStatus_110122.js
+14ene22 ET Incluir paginacion para proveedores y compradores normales
+WFStatus_200122.js
+
+
+
+CUIDADO: el template de comprador "basico" no se está utilizando para usuarios de hospitales, quizas si en tiendas
+
+DESACTIVADO (PENDIENTE NUEVA VERSION):
+1.- 29nov16	El envío del formulario y recuperación de la página la hacemos vía Ajax
+2.- IMPORTANTE: QUITAR LAS CARGAS DE LIBRERIAS JS QUE SE HARÁ UNICAMENTE EN EL MainHTML
+
+
+

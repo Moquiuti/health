@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Solicitud via Ajax de datos de centro para incluirlos en lugar de entrega
+	Ultima revisión: ET 13jun18	16:22
+-->
+<?xml-stylesheet type="text/xsl" href="datosCentroJSON.xsl"?>
+
+<datosCentro xmlns:xsql="urn:oracle-xsql" connection="newco" >
+	<xsql:include-owa>
+		  <![CDATA[
+	
+	    	DECLARE
+		        US_ID		NUMBER;
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DetalleCentro');
+				IF US_ID>0 THEN
+				
+					centros_pck.DatosMinimosCentro_XML( '{@IDCENTRO}');	
+										
+				END IF;
+				
+			END;
+   		
+	      ]]>	  
+    	  
+	</xsql:include-owa>
+</datosCentro>
+

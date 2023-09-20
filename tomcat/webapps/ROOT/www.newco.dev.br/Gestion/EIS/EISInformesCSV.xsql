@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!-- 
+	Informe en formato CSV para ser abierto desde excel
+	Ultima revision: ET 15nov17
+	
+	Cuidado, al no estar fijado el encoding, se devuelve en UTF-8
+-->
+
+<?xml-stylesheet type="text/xsl" href="EISInformesCSV.xsl"?>
+
+<EISInformes xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="IDEMPRESA"/>
+<xsql:include-param name="IDCENTRO"/>
+<xsql:include-param name="IDINFORME"/>
+
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-request-params/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISInformes');
+		IF US_ID>=0 THEN
+			EISSEGUIMIENTO_PCK.Informe_XML(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDCENTRO}',				-- 20ago2015
+				'{@IDINFORME}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EISInformes>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Actualiza las cantidades de forma automatica para los productos de la licitacion que no corresponden con las unidades por lote del proveedor seleccionado
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ActualizarCantidadesJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ActualizarCantidadesJSON.xsl"?>
+
+<CantidadesActualizadas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="LISTA_PRODUCTOS"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_count		NUMBER;
+	BEGIN
+
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ActualizarCantidades');
+		IF US_ID>=0 THEN
+
+			v_count:=LICITACIONES_PCK.ActualizarCantidades(
+				US_ID,
+				'{@LIC_ID}',
+				'{@LISTA_PRODUCTOS}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_count > 0 THEN
+				HTP.P('<OK>'||v_count||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CantidadesActualizadas>

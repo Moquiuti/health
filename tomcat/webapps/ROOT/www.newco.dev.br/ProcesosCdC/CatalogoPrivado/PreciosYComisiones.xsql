@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Listado del catálogo privado
+	ultima revision: ET 20oct20 10:45
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="PreciosYComisionesHTML.xsl"?>
+
+<FamiliasYProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="VENTANA"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="ORIGEN"/>
+	<xsql:include-param name="TYPE"/>
+
+	<xsql:include-param name="IDCLIENTE"/>
+	<xsql:include-param name="IDINFORME"/>
+	<xsql:include-param name="IDCATEGORIA"/>
+	<xsql:include-param name="IDFAMILIA"/>
+	<xsql:include-param name="IDSUBFAMILIA"/>
+	<xsql:include-param name="IDGRUPO"/>
+	<xsql:include-param name="IDPROVEEDOR"/>
+	<xsql:include-param name="PRODUCTO"/>
+	<xsql:include-param name="PROVEEDOR"/>
+	<xsql:include-param name="IDCENTRO"/>
+	<xsql:include-param name="SINUSAR"/>
+	<xsql:include-param name="ADJUDICADO"/>
+	<xsql:include-param name="MES"/>
+	<xsql:include-param name="ANNO"/>
+	<xsql:include-param name="TIPOFILTRO"/>
+	<xsql:include-param name="IDPRODUCTO"/>
+
+	<xsql:include-param name="IDLICITACION"/>
+
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		PRODUCTO_ID	NUMBER := NULL;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PreciosYComisiones');
+		IF US_ID>=0 THEN
+
+			IF '{@IDPRODUCTO}' IS NOT NULL THEN
+				PRODUCTO_ID := '{@IDPRODUCTO}';
+			END IF;
+
+			CATALOGOPRIVADO_SEG_PCK.Listado_XML
+			(
+				US_ID,
+				'{@IDCLIENTE}',				--	'IDCliente'
+				'{@IDINFORME}',				--	'Comisiones'
+				'{@IDCATEGORIA}',
+				'{@IDFAMILIA}',
+				'{@IDSUBFAMILIA}',
+				'{@IDGRUPO}',
+				'{@IDPROVEEDOR}',
+				'{@PRODUCTO}',
+				'{@PROVEEDOR}',
+				'{@IDCENTROCLIENTE}',
+				'{@SINUSAR}',
+				'{@ADJUDICADO}',
+				'{@MES}',
+				'{@ANNO}',
+				'{@TIPOFILTRO}',			--	20oct20
+				PRODUCTO_ID,				-- solo MVM - Anyadir textbox al buscador para buscar por IDPRODUCTO (solo MVM)
+				'{@PRIMEROSPEDIDOS}',		-- solo MVM
+				'{@CON_CONSUMO}',			-- solo MVM
+				'{@SIN_CONSUMO}',			-- solo MVM
+				'{@CONSUMO_MINIMO}',		-- solo MVM
+				'{@INFORMAR_X_CENTRO}',		-- solo MVM
+				'{@IDLICITACION}',
+                '{@SOLO_PROD_ESTANDAR}',
+                '{@CON_CONTRATO}',			--	7jun17	Solo con contrato
+                '{@REGULADOS}',				--	16ene19	Regulados
+                '{@ORDEN1}',				--	16ene19	Solo Orden1
+				'{@SIN_STOCK}',				--	16ene19 Sin stock
+				'{@PROV_BLOQUEADO}',		--	16ene19 Proveedor bloqueado
+				'{@FLINEASPORPAGINA}',		--	17ago16
+				'{@PAGINA}',				--	17ago16
+				'{@ORDEN}',					--	18ene17
+				'{@TRASPASADOS}',			--	15nov19
+				'{@CLASIF_PROVISIONAL}',	--	15nov19
+				'{@GRUPODESTOCK}'			--	7ene21
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</FamiliasYProductos>

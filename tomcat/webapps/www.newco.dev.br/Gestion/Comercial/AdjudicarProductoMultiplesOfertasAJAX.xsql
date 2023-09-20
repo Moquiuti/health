@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Adjudica un producto en las licitaciones de seleccion multiple
+	Ultima revision: ET 23mar23
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="AdjudicarProductoMultiplesOfertasJSON.xsl"?>
+
+<SeleccionarProductos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdjudicarProductoMultiplesOfertasAJAX');
+		IF US_ID>=0 THEN
+			v_res:=Licitaciones_AdjudMult_pck.AdjudicarProducto(
+				US_ID,
+				'{@IDLIC}',
+				'{@IDPRODUCTOLIC}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = 'ERROR' THEN
+				HTP.P('<ERROR/>');
+			ELSE
+				HTP.P('<OK>'||v_res||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</SeleccionarProductos>

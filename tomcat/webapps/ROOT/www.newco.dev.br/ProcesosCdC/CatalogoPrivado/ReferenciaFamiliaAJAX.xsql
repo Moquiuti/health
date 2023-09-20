@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que devuelve la referencia de familia dado un IDFamilia -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ReferenciaFamiliaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ReferenciaFamiliaJSON.xsl"?>
+
+
+<ReferenciaFamilia xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDFAMILIA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_RefFamilia		VARCHAR2(5);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ReferenciaFamiliaAJAX');
+		IF US_ID>=0 THEN
+			v_RefFamilia := CATALOGOPRIVADO_V4_PCK.ReferenciaFamilia(
+				'{@IDFAMILIA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_RefFamilia = '-1' THEN
+				HTP.P('<ERROR/>');
+			ELSE
+				HTP.P('<OK>'||v_RefFamilia||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ReferenciaFamilia>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guardar datos de cuenta bancaria Nuevo disenno.
+	ultima revision: ET 9ene23 18:44
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EMPFichaCompletaHTML2022.xsl"?>
+
+<FichaEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<xsql:include-owa>
+	  <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPFichaCompleta');
+			IF US_ID>=0 THEN
+			
+				IF '{@EMP_ID}' IS NOT NULL AND '{@EMP_FIB_CODIGOBANCO}' IS NOT NULL THEN
+				
+					v_Res:=Empresas_FicComp_Pck.GuardarCuentaBancaria
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'{@ORDEN}',
+						'{@EMP_FIB_CODIGOBANCO}',
+						'{@EMP_FIB_TIPOCUENTA}',
+						'{@NUMEROCUENTA}',
+						'{@TITULARCUENTA}'
+					);
+				
+				END IF;
+			
+				Empresas_FicComp_Pck.Empresa_XML(US_ID,'{@EMP_ID}');
+			END IF;				   
+		END;
+	]]>
+	</xsql:include-owa>
+  
+</FichaEmpresa>
+

@@ -1,0 +1,2 @@
+04mar22 ET Nuevo disenno2022
+28set22 ET No funcionaba Desactivar/reactivar: estaba desactivado en el XSQL

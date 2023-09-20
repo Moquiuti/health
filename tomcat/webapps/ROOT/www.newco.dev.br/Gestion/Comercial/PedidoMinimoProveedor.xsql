@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+	Peticion que permite al proveedor introducir el valor de 'Pedido Minimo' para su oferta de la licitacion
+	Ultima revision: ET 11feb20 11:40
++-->
+<?xml-stylesheet type="text/xsl" href="PedidoMinimoProveedorJSON.xsl"?>
+
+<PedidoMinimo xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDLicProv	LIC_PROVEEDORES.LIC_PROV_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidoMinimoLicitacion');
+		IF US_ID>=0 THEN
+			v_IDLicProv:=LICITACIONES_PCK.PedidoMinimoProveedor(
+				US_ID,
+				'{@LIC_PROV_ID}',
+				'{@LIC_PROV_PEDIDOMINIMO}',
+				'{@LIC_PROV_COMENTARIOSPROV}',
+				'{@LIC_PROV_FRETE}',
+				'{@LIC_PROV_PLAZOENTREGA}',
+				'{@LIC_PROV_IDFORMAPAGO}',
+				'{@LIC_PROV_IDPLAZOPAGO}',
+				'{@LIC_PROV_IDDOCUMENTO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDLicProv > 0 THEN
+				HTP.P('<OK>'||v_IDLicProv||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</PedidoMinimo>

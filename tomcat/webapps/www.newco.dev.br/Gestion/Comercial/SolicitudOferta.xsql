@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  	Ficha de Solicitud de Oferta
+	Ultima revisión: ET 18jul17 13:25 
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SolicitudOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SolicitudOfertaHTML.xsl"?>
+
+<SolicitudOferta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="SO_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SolicitudOferta');
+		IF US_ID>=0 THEN		   
+			SOLICITUDESOFERTA_PCK.Solicitud_XML(
+				US_ID,
+				'{@SO_ID}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</SolicitudOferta>

@@ -1,0 +1,1 @@
+referencia producto|Nombre del Producto|Medida|Casificacion de empaque|unidad por empaque|Marca Producto|Laboratorio Fabricante|Clasificacion del Producto|Numero Registro INVIMA|Fecha Vencimiento Registro|Clasificacion de Riesgo| Valor Unitario |IVA|Descuento Comercial|Bonificación

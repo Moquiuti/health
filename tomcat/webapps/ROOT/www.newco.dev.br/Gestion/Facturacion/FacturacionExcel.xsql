@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="FacturacionExcelHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="FacturacionExcelHTML.xsl"?>
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Descarga Excel Facturacion');
+
+	 		IF US_ID > 0 THEN
+				FACTURACION_PCK.InformeCentros_Excel(
+					US_ID,
+          '{@IDPAIS}',
+          '{@MES}',
+          '{@ANNO}',
+          NVL('{@SOLOREMESAS}', 'N'),
+          '{@NOMBRE}'
+				);
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</DescargaExcel>

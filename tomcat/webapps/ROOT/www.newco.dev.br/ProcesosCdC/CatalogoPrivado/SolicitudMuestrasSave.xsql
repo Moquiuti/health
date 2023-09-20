@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SolicitudMuestrasSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SolicitudMuestrasSaveHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="READ_ONLY"/>
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SolicitudMuestras');	
+		  IF US_ID>=0 THEN
+                    EVAL_solicitudmuestras_PCK.solicitudmuestras(
+                      US_ID,
+                      '{@IDSOLICITUD}',
+                      null,
+                      '{@REFERENCIA}',
+                      '{@PRODUCTO}',
+                      '{@REFERENCIA_DEL_PROVEEDOR}',
+                      '{@PRODUCTO_DEL_PROVEEDOR}',
+                      '{@VALIDADO}',
+                      '{@NUMEROMUESTRAS}',
+                      '{@CHK_FICHATECNICA}',
+                      '{@CHK_CERTIFICADO}',
+                      '{@COMENTARIOS}',
+                      '{@ACCION}'
+	            );
+	            
+        	  END IF;
+        	  
+                END;
+        ]]>
+  </xsql:include-owa>
+  
+  <botones>
+
+     <button label="Cerrar" caption="CATPRIV-0680">
+      <name_function>CerrarVentana</name_function>
+    </button>
+    
+    
+  </botones>
+  
+ 
+</Mantenimiento>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+
+	Actualiza los estados de las tareas desde la lista de tareas
+	
+-->
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListaTareasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListaTareasHTML.xsl"?>
+
+<ListaTareas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <!--<xsql:include-param name="TIPO"/>-->
+  
+  <xsql:include-owa>
+  	DECLARE
+		US_ID	NUMBER;
+  	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Agenda: ListaTareas');
+  		Agenda_PCK.ActualizarEstadoTareas (US_ID,'{@FECHAACTIVA}','{@RESULTADO}');
+  		Agenda_PCK.ListaTareas_XML (US_ID,'{@IDUSUARIOAGENDA}','{@MODO}');
+	END;
+  </xsql:include-owa>
+    
+  <returnHome/>
+</ListaTareas>

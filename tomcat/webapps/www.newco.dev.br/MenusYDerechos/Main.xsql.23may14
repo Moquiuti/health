@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="MainHTML.xsl"?>
+
+<Main xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="LANG" value="{@LANG}"/>
+
+<!--	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="PARAMETRO"/>
+	<xsql:include-param name="PARAMETROBR"/>
+	<xsql:include-param name="MVMCOOKIE"/>
+	<xsql:include-param name="RESOLUCION"/>
+	<xsql:include-param name="RESOLUCIONBR"/>-->
+
+	<!-- Realiza la validacion del usuario	-->
+
+	<xsql:include-owa>
+	<![CDATA[
+		BEGIN
+			seguridad_pck.Login('{@PARAMETRO}'||'{@PARAMETROBR}','{@MVMCOOKIE}','{@RESOLUCION}'||'{@RESOLUCIONBR}','http://www.newco.dev.br/');
+		END;
+	]]>
+	</xsql:include-owa>
+
+
+	<!-- 27.03.14 - DC - Intento de guardar la cookie de SES_ID directamente como salida de la funcion -->
+<!--
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			SES_ID		NUMBER;
+		BEGIN
+			SES_ID := SEGURIDAD_PCK.Login_XML('{@PARAMETRO}'||'{@PARAMETROBR}','{@MVMCOOKIE}','{@RESOLUCION}'||'{@RESOLUCIONBR}','http://www.newco.dev.br/');
+			HTP.p('Set-Cookie: SESS_ID='||SES_ID||' path=/ expires=01-APR-2014');
+		END;
+	]]>
+	</xsql:include-owa>
+
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" name="SES_ID" value="{@SES_ID}"/>
+-->
+<!--
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" name="PARAMETRO" value=""/>
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" name="RESOLUCION" value=""/>
+-->
+	<!--	  Ponemos el parametro de sesion 	+-->
+<!--
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="US_ID SES_ID LANG">
+		SELECT US_ID,
+			SES_ID,
+			DECODE(US_IDIDIOMA,0,'spanish',2,'portugues','error')
+		FROM USUARIOS,
+			sesionesActivas
+		WHERE UPPER(US_USUARIO) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}'||'{@PARAMETROBR}',1))
+			AND UPPER(US_CLAVE) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}'||'{@PARAMETROBR}',2))
+			AND NVL(US_STATUS,' ') != 'B'
+			AND ses_idUsuario=us_id
+			AND ses_fecha=(select max(ses_fecha)
+					from sesionesactivas
+					where ses_idUsuario=(SELECT US_ID
+								FROM USUARIOS
+								WHERE UPPER(US_USUARIO) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}'||'{@PARAMETROBR}',1))
+									AND UPPER(US_CLAVE) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}'||'{@PARAMETROBR}',2))
+									AND NVL(US_STATUS,' ') != 'B'))
+	</xsql:set-cookie>
+-->
+	<!--  Modificamos el flag para que no actualize la cookie de nuevo
+	<xsql:dml>
+		UPDATE USUARIOS 
+			SET US_ACCION_COOKIE = 0
+			WHERE UPPER(US_USUARIO) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}',1))
+				AND UPPER(US_CLAVE) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}',2))
+				AND NVL(US_STATUS,' ') != 'B'
+	</xsql:dml> +-->
+
+	<jumpToClose>
+		<picture-off>Anterior</picture-off>
+		<picture-on>Anterior_mov</picture-on>  
+		<page>window.close();</page>
+		<caption>cerrar</caption>
+	</jumpToClose>
+
+	<button label="Enviar" caption="IMG-0100">
+		<name_function>Envia</name_function>
+		<param>document.forms['contactar']</param>
+		<param>'http://www.newco.dev.br/General/GError.xsql'</param>
+	</button>
+</Main>

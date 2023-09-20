@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Buscador del catálogo privado
+	Ultima revision: ET 14jul20 08:20
+-->
+<?xml-stylesheet type="text/xsl" href="BuscadorHTML.xsl"?>
+
+<Buscador xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="VENTANA"/>
+	<xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="ORIGEN"/>
+	<xsql:include-param name="TYPE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BuscCatPriv');
+		IF US_ID>=0 THEN
+			CATALOGOPRIVADO_SEG_PCK.Buscador_XML(US_ID, '{@IDEMPRESA}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</Buscador>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de noticias
+	Ultima revisión: ET 31may22 09:45
+-->
+<?xml-stylesheet type="text/xsl" href="VerTodasNoticiasHTML.xsl"?>
+
+<MantenimientoNoticias xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+  <![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoNoticias');
+		IF US_ID>=0 THEN
+		
+			utilidades_pck.debug('Noticias. XSQL. Accion:{@ACCION} Destacada:{@DESTACADA}');
+		
+			IF '{@ACCION}'='GUARDAR' THEN
+				Noticias_PCK.ActualizarNoticia_XML
+					(
+						US_ID,
+						'{@IDNOTICIA}',		--	ID de la noticia, NULL para noticia nueva
+						'{@FECHA}',			--	NULL para noticia nueva
+						'{@TITULO}',
+						'{@TEXTO}',
+						'{@COMENTARIOS}',	--	Comentarios sobre la noticia, NO OPERATIVO TODAVÍA
+						'{@ESTADO}',
+						'{@IDSELECCION}',
+						'{@ANCHOR}',
+						'{@URL}',
+                        '{@CADENA_IMAGENES}',
+                        '{@IMAGENES_BORRADAS}',
+						'{@IDPORTAL}',		--	ID de Portal
+						'{@IDDOCUMENTO}',	--	ID documento
+						'{@DESTACADA}'		--	Noticia destacada
+					);
+			ELSE
+				NOTICIAS_PCK.ListaNoticias_XML(US_ID,'S');
+			END IF;
+		END IF;
+	END;
+  ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</MantenimientoNoticias>

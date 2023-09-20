@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CertificadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CertificadoHTML.xsl"?>
+
+<Productos xmlns:xsql="urn:oracle-xsql" connection="newco" >
+
+  <xsql:include-param name="CERT_IMG"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+ 
+        
+  <button label="Cerrar" caption="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button> 
+  
+  <button label="Imprimir" caption="IMG-1490">
+    <name_function>window.print</name_function>  
+  </button>
+  
+</Productos>

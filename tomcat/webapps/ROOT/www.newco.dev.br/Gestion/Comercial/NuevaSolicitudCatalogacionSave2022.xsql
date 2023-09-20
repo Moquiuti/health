@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Nueva Solicitud de Catalogacion (SAVE). Nuevo disenno 2022.
+	Ultima revision: ET 16may22 10:20 SolicitudCatalogacion2022_130522.js
+-->
+<?xml-stylesheet type="text/xsl" href="NuevaSolicitudCatalogacionHTML2022.xsl"?>
+
+<NuevaSolicitud xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		SC_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevaSolicitudCatalogacionSave');
+		IF US_ID > 0 THEN
+			SC_ID:=SOLICITUDESCATALOGACION_PCK.NuevaSolicitud(
+				US_ID,
+				NULL,
+				NULL,
+				NULL,
+				NULL,
+				'{@SC_TITULO}',
+				'{@SC_REFCLIENTE}',
+				'{@SC_REFPROVEEDOR}',
+       			'{@SC_PRODUCTO}',
+				'{@SC_PROVEEDOR}',
+				'{@SC_DESCRIPCION}',
+				'{@SC_PRECIO}',
+				'{@SC_CANTIDAD}',
+				'{@SC_IDDOCSOLICITUD}'
+			);
+
+			IF SC_ID > 0 THEN
+        		SOLICITUDESCATALOGACION_PCK.Solicitud_XML(
+            		US_ID,
+            		SC_ID,
+            		'S'
+        		);
+
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevaSolicitud>

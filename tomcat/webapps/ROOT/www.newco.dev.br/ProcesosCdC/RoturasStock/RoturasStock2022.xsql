@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  	Buscador y Listado de Roturas de Stock
+	Ultima revision: ET 26ago19
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="RoturasStockHTML2022.xsl"?>
+
+<RoturasStock xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RoturasStock');
+		IF US_ID>=0 THEN
+		
+			IF '{@ACCION}' IS NOT NULL THEN
+				v_Res:=CONTROLSTOCKS_PCK.Accion(US_ID, '{@ACCION}','{@PARAMETRO}');
+			END IF;
+			   
+			CONTROLSTOCKS_PCK.Listado_XML(
+				US_ID,
+				'{@FIDCLIENTE}',
+				'{@FIDPROVEEDOR}',
+				'{@FTEXTO}',
+				'{@FIDESTADO}',
+				'{@FIDTIPO}',
+				v_Res
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</RoturasStock>

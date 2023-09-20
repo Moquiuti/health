@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	ultima revision	ET 31oct18 11:37
+-->
+<?xml-stylesheet type="text/xsl" href="EMPNuevaHTML2022.xsl"?>
+
+<BusquedaEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="ADMINISTRADORMVM"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <!--<xsql:include-param name="IDUSUARIO"/>
+  <xsql:include-param name="SES_ID"/>-->
+  <xsql:include-param name="EMP_IDPAIS"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPNueva, nueva');
+		  IF US_ID>=0 THEN
+            MantenimientoEmpresas_PCK.Nueva_XML(US_ID);
+          end if;
+        END;
+        ]]>
+  </xsql:include-owa>
+</BusquedaEmpresas>
+

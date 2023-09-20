@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	XSQL para el mantenimiento (borrar, cambiar estado) de pedidos
+	Ultima revision: ET 6jul20 18:00
+-->
+<?xml-stylesheet type="text/xsl" href="MANTPedidosHTML2022.xsl"?>
+
+<MantenimientoPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="MO_ID"/>
+  <xsql:include-param name="IDCLIENTE"/>
+  <xsql:include-param name="IDPROVE"/>
+  
+        <xsql:include-owa>
+          <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoPedidos');
+		  IF US_ID>=0 THEN
+               MANTENIMIENTOPEDIDOS_PCK.Inicio_XML(US_ID);
+          END IF;				   
+        END;
+        ]]>
+        </xsql:include-owa>
+  <returnHome/>
+</MantenimientoPedidos>
+

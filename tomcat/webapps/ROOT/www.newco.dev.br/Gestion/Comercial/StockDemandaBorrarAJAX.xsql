@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Cambia el estado de la demanda de stock a 'B'
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockDemandaBorrarJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockDemandaBorrarJSON.xsl"?>
+
+<StockDemandaBorrar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="SD_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID				NUMBER;
+		v_IDStockD	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockDemandaBorrar');
+		IF US_ID>=0 THEN
+			v_IDStockD:=ANUNCIOSSTOCKS_PCK.BorrarDemanda(
+				US_ID,
+				'{@SD_ID}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDStockD > 0 THEN
+				HTP.P('<OK>'||v_IDStockD||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</StockDemandaBorrar>

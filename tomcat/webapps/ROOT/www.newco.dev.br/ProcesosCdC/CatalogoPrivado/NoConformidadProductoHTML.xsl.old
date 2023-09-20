@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" />
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>  
+  <xsl:template match="/">
+
+<html>
+<head>
+<title>Informe de no conformidad de producto</title>
+  <xsl:text disable-output-escaping="yes"><![CDATA[
+    <link rel="stylesheet" href="http://www.newco.dev.br/General/Estilos.css" type="text/css">
+    <link rel="stylesheet" href="http://www.newco.dev.br/General/EstilosImprimir.css" type="text/css" media="print">
+    <script language="javascript" src="http://www.newco.dev.br/General/general.js"></script>
+    <script language="javascript">
+      <!--
+      
+        var valorNulo='-1';
+        
+        var msgNingunaFamilia='-- Ninguna Familia --';
+        var msgTituloFamilia='Todas las Familias';
+        
+        var msgNingunaSubfamilia='-- Ninguna Subfamilia --';
+        var msgTituloSubfamilia='Todas las Subfamilias';
+        
+        var msgNingunProductoEstandar='-- Ningún Producto Estándar --';
+        var msgTituloProductoEstandar='Todos los Productos Estándar';
+        
+        var msgNingunProveedor='-- Ningún Proveedor --';
+        var msgTituloProveedor='Todos los Proveedores';
+        
+        var msgNingunProducto='-- Ningún Producto --';
+        var msgTituloProducto='Todos los Productos';
+        
+      
+        //montamos los array con las familias, subfamilias, productosestandar, proveedores, productos 
+        
+        ]]></xsl:text>
+        
+          var arrayFamilias=new Array();
+          var arrayMaestroProductos=new Array();
+      
+          <xsl:for-each select="Mantenimiento/NOCONFORMIDAD/CATALOGOPRIVADO/FAMILIAS/FAMILIA">
+            arrayFamilias[arrayFamilias.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="REFERENCIA"/>','<xsl:value-of select="NOMBRE"/>');
+                                                          
+            var arraySubfamilias_<xsl:value-of select="ID"/>=new Array(); 
+            <xsl:for-each select="SUBFAMILIAS/SUBFAMILIA">
+              arraySubfamilias_<xsl:value-of select="../../ID"/>[arraySubfamilias_<xsl:value-of select="../../ID"/>.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="REFERENCIA"/>','<xsl:value-of select="NOMBRE"/>');
+              
+              var arrayProductosEstandar_<xsl:value-of select="ID"/>=new Array();
+              <xsl:for-each select="PRODUCTOSESTANDAR/PRODUCTOESTANDAR">
+                arrayProductosEstandar_<xsl:value-of select="../../ID"/>[arrayProductosEstandar_<xsl:value-of select="../../ID"/>.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="REFERENCIA"/>','<xsl:value-of select="NOMBRE"/>');
+                
+                var arrayProveedores_<xsl:value-of select="ID"/>=new Array(); 
+                <xsl:for-each select="PROVEEDORES/PROVEEDOR">
+                  arrayProveedores_<xsl:value-of select="../../ID"/>[arrayProveedores_<xsl:value-of select="../../ID"/>.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="NOMBRE"/>');
+                  
+                  var arrayProductos_<xsl:value-of select="ID"/>_<xsl:value-of select="../../ID"/>=new Array();
+                  arrayMaestroProductos[arrayMaestroProductos.length]='arrayProductos_<xsl:value-of select="ID"/>_<xsl:value-of select="../../ID"/>';
+                  <xsl:for-each select="PRODUCTOS/PRODUCTO">
+                    arrayProductos_<xsl:value-of select="../../ID"/>_<xsl:value-of select="../../../../ID"/>[arrayProductos_<xsl:value-of select="../../ID"/>_<xsl:value-of select="../../../../ID"/>.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="REFERENCIA"/>','<xsl:value-of select="NOMBRE"/>');
+                  </xsl:for-each>  
+                </xsl:for-each>          
+              </xsl:for-each>                     
+            </xsl:for-each>                       
+          </xsl:for-each>
+      
+        <xsl:text disable-output-escaping="yes"><![CDATA[
+        
+        function inicializarDesplegable(form,objName,elementoPorDefecto){
+          
+          switch(objName){
+            
+            ////////////////////////////////
+            //
+            //    FAMILIAS 
+            //
+            ////////////////////////////////
+            
+            case 'FAMILIAS':
+              
+              form.elements[objName].options.length=0;
+              
+              // montamos el desplegable de familias
+              
+              if(arrayFamilias.length==0){
+                var addOption=crearElemento(msgNingunaFamilia,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+              }
+              else{
+                var addOption=crearElemento(msgTituloFamilia,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+                
+                for(var n=0;n<arrayFamilias.length;n++){
+                  var addOption=crearElemento(arrayFamilias[n][2],arrayFamilias[n][0],elementoPorDefecto);
+                  asignarElemento(form,objName,addOption);
+                }
+              }
+              
+              asignarElementoSeleccionado(form,objName,elementoPorDefecto);
+              
+              // volvemos a llamar a la funcion para montar el desplegable de subfamilias
+              inicializarDesplegable(form,'SUBFAMILIAS',valorNulo);
+              
+            break;
+            
+            ////////////////////////////////
+            //
+            //    SUBFAMILIAS 
+            //
+            ////////////////////////////////
+            
+            case 'SUBFAMILIAS':
+            
+              var idFamilia=form.elements['FAMILIAS'].value;
+              form.elements[objName].options.length=0;
+              
+              
+              // montamos el desplegable de subfamilias
+              
+              // miramos si la familia selecionada es 'TODAS', si lo es recorremos todas las subfamilias
+              
+              var algunElemento=0;
+              
+              if(idFamilia==valorNulo){
+                for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                  var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                  if(arraySubfamilias.length>0){
+                    algunElemento=1;
+                  }
+                }
+              }
+              else{
+                var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                if(arraySubfamilias.length>0){
+                    algunElemento=1;
+                }
+              }
+              
+              if(!algunElemento){
+                var addOption=crearElemento(msgNingunaSubfamilia,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+              }
+              else{
+                var addOption=crearElemento(msgTituloSubfamilia,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+                
+                if(idFamilia==valorNulo){
+                  for(var n=0;n<arrayFamilias.length;n++){
+                    var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                    for(var i=0;i<arraySubfamilias.length;i++){
+                      var addOption=crearElemento(arraySubfamilias[i][2],arraySubfamilias[i][0],elementoPorDefecto);
+                      asignarElemento(form,objName,addOption);
+                    } 
+                  }
+                }
+                else{
+                  var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                  for(var i=0;i<arraySubfamilias.length;i++){
+                    var addOption=crearElemento(arraySubfamilias[i][2],arraySubfamilias[i][0],elementoPorDefecto);
+                    asignarElemento(form,objName,addOption);
+                  } 
+                }
+                
+              }
+              
+              asignarElementoSeleccionado(form,objName,elementoPorDefecto);
+              
+              // volvemos a llamar a la funcion para montar el desplegable de productosestandar
+              inicializarDesplegable(form,'PRODUCTOSESTANDAR',valorNulo);
+            
+            break;
+            
+            ////////////////////////////////
+            //
+            //   PRODUCTOSESTANDAR 
+            //
+            ////////////////////////////////
+            
+            case 'PRODUCTOSESTANDAR':
+            
+              var idFamilia=form.elements['FAMILIAS'].value;
+              var idSubfamilia=form.elements['SUBFAMILIAS'].value
+              
+              form.elements[objName].options.length=0;
+              
+              // montamos el desplegable de productosestandar
+              
+              // miramos si la subfamilia selecionada es 'TODAS', si lo es miamos si la familia seleccionada es TODAS
+              // si lo es recorremos todas las familias
+              
+              var algunElemento=0;
+              
+              if(idSubfamilia==valorNulo){
+                if(idFamilia==valorNulo){
+                  for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                    var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                    for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                      var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                      if(arrayProductosEstandar.length>0){
+                        algunElemento=1;
+                      }
+                    }
+                  }
+                } 
+                else{
+                  var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                  for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                    var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                    if(arrayProductosEstandar.length>0){
+                      algunElemento=1;
+                    }
+                  }
+                }
+              }
+              else{
+                var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                if(arrayProductosEstandar.length>0){
+                  algunElemento=1;
+                }
+              }
+              
+              
+              if(!algunElemento){
+                var addOption=crearElemento(msgNingunProductoEstandar,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+              }
+              else{
+                var addOption=crearElemento(msgTituloProductoEstandar,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+                
+                
+                
+                
+                if(idSubfamilia==valorNulo){
+                  if(idFamilia==valorNulo){
+                    var algunElemento=0;
+                    for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                      var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                      for(var i=0;i<arraySubfamilias.length;i++){
+                        var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                        for(var k=0;k<arrayProductosEstandar.length;k++){
+                          var addOption=crearElemento(arrayProductosEstandar[k][2],arrayProductosEstandar[k][0],elementoPorDefecto);
+                          asignarElemento(form,objName,addOption);
+                        }
+                      }
+                    }
+                  } 
+                  else{
+                    var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                    for(var i=0;i<arraySubfamilias.length;i++){
+                      var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                      for(var k=0;k<arrayProductosEstandar.length;k++){
+                        var addOption=crearElemento(arrayProductosEstandar[k][2],arrayProductosEstandar[k][0],elementoPorDefecto);
+                        asignarElemento(form,objName,addOption);
+                      }
+                    }
+                  }
+                }
+                else{
+                  var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                  for(var k=0;k<arrayProductosEstandar.length;k++){
+                    var addOption=crearElemento(arrayProductosEstandar[k][2],arrayProductosEstandar[k][0],elementoPorDefecto);
+                    asignarElemento(form,objName,addOption);
+                  }
+                } 
+              }
+              
+              asignarElementoSeleccionado(form,objName,elementoPorDefecto);
+              
+              // volvemos a llamar a la funcion para montar el desplegable de proveedores
+              inicializarDesplegable(form,'PROVEEDORES',valorNulo);
+  
+            break;
+            
+            ////////////////////////////////
+            //
+            //      PROVEEDORES
+            //
+            ////////////////////////////////
+            
+            case 'PROVEEDORES':
+            
+              var idFamilia=form.elements['FAMILIAS'].value;
+              var idSubfamilia=form.elements['SUBFAMILIAS'].value;
+              var idProductoEstandar=form.elements['PRODUCTOSESTANDAR'].value
+              
+              
+              form.elements[objName].options.length=0;
+              
+              // montamos el desplegable de proveedores
+              
+              // miramos si la subfamilia selecionada es 'TODAS', si lo es miramos si la familia seleccionada es TODAS
+              // si lo es miramos si los Productos estandar son 'TODOS' si lo es recorremos todas las familias
+              
+              var algunElemento=0;
+              
+              if(idProductoEstandar==valorNulo){
+                if(idSubfamilia==valorNulo){
+                  if(idFamilia==valorNulo){
+                    for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                      var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                      for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                        var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                        for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                          var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[j][0]);
+                          if(arrayProveedores.length>0){
+                            algunElemento=1;
+                          }
+                        }
+                      }
+                    }
+                  } 
+                  else{
+                    var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                    for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                      var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                      for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                        var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[j][0]);
+                        if(arrayProveedores.length>0){
+                          algunElemento=1;
+                        }
+                      }
+                    }
+                  }
+                }
+                else{
+                  var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                  for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                    var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[j][0]);
+                    if(arrayProveedores.length>0){
+                      algunElemento=1;
+                    }
+                  }
+                }
+              }
+              else{
+                var arrayProveedores=eval('arrayProveedores_'+idProductoEstandar);
+                if(arrayProveedores.length>0){
+                  algunElemento=1;
+                }
+              }
+              
+              
+              
+              if(!algunElemento){
+                var addOption=crearElemento(msgNingunProveedor,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+              }
+              else{
+                var addOption=crearElemento(msgTituloProveedor,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+                
+                
+                
+                
+                if(idProductoEstandar==valorNulo){
+                  if(idSubfamilia==valorNulo){
+                    if(idFamilia==valorNulo){
+                      var algunElemento=0;
+                      for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                        var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                        for(var i=0;i<arraySubfamilias.length;i++){
+                          var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                          for(var k=0;k<arrayProductosEstandar.length;k++){
+                            var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[k][0]);
+                            for(var j=0;j<arrayProveedores.length;j++){
+                              if(!elementoYaInsertado(form,objName,arrayProveedores[j][0])){
+                                var addOption=crearElemento(arrayProveedores[j][1],arrayProveedores[j][0],elementoPorDefecto);
+                                asignarElemento(form,objName,addOption);
+                              }
+                            }
+                          }
+                        }
+                      }
+                    } 
+                    else{
+                      var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                      for(var i=0;i<arraySubfamilias.length;i++){
+                        var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                        for(var k=0;k<arrayProductosEstandar.length;k++){
+                          var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[k][0]);
+                          for(var j=0;j<arrayProveedores.length;j++){
+                            if(!elementoYaInsertado(form,objName,arrayProveedores[j][0])){
+                              var addOption=crearElemento(arrayProveedores[j][1],arrayProveedores[j][0],elementoPorDefecto);
+                              asignarElemento(form,objName,addOption);
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  else{
+                    var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                    for(var k=0;k<arrayProductosEstandar.length;k++){
+                      var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[k][0]);
+                      for(var j=0;j<arrayProveedores.length;j++){
+                        if(!elementoYaInsertado(form,objName,arrayProveedores[j][0])){
+                          var addOption=crearElemento(arrayProveedores[j][1],arrayProveedores[j][0],elementoPorDefecto);
+                          asignarElemento(form,objName,addOption);
+                        }
+                      }
+                    }
+                  } 
+                }
+                else{
+                  var arrayProveedores=eval('arrayProveedores_'+idProductoEstandar);
+                  for(var j=0;j<arrayProveedores.length;j++){
+                    if(!elementoYaInsertado(form,objName,arrayProveedores[j][0])){
+                      var addOption=crearElemento(arrayProveedores[j][1],arrayProveedores[j][0],elementoPorDefecto);
+                      asignarElemento(form,objName,addOption);
+                    }
+                  }
+                }
+              }
+              
+              asignarElementoSeleccionado(form,objName,elementoPorDefecto);
+              
+              // volvemos a llamar a la funcion para montar el desplegable de productos
+              inicializarDesplegable(form,'PRODUCTOS',valorNulo);
+            
+            break;
+            
+            ////////////////////////////////
+            //
+            //      PRODUCTOS
+            //
+            ////////////////////////////////
+            
+            case 'PRODUCTOS':
+            
+              var idFamilia=form.elements['FAMILIAS'].value;
+              var idSubfamilia=form.elements['SUBFAMILIAS'].value;
+              var idProductoEstandar=form.elements['PRODUCTOSESTANDAR'].value;
+              var idProveedor=form.elements['PROVEEDORES'].value;
+              
+              
+              form.elements[objName].options.length=0;
+              
+              // montamos el desplegable de proveedores
+              
+              // miramos si la subfamilia selecionada es 'TODAS', si lo es miramos si la familia seleccionada es TODAS
+              // si lo es miramos si los Productos estandar son 'TODOS' si lo es miramos si los proveedores es 'TODOS' 
+              // recorremos todas las familias
+              
+              var algunElemento=0;
+              
+              if(idProveedor==valorNulo){
+                if(idProductoEstandar==valorNulo){
+                  if(idSubfamilia==valorNulo){
+                    if(idFamilia==valorNulo){
+                      for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                        var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                        for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                          var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                          for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                            var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[j][0]);
+                            for(var g=0;g<arrayProveedores.length && !algunElemento;g++){
+                              var arrayProductos=eval('arrayProductos_'+arrayProveedores[g][0]+'_'+arrayProductosEstandar[j][0]);
+                              if(arrayProductos.length>0){
+                                algunElemento=1;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    } 
+                    else{
+                      var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                      for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                        var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                        for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                          var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[j][0]);
+                          for(var g=0;g<arrayProveedores.length && !algunElemento;g++){
+                            var arrayProductos=eval('arrayProductos_'+arrayProveedores[g][0]+'_'+arrayProductosEstandar[j][0]);
+                            if(arrayProductos.length>0){
+                              algunElemento=1;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  else{
+                    var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                    for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                      var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[j][0]);
+                      for(var g=0;g<arrayProveedores.length && !algunElemento;g++){
+                        var arrayProductos=eval('arrayProductos_'+arrayProveedores[g][0]+'_'+arrayProductosEstandar[j][0]);
+                        if(arrayProductos.length>0){
+                          algunElemento=1;
+                        }
+                      }
+                    }
+                  }
+                }
+                else{
+                  var arrayProveedores=eval('arrayProveedores_'+idProductoEstandar);
+                  for(var g=0;g<arrayProveedores.length && !algunElemento;g++){
+                    var arrayProductos=eval('arrayProductos_'+arrayProveedores[g][0]+'_'+idProductoEstandar);
+                    if(arrayProductos.length>0){
+                      algunElemento=1;
+                    }
+                  }
+                }
+              }
+              else{
+                if(idProductoEstandar==valorNulo){
+                  if(idSubfamilia==valorNulo){
+                    if(idFamilia==valorNulo){
+                      for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                        var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                        for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                          var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                          for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                            if(existeArrayProductos('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[j][0])){
+                              var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[j][0]);
+                              if(arrayProductos.length>0){
+                                algunElemento=1;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    } 
+                    else{
+                      var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                      for(var i=0;i<arraySubfamilias.length && !algunElemento;i++){
+                        var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                        for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                          if(existeArrayProductos('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[j][0])){
+                            var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[j][0]);
+                            if(arrayProductos.length>0){
+                              algunElemento=1;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  else{
+                    var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                    for(var j=0;j<arrayProductosEstandar.length && !algunElemento;j++){
+                      if(existeArrayProductos('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[j][0])){
+                        var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[j][0]);
+                        if(arrayProductos.length>0){
+                          algunElemento=1;
+                        }
+                      }
+                    }
+                  }  
+                }
+                else{
+                  var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+idProductoEstandar);
+                  if(arrayProductos.length>0){
+                    algunElemento=1;
+                  }
+                }
+              }
+              
+              
+              
+              if(!algunElemento){
+                var addOption=crearElemento(msgNingunProducto,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+              }
+              else{
+                var addOption=crearElemento(msgTituloProducto,valorNulo,elementoPorDefecto);
+                asignarElemento(form,objName,addOption);
+                
+                
+                
+                
+                if(idProveedor==valorNulo){
+                  if(idProductoEstandar==valorNulo){
+                    if(idSubfamilia==valorNulo){
+                      if(idFamilia==valorNulo){
+                        var algunElemento=0;
+                        for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                          var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                          for(var i=0;i<arraySubfamilias.length;i++){
+                            var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                            for(var k=0;k<arrayProductosEstandar.length;k++){
+                              var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[k][0]);
+                              for(var j=0;j<arrayProveedores.length;j++){
+                                var arrayProductos=eval('arrayProductos_'+arrayProveedores[j][0]+'_'+arrayProductosEstandar[k][0]);
+                                for(var g=0;g<arrayProductos.length;g++){
+                                  if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                                    var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                                    asignarElemento(form,objName,addOption);
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      } 
+                      else{
+                        var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                        for(var i=0;i<arraySubfamilias.length;i++){
+                          var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                          for(var k=0;k<arrayProductosEstandar.length;k++){
+                            var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[k][0]);
+                            for(var j=0;j<arrayProveedores.length;j++){
+                              var arrayProductos=eval('arrayProductos_'+arrayProveedores[j][0]+'_'+arrayProductosEstandar[k][0]);
+                              for(var g=0;g<arrayProductos.length;g++){
+                                if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                                  var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                                  asignarElemento(form,objName,addOption);
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    else{
+                      var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                      for(var k=0;k<arrayProductosEstandar.length;k++){
+                        var arrayProveedores=eval('arrayProveedores_'+arrayProductosEstandar[k][0]);
+                        for(var j=0;j<arrayProveedores.length;j++){
+                          var arrayProductos=eval('arrayProductos_'+arrayProveedores[j][0]+'_'+arrayProductosEstandar[k][0]);
+                          for(var g=0;g<arrayProductos.length;g++){
+                            if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                              var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                              asignarElemento(form,objName,addOption);
+                            }
+                          }
+                        }
+                      }
+                    } 
+                  }
+                  else{
+                    var arrayProveedores=eval('arrayProveedores_'+idProductoEstandar);
+                    for(var j=0;j<arrayProveedores.length;j++){
+                      var arrayProductos=eval('arrayProductos_'+arrayProveedores[j][0]+'_'+idProductoEstandar);
+                      for(var g=0;g<arrayProductos.length;g++){
+                        if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                          var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                          asignarElemento(form,objName,addOption);
+                        }
+                      }
+                    }
+                  }
+                }
+                else{
+                  if(idProductoEstandar==valorNulo){
+                    if(idSubfamilia==valorNulo){
+                      if(idFamilia==valorNulo){
+                        var algunElemento=0;
+                        for(var n=0;n<arrayFamilias.length && !algunElemento;n++){
+                          var arraySubfamilias=eval('arraySubfamilias_'+arrayFamilias[n][0]);
+                          for(var i=0;i<arraySubfamilias.length;i++){
+                            var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                            for(var k=0;k<arrayProductosEstandar.length;k++){
+                              if(existeArrayProductos('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[k][0])){
+                                var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[k][0]);
+                                for(var g=0;g<arrayProductos.length;g++){
+                                  if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                                    var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                                    asignarElemento(form,objName,addOption);
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      } 
+                      else{
+                        var arraySubfamilias=eval('arraySubfamilias_'+idFamilia);
+                        for(var i=0;i<arraySubfamilias.length;i++){
+                          var arrayProductosEstandar=eval('arrayProductosEstandar_'+arraySubfamilias[i][0]);
+                          for(var k=0;k<arrayProductosEstandar.length;k++){
+                            if(existeArrayProductos('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[k][0])){
+                              var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[k][0]);
+                              for(var g=0;g<arrayProductos.length;g++){
+                                if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                                  var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                                  asignarElemento(form,objName,addOption);
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    else{
+                      var arrayProductosEstandar=eval('arrayProductosEstandar_'+idSubfamilia);
+                      for(var k=0;k<arrayProductosEstandar.length;k++){
+                        if(existeArrayProductos('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[k][0])){
+                          var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+arrayProductosEstandar[k][0]);
+                          for(var g=0;g<arrayProductos.length;g++){
+                            if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                              var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                              asignarElemento(form,objName,addOption);
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  else{
+                    var arrayProductos=eval('arrayProductos_'+idProveedor+'_'+idProductoEstandar);
+                    for(var g=0;g<arrayProductos.length;g++){
+                      if(!elementoYaInsertado(form,objName,arrayProductos[g][0])){
+                        var addOption=crearElemento(arrayProductos[g][2],arrayProductos[g][0],elementoPorDefecto);
+                        asignarElemento(form,objName,addOption);
+                      }
+                    }
+                  }
+                }
+              }
+              
+              asignarElementoSeleccionado(form,objName,elementoPorDefecto);
+            
+            break;
+          }
+        }
+        
+        
+        
+        
+        
+        function elementoYaInsertado(form,objName,valor){
+          for(var n=0;n<form.elements[objName].options.length;n++){
+            if(form.elements[objName].options[n].value==valor){
+              return true;
+            }
+          }
+          return false;
+        }
+        
+        function crearElemento(texto,id,elementoPorDefecto){
+          
+          var textoTmp;
+          
+          if(id==elementoPorDefecto){
+            textoTmp='['+texto+']';
+          }
+          else{
+            textoTmp=texto;
+          }
+        
+          var addOption=new Option(textoTmp,id);
+          
+          return addOption;
+        }
+        
+        function asignarElemento(form,objName,opcion){
+          form.elements[objName].options[form.elements[objName].options.length]=opcion;
+        }
+        
+        function asignarElementoSeleccionado(form,objName,elementoPorDefecto){
+          var encontrado=0;
+          for(var n=0;n<form.elements[objName].options.length && !encontrado;n++){
+            if(form.elements[objName].options[n].value==elementoPorDefecto){
+              encontrado=1;
+              form.elements[objName].selectedIndex=n;
+            }
+          }
+          if(!encontrado){
+            form.elements[objName].selectedIndex=0;
+          }
+        }
+        
+        function obtenerIdAmpliado(nombre,posicion){
+          var nombreTmp=nombre+'_';
+
+          var posicionPrimero=-1;
+          var posicionSegundo=-1;
+
+          var encontrados=0;
+
+          var id;
+
+          for(var n=0;n<nombreTmp.length-1;n++){
+            if(nombreTmp.substring(n,n+1)=='_'){
+              encontrados++;
+              if(encontrados==posicion){
+                posicionPrimero=n;
+              }
+              else{
+                if(encontrados==posicion+1){
+                  posicionSegundo=n;
+                }
+              }
+            }
+          }
+          if(posicionPrimero!=-1 && posicionSegundo!=-1){
+            id=nombreTmp.substring(posicionPrimero+1,posicionSegundo);
+          }
+          else{
+            id=-1;
+          }
+
+          return id;
+        }
+        
+        function existeArrayProductos(nombreArray){
+        
+          for(var n=0;n<arrayMaestroProductos.length;n++){
+            if(nombreArray==arrayMaestroProductos[n]){
+              return true;
+            }
+          }
+          return false;
+        }
+
+      
+     //-->
+    </script>
+    ]]></xsl:text>
+  </head>
+
+<body bgcolor="#FFFFFF">
+  <xsl:choose>
+  <xsl:when test="//SESION_CADUCADA">
+    <xsl:apply-templates select="//SESION_CADUCADA"/> 
+  </xsl:when>
+  <xsl:when test="//ROWSET/ROW/Sorry">
+    <xsl:apply-templates select="//ROWSET/ROW/Sorry"/> 
+  </xsl:when>
+  <xsl:otherwise>
+  <xsl:attribute name="onLoad">inicializarDesplegable(document.forms['form1'],'FAMILIAS',-1);</xsl:attribute>
+  
+<p align="center" class="tituloPag">Informe de no conformidad de producto</p>
+
+<form name="form1" method="post" action="NoConformidadProductoSave.xsql">
+
+  <table width="90%" border="0" align="center">
+    <tr> 
+      <td align="center">
+  <table width="100%" border="0" cellspacing="1" cellpadding="3" class="muyoscuro">
+    <tr class="oscuro"> 
+      <td class="oscuro" align="center">
+        Informe de no conformidad de producto
+      </td>
+    </tr>
+    <tr class="blanco"> 
+      <td height="18" class="blanco">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+          <tr>
+            <td> 
+              <table width="100%" border="0" cellspacing="1" cellpadding="3" class="muyoscuro" align="center">
+                <tr  class="blanco">
+                  <td width="20%" class="claro" align="right">
+                    <b>Número de Informe:</b>
+                  </td>
+                  <td width="35%"  class="blanco">
+                    <font color="NAVY" size="2">
+    	              <b><xsl:value-of select="Mantenimiento/NOCONFORMIDAD/NUMERO"/></b>
+    	            </font>
+                  </td>
+                  <td width="25%" align="right" class="claro">
+                    <b>Fecha:</b>
+                  </td>
+                  <td width="*"  class="blanco">
+                    <font color="NAVY" size="2">
+    	              <b><xsl:value-of select="Mantenimiento/NOCONFORMIDAD/FECHA"/></b>
+    	            </font>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td> 
+              <table width="100%" border="0" cellspacing="1" cellpadding="3" align="center" class="muyoscuro">
+                <tr class="blanco">
+                  <td width="20%" class="claro" align="right">Responsable de compras:
+                  </td>
+                  <td width="35%" valign="middle" class="blanco">
+                    <xsl:value-of select="Mantenimiento/NOCONFORMIDAD/RESPONSABLE"/>
+                    <input type="hidden" name="IDRESPONSABLE" value="{Mantenimiento/NOCONFORMIDAD/IDRESPONSABLE}"/>
+                  </td>
+                  <td width="25%" class="claro" align="right">Centro:
+                  </td>
+                  <td width="*" valign="middle" class="blanco">
+                    <xsl:value-of select="Mantenimiento/NOCONFORMIDAD/CENTRO"/>
+                    <input type="hidden" name="IDCENTRO" value="{Mantenimiento/NOCONFORMIDAD/IDCENTRO}"/>
+                  </td>
+                </tr>
+                <tr class="blanco">
+                  <td class="claro" align="right">Responsable no conformidad:<span class="camposObligatorios">*</span>
+                  </td>
+                  <td valign="middle" class="blanco">
+                    <input type="text" name="IDRESPONSABLEACTA" value="{ID}" size="60" maxlength="100"/>
+                  </td>
+                  <td class="claro" align="right">Cargo responsable no Conformidad:<span class="camposObligatorios">*</span>
+                  </td>
+                  <td valign="middle" class="blanco">
+                    <input type="text" name="IDRESPONSABLEACTA" value="{ID}" size="30" maxlength="100"/>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table width="100%" border="0" cellspacing="1" cellpadding="3" class="muyoscuro">
+                <tr  class="oscuro">
+                  <td colspan="4" class="oscuro"><b>Datos del producto:</b><br/><br/></td>
+                </tr>
+                      <tr class="blanco" align="center">
+                        <td class="claro" align="right" width="15%">
+                          Familia de productos:
+                        </td>
+                        <td class="blanco" align="left" width="33%">
+                          <select name="FAMILIAS" onChange="inicializarDesplegable(document.forms['form1'],this.name,this.value);"/>
+                        </td>
+                        <td class="claro" align="right" width="17%">
+                          Subfamilia de productos:
+                        </td>
+                        <td class="blanco" align="left" width="*">
+                          <select name="SUBFAMILIAS" onChange="inicializarDesplegable(document.forms['form1'],this.name,this.value);"/>
+                        </td>
+                      </tr>
+                      <tr class="blanco" align="center">
+                        <td  class="claro" align="right">
+                          Producto estándar:
+                        </td>
+                        <td class="blanco" align="left" colspan="3">
+                          <select name="PRODUCTOSESTANDAR" onChange="inicializarDesplegable(document.forms['form1'],this.name,this.value);"/>
+                        </td>
+                      </tr>
+                      <tr class="blanco" align="center">
+                        <td  class="claro" align="right">
+                          Proveedor:
+                        </td>
+                        <td class="blanco" align="left" colspan="3">
+                          <select name="PROVEEDORES" onChange="inicializarDesplegable(document.forms['form1'],this.name,this.value);"/>
+                        </td>
+                      </tr>
+                      <tr class="blanco" align="center">
+                        <td  class="claro" align="right">
+                          Producto:<span class="camposObligatorios">*</span>
+                        </td>
+                        <td class="blanco" align="left" colspan="3">
+                          <select name="PRODUCTOS" onChange="inicializarDesplegable(document.forms['form1'],this.name,this.value);"/>
+                        </td>
+                      </tr>
+                      <tr class="blanco" align="center">
+                        <td  class="claro" align="right">
+                          Descripción:<span class="camposObligatorios">*</span>
+                        </td>
+                        <td class="blanco" align="center" colspan="3">
+                          &nbsp;
+                          <textarea name="COMENTARIOS" cols="80" rows="5">
+                            <xsl:value-of select="Mantenimiento/ACTA_EVALUACION/COMENTARIOS"/>
+                          </textarea>
+                        </td>
+                      </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr> 
+  </table>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  Los campos marcados con (<span class="camposObligatorios">*</span>) son obligatorios.
+  </td>
+  </tr>
+   </table>
+  <br/>
+  <br/>
+      <table width="100%">
+        <tr align="center"> 
+          <xsl:choose>
+            <xsl:when test="//Mantenimiento/READ_ONLY='S' or //Mantenimiento/ACTA_EVALUACION/STATUS>40">
+              <td>
+                <xsl:call-template name="boton">
+                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Cancelar']"/>
+                </xsl:call-template>
+              </td>
+              <td>
+                <xsl:call-template name="boton">
+                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Imprimir']"/>
+                </xsl:call-template>
+              </td>
+    	    </xsl:when>
+    	    <xsl:otherwise> 
+    	      <td>
+                <xsl:call-template name="boton">
+                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Cancelar']"/>
+                </xsl:call-template>
+              </td>
+              <td>
+                <xsl:call-template name="boton">
+                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Borrar']"/>
+                </xsl:call-template>
+              </td>
+              <td>
+                <xsl:call-template name="boton">
+                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Guardar']"/>
+                </xsl:call-template>
+              </td>
+              <td>
+                <xsl:call-template name="boton">
+                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Imprimir']"/>
+                </xsl:call-template>
+              </td>
+              <td>
+                <xsl:call-template name="boton">
+                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='CerrarActa']"/>
+                </xsl:call-template>
+              </td> 
+    	    </xsl:otherwise>
+    	  </xsl:choose>
+        </tr>
+      </table>
+  
+</form>
+<p>&nbsp; </p>
+</xsl:otherwise>
+</xsl:choose>
+  </body>
+  </html>
+</xsl:template>
+
+
+<xsl:template match="Status/BORRADO">
+
+
+  <p class="tituloPag">
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0600' and @lang=$lang]" disable-output-escaping="yes"/>
+  </p>
+  <hr/>
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0610' and @lang=$lang]" disable-output-escaping="yes"/>
+  <br/> 
+  <br/> 
+  <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="//Mantenimiento/botones/button[@label='Cerrar']"/>
+            </xsl:call-template>
+   
+</xsl:template> 
+
+<xsl:template match="Status/CERRADO">
+
+
+  <p class="tituloPag">
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0611' and @lang=$lang]" disable-output-escaping="yes"/>
+  </p>
+  <hr/>
+  <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0612' and @lang=$lang]" disable-output-escaping="yes"/>
+  <br/> 
+  <br/> 
+  <xsl:call-template name="boton">
+              <xsl:with-param name="path" select="//Mantenimiento/botones/button[@label='Cerrar']"/>
+            </xsl:call-template>
+   
+</xsl:template> 
+
+<xsl:template name="COMBO_PREVISION">
+      <xsl:param name="nombre"/>
+      <xsl:param name="IDAct"/>
+      <xsl:param name="onChange"/>
+      <xsl:call-template name="desplegable">
+    	<xsl:with-param name="path" select="/Mantenimiento/field[@name='COMBO_PREVISION']"/>
+    	<xsl:with-param name="nombre"><xsl:value-of select="$nombre"/></xsl:with-param>
+    	<xsl:with-param name="defecto"><xsl:value-of select="$IDAct"/></xsl:with-param>
+    	<xsl:with-param name="onChange"><xsl:value-of select="$onChange"/></xsl:with-param>
+    </xsl:call-template>
+</xsl:template>
+
+
+</xsl:stylesheet>

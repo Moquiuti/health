@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<EIS xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  
+       <!-- 
+         Ejemplo:
+                IDINDICADOR = 1
+                ANNO = 1999
+                FILTRO = 'CANTIDAD >= 200'
+                AGRUPAPOR = -1 | 1
+        EIS_PCK.ConsultaBD('1','2000','','-1');
+        EIS_PCK.ConsultaBD('{@IDINDICADOR}','{@ANNO}','{@FILTRO}','{@AGRUPAPOR}'); 
+        
+        
+        Annadir indicador de sesion
+        
+        /EIS/EISConsultaBD.xsql?SESION=FFFF&CUADROMANDO=1&ANNO=1999&INDICADORES=(Codigo,Filtro,Agrupacion,FiltroManual),(Cod,...)
+        EIS_PCK.ConsultaBD('{@CUADROMANDO}','{@ANNO}','({@INDICADORES})');                     
+Indicadores incluye los campos: IDINDICADOR, FILTROPREDEFINIDO, AGRUPACION,
+FILTROMANUAL separados por comas
+
+  
+       -->
+      <xsql:include-owa>
+        EIS_PCK.ConsultaBD('{@CUADROMANDO}','{@ANNO}','{@INDICADORES}');
+      </xsql:include-owa>
+
+</EIS>
+

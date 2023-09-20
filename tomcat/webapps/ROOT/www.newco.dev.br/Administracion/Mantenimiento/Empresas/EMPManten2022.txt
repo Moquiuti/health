@@ -1,0 +1,3 @@
+06jul22 ET Al guardar la empresa, se vuelve al disenno antiguo. Se produce un error con el campo de comentarios comerciales.
+
+

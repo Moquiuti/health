@@ -1,0 +1,437 @@
+/*	
+	CSS para el area publica de la web de MedicalVM
+	13dic16		Primeras pruebas
+	Ultima revision: 9ene17 08:48 20190226 CentralCG
+*/
+
+/*border: 1px solid #ffff00;	 para pruebas	*/
+
+
+body{
+	font-family:Open Sans Regular, Verdana, Arial,sans-serif;
+}
+
+div.todo{
+	top: 0;
+	left: 0;
+	width:100%;
+	/*background:#446BAC;*/
+}
+
+div.cabecera{
+	top: 0;
+	left: 0;
+	position: fixed;
+	height:100px;
+	width:100%;
+	background:#FFFFFF;
+}
+
+div.logo{
+	margin-top: 20px;
+	margin-left: 100px; 
+	margin-right: 100px; 
+	display:inline-block;
+}
+
+div.loginOK{
+	background:#FFFFC8;
+	color: #446BAC;
+	border-style: dotted;
+	border-width:1px;
+	border-color: #446BAC; 
+	padding: 5px 10px 5px 10px;
+	font-size:14px;
+	width:400px;
+}
+
+div.loginKO{
+	background:#FFFFC8;
+	color: #fb0d40;
+	border-style: dotted;
+	border-width:1px;
+	border-color: #fb0d40; 
+	padding: 5px 10px 5px 10px;
+	font-size:14px;
+	width:400px;
+}
+
+/*	El "nav" ya ejerce como un "div" propio
+div.menu{
+	display:inline-block;
+}*/
+
+div.separador{
+	position: fixed;
+	/*position:absolute;*/
+	top:100px;
+	height:20px;
+	width:100%;
+	background:#F7F7F7;
+}
+
+div.avisoCookie{
+	top:15px;
+	position: fixed;
+	height:100px;
+	width:100%;
+	background:#F7F7F7;
+}
+
+div.avisoCookieBox{
+	margin-top: 10px;
+	margin-left: 10px; 
+}
+
+
+div.centro{
+	margin-top: 0px; 
+	width:100%;
+	margin-left: 100px; 
+	/*margin-top: 120px;*/
+	vertical-align:middle;
+}
+
+div.textocentro{
+	width:500px;
+	display:inline-block;
+}
+
+div.login{
+	display:inline-block;
+	vertical-align:top;	
+	/*background-image: url("http://www.newco.dev.br/images/ordenhospitalaria/ImagenConFondoAzul.png");*/
+	width:600px;
+	height:600px;
+}
+
+div.loginBox{
+	margin-top:150px;
+	margin-left:140px;
+}
+
+div.zonados{
+	margin-top:0;
+	padding-top: 40px; 
+	padding-bottom: 40px;
+	width:100%;
+	background:#F7F7F7;
+}
+
+div.zonatres{
+	margin-top:120px;
+	width:100%;
+	height:250px;
+}
+
+div.cliente{
+	margin-left: 100px; 
+	display:inline-block;
+}
+
+div.proveedor{
+	margin-left: 100px; 
+	display:inline-block;
+}
+
+div.servicios{
+	padding-top: 40px; 
+	padding-bottom: 40px;
+	margin-left: 100px; 
+}
+
+div.servicio{
+	top: 0; 
+	vertical-align:top;
+	width:280px;
+	height:230px;
+	display:inline-block;
+	text-align:center;
+}
+
+div.zonacuatro{
+	width:100%;
+	background:#F7F7F7;
+}
+
+div.contacto{
+	display:inline-block;
+	padding-top: 40px; 
+	padding-bottom: 40px;
+	width:550px;
+	margin-left: 100px; 
+	margin-top: 100px;
+}
+
+div.logosClientes{
+	margin-left: 100px; 
+	display:inline-block;
+	background:#FFFFFF;
+	border: 1px solid #D0D0D0;
+	width:250px;
+}
+
+h1{
+	color:#FFFFFF;
+	font-size:20px;
+}
+h2{
+	color:#FFFFFF;
+	font-size:18px;
+}
+h3{
+	color:#FFFFFF;
+	font-size:16px;
+	font-weight:bold;
+}
+p{
+	color:#FFFFFF;
+	font-size:16px;
+	font-weight:normal;
+}
+p.textoCookie{
+	color:#555555;
+	font-size:10px;
+}
+
+.textoOscuro{
+	color:#555555;
+}
+h1.textoOscuro{
+	font-size:20px;
+}
+h2.textoOscuro{
+	font-size:18px;
+}
+h3.textoOscuro{
+	font-size:16px;
+	font-weight:bold;
+}
+h3.textoDestacado{
+	color:#446BAC;
+}
+
+p.textoOscuro{
+	font-size:16px;
+}
+
+.textoClaro{
+	color:#FFFFFF;
+}
+
+.textoLogin{
+	color:#FFFFFF;
+	font-size:16px;
+}
+
+span.textoDestacado{
+    font-weight:bold;
+    color:#446BAC;
+}
+
+div.pie{
+	width:100%;
+	height:40px;
+	background:#A0A0A0;
+	text-align:center;
+	vertical-align:middle;
+}
+
+div.pie p{
+	padding-top: 5px;
+	background:#A0A0A0;
+	height:15px;
+	color:#555555;
+	font-size:11px;
+	vertical-align:middle;
+	margin-top: 0px; 
+	margin-bottom: 0px;
+}
+
+
+
+/*	MENUS DE NAVEGACION		*/
+nav {
+	display:inline-block;
+    position: absolute;
+	width:700px;
+	height: 100px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 10px; 
+	background:#FFFFFF; 
+	font-size:13px;
+	z-index: 999;
+}
+
+/* Removing padding, margin and "list-style" from the "ul",
+ * and adding "position:reltive" */
+nav ul {
+    margin:0;
+    list-style: none;
+    position: absolute; 
+    background:#FFFFFF;
+    font-size:13px;
+    z-index: 999;
+}
+
+
+/* Positioning the navigation items inline */
+nav ul li {
+	height: 100px; 
+	width: 100px;
+    display: inline-block;
+    padding:0; /*0px 5px 0px 5px;*/
+    background-color: #FFFFFF;
+    z-index: 999;
+}
+/*
+nav ul li:first-child {
+ 	background-color: #446BAC;
+	color:#D6D6D6; 
+	text-decoration:none;
+}
+*/
+/* Styling the links */
+nav ul li a {
+	height: 20px; 
+    display:block;
+    color:#555555;
+    font-size:13px; 
+    text-decoration:none;
+	background-color: #FFFFFF; 
+	width:100%;
+	z-index: 999;
+	height: 20px;
+    padding-bottom: 40px;
+    padding-top: 40px;	
+}
+
+
+/* Background color change on Hover	*/
+nav ul li a:hover {
+	text-decoration:none;
+    background: #446BAC; 
+    color: #F0F0F0; 
+}
+
+nav li:hover a {
+	text-decoration:none;
+    background: #446BAC; 
+    color: #F0F0F0; 
+}
+
+nav li:hover ul a {
+    background: #446BAC; 
+    color: #F0F0F0; 
+}
+
+/*	Input por defecto			*/
+input {
+    border: 1px solid #a0a0a0;
+    height: 26px;
+	font-size: 20px;
+    /*padding: 10px 5px;*/
+    vertical-align: middle;
+    width: 220px;
+}
+
+/*	Para el formularo de contacto	*/
+/*	Formularios simples: "label:input" (fijar el width en cada formulario)	*/
+form.formEstandar{
+	font-size: 13px;
+	color:#333333;
+}
+
+.formEstandar ul {
+    /*width: 700px;*/
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 20px;
+    padding: 0px;
+}
+
+.formEstandar li {
+    padding: 5px;
+    position: relative;
+}
+
+.formEstandar label {
+    width: 250px;
+    margin-top: 3px;
+    display: inline;
+    float: left;
+    padding: 3px;
+	font-weight:bold;
+	color:#A0A0A0;
+	vertical-align: middle;
+}
+
+.formEstandar label.leyenda {
+	width:100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;			/*	Coge toda la línea	*/
+	font-weight:bold;
+	color:#A0A0A0;
+	text-align: center;
+	border-bottom:0px;
+	vertical-align: middle;
+}
+
+
+.formEstandar input.corto {
+    width: 100px;
+}
+
+.formEstandar input.largo {
+    width: 500px;
+}
+
+.formEstandar textarea {
+    padding: 8px;
+    width: 500px;
+	vertical-align: middle;
+}
+
+.formEstandar select {
+    height: 20px;
+	vertical-align: middle;
+   /* padding: 5px 8px;*/
+}
+
+/*	Boton destacado	para fondo oscuro	*/
+.btnClaro {
+	font-family: Open Sans Regular, sans-serif;
+	color: #3d5d95;
+	font-size: 13px;
+	padding: 5px 20px 5px 20px;
+	background: #F0F0F0;
+	text-decoration: none;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.btnClaro:hover {
+	background: #3d5d95;
+	color: #F0F0F0;
+	text-decoration: none;
+}
+
+/*	Boton destacado	para fondo claro	*/
+.btnOscuro {
+	background: #3d5d95;
+	color: #F0F0F0;
+	font-family: Open Sans Regular, sans-serif;
+	font-size: 13px;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.btnOscuro:hover {
+	color: #3d5d95;
+	background: #F0F0F0;
+	text-decoration: none;
+}

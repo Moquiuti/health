@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="UltimosComentariosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="UltimosComentariosHTML.xsl"?>
+<!--
+ |   
+ |
+ +-->
+
+<Multiofertas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="NOMBRE_OBJETO"/>
+  <xsql:include-param name="NOMBRE_FORM"/>
+  
+  <xsql:include-param name="COMENTARIO"/>
+  <xsql:include-param name="TIPO"/>
+  <xsql:include-param name="ACCION"/>
+  <xsql:include-param name="STYLE"/>
+  
+  <xsql:include-owa>
+    
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RepositorioComentarios');
+			
+			REPOSITORIOCOMENTARIOS_PCK.GuardarPorDefecto
+			IF US_ID>=0 THEN
+						REPOSITORIOCOMENTARIOS_PCK.GuardarPorDefecto (US_ID, '{@DEFECTO_SEL}');
+			END IF;
+			
+			IF US_ID>=0 THEN
+			  REPOSITORIOCOMENTARIOS_PCK.REPOSITORIO_COMENTARIOS(
+			    US_ID,
+			    null,
+			    null,
+			    LISTADO,
+			    null,
+			    '20'
+			    );
+			END IF;
+		END;
+        
+  </xsql:include-owa>
+  
+  <button label="Cerrar" caption="IMG-0190">
+    <name_function>CerrarVentana</name_function>
+  </button>
+  <button label="Guardar" caption="IMG-0020">
+    <name_function>GuardarComentario</name_function>
+    <param>document.forms['form1']</param>
+    <param>'INSERTAR'</param>
+  </button>
+  <button label="Borrar" caption="IMG-1230">
+    <name_function>BorrarComentarios</name_function>
+    <param>document.forms['form1']</param>
+    <param>'BORRAR'</param>
+  </button>
+  
+</Multiofertas>  
+
+        

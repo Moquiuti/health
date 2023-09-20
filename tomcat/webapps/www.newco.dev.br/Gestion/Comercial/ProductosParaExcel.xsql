@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Pagina para importar la tabla de productos de una licitacion a excel
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ProductosParaExcelHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ProductosParaExcelHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID" value="{@LIC_ID}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ProductosParaExcel');
+		IF US_ID>=0 and '{@LIC_ID}' IS NOT NULL THEN
+			LICITACIONES_PCK.Licitacion_XML(
+				US_ID,
+				'{@LIC_ID}'
+			);
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

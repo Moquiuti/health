@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SubFamiliasJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SubFamiliasJSON.xsl"?>
+
+<SubFamilias xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	BEGIN
+		CATALOGOPRIVADO_SEG_PCK.DesplegableSubfamilias_XML ('{@IDFAMILIA}');
+	END;
+]]>
+</xsql:include-owa>
+</SubFamilias>

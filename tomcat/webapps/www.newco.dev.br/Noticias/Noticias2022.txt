@@ -1,0 +1,2 @@
+31may22 ET Nuevo campo "Noticia destacada". Nuevo disenno 2022. Noticias2022_310522.js
+01jun22 ET SOlucionados errores JS

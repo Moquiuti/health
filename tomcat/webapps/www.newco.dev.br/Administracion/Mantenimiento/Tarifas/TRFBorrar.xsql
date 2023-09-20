@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TRFMantenHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TRFMantenHTML.xsl"?>
+
+<Tarifas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+ <!-- #@#@#@# Solo añadimos la parte de borrar respecto a TRFBorrar.xsql  #@#@#@# +-->
+ <xsql:include-owa>
+   TARIFAS_PCK.ModificarTarifasProducto('{@EMP_ID}','{@PRO_ID}','{@eliminarTOTAL}');
+ </xsql:include-owa>
+ <!-- #@#@#@# Fin añadido  #@#@#@# +-->
+
+ <xsql:include-param name="EMP_ID"/>
+ <xsql:include-param name="PRO_ID"/> 
+
+ <xsql:include-owa>
+   TARIFAS_PCK.ModificarTarifasProducto('{@EMP_ID}','{@PRO_ID}','{@SALTAR}','{@PRMEXTRA}');
+ </xsql:include-owa>
+ 
+ <xsql:include-xsql href="TRFComun.xsql"/>
+ 
+</Tarifas>

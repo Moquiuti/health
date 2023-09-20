@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EvaluacionProducto.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EvaluacionProducto.xsl"?>
+
+<EvaluacionProducto xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="FECHA_MUESTRAS"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+                RES             NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Modifica Evaluación');
+		IF US_ID>=0 THEN
+			RES:= EVALUACIONPRODUCTOS_PCK.ModificarEvaluacion(
+                            US_ID,                     
+                            '{@EVA_ID}',    
+                            '{@FECHA_MUESTRAS}',         
+                            '{@EVALUACION}',      
+                            '{@USUARIO_EVALUADOR}',        
+                            '{@MUESTRAS_PROBADAS}',          
+                            '{@FICHA_TECNICA}',         
+                            '{@DIAGNOSTICO}', 
+                            '{@EXPLI_NO_APTO}', 
+                            '{@DOC_EVAL}',           
+                            '{@ESTADO}'
+                        );
+                        
+                        IF RES >0 THEN
+                            HTP.P('<OK/>');
+                            
+                        ELSE
+                            HTP.P('<ERROR/>');
+                        END IF;
+                        
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+                RES             NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Modifica Evaluación');
+		IF US_ID>=0 THEN
+			
+                            EVALUACIONPRODUCTOS_PCK.Evaluacion_XML(
+				US_ID,
+				'{@EVA_ID}',
+				'S'
+                            );
+                      
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+</EvaluacionProducto>

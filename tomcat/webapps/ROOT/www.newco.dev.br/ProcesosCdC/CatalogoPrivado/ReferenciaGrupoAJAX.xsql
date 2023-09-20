@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que devuelve la referencia de grupo dado un IDGrupo -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ReferenciaGrupoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ReferenciaGrupoJSON.xsl"?>
+
+
+<ReferenciaGrupo xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDGRUPO"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_RefGrupo	VARCHAR2(10);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ReferenciaGrupoAJAX');
+			IF US_ID>=0 THEN
+				v_RefGrupo:=CATALOGOPRIVADO_V4_PCK.ReferenciaGrupo(
+					'{@IDGRUPO}'
+				);
+
+				HTP.P(Utilidades_Pck.CabeceraXML);
+				IF v_RefGrupo = '-1' THEN
+					HTP.P('<ERROR/>');
+				ELSE
+					HTP.P('<OK>'||v_RefGrupo||'</OK>');
+				END IF;
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ReferenciaGrupo>

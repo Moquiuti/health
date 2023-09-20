@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Recupera lista de productos  con las ofertas del proveedor
+	Ultima revision ET 11mar19 
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="RecuperaOfertaProductosJSON.xsl"?>
+
+<ProductosOfertas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaOfertaProductos');
+		IF US_ID>=0 THEN
+			LICITACIONES_PCK.OfertasProveedorLicitacion_XML(
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_PROV_ID}',
+				'{@IDIDIOMA}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ProductosOfertas>

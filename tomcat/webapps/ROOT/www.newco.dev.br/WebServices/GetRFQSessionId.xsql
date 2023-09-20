@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+    MVM Web Services: connection
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="GetRFQSessionId.xsl"?>
+-->
+<page connection="newco" allow-client-style="no"
+                        xmlns:xsql="urn:oracle-xsql"
+                        xmlns:e="http://schemas.xmlsoap.org/soap/envelope/"
+                        xmlns:s="http://www.newco.dev.br/WebServices/mvmWS.wsdl">
+
+<xsql:set-page-param name="user" xpath="e:Envelope/e:Body/getNombreUser/user"/>
+<xsql:set-page-param name="password" xpath="e:Envelope/e:Body/getPasswordUser/password"/>
+<xsql:set-page-param name="centro" xpath="e:Envelope/e:Body/getCentroUser/center"/>
+<xsql:set-page-param name="fileid" xpath="e:Envelope/e:Body/getCentroUser/FileID"/>
+	<xsql:include-param name="user"/>
+<PRUEBA/>
+	<xsql:include-owa bind-params="user password centro fileid">
+		<![CDATA[
+			DECLARE
+				US_ID NUMBER;
+			BEGIN
+				WEBSERVICES_PCK.GetRFQSessionId_XML(?,?,?,?);
+			END;
+		]]>
+	</xsql:include-owa>
+
+</page>
+

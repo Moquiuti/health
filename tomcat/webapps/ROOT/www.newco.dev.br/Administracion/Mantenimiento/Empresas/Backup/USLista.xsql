@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="USListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="USListaHTML.xsl"?>
+
+<ListaUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <!--
+   |  Nombre de la pagina. Parametro para guardar el error en caso de xsql-error
+   +--> 
+  <pagename>USLista</pagename>
+  <xsql:query tag-case="upper">
+    <![CDATA[
+    	SELECT US_ID AS ID,
+    	       {@EMP_ID} AS EMP_ID, 
+    	       US_USUARIO,
+    	       decode(trim(us_apellido1||us_apellido2),null,us_nombre,US_APELLIDO1 || ' ' || US_APELLIDO2 || ', ' || US_NOMBRE) AS NOMBRE,
+    	       EMP_NOMBRE AS EMPRESA,
+    	       DP_NOMBRE AS DEPARTAMENTO
+    	FROM USUARIOS, CENTROS, EMPRESAS, DEPARTAMENTOS
+    	WHERE US_IDCENTRO=CEN_ID 
+    	  AND CEN_IDEMPRESA=EMP_ID
+    	  AND EMP_ID = {@EMP_ID}
+    	  AND NVL(US_STATUS,'?') != 'B'
+    	  AND US_IDDEPARTAMENTO = DP_ID
+    	ORDER BY US_ID
+    ]]>
+    <xsql:no-rows-query>
+    	SELECT null AS ID, 
+    	       null AS NOMBRE,
+    	       EMP_NOMBRE AS EMPRESA
+    	FROM EMPRESAS
+    	WHERE EMP_ID = {@EMP_ID}
+    </xsql:no-rows-query>
+  </xsql:query>
+  
+ <ExtraButtons>
+    <!-- Para evitar el problema con los FORMS ANIDADOS -->
+    <formu name="dummy" action="none">
+    </formu>
+ 
+    <!-- Para el boton Anyadir -->  
+    <formu name="frmAddUser" action="USManten.xsql">
+     <field type="hidden" name="EMP_ID">
+      <xsql:include-param name="EMP_ID"/>
+     </field>
+     <field type="hidden" name="ID_USUARIO">
+       <ID_USUARIO>0</ID_USUARIO>
+     </field>
+     <button label="Insertar" caption="IMG-0430">
+       <name_function>document.forms['frmAddUser'].submit</name_function>
+     </button>
+    </formu>
+  
+  </ExtraButtons>     
+
+  <jumpTo>
+    <picture-off>Anterior</picture-off>  
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+</ListaUsuarios>

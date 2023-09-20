@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Zona de plantillas, en "Enviar Pedidos"
+	Ultima revision: ET 8ene21
+-->
+<?xml-stylesheet type="text/xsl" href="ZonaPlantillaHTML.xsl"?>
+
+
+<ZonaPlantilla xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID"/>
+    <xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+    <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+    <xsql:include-param name="HOJADEGASTOS" value="{@HOJADEGASTOS}"/>
+    <xsql:include-param name="NUMCEDULA" value="{@NUMCEDULA}"/>
+    <xsql:include-param name="NOMBREPACIENTE" value="{@NOMBREPACIENTE}"/>
+    <xsql:include-param name="HABITACION" value="{@HABITACION}"/>
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaPlantilla');	
+		  IF US_ID>=0 THEN   
+                    MVM_V3_PCK.AreaPlantillas_XML(US_ID, '{@CATEGORIA}', '{@IDNUEVACARPETA}', '{@IDNUEVAPLANTILLA}','{@ACCION}','{@IDPRODUCTO}','N','{@FECHA}');
+        	  END IF;
+          END;
+        ]]>
+  </xsql:include-owa>
+  
+</ZonaPlantilla>  
+
+        

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Testimonios de los clientes
+ *
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TestimoniosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TestimoniosHTML.xsl"?>
+
+<Testimonios xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  
+   <!-- guardamos nuevo testimonios -->
+   	 <xsql:include-owa>
+    	 <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+    	BEGIN
+			IF '{@SES_ID}' IS NOT NULL THEN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Testimonios');
+			END IF;
+					
+	    	TESTIMONIOS_PCK.ModificarTestimonio
+			(
+				'{@TES_ID}',
+				'{@US_ID}',
+				'{@TES_NOMBRE}',
+				'{@TES_CENTRO}',
+				'{@TES_CARGO}',
+				'{@TES_TEXTO}',
+				'{@TES_PALABRAS}',
+				'{@TES_IMPORTANCIA}',
+				'{@TES_ESTADO}'
+			);	
+			HTP.P(Utilidades_Pck.CabeceraXML || '<TESTIMONIOSPENDIENTES>');
+			TESTIMONIOS_PCK.Testimonios_XML ('{@US_ID}','','PENDIENTES','');
+			HTP.P('</TESTIMONIOSPENDIENTES>');
+
+		END;
+     ]]>
+  </xsql:include-owa>	
+  
+   
+ 
+</Testimonios>

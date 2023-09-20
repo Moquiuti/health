@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Solicitud de una consulta vía JSON
+-->
+<?xml-stylesheet type="text/xsl" href="EISDatosJSON.xsl"?>
+
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>  
+<xsql:include-param name="SES_ID"/>
+
+ <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISDatos');
+		  IF US_ID>=0 THEN
+                    EIS_PCK.CuadroDeMando
+					(
+						US_ID,
+						'{@IDCUADROMANDO}', 
+						'{@ANNO}',
+						'{@IDEMPRESA}',
+						'{@IDCENTRO}',
+						'{@IDUSUARIO}',
+						'{@IDEMPRESA2}',
+						'{@IDCENTRO2}',--16abr13	
+						'{@IDPRODUCTO}',
+						'{@IDGRUPO}',
+						'{@IDSUBFAMILIA}',
+						'{@IDFAMILIA}',
+						'{@IDCATEGORIA}',
+						'{@IDESTADO}',
+						'{@REFERENCIA}',
+						'{@CODIGO}',
+						'{@AGRUPARPOR}',
+						'{@IDRESULTADOS}',
+						null,
+						'XML',
+						'{@IDRATIO}'
+					);
+                  end if;
+					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</EIS_XML>

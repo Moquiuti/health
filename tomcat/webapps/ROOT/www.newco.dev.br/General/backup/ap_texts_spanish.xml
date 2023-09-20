@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<translation>
+<texts xml:lang="spanish">
+<!--
+	26dic16	ET
+	Ultima revision: 26dic16 12:18
+-->
+	<!--	
+		Textos y titulos para el portal MVM	
+	-->
+	<item name="AP_MVM_titulo">Plataforma de compras hospitalarias&nbsp;-&nbsp;MedicalVM.com</item>
+	<item name="AP_MVM_textocookie1">
+	Al acceder al área privada de MedicalVM.com se crearán únicamente las "cookies" necesarias para navegar en nuestra 
+	plataforma con seguridad, guardando la identificación de la sesión y algunos datos de configuración del usuario.
+	</item>
+	<item name="AP_MVM_textocookie2">
+	No obstante, el usuario si lo desea puede desactivar y/o eliminar estas cookies siguiendo las instrucciones de su navegador de Internet.
+	</item>
+	<item name="AP_MVM_textocookie3">
+	Si continúas navegando en la página entenderemos que aceptas nuestra <a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/PoliticaCookies.html','Politica%20Cookies',60,60,20,20);">política de cookies</a>&nbsp;
+	</item>
+	<item name="AP_MVM_PortalLargo">Medical Virtual Market</item>	
+	<item name="AP_MVM_Portal">MedicalVM</item>	
+	<!--	
+			Textos independientes del portal	
+	-->
+	<!--	Login	-->
+	<item name="AP_Usuario">Usuario</item>
+	<item name="AP_Contrasenna">Contrase&ntilde;a</item>
+	<item name="AP_RecuperarClave">Recuperar contrase&ntilde;a</item>
+	<!--	Menus		-->
+	<item name="AP_Servicios">Servicios</item>
+	<item name="AP_Clientes">Clientes</item>
+	<item name="AP_Proveedores">Proveedores</item>
+	<item name="AP_Contacto">Contacto</item>
+	<!--	Presentacion	-->
+	<item name="AP_Innovacion"> es una innovadora plataforma para la creaci&oacute;n de centrales de compra.</item>
+	<item name="AP_Ahorros"> aporta ahorros inmediatos y una gran rentabilidad a corto, medio y largo plazo para hospitales, clínicas quirúrgicas, clínicas odontológicas, centros sociosanitarios y otras empresas de salud.</item>
+	<item name="AP_Procedimientos"> incluye procedimientos para Catalogación, Evaluación de proveedores, Negociación, Seguimiento de pedidos, Gestión de incidencias.</item>
+	<item name="AP_Escalable"> es muy escalable y puede ser adaptada para el uso desde peque&ntilde;os centros, a grandes grupos hospitalarios.</item>
+	<item name="AP_Clientesyproveedores"> M&aacute;s de 300 clientes y 5.000 proveedores trabajan con </item>
+	<item name="AP_Donde"> en Espa&ntilde;a y Latinoam&eacute;rica.</item>
+	<!--	Servicios	-->
+	<item name="AP_PlatCompras">Plataforma de compras</item>
+	<item name="AP_PlatCompras_explic">Cat&aacute;logo personalizado y optimizado, env&iacute;o de pedidos, potentes estad&iacute;sticas.</item>
+	<item name="AP_SegPedidos">Seguimiento de pedidos</item>
+	<item name="AP_SegPedidos_explic">Seguimiento de pedidos, resoluci&oacute;n de incidencias, an&aacute;lisis de proveedores.</item>
+	<item name="AP_CentralCompras">Central de compras</item>
+	<item name="AP_CentralCompras_explic">Creaci&oacute;n de una central de compras optimizada a medida del cliente.</item>
+	<item name="AP_AgregCompras">Agregaci&oacute;n de compras</item>
+	<item name="AP_AgregCompras_explic">Negociaciones conjuntas con condiciones consensuadas por los participantes.</item>
+	<!--	Ventajas clientes	-->
+	<item name="AP_VentCliente1">Optimizaci&oacute;n de los procedimientos de compras</item>
+	<item name="AP_VentCliente2">Ahorro en precio de producto</item>
+	<item name="AP_VentCliente3">Gesti&oacute;n de proveedores: calidad y servicio</item>
+	<item name="AP_VentCliente4">Potentes informes para la direcci&oacute;n: gran transparencia</item>
+	<item name="AP_VentCliente5">educci&oacute;n radical de costes administrativos</item>
+	<item name="AP_VentCliente6">Integraci&oacute;n opcional con el ERP</item>
+	<!--	Ventajas proveedor	-->
+	<item name="AP_VentProveedor1">Sin costes (MVM s&oacute;lo cobra al cliente)</item>
+	<item name="AP_VentProveedor2">Acuerdos comerciales a largo plazo, fidelizaci&oacute;n de clientes</item>
+	<item name="AP_VentProveedor3">Presencia comercial en todos los clientes MedicalVM</item>
+	<item name="AP_VentProveedor4">Reducci&oacute;n de costes comerciales</item>
+	<item name="AP_VentProveedor5">Mayores ingresos, menos gastos, sin ning&uacute;n coste a&ntilde;adido</item>
+	<item name="AP_VentProveedor6">Integraci&oacute;n opcional con el ERP</item>
+	<!--	Contacto	-->
+	<item name="AP_Contacte">Contacte</item> 
+	<item name="AP_Presentacion">o solicite una presentaci&oacute;n:</item>
+	<item name="AP_Empresa">Empresa</item> 
+	<item name="AP_Actividad">Actividad</item> 
+	<item name="AP_Nombrecontacto">Nombre contacto</item> 
+	<item name="AP_Telefono">Tel&eacute;fono</item> 
+	<item name="AP_EMail">E-Mail</item> 
+	<item name="AP_Comentarios">Comentarios</item> 
+	<item name="AP_Solicitarinfo">Solicitar info</item>
+	<item name="AP_Gracias">Gracias por contactar con MedicalVM. Le responderemos lo antes posible.</item>
+	<item name="AP_LogosClientes">Logotipos de algunos clientes</item>
+	<!--	Mensajes de error	-->
+	<item name="AP_ErrorFaltaNombre">El nombre y apellido son obligatorios.</item>
+	<item name="AP_ErrorFaltaEMail">Un e-mail de contacto es obligatorio.</item>
+	<item name="AP_ErrorFaltaTelf">El teléfono de contacto es obligatorio.</item>
+	<item name="AP_ErrorFaltaEmpresa">El nombre de la empresa es obligatorio.</item>
+	<item name="AP_ErrorFaltaTipo">El tipo de empresa es obligatorio.</item>
+	<item name="AP_ErrorFaltaCargo">El cargo es obligatorio.</item>
+	<item name="AP_ErrorFaltaInfo">Díganos qué información solicita.</item>
+	<!--	Pie	-->
+	<item name="AP_Pie1">Contáctanos: comercial[@]medicalvm.com&nbsp;&nbsp;|&nbsp;&nbsp;  Tel: 902.10.31.61</item>
+	<item name="AP_Pie2">Medical Virtual Market 2016 - Todos los derechos reservados</item>
+
+</texts>
+</translation>

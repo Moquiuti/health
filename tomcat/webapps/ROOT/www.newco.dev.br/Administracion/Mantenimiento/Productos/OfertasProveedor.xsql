@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="OfertasProveedor.xsl"?>
+<?xml-stylesheet type="text/xsl" href="OfertasProveedor.xsl"?>
+
+<OfertasProveedor xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="TIPO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DOCUMENTOS_PCK.ListaOfertasDelProveedor_XML ('{@IDPROVEEDOR}',0,'OFERTAS','','{@IDPROVEEDOR}','{@TIPO}','S');
+]]>
+</xsql:include-owa>
+</OfertasProveedor>

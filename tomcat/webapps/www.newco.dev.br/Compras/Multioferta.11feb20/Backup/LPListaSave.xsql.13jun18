@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |
+ |	Guardamos los cambios en las lineas de plantilla.
+ |
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="LPListaSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="LPListaSaveHTML.xsl"?>
+<!--
+<Main xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  -->
+
+<pagename>LPListaSave</pagename>
+
+<xsql:include-param name="PL_ID"/>
+<xsql:include-param name="LP_ID"/>
+<xsql:include-param name="IDDIVISA"/>
+
+<xsql:dml>
+<![CDATA[
+	BEGIN
+	COMPRAVENTALIB.GuardarListaProductos('{@LP_ID}',
+					     '{@STRING_CANTIDADES}',
+					     '{@IDDIVISA}',
+					     SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LPListaSave'),
+					     'SI');
+	END;   
+]]>	  
+</xsql:dml>
+
+</Main>
+

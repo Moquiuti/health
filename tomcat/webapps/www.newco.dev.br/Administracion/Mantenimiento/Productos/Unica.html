@@ -1,0 +1,91 @@
+<!--
+	EStá pagina crea los iframes necesariospara la parte del buscador y la de resultados del catálogo de proveedores
+ 	Ultima revision ET 2ene17 09:37
+-->
+<html>
+<head>
+	<title>Mantenimiento Catálogo Proveedores</title>
+	<!--<link rel="stylesheet" type="text/css" href="http://www.newco.dev.br/General/basic.10.04.14.css">-->
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+
+	<style>
+		#divBuscador{
+			width:100%;
+			height:125px;
+		}
+		#divResultados{
+			width:100%;
+		}
+
+		iframe{
+			width:100%;
+			height:100%;
+		}
+
+                #overlay {
+			background: #000000;
+			opacity:0.5;
+			bottom: 0;
+			left: 0;
+			position: fixed;
+			right: 0;
+			top: 0;
+			z-index: 10000;
+		}
+	
+		#loadingPopup {
+			background: none repeat scroll 0 0 #FFFFFF;
+			border: 5px solid #DDDDDD;
+			left: 35%;
+			padding: 10px;
+			position: fixed;
+			text-align: center;
+			top: 30%;
+			width: 380px;
+			z-index: 20000;
+			-moz-border-radius:30px 0;
+		}
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var FIREFOX = /Firefox/i.test(navigator.userAgent);
+
+			// Si no se visualiza con navegador firefox
+			if(!FIREFOX)
+				jQuery("#divResultados").css("height","300px");
+
+			// Siempre que se carga el iframe de resultados
+			$('#Resultados').load(function(){
+				this.style.height = this.contentWindow.document.body.offsetHeight + 80 + 'px';
+			});
+                });
+
+		function showLoading(){
+			jQuery('#overlay').show();
+			jQuery('#loadingPopup').show();
+			jQuery('#Resultados').hide();
+		}
+
+		function hideLoading(){
+			jQuery('#overlay').hide();
+			jQuery('#loadingPopup').hide();
+			jQuery('#Resultados').show();
+		}
+	</script>
+</head>
+
+<body>
+	<div id="divBuscador">
+		<iframe  id="Buscador" name="Buscador" src="PROBuscador.xsql" frameborder="0"></iframe>
+	</div>
+
+	<div id="divResultados">
+		<div id="overlay" style="display:none;"></div>
+		<div id="loadingPopup" style="display:none;">
+			<img src="http://www.newco.dev.br/images/loader-2.gif"/>&nbsp;Cargando...
+		</div>
+		<iframe name="Resultados" id="Resultados" src="about:blank" scrolling="no" frameborder="0" onload="hideLoading();"></iframe>
+	</div>
+</body>
+</html>

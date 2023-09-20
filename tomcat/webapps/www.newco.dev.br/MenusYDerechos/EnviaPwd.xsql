@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Recupera el pwd de un usuario dado el email
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EnviaPwdJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EnviaPwdJSON.xsl"?>
+
+<EnviaPwd xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		v_Respuesta	VARCHAR2(10);
+	BEGIN
+		v_Respuesta:=SEGURIDAD_PCK.EnviarClave_Mail(
+			'{@EMAIL}'
+		);
+
+		HTP.P(Utilidades_Pck.CabeceraXML);
+		IF v_Respuesta = 'OK' THEN
+			HTP.P('<OK/>');
+		ELSE
+			HTP.P('<ERROR/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EnviaPwd>

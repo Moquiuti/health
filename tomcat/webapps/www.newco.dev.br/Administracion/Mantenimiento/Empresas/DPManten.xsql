@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |   Mantenimiento de Departamentos
+ |
+ |   Parametros:
+ |              DP_ID : Codigo de departamento 
+ |              EMP_ID:
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="DPMantenHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="DPMantenHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" >
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+ <xsql:include-owa>
+
+<![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DPManten');
+		if us_id>=0 then
+                  SEGURIDAD_PCK.DoNothing();
+		end if;		   
+        END;
+        ]]>	  
+</xsql:include-owa>
+ 
+ 
+ <form name="frmDPManten" action="DPMantenSave.xsql">
+     <xsql:query rowset-element="Lista" 
+                row-element="Registro" null-indicator="yes">
+      <![CDATA[
+                select DP_IDEMPRESA as EMP_ID, 
+                       EMP_NOMBRE as EMP_NOMBRE,
+                       DP_ID as DP_ID, 
+               	       DP_NOMBRE, 
+                       DP_IDRESPONSABLE,
+                       US_NOMBRE ||' '||US_APELLIDO1||' '||US_APELLIDO2 As RESPONSABLE
+                from departamentos, usuarios, empresas
+                where dp_id = {@DP_ID}
+                  and dp_idresponsable = us_id (+)
+                  and dp_idempresa = emp_id
+      ]]>
+
+     <xsql:no-rows-query rowset-element="Lista" 
+                row-element="Registro" null-indicator="yes">
+	select {@EMP_ID} as EMP_ID,
+	       EMP_NOMBRE as EMP_NOMBRE,
+	       {@DP_ID} as DP_ID,
+	       null DP_NOMBRE,
+	       null DP_IDRESPONSABLE,
+	       null RESPONSABLE
+	from empresas
+	where EMP_ID = {@EMP_ID}
+     </xsql:no-rows-query>
+    </xsql:query>
+
+    <!--
+     |  Listado de los usuarios de la empresa. Permite cambiar el responsable
+     |     del departamento.
+     +-->
+    <field name="DP_IDRESPONSABLE">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+                select -1 as "ID",
+                        '[Seleccione un responsable]' as "listItem"
+                from dual
+                union
+                select us_id as "ID",  
+                       US_NOMBRE ||' '||US_APELLIDO1||' '||US_APELLIDO2||' ('||TU_DESCRIPCION||')' as "listItem"
+                from usuarios, centros, empresas, tiposusuarios
+                where us_idtipo = tu_id
+                  and us_idcentro = cen_id
+                  and cen_idempresa = emp_id
+                  and emp_id = {@EMP_ID}
+                  and cen_status is null
+                  and us_status is null
+        ]]>
+
+       <xsql:no-rows-query>
+          Select 'Sorry' "Sorry" from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+ 
+    <button label="Aceptar" caption="IMG-0020">
+      <name_function>document.forms['frmDPManten'].submit</name_function>
+    </button>    
+  </form>
+
+<ExtraButtons>
+    <!-- Para evitar el problema con los FORMS ANIDADOS -->
+    <formu name="dummy" action="none">
+    </formu>
+
+    <!-- Para el boton Borrar -->
+    <formu name="frmBorrar" action="DPBorrar.xsql">
+     <field type="hidden" name="DP_ID">
+      <xsql:include-param name="DP_ID"/>
+     </field>
+     <field type="hidden" name="EMP_ID">
+      <xsql:include-param name="EMP_ID"/>
+     </field>
+
+     <button label="Eliminar" caption="IMG-0000">
+       <name_function>Actua</name_function>
+       <param>document.forms['frmBorrar']</param>
+     </button>     
+    </formu>
+  </ExtraButtons> 
+
+
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>DP-0805</page>
+    <caption>G-0001</caption>    
+  </jumpTo>
+  
+  <botones_nuevo>
+    <button label="Cancelar" caption="IMG-0050">
+      <name_function>window.close</name_function>
+    </button>
+    
+    <button label="Aceptar" caption="IMG-0020">
+      <name_function>enviarDatos</name_function>
+      <param>document.forms['frmDPManten']</param>
+    </button> 
+    
+    <button label="Borrar" caption="IMG-0000">
+       <name_function>Actua</name_function>
+       <param>document.forms['frmBorrar']</param>
+     </button> 
+  </botones_nuevo>
+  
+ 
+</Mantenimiento>
+

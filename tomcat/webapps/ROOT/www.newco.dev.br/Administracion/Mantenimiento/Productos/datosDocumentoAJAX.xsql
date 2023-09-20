@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Recupera los datos de un documento desde la base de datos
+	Ultima revision: ET 12feb20
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="datosDocumentoJSON.xsl"?>
+
+
+<datosDocumento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','datosDocumento');
+		IF US_ID>=0 THEN
+			DOCUMENTOS_PCK.Documento_XML(
+				US_ID,
+				'{@IDDOCUMENTO}',
+				'{@TIPODOCUMENTO}',
+				'DOCUMENTO',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</datosDocumento>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para el tablon de anuncios.
+	
+	(c) 29/8/2001 E.Torrellas
+
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VerAnunciosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VerAnunciosHTML.xsl"?>
+
+<TablonAnuncios xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <!-- Presenta los ultimos 5 anuncios de MedicalVM	-->
+  <xsql:include-owa>
+  	TablonAnuncios_PCK.MostrarUltimosAnuncios(null,5);
+  </xsql:include-owa>
+
+	<BloquearEnlaces>
+		1
+	</BloquearEnlaces>
+		
+
+  <returnHome/>
+</TablonAnuncios>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="nomenclatorFrameHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" media="mozilla" href="nomenclatorFrameHTML.xsl"?>
+
+
+<Frameset xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:include-param name="LLP_ID"/>
+  <xsql:include-param name="LP_ID"/>
+  <xsql:include-param name="OP"/>
+  <xsql:include-param name="US_ID"/>
+   <xsql:include-param name="HISTORY"/>
+  
+</Frameset>
+
+ 
+
+
+
+
+            
+     

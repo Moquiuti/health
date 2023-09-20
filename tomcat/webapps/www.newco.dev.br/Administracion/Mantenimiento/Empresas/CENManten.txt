@@ -1,0 +1,16 @@
+22nov17 ET E761.- [MVM] Mant.Centro: Para Colombia no se muestra el desplegable de provincias
+27nov17 ET Cod.Postal opcional
+18ene18 ET No se muestra correctamente el logo
+19ene18 ET Incluir nuevos campos
+07mar19 ET Nuevo campo: CEN_REFERENCIAINTEGRACION
+08mar19 ET Nuevo campo: CEN_IDCATEGORIAPROVISIONAL
+11mar19 ET Cambiar diseño pestañas
+11mar19 ET Corregir problema al guardar documentos (quedan asociados a la empresa, no al centro)
+11jul19 ET Nuevo campo: CEN_IDSELAREAGEOGRAFICA
+18set19 ET Nuevo campo: CEN_BLOQUEADO
+18oct19 ET Incluir campos de configuración de integración
+21oct19 ET Incluir campo desplegable modelos OC para descarga. Separar configuración de integración.
+27feb20 ET Nuevo campo: CEN_URLWEBSERVICE
+28ene21 ET Poner texto de apoyo para los ficheros de carga de pedidos/licitaciones
+27feb20 ET Nuevo campo: CEN_IDMODELOWININTEGRACION
+07oct21 ET Nuevo campo: CEN_INT_RETENERDESCARGAOC

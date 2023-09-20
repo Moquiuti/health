@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="Incidencias.xsl"?>
+<?xml-stylesheet type="text/xsl" href="Incidencias.xsl"?>
+
+<Incidencias xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="IDEMPRESA_COMPRADORA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="LIC_OFE_ID"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="PRO_NOMBRE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROIncidencias, Mostrar');
+		IF US_ID>=0 THEN
+			INCIDENCIASPRODUCTOS_PCK.Incidencias_XML(
+				US_ID,
+				'{@PRO_ID}',
+				'{@LIC_OFE_ID}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Incidencias>

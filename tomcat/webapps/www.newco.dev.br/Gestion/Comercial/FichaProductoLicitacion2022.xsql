@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ficha de un producto de la licitacion // pruebas de pedido para licitaciones multicentro
+	Ultima revision: ET 29jul19 17:24
++-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="FichaProductoLicitacionHTML2022.xsl"?>
+
+<FichaProductoLic xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="ORIGEN"/>
+<xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(5);
+		v_count		NUMBER(3);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantLicitacion');
+		IF US_ID>=0 THEN
+		
+			IF '{@ACCION}'='PRODUCTO' THEN
+			
+				--	Es una llamada AJAX a ActualizarProductos.xsql
+				NULL;
+			
+			
+			ELSIF '{@ACCION}'='MARCAS' THEN
+				
+				Catalogoprivado_Mant_Pck.ActualizaMarcasAceptables
+				(
+					US_ID,
+					'{@IDEMPRESA}',
+					'{@LIC_PROD_IDPRODESTANDAR}',
+					'{@PARAMETROS}'
+				);
+
+			ELSIF '{@ACCION}'='CAMBIOPRODEST' THEN
+				
+				licitaciones_seg_pck.CambioProductoEstandar
+				(
+					US_ID,
+					'{@LIC_ID}',
+					'{@LIC_PROD_ID}',
+					'{@PARAMETROS}'
+				);
+		
+			END IF;
+		
+			LICITACIONES_PCK.ProductoConOfertas_XML(
+				US_ID,
+				'{@LIC_PROD_ID}',
+				NULL,
+				'S'
+			);
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</FichaProductoLic>

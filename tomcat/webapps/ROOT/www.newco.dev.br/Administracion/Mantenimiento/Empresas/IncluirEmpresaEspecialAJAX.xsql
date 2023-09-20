@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="IncluirEmpresaEspecialJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="IncluirEmpresaEspecialJSON.xsl"?>
+
+<incluirEmpresaEspecial xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		RES		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IncluirEmpresaEspecial');
+		IF US_ID>0 THEN
+			RES:=EMPRESAS_PCK.IncluirEmpresaEspecial(
+				'{@EMP_ID}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF RES > 0 THEN
+				HTP.P('<OK>'||RES||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</incluirEmpresaEspecial>

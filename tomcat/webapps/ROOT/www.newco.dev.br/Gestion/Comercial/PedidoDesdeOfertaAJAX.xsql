@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Actualiza ofertas de la licitacion (ha modificar por el usuario autor)
+ 	Ultima revision: ET 17jul19 10:48
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="PedidoDesdeOfertaJSON.xsl"?>
+
+<PedidoDesdeOferta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID				NUMBER;
+		v_Res				VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidoDesdeOferta');
+		IF US_ID>=0 THEN
+			v_Res:=LICITACIONESPEDIDOS_PCK.PedidoDesdeOferta(
+				US_ID,
+				'{@LIC_ID}',
+				'{@IDOFERTALIC}',
+				'{@IDMULTIOFERTA}',
+				'{@CANTIDAD}',
+				'{@IDCENTROPEDIDO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF SUBSTR(v_Res,1,2)='OK' THEN
+				HTP.P('<OK>'
+					||'<MO_ID>'		||utilidades_pck.Piece(v_Res,'|',1)	||'</MO_ID>'
+					||'<CODPEDIDO>'	||utilidades_pck.Piece(v_Res,'|',2)	||'</CODPEDIDO>'
+					||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</PedidoDesdeOferta>

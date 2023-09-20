@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="Contrato.xsl"?>
+<?xml-stylesheet type="text/xsl" href="Contrato.xsl"?>
+
+<Contrato xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT 
+		MED_NIF				AS NIF,
+		MED_NOMBRE||' '||MED_APELLIDO1||' '||MED_APELLIDO2 AS NOMBRE,
+		MED_FECHA_NAC		AS FECHANAC,
+		MED_DIRECCION		AS DIRECCION,
+		MED_POBLACION		AS POBLACION,
+		MED_PROVINCIA		AS PROVINCIA,
+		MED_CPOSTAL			AS CODPOSTAL,
+		MED_FAX				AS FAX,
+		MED_EMAIL			AS EMAIL,
+		MED_PROCESADO		AS PROCESADO,
+		MED_FECHA_ALTA 		AS FECHA,
+		to_char(SYSDATE,'DD/MM/YYYY') AS FECHAFIRMA,
+		CURSOR( SELECT 
+			MED_CEN_NOMBRE 		AS NOMBRE,
+			MED_CEN_NIF 		AS NIF,
+ 			MED_CEN_DIRECCION	AS DIRECCION,
+ 			MED_CEN_POBLACION	AS POBLACION,
+ 			MED_CEN_PROVINCIA	AS PROVINCIA
+			FROM MEDICOS_CENTROS
+			WHERE MED_IDMEDICO=MED_ID) AS CENTROS
+		FROM MEDICOS WHERE MED_ID={@idmedico}
+    ]]>
+  </xsql:query>
+  <returnHome/>
+</Contrato>
+

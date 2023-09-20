@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="P1ListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" 		 href="P1ListaHTML.xsl"?>
+
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+  <xsql:include-param name="xml-stylesheet"/>
+  
+  <form name="BuscaProductos"  method="post" action="P4Lista.xsql">
+
+  <xsql:include-param name="LLP_PRODUCTO_DETERMINADO"/>            
+  <xsql:include-param name="LLP_ID"/>
+  <xsql:include-param name="LP_ID"/>  
+  <xsql:include-param name="TCV_ID"/>    
+  <xsql:include-param name="REGISTROSPORPAGINA"/>
+  
+  <!--
+   |     Ferran Foz - nextret.net - 23/1/2001
+   |		 Añadimos el campo LLP_PRODUCTO_DETERMINADO,
+   |		 (solo se mantiene el estado, no se procesa ni almacena).										
+   |		 Nos indica el nombre del producto que hemos seleccionado como
+   |		  predeterminado de forma automatica. Para confirmarlo con el
+   |		  usuario
+   +-->
+  <xsql:include-param name="LLP_PRODUCTO_AUTOMATICO"/>  
+  
+  <!-- ULTIMAPAGINA es defineix a partir dels butons -->
+  <ERR_JUMPTO_LINK>G-0011</ERR_JUMPTO_LINK>
+  <JUMPTO_LINK>G-0011</JUMPTO_LINK>  
+  
+  <xsql:include-owa>
+    <![CDATA[
+    BEGIN
+      PRODUCTOS_PCK.BuscaPaginasSeleccionadas(
+                    p_ULTIMAPAGINA => '{@ULTIMAPAGINA}',
+                    p_REGISTROSPORPAGINA => 8,
+                    p_ORDERBY => 'CAT_NOMBRE, FAM_NOMBRE, SFA_NOMBRE, PRO_NOMBRE',
+                    p_LLP_ID => '{@LLP_ID}',
+                    p_TCV_ID => '{@TCV_ID}',
+                    p_REGISTROS_ANTES => '{@CONTROLREGISTRES}',
+                    p_REGISTROS_DESPUES => '{@SELECCIONARTOTAL}',
+                    p_LLP_PRODUCTO_DETERMINADO => '{@LLP_PRODUCTO_DETERMINADO}'
+                    );
+     END;
+    ]]>
+  </xsql:include-owa>
+
+    <button label="EliminarPeq" alt="IMG-0250" status="IMG-0250">
+      <name_function>Resetea</name_function>
+      <param>document.forms[0]</param>      
+    </button>
+    
+    <button label="EditarPeq" alt="IMG-0230" status="IMG-0230">
+      <name_function>AsignarReferencia</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3AsignarRef.xsql'</param>               
+    </button>                     
+ 
+     <!--
+      |  
+      |
+      +-->
+      
+      
+     <button label="Insertar" caption="IMG-0030">  
+      <name_function>InsertarProductos</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3Insertar.xsql'</param>                  
+    </button>   
+    
+    <button label="AmpliadasPeq" alt="IMG-0200" status="IMG-0200">  
+      <name_function>Amplia_fichas</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>                 
+    </button>
+    
+    <button label="Reducidas" caption="IMG-0210">  
+      <name_function>Reduce_fichas</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>                 
+    </button>     
+</form>  
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0011</page>
+    <caption>G-0001</caption>
+  </jumpTo>  
+  <ExtraButtons>
+    <button label="Indice" caption="IMG-0040"/>
+  </ExtraButtons>     
+</Lista>

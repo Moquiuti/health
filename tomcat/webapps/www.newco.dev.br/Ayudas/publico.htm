@@ -1,0 +1,606 @@
+<html>
+<head>
+<title>Manual de Usuario MVM</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+.enlaces {  font-size: 12px}
+.texto {  font-size: 12px; color: #000000}
+.tituloPag {  font-family: Arial, Helvetica, sans-serif; font-size: 36px; font-weight: bold; color: #000000}
+.textoBold { font-size: 12px; font-weight: bold}
+.textoLigth { font-size: 12px; font-weight: lighter}
+.subTituloPag { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #000000 }
+.subTituloPagUnderline { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #000000 ; text-decoration: underline}
+.textoUnderline { font-size: 12px; text-decoration: underline}
+.alerta {  font-size: 24px; color: #FF3333}
+-->
+</style>
+</head>
+
+<body bgcolor="#EEFFFF"><br><br>
+<table width="100%" border="0" align="center">
+  <tr> 
+    <td> 
+      <div align="center"><span class="tituloPag"><br>
+        <br>
+        <br>
+        <br>
+        MANUAL DE FORMACIÓN<br>
+        de<br>
+        Medical Virtual Market</span><br>
+        <br>
+        <a href="http://www.newco.dev.br"><span class="enlaces">www.mvmnucleo.com</span></a><span class="enlaces"><br>
+        </span><br>
+        <br>
+        <table width="267" border="0" class="titulo" bordercolorlight="#FFFFFF" bgcolor="#000000" bordercolordark="#FFFFFF">
+          <tr bgcolor="#EEFFFF"> 
+            <td> 
+              <div align="center"><span class="tituloPag">Uso Interno</span></div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <span class="enlaces"><span class="texto">Responsables:</span><br>
+        <br>
+        <br>
+        <span class="subTituloPagUnderline">Atención:</span> <span class="texto">Documento 
+        confidencial de uso exclusivo para el personal de:</span><br>
+        <br>
+        <span class="subTituloPagUnderline">MedicalVM</span><br>
+        <br>
+        <span class="textoLigth"><span class="textoLigth"><span class="textoLigth">jueves, 
+        14 de Junio de 2001</span></span></span></span><br>
+        <br>
+        <span class="texto"><span class="texto">Para cualquier consulta contactar 
+        con Alfonso Linares</span><br>
+        <br>
+        </span> <a href="mailto:%3Ca%20href=%22mailto:%22%3Ealinares@medicalvm.com%3C/a%3E">alinares@medicalvm.com</a><br>
+        <br>
+        <span class="texto"><span class="texto">Tel.</span> 606 99 36 11<br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <span class="subTituloPagUnderline">INDICE</span> </span></div>
+    </td>
+  </tr>
+</table>
+<br>
+  <a href="#notaUsuario"><span class="enlaces">NOTA IMPORTANTE AL USUARIO</span></a><span class="enlaces"><br>
+  <br>
+  <a href="#esquemaFuncionalidades">ESQUEMA DEL MENÚ DE FUNCIONALIDADES</a><br>
+  <br>
+<a href="#funcionalidadesConstruccion">FUNCIONALIDADES EN CONSTRUCCIÓN</a><br>
+  <br>
+<a href="#diagramaProceso">DIAGRAMA DE PROCESO DE MEDICALVM</a><br>
+  <br>
+<a href="#paginaInicial">ACCESO A MEDICAL – PÁGINA INICIAL.</a> <br>
+  </span>
+<ol>
+  <li><span class="enlaces"><a href="#paginaPublica">PÁGINA PÚBLICA</a></span></li>
+  <span class="enlaces"><br>
+  <br>
+  </span>
+  <li><span class="enlaces"><a href="#introduccion">INTRODUCCIÓN</a></span></li>
+  <span class="enlaces"><br>
+  <br>
+  </span>
+  <li><span class="enlaces"><a href="#personal">PERSONAL</a></span></li>
+  <span class="enlaces"><br>
+  <br>
+  </span>
+  <li><span class="enlaces"><a href="#compras">COMPRAS</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#ofertasPedidos">OFERTAS Y PEDIDOS</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#solicitudOfertas">SOLICITUD DE OFERTAS</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#pedidoDirecto">PEDIDO DIRECTO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#comprasCurso">COMPRAS EN CURSO:<br>
+        </a><br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#ventas">VENTAS</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#bandejaTareas">BANDEJA DE TAREAS<br>
+        <br>
+        </a></span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#ventasCurso">VENTAS EN CURSO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#negociacion">NEGOCIACIÓN</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#confirmacionPedido">CONFIRMACIÓN DEL 
+        PEDIDO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#bannersDinamicos">BANNERS DINÁMICOS</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#gestion">GESTIÓN</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#confirmacionProductos">CONFIRMACIÓN 
+        PRODUCTOS Y DATOS EMPRESA</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#administracion">ADMINISTRACIÓN</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#gestionClientesProveedores">GESTIÓN 
+        CLIENTES Y PROVEEDORES</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#estructuraEmpresa">ESTRUCTURA DE EMPRESA</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#estructuraProductos">ESTRUCTURA DE PRODUCTOS</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#asignacionPrecios">ASIGNACIÓN DE PRECIO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#sugerencias">SUGERENCIAS A MEDICALVM</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#ejercicios">EJERCICIOS DE FORMACIÓN </a><br>
+    <br>
+    </span><br></li></ol>
+    <br>
+    <br>
+    <br>
+    <table width="100%" border="0" class="subTituloPag">
+      <tr bgcolor="#a0d8d7"> 
+        <td> 
+          <a name="notaUsuario">
+          <div align="center">NOTA IMPORTANTE AL USUARIO</div>
+          </a>
+        </td>
+      </tr>
+    </table>
+  
+
+<table width="100%" border="1" bgcolor="#000000" bordercolordark="#FFFFFF" bordercolorlight="#FFFFFF" class="texto">
+  <tr bgcolor="#EEFFFF"> 
+    <td> 
+      <div align="center">Al entrar por primera con su clave de acceso personal 
+        le recomendamos que vaya al menú:<br>
+        <br>
+        <span class="textoBold">Administración > Gestión de Clientes y Proveedores</span> 
+        <br>
+        <br>
+        Para configurar quienes son Sus Clientes y Sus Proveedores<br>
+        <br>
+        . De este modo ningún otro Cliente o Proveedor, que no haya sido expresamente 
+        indicado por Ud. Tendrá la posibilidad de consultar sus Productos.<br>
+        <br>
+        Para más detalles vaya al Capítulo 7 de este Manual “Administración”.<br>
+        <br>
+        Para cualquier duda consulte con Alfonso Linares, 606 99 36 11, <span class="enlaces"><a href="#%3Cspan%20class=%22enlaces%22%3Ealinares@medicalvm.com%20">alinares@medicalvm.com 
+        </a></span><br>
+        <br>
+        Gracias.</div>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td>
+      <a name="esquemaFuncionalidades"> 
+      <div align="center">ESQUEMA DEL MENÚ DE FUNCIONALIDADES</div>
+      </a>
+    </td>
+  </tr>
+  <tr class="texto"> 
+    <td height="111">Agente: tanto Comprador como Vendedor<br>
+      Comprador: habitualmente es un centro hospitalario <br>
+      Vendedor: habitualmente es un distribuidor o fabricante</td>
+  </tr>
+  <tr> 
+    <td height="84"> 
+      <table width="100%" border="1" bgcolor="#000000" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" height="52">
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47"> 
+            <div align="center" class="textoUnderline">Menú</div>
+          </td>
+          <td width="33%" height="47"> 
+            <div align="center" class="textoUnderline">Submenú</div>
+          </td>
+          <td width="33%" height="47"> 
+            <div align="center" class="textoUnderline">Explicación</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td height="55"> 
+      <div align="center"><span class="textoUnderline"><span class="texto">COMPRADOR:</span></span><span class="texto"> 
+        CLINICA U HOSPITAL</span></div>
+    </td>
+  </tr>
+  <tr> 
+    <td height="68"> 
+      <table width="100%" border="1" bgcolor="#000000" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" height="52">
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Compras<br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+                <li> Ofertas y Pedidos<br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                </li>
+                <li> Compras en curso </li>
+              </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+                <li> Permite una compra planificada y organizada. Se crean carpetas 
+                  (plantillas) por temas, tipo de producto, proveedor, tipo de 
+                  pedido (pedido urgente, programado,...), etc... para enviarlo 
+                  posteriormente al Vendedor como un sólo Pedido de materiales 
+                  o servicios<br>
+                  <br>
+                </li>
+                <li>Es el resumen de las peticiones de oferta o pedido enviados 
+                  por confirmar por parte del Vendedor </li>
+              </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="116" class="texto"> 
+            <ul>
+              <li>Ventas </li>
+            </ul>
+            <br>
+            <br>
+          </td>
+          <td width="33%" height="116" class="texto"> 
+            <ul>
+              <li>Ventas en curso </li>
+            </ul>
+            <br>
+            <br>
+          </td>
+          <td width="33%" height="116" class="texto"> 
+            <ul>
+              <li>Es el resumen de las Peticiones de ofertas enviadas, Peticiones 
+                de Aceptación de Pedidos en curso o aceptadas.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Administración <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Gestión Clientes y Proveedores<br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+              <li>Estructura Empresa Estructura<br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+              <li>Productos </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Permite al Agente decidir “quién me ve”; el otro Agente deberá 
+                dar también su Ok para que “los 2 se vean”<br>
+                <br>
+              </li>
+              <li>Permite al Agente definir los datos básicos de su empresa, usuarios, 
+                limites de compra y venta, etc...<br>
+                <br>
+              </li>
+              <li>Permite al Vendedor mantener su base de datos de productos en 
+                catálogo, nombres, unidades, precios,... </li>
+            </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Incidencias </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Incidencias <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+              <li>Sugerencias </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Permite a todo Agente remitir una incidencia a la empresa que 
+                la causó <br>
+                <br>
+              </li>
+              <li>Permite a todo Agente comunicarse directamente con Medical Virtual 
+                Market S.L. </li>
+            </ul>
+</td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Gestión </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Confirmación de Productos y Datos de empresa </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Permite al Vendedor confirmar la estructura inicial de productos 
+                introducida por MedicalVM </li>
+            </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Personal </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li> Bandeja de trabajo <br>
+                <br>
+              </li>
+              <li> Cambio de clave </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Lista de tareas pendientes<br>
+                <br>
+              </li>
+              <li>Cambio de password, no de nombre de usuario </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+ <br>
+  <br>
+<br>
+<br>
+<br>
+  <br>
+
+<table width="100%" border="0" align="center">
+  <tr bgcolor="#a0d8d7"> 
+    <td>
+<a name="funcionalidadesConstruccion"> 
+      <div align="center" class="subTituloPag">FUNCIONALIDADES EN CONSTRUCCIÓN</div>
+</a>
+    </td>
+  </tr>
+</table>
+<br>
+  <br>
+  <br>
+  <span class="texto">Medical Virtual Market y su equipo técnico siguen desarrollando 
+  funcionalidades que pronto estarán en funcionamiento:</span><br>
+  <br>
+  <span class="textoBold">Consultas generales</span><br>
+  <span class="texto">Permite al agente comprador realizar un sondeo de condiciones 
+  de venta de productos o servicios. Este sondeo podrá hacerse por Región, Especialidad, 
+  Distribuidor o Fabricante, Familia de productos, Calidad, etc... <br>
+  La diferencia con una multioferta es que los campos a describir estarán abiertos 
+  (texto y fichas técnicas) y no existirán campos restrictivos como fecha de pago 
+  o fecha de entrega, sino que éstos serán opcionales. <br>
+  </span><br>
+  <span class="textoBold">Promociones y liquidación de stocks </span><br>
+  <span class="texto">Permitirá al vendedor anunciar en un lugar determinado, 
+  filtrado por el Comprador, aquellas ofertas especiales o excesos de stocks existentes. 
+  Se podrán seleccionar dichas oportunidades y se procederá a su compra siguiendo 
+  el proceso habitual de MedicalVM. </span><br>
+  <br>
+  <span class="textoBold">Alarmas </span><br>
+  <span class="texto">Existirán alarmas que controlarán y avisarán al usuario 
+  de cualquier desvío sobre las previsiones fijadas: entregas, pagos, contestación 
+  a ofertas, presupuestos, etc... <br>
+  </span><br>
+  <br>
+  <br>
+  <br>
+
+<table width="100%" border="0" align="center">
+  <tr bgcolor="#a0d8d7"> 
+    <td> 
+<a name="diagramaProceso">
+      <div align="center" class="subTituloPag">DIAGRAMA DE PROCESO DE MEDICALVM 
+      </div>
+</a>
+    </td>
+  </tr>
+  <tr>
+    <td height="467"> 
+      <div align="center"><img src="../images/manual/diagramaProcesos.gif" width="561" height="365"></div>
+    </td>
+  </tr>
+</table>
+<br>
+  <br>
+  <span class="texto">Este gráfico nos muestra el proceso de compra – venta a 
+  través de MedicalVM desde el momento en el que se busca un producto (búsqueda) 
+  a través del menú de compras, hasta que se recibe el material solicitado. Para 
+  ello, MedicalVM nos aporta las herramientas necesarias para poder establecer 
+  una negociación y controlar todas las incidencias aparecidas durante el proceso 
+  de compra – venta.</span> <br>
+  <br>
+  <br>
+<table width="100%" border="0">
+  <tr class="subTituloPag"> 
+    <td bgcolor="#a0d8d7"> 
+<a name="paginaInicial">
+      <div align="center">ACCESO A MEDICAL – PAGINA INICIAL</div>
+</a>
+    </td>
+  </tr>
+  <tr> 
+    <td height="312"> 
+      <div align="center"><img src="../images/manual/img01.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<div class="texto">Es la pantalla que nos aparece al conectarnos a <span class="textoBold">www.mvmnucleo.com</span> 
+  . Pulsando sobre cualquier zona <img src="../images/manual/01.gif" width="24" height="24"> 
+  de la misma accederemos a la pantalla de presentación. </div>
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td>
+<a name="paginaPublica">
+1. PAGINA PÚBLICA
+</a>
+</td>
+  </tr>
+  <tr> 
+    <td> 
+      <div align="center"><img src="../images/manual/img02.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<div class="texto"> Ésta es la pantalla de presentación de MedicalVM. En ella se 
+  explica de manera sencilla todas las <span class="textoBold">ventajas y beneficios</span> 
+  que podemos obtener usando éste canal de transacciones.<br>
+  <br>
+  En el menú de la izquierda tenemos el menú siguiente:<br>
+  <br>
+  </div>
+  <ul>
+  <li><span class="textoUnderline">Presentación: </span></li>
+  <span class="texto">una breve presentación de MedicalVM<br>
+  </span>
+  <li><span class="textoUnderline">Contactar: </span></li>
+  <span class="texto">para poder ponerse en contacto con nosotros. Sólo es necesario 
+  rellenar un pequeño cuestionario y MedicalVM se pondrá en contacto con usted.<br>
+  </span>
+  <li><span class="textoUnderline">Documentación: </span></li>
+  <span class="texto">diversa documentación sobre MedicalVM: información sobre 
+  el primer congreso MedicalVM y listado de asistentes, noticias, ponencia sobre 
+  los problemas en la gestión de las compras en el sector, y diversas estadísticas 
+  relevantes dentro del sector sanitario.</span> 
+</ul>
+<br>
+<br>
+<span class="texto">Para la entrada registrada al sistema será necesario rellenar 
+los campos de USUARIO y el de CLAVE DE ACCESO. El</span> <span class="textoBold">USUARIO</span> 
+<span class="texto">siempre es </span><span class="textoBold">JGONZALEZ</span> 
+<span class="texto">(ejemplo para Javier González). La clave de acceso deberá 
+solicitarse a MedicalVM. </span><br>
+  <br>
+</body>
+</html>

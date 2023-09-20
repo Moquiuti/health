@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	12nov09	Pedidos a punto de entregar, para el control de Carla
+-->
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PedidosAPuntoDeEntregarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PedidosAPuntoDeEntregarHTML.xsl"?>
+
+<PedidosAPuntoDeEntregar xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<!--	Pedidos problematicos, alarmas	y bandeja		-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidosAPuntoDeEntregar');
+					IF US_ID>=0 THEN
+						BANDEJA_PCK.PedidosAPuntoDeEntregar(US_ID,'{@ORDEN}','{@SENTIDO}');
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+  
+</PedidosAPuntoDeEntregar>

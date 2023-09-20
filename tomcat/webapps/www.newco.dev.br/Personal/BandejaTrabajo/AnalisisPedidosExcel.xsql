@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+    Analisis pedidos. Exportacion Excel.
+	Ultima revision: ET 7jul23 15:00
+-->
+<?xml-stylesheet type="text/xsl" href="AnalisisPedidosExcelHTML.xsl"?>
+
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDPRODUCTO" />
+  <xsql:include-param name="IDEMPRESA" />
+
+	<!--	Pedidos problematicos, alarmas, bandeja y licitaciones en curso	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Analisis Pedidos');
+					IF US_ID>=0 THEN
+						AnalisisPedidos_Pck.Listado_Excel
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDPRODESTANDAR}',
+							'{@IDPRODUCTO}',
+							'{@CODIGOPEDIDO}',
+							'{@PRODUCTO}',
+							'{@FINALIZADOS}',
+							'{@PENDIENTES}',
+							'{@URGENTES}',
+							'{@INVERTIRABONOS}',
+							'{@FECHA_INICIO}',
+							'{@FECHA_FINAL}',
+							'{@TOTAL_LINEA_MIN}',
+							'{@TOTAL_LINEA_MAX}',
+							'{@PORC_AHORRO_MIN}',
+							'{@PORC_AHORRO_MAX}',
+							'{@PAGINA}',
+							'{@LINEA_POR_PAGINA}',
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+							'S',                             --CABECERA
+							'{@UTILFECHAENTREGA}',
+							'{@IDMULTIOFERTA}',
+							'{@IDCENTROCONSUMO}',
+							'{@IDLICITACION}',
+							'{@MODO}'							--	CON_CONTRATO para filtrar lineas de pedido con contrato
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</DescargaExcel>

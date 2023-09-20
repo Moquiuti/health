@@ -1,0 +1,21 @@
+ET 11nov16	Fichero de instrucciones y cambios para la página principal
+
+nov16: multiples cambios solicitados por Breno
+- QUITAR FRAMES, montar con DIV
+- Menú CSS: revisar compatibilidad con navegadores
+- Obliga a los menús a llamar al DIV mediante javascript
+
+29nov16 ET Añadimos en el JS funcionespara envío de formularios y actualización de los DIV
+26oct17	ET Para usuarios que no acceden a INICIO tenemos que mostrar en el frame inferior la página que corresponda
+
+20jul20	ET Acceso directo desde ERP, con parametros para indicar a que página va y para inicializar valores en la página
+29jul20 ET La cookie SES_ID se rechazará pronto porque tiene el atributo "sameSite" establecido en "none"
+11oct20 ET Nuevos campos NUMCEDULA, NOMBREPACIENTE
+08ene21 ET Nuevo campo HABITACION
+12mar21 ET Acceso a la nueva pagina de pedidos desde Catalogo
+09dic21 ET Proveedores de Brasil acceden directamente a Relatorios en lugar de INICIO, pasar ACCION como parametro a Sesion_XML
+11ene22 ET Empezamos a trabajar con Cabecera 2022
+
+
+
+

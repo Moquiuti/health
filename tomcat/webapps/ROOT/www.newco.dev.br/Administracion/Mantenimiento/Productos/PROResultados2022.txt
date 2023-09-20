@@ -1,0 +1,2 @@
+08mar22 ET Resultado de la busqueda del catalogo de proveedores, para mantenimiento. nuevo disenno 2022.  PROBuscador2022_080322.js
+28jun22 ET Se produce un error al pulsar el boton "Siguiente"

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Pedido minimo por cliente
+	Ultima revision: ET 6may22 11:07
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="PedidoMinimoPorClienteHTML2022.xsl"?>
+
+<MantenimientoEmpresas xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedMinPorEmpresa');
+		IF US_ID>=0 THEN
+			HTP.P(	Utilidades_Pck.CabeceraXML
+					||'<PEDIDOSMINIMOS>');
+			
+			IF '{@ACCION}' IS NOT NULL THEN
+				HTP.P('<ACCION>'||'{@ACCION}'||'</ACCION>');
+			ELSE
+				HTP.P('<ACCION>INICIO</ACCION>');
+			END IF;
+
+			--INCLUIR EN EMPRESAS_PCK.PedidoMinimoPorCLiente_XML
+			--IF '{@ADMIN}'='S' THEN
+			--	EMPRESAS_PCK.ListaEmpresasXML('{@NUEVO_CLIENTE}','IDEMPRESACLIENTE','N',NULL, usuarios_pck.IDPais(US_ID));
+			--END IF;
+
+			IF '{@ACCION}' IS NOT NULL THEN
+				EMPRESAS_PCK.PedidoMinimoPorCLiente
+				(
+           			'{@IDPROVEEDOR}',
+           			'{@NUEVO_CLIENTE}',
+           			'{@NUEVO_CENTRO}',
+           			'{@EMP_PEDMINIMOACTIVO}',
+					'{@EMP_PEDIDOMINIMO}',	
+					'{@EMP_PEDIDOMINIMO_NM}',	
+					'{@EMP_DESCRIPCIONPEDIDOMINIMO}',
+					'{@ACCION}',
+					'{@DESDE}',
+					'{@PLAZO_ENTREGA}',
+					'{@PLAZO_ENVIO}'
+        		);
+			END IF;
+
+			EMPRESAS_PCK.PedidoMinimoPorCLiente_XML
+			(
+				US_ID,							--	14oct21
+           		'{@IDPROVEEDOR}',
+           		'{@NUEVO_CLIENTE}',
+           		'{@NUEVO_CENTRO}'
+			);
+			HTP.P('</PEDIDOSMINIMOS>');
+		END IF;			   
+    END;
+        ]]>  
+</xsql:include-owa>
+<!--
+      <button label="Cerrar" caption="IMG-0190">
+        <name_function>CerrarVentana</name_function>
+      </button>
+      
+      <button label="InsertarEmpresa" caption="IMG-1610">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'INSERTARCLIENTE'</param>
+      </button>
+      
+      <button label="InsertarCentro" caption="IMG-1630">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'INSERTARCENTRO'</param>
+      </button>
+      
+      <button label="Cancelar" caption="IMG-0050">
+        <name_function>NuevoPedidoMinimoPorCliente</name_function>
+        <param>document.forms[0]</param>
+      </button>
+      
+      <button label="GuardarEmpresa" caption="IMG-1620">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'GUARDARCLIENTE'</param>
+      </button>
+	  -->
+      <!--
+      <button label="GuardarCentro" caption="IMG-1640">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'GUARDARCENTRO'</param>
+      </button>
+    -->
+
+</MantenimientoEmpresas>

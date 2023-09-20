@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" />
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>  
+  <xsl:template match="/">
+  
+  
+<html>
+  <head>
+    <title>Mantenimiento del Catálogo Privado</title>
+      <!--style-->
+      <xsl:call-template name="estiloIndip"/>
+      <!--fin de style-->  
+	  
+	  	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+        <script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+        
+    <xsl:text disable-output-escaping="yes"><![CDATA[
+  
+    <script language="javascript">
+      <!--
+      
+        function RecargarZonaCatalogo(nombreFrame){
+          var idSubfamilia=document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value;
+          var idProductoEstandar=document.forms[0].elements['CATPRIV_ID'].value;
+
+          objFrame = new Object();
+          objFrame=obtenerFrame(top,nombreFrame);
+          objFrame.location.href='ZonaCatalogo.xsql?IDNUEVASUBFAMILIA='+idSubfamilia+'&IDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'&ACCION=CAMBIOPRODUCTOESTANDAR';
+          
+          objFrame = new Object();
+          objFrame=obtenerFrame(top,'zonaProducto');
+          objFrame.location.href='about:blank';
+          
+          
+          
+          document.location.href='BuscadorFrame.xsql';
+            
+            
+        }
+        
+        function CerrarVentana(){ 
+      
+            if(window.parent.opener && !window.parent.opener.closed){
+              var objFrameTop=new Object();          
+              objFrameTop=window.parent.opener.top;   
+              var FrameOpenerName=window.parent.opener.name;
+              var objFrame=new Object();
+              objFrame=obtenerFrame(objFrameTop,FrameOpenerName);
+              if(objFrame!=null && objFrame.recargarPagina){
+                objFrame.recargarPagina('PROPAGAR');
+              }
+              else{
+                Refresh(objFrame.document);
+              }  	
+            }
+            
+            window.parent.close();
+            
+          }
+      
+      //-->
+    </script>
+    ]]></xsl:text>
+  </head>
+  <body>
+<xsl:choose>
+  <xsl:when test="//SESION_CADUCADA">
+    <xsl:apply-templates select="//SESION_CADUCADA"/> 
+  </xsl:when>
+  <xsl:when test="//Sorry">
+    <xsl:apply-templates select="//Sorry"/> 
+  </xsl:when>
+  <xsl:when test="//Status">
+    <xsl:apply-templates select="//Status"/> 
+  </xsl:when>
+  <xsl:otherwise>
+    
+    
+    <xsl:choose>
+      <xsl:when test="Mantenimiento/VENTANA='NUEVA'">
+        <p class="tituloPag">
+          Producto Estándar
+        </p>
+        <hr/>
+          Los datos han sido guardados
+        <br/> 
+        <br/> 
+        <xsl:call-template name="boton">
+          <xsl:with-param name="path" select="/Mantenimiento/botones/button[@label='Cerrar']"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+
+    <xsl:attribute name="onLoad">
+      RecargarZonaCatalogo('zonaCatalogo');
+    </xsl:attribute>
+    <!--<p align="left" class="tituloPag">
+      <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0150' and @lang=$lang]" disable-output-escaping="yes"/>
+    </p>
+    <br/>
+    <xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='CATPRIV-0320' and @lang=$lang]" disable-output-escaping="yes"/>
+    <hr/>
+    <br/>
+    <xsl:call-template name="boton">
+      <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Aceptar']"/>
+    </xsl:call-template>-->
+    <form name="form1" method="post">
+      <input type="hidden" name="CATPRIV_ID" value="{Mantenimiento/OK/CATPRIV_ID}"/>
+      <input type="hidden" name="CATPRIV_IDSUBFAMILIA" value="{Mantenimiento/OK/CATPRIV_IDSUBFAMILIA}"/>
+    </form>
+    </xsl:otherwise>
+    </xsl:choose>
+  </xsl:otherwise>
+</xsl:choose>
+
+  </body>
+  </html>
+</xsl:template>  
+
+
+
+<!-- 
+
+   no utilizo el de general.xsl
+
+ -->
+
+<xsl:template match="Status">
+
+  <p class="tituloPag">
+  <xsl:value-of select="ERROR/@titulo"/>
+  </p>
+  <hr/>
+  <xsl:for-each select="ERROR/DESCRIPCION">
+  	- <xsl:value-of select="MSGB"/>
+  	<br/>
+  </xsl:for-each>
+  <br/> 
+  <xsl:call-template name="boton">
+    <xsl:with-param name="path" select="/Mantenimiento/botones/button[@label='Volver']"/>
+  </xsl:call-template>
+   
+</xsl:template>
+
+
+
+</xsl:stylesheet>

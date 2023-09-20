@@ -1,0 +1,178 @@
+// JS para el mantenimiento de productos (catálogo proveedor)
+// Ultima revisión: ET 22ene20 PROTarifas_201020.js
+
+jQuery(document).ready(globalEvents);
+
+function globalEvents(){
+	//selecionar ofertas de proveedor
+
+	//	12dic16	Marcamos la primera opción de menú
+	jQuery("#pes_Tarifas").css('background','#3b569b');
+	jQuery("#pes_Tarifas").css('color','#D6D6D6');
+
+	// Se clica en pestañas
+	jQuery("#pes_Ficha").click(function(){
+	
+		//	Pendiente identificar si estamos en mantenimiento o en lectura
+	
+ 		var IDProducto = document.forms['frmTarifas'].elements['PRO_ID'].value;
+		window.location.assign("http://www.newco.dev.br/Administracion/Mantenimiento/Productos/PROManten.xsql?PRO_ID="+IDProducto);
+
+	});
+	jQuery("#pes_Documentos").click(function(){
+	
+		//	Pendiente identificar si estamos en mantenimiento o en lectura
+	
+ 		var IDProducto = document.forms['frmTarifas'].elements['PRO_ID'].value;
+		window.location.assign("http://www.newco.dev.br/Administracion/Mantenimiento/Productos/PRODocs.xsql?PRO_ID="+IDProducto);
+
+	});
+	jQuery("#pes_Pack").click(function(){
+	
+		//	Pendiente identificar si estamos en mantenimiento o en lectura
+	
+ 		var IDProducto = document.forms['frmTarifas'].elements['PRO_ID'].value;
+		window.location.assign("http://www.newco.dev.br/Administracion/Mantenimiento/Productos/PROPack.xsql?PRO_ID="+IDProducto);
+
+	});
+	
+	if (arrTarifas.length>0)
+		CambioCliente();
+}//fin de globalEvents
+
+
+//	Guarda una tarifa
+function Guardar()
+{
+	var msg='';
+	
+	formu=document.forms['frmTarifas'];
+	
+	//	Comprobar campos
+	//	IDCliente obligatiorio
+	if(formu.elements['IDCLIENTE'].value == '-1')
+		msg = msg + strClienteObligatorio+'\n';
+		
+	//	Importe en formato numérico
+	if ((formu.elements['IMPORTE'].value == '') || (isNaN(Number.parseFloat(formu.elements['IMPORTE'].value.replace('.','').replace(',','.')))))
+		msg = msg + strErrorEnTarifa+'\n';
+
+	//	FechaInicio
+	if((formu.elements['FECHAINICIO'].value != '') && (CheckDate(formu.elements['FECHAINICIO'].value)))
+		msg = msg +strErrorEnFechaInicio +'\n';
+
+	//	Fecha final
+	if((formu.elements['FECHAFINAL'].value != '') && (CheckDate(formu.elements['FECHAFINAL'].value)))
+		msg = msg + strErrorEnFechaFin+'\n';
+
+	//	Importe en formato numérico
+	if ((formu.elements['BONIF_COMPRA'].value != '') && (isNaN(Number.parseInt(formu.elements['BONIF_COMPRA'].value))))
+		msg = msg + strNumeroIncorrecto.replace('[[NUMERO]]',formu.elements['BONIF_COMPRA'].value)+'\n';
+
+	//	Importe en formato numérico
+	if ((formu.elements['BONIF_GRATIS'].value != '') && (isNaN(Number.parseInt(formu.elements['BONIF_GRATIS'].value))))
+		msg = msg + strNumeroIncorrecto.replace('[[NUMERO]]',formu.elements['BONIF_GRATIS'].value)+'\n';
+
+	if (msg!='')
+	{
+		alert(msg);
+	}
+	else
+	{
+		formu.elements['ACCION'].value = 'GUARDAR';
+		formu.submit();
+	}
+}
+
+
+//	Guarda una tarifa
+function EliminarTarifa(IDCliente)
+{
+	var Pos=BuscaPosCliente(IDCliente);
+	if (confirm(msgBorrarTarifa.replace('[[CLIENTE]]',arrTarifas[Pos].Cliente)))
+	{
+		jQuery('#IDCLIENTE').val(IDCliente);
+		formu=document.forms['frmTarifas'];
+		formu.elements['ACCION'].value = 'BORRAR';
+		formu.submit();
+	}
+}
+
+
+//	Al cambiar el desplegable de cliente, actualizar desplegable de tipos de negociación
+function CambioCliente()
+{
+	IDCliente=jQuery('#IDCLIENTE').val();
+	
+	//solodebug	
+	console.log('CambioCliente. IDCliente:'+IDCliente);
+	var count=0;
+	
+	jQuery('#IDTIPONEGOCIACION').empty();
+
+	if (IDCliente !='-1')
+	{
+		var Pos=BuscaPosCliente(IDCliente);
+
+		for (var j=0;j<arrTarifas[Pos].DespTipoNeg.length;++j)
+		{
+			count++;
+			//solodebug	console.log(arrTarifas[Pos].IDCliente+' TipoNeg:'+arrTarifas[Pos].DespTipoNeg[j].ID+':'+arrTarifas[Pos].DespTipoNeg[j].Nombre);
+			jQuery('#IDTIPONEGOCIACION').append(new Option(arrTarifas[Pos].DespTipoNeg[j].Nombre,arrTarifas[Pos].DespTipoNeg[j].ID));
+		}
+	}
+
+	if ((IDCliente =='')||(IDCliente =='-1')||(count<=1))
+		jQuery('#tdTipoNeg').hide();
+	else
+		jQuery('#tdTipoNeg').show();
+}
+
+
+//	Recupera los datos de la tarifa para facilitar su modificación
+function RecuperarTarifa(IDCliente)
+{
+	//	Primero el cambio de cliente, para informar también el desplegable de tipos de negociación
+	jQuery('#IDCLIENTE').val(IDCliente);
+	CambioCliente();
+	
+	//solodebug	
+	console.log('RecuperarTarifa. ID:'+IDCliente);
+	
+	var Pos=BuscaPosCliente(IDCliente);
+	
+	//solodebug	
+	console.log(arrTarifas[Pos].IDCliente);
+
+	jQuery('#IMPORTE').val(arrTarifas[Pos].Importe);
+	jQuery('#IDDIVISA').val(arrTarifas[Pos].IDDivisa);
+	jQuery('#FECHAINICIO').val(arrTarifas[Pos].FechaInicio);
+	jQuery('#FECHAFINAL').val(arrTarifas[Pos].FechaLimite);
+	jQuery('#IDTIPONEGOCIACION').val(arrTarifas[Pos].IDTipoNeg);
+	jQuery('#NOMBREDOCUMENTO').val(arrTarifas[Pos].NombreDoc);
+	jQuery('#IDDOCUMENTO').val(arrTarifas[Pos].IDDocumento);
+	jQuery('#BONIF_COMPRA').val(arrTarifas[Pos].BonifCompra);
+	jQuery('#BONIF_GRATIS').val(arrTarifas[Pos].BonifGratis);
+}
+
+
+//	Devuelve la posición del cliente
+function BuscaPosCliente(IDCliente)
+{
+	var Pos=-1;
+	for (var i=0;(i<arrTarifas.length)&&(Pos==-1);++i)
+	{
+		//solodebug	
+		console.log('BuscaPosCliente ('+i+'):'+arrTarifas[i].IDCliente);
+		
+		if (arrTarifas[i].IDCliente==IDCliente)
+		{
+			Pos=i;
+		}
+	}
+
+	//solodebug	
+	console.log('BuscaPosCliente ('+IDCliente+'). Devolviendo:'+Pos);
+
+	return Pos;
+}

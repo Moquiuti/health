@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Mantenimiento de los datos de control de pedidos problematicos
+	Ultima revision: 28ago19 15:35
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="ControlPedidosHTML.xsl"?>
+-->
+<ControlPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<!--	Muestra los datos de seguimiento por parte de MVM de un pedido		-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ControlPedidos');
+					IF US_ID>=0 THEN
+						--PedidosProblematicos_Pck.MostrarPedidoProblematico_XML(US_ID,'{@IDPEDIDO}','S');
+						PedidosProblematicos_Pck.ControlPedido_XML(US_ID,'{@IDPEDIDO}','S');
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+</ControlPedidos>

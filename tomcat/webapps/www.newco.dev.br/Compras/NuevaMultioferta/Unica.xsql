@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--   
+	Esta página sustituye a Unica.html para poder utilizar estilos e idiomas
+	2dic16
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="UnicaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="UnicaHTML.xsl"?>
+
+<EnviarPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG"/>
+</EnviarPedidos>
+
+

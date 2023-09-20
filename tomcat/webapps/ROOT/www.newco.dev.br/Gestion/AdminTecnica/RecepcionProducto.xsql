@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	ultima revision 6set18 10:48
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="RecepcionProductoJSON.xsl"?>
+
+<EnvioLineaFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NUMLINEA" value="NUMLINEA"/>
+	<xsql:include-param name="TEXTO" value="{@TEXTO}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	
+	<!--	Datos que devolvera el PL/SQL	
+	<OK/>
+	-->	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecepcionProducto');
+
+	 		IF US_ID > 0 THEN
+				--utilidades_pck.debug('XSQL: IntegracionRecepcion_pck.RecepcionProducto {@US_ID}, {@IDFICHERO},{@NUMLINEA},{@TEXTO}');
+
+				v_Res:=IntegracionRecepcion_pck.RecepcionLineaPedido
+				(
+					'{@US_ID}',
+					'{@INTF_ID}',
+					'{@NUMLINEA}',
+					'{@TEXTO}',
+					'{@CODPEDIDO}',
+					'{@REFCLIENTE}',
+					'{@NOMBREPRODUCTO}',
+					'{@CANTIDAD}',
+					'{@FECHA}'
+				);
+ 				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P(	'<OK>'
+						||	'<NUMLINEA>{@NUMLINEA}</NUMLINEA>'
+						||	'<LMO_ID>'||utilidades_pck.Piece(v_Res,'|',1)||'</LMO_ID>'
+						||	'</OK>');
+				ELSE
+
+					HTP.P('<ERROR msg="'||utilidades_pck.Piece(v_Res,'|',2)||'"/>');
+				
+				END IF;
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnvioLineaFichero>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |   Mantenimiento de Centros.
+ |     Parametros:
+ |         ID: Codigo de Centro (Obligatorio)
+ |     EMP_ID: Codigo de Empresa (Opcional)
+ |
+ |  Para anyadir un Centro:
+ |         ID: Codigo de Centro = 0
+ |      EMP_ID: Codigo de Empresa
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ContactoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ContactoHTML.xsl"?>
+
+<Contacto xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="ID"/>
+  <xsql:include-param name="EMP_ID"/>
+
+  <!-- Inicio del formulario -->
+
+    <xsql:include-owa>
+    <![CDATA[
+		TablonAnuncios_PCK.ContactoAnuncio_XML('{@IDAnuncio}','{@IDRespuesta}');
+    ]]>
+
+    </xsql:include-owa>
+    
+  
+  <botones_nuevo>
+  
+    <button label="Cerrar" caption="IMG-0190">
+      <name_function>window.close</name_function>
+    </button>
+  
+  </botones_nuevo>
+  
+  
+</Contacto>
+

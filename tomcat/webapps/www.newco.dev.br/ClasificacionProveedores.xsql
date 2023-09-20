@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Datos necesarios para el Área Pública
+ *		Estadistica agregada de afiliados
+ *		Ofertas
+ *
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ClasificacionProveedores.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ClasificacionProveedores.xsl"?>
+
+<ClasificacionProveedores xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" name="US_ID" value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="SES_ID"  value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="MVMCOOKIE"  value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com.br" path="" names="LANG"  value="spanish"/>
+
+
+	<LANG>spanish</LANG>
+	
+	 <xsql:include-owa>
+    <![CDATA[
+    	BEGIN
+			
+        		EIS_PROVEEDORES_PCK.Listado_XML(
+					NULL,  --US_ID,
+					NULL	   --pais 55 brasil
+					);
+			
+		END;
+    ]]>
+  </xsql:include-owa>	
+  
+</ClasificacionProveedores>

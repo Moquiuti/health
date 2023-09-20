@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AyudaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AyudaHTML.xsl"?>
+
+<Ayuda xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+ 
+        <xsql:include-owa>
+        <![CDATA[
+        BEGIN
+          AYUDA_PCK.Generar('{@PAG}');
+        END;
+        ]]>
+        </xsql:include-owa>
+ 
+</Ayuda>

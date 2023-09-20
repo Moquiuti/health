@@ -1,0 +1,4 @@
+08abr22 ET Nueva carga reducida de pedidos para calculo de ahorros.
+09abr22 ET Nuevo disenno 2022. MantenProductos2022_090422.js
+30jun22 ET Solucionados problemas JS. MantenProductos2022_090422.js
+04jul22 ET Nueva carga para actualizar tipo de IVA. MantenProductos2022_040722.js

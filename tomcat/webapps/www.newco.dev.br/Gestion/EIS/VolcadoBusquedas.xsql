@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VolcadoBusquedas.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VolcadoBusquedas.xsl"?>
+
+<Busquedas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+<![CDATA[
+	SELECT to_char(LGC_TIMESTAMP,'dd/mm/yyyy') AS FECHA,
+		EMP_ID AS IDEMPRESA,
+		EMP_NOMBRE AS EMPRESA,
+		US_NOMBRE||' '||US_APELLIDO1||' '||US_APELLIDO2 USUARIO,
+		LGC_NOMBRE,
+		LGC_PROVEEDOR,
+		LGC_NUM_ROWS AS LINEAS
+	FROM LOG_CONSULTAS, EMPRESAS,USUARIOS
+	WHERE LGC_IDEMPRESACONSULTA=EMP_ID
+		AND	LGC_IDUSUARIO=US_ID
+		AND EMP_ID<>1
+		AND LGC_TIMESTAMP>SYSDATE-60
+		AND	LGC_BUSCADOR='PROV'
+		AND	LGC_NUM_ROWS>0
+		AND NVL(US_CENTRALCOMPRAS,'N')<>'S'
+	ORDER BY LGC_TIMESTAMP DESC
+]]>
+</xsql:query>
+<returnHome/>
+</Busquedas>

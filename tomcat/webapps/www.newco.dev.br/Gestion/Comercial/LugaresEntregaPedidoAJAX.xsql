@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Lista de los lugares de entrega de un centro via ajax
+ 	Se utiliza el IDUsuario para conseguir el IDCentro
+	Ultima revision:ET 14set20 11:30 
++-->
+<?xml-stylesheet type="text/xsl" href="LugaresEntregaPedidoJSON.xsl"?>
+
+<Lugares xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LugaresEntregaPedidoAJAX');
+		IF US_ID>=0 THEN
+			CENTROS_PCK.DesplegableLugaresEntregaXML(
+				'{@IDCENTRO}',											--	14set20 UTILIDADES_PCK.CentroDelUsuario('{@IDUSUARIO}'),
+                NULL,
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Lugares>

@@ -1,0 +1,41 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://www.newco.dev.br/General/Estilos.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<script type="text/javascript" src="http://www.newco.dev.br/General/general.js">
+	</script>
+	<script type="text/javascript">
+	<!--
+        function SituaDiv(){
+          var anchoImagen=window.screen.availWidth*0.25; 
+          var anchoTexto=window.screen.availWidth*0.26;          
+          if (is_nav){
+            if (is_nav5up){     
+              document.getElementById('imagen').left=anchoImagen;
+              document.getElementById('imagen').visibility='visible';  
+              document.getElementById('texto').left=anchoTexto;                
+              document.getElementById('texto').visibility='visible';                   
+            }
+            else{          
+              document.layers['imagen'].left=anchoImagen; 
+              document.layers['imagen'].visibility='show';  
+              document.layers['texto'].left=anchoTexto;
+              document.layers['texto'].visibility='show';               
+            }
+          }         
+          else{ 
+            document.getElementById('imagen').style.left=anchoImagen; 
+            document.getElementById('imagen').visibility='visible';    
+            document.getElementById('texto').style.left=anchoTexto; 
+            document.getElementById('texto').visibility='visible';                                        
+          }
+        }	             
+        //-->
+        </script> 
+</head>
+
+<body bgcolor="#EEFFFF" onLoad="SituaDiv()">
+
+<div id="imagen" style="position:absolute;visibility:hidden;visibility:hide;left:0px;top:40px;width:250px;height:187px;z-index:0"><img src="http://www.newco.dev.br/images/Empresa.gif" width="250" height="187"/></div>
+<div id="texto" style="position:absolute;visibility:hidden;visibility:hide;left:0px;top:100px;width:250px;height:127px;z-index:1"><p class="tituloNegro" align="center">Espacio reservado para la empresa. </p> </div>
+</body> </html>

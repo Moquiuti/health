@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Datos necesarios para el Área Pública
+ *		Estadistica agregada de afiliados
+ *		Ofertas
+ *
+ 	<xsql:set-cookie host="www.mvmnucleo.com" path="/" name="US_ID" value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="SES_ID"  value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="MVMCOOKIE"  value="" />
+	<xsql:set-cookie host="www.mvmnucleo.com.br" path="" names="LANG"  value="spanish"/>
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MVMClientesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MVMClientesHTML.xsl"?>
+
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	
+
+	<LANG>spanish</LANG>
+	
+
+   <xsql:include-owa>
+    <![CDATA[
+        DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			--CENTROS_PCK.ListadoPublicoCentros_XML;
+			EMPRESAS_PCK.ListadoPublicoEmpresas_XML('34');
+     END;
+    ]]>
+  </xsql:include-owa>
+  
+	
+  
+</AreaPublica>

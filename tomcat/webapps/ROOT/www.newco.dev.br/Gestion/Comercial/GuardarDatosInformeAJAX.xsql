@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+	Guarda los datos del informe para una licitacion
+	Ultima revision: ET 29may19 14:45
++-->
+<?xml-stylesheet type="text/xsl" href="GuardarDatosInformeJSON.xsl"?>
+
+<GuardarInforme xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDLicitacion		LICITACIONES.LIC_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','GuardarInforme');
+		IF US_ID>=0 THEN
+			v_IDLicitacion:=LICITACIONES_PCK.GuardarInforme(
+				US_ID,
+				'{@LIC_ID}',
+				'{@LIC_INF_SITUACION}',
+				'{@LIC_INF_PRESENTACION}',
+				'{@LIC_INF_ANALISIS}',
+				'{@LIC_INF_CONCLUSIONES}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDLicitacion > 0 THEN
+				HTP.P('<OK>'||v_IDLicitacion||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</GuardarInforme>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Inserta productos en el catalogo del Proveedor y muestra mensajes de aviso
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="InsertarEnCatalogoProveedorJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="InsertarEnCatalogoProveedorJSON.xsl"?>
+
+<InsertarCatProv xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaUsuariosLic');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.CrearCatalogoProveedor(
+				US_ID,
+				'{@LIC_ID}',
+				'{@EMP_ID}',
+				'{@CAT}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = 'ERROR' THEN
+				HTP.P('<ERROR/>');
+			ELSE
+				HTP.P('<OK>'||v_res||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</InsertarCatProv>

@@ -1,0 +1,74 @@
+Log de cambios en las páginas MultiofertaFrameHTML, MultiofertaTemplateUnic.xsl
+
+
+21nov16 Adaptación al nuevo diseño de Breno, recuperando código desde WFStatusHTML
+		Cabecera
+		
+22nov16	Cambio formato botones
+		Incluir botones en la cabecera
+		Siguen al final de la página los botones para MVM: <xsl:template name="botonesMVM"> 
+
+24nov16	Reducir e igualar fuentes en datos cliente/proveedor/pedido
+		Ajustes varios
+
+25nov16	Ajustes varios
+21abr17	No mostramos la forma y plazo de pago si no están informados
+29jun17 Utilizar diferente tipo de código de cliente según usuario
+30jun17	Incluir documento adjunto
+6set17	Incluir nota proveedor y posibilidad de realizar valoración
+7set17	Enlazar el proveedor a la ficha de proveedor (solo para compradores) <a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID=11456&amp;VENTANA=NUEVA','Detalle Empresa',90,80,0,-50);">
+10nov17	El usuario "de empresa" no puede aprobar pedidos de otro usuario
+18dic17	Botón "Mantenimiento pedido" para usuarios aprobadores en el estado "pendiente de aprobación (40_RW)
+20dic17	Incluir pedido mínimo para simplificar toma de decisiones
+18ene18	Incluir botones de gestión (Manten pedido, enviar pdf) para usuarios con derechos de mantenimiento de pedido
+18ene18 Incluir botón "Recibir PDF" para enviar PDF del pedido al usuario que está conectado (solo para usuarios con derechos de control o mantenimiento)
+18ene18 Incluir botón "Recibir PDF" para enviar PDF del pedido al usuario que está conectado (para todos los usuarios)
+30ene18	En estado 40 (pedido rechazado por el responsable), no permite cerrar. creado MOFS/MOF_41_RW_js
+02feb18	En estado 12 (pedido rechazado por el proveedor), no permite cerrar. creado MOFS/MOF_41_RW_js
+13feb18	En estado 11 (pedido pendiente de aceptar por el proveedor) incluir botón consulta, y desplegable de motivo de rechazo o consulta 
+22feb18	Se duplican los comentarios
+25abr18	Crear back order a partir de pedido parcial
+07may18	En el caso de pedido de elementos especiales, el nombre del pack debe mostrarse bien diferenciado
+07may18	El icono de "recibido/no recibido" sirve para cambiar el estado de la linea
+08may18	Crear back order a partir de pedido parcial
+21jun18	Incluir datos paciente en el pedido
+03set18	Permitir superar el máximo de cantidad en la recepción de pedidos de packs (elementos especiales)
+04set18	Corregido error en comprobación de cantidades (alfanum en lugar de num)
+28set18	En el estado 11 no se muestran los comentarios
+02oct18	Incluir documento (hoja de gasto) en la recepción del pedido
+03abr19 Varias mejoras de diseño
+24abr19	Incluir botón "Histórico" en la aprobación del pedido que abre el análisis de pedidos
+13may19 Únicamente permitir subir documentos en estados 11 y 40
+11nov19 Destacar la fecha prevista de entrega
+14nov19 Incluir enlace a la licitación en los pedidos generados desde licitación
+18feb20 Destacar la fecha de entrega en el estado 11
+03mar20 Incluir proceso de aprobación
+07set20 Incluir campo "baja prioridad" 
+29set20 Multidocumentos
+10oct20 Destacar la categoría ACTIVOS, SERVICIOS, etc (solicitado por Imbanaco)
+26oct20 Destacar observaciones (solicitado por Unimed)
+25nov20 Quitar la columna de unidades por lote (solicitado por Unimed)
+29dic20 Incluir coste de transporte e IVA coste de transporte en los pedidos. Reorganizar espacio de totales.
+07ene21 Solucionados varios problemas creando backorder de un backorder
+18ene21 Corregir problema con saltos de linea en observaciones
+28ene21 Multidivisa
+12feb21 UNIMED: mostrar datos de contacto del comprador
+22feb21 Clausulas legales (Imbanaco)
+12abr21 Tipos de pedidos (Imbanaco)
+04jun21 Incluir info de mantenimiento del producto
+17jun21 Bloquear boton de ABONO en estado 13 y 25 (Imbanaco)
+11may21 Incluir comentario a nivel de cada linea de producto en el estado 40 para EMP_SEGUIMIENTOAPROBACION='S' (Imbanaco)
+05jul21 Retomamos desarrollo anterior
+23jul21 Mejoras en la maquetacion de totales
+23jul21 Exportacion excel (Imbanaco)
+02set21 Aprobar multioferta divisa: mostrar tipo de cambio. ¿Permitir editar?
+21set21 Destacar en la parte superior de la pagina el texto de aceptar todas las condiciones // CANCELADO
+25oct21 Presentar mensaje de aviso al proveedor cuando abra un abono
+
+
+
+
+
+
+
+

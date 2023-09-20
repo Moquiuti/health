@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Modifica la fecha de decision prevista para una licitacion
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ModificarFechaDecisionJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ModificarFechaDecisionJSON.xsl"?>
+
+<ModificarFecha xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="FECHA"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ModificarFechaDecisionAJAX');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.ModificarFechaDecision(
+				US_ID,
+				'{@LIC_ID}',
+				'{@FECHA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res > 0 THEN
+				HTP.P('<OK>'||v_res||'</OK>');
+			ELSE
+				HTP.P('<\ERROR>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModificarFecha>

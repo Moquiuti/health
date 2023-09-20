@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Datos necesarios para el Área Pública
+ *		Estadistica agregada de afiliados
+ *		Ofertas
+ * Cloud 20180319 www.mvmnucleo.com/indexCR443.xsql
+ +-->
+<!-- -->
+<!-- <?xml-stylesheet type="text/xsl" media="Mozilla" href="indexHTML.xsl"?> -->
+<?xml-stylesheet type="text/xsl" href="indexHTMLCR.xsl"?>
+
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="mvmnucleo" lang="spanish">
+        <xsql:include-param name="PORTAL"/>
+        <xsql:include-param name="REDUCIDO"/>
+        <xsql:include-param name="INDEXLANG"/>
+        <!--<LANG>spanish</LANG>-->
+</AreaPublica>
+
+<!-- 20180319
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="mvmnucleo" lang="spanish">
+   
+	<xsql:set-cookie host="www.comprasresidencias.com" path="" name="US_ID" value=""/>
+	<xsql:set-cookie host="www.comprasresidencias.com" path="" names="SES_ID"  value=""/>
+	<xsql:set-cookie host="www.comprasresidencias.com" path="" names="MVMCOOKIE"  value=""/>
+	<xsql:set-cookie host="www.comprasresidencias.com" path="" names="LANG"  value="spanish"/>
+
+	<LANG>spanish</LANG>
+        <STYLE>basic.11.04.14.css</STYLE>
+</AreaPublica>
+-->

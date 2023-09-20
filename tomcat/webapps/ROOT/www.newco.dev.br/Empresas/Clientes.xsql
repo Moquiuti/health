@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TablaEmpresasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TablaEmpresasHTML.xsl"?>
+
+<Proveedores xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="OPCION"/>
+  
+  <xsql:query tag-case="upper" row-element="EMPRESA" rowset-element="">
+    <![CDATA[
+		SELECT EMP_ID, EMP_NOMBRE
+		FROM EMPRESAS
+		WHERE ((EMP_STATUS<>'B') OR (EMP_STATUS IS NULL))
+		AND (EMP_IDTIPO<>3 AND EMP_IDTIPO<>4 AND EMP_IDTIPO<>5 AND EMP_IDTIPO<>6 AND EMP_IDTIPO<>8)
+		ORDER BY EMP_NOMBRE
+    ]]>
+  </xsql:query>
+  <jumpTo>
+    <picture-on>Cancelar_mov</picture-on>
+    <picture-off>Cancelar</picture-off> 
+    <page>G-0035</page>
+    <caption>IMG-0190</caption>    
+  </jumpTo>  
+   
+  <button label="Cerrar" caption="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button>  
+  
+  <returnHome/>
+</Proveedores>
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="P3FamiliasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="P3FamiliasHTML.xsl"?>
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <form name="SeleccionFamilias" method="post">
+   <!--
+    //[[ Copiamos los parametros dentro del form para volver a enviar la consulta ]]//
+   +-->
+  <xsql:include-param name="EMPRESATOTAL"/>
+  <xsql:include-param name="NOMENCLATORTOTAL"/>
+  <!-- +-->
+
+  <xsql:include-param name="LLP_CATEGORIA"/>
+  <xsql:include-param name="LLP_FAMILIA"/>  
+  <xsql:include-param name="LLP_SUBFAMILIA"/>  
+  <xsql:include-param name="LLP_NOMBRE"/>    
+  <xsql:include-param name="LLP_DESCRIPCION"/>  
+  <xsql:include-param name="LLP_FABRICANTE"/>      
+  <xsql:include-param name="LLP_MARCA"/>        
+  <xsql:include-param name="LLP_PROVEEDOR"/>        
+  <xsql:include-param name="LLP_HOMOLOGADO"/>        
+  <xsql:include-param name="LLP_CERTIFICACION"/>            
+  <xsql:include-param name="LLP_NIVEL_CALIDAD"/>            
+  <xsql:include-param name="LLP_PROV_HABITUALES"/>            
+  <xsql:include-param name="LLP_PRODUCTO_DETERMINADO"/>     
+  <xsql:include-param name="LLP_PRESENTACION"/>              
+  <xsql:include-param name="LLP_ORDERBY"/>              
+  <xsql:include-param name="LLP_LISTAR"/>          
+  <xsql:include-param name="OPERACION"/>          
+  <xsql:include-param name="LLP_IDESPECIALIDAD"/>          
+  
+  <xsql:include-param name="LLP_ID"/>
+  <xsql:include-param name="LP_ID"/>  
+  <xsql:include-param name="TCV_ID"/>    
+  <xsql:include-param name="REGISTROSPORPAGINA"/>
+  <!-- ULTIMAPAGINA es defineix a partir dels butons -->
+  
+  <xsql:include-owa>
+    <![CDATA[
+    BEGIN
+      PRODUCTOS_PCK.BuscaFamilias(  '{@US_ID}',
+                                    p_EMPRESAS_SELECCIONADAS => '{@EMPRESATOTAL}',
+                                    p_NOMENCLATOR_SELECCIONADO => '{@NOMENCLATORTOTAL}',
+                                    p_CATEGORIA => '{@LLP_CATEGORIA}',
+				    p_FAMILIA => '{@LLP_FAMILIA}',
+				    p_SUBFAMILIA => '{@LLP_SUBFAMILIA}',
+				    p_NOMBRE => '{@LLP_NOMBRE}',
+				    p_DESCRIPCION => '{@LLP_DESCRIPCION}',
+				    p_FABRICANTE => '{@LLP_FABRICANTE}',
+				    p_MARCA => '{@LLP_MARCA}',
+				    p_PROVEEDOR => '{@LLP_PROVEEDOR}',
+				    p_HOMOLOGADO => '{@HOMOLOGADO}',
+				    p_CERTIFICACION => '{@CERTIFICACION}',
+				    p_NIVEL_CALIDAD => '{@LLP_NIVEL_CALIDAD}',
+				    p_PROV_HABITUALES => '{@LLP_PROV_HABITUALES}'
+                    );
+     END;
+    ]]>
+  </xsql:include-owa>
+     
+    <button label="Seleccionar" caption="IMG-0110"> 
+      <name_function>Seleccionar</name_function>
+      <param>document.forms[0]</param>
+      <param>'FAMILIA'</param>       
+    </button>
+
+    <button label="Buscar" caption="P3-0425">
+      <name_function>Actua</name_function>
+      <param>document.forms[0]</param>
+      <param>'FAMILIA'</param>      
+      <param>'P3Lista.xsql'</param>            
+    </button>
+        
+    <button label="Siguiente" caption="P3-0465">
+      <name_function>Actua</name_function>
+      <param>document.forms[0]</param>
+      <param>'FAMILIA'</param>
+      <param>'P3SubFamilias.xsql'</param>            
+    </button>
+</form>  
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>       
+</Lista>

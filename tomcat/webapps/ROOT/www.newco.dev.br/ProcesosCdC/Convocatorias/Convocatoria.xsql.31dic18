@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de convocatoria + funciones avanzadas
+	ultima revision: ET 23nov18 10:10
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="ConvocatoriaHTML.xsl"?>
+
+<Convocatoria xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<xsql:include-owa>
+	  <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Convocatoria');
+			IF US_ID>=0 THEN
+			
+				utilidades_pck.debug('XSQL. Convocatoria US_ID:'||US_ID||' IDConv:'||'{@LIC_CONV_ID}'||' Accion:'||'{@ACCION}');
+			
+				IF NVL('{@ACCION}','N')='GUARDAR' THEN
+				
+					Convocatorias_pck.Modificar
+					(
+						US_ID,
+						'{@LIC_CONV_ID}',
+						'{@LIC_CONV_NOMBRE}',
+						'{@FECHADECISION}',
+						'{@LIC_HORADECISION}'
+					);
+					
+				ELSIF NVL('{@ACCION}','N')='INCLUIR' THEN
+					
+					Convocatorias_pck.IncluirProveedor
+					(
+						US_ID,
+						'{@LIC_CONV_ID}',
+						'{@PARAMETROS}'
+					);
+				
+				ELSIF NVL('{@ACCION}','N') IN ('BORRAR','SUSPENDER','RECUPERAR') THEN
+					
+					Convocatorias_pck.CambiarEstadoProveedor
+					(
+						US_ID,
+						'{@LIC_CONV_ID}',
+						'{@PARAMETROS}',
+						'{@ACCION}'
+					);
+				
+				ELSIF NVL('{@ACCION}','N') IN ('REACTIVAR') THEN
+					
+					Convocatorias_pck.ReactivarProveedor
+					(
+						'{@LIC_CONV_ID}',
+						'{@PARAMETROS}'
+					);
+
+				ELSIF NVL('{@ACCION}','N')='INCLUIRLIC' THEN
+					
+					Convocatorias_pck.IncluirLicitacion
+					(
+						US_ID,
+						'{@LIC_CONV_ID}',
+						'{@PARAMETROS}'
+					);
+				
+				ELSIF NVL('{@ACCION}','N')='QUITARLIC' THEN
+					
+					Convocatorias_pck.QuitarLicitacion
+					(
+						US_ID,
+						'{@LIC_CONV_ID}',
+						'{@PARAMETROS}'
+					);
+				
+				END IF;
+			
+				Convocatorias_pck.Convocatoria_XML(US_ID,'{@LIC_CONV_ID}');
+			END IF;				   
+		END;
+	]]>
+	</xsql:include-owa>
+  
+</Convocatoria>
+

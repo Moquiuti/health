@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="InicioStocksHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="InicioStocksHTML.xsl"?>
+-->
+
+<TestWebService xmlns:xsql="urn:oracle-xsql" connection="newco">
+<!--	Para probarlo: www.mvmnucleo.com/Integracion/TestWebService.xsql	-->
+	<xsql:include-owa>
+        <![CDATA[
+			DECLARE
+				Navegad  			VARCHAR2(500);
+				IP_Addr  			VARCHAR2(500);
+				Referer  			VARCHAR2(500);
+				QueryString			VARCHAR2(500);
+				ContentType			VARCHAR2(500);
+				ContentLength		VARCHAR2(500);
+				PostData			VARCHAR2(500);
+			BEGIN
+    			Navegad := OWA_UTIL.GET_CGI_ENV('HTTP_USER_AGENT');
+				IP_Addr := OWA_UTIL.GET_CGI_ENV('REMOTE_ADDR');
+				Referer := OWA_UTIL.GET_CGI_ENV('HTTP_REFERER');
+				QueryString := OWA_UTIL.GET_CGI_ENV('QUERY_STRING');
+				ContentType	:= OWA_UTIL.GET_CGI_ENV('CONTENT_TYPE');
+				ContentLength:= OWA_UTIL.GET_CGI_ENV('CONTENT_LENGTH');
+				PostData:= OWA_UTIL.GET_CGI_ENV('HTTP_RAW_POST_DATA');
+
+				HTP.P('<TEST>'
+					||'<NAVEGADOR>'			||Navegad		||'</NAVEGADOR>'
+					||'<IP>'				||IP_Addr		||'</IP>'
+					||'<REFERER>'			||Referer		||'</REFERER>'
+					||'<QUERY_STRING>'		||QueryString	||'</QUERY_STRING>'
+					||'<CONTENT_TYPE>'		||ContentType	||'</CONTENT_TYPE>'
+					||'<CONTENT_LENGTH>'	||ContentLength	||'</CONTENT_LENGTH>'
+					||'<HTTP_RAW_POST_DATA>'	||PostData	||'</HTTP_RAW_POST_DATA>'
+					||'</TEST>');
+			END;
+        ]]>
+        </xsql:include-owa>
+
+
+</TestWebService>

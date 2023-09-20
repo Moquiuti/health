@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Segundo paso del pedido
+	Ultima revision: ET 16feb22 16:26 
+	
+	Normalmente se llama desde LPAnalizarSave.xsql. Este caso es solo para desarrollo
+-->
+<?xml-stylesheet type="text/xsl" href="CVGenerarHTML.xsl"?>
+
+<Generar xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CVGenerar');
+		IF US_ID>=0 AND '{@LP_ID}' IS NOT NULL THEN
+			MULTIOFERTAS_SEGUIMIENTO_PCK.MostrarMultiOfertas(
+				'{@LP_ID}',
+				'0',		-- Siempre se utiliza la propia del pais ('0')	'{@IDDIVISA}',
+				US_ID
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Generar>

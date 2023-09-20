@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Listados Personalizados
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListadosPersonalizadosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListadosPersonalizadosHTML.xsl"?>
+
+<ListadosPersonalizados xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<!--<xsql:set-stylesheet-param name="usuario" value="{@US_ID}"/>-->
+<xsql:set-stylesheet-param name="SES_ID" value="{@SES_ID}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="lang"/>
+
+</ListadosPersonalizados>

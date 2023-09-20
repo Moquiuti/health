@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Listado con las ofertas NO seleccionadas
+	Revisado ET 31mar22 10:00
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="licProductosNoSeleccionadosHTML2022.xsl"?>
+
+<OfertasSeleccionadas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="IDCENTROCOMPRAS"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="STYLE"/>
+ 
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(6);
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','OfertasNoSel');
+
+		IF US_ID>=0 and '{@LIC_ID}' IS NOT NULL THEN
+		
+				LICITACIONESINFORMES_PCK.NoSeleccionados_XML(
+					US_ID,
+					'{@LIC_ID}'
+				);
+
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</OfertasSeleccionadas>

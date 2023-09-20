@@ -1,0 +1,1856 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE note SYSTEM "http://www.newco.dev.br/General/medicalvm.ent">
+
+<!--
+ |   Mensajes de la aplicación Medical Virtual Market 
+ |  
+ +-->
+<messages xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <!-- Imatges -->
+  <msg id="DB-006" lang="spanish">http://www.newco.dev.br/images/ant.gif</msg>
+  <msg id="DB-007" lang="spanish">http://www.newco.dev.br/images/ant_pres.gif</msg>
+  <msg id="DB-003" lang="spanish">http://www.newco.dev.br/images/indice.gif</msg>    
+  <msg id="DB-004" lang="spanish">http://www.newco.dev.br/images/triang_bk.gif</msg>
+  <msg id="DB-005" lang="spanish">http://www.newco.dev.br/images/anexo.gif</msg>
+  <msg id="DB-100" lang="spanish">http://www.newco.dev.br/Productos/imagenes/no_disp.gif</msg>     
+  <msg id="DB-001" lang="spanish">http://www.newco.dev.br/images/Botones/Anterior.gif</msg>     
+  <msg id="DB-002" lang="spanish">http://www.newco.dev.br/images/Botones/Anterior_mov.gif</msg>     
+  <msg id="DB-Aceptar" lang="spanish">http://www.newco.dev.br/images/Botones/Aceptar.gif</msg>
+  <msg id="DB-Aceptar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Aceptar_mov.gif</msg>
+  <msg id="DB-Alarma" lang="spanish">http://www.newco.dev.br/images/Botones/Alarma.gif</msg>
+  <msg id="DB-Alarma_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Alarma_mov.gif</msg>
+  <msg id="DB-Analizar" lang="spanish">http://www.newco.dev.br/images/Botones/Analizar.gif</msg>     
+  <msg id="DB-Analizar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Analizar_mov.gif</msg>     
+  <msg id="DB-Ampliadas" lang="spanish">http://www.newco.dev.br/images/Botones/Ampliadas.gif</msg>     
+  <msg id="DB-Ampliadas_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Ampliadas_mov.gif</msg>
+  <msg id="DB-Anterior" lang="spanish">http://www.newco.dev.br/images/Botones/Anterior.gif</msg>     
+  <msg id="DB-Anterior_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Anterior_mov.gif</msg>     
+  <msg id="DB-Bandeja" lang="spanish">http://www.newco.dev.br/images/Botones/Bandeja.gif</msg>
+  <msg id="DB-Bandeja_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Bandeja_mov.gif</msg>
+  <msg id="DB-Borrar" lang="spanish">http://www.newco.dev.br/images/Botones/Borrar.gif</msg>
+  <msg id="DB-Borrar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Borrar_mov.gif</msg>
+  <msg id="DB-Bucle" lang="spanish">http://www.newco.dev.br/images/Botones/Bucle.gif</msg>
+  <msg id="DB-Bucle_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Bucle_mov.gif</msg>
+  <msg id="DB-Buscar" lang="spanish">http://www.newco.dev.br/images/Botones/Buscar.gif</msg>
+  <msg id="DB-Buscar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Buscar_mov.gif</msg>
+  <msg id="DB-BuscarCYP" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarCYP.gif</msg>
+  <msg id="DB-BuscarCYP_mov" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarCYP_mov.gif</msg>
+  <msg id="DB-BuscarEnPlantilla" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarEnPlantilla.gif</msg>
+  <msg id="DB-BuscarEnPlantilla_mov" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarEnPlantilla_mov.gif</msg>
+  <msg id="DB-BuscarPeq" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarPeq.gif</msg>
+  <msg id="DB-BuscarPeq_mov" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarPeq_mov.gif</msg>
+  <msg id="DB-BuscarFino" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarFino.gif</msg>
+  <msg id="DB-BuscarFino_mov" lang="spanish">http://www.newco.dev.br/images/Botones/BuscarFino_mov.gif</msg>
+  <msg id="DB-Cancelar" lang="spanish">http://www.newco.dev.br/images/Botones/Cancelar.gif</msg>     
+  <msg id="DB-Cancelar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Cancelar_mov.gif</msg>     
+  <msg id="DB-Catalogo" lang="spanish">http://www.newco.dev.br/images/Botones/Catalogo.gif</msg>     
+  <msg id="DB-Catalogo_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Catalogo_mov.gif</msg>  
+  <msg id="DB-Copiar" lang="spanish">http://www.newco.dev.br/images/Botones/Copiar.gif</msg>     
+  <msg id="DB-Copiar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Copiar_mov.gif</msg>     
+  <msg id="DB-Editar" lang="spanish">http://www.newco.dev.br/images/Botones/Editar.gif</msg>
+  <msg id="DB-Editar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Editar_mov.gif</msg>
+  <msg id="DB-EditarPeq" lang="spanish">http://www.newco.dev.br/images/Botones/EditarPeq.gif</msg>
+  <msg id="DB-EditarPeq_mov" lang="spanish">http://www.newco.dev.br/images/Botones/EditarPeq_mov.gif</msg>
+  <msg id="DB-Eliminar" lang="spanish">http://www.newco.dev.br/images/Botones/Eliminar.gif</msg>
+  <msg id="DB-Eliminar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Eliminar_mov.gif</msg>
+  <msg id="DB-EliminarPeq" lang="spanish">http://www.newco.dev.br/images/Botones/EliminarPeq.gif</msg>
+  <msg id="DB-EliminarPeq_mov" lang="spanish">http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif</msg>
+  <msg id="DB-Enviar" lang="spanish">http://www.newco.dev.br/images/Botones/Enviar.gif</msg>
+  <msg id="DB-Enviar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Enviar_mov.gif</msg>
+  <msg id="DB-EnviarPed" lang="spanish">http://www.newco.dev.br/images/Botones/EnviarPed.gif</msg>
+  <msg id="DB-EnviarPed_mov" lang="spanish">http://www.newco.dev.br/images/Botones/EnviarPed_mov.gif</msg>
+  <msg id="DB-Generar" lang="spanish">http://www.newco.dev.br/images/Botones/Generar.gif</msg>
+  <msg id="DB-Generar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Generar_mov.gif</msg>
+  <msg id="DB-Home" lang="spanish">http://www.newco.dev.br/images/Botones/Home.gif</msg>
+  <msg id="DB-Home_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Home_mov.gif</msg>
+  <msg id="DB-Indice" lang="spanish">http://www.newco.dev.br/images/Botones/Indice.gif</msg>
+  <msg id="DB-Indice_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Indice_mov.gif</msg>
+  <msg id="DB-Insertar" lang="spanish">http://www.newco.dev.br/images/Botones/Insertar.gif</msg>
+  <msg id="DB-Insertar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Insertar_mov.gif</msg>
+  <msg id="DB-InsertarVarios" lang="spanish">http://www.newco.dev.br/images/Botones/InsertarVarios.gif</msg>
+  <msg id="DB-InsertarVarios_mov" lang="spanish">http://www.newco.dev.br/images/Botones/InsertarVarios_mov.gif</msg>
+  <msg id="DB-Generar" lang="spanish">http://www.newco.dev.br/images/Botones/Generar.gif</msg>
+  <msg id="DB-Generar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Generar_mov.gif</msg>
+  <msg id="DB-Guardar" lang="spanish">http://www.newco.dev.br/images/Botones/Guardar.gif</msg>
+  <msg id="DB-Guardar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Guardar_mov.gif</msg>
+  <msg id="DB-Imprimir" lang="spanish">http://www.newco.dev.br/images/Botones/Imprimir.gif</msg>
+  <msg id="DB-Imprimir_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Imprimir_mov.gif</msg>
+  <msg id="DB-Incluir" lang="spanish">http://www.newco.dev.br/images/Botones/Incluir.gif</msg>
+  <msg id="DB-Incluir_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Incluir_mov.gif</msg>
+  <msg id="DB-Limpiar" lang="spanish">http://www.newco.dev.br/images/Botones/Limpiar.gif</msg>
+  <msg id="DB-Limpiar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Limpiar_mov.gif</msg>
+  <msg id="DB-Manos" lang="spanish">http://www.newco.dev.br/images/Botones/Manos.gif</msg>     
+  <msg id="DB-Manos_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Manos_mov.gif</msg>     
+  <msg id="DB-Multioferta" lang="spanish">http://www.newco.dev.br/images/Botones/Multioferta.gif</msg>     
+  <msg id="DB-Multioferta_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Multioferta_mov.gif</msg>
+  <msg id="DB-Negociar" lang="spanish">http://www.newco.dev.br/images/Botones/Negociar.gif</msg>     
+  <msg id="DB-Negociar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Negociar_mov.gif</msg>     
+  <msg id="DB-No" lang="spanish">http://www.newco.dev.br/images/Botones/No.gif</msg>     
+  <msg id="DB-No_mov" lang="spanish">http://www.newco.dev.br/images/Botones/No_mov.gif</msg>     
+  <msg id="DB-Nueva" lang="spanish">http://www.newco.dev.br/images/Botones/Nuevo.gif</msg>     
+  <msg id="DB-Nueva_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Nuevo_mov.gif</msg>     
+  <msg id="DB-Nuevo" lang="spanish">http://www.newco.dev.br/images/Botones/Nuevo.gif</msg>     
+  <msg id="DB-Nuevo_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Nuevo_mov.gif</msg> 
+  <msg id="DB-Proveedores" lang="spanish">http://www.newco.dev.br/images/Botones/Proveedores.gif</msg>     
+  <msg id="DB-Proveedores_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Proveedores_mov.gif</msg>   
+  <msg id="DB-Clientes" lang="spanish">http://www.newco.dev.br/images/Botones/Clientes.gif</msg>     
+  <msg id="DB-Clientes_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Clientes_mov.gif</msg>   
+  <msg id="DB-Salir" lang="spanish">http://www.newco.dev.br/images/Botones/Salir.gif</msg>     
+  <msg id="DB-Salir_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Salir_mov.gif</msg>     
+  <msg id="DB-Papelera" lang="spanish">http://www.newco.dev.br/images/Botones/Papelera.gif</msg>     
+  <msg id="DB-Papelera_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Papelera_mov.gif</msg>
+  <msg id="DB-Precio" lang="spanish">http://www.newco.dev.br/images/Botones/Precio.gif</msg>     
+  <msg id="DB-Precio_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Precio_mov.gif</msg>
+  <msg id="DB-PrecioPeq" lang="spanish">http://www.newco.dev.br/images/Botones/PrecioPeq.gif</msg>     
+  <msg id="DB-PrecioPeq_mov" lang="spanish">http://www.newco.dev.br/images/Botones/PrecioPeq_mov.gif</msg>
+  <msg id="DB-Print" lang="spanish">http://www.newco.dev.br/images/Botones/Print.gif</msg>     
+  <msg id="DB-Print_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Print_mov.gif</msg>
+  <msg id="DB-Producto" lang="spanish">http://www.newco.dev.br/images/Botones/Producto.gif</msg>     
+  <msg id="DB-Producto_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Producto_mov.gif</msg>
+  <msg id="DB-Reducidas" lang="spanish">http://www.newco.dev.br/images/Botones/Reducidas.gif</msg>
+  <msg id="DB-Reducidas_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Reducidas_mov.gif</msg>
+  <msg id="DB-Seleccionar" lang="spanish">http://www.newco.dev.br/images/Botones/Seleccionar.gif</msg>
+  <msg id="DB-Seleccionar_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Seleccionar_mov.gif</msg>
+  <msg id="DB-Siguiente" lang="spanish">http://www.newco.dev.br/images/Botones/Siguiente.gif</msg>
+  <msg id="DB-Siguiente_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Siguiente_mov.gif</msg>
+  <msg id="DB-Up" lang="spanish">http://www.newco.dev.br/images/Botones/Up.gif</msg>
+  <msg id="DB-Up2" lang="spanish">http://www.newco.dev.br/images/Botones/Up2.gif</msg>
+  <msg id="DB-Cabecera" lang="spanish">http://www.newco.dev.br/images/Botones/Cabecera.gif</msg>
+  <msg id="DB-Cabecera_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Cabecera_mov.gif</msg>
+  <msg id="DB-ContenidoPlantilla_mov" lang="spanish">http://www.newco.dev.br/images/Botones/ContenidoPlantilla_mov.gif</msg>
+  <msg id="DB-ContenidoPlantilla" lang="spanish">http://www.newco.dev.br/images/Botones/ContenidoPlantilla.gif</msg>
+  <msg id="DB-AceptarMO" lang="spanish">http://www.newco.dev.br/images/Botones/AceptarMO.gif</msg>
+  <msg id="DB-CancelarMO" lang="spanish">http://www.newco.dev.br/images/Botones/CancelarMO.gif</msg>
+  <msg id="DB-ConsultarMO" lang="spanish">http://www.newco.dev.br/images/Botones/ConsultarMO.gif</msg>
+  <msg id="DB-CopiarPeq" lang="spanish">http://www.newco.dev.br/images/Botones/CopiarPeq.gif</msg>
+  <msg id="DB-CopiarPeq_mov" lang="spanish">http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif</msg>  
+  <msg id="DB-ListaPlantillas" lang="spanish">http://www.newco.dev.br/images/Botones/ListaPlantillas.gif</msg>
+  <msg id="DB-ListaPlantillas_mov" lang="spanish">http://www.newco.dev.br/images/Botones/ListaPlantillas_mov.gif</msg>
+  <msg id="DB-Empresa" lang="spanish">http://www.newco.dev.br/images/Botones/Empresa.gif</msg>
+  <msg id="DB-Empresa_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Empresa_mov.gif</msg>
+  <msg id="DB-Depart" lang="spanish">http://www.newco.dev.br/images/Botones/Depart.gif</msg>
+  <msg id="DB-Depart_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Depart_mov.gif</msg>
+  <msg id="DB-User" lang="spanish">http://www.newco.dev.br/images/Botones/User.gif</msg>
+  <msg id="DB-User_mov" lang="spanish">http://www.newco.dev.br/images/Botones/User_mov.gif</msg>
+  <msg id="DB-AmpliadasPeq" lang="spanish">http://www.newco.dev.br/images/Botones/AmpliadasPeq.gif</msg>
+  <msg id="DB-AmpliadasPeq_mov" lang="spanish">http://www.newco.dev.br/images/Botones/AmpliadasPeq_mov.gif</msg>  
+  <msg id="DB-Subir" lang="spanish">http://www.newco.dev.br/images/Botones/Subir.gif</msg>
+  <msg id="DB-Subir_mov" lang="spanish">http://www.newco.dev.br/images/Botones/Subir_mov.gif</msg>
+  <msg id="DB-CatalogoProductos" lang="spanish">http://www.newco.dev.br/images/Botones/CatalogoProductos.gif</msg>     
+  <msg id="DB-CatalogoProductos_mov" lang="spanish">http://www.newco.dev.br/images/Botones/CatalogoProductos_mov.gif</msg>   
+  
+  <!-- Imagenes de empresa -->
+  <msg id="DB-ADomingo" lang="spanish">http://www.newco.dev.br/files/Empresas/ADomingo/BotonADomingo.gif</msg>
+  <msg id="DB-ADomingo_mov" lang="spanish">http://www.newco.dev.br/files/Empresas/ADomingo/BotonADomingo_mov.gif</msg>    
+
+  <!-- Mensajes texto de imagenes -->
+  <msg id="IMG-0000" lang="spanish">Eliminar</msg> 
+  <msg id="IMG-0010" lang="spanish">Continuar</msg>
+  <msg id="IMG-0020" lang="spanish">Guardar</msg>
+  <msg id="IMG-0025" lang="spanish">Guardar y Continuar</msg>
+  <msg id="IMG-0030" lang="spanish">Aceptar</msg>  
+  <msg id="IMG-0035" lang="spanish">Guardar y Salir</msg>  
+  <msg id="IMG-0040" lang="spanish">Volver</msg>  
+  <msg id="IMG-0050" lang="spanish">Cancelar</msg>
+  <msg id="IMG-0060" lang="spanish">Pendiente</msg>
+  <msg id="IMG-0070" lang="spanish">Salir</msg>
+  <msg id="IMG-0080" lang="spanish">Editar</msg>        
+  <msg id="IMG-0090" lang="spanish">Bandeja</msg>
+  <msg id="IMG-0100" lang="spanish">Enviar</msg>
+  <msg id="IMG-0101" lang="spanish">Responder</msg>
+  <msg id="IMG-0103" lang="spanish">Enviar comentario</msg>
+  <msg id="IMG-0105" lang="spanish">Devolver</msg>  
+  <msg id="IMG-0110" lang="spanish">Todos</msg>
+  <msg id="IMG-0120" lang="spanish">Buscar</msg>    
+  <msg id="IMG-0130" lang="spanish">Imprimir</msg>   
+  <msg id="IMG-0150" lang="spanish">Rechazar</msg>
+  <msg id="IMG-0140" lang="spanish">Terminar petici&oacute;n de oferta</msg>
+  <msg id="IMG-0160" lang="spanish">Directo</msg>  
+  <msg id="IMG-0170" lang="spanish">Guardar plantilla y salir</msg>
+  <msg id="IMG-0180" lang="spanish">Terminar</msg>
+  <msg id="IMG-0190" lang="spanish">Cerrar</msg>  
+  <msg id="IMG-0200" lang="spanish">Fichas ampliadas</msg>
+  <msg id="IMG-0205" lang="spanish">Ver las fichas Completas de los Productos</msg>
+  <msg id="IMG-0210" lang="spanish">Fichas reducidas</msg>
+  <msg id="IMG-0215" lang="spanish">Ver las fichas normales de los Productos</msg>
+  <!--<msg id="IMG-0220" lang="spanish">Cat&#225;logo</msg>-->
+  <msg id="IMG-0220" lang="spanish">B&uacute;squeda Avanzada</msg>
+  <msg id="IMG-0221" lang="spanish">Varias l&iacute;neas</msg>
+  <msg id="IMG-0222" lang="spanish">Una l&iacute;nea</msg>
+  <msg id="IMG-0223" lang="spanish">Insertar productos en la plantilla actual</msg>  
+  <msg id="IMG-0225" lang="spanish">Asignar los productos a una linea</msg>    
+  <msg id="IMG-0227" lang="spanish">Asignar cada producto a una linea independiente</msg>    
+  <msg id="IMG-0230" lang="spanish">Referencia</msg>
+  <msg id="IMG-0235" lang="spanish">Asigne su referencia a todos los productos seleccionados</msg>  
+  <msg id="IMG-0240" lang="spanish">Borrar productos</msg>
+  <msg id="IMG-0250" lang="spanish">Borrar cantidades</msg>
+  <msg id="IMG-0260" lang="spanish">Responder</msg>
+  <msg id="IMG-0270" lang="spanish">Copiar</msg>
+  <msg id="IMG-0280" lang="spanish">Nueva</msg>
+  <msg id="IMG-0285" lang="spanish">Nueva plantilla</msg>
+  <msg id="IMG-0286" lang="spanish">Lista de &lt;br/&gt;&lt;b&gt;Proveedores&lt;/b&gt;</msg>
+  <msg id="IMG-0287" lang="spanish">Lista de &lt;br/&gt;&lt;b&gt;Clientes&lt;/b&gt;</msg>
+  <msg id="IMG-0290" lang="spanish">Generar</msg>
+  <msg id="IMG-0300" lang="spanish">Analizar</msg>
+  <msg id="IMG-0310" lang="spanish">Clientes</msg>
+  <msg id="IMG-0320" lang="spanish">Proveedores</msg>
+  <msg id="IMG-0330" lang="spanish">Proveedores Habituales</msg>
+  <msg id="IMG-0340" lang="spanish">Añadir</msg>
+  <msg id="IMG-0350" lang="spanish">Enviar Peticion</msg>
+  <msg id="IMG-0360" lang="spanish">Confirmar</msg>
+  <msg id="IMG-0370" lang="spanish">Generar Incidencia</msg>
+  <!--<msg id="IMG-0380" lang="spanish">Recepci&oacute;n Correcta</msg>-->
+  <msg id="IMG-0380" lang="spanish">Pedido Recibido</msg>
+  <msg id="IMG-0381" lang="spanish">!Recibido parcialmente</msg>
+  <msg id="IMG-0382" lang="spanish">Crear Abono</msg>
+  <msg id="IMG-0385" lang="spanish">Muestras Recibidas</msg>
+  <msg id="IMG-0390" lang="spanish">Incidencias</msg>
+  <msg id="IMG-0400" lang="spanish">Finalizar Pedido</msg>  
+  <msg id="IMG-0405" lang="spanish">Abono aceptado</msg>
+  <msg id="IMG-0410" lang="spanish">OK</msg>
+  <msg id="IMG-0420" lang="spanish">Modificar Estructura</msg>
+  
+  <msg id="IMG-0421" lang="spanish">Centros</msg>
+  <msg id="IMG-0422" lang="spanish">Departamentos</msg>
+  <msg id="IMG-0423" lang="spanish">Usuarios</msg>
+  
+  <msg id="IMG-0430" lang="spanish">Añadir Usuario</msg>  
+  <msg id="IMG-0440" lang="spanish">Seleccionar</msg>  
+  <msg id="IMG-0450" lang="spanish">Preparar Pedido</msg>  
+  <msg id="IMG-0460" lang="spanish">Enviar Pedido</msg>
+  <msg id="IMG-0465" lang="spanish">Guardar Cambios</msg>
+  <msg id="IMG-0470" lang="spanish">Guardar Nueva Empresa</msg>   
+  <msg id="IMG-0480" lang="spanish">Buscar Empresa</msg>
+  <msg id="IMG-0490" lang="spanish">Buscar</msg>          
+  <msg id="IMG-0500" lang="spanish">Borrar selección</msg>   
+  <msg id="IMG-0510" lang="spanish">Confirmar Productos</msg>
+  <msg id="IMG-0520" lang="spanish">Editar nueva linea</msg>  
+  <msg id="IMG-0530" lang="spanish">A&ntilde;adir Centro</msg>
+  <msg id="IMG-0540" lang="spanish">A&ntilde;adir Departamento</msg>  
+  <msg id="IMG-0550" lang="spanish">&lt;b&gt;Lista de plantillas&lt;/b&gt;</msg>
+  <msg id="IMG-0551" lang="spanish">Lista de plantillas</msg>
+  <msg id="IMG-0560" lang="spanish">Borrar plantilla</msg>
+  <msg id="IMG-0570" lang="spanish">Limpiar plantilla</msg> 
+  <msg id="IMG-0580" lang="spanish">Añadir plantilla a otra</msg>
+  
+  <!--
+  <msg id="IMG-0590" lang="spanish">Ver plantilla actual</msg>
+  <msg id="IMG-0591" lang="spanish">Ver plantilla actual</msg>
+  -->
+  <msg id="IMG-0590" lang="spanish">&lt;b&gt;Abrir plantilla actual&lt;/b&gt;</msg>
+  <msg id="IMG-0591" lang="spanish">Abrir plantilla actual</msg>
+  
+  
+  <msg id="IMG-0600" lang="spanish">Buscar en plantilla</msg>
+  <msg id="IMG-0620" lang="spanish">Preparar pedido</msg>
+  <msg id="IMG-0625" lang="spanish">Preparar un Pedido</msg>
+  <msg id="IMG-0630" lang="spanish">Multioferta</msg>
+  <msg id="IMG-0640" lang="spanish">Ver cabecera de la plantilla</msg>
+  <msg id="IMG-0650" lang="spanish">Finalizar incidencia</msg> <!-- Devolver y acabar -->
+  <!--<msg id="IMG-0660" lang="spanish">Buscar productos en &lt;br/&gt;&lt;b&gt;Cat&aacute;logo&lt;/b&gt;</msg>-->
+  <msg id="IMG-0660" lang="spanish">B&uacute;squeda&lt;br/&gt;&lt;b&gt;Avanzada&lt;/b&gt;</msg>
+  <msg id="IMG-0670" lang="spanish">Pulse aquí para cambiar el estado de envío del pedido</msg>
+  <msg id="IMG-0680" lang="spanish">Guardar nuevo producto</msg>
+  <msg id="IMG-0690" lang="spanish">Guardar las modificaciones</msg>
+  <msg id="IMG-0700" lang="spanish">Subir</msg> 
+  <msg id="IMG-0710" lang="spanish">Proveedores</msg>
+  <msg id="IMG-0720" lang="spanish">Clientes</msg>
+  <msg id="IMG-0730" lang="spanish">Guardar</msg>
+
+  <!-- Mensajes texto de imagenes de empresa-->
+  <msg id="IMG-1000" lang="spanish">Ambulancias Domingo</msg>
+  <msg id="IMG-1001" lang="spanish">Ambulancias&lt;br/&gt;Domingo</msg>  
+  <msg id="IMG-1010" lang="spanish">Productos Habituales</msg> 
+  <msg id="IMG-1020" lang="spanish">Productos &lt;br/&gt;&lt;b&gt;Habituales&lt;/b&gt;</msg>   
+  <msg id="IMG-1030" lang="spanish">Nueva&lt;br/&gt;&lt;b&gt;plantilla&lt;/b&gt;</msg>  
+  <msg id="IMG-1040" lang="spanish">Cancelar Pedido</msg>
+  <msg id="IMG-1050" lang="spanish">Productos en &lt;br/&gt;&lt;b&gt;Plantillas&lt;/b&gt;</msg>
+  <msg id="IMG-1060" lang="spanish">Productos en Plantillas</msg>
+  <msg id="IMG-1070" lang="spanish">Inicio</msg>
+  <msg id="IMG-1080" lang="spanish">Ofertas y Pedidos</msg>
+  <msg id="IMG-1085" lang="spanish">Pedidos en Curso</msg>
+  <msg id="IMG-1090" lang="spanish">Tabl&oacute;n de anuncios</msg>
+  <msg id="IMG-1095" lang="spanish">E.I.S.</msg>
+  <msg id="IMG-1097" lang="spanish">Central de Compras</msg>
+  <msg id="IMG-1100" lang="spanish">Ventas de Stocks</msg>
+  <msg id="IMG-1103" lang="spanish">Foro Privado</msg>
+  <msg id="IMG-1106" lang="spanish">Foro P&uacute;blico</msg>
+  <msg id="IMG-1110" lang="spanish">Gesti&oacute;n</msg>
+  <msg id="IMG-1120" lang="spanish">Lista de Proveedores</msg>
+  <msg id="IMG-1130" lang="spanish">Productos Habituales</msg> 
+  <msg id="IMG-1140" lang="spanish">B&uacute;squeda Avanzada</msg>
+  
+  <msg id="IMG-1150" lang="spanish">Preparar&lt;br/&gt;OFERTA</msg>
+  <msg id="IMG-1160" lang="spanish">Preparar una oferta</msg>
+  <msg id="IMG-1170" lang="spanish">Preparar&lt;br/&gt;PEDIDO</msg>
+  <msg id="IMG-1180" lang="spanish">Preparar un pedido</msg>
+  
+  <msg id="IMG-1190" lang="spanish">Nueva</msg>
+  <msg id="IMG-1200" lang="spanish">Crear una Plantilla Nueva</msg>
+  <msg id="IMG-1205" lang="spanish">Crear una Carpeta Nueva</msg>
+  
+  <msg id="IMG-1210" lang="spanish">Propiedades</msg>
+  <msg id="IMG-1220" lang="spanish">Editar las Propiedades de la Plantilla</msg>
+  <msg id="IMG-1225" lang="spanish">Editar las Propiedades de la Carpeta</msg>
+  
+  <msg id="IMG-1230" lang="spanish">Borrar</msg>
+  <msg id="IMG-1240" lang="spanish">Borrar la Plantilla</msg>
+  <msg id="IMG-1245" lang="spanish">Borrar la Carpeta</msg>
+  
+  <msg id="IMG-1250" lang="spanish">Ver m&aacute;s detalles / Ocultar productos</msg>
+  <msg id="IMG-1260" lang="spanish">Ver m&aacute;s detalles / Ocultar productos</msg>
+  
+  <msg id="IMG-1270" lang="spanish">Reserva de Banners</msg>
+  <msg id="IMG-1280" lang="spanish">Invitaci&oacute;n a Proveedores</msg>
+  <msg id="IMG-1290" lang="spanish">Invitaci&oacute;n a Clientes</msg>
+  <msg id="IMG-1300" lang="spanish">Lista de Clientes</msg>
+  
+  <msg id="IMG-1310" lang="spanish">Contrato de Afiliaci&oacute;n</msg>
+  
+  <msg id="IMG-1320" lang="spanish">Inicio</msg>
+  <msg id="IMG-1330" lang="spanish">Qui&eacute;nes somos?</msg>
+  <msg id="IMG-1340" lang="spanish">Altas de Centros</msg>
+  <msg id="IMG-1350" lang="spanish">Altas de Proveedores</msg>
+  <msg id="IMG-1360" lang="spanish">Contactar</msg>
+  
+  <msg id="IMG-1370" lang="spanish">Cerrar Plantilla</msg>
+  <msg id="IMG-1380" lang="spanish">Terminar oferta</msg>
+  
+  
+  <msg id="IMG-1390" lang="spanish">Nueva</msg>
+  <msg id="IMG-1395" lang="spanish">Nuevo</msg>
+  <msg id="IMG-1400" lang="spanish">Crear una Empresa Nueva</msg>
+  <msg id="IMG-1410" lang="spanish">Crear un Centro Nuevo</msg>
+  
+  <msg id="IMG-1420" lang="spanish">Propiedades</msg>
+  <msg id="IMG-1430" lang="spanish">Editar las Propiedades de la Empresa</msg>
+  <msg id="IMG-1440" lang="spanish">Editar las Propiedades del Centro</msg>
+  
+  <msg id="IMG-1450" lang="spanish">Borrar</msg>
+  <msg id="IMG-1460" lang="spanish">Borrar la Empresa</msg>
+  <msg id="IMG-1470" lang="spanish">Borrar el Centro</msg>
+  
+  <msg id="IMG-1480" lang="spanish">A&ntilde;adir usuario</msg>
+  <msg id="IMG-1490" lang="spanish">Imprimir</msg>
+  <msg id="IMG-1500" lang="spanish">Ver password</msg>
+  <msg id="IMG-1510" lang="spanish">Por cliente</msg>
+  <msg id="IMG-1515" lang="spanish">Modificar</msg>
+  <msg id="IMG-1520" lang="spanish">Insertar</msg>
+  <msg id="IMG-1530" lang="spanish">Añadir Lugar</msg>
+  <msg id="IMG-1535" lang="spanish">Añadir Centro</msg>
+  <!--<msg id="IMG-1537" lang="spanish">Añadir Almacén</msg>-->
+  
+  <msg id="IMG-1540" lang="spanish">Modificar el lugar de entrega por defecto</msg>
+  <msg id="IMG-1545" lang="spanish">Modificar el centro de consumo por defecto</msg>
+  <!--<msg id="IMG-1547" lang="spanish">Modificar el almacén interno por defecto</msg>-->
+  <msg id="IMG-1550" lang="spanish">Empresas Autorizadas</msg>
+  <msg id="IMG-1560" lang="spanish">Guardar</msg>
+
+  <msg id="IMG-1600" lang="spanish">Plantillas por Usuario</msg>
+  <msg id="IMG-1605" lang="spanish">Asignar Comerciales</msg>
+  <msg id="IMG-1607" lang="spanish">Control Usuarios</msg>
+  
+  <msg id="IMG-1610" lang="spanish">Insertar Empresa</msg>
+  <msg id="IMG-1620" lang="spanish">Guardar Empresa</msg>
+  <msg id="IMG-1630" lang="spanish">Insertar Centro</msg>
+  <msg id="IMG-1640" lang="spanish">Guardar Centro</msg>
+  
+  <msg id="IMG-1650" lang="spanish">Programar Pedido</msg>
+  <msg id="IMG-1660" lang="spanish">Eliminar</msg>
+  <msg id="IMG-1670" lang="spanish">Nuevo Programa</msg>
+  <msg id="IMG-1680" lang="spanish">Copiar Programa</msg>
+  
+  <msg id="IMG-1700" lang="spanish">Programaci&oacute;n de pedidos</msg>	<!--	20/11/2003	-->
+  
+  
+  <!-- Missatges de confirmacio -->
+  <!-- 0xxx - Titols 
+       1xxx - Body 
+    -->
+  <msg id="OK-0100" lang="spanish">Datos actualizados</msg>     
+  <msg id="OK-0110" lang="spanish">Registro modificado</msg>
+  <msg id="OK-0120" lang="spanish">Multioferta enviada</msg>
+  <msg id="OK-0140" lang="spanish">Comentario registrado</msg>
+  <msg id="OK-0150" lang="spanish">Incidencia registrada</msg> 
+  <msg id="OK-0152" lang="spanish">Incidencia eliminada</msg> 
+  <msg id="OK-0155" lang="spanish">Respuesta registrada</msg> 
+  <msg id="OK-0157" lang="spanish">Incidencia resuelta</msg> 
+  
+  <msg id="OK-0160" lang="spanish">Validación finalizada</msg>  
+  <msg id="OK-0170" lang="spanish">Oferta enviada</msg>  
+  <msg id="OK-0180" lang="spanish">Respuesta enviada</msg>  
+  <msg id="OK-0185" lang="spanish">Pedido confirmado</msg>    
+  <msg id="OK-0190" lang="spanish">Oferta terminada</msg>  
+  <msg id="OK-0200" lang="spanish">Petición enviada</msg>  
+  <msg id="OK-0205" lang="spanish">Pedido enviado</msg>  
+  <msg id="OK-0206" lang="spanish">Abono enviado</msg>  
+  <msg id="OK-0208" lang="spanish">Solicitud de muestras enviada</msg>  
+  <msg id="OK-0210" lang="spanish">Pedido terminado</msg>  
+  <msg id="OK-0220" lang="spanish">Pedido cobrado</msg>  
+  <msg id="OK-0225" lang="spanish">Pedido aceptado</msg>
+  <msg id="OK-0226" lang="spanish">Abono aceptado</msg>    
+  <msg id="OK-0228" lang="spanish">Solicitud de muestras aceptada</msg>
+  <msg id="OK-0230" lang="spanish">Pedido procesado</msg>  
+  <msg id="OK-0240" lang="spanish">Oferta finalizada</msg>  
+  <msg id="OK-0246" lang="spanish">Abono finalizado</msg>  
+  <msg id="OK-0248" lang="spanish">Solicitud de muestras finalizada</msg>  
+  <msg id="OK-0250" lang="spanish">Material Recibido</msg>  
+  <msg id="OK-0260" lang="spanish">Pedido finalizado</msg>  
+  <msg id="OK-0270" lang="spanish">Pedidos Programados</msg>  
+  <msg id="OK-0300" lang="spanish">Pedido rechazado</msg>  
+    
+  <!-- -->
+  <msg id="OK-1000" lang="spanish">Los datos han sido registrados.</msg>
+  <msg id="OK-1010" lang="spanish">Los datos han sido procesados correctamente.</msg>
+  <msg id="OK-1020" lang="spanish">Los datos han sido registrados correctamente.</msg>
+  <msg id="OK-1030" lang="spanish">Su multioferta ha sido enviada correctamente.</msg>
+  <msg id="OK-1040" lang="spanish">Su comentario ha sido registrado.</msg>
+  <msg id="OK-1050" lang="spanish">La incidencia ha sido registrada.</msg>
+  <msg id="OK-1052" lang="spanish">La incidencia ha sido eliminada.</msg>
+  <msg id="OK-1055" lang="spanish">Su respuesta a la incidencia ha sido registrada.</msg> 
+  <msg id="OK-1057" lang="spanish">La incidencia ha sido resuelta.</msg> 
+  
+  <msg id="OK-1060" lang="spanish">Los datos de su empresa han sido validados.</msg>    
+  <msg id="OK-1070" lang="spanish">Su oferta ha sido enviada.</msg>      
+  <msg id="OK-1080" lang="spanish">Su pedido ha sido confirmado.</msg>  
+
+  <msg id="OK-1085" lang="spanish">Su petici&oacute;n de oferta ha sido enviada al proveedor.</msg>  
+  <msg id="OK-1090" lang="spanish">Su oferta ha sido enviada al cliente.</msg>  
+  <msg id="OK-1100" lang="spanish">Su respuesta ha sido enviada al proveedor.</msg>  
+  <msg id="OK-1110" lang="spanish">El aviso de finalizacion de la oferta ha sido enviado al proveedor.</msg>  
+  <msg id="OK-1120" lang="spanish">Su aviso de finalizacion de la oferta ha sido enviado al cliente.</msg>  
+  <msg id="OK-1130" lang="spanish">Su pedido ha sido enviado. Queda a la espera de la aceptación del proveedor.</msg>  
+  <msg id="OK-1132" lang="spanish">Su pedido queda a la espera de la aceptación del responsable.</msg>  
+  <msg id="OK-1134" lang="spanish">Su abono ha sido enviado. Queda a la espera de la aceptación del proveedor.</msg>  
+  <msg id="OK-1136" lang="spanish">Su solicitud de muestras ha sido enviada. Queda a la espera de la aceptación del proveedor.</msg>  
+  <msg id="OK-1140" lang="spanish">El pedido ha sido aceptado. Su cliente queda a la espera de la entrega del material.</msg>  
+  <msg id="OK-1150" lang="spanish">El pedido ha sido rechazado.</msg>  
+  <msg id="OK-1160" lang="spanish">Su aviso de recepci&oacute;n de material ha sido enviado. Su proveedor queda a la espera del pago.</msg>
+  <msg id="OK-1165" lang="spanish">Su aviso de recepci&oacute;n de material ha sido enviado.</msg>
+  <msg id="OK-1170" lang="spanish">El pedido ha sido cobrado. El proceso ha finalizado.</msg>  
+  <msg id="OK-1175" lang="spanish">El pedido ha sido pagado. El proceso ha finalizado.</msg>    
+  <msg id="OK-1178" lang="spanish">La solicitud de muestras ha sido confirmada. El proceso ha finalizado.</msg>  
+  <msg id="OK-1180" lang="spanish">La oferta ha finalizado.</msg>
+  <msg id="OK-1185" lang="spanish">El abono ha sido aceptado. El proceso ha finalizado.</msg> 
+  <msg id="OK-1190" lang="spanish">El abono ha sido rechazado. El proceso ha finalizado.</msg>
+  <msg id="OK-1195" lang="spanish">La solicitud de muestras ha sido rechazada. El proceso ha finalizado.</msg>
+  <msg id="OK-1200" lang="spanish">El abono ha sido aceptado.</msg>
+  <msg id="OK-1205" lang="spanish">La solicitud de muestras ha sido aceptada.</msg>
+  <msg id="OK-1210" lang="spanish">Los cambios en el pedido programado se han guardado correctamente.</msg>
+  <msg id="OK-1220" lang="spanish">El pedido ha sido rechazado. El comprador recibirá la notificación correspondiente.</msg>  
+
+
+  <!-- Missatges d'error -->
+  <msg id="ERR-0010" lang="spanish">No tiene autorizaci&oacute;n para acceder a esta oferta.</msg>  
+  <msg id="ERR-0020" lang="spanish">No tiene autorizaci&oacute;n para acceder a esta oferta.</msg> 
+  <msg id="ERR-0030" lang="spanish">Sesión Caducada</msg> 
+  <msg id="ERR-0040" lang="spanish">Para seguir en la aplicación debe volver a introducir el nombre de usuario y contraseña en la página inicial</msg>
+
+
+                          
+  <!-- Mensajes Globales -->
+  <msg id="G-0000" lang="spanish">MedicalVM - Su Mercado Sanitario en Internet</msg>
+  <msg id="G-0001" lang="spanish">Volver</msg>
+  <msg id="G-0005" lang="spanish">Continuar</msg>  
+  <msg id="G-0010" lang="spanish">javascript:history.go(-1);</msg>  
+  <msg id="G-0011" lang="spanish">javascript:history.go(-2);</msg>
+  <msg id="G-0012" lang="spanish">javascript:parent.history.go(-1);</msg>
+  <msg id="G-0013" lang="spanish">javascript:parent.history.go(-2);</msg>
+  <msg id="G-0014" lang="spanish">http://www.newco.dev.br/Compras/Multioferta/LPLista.xsql</msg>
+  <msg id="G-0005" lang="spanish">Volver a la bandeja de tareas</msg>
+  <msg id="G-0015" lang="spanish">http://www.newco.dev.br/Personal/BandejaTrabajo/WFStatus.xsql</msg>  
+  <msg id="G-0020" lang="spanish">http://www.newco.dev.br/MenusYDerechos/MENLista.xsql</msg>    
+  <msg id="G-0025" lang="spanish">http://www.newco.dev.br/Compras/NuevaMultioferta/Unica.xsql</msg>   
+  <msg id="G-0026" lang="spanish">http://www.newco.dev.br/TablonAnuncios/VerAnuncios.xsql</msg> 
+  <msg id="G-0027" lang="spanish">http://www.newco.dev.br/Sinonimos/Sinonimos.xsql</msg> 
+  <msg id="G-0030" lang="spanish">http://www.newco.dev.br/MainLogin.html</msg>
+  <msg id="G-0035" lang="spanish">javascript:parent.window.close();</msg>
+  <msg id="G-0031" lang="spanish">about:blank</msg>
+  
+  
+  <msg id="G-0040" lang="spanish">Siguiente</msg>
+  <msg id="G-0050" lang="spanish">Anterior</msg>
+  <msg id="G-0060" lang="spanish">La b&uacute;squeda no ha tenido &eacute;xito.</msg>
+  <msg id="G-0070" lang="spanish">No se encuentran datos con dichas especificaciones. Por favor vuelva a intentarlo.</msg>    
+  <msg id="G-0080" lang="spanish">Por favor, Seleccione alguna opci&#243;n.</msg> 
+  <msg id="G-0090" lang="spanish">Error en el dato</msg> 
+  <msg id="G-0100" lang="spanish">Siguiente</msg>
+  <msg id="G-0110" lang="spanish">Anterior</msg>  
+  <msg id="G-1000" lang="spanish">MedicalVM en actualización</msg>
+  <msg id="G-1001" lang="spanish">Le informamos que MedicalVM está en estos momentos actualizando su base de datos por lo que pueden producirse errores e interferencias. Rogamos espere unos minutos y vuelva a su actividad normal.
+En caso de persistir este error rogamos póngase en contacto directamente con el departamento técnico
+(Télefono 932 412 699). Disculpe las molestias.</msg>
+  <msg id="G-1005" lang="spanish">Error registrado</msg>  
+  <msg id="G-1006" lang="spanish">Perdone las molestias.</msg>
+  <msg id="G-1010" lang="spanish">Enviar</msg>
+  <msg id="G-1015" lang="spanish">Por favor, introduzca informaci&oacute;n adicional al problema.</msg>  
+  <msg id="G-1020" lang="spanish">Datos del campo</msg>
+  <msg id="G-1021" lang="spanish">erroneos.</msg>
+  <msg id="G-1024" lang="spanish">Existen campos incorrectos. Por favor revise el formulario anterior.</msg>  
+  <msg id="G-1030" lang="spanish">Su login o contrase&#241;a no son correctos.</msg>    
+  <msg id="G-1031" lang="spanish">Puede haber escrito su login y password con otro formato de may&uacute;sculas y min&uacute;sculas.</msg>    
+  <msg id="G-1032" lang="spanish">Por favor, vuelva a intentarlo. Si no consigue entrar en el sistema cont&aacute;cte con el departamento comercial:</msg>    
+  <msg id="G-1035" lang="spanish">Por favor, revise los siguientes puntos del formulario anterior:</msg>  
+  <msg id="G-1040" lang="spanish">Seleccione alguna l&#237;nea para borrar</msg>
+  <msg id="G-1050" lang="spanish">La b&uacute;squeda no ha tenido &eacute;xito.</msg>    
+  <msg id="G-1060" lang="spanish">Demasiados productos seleccionados. Por favor, revise las condiciones de busqueda introducidas.</msg>  
+  <msg id="G-1070" lang="spanish">Le rogamos que compruebe la ortograf&iacute;a de su b&uacute;squeda.</msg>    
+  <msg id="G-1080" lang="spanish">Si considera que ha habido alg&uacute;n problema o desea expresarnos alguna sugerencia, comentenoslo</msg>    
+  <msg id="G-1090" lang="spanish">Escriba su problema si desea ponerse en contacto con MedicalVM.</msg>  
+  <msg id="G-1100" lang="spanish">Si cree que ha sido un error del sistema, por favor, pongase en contacto con nosotros.</msg>  
+  <msg id="G-1110" lang="spanish">Si el producto buscado no está disponible, le rogamos que inserte un anuncio en el Tabl&oacute;n de Anuncios de MedicalVM, que ser&aacute; atendido por los proveedores afiliados o que  rellene el siguiente formulario que llegar&aacute; al Departamento Comercial de MedicalVM.</msg>  
+  <msg id="G-1120" lang="spanish">No existen empresas que cumplan las condiciones seleccionadas.</msg>  
+  <msg id="G-1200" lang="spanish">Cargando p&aacute;gina...</msg>  
+  
+  <!-- Login -->
+  <msg id="LOG-0010" lang="spanish">Usuario o codigo erroneos. Por favor, revise los datos.</msg>
+  <msg id="LOG-0020" lang="spanish">Bienvenido a Medical Virtual Market. A partir de este momento unicamente podr&aacute; acceder a través de este ordenador. Si tiene cualquier duda, contacte con el departamento tecnico.</msg>
+  <msg id="LOG-0030" lang="spanish">Le recordamos que el acceso a MedicalVM solo se permite realizar a través de un &uacute;nico ordenador asociado al usuario.</msg>
+  
+  <!-- CABECERA -->
+  <msg id="CAB-0010" lang="spanish">Nos construimos con sus comentarios</msg>
+  <msg id="CAB-0020" lang="spanish">Usuario</msg>     
+  <!-- #EMPRESAS# -->
+
+  <!-- EMPLista.xsql -->
+  <msg id="EMP-0010" lang="spanish">Listado de empresas</msg>
+  <msg id="EMP-0020" lang="spanish">Lista Actual de empresas</msg>  
+  <msg id="EMP-0030" lang="spanish">Identificador</msg>
+  <msg id="EMP-0040" lang="spanish">NIF</msg>
+  <msg id="EMP-0050" lang="spanish">Nombre</msg>  
+  <!-- EMPManten.xsql -->
+  <msg id="EMP-0060" lang="spanish">Mantenimiento de empresas</msg>
+  <msg id="EMP-0061" lang="spanish">Empresa</msg>  
+  <msg id="EMP-0065" lang="spanish">Direcci&oacute;n</msg>
+  <msg id="EMP-0066" lang="spanish">NIF</msg>
+  <msg id="EMP-0067" lang="spanish">Nombre</msg>
+  <msg id="EMP-0068" lang="spanish">Pedido m&iacute;nimo</msg> 
+  <msg id="EMP-0070" lang="spanish">Provincia</msg>
+  <msg id="EMP-0080" lang="spanish">C&oacute;digo Postal</msg>
+  <msg id="EMP-0090" lang="spanish">Poblaci&oacute;n</msg>
+  <msg id="EMP-0100" lang="spanish">Tipo</msg>
+  <msg id="EMP-0110" lang="spanish">Tel&eacute;fono</msg>
+  <msg id="EMP-0120" lang="spanish">Fax</msg>
+  <msg id="EMP-0121" lang="spanish">Enlace</msg>
+  <msg id="EMP-0122" lang="spanish">Publicar</msg> 
+  <msg id="EMP-0125" lang="spanish">Logotipo</msg>     
+  <msg id="EMP-0130" lang="spanish">Referencias</msg>
+  <msg id="EMP-0135" lang="spanish">Descripci&oacute;n</msg>  
+  <msg id="EMP-0140" lang="spanish">No se han encontrado datos de la empresa cuyo n&uacute;mero es </msg>
+  <msg id="EMP-0145" lang="spanish">No tiene permisos para modificar los datos de la empresa. Pongase en contacto con el usuario administrador.</msg>    
+  
+  <!-- EMPMantenSave.xsql -->
+  <msg id="EMP-0150" lang="spanish">Actualizaci&oacute;n de empresas</msg>
+  <msg id="EMP-0155" lang="spanish">Error en el proceso de alta de empresa. Revise la tabla de errores.</msg>
+  
+  <!-- ** Ara s'usen OK-0100 i OK-1000 -->
+  <msg id="EMP-0160" lang="spanish">Datos actualizados</msg>
+  <msg id="EMP-0170" lang="spanish">Los datos han sido registrados.</msg>
+  <!-- ** -->
+  
+  <msg id="EMP-0180" lang="spanish">Referencias</msg>
+  <msg id="EMP-0190" lang="spanish">Referencias</msg>
+  <msg id="EMP-0193" lang="spanish">Volver a la lista</msg>  
+  <msg id="EMP-0195" lang="spanish">javascript:history.go(-1);</msg>  
+  <msg id="EMP-0196" lang="spanish">javascript:history.go(-1);</msg>
+  <msg id="EMP-0197" lang="spanish">javascript:history.go(-2);</msg>    
+  
+  <!-- EMPBusca.xsql -->  
+  <msg id="EMP-0200" lang="spanish">Mantenimiento de empresas</msg>  
+  <msg id="EMP-0210" lang="spanish">Datos de la Empresa</msg>  
+  <msg id="EMP-0220" lang="spanish">Direcci&oacute;n</msg>
+  <msg id="EMP-0230" lang="spanish">NIF</msg>
+  <msg id="EMP-0240" lang="spanish">Nombre</msg>    
+  <msg id="EMP-0250" lang="spanish">Provincia</msg>
+  <msg id="EMP-0260" lang="spanish">C&oacute;digo Postal</msg>
+  <msg id="EMP-0270" lang="spanish">Poblaci&oacute;n</msg>
+  <msg id="EMP-0280" lang="spanish">Tipo de Empresa</msg>
+  <msg id="EMP-0285" lang="spanish">Especialidad</msg>
+  <msg id="EMP-0290" lang="spanish">Tel&eacute;fono</msg>
+  <msg id="EMP-0295" lang="spanish">Zona comercial</msg>
+  <msg id="EMP-0300" lang="spanish">Fax</msg>
+  <msg id="EMP-0310" lang="spanish">Descripci&oacute;n comercial de la empresa</msg>
+  <msg id="EMP-0320" lang="spanish">No se han encontrado empresas con los datos facilitados.</msg>  
+  <msg id="EMP-0330" lang="spanish">Por favor, vuelva a intentarlo.</msg>    
+  <msg id="EMP-0340" lang="spanish">El tipo de empresa seleccionado no existe.</msg>
+  <msg id="EMP-0345" lang="spanish">Centros</msg>
+  <msg id="EMP-0350" lang="spanish">Centros de Trabajo</msg>
+  <msg id="EMP-0355" lang="spanish">No.Centro</msg>
+  <msg id="EMP-0360" lang="spanish">Nombre del centro</msg>
+  <msg id="EMP-0370" lang="spanish">Departamento</msg>
+  <msg id="EMP-0375" lang="spanish">No.Departamento</msg>
+  <msg id="EMP-0380" lang="spanish">Nombre del departamento</msg>
+  <msg id="EMP-0390" lang="spanish">Usuario responsable</msg>
+  <msg id="EMP-0400" lang="spanish">Usuario</msg>
+  <msg id="EMP-0405" lang="spanish">No.Usuario</msg>
+  <msg id="EMP-0410" lang="spanish">Primer Apellido</msg>
+  <msg id="EMP-0420" lang="spanish">Segundo Apellido</msg>
+  <msg id="EMP-0430" lang="spanish">Sexo</msg>
+  <msg id="EMP-0440" lang="spanish">Tipo de usuario</msg>
+  <msg id="EMP-0450" lang="spanish">E-mail</msg>
+  <msg id="EMP-0460" lang="spanish">T&iacute;tulo</msg>
+  <msg id="EMP-0470" lang="spanish">Nueva empresa</msg>
+  
+  <!-- EMPBorrar.xsql -->
+  <msg id="EMP-0400" lang="spanish">Borrar empresa</msg> 
+  <msg id="EMP-0410" lang="spanish">Por favor, vuelva a intentarlo.</msg> 
+    
+  <!-- EMPOpciones.xsql -->
+  <msg id="EMP-0450" lang="spanish">Seleccione una opci&oacute;n</msg> 
+  
+  <!--    EMPDetalle datos de usuarios-->
+  <msg id="EMP-0480" lang="spanish">Usuarios</msg> 
+  <msg id="EMP-0490" lang="spanish">Nombre</msg> 
+  <msg id="EMP-0495" lang="spanish">Centro</msg>
+  <msg id="EMP-0500" lang="spanish">Cargo</msg>
+  <msg id="EMP-0510" lang="spanish">Tel&eacute;fono</msg>
+  <msg id="EMP-0520" lang="spanish">formato recomendado: B-00000000</msg>   
+  
+  
+    
+  <!-- #CENTROS# -->
+  <!-- CENLista.xsql -->
+  <msg id="CEN-0010" lang="spanish">Listado de Centros</msg>
+  <msg id="CEN-0020" lang="spanish">Listado de Centros</msg>
+  <msg id="CEN-0030" lang="spanish">Empresa</msg>
+  <msg id="CEN-0040" lang="spanish">Nombre Completo</msg>  
+  <msg id="CEN-0045" lang="spanish">Nombre Corto</msg>
+  <msg id="CEN-0050" lang="spanish">Direcci&oacute;n</msg>
+  <msg id="CEN-0060" lang="spanish">Poblaci&oacute;n</msg>  
+  <msg id="CEN-0070" lang="spanish">No se han encontrado centros con los datos facilitados.</msg>  
+  <msg id="CEN-0080" lang="spanish">Por favor, vuelva a intentarlo.</msg>    
+  <msg id="CEN-0090" lang="spanish">javascript:history.go(-1);</msg>    
+  <!-- CenManten.xsql -->
+  <msg id="CEN-0100" lang="spanish">Mantenimiento de centros</msg>  
+  <msg id="CEN-0110" lang="spanish">No se han encontrado datos del centro cuyo n&uacute;mero es </msg>  
+  <msg id="CEN-0115" lang="spanish">Nuevo Centro</msg> 
+  <msg id="CEN-0120" lang="spanish">Mantenimiento de centros</msg>  
+  <msg id="CEN-0125" lang="spanish">Centros</msg>
+  <msg id="CEN-0140" lang="spanish">Nombre</msg>
+  <msg id="CEN-0150" lang="spanish">Direcci&oacute;n</msg>
+  <msg id="CEN-0160" lang="spanish">Provincia</msg>
+  <msg id="CEN-0170" lang="spanish">Poblaci&oacute;n</msg>
+  <msg id="CEN-0180" lang="spanish">C&oacute;digo Postal</msg>
+  <msg id="CEN-0190" lang="spanish">Tel&eacute;fono</msg>
+  <msg id="CEN-0200" lang="spanish">Fax</msg>
+  <msg id="CEN-0210" lang="spanish">Empresa</msg>
+  <msg id="CEN-0215" lang="spanish">NIF</msg>
+  <msg id="CEN-0230" lang="spanish">N&uacute;mero de Camas</msg>
+  <msg id="CEN-0240" lang="spanish">Consumo objetivo mensual</msg>
+  <msg id="CEN-0235" lang="spanish">Quir&oacute;fanos</msg>
+  <!-- CENMantenSave.xsql -->
+  <msg id="CEN-0250" lang="spanish">Actualizaci&oacute;n de centros</msg>  
+  <msg id="CEN-0260" lang="spanish">javascript:history.go(-2);</msg>    
+  <!-- CENBorrar.xsql -->
+  <msg id="CEN-0270" lang="spanish">Borrado de centros</msg> 
+    
+  <!-- #DEPARTAMENTOS# -->
+  <!-- DPLista.xsql -->
+  <msg id="DP-0010" lang="spanish">Listado de departamentos</msg>
+  <msg id="DP-0020" lang="spanish">Listado de departamentos</msg>   
+  <msg id="DP-0030" lang="spanish">Empresa</msg>  
+  <msg id="DP-0040" lang="spanish">Nombre</msg>  
+  <msg id="DP-0050" lang="spanish">Responsable</msg>    
+  <msg id="DP-0070" lang="spanish">No se han encontrado departamentos con los datos facilitados.</msg>  
+  <msg id="DP-0080" lang="spanish">Por favor, vuelva a intentarlo.</msg>    
+
+  <!-- DPManten.xsql -->
+  <msg id="DP-0100" lang="spanish">Mantenimiento de Departamentos</msg>
+  <msg id="DP-0105" lang="spanish">Mantenimiento de Departamentos</msg>  
+  <msg id="DP-0110" lang="spanish">Empresa</msg>
+  <msg id="DP-0115" lang="spanish">C&oacute;digo</msg>  
+  <msg id="DP-0120" lang="spanish">Nombre</msg>
+  <msg id="DP-0130" lang="spanish">Responsable</msg>
+  <msg id="DP-0140" lang="spanish">No se han encontrado datos del Departamento cuyo n&uacute;mero es </msg>
+
+  <msg id="DP-0800" lang="spanish">Volver al listado</msg>
+  <msg id="DP-0805" lang="spanish">javascript:history.go(-1);</msg>  
+  <!-- DPBorrar.xsql -->
+  <msg id="DP-0500" lang="spanish">Volver al listado</msg>
+  <msg id="DP-0510" lang="spanish">javascript:history.go(-2);</msg> 
+  <msg id="DP-0520" lang="spanish">Borrar departamento</msg>   
+  
+  
+  
+  <!-- #SUGERENCIAS# -->
+  <!-- SUAlta.xsql -->
+  <msg id="SU-0010" lang="spanish">Sugerencias</msg>  
+  <msg id="SU-0020" lang="spanish">Asunto</msg>    
+  <msg id="SU-0030" lang="spanish">Descripcion</msg>      
+  <msg id="SU-0040" lang="spanish">Responsable</msg>        
+  <msg id="SU-0050" lang="spanish">Usuario</msg>          
+  <msg id="SU-0060" lang="spanish">Empresa</msg>        
+  <msg id="SU-0070" lang="spanish">El Usuario no existe. Por favor, vuelva a entrar en el sistema.</msg>
+  <!-- SUAltaSave.xsql -->
+  <msg id="SU-0100" lang="spanish">Sugerencia almacenada</msg>          
+  <msg id="SU-0105" lang="spanish">Su sugerencia ha sido registrada.</msg>            
+  <!-- SUListado.xsql -->         
+  <msg id="SU-0200" lang="spanish">Sugerencias pendientes</msg>       
+  <msg id="SU-0210" lang="spanish">De</msg>       
+  <msg id="SU-0220" lang="spanish">Asunto</msg>       
+  <msg id="SU-0230" lang="spanish">Recibido</msg> 
+  <msg id="SU-0240" lang="spanish">Estado</msg>               
+  <msg id="SU-0250" lang="spanish">No existen sugerencias pendientes.</msg>
+  <!-- Formulario de incidencias y sugerencias -->
+  <msg id="SU-0300" lang="spanish">Sugerencias e incidencias</msg>       
+  <msg id="SU-0301" lang="spanish">Hist&oacute;rico</msg>
+  <msg id="SU-0302" lang="spanish">Actual</msg>
+  <msg id="SU-0303" lang="spanish">Proceso de sugerencia cerrado</msg>
+  <msg id="SU-0304" lang="spanish">ciclo</msg>
+  <msg id="SU-0310" lang="spanish">Descripci&oacute;n de la sugerencia/incidencia para MedicalVM</msg>       
+  <msg id="SU-0320" lang="spanish">Fecha</msg>       
+  <msg id="SU-0330" lang="spanish">Autor</msg>
+  <msg id="SU-0331" lang="spanish">Cargo</msg>  
+  <msg id="SU-0340" lang="spanish">Empresa</msg>     
+  <msg id="SU-0320" lang="spanish">T&iacute;tulo</msg>       
+  <msg id="SU-0330" lang="spanish">Autor</msg> 
+  <msg id="SU-0340" lang="spanish">Empresa</msg> 
+  <msg id="SU-0350" lang="spanish">Responsable</msg> 
+  <msg id="SU-0360" lang="spanish">Asunto</msg> 
+  <msg id="SU-0370" lang="spanish">Descripci&oacute;n</msg>
+
+  <msg id="SU-0380" lang="spanish">An&aacute;lisis de la sugerencia/incidencia</msg>         
+  <msg id="SU-0390" lang="spanish">Prioridad</msg> 
+  <msg id="SU-0400" lang="spanish">Descartado</msg>
+  <msg id="SU-0410" lang="spanish">Resumen</msg>
+  <msg id="SU-0420" lang="spanish">Detalle</msg>          
+  <msg id="SU-0430" lang="spanish">Fecha prevista de realizaci&oacute;n</msg> 
+
+  <msg id="SU-0440" lang="spanish">Resultado de la sugerencia/incidencia</msg>
+  <msg id="SU-0450" lang="spanish">Objetivo</msg>          
+  <msg id="SU-0460" lang="spanish">Resultado</msg>   
+  
+  <msg id="SU-0470" lang="spanish">Conformidad del cliente</msg>
+  <msg id="SU-0480" lang="spanish">Valoraci&oacute;n del resultado</msg>          
+  <msg id="SU-0490" lang="spanish">Comentarios</msg>   
+    
+  <!-- #WORKFLOW# -->
+  <msg id="WF-0000" lang="spanish">No tiene elementos pendientes en el buzon</msg>  
+  <msg id="WF-0010" lang="spanish">WFStatus.xsql</msg>
+  <msg id="WF-0020" lang="spanish">Listar Documentos Pendientes</msg>  
+  <!-- WFStatus.xsql -->
+  <msg id="WF-0100" lang="spanish">Bandeja de tareas</msg>
+  <msg id="WF-0200" lang="spanish">No tiene sugerencias pendientes.</msg> 
+  <msg id="WF-0340" lang="spanish">No tiene tareas Pendientes</msg>         
+    <!-- Para singular (1 sugerencia) -->
+  <msg id="WF-0210" lang="spanish">Tiene 1 sugerencia pendiente.</msg>            
+    <!-- Para plural -->  
+  <msg id="WF-0220" lang="spanish">Tiene </msg>              
+  <msg id="WF-0230" lang="spanish"> sugerencias pendientes.</msg> 
+  <msg id="WF-0240" lang="spanish">bienvenido a MedicalVM</msg>
+  <msg id="WF-0245" lang="spanish">bienvenida a MedicalVM</msg>
+  <msg id="WF-0250" lang="spanish">Su ultimo acceso al sistema fue el</msg>       
+  <msg id="WF-0260" lang="spanish">Sugerencias</msg>
+  <msg id="WF-0270" lang="spanish">Incidencias</msg>
+  <msg id="WF-0280" lang="spanish">Alarmas</msg>
+  <msg id="WF-0290" lang="spanish">Noticias</msg>  
+  <msg id="WF-0300" lang="spanish">Publicidad</msg>
+  <msg id="WF-0310" lang="spanish">Consejos y trucos</msg>
+  <msg id="WF-0320" lang="spanish">Preguntas frecuentes</msg>
+  <msg id="WF-0325" lang="spanish">Todas</msg>
+  <msg id="WF-0330" lang="spanish">Fecha:</msg>
+  <msg id="WF-0335" lang="spanish">Ver más noticias</msg>
+  
+        
+  <!-- #USUARIOS# -->
+  <!-- USLista.xsql -->
+  <msg id="US-0010" lang="spanish">Listado de Usuarios</msg>
+  <msg id="US-0020" lang="spanish">ID</msg>
+  <msg id="US-0050" lang="spanish">Nombre del Usuario</msg>
+  <msg id="US-0100" lang="spanish">Empresa</msg>
+  <msg id="US-0110" lang="spanish">Usuario</msg>  
+  <msg id="US-0120" lang="spanish">Departamento</msg>    
+
+  
+  <!-- USManten.xsql --> <!-- USMantenSave.xsql -->  <!-- USBorrar.xsql -->
+  <msg id="US-0200" lang="spanish">Mantenimiento de usuarios</msg>
+  <msg id="US-0210" lang="spanish">Mantenimiento de usuarios</msg>  
+  <msg id="US-0215" lang="spanish">Datos perosonales de</msg>
+  <msg id="US-0220" lang="spanish">Centro</msg>    
+  <msg id="US-0230" lang="spanish">Primer apellido</msg>    
+  <msg id="US-0240" lang="spanish">Segundo apellido</msg>    
+  <msg id="US-0250" lang="spanish">Centro</msg>      
+  <msg id="US-0260" lang="spanish">Tipo Usuario</msg>      
+  <msg id="US-0270" lang="spanish">Idioma</msg>      
+  <msg id="US-0280" lang="spanish">Departamento</msg>
+  <msg id="US-0285" lang="spanish">Sexo</msg>           
+  <msg id="US-0290" lang="spanish">e-mail</msg>      
+  <msg id="US-0295" lang="spanish">Segundo e-mail</msg>      
+  <msg id="US-0297" lang="spanish">(se enviará un mensaje redundante a esta direcci&oacute;n)</msg>      
+  <msg id="US-0300" lang="spanish">Login</msg>      
+  <msg id="US-0310" lang="spanish">Password</msg>      
+  <msg id="US-0320" lang="spanish">Repita password</msg>          
+  <msg id="US-0330" lang="spanish">Pedido M&aacute;ximo</msg>      
+  <msg id="US-0340" lang="spanish">Compra mensual m&aacute;xima</msg>            
+  <msg id="US-0345" lang="spanish">Compra anual m&aacute;xima</msg>          
+  <msg id="US-0350" lang="spanish">Limitaci&oacute;n Familias</msg>      
+  <msg id="US-0360" lang="spanish">Administrador</msg>   
+  <msg id="US-0362" lang="spanish">Central de Compras</msg>
+  <msg id="US-0364" lang="spanish">Administrador de Centro</msg>       
+  <msg id="US-0400" lang="spanish">No se han encontrado datos de la empresa cuyo n&uacute;mero es </msg>
+  <msg id="US-0410" lang="spanish">Volver al Listado</msg>            
+  <msg id="US-0420" lang="spanish">javascript:history.go(-1);</msg>            
+  <msg id="US-0422" lang="spanish">La clave actual no es correcta.</msg>            
+  <msg id="US-0424" lang="spanish">Revise la nueva clave, la repetici&oacute;n no coincide.</msg>            
+  <msg id="US-0426" lang="spanish">La nueva clave es demasiado corta.</msg>                       
+  <msg id="US-0430" lang="spanish">Actualizaci&oacute;n de usuarios</msg>  
+  <msg id="US-0440" lang="spanish">Nombre</msg>
+  <msg id="US-0450" lang="spanish">Borrar usuarios</msg>    
+  <msg id="US-0460" lang="spanish">Tipo Empresa</msg>
+  <msg id="US-0470" lang="spanish">Poblacion</msg>  
+  <msg id="US-0480" lang="spanish">Provincia</msg>    
+  <msg id="US-0490" lang="spanish">Cargo</msg>      
+  <msg id="US-0500" lang="spanish">Empresa</msg>        
+  <msg id="US-0510" lang="spanish">Tel&eacute;fono fijo</msg>
+  <msg id="US-0520" lang="spanish">Tel&eacute;fono m&oacute;vil</msg>
+  <msg id="US-0530" lang="spanish">Operador</msg>
+  <msg id="US-0540" lang="spanish">&iquest;D&oacute;nde desea recibir sus avisos?</msg>          
+  <msg id="US-0550" lang="spanish">Empresa</msg>
+  <msg id="US-0560" lang="spanish">Centro</msg>
+  <msg id="US-0565" lang="spanish">EIS Simplificado</msg>
+  <msg id="US-0570" lang="spanish">Pedidos enviados</msg>
+  <msg id="US-0580" lang="spanish">Pedidos recibidos</msg>
+  <msg id="US-0590" lang="spanish">Avisos por email</msg>          
+  
+  <!-- Errores en el Alta de usuarios -->
+
+  <msg id="US-0800" lang="spanish">Es obligatorio introducir un nombre de usuario.</msg>          
+  <msg id="US-0810" lang="spanish">Debe introducir un Login.</msg>          
+  <msg id="US-0820" lang="spanish">Revise las claves, no son iguales.</msg>            
+  <msg id="US-0830" lang="spanish">Debe consignar el usuario a un Centro.</msg>            
+  <msg id="US-0840" lang="spanish">Debe consignar el usuario a un Departamento.</msg>            
+  <msg id="US-0850" lang="spanish">El importe maximo de pedido debe ser numerico.</msg>            
+  <msg id="US-0860" lang="spanish">El importe maximo de compra mensual debe ser numerico.</msg>            
+  <msg id="US-0870" lang="spanish">El importe maximo de compra anual debe ser numerico.</msg>            
+  <msg id="US-0880" lang="spanish">Debe introducir un password.</msg>            
+  <msg id="US-0890" lang="spanish">Debe repetir el password para validar que este es correcto.</msg>            
+  <msg id="US-0900" lang="spanish">El Login introducido ya existe en el sistema. Por favor, use otro nombre de login.</msg>            
+  <msg id="US-0910" lang="spanish">El usuario seleccionado no existe en el sistema.</msg> 
+  <msg id="US-0920" lang="spanish">T&iacute;tulo</msg>           
+
+    
+  <!-- USDERLista.xsql -->
+  <msg id="USD-1010" lang="spanish">Listado de Derechos del Usuario</msg>
+  <msg id="USD-1050" lang="spanish">Nombre del Usuario</msg>
+  <msg id="USD-1100" lang="spanish">Tipo de Menu</msg>
+  <msg id="USD-1120" lang="spanish">Menu</msg>
+  <msg id="USD-1140" lang="spanish">Autorizado</msg>  
+  
+  <!-- #PRODUCTOS# -->
+  <!-- PROBusca.xsql -->
+  <msg id="PRO-0100" lang="spanish">B&uacute;squeda de Productos</msg>
+  <msg id="PRO-0110" lang="spanish">B&uacute;squeda de Productos</msg>
+  <msg id="PRO-0111" lang="spanish">Productos</msg>    
+  <msg id="PRO-0120" lang="spanish">Categoria</msg>    
+  <msg id="PRO-0130" lang="spanish">Familia</msg>  
+  <msg id="PRO-0140" lang="spanish">Subfamilia</msg>    
+  <msg id="PRO-0150" lang="spanish">Nombre</msg>  
+  <msg id="PRO-0160" lang="spanish">Descripcion</msg>  
+  <msg id="PRO-0170" lang="spanish">Fabricante</msg>        
+  <msg id="PRO-0180" lang="spanish">Marca</msg>        
+  <msg id="PRO-0190" lang="spanish">Proveedor</msg>            
+  
+  <msg id="PRO-0200" lang="spanish">Volver al listado</msg>
+  <msg id="PRO-0210" lang="spanish">javascript:history.go(-1);</msg>
+  <msg id="PRO-0215" lang="spanish">http://www.newco.dev.br/Compras/Multioferta/LLPManten.xsql</msg>
+  <msg id="PRO-0220" lang="spanish">La b&uacute;squeda no ha tenido &eacute;xito.</msg>    
+  <msg id="PRO-0230" lang="spanish">Demasiados productos seleccionados. Por favor, sea m&aacute;s conciso en la b&uacute;squeda.</msg>  
+  <msg id="PRO-0240" lang="spanish">No se encuentran productos con dichas especificaciones. Por favor vuelva a intentarlo.</msg>    
+  <msg id="PRO-0245" lang="spanish">Si tiene alg&uacute;n problema para encontrar un producto determinado com&eacute;ntenoslo</msg>    
+  
+  <!-- PROLista.xsql -->
+    
+  <msg id="PRO-0250" lang="spanish">Ref.</msg>
+  <msg id="PRO-0260" lang="spanish">Distribuidor</msg>    
+  <msg id="PRO-0270" lang="spanish">Homologado</msg>
+  <msg id="PRO-0280" lang="spanish">Certificados</msg>
+  <msg id="PRO-0290" lang="spanish">Unidad b&aacute;sica</msg>
+  <msg id="PRO-0300" lang="spanish">Ud./&lt;br/&gt;Lote</msg> <!-- Unidades por lote -->
+  <msg id="PRO-0310" lang="spanish">Lista de productos</msg> 
+  <msg id="PRO-0320" lang="spanish">Seleccionar</msg>  
+  <msg id="PRO-0330" lang="spanish">"unidades"</msg>
+  <msg id="PRO-0340" lang="spanish">Por favor, Introduzca las unidades deseadas cuando seleccione un producto</msg>   
+  <msg id="PRO-0350" lang="spanish">Por favor, Introduzca unidades validas</msg>   
+  <msg id="PRO-0360" lang="spanish">Seleccione una opcion predeterminada</msg>    
+  <msg id="PRO-0370" lang="spanish">Introduzca el n&amp;uacute;mero de unidades/Lote deseados en la opcion seleccionada</msg>
+  <msg id="PRO-0380" lang="spanish">Avanzar</msg>
+  <msg id="PRO-0390" lang="spanish">Retroceder</msg> 
+  
+   <!-- PROALta.xsql -->
+  <msg id="PRO-0400" lang="spanish">Alta de productos</msg>
+  <msg id="PRO-0410" lang="spanish">Nombre</msg>
+  <msg id="PRO-0420" lang="spanish">Nombre internacional</msg>
+  <msg id="PRO-0430" lang="spanish">Precio Ud. b&aacute;sica</msg>
+  <msg id="PRO-0440" lang="spanish">Los campos marcados con </msg>
+  <msg id="PRO-0450" lang="spanish">son obligatorios</msg>
+  <msg id="PRO-0460" lang="spanish">Mantenimiento de productos</msg>
+  <msg id="PRO-0470" lang="spanish">El producto ha sido actualizado.</msg>
+  
+  <!-- Listado de Productos-->
+  <msg id="PRO-0480" lang="spanish">Anterior</msg>
+  <msg id="PRO-0485" lang="spanish">Buscar</msg>
+  <msg id="PRO-0490" lang="spanish">Siguiente</msg>
+  <msg id="PRO-0500" lang="spanish">Actualizar los cambios</msg>
+  
+   
+  <!-- #CARPETAS# -->
+  <msg id="CARP-0160" lang="spanish">Descripción de la Carpeta</msg>
+  <msg id="CARP-0162" lang="spanish">Propiedades de la Carpeta</msg>
+  <msg id="CARP-0165" lang="spanish">Cabecera de la oferta</msg>      
+  <msg id="CARP-0170" lang="spanish">Nombre</msg>
+  <msg id="CARP-0180" lang="spanish">Descripci&oacute;n</msg>
+  <msg id="CARP-0190" lang="spanish">Nombre del centro</msg>
+  <msg id="CARP-0200" lang="spanish">Responsable</msg>
+  <msg id="CARP-0210" lang="spanish">Programada</msg>
+  <msg id="CARP-0205" lang="spanish">Autorizada para</msg>
+  <msg id="CARP-0220" lang="spanish">Fecha de activaci&oacute;n</msg>
+  <msg id="CARP-0230" lang="spanish">Periodo de activaci&oacute;n</msg>
+  <msg id="CARP-0240" lang="spanish">Forma de pago habitual</msg> 
+  <msg id="CARP-0245" lang="spanish">(Opcional)</msg> 
+  <msg id="CARP-0250" lang="spanish">Condiciones generales</msg>
+  <msg id="CARP-0260" lang="spanish">El campo Periodo de activacion no tiene un valor numérico correcto</msg>
+  <msg id="CARP-0270" lang="spanish">Introduzca la fecha de activacion</msg>    
+  <msg id="CARP-0275" lang="spanish">Rellene el campo fecha de activacion</msg> 
+  <msg id="CARP-0280" lang="spanish">Introduzca un nombre a la carpeta</msg>   
+  <msg id="CARP-0286" lang="spanish">Carpeta P&uacute;blica</msg> 
+  
+
+  <!-- #PLANTILLAS# -->
+  <!-- PLLista.xsql -->
+  <msg id="PL-0100" lang="spanish">L&iacute;neas de la plantilla</msg>
+  <msg id="PL-0110" lang="spanish">Nombre</msg>        
+  <msg id="PL-0120" lang="spanish">Cantidad</msg>
+  <msg id="PL-0130" lang="spanish">Precio</msg>
+  <msg id="PL-0135" lang="spanish">Proveedores</msg> 
+  <msg id="PL-0136" lang="spanish">Proveedor</msg>
+  <msg id="PL-0138" lang="spanish">Referencia</msg>     
+  <msg id="PL-0140" lang="spanish">Seleccione alguna plantilla de la columna de la izquierda</msg>  
+  <msg id="PL-0145" lang="spanish">Para ejecutar esta acción debe crear una línea de plantilla (botón Nueva)</msg>  
+  <msg id="PL-0150" lang="spanish">¿Esta seguro de querer eliminar la plantilla?</msg>  
+  <msg id="PL-0155" lang="spanish">(*) Estas plantillas son plantillas ejemplo creadas por MedicalVM para su comodidad.</msg>
+
+  <!-- PLManten.xsql --> 
+  <msg id="PL-0160" lang="spanish">Descripción de la plantilla</msg>
+  <msg id="PL-0162" lang="spanish">Propiedades de la plantilla</msg>
+  <msg id="PL-0165" lang="spanish">Cabecera de la oferta</msg>      
+  <msg id="PL-0170" lang="spanish">Nombre</msg>
+  <msg id="PL-0180" lang="spanish">Descripci&oacute;n</msg>
+  <msg id="PL-0185" lang="spanish">Carpeta</msg>
+  <msg id="PL-0190" lang="spanish">Nombre del centro</msg>
+  <msg id="PL-0200" lang="spanish">Responsable</msg>
+  <msg id="PL-0205" lang="spanish">Autorizada para</msg>
+  <msg id="PL-0210" lang="spanish">Programada</msg>
+  <msg id="PL-0220" lang="spanish">Fecha de activaci&oacute;n</msg>
+  <msg id="PL-0230" lang="spanish">Periodo de activaci&oacute;n</msg>
+  <msg id="PL-0240" lang="spanish">Forma de pago habitual</msg> 
+  <msg id="PL-0245" lang="spanish">(Opcional)</msg> 
+  <msg id="PL-0250" lang="spanish">Condiciones generales</msg>
+  <msg id="PL-0255" lang="spanish">Otras&lt;br/&gt;condiciones&lt;br/&gt;particulares</msg>
+  <msg id="PL-0260" lang="spanish">El campo Periodo de activacion no tiene un valor numérico correcto</msg>
+  <msg id="PL-0270" lang="spanish">Introduzca la fecha de activacion</msg>    
+  <msg id="PL-0275" lang="spanish">Rellene el campo fecha de activacion</msg>    
+  <!-- -->
+  <msg id="PL-0278" lang="spanish">Revise la fecha de activación</msg>
+  <msg id="PL-0285" lang="spanish">Introduzca un nombre para la plantilla</msg>
+  <msg id="PL-0286" lang="spanish">Plantilla P&uacute;blica</msg> 
+  <msg id="PL-0287" lang="spanish">Plantilla de reserva</msg> 
+  
+  <!-- LPLista.xsql -->
+  <msg id="PL-0280" lang="spanish">Actualizaci&oacute;n de plantillas</msg>  
+  <msg id="PL-0290" lang="spanish">Nombre</msg>
+  <msg id="PL-0300" lang="spanish">Descripci&oacute;n</msg>
+  <msg id="PL-0310" lang="spanish">Nombre</msg>
+  <msg id="PL-0315" lang="spanish">Ud. b&aacute;sica</msg>
+  <msg id="PL-0316" lang="spanish">Ud./&lt;br/&gt;Lote</msg>
+  <msg id="PL-0317" lang="spanish">Precio Ud. b&aacute;sica</msg>       
+  <msg id="PL-0320" lang="spanish">Ud.</msg>
+  <msg id="PL-0330" lang="spanish">Importe</msg>
+  <msg id="PL-0335" lang="spanish">Opc.</msg>  
+  <msg id="PL-0340" lang="spanish">Introduzca un nombre a la plantilla</msg>   
+  <msg id="PL-0350" lang="spanish">Seleccione alg&uacute;n opci&oacute;n para analizar</msg>
+  <msg id="PL-0360" lang="spanish">Seleccione solamente una opci;uacute;n para analizar</msg>
+  <msg id="PL-0370" lang="spanish">PLLista.xsql</msg>
+  <msg id="PL-0380" lang="spanish">http://www.newco.dev.br/images/Botones/Buscar.gif</msg>  
+  <msg id="PL-0390" lang="spanish">Plantillas</msg>
+  <msg id="PL-0400" lang="spanish">No puede enviar una plantilla sin insertar lineas de productos</msg>
+  <msg id="PL-0405" lang="spanish">No puede realizar esta operacion con la plantilla vacia. Inserte antes lineas de productos con mediante la opcion Editar.</msg>
+  <msg id="PL-0410" lang="spanish">Inserci&oacute;n de una nueva l&iacute;nea mediante la b&uacute;squeda r&aacute;pida</msg>
+  <msg id="PL-0420" lang="spanish">Proveedor</msg>
+  <msg id="PL-0430" lang="spanish">Ref.Prod.Cliente</msg>
+  <msg id="PL-0440" lang="spanish">Ref.Prod.Proveedor</msg>
+
+  <msg id="PL-0450" lang="spanish">Nueva plantilla</msg>
+  <msg id="PL-0460" lang="spanish">Copiar plantilla</msg>
+  <msg id="PL-0470" lang="spanish">Editar plantilla</msg>
+  <msg id="PL-0480" lang="spanish">Eliminar plantilla</msg>
+  <msg id="PL-0490" lang="spanish">Revisar y enviar</msg>        
+  <msg id="PL-0500" lang="spanish">Preparar oferta</msg>
+  <msg id="PL-0505" lang="spanish">Preparar una Oferta</msg>
+  <msg id="PL-0510" lang="spanish">Pedido directo</msg>
+  <msg id="PL-0520" lang="spanish">Cambiar el nombre de la linea</msg>
+  <msg id="PL-0530" lang="spanish">Introduzca el nuevo nombre de la linea</msg>      
+  <msg id="PL-0540" lang="spanish">Variar el contenido de la linea</msg>
+  <msg id="PL-0550" lang="spanish">Ver el contenido de la linea</msg>
+  <msg id="PL-0560" lang="spanish">Eliminar la linea</msg>
+  <msg id="PL-0570" lang="spanish">¿Quiere eliminar la linea? </msg>
+  <msg id="PL-0580" lang="spanish">Ver cabecera de la plantilla</msg>
+    
+  <!-- #LINEASLISTAPRODUCTOS# -->       
+  <!-- LLPManten.xsql -->
+  <msg id="LP-0000" lang="spanish">Inserci&oacute;n de productos</msg>
+  <msg id="LP-0010" lang="spanish">http://www.newco.dev.br/Compras/Multioferta/LPLista.xsql?LP_ID=</msg>  
+  <msg id="LP-0100" lang="spanish">B&uacute;squeda de productos</msg>
+  <msg id="LP-0105" lang="spanish">Nombre de la l&iacute;nea de productos</msg>
+  <msg id="LP-0110" lang="spanish">Productos</msg>    
+  <msg id="LP-0120" lang="spanish">Categor&iacute;a</msg>    
+  <msg id="LP-0130" lang="spanish">Familia</msg>  
+  <msg id="LP-0140" lang="spanish">Subfamilia</msg>  
+  <msg id="LP-0150" lang="spanish">Nombre</msg>  
+  <msg id="LP-0160" lang="spanish">Descripci&oacute;n</msg>  
+  <msg id="LP-0170" lang="spanish">Fabricante</msg>        
+  <msg id="LP-0180" lang="spanish">Marca</msg>        
+  <msg id="LP-0190" lang="spanish">Proveedor</msg>
+  <msg id="LP-0195" lang="spanish">Solo en proveedores habituales</msg>     
+  <msg id="LP-0200" lang="spanish">Ver fichas ampliadas de productos</msg> 
+  <msg id="LP-0210" lang="spanish">Homologado</msg>
+  <msg id="LP-0220" lang="spanish">Nivel de calidad del proveedor</msg>  
+  <msg id="LP-0230" lang="spanish">Rellene el campo descripcion de la linea de productos, por favor</msg>
+  <msg id="LP-0240" lang="spanish">Seleccione categor&iacute;a</msg>
+  <msg id="LP-0241" lang="spanish">Seleccione familia</msg>
+  <msg id="LP-0242" lang="spanish">Seleccione subfamilia</msg>
+  <msg id="LP-0243" lang="spanish">Seleccione opci&oacute;n</msg>
+  <msg id="LP-0244" lang="spanish">Familia seleccionada:&nbsp;</msg>
+  <msg id="LP-0245" lang="spanish">Familia:&nbsp;</msg>
+  <msg id="LP-0246" lang="spanish">Subfamilia:&nbsp;</msg>
+   
+  
+  <!-- LPAnalizar.xsql -->
+  <msg id="LP-0250" lang="spanish">Analizar proveedores</msg>
+  <msg id="LP-0260" lang="spanish">Nombre</msg>    
+  <msg id="LP-0270" lang="spanish">Descripci&oacute;n</msg>
+  <msg id="LP-0280" lang="spanish">Forma de pago</msg>
+  <msg id="LP-0290" lang="spanish">Condiciones generales</msg>
+  <msg id="LP-0295" lang="spanish">Otras&lt;br/&gt;condiciones&lt;br/&gt;particulares</msg>
+  <msg id="LP-0300" lang="spanish">Fecha de emisi&oacute;n</msg>  
+  <msg id="LP-0305" lang="spanish">L&iacute;nea</msg>  
+  <msg id="LP-0310" lang="spanish">Producto</msg> 
+  <msg id="LP-0315" lang="spanish">Proveedor</msg>
+  <msg id="LP-0317" lang="spanish">Ud. B&amp;aacute;sica/&lt;br/&gt;Lote</msg>  
+  <msg id="LP-0320" lang="spanish">Cantidad solicitada&lt;br/&gt;(Ud. b&amp;aacute;sica) </msg>
+  <msg id="LP-0325" lang="spanish">Importe(€) s/IVA </msg>
+  <msg id="LP-0326" lang="spanish">Divisa</msg>  
+  <msg id="LP-0327" lang="spanish">Div.</msg> 
+  <msg id="LP-0330" lang="spanish">Sel.</msg>
+  <!--<msg id="LP-0340" lang="spanish">Coste estimado</msg>-->
+  <msg id="LP-0340" lang="spanish">Coste total</msg>
+  <msg id="LP-0345" lang="spanish">Coste del pedido</msg>  
+  <msg id="LP-0350" lang="spanish">Fecha l&iacute;mite de respuesta</msg>
+  <msg id="LP-0360" lang="spanish">Fecha de entrega</msg>
+  <msg id="LP-0370" lang="spanish">Plazo de entrega m&aacute;ximo</msg>  
+  <msg id="LP-0380" lang="spanish">Tipo de producto</msg>
+  <msg id="LP-0390" lang="spanish">Orden</msg>
+  <msg id="LP-0400" lang="spanish">Opciones de la b&uacute;squeda</msg>
+  <msg id="LP-0401" lang="spanish">Opciones avanzadas</msg>
+  <msg id="LP-0402" lang="spanish">Nomenclator</msg>
+  <msg id="LP-0403" lang="spanish">B&uacute;squeda r&aacute;pida</msg>       
+  <msg id="LP-0410" lang="spanish">Listar por</msg>
+  <msg id="LP-0420" lang="spanish">Mostrar informacion de proveedores de la multioferta</msg>            
+  <msg id="LP-0430" lang="spanish">N&uacute;mero de Plantilla:</msg>            
+  <msg id="LP-0440" lang="spanish">IVA</msg>
+  <msg id="LP-0450" lang="spanish">Precio Ud. b&amp;aacute;sica</msg>  
+  <msg id="LP-0460" lang="spanish">Referencia</msg> 
+  <msg id="LP-0470" lang="spanish">No puede realizar un pedido directo con esta plantilla dado que algunos de los productos no tienen precio. Por favor, realize una oferta al proveedor. Gracias.</msg>  
+  <msg id="LP-0480" lang="spanish">Fecha de pago</msg>
+  <msg id="LP-0490" lang="spanish">Forma de pago</msg>
+  <msg id="LP-0500" lang="spanish">Los productos sin precio informado no se podr&#225;n enviar</msg>
+  <msg id="LP-0510" lang="spanish">No hay ning&#250;n producto seleccionado. No se puede enviar el pedido. Por favor revise su elecci&#243;n</msg>
+  <msg id="LP-0515" lang="spanish">No hay ning&#250;n producto seleccionado. No se puede enviar la oferta. Por favor revise su elecci&#243;n</msg>
+  <msg id="LP-0520" lang="spanish">La FECHA LIMITE DE RESPUESTA ha de ser mayor que la actual</msg>
+  <msg id="LP-0530" lang="spanish">La FECHA DE ENTREGA ha de ser mayor que la actual</msg>
+  <msg id="LP-0540" lang="spanish">La FECHA DE ENTREGA ha de ser mayor o igual que la FECHA LIMITE DE RESPUESTA</msg>       
+  <msg id="LP-0550" lang="spanish">La FECHA DE PAGO ha de ser mayor que la actual</msg>
+  <msg id="LP-0560" lang="spanish">(Opcional)</msg>
+  <msg id="LP-0570" lang="spanish">Ref. Cliente</msg>
+  <msg id="LP-0580" lang="spanish">Ref. Proveedor</msg>
+  <msg id="LP-0590" lang="spanish">Pedir oferta </msg>
+  <msg id="LP-0600" lang="spanish">Si no introduce ningún criterio de búsqueda el botón 'buscar' le presentará todos los productos </msg>
+  <msg id="LP-0610" lang="spanish">Sin referencia privada</msg>
+  <msg id="LP-0620" lang="spanish">PRINCIPAL</msg>
+  <msg id="LP-0630" lang="spanish">RESERVA</msg>
+  <msg id="LP-0640" lang="spanish">Tipo de plantilla</msg>
+  
+  
+  <!-- PLDirecto.xsql -->
+  <msg id="PLD-0010" lang="spanish">Generaci&uacute;n Directa de Multioferta</msg>            
+  
+
+  <!-- P3Lista.xsql -->
+  <msg id="P3-0010" lang="spanish">P&aacute;gina </msg>
+  <msg id="P3-0020" lang="spanish"> de </msg>
+  <msg id="P3-0030" lang="spanish"> Productos</msg>
+  <msg id="P3-0040" lang="spanish"> Producto</msg>
+  <msg id="P3-0050" lang="spanish"> Proveedores</msg>
+  <msg id="P3-0060" lang="spanish"> Proveedor</msg>
+            
+  <msg id="P3-0100" lang="spanish">Selecci&oacute;n de productos</msg>
+  <msg id="P3-0110" lang="spanish">Productos</msg>    
+  <msg id="P3-0120" lang="spanish">Categoria</msg>    
+  <msg id="P3-0130" lang="spanish">Familia</msg>  
+  <msg id="P3-0135" lang="spanish">Especialidad</msg>  
+  <msg id="P3-0140" lang="spanish">Subfamilia</msg> 
+  <msg id="P3-0145" lang="spanish">Ref</msg> 
+  <msg id="P3-0150" lang="spanish">Nombre</msg>  
+  <msg id="P3-0160" lang="spanish">Descripci&oacute;n</msg>  
+  <msg id="P3-0165" lang="spanish">Ficha T&eacute;cnica</msg>  
+  <msg id="P3-0170" lang="spanish">Fabricante</msg>        
+  <msg id="P3-0180" lang="spanish">Marca</msg>        
+  <msg id="P3-0190" lang="spanish">Proveedor</msg>  
+  <msg id="P3-0195" lang="spanish">Especialidad del Producto</msg>  
+  <msg id="P3-0200" lang="spanish">Certificaci&oacute;n</msg>
+  <msg id="P3-0210" lang="spanish">Homologado</msg>
+  <msg id="P3-0220" lang="spanish">Unidad b&amp;aacute;sica</msg>
+  <msg id="P3-0230" lang="spanish">Ud./&lt;br/&gt;Lote</msg> <!-- Era: Unidades por lote -->
+  <msg id="P3-0235" lang="spanish">Ud./&lt;br/&gt;Lote</msg>  <!-- Era: Unidades/lote -->
+  <msg id="P3-0237" lang="spanish">Ud./Lote</msg>  <!-- Era: Unidades/lote -->
+  <msg id="P3-0240" lang="spanish">Nomenclator</msg> 
+  <msg id="P3-0261" lang="spanish">C&oacute;digo nomenclator</msg>  
+  <msg id="P3-0265" lang="spanish">Pedir </msg>    
+  <msg id="P3-0270" lang="spanish"> unidades</msg>
+  <msg id="P3-0280" lang="spanish">Introduzca las unidades deseadas cuando seleccione un producto</msg>   
+  <msg id="P3-0290" lang="spanish">Introduzca unidades validas</msg>   
+  <msg id="P3-0300" lang="spanish">Asigne una referencia a todos los productos seleccionados</msg>        
+  <msg id="P3-0310" lang="spanish">Seleccione los productos</msg>
+  <msg id="P3-0315" lang="spanish">La referencia</msg>
+  <msg id="P3-0320" lang="spanish">es correcta? </msg>
+  <msg id="P3-0340" lang="spanish">Imagen</msg>
+  <msg id="P3-0350" lang="spanish">Enlace</msg>
+  <msg id="P3-0360" lang="spanish">Tarifa p&uacute;blica</msg>
+  <msg id="P3-0361" lang="spanish">Tarifa privada</msg>  
+  <msg id="P3-0370" lang="spanish">Cantidad (unidades)</msg>
+  <msg id="P3-0375" lang="spanish">Ud.&lt;br/&gt;b&aacute;ica</msg>  
+  <msg id="P3-0380" lang="spanish">Precio Ud. b&aacute;sica</msg> 
+  <msg id="P3-0385" lang="spanish">&nbsp;</msg> <!-- Era Divisa -->
+  <msg id="P3-0390" lang="spanish">Ref. Proveedor</msg>
+  <msg id="P3-0395" lang="spanish">Nombre Proveedor</msg>
+  <msg id="P3-0400" lang="spanish">Ref. Cliente</msg>  
+  <msg id="P3-0410" lang="spanish">Pre.</msg> 
+  <msg id="P3-0420" lang="spanish">Num. Unid.</msg>
+  <msg id="P3-0421" lang="spanish">Num. Cajas</msg>  
+  <msg id="P3-0425" lang="spanish">Ver productos</msg>
+               
+  <!-- #P3EMPRESAS# -->
+  <msg id="P3-0430" lang="spanish">Empresas</msg> 
+  <msg id="P3-0440" lang="spanish">Tipo</msg>
+  <msg id="P3-0450" lang="spanish">Proveedores que ofrecen el producto solicitado</msg>
+  <msg id="P3-0455" lang="spanish">Ver familias</msg>
+  <!-- #P3FAMILIAS# -->
+  <msg id="P3-0460" lang="spanish">Familias</msg> 
+  <msg id="P3-0465" lang="spanish">Ver subfamilias</msg>
+  
+  <!-- #P3FAMILIAS# -->
+  <msg id="P3-0470" lang="spanish">Subfamilias</msg>
+  
+  <!-- #PROPLISTA# -->
+  <msg id="P3-0480" lang="spanish">Volver a la b&uacute;squeda</msg>
+  <msg id="P3-0490" lang="spanish">Asignar tarifa p&uacute;blica</msg>
+  <msg id="P3-0491" lang="spanish">Asignar tarifa</msg>
+  <msg id="P3-0500" lang="spanish">Asignar tarifa privada</msg>
+  <msg id="P3-0510" lang="spanish">No ha preseleccionado ningún producto. \nEsta preselección es necesaria para poder realizar un pedido directo. \n¿Desea que MedicalVM le preseleccione un producto entre los que ha escogido?</msg>                     
+  <msg id="P3-0520" lang="spanish">IVA</msg>
+  <msg id="P3-0530" lang="spanish">Tipo de Producto</msg>
+  <msg id="P3-0540" lang="spanish">Precio P&uacute;blico (&euro;)</msg>
+    
+  <!-- #GENERAR PEDIDOS# -->
+  <msg id="CVG-0100" lang="spanish">Oferta lista para enviar</msg>
+  <msg id="CVG-0105" lang="spanish">C&oacute;digo de la oferta</msg>  
+  <msg id="CVG-0110" lang="spanish">Forma de pago</msg>
+  <msg id="CVG-0120" lang="spanish">Condiciones generales</msg>
+  <msg id="CVG-0130" lang="spanish">Fecha de emisi&oacute;n</msg>
+  <msg id="CVG-0135" lang="spanish">Producto</msg>  
+  <msg id="CVG-0140" lang="spanish">Fabricante</msg>
+  <msg id="CVG-0145" lang="spanish">Marca</msg>
+  <msg id="CVG-0150" lang="spanish">Precio Ud. b&amp;aacute;sica</msg>  
+  <msg id="CVG-0160" lang="spanish">Cantidad solicitada&lt;br/&gt;(Ud. b&amp;aacute;sica)</msg>
+  <msg id="CVG-0165" lang="spanish">Tipo&lt;br/&gt;IVA</msg>
+  <msg id="CVG-0170" lang="spanish">Importe(€) s/IVA</msg>
+  <msg id="CVG-0172" lang="spanish">Div.</msg>
+  <msg id="CVG-0175" lang="spanish">C&oacute;digo de Oferta</msg>  
+  <msg id="CVG-0180" lang="spanish">Proveedor</msg>
+  <msg id="CVG-0190" lang="spanish">Usuario</msg>
+  <msg id="CVG-0210" lang="spanish">Fecha l&iacute;mite de respuesta</msg>
+  <msg id="CVG-0220" lang="spanish">Fecha de entrega</msg>
+  <msg id="CVG-0221" lang="spanish">Lugar de entrega</msg>           
+  <msg id="CVG-0230" lang="spanish">Subtotal</msg>
+  <msg id="CVG-0232" lang="spanish">Importe IVA</msg>
+  <msg id="CVG-0235" lang="spanish">Importe total</msg>
+  <msg id="CVG-0240" lang="spanish">Oferta enviada a </msg>
+  <msg id="CVG-0245" lang="spanish"> proveedor.</msg>
+  <msg id="CVG-0250" lang="spanish"> proveedores.</msg>
+  <msg id="CVG-0260" lang="spanish">Su plantilla ha sido guardada.</msg>
+  <msg id="CVG-0270" lang="spanish">Pedido M&iacute;nimo</msg>
+  <msg id="CVG-0275" lang="spanish">Puede a&#241;adir sus comentarios:</msg>
+  <msg id="CVG-0290" lang="spanish">El envío de pedidos supone la aceptación de las condiciones del </msg>
+  <msg id="CVG-0295" lang="spanish">Contrato de Afiliación de MedicalVM.</msg>
+  <msg id="CVG-0296" lang="spanish">Contrato de Afiliaci&oacute;n para m&eacute;dicos de MedicalVM.</msg>
+  <msg id="CVG-0297" lang="spanish">Presupuesto</msg>
+  
+
+   
+  
+<!--  <msg id="CVG-0280" lang="spanish">http://www.newco.dev.br/Compras/Multioferta/CVGenerarSave.xsql</msg> -->
+  
+  <!-- Per a pedido directo... -->
+  <msg id="CVG-0300" lang="spanish">Pedido listo para enviar</msg>  
+  <msg id="CVG-0310" lang="spanish">C&oacute;digo de Pedido</msg>  
+  <msg id="CVG-0315" lang="spanish">http://www.newco.dev.br/Compras/Multioferta/CVAnalisisDetalle.xsql</msg>    
+  <msg id="CVG-0320" lang="spanish">Definir pagos</msg>      
+  <msg id="CVG-0330" lang="spanish">A continuaci&oacute;n debera definir los pagos de los pedidos realizados.</msg>        
+  <msg id="CVG-0340" lang="spanish">Solicitamos comercial</msg>
+  <msg id="CVG-0350" lang="spanish">Solicitamos muestra</msg>
+  <msg id="CVG-0360" lang="spanish">No se precisa contacto comercial por el momento</msg>
+  <msg id="CVG-0370" lang="spanish">Ref. Proveedor</msg>
+  <msg id="CVG-0380" lang="spanish">Ref. Cliente</msg>
+  <msg id="CVG-0390" lang="spanish">Ud. b&amp;aacute;sica</msg>
+  <msg id="CVG-0400" lang="spanish">PRINCIPAL</msg>
+  <msg id="CVG-0410" lang="spanish">RESERVA</msg>
+  <msg id="CVG-0420" lang="spanish">Tipo de plantilla</msg>
+  <!-- #MULTIOFERTA# -->
+  <msg id="MO-0100" lang="spanish">Generaci&oacute;n de la multioferta</msg>
+  <msg id="MO-0101" lang="spanish">solicita una oferta</msg>
+  <msg id="MO-0102" lang="spanish">Petici&oacute;n de aceptaci&oacute;n de pedido de</msg>
+  <msg id="MO-0103" lang="spanish">Preparar Pedido</msg>
+  <msg id="MO-0104" lang="spanish">Aceptaci&oacute;n del pedido</msg> 
+  <msg id="MO-0105" lang="spanish">Pedido pendiente de recepci&oacute;n</msg>
+  <msg id="MO-0106" lang="spanish">Control de cobro</msg>  
+  <msg id="MO-0107" lang="spanish">enviado a </msg>
+  <msg id="MO-0108" lang="spanish">proveedores</msg>
+  <msg id="MO-0109" lang="spanish">Cliente:</msg>        
+  <msg id="MO-0110" lang="spanish">Forma de pago</msg>
+  <msg id="MO-0111" lang="spanish">Proveedor:</msg>
+  
+  <msg id="MO-0112" lang="spanish">Lugar de entrega</msg>
+  <msg id="MO-0113" lang="spanish">proveedor</msg>
+  <msg id="MO-0114" lang="spanish">Proceso terminado</msg>  
+  <msg id="MO-0115" lang="spanish">Respuesta de </msg>
+  <msg id="MO-0116" lang="spanish">Proceso terminado</msg>
+  <msg id="MO-0117" lang="spanish">Pago recibido por el proveedor</msg>
+  <msg id="MO-0118" lang="spanish">Pedido programado en preparación</msg>
+  <msg id="MO-0119" lang="spanish">Pedido programado pendiente de confirmar</msg>
+  <msg id="MO-0120" lang="spanish">Condiciones generales</msg>
+  <msg id="MO-0121" lang="spanish">Pedido programado rechazado sin enviar</msg>
+  <msg id="MO-0122" lang="spanish">Pedido modelo</msg>
+  <msg id="MO-0125" lang="spanish">Otras&lt;br/&gt;condiciones&lt;br/&gt;particulares</msg>
+  <msg id="MO-0130" lang="spanish">Fecha de emisi&oacute;n de la multioferta</msg>
+  <msg id="MO-0135" lang="spanish">N&uacute;mero de pedido</msg>
+  <msg id="MO-0136" lang="spanish">N&uacute;mero de oferta</msg>  
+  <msg id="MO-0140" lang="spanish">Ref.&lt;br/&gt;Prov.</msg>
+  <msg id="MO-0145" lang="spanish">Ref.&lt;br/&gt;Cliente</msg>
+  <msg id="MO-0146" lang="spanish">Recibida</msg>
+  <msg id="MO-0150" lang="spanish">Nombre</msg>  
+  <msg id="MO-0155" lang="spanish">Precio Ud. b&amp;aacute;sica</msg>
+  <msg id="MO-0157" lang="spanish">Tarifa</msg>
+  <msg id="MO-0160" lang="spanish">Cantidad solicitada&lt;br/&gt;(Ud. b&amp;aacute;sica)</msg>
+  <msg id="MO-0161" lang="spanish">Solicitar&lt;br/&gt;productos</msg>
+  <msg id="MO-0163" lang="spanish">Rechazar Envío</msg>
+  <msg id="MO-0165" lang="spanish">Precio anterior</msg>
+  <msg id="MO-0166" lang="spanish">Ud. b&amp;aacute;sica/&lt;br/&gt;Lote</msg> 
+  <msg id="MO-0170" lang="spanish">Importe</msg>
+  <msg id="MO-0175" lang="spanish">Tipo IVA</msg>
+  <msg id="MO-0180" lang="spanish">Proveedor</msg>
+  <msg id="MO-0185" lang="spanish">Div.</msg>
+  <msg id="MO-0190" lang="spanish">Usuario</msg>
+  <msg id="MO-0200" lang="spanish">Vendedor</msg>
+  <!--<msg id="MO-0210" lang="spanish">Fecha l&iacute;mite de decisi&oacute;n</msg>-->
+  <!-- cambiado el texto de fecha limite de decision por fecha limite de respuesta en la multioferta -->
+  <msg id="MO-0210" lang="spanish">Fecha l&iacute;mite de respuesta</msg>
+  <msg id="MO-0220" lang="spanish">Fecha de entrega</msg>          
+  <msg id="MO-0230" lang="spanish">Importe total</msg>
+  <msg id="MO-0235" lang="spanish">Importe IVA</msg>  
+  <msg id="MO-0240" lang="spanish">Coste de transporte &lt;br/&gt;(16% IVA no incluido)</msg>
+  <msg id="MO-0250" lang="spanish">Descuento por l&iacute;nea</msg>
+  <msg id="MO-0260" lang="spanish">Descuento total aplicado (%)</msg>
+  <msg id="MO-0270" lang="spanish">Subtotal</msg>         
+  <msg id="MO-0280" lang="spanish">Comentarios de </msg>
+  <msg id="MO-0285" lang="spanish">Introduzca sus comentarios</msg>
+  <msg id="MO-0290" lang="spanish">Calcular el importe total a partir del descuento introducido</msg>
+  <msg id="MO-0300" lang="spanish">Calcular el descuento a partir del importe total introducido</msg>  
+  <msg id="MO-0305" lang="spanish">Plantilla</msg>  
+  <msg id="MO-0308" lang="spanish">Lineas de Pago</msg>  
+  <msg id="MO-0310" lang="spanish">Fecha de pago</msg>
+  <msg id="MO-0315" lang="spanish">dd/mm/aaaa</msg>    
+  <msg id="MO-0320" lang="spanish">Forma de pago</msg>  
+  <msg id="MO-0330" lang="spanish">Importe</msg>  
+  <msg id="MO-0340" lang="spanish">Div.</msg>  
+  <msg id="MO-0350" lang="spanish">Comentarios</msg>
+  <msg id="MO-0360" lang="spanish">ha terminado su oferta</msg> 
+  <msg id="MO-0362" lang="spanish">ha rechazado su pedido</msg>   
+  <msg id="MO-0363" lang="spanish">ha rechazado su abono</msg>
+  <msg id="MO-0365" lang="spanish">Fecha</msg> 
+  <msg id="MO-0370" lang="spanish">Empresa</msg> 
+  <msg id="MO-0375" lang="spanish">Usuario</msg>   
+  <msg id="MO-0377" lang="spanish">Centro</msg>   
+  <msg id="MO-0380" lang="spanish">Estado</msg>   
+  <msg id="MO-0385" lang="spanish">N&uacute;mero</msg>   
+  <msg id="MO-0390" lang="spanish">Procesos de venta en curso</msg>   
+  <msg id="MO-0391" lang="spanish">Ofertas en curso</msg>
+  <msg id="MO-0392" lang="spanish">Pedidos en curso</msg>
+  <msg id="MO-0395" lang="spanish">Procesos de compra en curso</msg>  
+  <msg id="MO-0396" lang="spanish">Ofertas en curso</msg>
+  <msg id="MO-0397" lang="spanish">Pedidos en curso</msg> 
+  <msg id="MO-0400" lang="spanish">Por favor, Introduzca un comentario explicativo sobre su rechazo. Gracias.</msg>
+  <msg id="MO-0405" lang="spanish">Por favor, Introduzca un importe valido.</msg>
+  <msg id="MO-0410" lang="spanish">Ver las multiofertas en el estado </msg> 
+       
+  <msg id="MO-0400" lang="spanish">No tiene ofertas pendientes.</msg>          
+    <!-- Para singular (1 sugerencia) -->
+  <msg id="MO-0410" lang="spanish">Tiene 1 oferta pendiente.</msg>            
+    <!-- Para plural -->  
+  <msg id="MO-0420" lang="spanish">Compras</msg>
+  <msg id="MO-0430" lang="spanish">Ventas</msg>       
+  <msg id="MO-0440" lang="spanish">Volver al Inicio</msg>
+  <msg id="MO-0450" lang="spanish">http://www.newco.dev.br/Compras/Multioferta/MOListado.xsql</msg>  
+  
+  <msg id="MO-0460" lang="spanish">Los pagos no estan completos. &lt;br/&gt; Por favor revise la informacion introducida.</msg>
+  <msg id="MO-0465" lang="spanish">El total de pagos es superior al del pedido. &lt;br/&gt; Por favor revise la informacion introducida.</msg>
+  <msg id="MO-0470" lang="spanish">Revise los productos de la oferta. Introduzca precios para todos los productos.</msg>
+  <msg id="MO-0480" lang="spanish">La fecha de entrega no es correcta. Por favor, introduzca una fecha de entrega valida.</msg>
+  <msg id="MO-0485" lang="spanish">La fecha de decisión no es correcta. Por favor, introduzca una fecha de decisión valida.</msg>
+  <msg id="MO-0490" lang="spanish">La fecha de pago no es correcta. Por favor, introduzca una fecha de pago valida.</msg>  
+  
+  <!--compras-->
+  <msg id="MO-0500" lang="spanish">No tiene ofertas en curso.</msg>
+  <msg id="MO-0505" lang="spanish">No tiene pedidos en curso.</msg>            
+    <!-- Para singular (1 sugerencia) -->
+  <msg id="MO-0510" lang="spanish">Tiene 1 oferta en curso.</msg>
+  <msg id="MO-0515" lang="spanish">Tiene 1 pedido en curso.</msg>              
+    <!-- Para plural -->  
+  <msg id="MO-0520" lang="spanish">Tiene </msg>              
+  <msg id="MO-0530" lang="spanish"> ofertas en curso.</msg>
+  <msg id="MO-0535" lang="spanish"> pedidos en curso.</msg>        
+  <!--ventas-->
+  <msg id="MO-0600" lang="spanish">No tiene ofertas en curso.</msg>
+  <msg id="MO-0605" lang="spanish">No tiene pedidos en curso.</msg>             
+    <!-- Para singular (1 sugerencia) -->
+  <msg id="MO-0610" lang="spanish">Tiene 1 oferta en curso.</msg>
+  <msg id="MO-0615" lang="spanish">Tiene 1 pedido en curso.</msg>             
+    <!-- Para plural -->  
+  <msg id="MO-0620" lang="spanish">Tiene </msg>              
+  <msg id="MO-0630" lang="spanish"> ofertas en curso.</msg>
+  <msg id="MO-0635" lang="spanish"> pedidos en curso.</msg>         
+
+  <msg id="MO-0640" lang="spanish">Negociaci&oacute;n</msg>
+  <msg id="MO-0650" lang="spanish">C&oacute;digo multioferta</msg>
+  <msg id="MO-0660" lang="spanish">C&oacute;digo oferta</msg>
+  <msg id="MO-0670" lang="spanish">Es necesario introducir todos los precios de las líneas para enviar la aceptación de pedido.</msg>
+  <msg id="MO-0680" lang="spanish">Debe asignar todos los precios antes de enviar la oferta.</msg>
+  <msg id="MO-0690" lang="spanish">La aceptación de este pedido generará una comisión del 2,5% sobre el Importe Total del pedido.&lt;BR/&gt;La factura correspondiente le será enviada a la Aceptación de este pedido.</msg>
+  <msg id="MO-0700" lang="spanish">Comprador:&nbsp;</msg>
+  <msg id="MO-0710" lang="spanish">Vendedor:&nbsp;</msg>
+  <msg id="MO-0720" lang="spanish">Fecha de la oferta</msg>
+  <msg id="MO-0730" lang="spanish">Fecha del pedido</msg>
+  <msg id="MO-0740" lang="spanish">Ud. b&aacute;sica</msg>
+  <msg id="MO-0750" lang="spanish">Datos del Cliente:</msg>
+  <msg id="MO-0750" lang="spanish">Datos del Proveedor:</msg>
+  <msg id="MO-0760" lang="spanish">Al aceptar el pedido el proveedor se compromete a respetar todas las condiciones
+especificadas en el mismo por el cliente. Si no es as&iacute;, &lt;b&gt;contacte primero con MedicalVM&lt;/b&gt;.</msg>
+<msg id="MO-0765" lang="spanish">Al aceptar el abono el proveedor se compromete a respetar todas las condiciones
+especificadas en el mismo por el cliente. Si no es as&iacute;, el proveedor deber&aacute; rechazar el abono</msg>
+  <msg id="MO-0770" lang="spanish">PRINCIPAL</msg>
+  <msg id="MO-0780" lang="spanish">RESERVA</msg>
+  <msg id="MO-0790" lang="spanish">Tipo de plantilla</msg>
+  <msg id="MO-0800" lang="spanish">El abono ha sido aceptado</msg>
+  <msg id="MO-0810" lang="spanish">Solicitud de abono</msg>
+
+  <msg id="MO-1000" lang="spanish">Pedido pendiente de aprobaci&oacute;n por el responsable</msg>
+            
+  <!-- #CVANALISIS# -->
+  <msg id="CVA-0100" lang="spanish">Compras en curso</msg>
+  <msg id="CVA-0105" lang="spanish">Compras Finalizadas</msg>
+  <msg id="CVA-0110" lang="spanish">Proveedor</msg>
+  <msg id="CVA-0120" lang="spanish">Vendedor</msg>
+  <msg id="CVA-0130" lang="spanish">Estado actual</msg>    
+  <msg id="CVA-0140" lang="spanish">Fecha Emisi&oacute;n</msg>
+  <!--<msg id="CVA-0150" lang="spanish">Fecha l&iacute;mite de decisi&oacute;n</msg>-->
+  <msg id="CVA-0150" lang="spanish">Fecha l&iacute;mite de respuesta</msg>
+  <msg id="CVA-0160" lang="spanish">Fecha Entrega</msg>    
+  <msg id="CVA-0170" lang="spanish">Plantilla</msg>
+  <msg id="CVA-0180" lang="spanish">No tiene compras en curso</msg>
+  
+  <!-- #CVANALISIS-DETALLE# -->
+  <msg id="CVD-0010" lang="spanish">Detalle MultiOferta</msg>
+  <msg id="CVD-0020" lang="spanish">Importe Actual</msg>
+  <!--<msg id="CVD-0030" lang="spanish">Fecha l&iacute;mite de decisi&oacute;n</msg>-->
+  <msg id="CVD-0030" lang="spanish">Fecha l&iacute;mite de respuesta</msg>
+  
+  <msg id="CVD-0040" lang="spanish">Ultimo movimiento</msg>
+  
+  <!-- #LINASPAGOPEDIDOS# -->
+  
+  <msg id="LPP-0001" lang="spanish">Fecha de pago incorrecta</msg>
+  <msg id="LPP-0010" lang="spanish">Forma de pago incorrecta</msg>  
+  <msg id="LPP-0020" lang="spanish">Divisa de pago incorrecta</msg>    
+  
+  <!-- #INCIDENCIAS# -->
+  <msg id="INC-0000" lang="spanish">No tiene incidencias pendientes.</msg>          
+    <!-- Para singular  -->
+  <msg id="INC-0010" lang="spanish">Tiene 1 incidencia pendiente.</msg>            
+    <!-- Para plural -->  
+  <msg id="INC-0020" lang="spanish">Tiene </msg>              
+  <msg id="INC-0030" lang="spanish"> incidencias pendientes.</msg>       
+  <msg id="INC-0100" lang="spanish">Incidencias pendientes</msg>   
+  <msg id="INC-0110" lang="spanish">Codigo</msg>       
+  <msg id="INC-0120" lang="spanish">Empresa</msg> 
+  <msg id="INC-0130" lang="spanish">Usuario</msg>   
+  <msg id="INC-0140" lang="spanish">Fecha</msg>
+  <msg id="INC-0145" lang="spanish">Tipo</msg>
+  <msg id="INC-0150" lang="spanish">Estado</msg>   
+  <msg id="INC-0155" lang="spanish">Fecha de inicio</msg>   
+  <msg id="INC-0160" lang="spanish">N&amp;uacute;mero de incidencia</msg>   
+  <msg id="INC-0170" lang="spanish">Reclamante</msg>   
+  <msg id="INC-0180" lang="spanish">Reclamado</msg>   
+  <msg id="INC-0190" lang="spanish">Empresa</msg>  
+  <msg id="INC-0195" lang="spanish">Centro</msg> 
+  <msg id="INC-0196" lang="spanish">Centro afectado</msg> 
+  <msg id="INC-0200" lang="spanish">Usuario</msg>   
+  <msg id="INC-0201" lang="spanish">Usuario afectado</msg> 
+  <msg id="INC-0210" lang="spanish">Tipo</msg>
+  <msg id="INC-0220" lang="spanish">Incidencia</msg>
+  <msg id="INC-0230" lang="spanish">Gravedad</msg>
+  <msg id="INC-0240" lang="spanish">Descripci&oacute;n de los costes ocasionados</msg>
+  <msg id="INC-0250" lang="spanish">Costes Ocasionados</msg>
+  <msg id="INC-0260" lang="spanish">Divisa</msg>
+  <msg id="INC-0265" lang="spanish">Fecha</msg>  
+  <msg id="INC-0270" lang="spanish">Tipo de causa</msg>
+  <msg id="INC-0280" lang="spanish">Causa</msg>
+  <msg id="INC-0290" lang="spanish">Acci&oacute;n inmediata: (como se ha corregido esta incidencia)</msg>  
+  <msg id="INC-0300" lang="spanish">Situaci&oacute;n accion</msg>    
+  <msg id="INC-0310" lang="spanish">Acci&oacute;n correctora: (como se evita que incidencias como esta se puedan volver a producir en el futuro)</msg>  
+  <msg id="INC-0320" lang="spanish">Situaci&oacute;n accion</msg>  
+  <msg id="INC-0330" lang="spanish">Tipo de Valoraci&oacute;n</msg>    
+  <msg id="INC-0340" lang="spanish">Descripci&oacute;n</msg>
+  <msg id="INC-0350" lang="spanish">Incidencia producida por</msg>
+  <msg id="INC-0360" lang="spanish">Descripci&oacute;n de la incidencia</msg>      
+  <msg id="INC-0370" lang="spanish">Valoraci&oacute;n</msg> 
+  <msg id="INC-0375" lang="spanish">Soluci&oacute;n</msg>
+  <msg id="INC-0380" lang="spanish">Descripci&oacute;n de la soluci&oacute;n</msg>
+  <msg id="INC-0390" lang="spanish">El Coste Ocasionado debe ser num&eacute;rico.</msg>
+  
+  
+
+  <msg id="INC-0400" lang="spanish">Volver al Inicio</msg>
+  <msg id="INC-0410" lang="spanish">http://www.newco.dev.br/Compras/Incidencias/INCListado.xsql</msg>  
+
+  <msg id="INC-0420" lang="spanish">Definici&oacute;n de la incidencia</msg>
+  <msg id="INC-0430" lang="spanish">Respuesta a la incidencia</msg>
+  <msg id="INC-0440" lang="spanish">Valoraci&oacute;n de la incidencia</msg>  
+  <msg id="INC-0450" lang="spanish">Incidencia finalizada</msg> 
+  <msg id="INC-0455" lang="spanish">Incidencia registrada sin enviar</msg>  
+  <msg id="INC-0500" lang="spanish">La empresa seleccionada no tiene un responsable. Se ha registrado el error. Recibira una respuesta via correo electronico.</msg>
+  <msg id="INC-0510" lang="spanish">Borrar incidencia</msg>
+  <msg id="INC-0520" lang="spanish">No iniciada</msg>
+  <msg id="INC-0530" lang="spanish">En curso</msg>
+  <msg id="INC-0540" lang="spanish">Finalizada</msg>
+  <msg id="INC-0550" lang="spanish">Ver Oferta</msg>
+  <msg id="INC-0560" lang="spanish">Pedido</msg>
+  <msg id="INC-0570" lang="spanish">Ver Empresa</msg>
+  <msg id="INC-0580" lang="spanish">NIF</msg>
+  <msg id="INC-0590" lang="spanish">Cerrar sin enviar</msg>
+  <msg id="INC-0600" lang="spanish">Soluci&amp;oacute;n propuesta por el cliente</msg>
+  <msg id="INC-0610" lang="spanish">Enviar al proveedor</msg>
+  <msg id="INC-0620" lang="spanish">Ver incidencia Externa</msg>
+  
+  
+  
+  <!-- #ALARMAS# -->
+  <msg id="AL-0000" lang="spanish">No tiene alarmas pendientes.</msg>          
+    <!-- Para singular  -->
+  <msg id="AL-0010" lang="spanish">Tiene 1 alarma pendiente.</msg>            
+    <!-- Para plural -->  
+  <msg id="AL-0020" lang="spanish">Tiene </msg>              
+  <msg id="AL-0030" lang="spanish"> alarmas pendientes.</msg>       
+  <msg id="AL-0100" lang="spanish">Alarmas pendientes</msg>   
+    
+    
+  <!-- #CLIENTESYPROVEEDORES# -->
+  <msg id="CYP-0000" lang="spanish">Mantenimiento Clientes y Proveedores</msg>              
+  <msg id="CYP-0005" lang="spanish">Clientes y Proveedores</msg>    
+  <msg id="CYP-0010" lang="spanish">Empresa</msg>    
+  <msg id="CYP-0015" lang="spanish">Cliente</msg>        
+  <msg id="CYP-0020" lang="spanish">Proveedor</msg>        
+  <msg id="CYP-0025" lang="spanish">Proveedor&lt;/br&gt;Habitual</msg>        
+  <msg id="CYP-0030" lang="spanish">Nota&lt;/br&gt;Calidad</msg>              
+  <msg id="CYP-0100" lang="spanish">La b&uacute;squeda no ha tenido &eacute;xito.</msg>    
+  <msg id="CYP-0110" lang="spanish">No se encuentran empresas con dichas especificaciones. Por favor vuelva a intentarlo.</msg>    
+  <msg id="CYP-0210" lang="spanish">Empresa (opcional)</msg>  
+  <msg id="CYP-0220" lang="spanish">Direcci&oacute;n</msg>
+  <msg id="CYP-0230" lang="spanish">Nif</msg>
+  <msg id="CYP-0240" lang="spanish">Nombre</msg>    
+  <msg id="CYP-0250" lang="spanish">Provincia</msg>
+  <msg id="CYP-0260" lang="spanish">C&oacute;digo Postal</msg>
+  <msg id="CYP-0270" lang="spanish">Poblaci&oacute;n</msg>
+  <msg id="CYP-0280" lang="spanish">Tipo</msg>
+  <msg id="CYP-0290" lang="spanish">Tel&eacute;fono</msg>
+  <msg id="CYP-0300" lang="spanish">Fax</msg>
+  <msg id="CYP-0310" lang="spanish">Referencias</msg>
+  <msg id="CYP-0320" lang="spanish">http://www.newco.dev.br/Administracion/ClientesYProveedores/CYPBusca.xsql</msg>
+  <msg id="CYP-0330" lang="spanish">Consultas predefinidas (opcional)</msg>
+  <msg id="CYP-0335" lang="spanish">Consultas predefinidas</msg>
+  <msg id="CYP-0340" lang="spanish">Volver a la b&uacute;squeda</msg>           
+  
+  <!-- #TARIFAS# -->
+  <msg id="TRF-0000" lang="spanish">Tarifas</msg>
+  <msg id="TRF-0010" lang="spanish">Cantidad (unidades)</msg>
+  <msg id="TRF-0020" lang="spanish">Importe unitario</msg>
+  <msg id="TRF-0030" lang="spanish">Divisa</msg>
+  <msg id="TRF-0040" lang="spanish">Nomenclator</msg>
+  <msg id="TRF-0070" lang="spanish">Descripcion</msg>
+  <msg id="TRF-0080" lang="spanish">Unidad b&aacute;sica</msg>
+  <msg id="TRF-0090" lang="spanish">Unidades por Lote</msg>  <!-- Era: Unidades por lote -->
+  <msg id="TRF-0100" lang="spanish">Descripci&oacute;n</msg>
+  <msg id="TRF-0110" lang="spanish">Eliminar</msg>
+  <msg id="TRF-0120" lang="spanish">Rellene el campo cantidad</msg>
+  <msg id="TRF-0130" lang="spanish">Rellene el campo importe</msg>
+  <msg id="TRF-0140" lang="spanish">Introduzca una cantidad correcta</msg>
+  <msg id="TRF-0150" lang="spanish">Introduzca un importe correcto</msg>        
+  <msg id="TRF-0160" lang="spanish">Marca</msg> 
+  <msg id="TRF-0170" lang="spanish">Fabricante</msg>
+  <msg id="TRF-0180" lang="spanish">Referencia del proveedor</msg>  
+  <msg id="TRF-0190" lang="spanish">IVA</msg>
+  <msg id="TRF-0200" lang="spanish">Asignaci&oacute;n de precio p&uacute;blico</msg>
+  <msg id="TRF-0210" lang="spanish">Asignaci&oacute;n de </msg>
+  <msg id="TRF-0220" lang="spanish">Precio Privado</msg>
+  <msg id="TRF-0230" lang="spanish"> para </msg>
+        
+  <!-- Productos Propios PROP -->
+  <msg id="PROP-0010" lang="spanish">Mantenimiento de Productos</msg>  
+  <msg id="PROP-0020" lang="spanish">Unicamente el gerente puede validar los datos de la empresa.</msg>  
+  <msg id="PROP-0030" lang="spanish">Desea validar la informaci&oacute;n que Medical Virtual Market dispone de su empresa para poder empezar a operar en el mercado ? </msg>    
+  
+  <!--Cambio de clave-->
+  <msg id="CC-0010" lang="spanish">Las dos claves nuevas no coinciden. Vuelva a introducirlas otra vez.</msg>         
+  <msg id="CC-0020" lang="spanish">Introduzca la clave antigua</msg>         
+  <msg id="CC-0030" lang="spanish">Introduzca la clave nueva</msg>         
+  <msg id="CC-0040" lang="spanish">Repita la clave nueva</msg>         
+
+  <!-- #INCBuscaEmp# -->
+  <msg id="IBE-0000" lang="spanish">Introduzca los datos para buscar la empresa que ha producido la incidencia:</msg>                         
+  <msg id="IBE-0100" lang="spanish">La b&uacute;squeda no ha tenido &eacute;xito.</msg>    
+  <msg id="IBE-0110" lang="spanish">No se encuentran empresas con dichas especificaciones. Por favor vuelva a intentarlo.</msg>    
+  <msg id="IBE-0210" lang="spanish">Empresa</msg>  
+  <msg id="IBE-0220" lang="spanish">Direcci&oacute;n</msg>
+  <msg id="IBE-0230" lang="spanish">Nif</msg>
+  <msg id="IBE-0240" lang="spanish">Nombre</msg>    
+  <msg id="IBE-0250" lang="spanish">Provincia</msg>
+  <msg id="IBE-0260" lang="spanish">C&oacute;digo Postal</msg>
+  <msg id="IBE-0270" lang="spanish">Poblaci&oacute;n</msg>
+  <msg id="IBE-0280" lang="spanish">Tipo</msg>  
+  <msg id="IBE-0290" lang="spanish">Tel&eacute;fono</msg>
+  <msg id="IBE-0300" lang="spanish">Fax</msg>
+
+  <!-- #INCListaEmp# -->  
+  <msg id="ILE-0010" lang="spanish">Seleccione la empresa que debe atender la incidencia:</msg>
+  <msg id="ILE-0050" lang="spanish">Nombre</msg>  
+  <msg id="ILE-0090" lang="spanish">Poblaci&oacute;n</msg>
+  <msg id="ILE-0100" lang="spanish">Tipo</msg>
+  
+  <!-- #INCListaDep# -->
+  <msg id="ILD-0020" lang="spanish">Seleccione el departamento que debe atender la incidencia:</msg>   
+  <msg id="ILD-0030" lang="spanish">Empresa</msg>  
+  <msg id="ILD-0040" lang="spanish">Nombre</msg>  
+  <msg id="ILD-0050" lang="spanish">Responsable</msg>  
+  
+  <!-- Ventas en Curso -->
+  
+  <msg id="VC-0000" lang="spanish">Ventas en Curso</msg>
+  <msg id="VC-0005" lang="spanish">Ventas Finalizadas</msg>
+  <msg id="VC-0010" lang="spanish">Cliente</msg>
+  <msg id="VC-0020" lang="spanish">Usuario</msg>  
+  <msg id="VC-0030" lang="spanish">Estado</msg>
+  <msg id="VC-0040" lang="spanish">Total</msg> <!-- Importe Final -->
+  
+  
+  <!--<msg id="VC-0050" lang="spanish">Fecha l&iacute;mite de decisi&oacute;n</msg>-->
+  <!-- cambiado el el texto de fecha limite de decision por ...respuesta en el Resumen de ventas en curso -->
+  <msg id="VC-0050" lang="spanish">Fecha l&iacute;mite de respuesta</msg>
+  
+  <msg id="VC-0060" lang="spanish">Fecha Entrega</msg>  
+  <msg id="VC-0070" lang="spanish">Ventas en curso</msg>    
+  <msg id="VC-0080" lang="spanish">Importe Total</msg>    
+  <msg id="VC-0090" lang="spanish">Subtotal</msg>    
+  <msg id="VC-0100" lang="spanish">Empresa</msg>   
+  <msg id="VC-0110" lang="spanish">C&oacute;digo oferta</msg>
+  <msg id="VC-0120" lang="spanish">Fecha ultima actualizaci&oacute;n</msg> 
+   
+  <!--<msg id="VC-0130" lang="spanish">Fecha l&iacute;mite de decisi&oacute;n</msg>-->
+  <!-- cambiado el el texto de fecha limite de decision por ...respuesta en el Resumen de ventas en curso --> 
+  <msg id="VC-0130" lang="spanish">Fecha l&iacute;mite de respuesta</msg>    
+     
+  <msg id="VC-0140" lang="spanish">No tiene ventas en curso</msg>         
+  
+  <msg id="VC-0300" lang="spanish">C&oacute;digo</msg>      
+  <msg id="VC-0310" lang="spanish">Producto</msg>      
+  <msg id="VC-0320" lang="spanish">Cantidad</msg>      
+  <msg id="VC-0330" lang="spanish">Importe Unitario</msg>        
+  <msg id="VC-0340" lang="spanish">Total</msg>          
+  
+<!-- Para Pantalla Unica -->
+  <msg id="PU-0000" lang="spanish">&nbsp;&nbsp;Producto: </msg>
+  <msg id="PU-0010" lang="spanish">&nbsp;&nbsp;Proveedor: </msg> 
+  <msg id="PU-0015" lang="spanish">&nbsp;&nbsp;Listar por: </msg> 
+  <msg id="PU-0020" lang="spanish">Listar por Producto</msg> 
+  <msg id="PU-0030" lang="spanish">Listar por Proveedor</msg>
+  <msg id="PU-0040" lang="spanish">Buscar en nomenclator</msg>
+  <msg id="PU-0050" lang="spanish">Buscar especialidades</msg>
+  <msg id="PU-0060" lang="spanish">Seleccione la plantilla a borrar</msg>
+  <msg id="PU-0070" lang="spanish">Seleccione la plantilla a copiar</msg>
+  <msg id="PU-0080" lang="spanish">Eliminar plantilla</msg>
+  <msg id="PU-0090" lang="spanish">Copiar plantilla</msg>
+  <msg id="PU-0100" lang="spanish">Lista de Plantillas</msg>
+  <msg id="PU-0110" lang="spanish">Descripci&oacute;n</msg>
+    
+    
+<!-- Para Proceso de Medicos -->    
+  <msg id="MED-0010" lang="spanish">Error, el medico ya esta en Medical VM</msg>
+  <msg id="MED-0020" lang="spanish">Alta registrada</msg>
+  <msg id="MED-0030" lang="spanish">El medico ha sido registrado</msg>
+  
+  
+<!-- Tablon de Anucios -->
+  <msg id="TA-0010" lang="spanish"></msg>
+  <msg id="TA-0020" lang="spanish"></msg>
+  
+<!--  Listado de proveedores  -->
+  <msg id="PRV-0010" lang="spanish">Listado de Proveedores</msg>
+  
+<!--  Listado de clientes-->
+    <msg id="CLI-0010" lang="spanish">Listado de Clientes</msg>
+    
+<!-- Nomenclator -->
+
+  <msg id="NOM-0020" lang="spanish">TODOS LOS PRODUCTOS</msg>
+  <msg id="NOM-0010" lang="spanish">--------------------------------------Subir a la familia superior ------------------------------------</msg>
+  <msg id="NOM-0030" lang="spanish">Selecci&oacute;n:</msg>
+  <msg id="NOM-0040" lang="spanish">Familia:</msg>
+  <msg id="NOM-0050" lang="spanish">Subfamilia:</msg>
+  <msg id="NOM-0060" lang="spanish">Subir al nivel superior</msg>
+  
+  
+  <!--  texto iconos area publica  -->
+  
+  <msg id="PUB-0010" lang="spanish">Suturas Quir&uacute;rgicas</msg>
+  <msg id="PUB-0020" lang="spanish">Material sanitario</msg>
+  <msg id="PUB-0030" lang="spanish">Equipos Suero</msg>
+  <msg id="PUB-0040" lang="spanish">Vendas y Gasas</msg>
+  <msg id="PUB-0050" lang="spanish">Libros M&eacute;dicos</msg>
+  <msg id="PUB-0060" lang="spanish">Vendas Crep&eacute;</msg>
+  
+   
+   <!--  Lugares de entrega  -->
+  <msg id="LG-0010" lang="spanish">Lugares de Entrega</msg>
+  
+  
+  
+  <!--  Procesos CdC (Catalogo Privado)  -->
+  
+              
+   
+   
+        <!-- Zona Catalogo -->
+       
+  <msg id="CATPRIV-0010" lang="spanish">Familias de Productos</msg>
+  <msg id="CATPRIV-0012" lang="spanish">Subfamilias de Productos</msg>
+  <msg id="CATPRIV-0020" lang="spanish">Productos Estándar</msg>
+  <msg id="CATPRIV-0030" lang="spanish">Productos</msg>
+  <msg id="CATPRIV-0040" lang="spanish">Nuevo</msg>
+  <msg id="CATPRIV-0050" lang="spanish">Propiedades</msg>
+  <msg id="CATPRIV-0060" lang="spanish">Borrar</msg>
+  <msg id="CATPRIV-0070" lang="spanish">Nuevo</msg>
+  <msg id="CATPRIV-0080" lang="spanish">Propiedades</msg>
+  <msg id="CATPRIV-0090" lang="spanish">Borrar</msg>
+  <msg id="CATPRIV-0092" lang="spanish">Nuevo</msg>
+  <msg id="CATPRIV-0094" lang="spanish">Propiedades</msg>
+  <msg id="CATPRIV-0096" lang="spanish">Borrar</msg>
+  <msg id="CATPRIV-0100" lang="spanish">Ver más detalles</msg>
+  
+  
+  <!--  Uso Comun  -->
+  
+  
+  <msg id="CATPRIV-0110" lang="spanish">Aceptar</msg>
+  <msg id="CATPRIV-0112" lang="spanish">Copiar</msg>
+  <msg id="CATPRIV-0115" lang="spanish">Cerrar</msg>
+  <msg id="CATPRIV-0120" lang="spanish">Volver</msg>
+  <msg id="CATPRIV-0122" lang="spanish">Finalizar</msg>
+  <msg id="CATPRIV-0130" lang="spanish">Cerrar</msg>
+  <msg id="CATPRIV-0140" lang="spanish">Guardar</msg> 
+  
+  <!--  Mantenimiento de Familias  -->
+  
+  <msg id="CATPRIV-0150" lang="spanish">Mantenimiento Familias de Productos</msg>
+  <msg id="CATPRIV-0160" lang="spanish">Familia de Productos</msg>
+  <msg id="CATPRIV-0170" lang="spanish">Datos</msg>
+  <msg id="CATPRIV-0180" lang="spanish">Referencia</msg>
+  <msg id="CATPRIV-0190" lang="spanish">Nombre</msg>
+  <msg id="CATPRIV-0200" lang="spanish">Borrar</msg>
+  <msg id="CATPRIV-0210" lang="spanish">Nuevo</msg>
+  <msg id="CATPRIV-0220" lang="spanish">Propiedades</msg>
+  <msg id="CATPRIV-0230" lang="spanish">Borrar</msg>
+  <msg id="CATPRIV-0240" lang="spanish">Añadir Producto</msg>
+  
+  
+  <!-- MSG error AL ALTA DE FAMILIA REFERENCIA DULICADA -->
+  
+  <msg id="CATPRIV-0250" lang="spanish">ERROR de referencia duplicada</msg>
+  <msg id="CATPRIV-0260" lang="spanish">Introduzca otra referencia para la nueva familia</msg>
+  <msg id="CATPRIV-0270" lang="spanish">Volver</msg>
+  
+  <!-- Mantenimiento de Familias save -->
+  
+  <msg id="CATPRIV-0280" lang="spanish">Los datos han sido guardados</msg>
+  
+  
+  <!-- MSG error AL ALTA DE SUBFAMILIA REFERENCIA DULICADA -->
+  
+  <msg id="CATPRIV-0282" lang="spanish">ERROR de referencia duplicada</msg>
+  <msg id="CATPRIV-0284" lang="spanish">Introduzca otra referencia para la nueva subfamilia</msg>
+  <msg id="CATPRIV-0286" lang="spanish">Volver</msg>
+  
+  <!-- Mantenimiento de SUBFAMILIA save -->
+  
+  <msg id="CATPRIV-0288" lang="spanish">Los datos han sido guardados</msg>
+  
+  
+  
+  <!-- MSG error  ALTA DE PRODUCTO ESTANDAR REFERENCIA DULICADA -->
+  
+  <msg id="CATPRIV-0290" lang="spanish">Referencia duplicada</msg>
+  <msg id="CATPRIV-0300" lang="spanish">Introduzca otra referencia para el nuevo Producto Estándar</msg>
+  <msg id="CATPRIV-0310" lang="spanish">Volver</msg>
+  
+  
+  <!-- Mantenimiento dePRODUCTO ESTANDAR save -->
+  
+  <msg id="CATPRIV-0320" lang="spanish">Los datos han sido guardados</msg>
+  
+  
+  <!--  Detalle de productos estandar  -->
+  
+  <msg id="CATPRIV-0340" lang="spanish">Producto Estándar</msg>
+  <msg id="CATPRIV-0350" lang="spanish">Datos</msg>
+  <msg id="CATPRIV-0360" lang="spanish">Referencia producto</msg>
+  <msg id="CATPRIV-0370" lang="spanish">Nombre Producto</msg>
+  <msg id="CATPRIV-0380" lang="spanish">Ud. básica</msg>
+  <msg id="CATPRIV-0390" lang="spanish">Centros</msg>
+  <msg id="CATPRIV-0400" lang="spanish">Centros que utilizan el producto estándar</msg>
+  <msg id="CATPRIV-0420" lang="spanish">Mantenimiento de centros</msg>
+  <msg id="CATPRIV-0430" lang="spanish">Centro</msg>
+  <msg id="CATPRIV-0440" lang="spanish">Proveedor</msg>
+  <msg id="CATPRIV-0450" lang="spanish">Compra anual</msg>
+  <msg id="CATPRIV-0460" lang="spanish">Precio medio</msg>
+  <msg id="CATPRIV-0470" lang="spanish">Proveedores</msg>
+  <msg id="CATPRIV-0480" lang="spanish">Proveedores Aptos para el producto estándar</msg>
+  <msg id="CATPRIV-0490" lang="spanish">Añadir centro</msg>
+  <msg id="CATPRIV-0500" lang="spanish">Proveedor</msg>
+  <msg id="CATPRIV-0510" lang="spanish">Certificado CE</msg>
+  <msg id="CATPRIV-0520" lang="spanish">Ficha técnica</msg>
+  <msg id="CATPRIV-0530" lang="spanish">Estado Evaluación</msg>
+  <msg id="CATPRIV-0540" lang="spanish">Precio Ud. básica</msg>
+  <msg id="CATPRIV-0550" lang="spanish">Mantenimiento de proveedores</msg>
+  
+  
+  <!-- MSG error  ALTA DE proveedor PRODUCTO ESTANDAR REFERENCIA DULICADA -->
+  
+  <msg id="CATPRIV-0560" lang="spanish">Referencia duplicada</msg>
+  <msg id="CATPRIV-0570" lang="spanish">La referencia ya ha sido dada de alta para este proveedor.</msg>
+  <msg id="CATPRIV-0580" lang="spanish">Volver</msg>
+  
+   <!-- MSG error  ALTA DE proveedor PRODUCTO ESTANDAR REFERENCIA DULICADA -->
+  
+  <msg id="CATPRIV-0585" lang="spanish">Referencia duplicada</msg>
+  <msg id="CATPRIV-0587" lang="spanish">El centro ya ha sido dado de alta para este producto.</msg>
+  <msg id="CATPRIV-0589" lang="spanish">Volver</msg>
+  
+  <!-- evaluacion acta -->
+  
+  <msg id="CATPRIV-0590" lang="spanish">Borrar</msg>
+  
+  <msg id="CATPRIV-0600" lang="spanish">Mantenimiento de Actas</msg>
+  <msg id="CATPRIV-0610" lang="spanish">El acta de evaluación del producto ha sido eliminada.</msg>
+  <msg id="CATPRIV-0611" lang="spanish">Acta Finalizada</msg>
+  <msg id="CATPRIV-0612" lang="spanish">Los datos han sido guardados.</msg>
+  <msg id="CATPRIV-0613" lang="spanish">Acta de evaluaci&oacute;n</msg>
+  <msg id="CATPRIV-0620" lang="spanish">Añadir Responsable</msg>
+  <msg id="CATPRIV-0625" lang="spanish">Finalizar Acta</msg>
+  
+  <!-- MSG error  ALTA DE  PRODUCTO  NO EXISTE  -->
+  
+  <msg id="CATPRIV-0630" lang="spanish">Error</msg>
+  <msg id="CATPRIV-0640" lang="spanish">No existe la referencia del proveedor.</msg>
+  <msg id="CATPRIV-0650" lang="spanish">Volver</msg>
+  
+  
+  <!--informes -->
+  
+  <msg id="CATPRIV-0660" lang="spanish">Informe Finalizado</msg>
+  <msg id="CATPRIV-0665" lang="spanish">Informe de evaluaci&oacute;n</msg>
+  <msg id="CATPRIV-0662" lang="spanish">Informe Archivado</msg>
+  <msg id="CATPRIV-0670" lang="spanish">Los datos han sido guardados.</msg>
+  <msg id="CATPRIV-0672" lang="spanish">Los datos han sido guardados.</msg>
+  <msg id="CATPRIV-0680" lang="spanish">Volver</msg>
+  <msg id="CATPRIV-0690" lang="spanish">Finalizar Informe</msg>
+  
+  
+  <!-- no conformidad de producto -->
+  
+  <msg id="CATPRIV-0700" lang="spanish">Pendiente</msg>
+  <msg id="CATPRIV-0710" lang="spanish">Borrar</msg>
+  <msg id="CATPRIV-0720" lang="spanish">Enviar</msg>
+  <msg id="CATPRIV-0730" lang="spanish">Cancelar</msg>
+  <msg id="CATPRIV-0740" lang="spanish">Finalizar</msg>
+  <msg id="CATPRIV-0750" lang="spanish">Recibidas</msg>
+  
+  
+  
+  <!-- mensajes de alerta -->
+  
+  <msg id="ALT-0010" lang="spanish">Esta previsión presenta los pedidos programados por los centros cliente.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;La consulta es puramente informativa&lt;/b&gt; y tiene por objeto ayudar a planificar la gesti&oacute;n de almacenes de los proveedores. Los pedidos no se podr&aacute;n considerar como definitivos hasta que reciban el "Pedido pendiente de confirmaci&oacute;n por parte del proveedor".</msg>
+  <msg id="ALT-0020" lang="spanish">Para optimizar la apariencia de esta página es necesario pasar a la resolución &lt;b&gt;1024X768&lt;/b&gt;.&lt;br/&gt;&lt;br/&gt;
+&nbsp;&nbsp;&nbsp;Pasos:&lt;br/&gt;
+&lt;table width="80%" align="center"&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      1 - Mi PC > Panel de Control > Pantalla >
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;b&gt;Configuración&lt;/b&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      2 - Resolución:
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;b&gt;1024 X 768&lt;/b&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      3 - pulse botón "Avanzada...", seleccione:
+    &lt;/td&gt;
+    &lt;td&gt;
+       &lt;b&gt;"Fuentes Grandes"&lt;/b&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</msg>
+<msg id="ALT-0030" lang="spanish">
+Para cualquier duda rogamos contacte con el &lt;b&gt;dept. de pedidos&lt;/b&gt; &lt;br/&gt;(&lt;b&gt;telf: 93 241 26 99&lt;/b&gt; - &lt;b&gt;fax: 93 200 47 10&lt;/b&gt;) &lt;br/&gt;&lt;br/&gt;
+o a través del siguiente email: &lt;a href="mailto:pedidos@medicalvm.com"&gt;&lt;b&gt;pedidos@medicalvm.com&lt;/b&gt;&lt;/a&gt;.&lt;br&gt; &lt;br/&gt; Gracias.
+
+</msg>
+  
+
+  
+
+  
+</messages>

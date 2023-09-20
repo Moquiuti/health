@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/basicMVM2022.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+</head>
+<body class="header_login">
+	<div class="barra_superior_login"></div>
+	
+	<div id="coluna_esquerda_login" class="coluna_esquerda_login">
+		<div class="menu_login">
+			<a href="#">MedicalVM</a>
+			<a href="#">Servicios</a>
+			<a href="#">Clientes</a>
+			<a href="#">Proveedores</a>
+			<a href="#">Contacto</a>
+		</div>
+		<div id="coluna_esquerda_interna_login" class="coluna_esquerda_interna_login">
+			<a href="#default" class="logo_login"></a>
+			<div id="coluna_login" class="coluna_login">
+				<div class="col-sm-12">
+					<label class="label">Usu&aacute;rio</label>
+					<input name="usuario_login" class="input_formulario" type="text">
+				</div>
+			</div>
+			<div id="coluna_login" class="coluna_login">
+				<div class="col-sm-12">
+					<label class="label">Senha</label>
+					<input name="senha_login" class="input_formulario" type="password">
+					<div class="alert_danger">
+						Usuario ou senha incorreto.
+					</div>
+				</div>
+			</div>
+
+			<div id="coluna_login" class="coluna_login">
+				<a href="index.html"><button class="botao_acessar">ACESSAR PLATAFORMA</button></a>
+				<a href="#default" class="esqueci_senha">Esqueci minha senha</a>
+			</div>
+		</div>
+		<div id="coluna_esquerda_rodape_login" class="coluna_esquerda_rodape_login">
+			<a href="#default" id="logo_rodape_login_mvm" class="logo_rodape_login_mvm"></a>
+			<a href="#default" id="direito_autoral" class="direito_autoral">
+				MVM | Medical Virtual Market (c) Todos os direitos reservados.
+			</a>
+		</div>
+	</div>
+	<div id="coluna_direita_login" class="coluna_direita_login">
+		<div id="coluna_direita_interna_login" class="coluna_direita_interna_login"></div>
+	</div>
+	<script>
+
+		if( window.screen.height > 768){
+
+			coluna_direita_interna_login.style.height = window.screen.height+'px';	
+		}
+
+
+		if( window.screen.width < 750){
+			coluna_direita_interna_login.style.display = 'none';
+
+
+
+		/*	coluna_esquerda_login.style.width = '660px';
+			coluna_esquerda_login.style.height = '570px';
+			coluna_esquerda_login.style.left = '192px';
+			coluna_esquerda_login.style.top = '233px';
+
+			coluna_esquerda_interna_login.style.width = '100%';
+			coluna_esquerda_interna_login.style.height = '700px';
+
+			logo_login_mvm.style.width = '214px';
+			logo_login_mvm.style.height = '36px';
+			logo_login_mvm.style.left = '229px';
+			logo_login_mvm.style.top = '620px';
+
+			direito_autoral.style.width = '403px';
+			direito_autoral.style.height = '16px';
+			direito_autoral.style.left = '160px';
+			direito_autoral.style.top = '670px';*/
+		}
+	</script>
+</body>
+</html>

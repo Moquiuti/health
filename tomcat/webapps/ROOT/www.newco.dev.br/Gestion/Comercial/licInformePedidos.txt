@@ -1,0 +1,2 @@
+02jul20 ET Nuevo informe de pedidos solicitado por cliente de Brasil. Requiere incluir cantidades y precios reales en los pedidos creados a partir de una licitación
+

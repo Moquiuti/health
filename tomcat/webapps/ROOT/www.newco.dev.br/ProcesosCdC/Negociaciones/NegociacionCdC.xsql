@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NegociacionCdCHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NegociacionCdCHTML.xsl"?>
+
+
+<Negociacion xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	
+	<xsql:include-param name="READ_ONLY"/>
+
+	<xsql:include-owa>
+		<![CDATA[
+			DECLARE
+				US_ID		NUMBER;
+			BEGIN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NegociacionCDC.xsql, inicio');
+				IF US_ID>=0 THEN
+					NEGOCIACION_PCK.Negociacion_XML(US_ID,'{@IDINFORME}');
+				END IF;
+			END;
+		]]>
+	</xsql:include-owa>
+	
+	<botones>
+		<button label="Enviar" caption="IMG-0100">
+			<name_function>Enviar</name_function>
+			<param>document.forms[0]</param>
+    </button>
+    
+    <button label="Devolver" caption="IMG-0105">
+			<name_function>Devolver</name_function>
+			<param>document.forms[0]</param>
+    </button>
+    
+    <button label="Finalizar" caption="CATPRIV-0122">
+			<name_function>Finalizar</name_function>
+			<param>document.forms[0]</param>
+    </button>
+		
+		<button label="Cerrar" caption="IMG-0190">
+			<name_function>CerrarVentana</name_function>
+    </button>
+    
+    <button label="Imprimir" caption="IMG-0130">
+			<name_function>Imprimir</name_function>
+    </button>
+		
+	</botones>
+
+</Negociacion>

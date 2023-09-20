@@ -1,0 +1,16 @@
+13abr22 ET Nueva pagina para realizar la seleccion de productos uno a uno. LicitacionPorProducto2022_130422.js
+18may22 ET Solucionados problemas detectados por Flaviana en PRODUCCION.
+13jun22 ET Listad de cambios solicitados por MVMB
+10ago22 ET Correcciones solicitadas por Flaviana: ordenacion proveedores, botones para seguir licitacion finalizada, etc LicitacionV2_2022_100822.js LicV2Provs_2022_100822.js
+10ago22 ET Correccion solicitada por Bruno. LicitacionV2_2022_100822a.js
+11ago22 ET Incluye las marcas seleccionadas en la lista de aceptables, Separamos la funcion para abrir oferta
+22ago22 ET Si hay selecciones previas, solicita confirmacion
+01set22 ET Solucionado error al cerrar la licitacion
+07set22 ET Correccion solicitada por Flaviana: permitir editar unidad basica, marca de la oferta
+09set22 ET Campos PRECIO HISTORICO, UNIDAD BASICA, CANTIDAD editables
+19set22 ET Faltaba maquetar la pestanna de condiciones en estado cerrado. Tambien habia un error al mostrar el total por oferta. LicitacionV2_2022_190922.js
+22set22 ET No funcionaba bien el desplegable de MESES, no se mostraba el campo de fecha de entrega. LicitacionV2_2022_220922.js
+22set22 ET Lanzar pedidos desde la licitacion. LicitacionV2_2022_220922a.js
+30set22 ET Borrar oferta
+10oct22 ET Permitir mostrar todos los productos abiertos. LicitacionV2_2022_101022.js
+

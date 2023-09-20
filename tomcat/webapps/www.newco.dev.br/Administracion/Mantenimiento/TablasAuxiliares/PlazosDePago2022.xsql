@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--	
+	Mantenimiento de plazos de pago, para usuarios MVM. Nuevo disenno 2022.
+	Ultima revision ET 5set22 10:30
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="PlazosDePagoHTML2022.xsl"?>
+
+<PlazosDePago xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantPlazosDePago');
+			IF US_ID>=0 THEN
+				TablasAuxiliares_pck.PlazosDePago_XML(US_ID, '{@IDEMPRESA}', '{@ACCION}', '{@PARAMETROS}');
+          END IF;					   
+        END;
+    ]]>
+	</xsql:include-owa>
+</PlazosDePago>
+

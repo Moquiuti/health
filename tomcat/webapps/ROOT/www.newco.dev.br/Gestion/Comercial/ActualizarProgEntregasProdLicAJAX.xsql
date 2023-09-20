@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Guarda la programacion de entregas de un producto de licitacion
+	Ultima revision: ET 26abr23 10:35
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ActualizarProgEntregasProdLicJSON.xsl"?>
+
+<Licitacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID				NUMBER(12);
+      		v_Res				VARCHAR2(100);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ActualizarProgEntregasProdLic');
+
+	 		IF US_ID>0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				v_Res:=Licitaciones_seg_pck.EntregasProducto
+				(
+					US_ID,
+					'{@LIC_ID}',
+					'{@LIC_PROD_ID}',
+					'{@ENTREGAS}'
+				);
+				
+				IF v_Res='OK' THEN
+					HTP.P('<OK/>');
+				ELSE
+					HTP.P('<ERROR  msg="No se han podido actualizar los datos" />');
+				END IF;
+				
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</Licitacion>

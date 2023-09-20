@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="IncidenciasExcelJSON.xsl"?>
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="VENTANA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="SES_ID"/>
+        
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+        
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IncidenciasExcel');
+		IF US_ID>=0 THEN
+			INCIDENCIASPRODUCTOS_PCK.Incidencias_Excel(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+				'{@FIDRESPONSABLE}',
+				'{@FIDPROVEEDOR}',
+				'{@FIDPRODUCTO}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+				'',
+				''
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</DescargaExcel>

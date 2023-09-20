@@ -1,0 +1,51 @@
+&<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para las facturas
+	
+	Presenta unicamente las facturas enviadas o recibidas por la empresa
+	del usuario y no permite modificarlas.
+		
+	(c) 2/11/2001 E.Torrellas
+-->
+
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VerTodasFacturasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VerTodasFacturasHTML.xsl"?>
+
+<Facturas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:include-param name="TIPO"/>
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:query tag-case="upper" row-element="FACTURA" rowset-element="">
+    <![CDATA[
+			SELECT
+					FAC_ID					ID, 
+					FAC_CODIGO				CODIGO, 
+					CLIENTE.EMP_NOMBRE		CLIENTE,
+					PROVEEDOR.EMP_NOMBRE	PROVEEDOR,
+					to_char(FAC_FECHA,'dd/mm/yyyy')	FECHA,
+					Formato.Formato(FAC_SUBTOTAL,1)			SUBTOTAL,
+					Formato.Formato(FAC_IVA,1)				IVA,
+					Formato.Formato(FAC_TOTAL,1)		TOTAL,
+					FACE_DESCRIPCION		ESTADO
+			FROM 	FAC_FACTURAS, EMPRESAS CLIENTE, EMPRESAS PROVEEDOR, FAC_ESTADOS, 
+					CENTROS, USUARIOS
+			WHERE	CLIENTE.EMP_ID=FAC_IDCLIENTE
+				AND	PROVEEDOR.EMP_ID=FAC_IDEMPRESA
+				AND FACE_ID=FAC_IDESTADO
+				AND US_ID={@US_ID}
+				AND CEN_ID=US_IDCENTRO
+				AND (CEN_IDEMPRESA=CLIENTE.EMP_ID OR CEN_IDEMPRESA=PROVEEDOR.EMP_ID)				
+			ORDER 	BY FAC_FECHA DESC, FAC_CODIGO DESC
+    ]]>
+  </xsql:query>
+  <Mantenimiento>
+  	0
+  </Mantenimiento>
+  <button label="Cancelar" alt="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button> 
+  <returnHome/>
+</Facturas>
+

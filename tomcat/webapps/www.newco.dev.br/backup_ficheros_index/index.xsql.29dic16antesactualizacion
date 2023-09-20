@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--<?xml-stylesheet type="text/xsl" media="Android" href="movil/indexHTML.xsl"?>-->
+<?xml-stylesheet type="text/xsl" href="indexHTML.xsl"?>
+
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="mvmnucleo" lang="spanish">
+	<LANG>spanish</LANG>
+        <STYLE>basic.11.04.14.css</STYLE>
+</AreaPublica>

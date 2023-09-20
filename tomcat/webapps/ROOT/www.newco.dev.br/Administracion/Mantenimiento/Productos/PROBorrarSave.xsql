@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	Permite borrar un producto (solo para usuarios MVM)
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PRODetalleHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PRODetalleHTML.xsl"?>
+
+
+
+<Productos xmlns:xsql="urn:oracle-xsql" connection="newco" >
+
+ 
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="IDEMPRESA_COMPRADORA"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+ 
+        <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+		  res		VARCHAR(200);
+          
+		  BEGIN
+			  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PRODetalle, Mostrar');
+			  IF US_ID>=0 THEN
+			  
+			  HTP.P(utilidades_pck.CabeceraXML||'<PRODUCTO_BORRADO>');
+				
+		  		res:= MANTENIMIENTOPRODUCTOS_PCK.BorrarProducto(US_ID, '{@PRO_ID}');
+				
+				IF res = 'OK' THEN
+					HTP.P('<OK>'||res||'</OK>');
+				ELSE
+					HTP.P('<ERROR>'||res||'</ERROR>');
+				END IF;
+			
+                --PRODUCTOS_PCK.MostrarProducto('{@PRO_ID}','PRODUCTO',US_ID, '{@IDEMPRESA_COMPRADORA}');
+				
+		  	  HTP.P('</PRODUCTO_BORRADO>');
+		  
+          END IF;					   
+        END;
+        ]]>
+        </xsql:include-owa>
+        
+      
+		
+  <button label="Cancelar" alt="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button> 
+  
+</Productos>

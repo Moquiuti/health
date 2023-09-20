@@ -1,0 +1,544 @@
+<html>
+   <head>
+      <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/Estilos.css" type="text/css">
+	<script type="text/javascript" src="http://www.newco.dev.br/General/general.js">
+	</script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Compras/Multioferta/BuscaProd.js">
+	</script>
+	<script type="text/javascript">
+	<!--
+	function refillFamilias(formu,valor_categoria){
+	  // Borro opciones anteriores
+	  deleteOptions(formu.FAMILIA);	  
+	  deleteOptions(formu.SUBFAMILIA);
+          // Anyado los options
+          
+           if (valor_categoria=='1'){          	   
+            
+                  addOption(formu.FAMILIA,'Material de cura','3');
+                
+                  addOption(formu.FAMILIA,'Recipientes para muestras y residuos','4');
+                
+                  addOption(formu.FAMILIA,'Equipos para la administración de fluidos','5');
+                
+                  addOption(formu.FAMILIA,'Punción, incisión y otros','6');
+                
+                  addOption(formu.FAMILIA,'Material de sutura, identificación y oclusión de vasos','7');
+                
+                  addOption(formu.FAMILIA,'Higiene y protección','8');
+                
+                  addOption(formu.FAMILIA,'Cánulas, sondas y tubos','9');
+                
+                  addOption(formu.FAMILIA,'Material de cirugía laparoscópica','10');
+                
+                  addOption(formu.FAMILIA,'Material para cuidados','11');
+                
+                  addOption(formu.FAMILIA,'Material para el registro de datos','12');
+                
+                  addOption(formu.FAMILIA,'Material para ventiloterapia, oxigenoterapia, aerosolterapia y respiración asistida','13');
+                
+                  addOption(formu.FAMILIA,'Otros materiales','14');
+                                
+            }
+          
+           if (valor_categoria=='2'){          	   
+                            
+            }
+          
+           if (valor_categoria=='3'){          	   
+                            
+            }
+          
+           if (valor_categoria=='4'){          	   
+                            
+            }
+          
+           if (valor_categoria=='5'){          	   
+                            
+            }
+          
+           if (valor_categoria=='6'){          	   
+                            
+            }
+          
+           if (valor_categoria=='7'){          	   
+                            
+            }
+          
+           if (valor_categoria=='8'){          	   
+                            
+            }
+          
+           if (valor_categoria=='9'){          	   
+                            
+            }
+          
+           if (valor_categoria=='50'){          	   
+            
+                  addOption(formu.FAMILIA,'Material de limpieza','15');
+                
+                  addOption(formu.FAMILIA,'Material de aseo','16');
+                                
+            }
+          
+           if (valor_categoria=='51'){          	   
+            
+                  addOption(formu.FAMILIA,'Papel y Manipulados','17');
+                
+                  addOption(formu.FAMILIA,'Informática','18');
+                
+                  addOption(formu.FAMILIA,'Modelos impresos','19');
+                
+                  addOption(formu.FAMILIA,'Archivo y clasificación','20');
+                
+                  addOption(formu.FAMILIA,'Máquinas de Oficina','21');
+                
+                  addOption(formu.FAMILIA,'Escritura y corrección','22');
+                
+                  addOption(formu.FAMILIA,'Complementos para Oficina','23');
+                
+                  addOption(formu.FAMILIA,'Presentaciones y Congresos','24');
+                
+                  addOption(formu.FAMILIA,'Telefonía','25');
+                                
+            }
+          
+           if (valor_categoria=='52'){          	   
+            
+                  addOption(formu.FAMILIA,'Mobiliario no clínico','26');
+                
+                  addOption(formu.FAMILIA,'Mobiliario clínico','27');
+                
+                  addOption(formu.FAMILIA,'Otro mobiliario','28');
+                                
+            }
+          
+           if (valor_categoria=='53'){          	   
+            
+                  addOption(formu.FAMILIA,'material para iluminación','29');
+                
+                  addOption(formu.FAMILIA,'material para pintura','30');
+                
+                  addOption(formu.FAMILIA,'pilas y baterias','31');
+                                
+            }
+          
+           if (valor_categoria=='56'){          	   
+            
+                  addOption(formu.FAMILIA,'Material servicios de mesa','32');
+                
+                  addOption(formu.FAMILIA,'Material para cocinar','33');
+                
+                  addOption(formu.FAMILIA,'Material para conservar la comida','34');
+                
+                  addOption(formu.FAMILIA,'Otro material de cocina','35');
+                                
+            }
+          
+           if (valor_categoria=='57'){          	   
+            
+                  addOption(formu.FAMILIA,'Material de Jardineria','36');
+                                
+            }
+          
+           if (valor_categoria=='58'){          	   
+            
+                  addOption(formu.FAMILIA,'uniformes para personal sanitario','37');
+                
+                  addOption(formu.FAMILIA,'uniformes para personal administrativo','38');
+                
+                  addOption(formu.FAMILIA,'uniformes para personal de hosteleria','39');
+                
+                  addOption(formu.FAMILIA,'uniformes para personal de limpieza','40');
+                
+                  addOption(formu.FAMILIA,'uniformes para personal de mantenimiento','41');
+                
+                  addOption(formu.FAMILIA,'uniformes para personal de jardineria','42');
+                                
+            }
+          
+          formu.FAMILIA.selectedIndex=0;
+          formu.SUBFAMILIA.selectedIndex=0;        
+	  	  
+	}
+	        	
+	function refillSubfamilias(formu,valor_familia){
+	//Borro opciones anteriores
+	  //formu.SUBFAMILIA.length=1;
+          deleteOptions(formu.SUBFAMILIA);
+          //Anado los options
+          
+            if (valor_familia=='3'){          	             
+              addOption(formu.SUBFAMILIA,'Apósitos','5');addOption(formu.SUBFAMILIA,'Sin medicamentos','6');addOption(formu.SUBFAMILIA,'Combinados','7');addOption(formu.SUBFAMILIA,'De plástico','8');addOption(formu.SUBFAMILIA,'De tela sin tejer','9');addOption(formu.SUBFAMILIA,'Láminas semipermeables adhesivas y aerosoles','10');addOption(formu.SUBFAMILIA,'Lámina','11');addOption(formu.SUBFAMILIA,'Aerosol','12');addOption(formu.SUBFAMILIA,'Especiales y/o activos','13');addOption(formu.SUBFAMILIA,'Hidrocoloidales','14');addOption(formu.SUBFAMILIA,'Placas ','15');addOption(formu.SUBFAMILIA,'Oclusivas','16');addOption(formu.SUBFAMILIA,'Convencionales','17');addOption(formu.SUBFAMILIA,'Finas','18');addOption(formu.SUBFAMILIA,'Semioclusivas','19');addOption(formu.SUBFAMILIA,'Permeables','20');addOption(formu.SUBFAMILIA,'Pasta','21');addOption(formu.SUBFAMILIA,'Gránulos','22');addOption(formu.SUBFAMILIA,'Hidrogeles','23');addOption(formu.SUBFAMILIA,'Hemostáticos','24');addOption(formu.SUBFAMILIA,'De espuma gelatinosa absorbible','25');addOption(formu.SUBFAMILIA,'De celulosa oxidda regenerada','26');addOption(formu.SUBFAMILIA,'De desbridación','27');addOption(formu.SUBFAMILIA,'Otros apósitos especiales','28');addOption(formu.SUBFAMILIA,'Protector de tejidos de granulación','29');addOption(formu.SUBFAMILIA,'Para tratamiento de cicatrices hipertróficas','30');addOption(formu.SUBFAMILIA,'Absorbentes','31');addOption(formu.SUBFAMILIA,'Algodón hidrófilo','32');addOption(formu.SUBFAMILIA,'Rollo de algodón hidrófilo','33');addOption(formu.SUBFAMILIA,'Tampón vaginal','34');addOption(formu.SUBFAMILIA,'Disector','35');addOption(formu.SUBFAMILIA,'Compresa','36');addOption(formu.SUBFAMILIA,'Sucedáneos de algodón y similares','37');addOption(formu.SUBFAMILIA,'Celulosa','38');addOption(formu.SUBFAMILIA,'Rollo de celulosa','39');addOption(formu.SUBFAMILIA,'Cuadritos de celulosa','40');addOption(formu.SUBFAMILIA,'Rayón','41');addOption(formu.SUBFAMILIA,'Lentinas','42');addOption(formu.SUBFAMILIA,'Hisopo ginecológico','43');addOption(formu.SUBFAMILIA,'Gasa, malla y punto hidrófilo','44');addOption(formu.SUBFAMILIA,'Compresa','45');addOption(formu.SUBFAMILIA,'Sin contraste','46');addOption(formu.SUBFAMILIA,'Gasa','47');addOption(formu.SUBFAMILIA,'Con contraste','48');addOption(formu.SUBFAMILIA,'Malla','49');addOption(formu.SUBFAMILIA,'Punto hilo cambric','50');addOption(formu.SUBFAMILIA,'Gasa','51');addOption(formu.SUBFAMILIA,'Torunda','52');addOption(formu.SUBFAMILIA,'Tira','53');addOption(formu.SUBFAMILIA,'Tela sin tejer','54');addOption(formu.SUBFAMILIA,'Compresas','55');addOption(formu.SUBFAMILIA,'oftálmicas','56');addOption(formu.SUBFAMILIA,'Polímeros sintéticos','57');addOption(formu.SUBFAMILIA,'Esponjas nasales','58');addOption(formu.SUBFAMILIA,'Sin tubo ventilatorio','59');addOption(formu.SUBFAMILIA,'Con tubo ventilatorio','60');addOption(formu.SUBFAMILIA,'Combinados','61');addOption(formu.SUBFAMILIA,'Sin adhesivo','62');addOption(formu.SUBFAMILIA,'Para traqueostomía','63');addOption(formu.SUBFAMILIA,'Permeables','64');addOption(formu.SUBFAMILIA,'Impermeable','65');addOption(formu.SUBFAMILIA,'Para grandes exudados','66');addOption(formu.SUBFAMILIA,'Microesponjas para oftalmología','67');addOption(formu.SUBFAMILIA,'Con adhesivo','68');addOption(formu.SUBFAMILIA,'Vendas','69');addOption(formu.SUBFAMILIA,'De sujeción','70');addOption(formu.SUBFAMILIA,'Gasa hidrófila','71');addOption(formu.SUBFAMILIA,'Malla tubular elástica','72');addOption(formu.SUBFAMILIA,'De compresión','73');addOption(formu.SUBFAMILIA,'Sin adhesivo','74');addOption(formu.SUBFAMILIA,'De algodón','75');addOption(formu.SUBFAMILIA,'Compresión ligera','76');addOption(formu.SUBFAMILIA,'Compresión media','77');addOption(formu.SUBFAMILIA,'Compresión fuerte','78');addOption(formu.SUBFAMILIA,'De acaucho (Esmarch)','79');addOption(formu.SUBFAMILIA,'Con adhesivo','80');addOption(formu.SUBFAMILIA,'De inmovilización','81');addOption(formu.SUBFAMILIA,'Escayola','82');addOption(formu.SUBFAMILIA,'Fraguado lento','83');addOption(formu.SUBFAMILIA,'Fraguado rápido','84');addOption(formu.SUBFAMILIA,'Fibras sintéticas','85');addOption(formu.SUBFAMILIA,'De protección','86');addOption(formu.SUBFAMILIA,'Guata','87');addOption(formu.SUBFAMILIA,'Tubular elástico de punto','88');addOption(formu.SUBFAMILIA,'Esparadrapos','89');addOption(formu.SUBFAMILIA,'Esparadrapo de tela','90');addOption(formu.SUBFAMILIA,'Esparadrapo de tela sin tejer','91');addOption(formu.SUBFAMILIA,'Convencional','92');addOption(formu.SUBFAMILIA,'Hipoalérgico','93');addOption(formu.SUBFAMILIA,'Esparadrapo de plástico','94');addOption(formu.SUBFAMILIA,'Microperforado','95');addOption(formu.SUBFAMILIA,'Oclusivo','96');addOption(formu.SUBFAMILIA,'Vendajes','97');addOption(formu.SUBFAMILIA,'De contención y presión','98');addOption(formu.SUBFAMILIA,'Fajas de bandas','99');addOption(formu.SUBFAMILIA,'Prendas compresivas','100');addOption(formu.SUBFAMILIA,'Para problemas vasculares','101');addOption(formu.SUBFAMILIA,'Media bajo rodilla (corta)','102');addOption(formu.SUBFAMILIA,'Con puntera','103');addOption(formu.SUBFAMILIA,'Sin puntera','104');addOption(formu.SUBFAMILIA,'Media hasta muslo (alta)','105');addOption(formu.SUBFAMILIA,'Sin  puntera','106');addOption(formu.SUBFAMILIA,'Para linfedema','107');addOption(formu.SUBFAMILIA,'Para cirugía plástica','108');addOption(formu.SUBFAMILIA,'Fajas','109');addOption(formu.SUBFAMILIA,'De liposucción','110');addOption(formu.SUBFAMILIA,'De cirugía abdominal','111');addOption(formu.SUBFAMILIA,'Sujetadores','112');addOption(formu.SUBFAMILIA,'Suspensorios','113');addOption(formu.SUBFAMILIA,'Férulas','114');addOption(formu.SUBFAMILIA,'Para extremidad superior','115');addOption(formu.SUBFAMILIA,'De aluminio y foam','116');addOption(formu.SUBFAMILIA,'para brazos y hombros','117');addOption(formu.SUBFAMILIA,'otros','118');addOption(formu.SUBFAMILIA,'Nasal','119');addOption(formu.SUBFAMILIA,'Para extremidad inferior','120');addOption(formu.SUBFAMILIA,'Para cuello','121');addOption(formu.SUBFAMILIA,'Collarín rígido','122');addOption(formu.SUBFAMILIA,'Collarín semi-rígido','123');addOption(formu.SUBFAMILIA,'Soporte esternal','124');addOption(formu.SUBFAMILIA,'De tracción','125');addOption(formu.SUBFAMILIA,'Equipo de tracción de la piel adhesivo','126');
+            }
+          
+            if (valor_familia=='4'){          	             
+              addOption(formu.SUBFAMILIA,'Con activador de la coagulación','141');addOption(formu.SUBFAMILIA,'Para determinaciones especiales','142');addOption(formu.SUBFAMILIA,'Con vacío-Estériles','143');addOption(formu.SUBFAMILIA,'Para determinación de la velocidad de sedimentación','144');addOption(formu.SUBFAMILIA,'Para determinación de HLA-DR','145');addOption(formu.SUBFAMILIA,'Con vacío-No esteriles','146');addOption(formu.SUBFAMILIA,'Para determinación del TCA','147');addOption(formu.SUBFAMILIA,'Bolsas colectoras y accesorios','148');addOption(formu.SUBFAMILIA,'Colectoras de orina','149');addOption(formu.SUBFAMILIA,'Estériles','150');addOption(formu.SUBFAMILIA,'Con escala medidora y conexión reductora estándar','151');addOption(formu.SUBFAMILIA,'Convencional','152');addOption(formu.SUBFAMILIA,'De circuito cerrado','153');addOption(formu.SUBFAMILIA,'Sin filtro antibacteriano','154');addOption(formu.SUBFAMILIA,'Con filtro antibacteriano','155');addOption(formu.SUBFAMILIA,'Normalizada','156');addOption(formu.SUBFAMILIA,'Con urinómetro','157');addOption(formu.SUBFAMILIA,'Autoadhesiva para pediatría','158');addOption(formu.SUBFAMILIA,'No estériles','159');addOption(formu.SUBFAMILIA,'Colectoras gástricas','160');addOption(formu.SUBFAMILIA,'Adaptables a vasija receptora de sistema de aspiración','161');addOption(formu.SUBFAMILIA,'Sin válvula de seguridad','162');addOption(formu.SUBFAMILIA,'Con válvula de seguridad','163');addOption(formu.SUBFAMILIA,'Convencional','164');addOption(formu.SUBFAMILIA,'Con germicida','165');addOption(formu.SUBFAMILIA,'Colectoras de ostomía','166');addOption(formu.SUBFAMILIA,'Colostomía','167');addOption(formu.SUBFAMILIA,'Ilestomía','168');addOption(formu.SUBFAMILIA,'Urostomía','169');addOption(formu.SUBFAMILIA,'Ostomías temporales','170');addOption(formu.SUBFAMILIA,'Accesorios para ostomía','171');addOption(formu.SUBFAMILIA,'Cinturón','172');addOption(formu.SUBFAMILIA,'Pinza','173');addOption(formu.SUBFAMILIA,'Protectores de la piel','174');addOption(formu.SUBFAMILIA,'Pasta','175');addOption(formu.SUBFAMILIA,'Placas','176');addOption(formu.SUBFAMILIA,'Obsturadores','177');addOption(formu.SUBFAMILIA,'Sistemas de irrigación','178');addOption(formu.SUBFAMILIA,'Frascos para la recogida de muestras','179');addOption(formu.SUBFAMILIA,'Esteriles','180');addOption(formu.SUBFAMILIA,'De plástico','181');addOption(formu.SUBFAMILIA,'Con fondo cónico','182');addOption(formu.SUBFAMILIA,'Normalizado','183');addOption(formu.SUBFAMILIA,'Con cuchilla','184');addOption(formu.SUBFAMILIA,'Receptor de mucosidades','185');addOption(formu.SUBFAMILIA,'De cristal','186');addOption(formu.SUBFAMILIA,'cultivos aerobios','187');addOption(formu.SUBFAMILIA,'Con un medio de enrequecimiento','188');addOption(formu.SUBFAMILIA,'Con dos medios de enrequecimiento','189');addOption(formu.SUBFAMILIA,'Cultivos anaerobios','190');addOption(formu.SUBFAMILIA,'Con medio de enriquecimiento','191');addOption(formu.SUBFAMILIA,'No esteriles','192');addOption(formu.SUBFAMILIA,'De plástico','193');addOption(formu.SUBFAMILIA,'Con espatula adhesiva','194');addOption(formu.SUBFAMILIA,'Bote graduado','195');addOption(formu.SUBFAMILIA,'Colectores para drenaje de exudados','196');addOption(formu.SUBFAMILIA,'Con vacio','197');addOption(formu.SUBFAMILIA,'Sin valvula de seguridad','198');addOption(formu.SUBFAMILIA,'Convencional (redon)','199');addOption(formu.SUBFAMILIA,'Mini-redón','200');addOption(formu.SUBFAMILIA,'Con valvula de seguridad','201');addOption(formu.SUBFAMILIA,'Drenaje torácico con valvula de seguridad','202');addOption(formu.SUBFAMILIA,'Convencional','203');addOption(formu.SUBFAMILIA,'Doble sistema de recolección','204');addOption(formu.SUBFAMILIA,'Con opción para autotransfusión','205');addOption(formu.SUBFAMILIA,'Normalizado','206');addOption(formu.SUBFAMILIA,'Con camara de succión en seco','207');addOption(formu.SUBFAMILIA,'Otros recipientes para muestras y residuos','208');addOption(formu.SUBFAMILIA,'Colectores de incontinencia','209');addOption(formu.SUBFAMILIA,'vasos desechables','210');addOption(formu.SUBFAMILIA,'Espatula','211');addOption(formu.SUBFAMILIA,'Tubos para muestras','127');addOption(formu.SUBFAMILIA,'Para determinaciones microbiológicas','128');addOption(formu.SUBFAMILIA,'Para cultivo de gérmenes aerobios','129');addOption(formu.SUBFAMILIA,'Convencional','130');addOption(formu.SUBFAMILIA,'Con torunda pequeña','131');addOption(formu.SUBFAMILIA,'Para cultivo de gérmenes anaerobios','132');addOption(formu.SUBFAMILIA,'Convencional','133');addOption(formu.SUBFAMILIA,'Para determinaciones en sangre','134');addOption(formu.SUBFAMILIA,'Con vacío-Estériles','135');addOption(formu.SUBFAMILIA,'Sin sustancias anticoagulantes','136');addOption(formu.SUBFAMILIA,'Con sustancias anticoagulantes','137');addOption(formu.SUBFAMILIA,'Con activador de la coagulación','138');addOption(formu.SUBFAMILIA,'Con vacío-No esteriles','139');addOption(formu.SUBFAMILIA,'Con sustancias anticoagulantes','140');
+            }
+          
+            if (valor_familia=='5'){          	             
+              addOption(formu.SUBFAMILIA,'Con camara de medida','265');addOption(formu.SUBFAMILIA,'Para transfusíon de plaquetas','266');addOption(formu.SUBFAMILIA,'Con filtro antiagregados','267');addOption(formu.SUBFAMILIA,'Con filtro desleucocitario','268');addOption(formu.SUBFAMILIA,'Para bomba de infusión','269');addOption(formu.SUBFAMILIA,'Convencional','270');addOption(formu.SUBFAMILIA,'Rápida','271');addOption(formu.SUBFAMILIA,'Set para angiografía','272');addOption(formu.SUBFAMILIA,'Para administración enteral','273');addOption(formu.SUBFAMILIA,'Por gravedad','274');addOption(formu.SUBFAMILIA,'Con bomba','275');addOption(formu.SUBFAMILIA,'Para irrigación vesical','276');addOption(formu.SUBFAMILIA,'Una via de entrada','277');addOption(formu.SUBFAMILIA,'Doble via de entrada','278');addOption(formu.SUBFAMILIA,'Con camara de goteo','279');addOption(formu.SUBFAMILIA,'Sin cámara de goteo','280');addOption(formu.SUBFAMILIA,'Accesorios para equipos de infusión e irrigación','281');addOption(formu.SUBFAMILIA,'Prolongadores','282');addOption(formu.SUBFAMILIA,'Convencional','283');addOption(formu.SUBFAMILIA,'Con llave de tres vias','284');addOption(formu.SUBFAMILIA,'Para presión arterial y venosa','285');addOption(formu.SUBFAMILIA,'Para inyecciones de contraste','286');addOption(formu.SUBFAMILIA,'Alta presión','287');addOption(formu.SUBFAMILIA,'Baja presión','288');addOption(formu.SUBFAMILIA,'Con punto de inyección','289');addOption(formu.SUBFAMILIA,'Adaptadores','290');addOption(formu.SUBFAMILIA,'Conectores','291');addOption(formu.SUBFAMILIA,''Adaptador en ''Y'''','292');addOption(formu.SUBFAMILIA,'Llaves de paso','293');addOption(formu.SUBFAMILIA,'De dos vias','294');addOption(formu.SUBFAMILIA,'De tres vias','295');addOption(formu.SUBFAMILIA,'Tapones','296');addOption(formu.SUBFAMILIA,'Con conexión macho','297');addOption(formu.SUBFAMILIA,'Normalizado','298');addOption(formu.SUBFAMILIA,'Intermitente','299');addOption(formu.SUBFAMILIA,'Con conexión macho hembra','300');addOption(formu.SUBFAMILIA,'Obturadores','301');addOption(formu.SUBFAMILIA,'Dosificador de precisión','302');addOption(formu.SUBFAMILIA,'Sistema de flujo continuo','303');addOption(formu.SUBFAMILIA,'Termoregulador de sangre','304');addOption(formu.SUBFAMILIA,'Serpentín','305');addOption(formu.SUBFAMILIA,'Bolsas para calentadores','306');addOption(formu.SUBFAMILIA,'Equipo para bomba de infusión rápida','307');addOption(formu.SUBFAMILIA,'Filtros','308');addOption(formu.SUBFAMILIA,'Para soluciones','309');addOption(formu.SUBFAMILIA,'Filtros esterilizantes','310');addOption(formu.SUBFAMILIA,'Filtros no esterilizantes','311');addOption(formu.SUBFAMILIA,'Para sangre','312');addOption(formu.SUBFAMILIA,'Equipos de perfusión','313');addOption(formu.SUBFAMILIA,'Para hemodiálisis','314');addOption(formu.SUBFAMILIA,'Dializadores','315');addOption(formu.SUBFAMILIA,'lineas','316');addOption(formu.SUBFAMILIA,'Arteriales','317');addOption(formu.SUBFAMILIA,'Venosas','318');addOption(formu.SUBFAMILIA,'Catéteres','319');addOption(formu.SUBFAMILIA,'Equipos para infusión','320');addOption(formu.SUBFAMILIA,'Sistema para punción','321');addOption(formu.SUBFAMILIA,'Para hemofiltración','322');addOption(formu.SUBFAMILIA,'Hemofiltros','323');addOption(formu.SUBFAMILIA,'Líneas','324');addOption(formu.SUBFAMILIA,'Catéteres','325');addOption(formu.SUBFAMILIA,'Equipos para infusión','326');addOption(formu.SUBFAMILIA,'Para circulación extracorporea','327');addOption(formu.SUBFAMILIA,'Sistemas de perfusión','328');addOption(formu.SUBFAMILIA,'Para bomba de flujo continuo','329');addOption(formu.SUBFAMILIA,'Oxigeneradores','330');addOption(formu.SUBFAMILIA,'De burbujas ','331');addOption(formu.SUBFAMILIA,'De membrana','332');addOption(formu.SUBFAMILIA,'Reservorios','333');addOption(formu.SUBFAMILIA,'Filtros','334');addOption(formu.SUBFAMILIA,'Para línea arterial','335');addOption(formu.SUBFAMILIA,'Intercambiador de calor','336');addOption(formu.SUBFAMILIA,'Equipos para cardioplejia','337');addOption(formu.SUBFAMILIA,'Equipo de cardioplejia anterógrada-retrógrada','338');addOption(formu.SUBFAMILIA,'Accesorios para equipos de perfusión','339');addOption(formu.SUBFAMILIA,'Para hemodiálisis y hemofiltración','340');addOption(formu.SUBFAMILIA,'Protector del manometro de presión venosa','341');addOption(formu.SUBFAMILIA,'Para cirugía extracorporea','342');addOption(formu.SUBFAMILIA,'Concentrador de hematíes','343');addOption(formu.SUBFAMILIA,'Equipo para recuperación de sangre','344');addOption(formu.SUBFAMILIA,'Para boma centrífuga','345');addOption(formu.SUBFAMILIA,'Transductor','346');addOption(formu.SUBFAMILIA,'Cono','347');addOption(formu.SUBFAMILIA,'Para determinaciones de gases en sangre','348');addOption(formu.SUBFAMILIA,'Conexiones','349');addOption(formu.SUBFAMILIA,'reductores','350');addOption(formu.SUBFAMILIA,'Rectos ','351');addOption(formu.SUBFAMILIA,''En ''Y'''','352');addOption(formu.SUBFAMILIA,'Con conexión intermedia','353');addOption(formu.SUBFAMILIA,'Adaptadores','354');addOption(formu.SUBFAMILIA,'Válvula antirretorno','355');addOption(formu.SUBFAMILIA,'Transductor presión cardioplejia','356');addOption(formu.SUBFAMILIA,'Cánulas para perfusión en CEC','357');addOption(formu.SUBFAMILIA,'Aórticas','358');addOption(formu.SUBFAMILIA,'Venosas','359');addOption(formu.SUBFAMILIA,'Atrial','360');addOption(formu.SUBFAMILIA,'Cavas','361');addOption(formu.SUBFAMILIA,'Cavo-Atrial','362');addOption(formu.SUBFAMILIA,'Femoro-Venosa','363');addOption(formu.SUBFAMILIA,'Arteria y vena femoral','364');addOption(formu.SUBFAMILIA,'Arterias coronarias','365');addOption(formu.SUBFAMILIA,'Left-vent','366');addOption(formu.SUBFAMILIA,'Con fiador','367');addOption(formu.SUBFAMILIA,'Con extremo distal rígido','368');addOption(formu.SUBFAMILIA,'De raiz aórtica','369');addOption(formu.SUBFAMILIA,'Aspirador para cirugía de arterias coronarias','370');addOption(formu.SUBFAMILIA,'Jeringas','212');addOption(formu.SUBFAMILIA,'Jeringas convencionales','213');addOption(formu.SUBFAMILIA,'Cono Luer','214');addOption(formu.SUBFAMILIA,'Central','215');addOption(formu.SUBFAMILIA,'Con aguja','216');addOption(formu.SUBFAMILIA,'Sin aguja','217');addOption(formu.SUBFAMILIA,'Excentrico','218');addOption(formu.SUBFAMILIA,'Cono Luer-Lock','219');addOption(formu.SUBFAMILIA,'Cono cateter','220');addOption(formu.SUBFAMILIA,'Jeringas especiales','221');addOption(formu.SUBFAMILIA,'Para cemento','222');addOption(formu.SUBFAMILIA,'Con sistema de presión limitada','223');addOption(formu.SUBFAMILIA,'Para inyección de contraste','224');addOption(formu.SUBFAMILIA,'adaptable a bomba de inycción','225');addOption(formu.SUBFAMILIA,'Con cánula de alta presión','226');addOption(formu.SUBFAMILIA,'Con cánula de baja presión','227');addOption(formu.SUBFAMILIA,'Manual','228');addOption(formu.SUBFAMILIA,'De baja resistencia','229');addOption(formu.SUBFAMILIA,'Para administración oral','230');addOption(formu.SUBFAMILIA,'Para toma de sangre arterial','231');addOption(formu.SUBFAMILIA,'Con aguja','232');addOption(formu.SUBFAMILIA,'Sin aguja','233');addOption(formu.SUBFAMILIA,'Jeringa presión para catéter globo','234');addOption(formu.SUBFAMILIA,'Sin pantalla','235');addOption(formu.SUBFAMILIA,'Con pantalla','236');addOption(formu.SUBFAMILIA,'Bolsas y frascos','237');addOption(formu.SUBFAMILIA,'Para sangre','238');addOption(formu.SUBFAMILIA,'Bolsa simple','239');addOption(formu.SUBFAMILIA,'Bolsa de transferencia','240');addOption(formu.SUBFAMILIA,'Para otras soluciones de administración parenteral','241');addOption(formu.SUBFAMILIA,'De plástico','242');addOption(formu.SUBFAMILIA,'De cristal','243');addOption(formu.SUBFAMILIA,'Para nutrición parenteral','244');addOption(formu.SUBFAMILIA,'Para soluciones de preservación de órganos','245');addOption(formu.SUBFAMILIA,'Para infusión por bombeo','246');addOption(formu.SUBFAMILIA,'Bomba mecánica','247');addOption(formu.SUBFAMILIA,'Con globo','248');addOption(formu.SUBFAMILIA,'En infusiones continuas','249');addOption(formu.SUBFAMILIA,'En infusiones intermitentes','250');addOption(formu.SUBFAMILIA,'Para nutrición enteral','251');addOption(formu.SUBFAMILIA,'Para irrigación rectal','252');addOption(formu.SUBFAMILIA,'Pera de irrigación y aspiración','253');addOption(formu.SUBFAMILIA,'Equipos de infusión e irrigación','254');addOption(formu.SUBFAMILIA,'Para administración parenteral','255');addOption(formu.SUBFAMILIA,'Convencional','256');addOption(formu.SUBFAMILIA,'Sin PVC','257');addOption(formu.SUBFAMILIA,'Con microgotero','258');addOption(formu.SUBFAMILIA,'Con cámara de medida','259');addOption(formu.SUBFAMILIA,'Con medidor de presión venosa central','260');addOption(formu.SUBFAMILIA,'Para transfusión de sangre y hemoderivados','261');addOption(formu.SUBFAMILIA,'Convencional','262');addOption(formu.SUBFAMILIA,'Doble','263');addOption(formu.SUBFAMILIA,'Consistema de bombeo','264');
+            }
+          
+            if (valor_familia=='6'){          	             
+              addOption(formu.SUBFAMILIA,'Con capucha de protección','637');addOption(formu.SUBFAMILIA,'Punta ovular','638');addOption(formu.SUBFAMILIA,'Cuchillas','639');addOption(formu.SUBFAMILIA,'De corte lateral','640');addOption(formu.SUBFAMILIA,'De corte en todas direcciones','641');addOption(formu.SUBFAMILIA,'De doble corte','642');addOption(formu.SUBFAMILIA,'De corte escalonado','643');addOption(formu.SUBFAMILIA,'De corte enérgico','644');addOption(formu.SUBFAMILIA,'Tipo Rashkind','515');addOption(formu.SUBFAMILIA,'Cateter con cuchilla para septostomia','516');addOption(formu.SUBFAMILIA,'Equipo para colangiografía transhepatica','517');addOption(formu.SUBFAMILIA,'Cateteres y dispositivos para extracción de material intravascular y fleboextracción','518');addOption(formu.SUBFAMILIA,'Febloextractor','519');addOption(formu.SUBFAMILIA,'Tipo Fogarty','520');addOption(formu.SUBFAMILIA,'Arterial','521');addOption(formu.SUBFAMILIA,'Venoso','522');addOption(formu.SUBFAMILIA,'De irrigación','523');addOption(formu.SUBFAMILIA,'De oclusión','524');addOption(formu.SUBFAMILIA,'Mixto (irrigación-oclusión)','525');addOption(formu.SUBFAMILIA,'Para mamaria interna','526');addOption(formu.SUBFAMILIA,'Fórceps transvasculares','527');addOption(formu.SUBFAMILIA,'De Biopsia','528');addOption(formu.SUBFAMILIA,'Con mandíbula ovalada fenestrada','529');addOption(formu.SUBFAMILIA,'Con mandíbula dentada tipo cocodrilo','530');addOption(formu.SUBFAMILIA,'De cuerpos extraños','531');addOption(formu.SUBFAMILIA,'Con mandíbula dentada tipo ratón','532');addOption(formu.SUBFAMILIA,'Cateter dormia','533');addOption(formu.SUBFAMILIA,'Cateteres y dispositivos para oclusión vascular','534');addOption(formu.SUBFAMILIA,'Coils de Gianturco','535');addOption(formu.SUBFAMILIA,'Sistema de oclusión ductus','536');addOption(formu.SUBFAMILIA,'Cateter de emplazamiento','537');addOption(formu.SUBFAMILIA,'Endoprótesis para ductus','538');addOption(formu.SUBFAMILIA,'Cateteres con globo para oclusión temporal','539');addOption(formu.SUBFAMILIA,'Cateters para infusión intraarterial','540');addOption(formu.SUBFAMILIA,'Coaxiales','541');addOption(formu.SUBFAMILIA,'Guia de punta abierta tipo Sos','542');addOption(formu.SUBFAMILIA,'Guia de punta abierta tipo Gragg','543');addOption(formu.SUBFAMILIA,'Microcateter Radiofocus','544');addOption(formu.SUBFAMILIA,'Globo de contrapulsación','545');addOption(formu.SUBFAMILIA,'Filtros de cava','546');addOption(formu.SUBFAMILIA,'equipo filtro de cava temporal','547');addOption(formu.SUBFAMILIA,'equipo filtro de cava permanente','548');addOption(formu.SUBFAMILIA,'Accesorios para la introducción de los cateteres','549');addOption(formu.SUBFAMILIA,'Guías metálicas y accesorios','550');addOption(formu.SUBFAMILIA,'Convencionales','551');addOption(formu.SUBFAMILIA,'cortas','552');addOption(formu.SUBFAMILIA,'de doble extermo','553');addOption(formu.SUBFAMILIA,'largas','554');addOption(formu.SUBFAMILIA,'Rectas','555');addOption(formu.SUBFAMILIA,''Con punta en ''J'''','556');addOption(formu.SUBFAMILIA,'Especiales','557');addOption(formu.SUBFAMILIA,'Guias finas','558');addOption(formu.SUBFAMILIA,'De acero inoxidable','559');addOption(formu.SUBFAMILIA,'Con punta de platino','560');addOption(formu.SUBFAMILIA,'Con punta de oro','561');addOption(formu.SUBFAMILIA,'Con recubrimiento siliconado distal','562');addOption(formu.SUBFAMILIA,'De nitinol','563');addOption(formu.SUBFAMILIA,'Guías semirigidas de amplatz','564');addOption(formu.SUBFAMILIA,'Guias hidrofílicas','565');addOption(formu.SUBFAMILIA,'Accesorios guías','566');addOption(formu.SUBFAMILIA,'Torque unidireccional para guía','567');addOption(formu.SUBFAMILIA,'Introductor Guía','568');addOption(formu.SUBFAMILIA,'Cánula inserción guía','569');addOption(formu.SUBFAMILIA,'Introductores','570');addOption(formu.SUBFAMILIA,'Vasculares','571');addOption(formu.SUBFAMILIA,'Cortos','572');addOption(formu.SUBFAMILIA,'Convencionales','573');addOption(formu.SUBFAMILIA,'Pelables','574');addOption(formu.SUBFAMILIA,'De permanencia','575');addOption(formu.SUBFAMILIA,'Largos','576');addOption(formu.SUBFAMILIA,'Normalizados','577');addOption(formu.SUBFAMILIA,'Pelables','578');addOption(formu.SUBFAMILIA,'Extralargos','579');addOption(formu.SUBFAMILIA,'Normalizados','580');addOption(formu.SUBFAMILIA,'Tipo Mullins','581');addOption(formu.SUBFAMILIA,'Tipo cope','582');addOption(formu.SUBFAMILIA,'Tipo Amplatz','583');addOption(formu.SUBFAMILIA,'Valvulas hemostáticas','584');addOption(formu.SUBFAMILIA,'Convencionales','585');addOption(formu.SUBFAMILIA,'De varias luces','586');addOption(formu.SUBFAMILIA,'Bilumen','587');addOption(formu.SUBFAMILIA,'Trilumen','588');addOption(formu.SUBFAMILIA,'Adaptadores','589');addOption(formu.SUBFAMILIA,'Adaptador rodante','590');addOption(formu.SUBFAMILIA,'Lancetas y accesorios','591');addOption(formu.SUBFAMILIA,'Lancetas con disoisitivo mecánico','592');addOption(formu.SUBFAMILIA,'Lancetas para pinchador','593');addOption(formu.SUBFAMILIA,'Con disco','594');addOption(formu.SUBFAMILIA,'Con capuchón','595');addOption(formu.SUBFAMILIA,'Tiras reactivas','596');addOption(formu.SUBFAMILIA,'Para amniorrexis','597');addOption(formu.SUBFAMILIA,'Material de incisión','598');addOption(formu.SUBFAMILIA,'Bisturi y hoja para bisturi','599');addOption(formu.SUBFAMILIA,'Bisturi de hoja fija','600');addOption(formu.SUBFAMILIA,'Convencionales','601');addOption(formu.SUBFAMILIA,'Para microcirugia oftálmica ( cuchilletes )','602');addOption(formu.SUBFAMILIA,'Para incisión inicial','603');addOption(formu.SUBFAMILIA,'Para incisión tunelizada','604');addOption(formu.SUBFAMILIA,'Con punta de lanza','605');addOption(formu.SUBFAMILIA,'Con punta de lanza roma','606');addOption(formu.SUBFAMILIA,'Esclerotomos','607');addOption(formu.SUBFAMILIA,'Circular','608');addOption(formu.SUBFAMILIA,'Palo de golf','609');addOption(formu.SUBFAMILIA,'Hojas para bisturí','610');addOption(formu.SUBFAMILIA,'Convencionales','611');addOption(formu.SUBFAMILIA,'Quitapuntos','612');addOption(formu.SUBFAMILIA,'Para microcirugía','613');addOption(formu.SUBFAMILIA,'Punta aguja','614');addOption(formu.SUBFAMILIA,'Punta de cuchilla','615');addOption(formu.SUBFAMILIA,'Punta redonda','616');addOption(formu.SUBFAMILIA,'Punta palo de golf ( esclerotomo )','617');addOption(formu.SUBFAMILIA,'Punta circular','618');addOption(formu.SUBFAMILIA,'Punta lanceta roma','619');addOption(formu.SUBFAMILIA,'punta con filo de corte angulado','620');addOption(formu.SUBFAMILIA,'15 grados','621');addOption(formu.SUBFAMILIA,'45 grados','622');addOption(formu.SUBFAMILIA,'Punzones','623');addOption(formu.SUBFAMILIA,'Vasculares','624');addOption(formu.SUBFAMILIA,'Cutaneos','625');addOption(formu.SUBFAMILIA,'Cistitomos','626');addOption(formu.SUBFAMILIA,'Convencional','627');addOption(formu.SUBFAMILIA,'Para capsulorresis','628');addOption(formu.SUBFAMILIA,'Cuchilla Corneales','629');addOption(formu.SUBFAMILIA,'Trépano radial','630');addOption(formu.SUBFAMILIA,'Punch Corneal','631');addOption(formu.SUBFAMILIA,'Otros','632');addOption(formu.SUBFAMILIA,'Brocas para motores de artroscopia','633');addOption(formu.SUBFAMILIA,'Fresas','634');addOption(formu.SUBFAMILIA,'Sin capucha de protección','635');addOption(formu.SUBFAMILIA,'Punta redonda','636');addOption(formu.SUBFAMILIA,'Para introducción de guías señalizadoras','393');addOption(formu.SUBFAMILIA,'Para jeringa cartucho','394');addOption(formu.SUBFAMILIA,'Trocares','395');addOption(formu.SUBFAMILIA,'Trocares convencionales','396');addOption(formu.SUBFAMILIA,'Trócares especiales','397');addOption(formu.SUBFAMILIA,'Para artroscopia','398');addOption(formu.SUBFAMILIA,'Pleural','399');addOption(formu.SUBFAMILIA,'suprapúbico','400');addOption(formu.SUBFAMILIA,'De punción para biopsia','401');addOption(formu.SUBFAMILIA,'Por aspiración','402');addOption(formu.SUBFAMILIA,'Por efecto de cizalla','403');addOption(formu.SUBFAMILIA,'Para anestesia intradural','404');addOption(formu.SUBFAMILIA,'Cánulas, catéteres y dispositivos extravasculares','405');addOption(formu.SUBFAMILIA,'Urológicos','406');addOption(formu.SUBFAMILIA,'Para nefrostomía','407');addOption(formu.SUBFAMILIA,'Malecot','408');addOption(formu.SUBFAMILIA,'Con disco de retención','409');addOption(formu.SUBFAMILIA,'Sin disco de retención','410');addOption(formu.SUBFAMILIA,'Pigtail','411');addOption(formu.SUBFAMILIA,'Para drenaje vesical','412');addOption(formu.SUBFAMILIA,'Convencional','413');addOption(formu.SUBFAMILIA,'Con sistema de fijación a piel','414');addOption(formu.SUBFAMILIA,'Biliares','415');addOption(formu.SUBFAMILIA,''Tipo ''Ring'''','416');addOption(formu.SUBFAMILIA,''Tipo ''Cope'''','417');addOption(formu.SUBFAMILIA,'Para drenaje','418');addOption(formu.SUBFAMILIA,'Torácicos','419');addOption(formu.SUBFAMILIA,'Equipo para neumotorax','420');addOption(formu.SUBFAMILIA,'Con cateter corto','421');addOption(formu.SUBFAMILIA,'Con cateter largo','422');addOption(formu.SUBFAMILIA,'Equipo para toracocentesis','423');addOption(formu.SUBFAMILIA,'Equipo pleural neonato','424');addOption(formu.SUBFAMILIA,'Equipo para pericardiocentesis','425');addOption(formu.SUBFAMILIA,'Gástricos','426');addOption(formu.SUBFAMILIA,'Equipo de gastroyeyunostomia','427');addOption(formu.SUBFAMILIA,'Equipo de gastronomía','428');addOption(formu.SUBFAMILIA,'Para anestesia epidural','429');addOption(formu.SUBFAMILIA,'Catéter epidural','430');addOption(formu.SUBFAMILIA,'Equipo epidural','431');addOption(formu.SUBFAMILIA,'catéter convencional','432');addOption(formu.SUBFAMILIA,'catéter reforzado','433');addOption(formu.SUBFAMILIA,'Para bloqueo axilar continuo','434');addOption(formu.SUBFAMILIA,'Cánulas o catéteres, dispositivos intravasculares y accesorios','435');addOption(formu.SUBFAMILIA,'Para infusión venosa','436');addOption(formu.SUBFAMILIA,'Por punción','437');addOption(formu.SUBFAMILIA,'Cortos o periféricos','438');addOption(formu.SUBFAMILIA,'Con aguja guía interna','439');addOption(formu.SUBFAMILIA,'Con sistema Seldinger','440');addOption(formu.SUBFAMILIA,'Con sistema Seldinger y dilatador','441');addOption(formu.SUBFAMILIA,'Largos o centrales','442');addOption(formu.SUBFAMILIA,'A través de canula corta','443');addOption(formu.SUBFAMILIA,'A través de aguja','444');addOption(formu.SUBFAMILIA,'Con sistema Seldinger','445');addOption(formu.SUBFAMILIA,'Con sistema Seldinger y dilatador','446');addOption(formu.SUBFAMILIA,'A traves de un introductor pelable','447');addOption(formu.SUBFAMILIA,'Por incisión','448');addOption(formu.SUBFAMILIA,'Para arteria umbilical','449');addOption(formu.SUBFAMILIA,'De silicona','450');addOption(formu.SUBFAMILIA,'De PVC','451');addOption(formu.SUBFAMILIA,'Para cateterismo y angiografía','452');addOption(formu.SUBFAMILIA,'Para registro de presiones','453');addOption(formu.SUBFAMILIA,'Tipo Cournand','454');addOption(formu.SUBFAMILIA,'Tipo Swuan-ganz','455');addOption(formu.SUBFAMILIA,'Simples','456');addOption(formu.SUBFAMILIA,'Complejos','457');addOption(formu.SUBFAMILIA,'Para angiocardiografías','458');addOption(formu.SUBFAMILIA,'Tipo pigtail','459');addOption(formu.SUBFAMILIA,'Rectos','460');addOption(formu.SUBFAMILIA,'angulados','461');addOption(formu.SUBFAMILIA,'Para angiografia universal','462');addOption(formu.SUBFAMILIA,'Tipo Gensini','463');addOption(formu.SUBFAMILIA,'Tipo Berman','464');addOption(formu.SUBFAMILIA,'Para coronariografías','465');addOption(formu.SUBFAMILIA,'Tipo Judkins','466');addOption(formu.SUBFAMILIA,'Izquierdo','467');addOption(formu.SUBFAMILIA,'Derecho','468');addOption(formu.SUBFAMILIA,'Tipo Amplatz','469');addOption(formu.SUBFAMILIA,'Izquierdo','470');addOption(formu.SUBFAMILIA,'Derecho','471');addOption(formu.SUBFAMILIA,'Para angigrafías','472');addOption(formu.SUBFAMILIA,'Tipo Simmons','473');addOption(formu.SUBFAMILIA,'Tipo cobra','474');addOption(formu.SUBFAMILIA,'Tipo Sidewinder','475');addOption(formu.SUBFAMILIA,'Selectivo de arteria hepática','476');addOption(formu.SUBFAMILIA,'Selectivo de arteria esplénica','477');addOption(formu.SUBFAMILIA,'Para angiografía de mamaria interna','478');addOption(formu.SUBFAMILIA,'Tipo Geliaco','479');addOption(formu.SUBFAMILIA,'Tipo Bronquial','480');addOption(formu.SUBFAMILIA,'Derecho','481');addOption(formu.SUBFAMILIA,'Izquierdo','482');addOption(formu.SUBFAMILIA,'Para propósitos especiales','483');addOption(formu.SUBFAMILIA,'Para electrofisiología cardiaca','484');addOption(formu.SUBFAMILIA,'Electrodos para estimulación cardíaca temporal','485');addOption(formu.SUBFAMILIA,'Internos','486');addOption(formu.SUBFAMILIA,'Externos','487');addOption(formu.SUBFAMILIA,'Electrodos para diagnóstico electrofisiológico','488');addOption(formu.SUBFAMILIA,'Tetrapolares','489');addOption(formu.SUBFAMILIA,'De conexión fija','490');addOption(formu.SUBFAMILIA,'De conexión con cable','491');addOption(formu.SUBFAMILIA,'Decapolares','492');addOption(formu.SUBFAMILIA,'Accesorios','493');addOption(formu.SUBFAMILIA,'Cable de conexión a monitor','494');addOption(formu.SUBFAMILIA,'Catéteres y dispositivos para dilatación intraluminal','495');addOption(formu.SUBFAMILIA,'Dilatación coronaria','496');addOption(formu.SUBFAMILIA,'Cateteres guía','497');addOption(formu.SUBFAMILIA,'Catéteres dilatación','498');addOption(formu.SUBFAMILIA,'Normalizado','499');addOption(formu.SUBFAMILIA,'De alta presión','500');addOption(formu.SUBFAMILIA,'De perfusión miocárdica','501');addOption(formu.SUBFAMILIA,'Endoprótesis coronarias','502');addOption(formu.SUBFAMILIA,'Aterotomo coronario de tipo Simpson','503');addOption(formu.SUBFAMILIA,'Dilatación periférica','504');addOption(formu.SUBFAMILIA,'Cateteres de dilatación con globo','505');addOption(formu.SUBFAMILIA,'Endoprótesis metálicas autoexpandibles tipo Wallstent','506');addOption(formu.SUBFAMILIA,'Ilíacas','507');addOption(formu.SUBFAMILIA,'Shunt arteriovenoso','508');addOption(formu.SUBFAMILIA,'Valvuloplastía','509');addOption(formu.SUBFAMILIA,'Cateteres para valvuloplastía pulmonar y aórtica','510');addOption(formu.SUBFAMILIA,'Accesorios','511');addOption(formu.SUBFAMILIA,'Jeringa de presión para catéter globo','512');addOption(formu.SUBFAMILIA,'Cateteres de punción transvascular','513');addOption(formu.SUBFAMILIA,'Cateteres para artrioseptostomia','514');addOption(formu.SUBFAMILIA,'Agujas','371');addOption(formu.SUBFAMILIA,'Agujas convencionales','372');addOption(formu.SUBFAMILIA,'Subconjuntivales','373');addOption(formu.SUBFAMILIA,'Intradérmicas','374');addOption(formu.SUBFAMILIA,'Subcutáneas','375');addOption(formu.SUBFAMILIA,'Intramusculares','376');addOption(formu.SUBFAMILIA,'Intravenosas','377');addOption(formu.SUBFAMILIA,'Para vial','378');addOption(formu.SUBFAMILIA,'Para infiltración','379');addOption(formu.SUBFAMILIA,'Para extracción de sangre','380');addOption(formu.SUBFAMILIA,'Agujas con aletas','381');addOption(formu.SUBFAMILIA,'Convencional','382');addOption(formu.SUBFAMILIA,'Con tapón de latex','383');addOption(formu.SUBFAMILIA,'Para fístula arterio-venosa','384');addOption(formu.SUBFAMILIA,'Agujas especiales','385');addOption(formu.SUBFAMILIA,'Para porta catéteres','386');addOption(formu.SUBFAMILIA,'Normalizadas','387');addOption(formu.SUBFAMILIA,'Con placa de fijación','388');addOption(formu.SUBFAMILIA,'Para bloqueo nervioso','389');addOption(formu.SUBFAMILIA,'Con conexión a neuroestimulador','390');addOption(formu.SUBFAMILIA,'En anestesia oftálmica','391');addOption(formu.SUBFAMILIA,'Para introducción de guías metálicas','392');
+            }
+          
+            if (valor_familia=='7'){          	             
+              addOption(formu.SUBFAMILIA,'Material de sutura','645');addOption(formu.SUBFAMILIA,'Agujas de sutura','646');addOption(formu.SUBFAMILIA,'Curva punta cilindrica','647');addOption(formu.SUBFAMILIA,'Aguja sutura curva gruesa','648');addOption(formu.SUBFAMILIA,'Aguja sutura curva fina','649');addOption(formu.SUBFAMILIA,'Curva punta triangular','650');addOption(formu.SUBFAMILIA,'Recta punta triangular','651');addOption(formu.SUBFAMILIA,'Suturas','652');addOption(formu.SUBFAMILIA,'Manuales','653');addOption(formu.SUBFAMILIA,'No reabsorbibles','654');addOption(formu.SUBFAMILIA,'Naturales','655');addOption(formu.SUBFAMILIA,'Seda','656');addOption(formu.SUBFAMILIA,'Vegetales','657');addOption(formu.SUBFAMILIA,'Lino','658');addOption(formu.SUBFAMILIA,'Sinteticas','659');addOption(formu.SUBFAMILIA,'Poliester','660');addOption(formu.SUBFAMILIA,'rebestimiento de teflon','661');addOption(formu.SUBFAMILIA,'rebestimiento de silicona','662');addOption(formu.SUBFAMILIA,'Polipropileno','663');addOption(formu.SUBFAMILIA,'Politetrafluoretileno ( Teflón )','664');addOption(formu.SUBFAMILIA,'Polivinildifluoretileno','665');addOption(formu.SUBFAMILIA,'Poliamidas','666');addOption(formu.SUBFAMILIA,'Metálicas','667');addOption(formu.SUBFAMILIA,'Reabsorbibles','668');addOption(formu.SUBFAMILIA,'Naturales','669');addOption(formu.SUBFAMILIA,'Catgut','670');addOption(formu.SUBFAMILIA,'Simple','671');addOption(formu.SUBFAMILIA,'Crómoco','672');addOption(formu.SUBFAMILIA,'Sinteticas','673');addOption(formu.SUBFAMILIA,'Ácido poliglicólico','674');addOption(formu.SUBFAMILIA,'Derivados del ácido poliglicólico','675');addOption(formu.SUBFAMILIA,'Polidioxanona','676');addOption(formu.SUBFAMILIA,'Adhesivas','677');addOption(formu.SUBFAMILIA,'Cutanea','678');addOption(formu.SUBFAMILIA,'Especiales','679');addOption(formu.SUBFAMILIA,'Sutura de autocerrado para esternon','680');addOption(formu.SUBFAMILIA,'Metálicas','681');addOption(formu.SUBFAMILIA,'Grapadoras de piel','682');addOption(formu.SUBFAMILIA,'Grapadora sutura externa','683');addOption(formu.SUBFAMILIA,'Grapadora sutura interna','684');addOption(formu.SUBFAMILIA,'Lineal','685');addOption(formu.SUBFAMILIA,'Sin corte medial no aticuladas','686');addOption(formu.SUBFAMILIA,'Sin corte medial articuladas','687');addOption(formu.SUBFAMILIA,'Con corte medial','688');addOption(formu.SUBFAMILIA,'Para bolsas de tabaco','689');addOption(formu.SUBFAMILIA,'Aplicadores de clips','690');addOption(formu.SUBFAMILIA,'No desechables','691');addOption(formu.SUBFAMILIA,'Desechable','692');addOption(formu.SUBFAMILIA,'Para ligadura','693');addOption(formu.SUBFAMILIA,'Para ligadura y división','694');addOption(formu.SUBFAMILIA,'Material de identificación','695');addOption(formu.SUBFAMILIA,'Cintas identificadoras','696');addOption(formu.SUBFAMILIA,'Grande','697');addOption(formu.SUBFAMILIA,'Pequeña','698');addOption(formu.SUBFAMILIA,'Material de oclusión de vasos (Clamps)','699');addOption(formu.SUBFAMILIA,'Otros materiales','700');addOption(formu.SUBFAMILIA,'Cauterio quirúrgico','701');addOption(formu.SUBFAMILIA,'Punta lazo','702');addOption(formu.SUBFAMILIA,'Punta fina','703');addOption(formu.SUBFAMILIA,'Cera para huesos','704');addOption(formu.SUBFAMILIA,'Accesorios','705');addOption(formu.SUBFAMILIA,'Tubos protectores','706');addOption(formu.SUBFAMILIA,'tubo protector mandibulas','707');addOption(formu.SUBFAMILIA,'Pinza quitagrapas','708');
+            }
+          
+            if (valor_familia=='8'){          	             
+              addOption(formu.SUBFAMILIA,'Otros materiales para higiene y protección','1301');addOption(formu.SUBFAMILIA,'Ropa desechable para cama','1302');addOption(formu.SUBFAMILIA,'Sábanas','1303');addOption(formu.SUBFAMILIA,'De celulosa','1304');addOption(formu.SUBFAMILIA,'Metalizadas','1305');addOption(formu.SUBFAMILIA,'Fundas de almohada','1306');addOption(formu.SUBFAMILIA,'Fundas asépticas','1307');addOption(formu.SUBFAMILIA,'Esponjas','1308');addOption(formu.SUBFAMILIA,'Reutilizables','1309');addOption(formu.SUBFAMILIA,'Desechables','1310');addOption(formu.SUBFAMILIA,'Bastoncillos higiénicos de algodón','1311');addOption(formu.SUBFAMILIA,'Pañuelos de celulosa','1312');addOption(formu.SUBFAMILIA,'Empapadores','1313');addOption(formu.SUBFAMILIA,'Convencional','1314');addOption(formu.SUBFAMILIA,'para adultos','1315');addOption(formu.SUBFAMILIA,'Con elástico','1316');addOption(formu.SUBFAMILIA,'Celulosa hospitalaria','1317');addOption(formu.SUBFAMILIA,'Rollo papel camilla','1318');addOption(formu.SUBFAMILIA,'Baberos','1319');addOption(formu.SUBFAMILIA,'Otros productos de celulosa hosp','1320');addOption(formu.SUBFAMILIA,'Dispensadores para celulosa hospitalaria','1321');addOption(formu.SUBFAMILIA,'Con antiséptico','772');addOption(formu.SUBFAMILIA,'Maquinillas para rasurar','773');addOption(formu.SUBFAMILIA,'Batas','709');addOption(formu.SUBFAMILIA,'No estériles','710');addOption(formu.SUBFAMILIA,'Convencionales','711');addOption(formu.SUBFAMILIA,'Especiales','712');addOption(formu.SUBFAMILIA,'Estériles','713');addOption(formu.SUBFAMILIA,'Convencionales','714');addOption(formu.SUBFAMILIA,'Quirúrgicas','715');addOption(formu.SUBFAMILIA,'Guantes','716');addOption(formu.SUBFAMILIA,'No estériles','717');addOption(formu.SUBFAMILIA,'Para examen','718');addOption(formu.SUBFAMILIA,'De polietileno','719');addOption(formu.SUBFAMILIA,'De látex','720');addOption(formu.SUBFAMILIA,'Sin polvo','721');addOption(formu.SUBFAMILIA,'Con polvo','722');addOption(formu.SUBFAMILIA,'De polivinilo','723');addOption(formu.SUBFAMILIA,'De plástico o de menaje','724');addOption(formu.SUBFAMILIA,'Estériles','725');addOption(formu.SUBFAMILIA,'Para examen','726');addOption(formu.SUBFAMILIA,'De polietileno','727');addOption(formu.SUBFAMILIA,'De látex','728');addOption(formu.SUBFAMILIA,'Quirúrgicos','729');addOption(formu.SUBFAMILIA,'De látex','730');addOption(formu.SUBFAMILIA,'Convencionales','731');addOption(formu.SUBFAMILIA,'Hipoalérgicos','732');addOption(formu.SUBFAMILIA,'Sintéticos (antialérgicos)','733');addOption(formu.SUBFAMILIA,'De plástico o de menaje','734');addOption(formu.SUBFAMILIA,'Mascarillas','735');addOption(formu.SUBFAMILIA,'Convencional','736');addOption(formu.SUBFAMILIA,'Quirúrgicas','737');addOption(formu.SUBFAMILIA,'Plegadas','738');addOption(formu.SUBFAMILIA,'Con visor','739');addOption(formu.SUBFAMILIA,'Sin visor','740');addOption(formu.SUBFAMILIA,'Redondeada','741');addOption(formu.SUBFAMILIA,'Gorros','742');addOption(formu.SUBFAMILIA,'Convencionales (tipo ducha)','743');addOption(formu.SUBFAMILIA,'Quirúrgicos','744');addOption(formu.SUBFAMILIA,'Casquete','745');addOption(formu.SUBFAMILIA,'Con elático','746');addOption(formu.SUBFAMILIA,'Con cintas','747');addOption(formu.SUBFAMILIA,'Escafandra','748');addOption(formu.SUBFAMILIA,'De una pieza','749');addOption(formu.SUBFAMILIA,'Con cintas','750');addOption(formu.SUBFAMILIA,'Calzas','751');addOption(formu.SUBFAMILIA,'Cobertura quirúrgica','752');addOption(formu.SUBFAMILIA,'Paños','753');addOption(formu.SUBFAMILIA,'Convencionales','754');addOption(formu.SUBFAMILIA,'Fenestrados','755');addOption(formu.SUBFAMILIA,'Sábanas quirúrgicas','756');addOption(formu.SUBFAMILIA,'Sábana neurológica','757');addOption(formu.SUBFAMILIA,'Sábana artroscopia','758');addOption(formu.SUBFAMILIA,'Sábana extremidades','759');addOption(formu.SUBFAMILIA,'Sábana cubremesas','760');addOption(formu.SUBFAMILIA,'Equipo quirúrgico','761');addOption(formu.SUBFAMILIA,'Equipo angiografía','762');addOption(formu.SUBFAMILIA,'Equipo laparoscopia ginecológica','763');addOption(formu.SUBFAMILIA,'Equipo universal (1)','764');addOption(formu.SUBFAMILIA,'Equipo universal (2)','765');addOption(formu.SUBFAMILIA,'Equipo cardiovascular','766');addOption(formu.SUBFAMILIA,'Láminas adhesivas','767');addOption(formu.SUBFAMILIA,'Manguitos','768');addOption(formu.SUBFAMILIA,'Delantal transuretral','769');addOption(formu.SUBFAMILIA,'Cepillos quirúrgicos','770');addOption(formu.SUBFAMILIA,'Secos','771');
+            }
+          
+            if (valor_familia=='9'){          	             
+              addOption(formu.SUBFAMILIA,'Rectos','905');addOption(formu.SUBFAMILIA,'De PVC','906');addOption(formu.SUBFAMILIA,'De silicona','907');addOption(formu.SUBFAMILIA,'Curvos','908');addOption(formu.SUBFAMILIA,'De silicona','909');addOption(formu.SUBFAMILIA,'Para redón','910');addOption(formu.SUBFAMILIA,'Una luz','911');addOption(formu.SUBFAMILIA,'Tubular','912');addOption(formu.SUBFAMILIA,'Plano','913');addOption(formu.SUBFAMILIA,'Doble luz','914');addOption(formu.SUBFAMILIA,'Prolongadores','915');addOption(formu.SUBFAMILIA,'Para aspirador','916');addOption(formu.SUBFAMILIA,'Cortos','917');addOption(formu.SUBFAMILIA,'Largos','918');addOption(formu.SUBFAMILIA,'Para aspirador-irrigador','919');addOption(formu.SUBFAMILIA,'Para oxígeno','920');addOption(formu.SUBFAMILIA,'Cortos','921');addOption(formu.SUBFAMILIA,'Largos','922');addOption(formu.SUBFAMILIA,'Con conexión tipo embudo','923');addOption(formu.SUBFAMILIA,'Con conexión a rosca','924');addOption(formu.SUBFAMILIA,'Extralargos','925');addOption(formu.SUBFAMILIA,'Para capnografía','926');addOption(formu.SUBFAMILIA,'Para catéter','927');addOption(formu.SUBFAMILIA,'Circuitos de ventilación','928');addOption(formu.SUBFAMILIA,'Accesorios','929');addOption(formu.SUBFAMILIA,'Conectores','930');addOption(formu.SUBFAMILIA,'Convencionales','931');addOption(formu.SUBFAMILIA,'Estriados','932');addOption(formu.SUBFAMILIA,'Rectos','933');addOption(formu.SUBFAMILIA,'En Y','934');addOption(formu.SUBFAMILIA,'Con conexión intermedia','935');addOption(formu.SUBFAMILIA,'Lisos','936');addOption(formu.SUBFAMILIA,'Giratorios','937');addOption(formu.SUBFAMILIA,'En extubación','938');addOption(formu.SUBFAMILIA,'Lisos','939');addOption(formu.SUBFAMILIA,'Estriados','940');addOption(formu.SUBFAMILIA,'Para caudalímetro','941');addOption(formu.SUBFAMILIA,'Fiadores','942');addOption(formu.SUBFAMILIA,'Cánulas','790');addOption(formu.SUBFAMILIA,'Para traqueotomía-laringectomía','791');addOption(formu.SUBFAMILIA,'De plata','792');addOption(formu.SUBFAMILIA,'Traqueotomía','793');addOption(formu.SUBFAMILIA,'Laringectomía','794');addOption(formu.SUBFAMILIA,'De PVC','795');addOption(formu.SUBFAMILIA,'Adultos','796');addOption(formu.SUBFAMILIA,'Traqueotomía','797');addOption(formu.SUBFAMILIA,'Estándar','798');addOption(formu.SUBFAMILIA,'Sin globo','799');addOption(formu.SUBFAMILIA,'Sin cánula interior','800');addOption(formu.SUBFAMILIA,'Fenestrada','801');addOption(formu.SUBFAMILIA,'Anillada de fijación variable','802');addOption(formu.SUBFAMILIA,'Laringectomía','803');addOption(formu.SUBFAMILIA,'Pediátricas','804');addOption(formu.SUBFAMILIA,'Equipo minitraqueotomía de urgencia','805');addOption(formu.SUBFAMILIA,'De silicona','806');addOption(formu.SUBFAMILIA,'Traqueotomía','807');addOption(formu.SUBFAMILIA,'Convencional','808');addOption(formu.SUBFAMILIA,'Con globo de espuma autoinflable','809');addOption(formu.SUBFAMILIA,'Laringectomía','810');addOption(formu.SUBFAMILIA,'Para aspiración','811');addOption(formu.SUBFAMILIA,'Tipo Yankauer','812');addOption(formu.SUBFAMILIA,'Convencional','813');addOption(formu.SUBFAMILIA,'Con tubo prolongador','814');addOption(formu.SUBFAMILIA,'Convencional (aspiración)','815');addOption(formu.SUBFAMILIA,'De irrigación e iluminación','816');addOption(formu.SUBFAMILIA,'Tipo Frazier','817');addOption(formu.SUBFAMILIA,'Aspirador intracardíaco','818');addOption(formu.SUBFAMILIA,'Oftálmicas','819');addOption(formu.SUBFAMILIA,'Lacrimal','820');addOption(formu.SUBFAMILIA,'Pulidora','821');addOption(formu.SUBFAMILIA,'De aspiración','822');addOption(formu.SUBFAMILIA,'De aspiración-retracción','823');addOption(formu.SUBFAMILIA,'De irrigación (viscoelástico)','824');addOption(formu.SUBFAMILIA,'Para polo anterior (Rycroft)','825');addOption(formu.SUBFAMILIA,'Para polo posterior','826');addOption(formu.SUBFAMILIA,'Tipo Hammer','827');addOption(formu.SUBFAMILIA,'Tipo Wagner','828');addOption(formu.SUBFAMILIA,'Viscodisector','829');addOption(formu.SUBFAMILIA,'Vitreoretinal','830');addOption(formu.SUBFAMILIA,'De núcleo (Corydon)','831');addOption(formu.SUBFAMILIA,'Del cristalino (Helsinki)','832');addOption(formu.SUBFAMILIA,'Para inserción de guía','833');addOption(formu.SUBFAMILIA,'Sondas','834');addOption(formu.SUBFAMILIA,'Lacrimales','835');addOption(formu.SUBFAMILIA,'Para oxigenoterapia','836');addOption(formu.SUBFAMILIA,'Sonda','837');addOption(formu.SUBFAMILIA,'Gafas','838');addOption(formu.SUBFAMILIA,'Para aspiración traqueal y bronquial','839');addOption(formu.SUBFAMILIA,'Convencional','840');addOption(formu.SUBFAMILIA,'Con punta atraumática','841');addOption(formu.SUBFAMILIA,'Con circuito cerrado','842');addOption(formu.SUBFAMILIA,'Controlada','843');addOption(formu.SUBFAMILIA,'Esófago-gástricas compresoras','844');addOption(formu.SUBFAMILIA,'De Sengstaken-Blakemore','845');addOption(formu.SUBFAMILIA,'De Linton-Nachlas','846');addOption(formu.SUBFAMILIA,'Gástricas','847');addOption(formu.SUBFAMILIA,'Para aspiración','848');addOption(formu.SUBFAMILIA,'Tipo Levin','849');addOption(formu.SUBFAMILIA,'Tipo Salem','850');addOption(formu.SUBFAMILIA,'De gastrostomía','851');addOption(formu.SUBFAMILIA,'Tipo Pezzer','852');addOption(formu.SUBFAMILIA,'Para nutrición enteral','853');addOption(formu.SUBFAMILIA,'De poliuretano','854');addOption(formu.SUBFAMILIA,'Extremo distal con dos o cuatro orificions laterales','855');addOption(formu.SUBFAMILIA,'Extremo distal con un orificio lateral','856');addOption(formu.SUBFAMILIA,'De PVC','857');addOption(formu.SUBFAMILIA,'Duodenales','858');addOption(formu.SUBFAMILIA,'De Miller-Abbott','859');addOption(formu.SUBFAMILIA,'De oliva metálica','860');addOption(formu.SUBFAMILIA,'Convencional (Rehfuss)','861');addOption(formu.SUBFAMILIA,'De doble luz','862');addOption(formu.SUBFAMILIA,'Rectales','863');addOption(formu.SUBFAMILIA,'pediatrica','864');addOption(formu.SUBFAMILIA,'Vesicales','865');addOption(formu.SUBFAMILIA,'Femenina','866');addOption(formu.SUBFAMILIA,'Tipo Tiemann','867');addOption(formu.SUBFAMILIA,'Tipo Foley','868');addOption(formu.SUBFAMILIA,'Convencional','869');addOption(formu.SUBFAMILIA,'De látex','870');addOption(formu.SUBFAMILIA,'De silicona','871');addOption(formu.SUBFAMILIA,'De látex siliconado','872');addOption(formu.SUBFAMILIA,'Triple vía','873');addOption(formu.SUBFAMILIA,'Accesorios','874');addOption(formu.SUBFAMILIA,'Tapón para sonda','875');addOption(formu.SUBFAMILIA,'Válvula Salem antirreflujo','876');addOption(formu.SUBFAMILIA,'Tubos','877');addOption(formu.SUBFAMILIA,'Nasofaríngeos','878');addOption(formu.SUBFAMILIA,'Orofaríngeos','879');addOption(formu.SUBFAMILIA,'De Guedel o (tubo de Mayo)','880');addOption(formu.SUBFAMILIA,'Mascarilla laríngea','881');addOption(formu.SUBFAMILIA,'Endotraqueales','882');addOption(formu.SUBFAMILIA,'Convencionales','883');addOption(formu.SUBFAMILIA,'Con globo','884');addOption(formu.SUBFAMILIA,'Baja presión y volumen medio','885');addOption(formu.SUBFAMILIA,'Baja presión y volumen alto','886');addOption(formu.SUBFAMILIA,'Presión automática','887');addOption(formu.SUBFAMILIA,'Con anillo helicoidal','888');addOption(formu.SUBFAMILIA,'Sin globo','889');addOption(formu.SUBFAMILIA,'Especiales','890');addOption(formu.SUBFAMILIA,'Para intubación bronquial selectiva','891');addOption(formu.SUBFAMILIA,'Con oclusor fijo','892');addOption(formu.SUBFAMILIA,'Con oclusor movible','893');addOption(formu.SUBFAMILIA,'Para microcirugía laríngea','894');addOption(formu.SUBFAMILIA,'Opaco a rayos láser','895');addOption(formu.SUBFAMILIA,'No opaco a rayos láser','896');addOption(formu.SUBFAMILIA,'De drenaje','897');addOption(formu.SUBFAMILIA,'De Penrose','898');addOption(formu.SUBFAMILIA,'De Kehr','899');addOption(formu.SUBFAMILIA,'Silicona','900');addOption(formu.SUBFAMILIA,'Látex','901');addOption(formu.SUBFAMILIA,'Mixto','902');addOption(formu.SUBFAMILIA,'Para mediastino','903');addOption(formu.SUBFAMILIA,'Torácicos','904');
+            }
+          
+            if (valor_familia=='10'){          	             
+              addOption(formu.SUBFAMILIA,'De punción e insuflación','943');addOption(formu.SUBFAMILIA,'Aguja de insuflación (tipo Veress)','944');addOption(formu.SUBFAMILIA,'Trocares','945');addOption(formu.SUBFAMILIA,'Con punta piramidal','946');addOption(formu.SUBFAMILIA,'Con vaina radiopaca','947');addOption(formu.SUBFAMILIA,'Con vaina radiotransparente','948');addOption(formu.SUBFAMILIA,'Sin globo','949');addOption(formu.SUBFAMILIA,'Con globo','950');addOption(formu.SUBFAMILIA,'Con punta roma (tipo Hasson)','951');addOption(formu.SUBFAMILIA,'Accesorios para trocares','952');addOption(formu.SUBFAMILIA,'Reductor','953');addOption(formu.SUBFAMILIA,'Fijador','954');addOption(formu.SUBFAMILIA,'De disección y sujeción','955');addOption(formu.SUBFAMILIA,'Tijeras','956');addOption(formu.SUBFAMILIA,'Pinzas','957');addOption(formu.SUBFAMILIA,'Con mandíbula de bordes dentados romos','958');addOption(formu.SUBFAMILIA,'Con mandíbula de pico de pato','959');addOption(formu.SUBFAMILIA,'Con mandíbula tipo Babcock','960');addOption(formu.SUBFAMILIA,'Disectores','961');addOption(formu.SUBFAMILIA,'De ligaura y sutura','962');addOption(formu.SUBFAMILIA,'Aplicadores de grapas (Endograpadoras)','963');addOption(formu.SUBFAMILIA,'Aplicadores de clips','964');addOption(formu.SUBFAMILIA,'Endoligaduras','965');addOption(formu.SUBFAMILIA,'No reabsorbibles','966');addOption(formu.SUBFAMILIA,'Reabsorbibles','967');addOption(formu.SUBFAMILIA,'Endosuturas','968');addOption(formu.SUBFAMILIA,'Sin aplicador','969');addOption(formu.SUBFAMILIA,'Con aplicador','970');addOption(formu.SUBFAMILIA,'Con dispositivo mecánico','971');addOption(formu.SUBFAMILIA,'Unidad de carga','972');addOption(formu.SUBFAMILIA,'No reabsorbible','973');addOption(formu.SUBFAMILIA,'Reabsorbible','974');addOption(formu.SUBFAMILIA,'De irrigación-aspiración','975');addOption(formu.SUBFAMILIA,'Equipos','976');addOption(formu.SUBFAMILIA,'Tubos','977');addOption(formu.SUBFAMILIA,'De recogida de muestras','978');addOption(formu.SUBFAMILIA,'Otros materiales','979');addOption(formu.SUBFAMILIA,'Goma de insuflación','980');addOption(formu.SUBFAMILIA,'Óptica desechable','981');addOption(formu.SUBFAMILIA,'Funda para cámara','982');addOption(formu.SUBFAMILIA,'Equipos especiales','983');
+            }
+          
+            if (valor_familia=='11'){          	             
+              addOption(formu.SUBFAMILIA,'Para cura','984');addOption(formu.SUBFAMILIA,'Paquete cura base','985');addOption(formu.SUBFAMILIA,'Paquete cura hemodiálisis','986');addOption(formu.SUBFAMILIA,'Para ginecología','987');addOption(formu.SUBFAMILIA,'Pezonera','988');addOption(formu.SUBFAMILIA,'Sacaleches','989');addOption(formu.SUBFAMILIA,'Espéculo vaginal','990');addOption(formu.SUBFAMILIA,'Tallo laminaria','991');addOption(formu.SUBFAMILIA,'Para pediatría','992');addOption(formu.SUBFAMILIA,'Biberones','993');addOption(formu.SUBFAMILIA,'Tetinas','994');addOption(formu.SUBFAMILIA,'Convencionales','995');addOption(formu.SUBFAMILIA,'Para palatosis','996');addOption(formu.SUBFAMILIA,'Chupete','997');addOption(formu.SUBFAMILIA,'Pinza cordón umbilical','998');addOption(formu.SUBFAMILIA,'Pera nasal','999');addOption(formu.SUBFAMILIA,'Pulsera identificación pediátrica','1000');addOption(formu.SUBFAMILIA,'Para proteger la integridad del paciente','1001');addOption(formu.SUBFAMILIA,'Manta aislamiento','1002');addOption(formu.SUBFAMILIA,'Muñequeras de sujeción','1003');addOption(formu.SUBFAMILIA,'Protectores de úlceras de presión','1004');addOption(formu.SUBFAMILIA,'Almohadillas','1005');addOption(formu.SUBFAMILIA,'Talonera','1006');addOption(formu.SUBFAMILIA,'Elevador de pie','1007');addOption(formu.SUBFAMILIA,'Tubular de foam','1008');addOption(formu.SUBFAMILIA,'Placa electroquirúrgica adhesiva','1009');addOption(formu.SUBFAMILIA,'Almohadillas para desfibrilación','1010');addOption(formu.SUBFAMILIA,'Mordedor','1011');addOption(formu.SUBFAMILIA,'Sistema inmovilizador de catéter','1012');addOption(formu.SUBFAMILIA,'Protectores oculares','1013');addOption(formu.SUBFAMILIA,'Oclusivo','1014');addOption(formu.SUBFAMILIA,'Perforado','1015');
+            }
+          
+            if (valor_familia=='12'){          	             
+              addOption(formu.SUBFAMILIA,'Electrodos para E.C.G.','1016');addOption(formu.SUBFAMILIA,'Convencional','1017');addOption(formu.SUBFAMILIA,'Adulto','1018');addOption(formu.SUBFAMILIA,'Pediátrico','1019');addOption(formu.SUBFAMILIA,'Neonato','1020');addOption(formu.SUBFAMILIA,'De esfuerzo','1021');addOption(formu.SUBFAMILIA,'Para desfibrilación','1022');addOption(formu.SUBFAMILIA,'Accesorios','1023');addOption(formu.SUBFAMILIA,'Emulsión conductora','1024');addOption(formu.SUBFAMILIA,'Transductor de oxígeno','1025');addOption(formu.SUBFAMILIA,'Arterial','1026');addOption(formu.SUBFAMILIA,'Cerebral','1027');addOption(formu.SUBFAMILIA,'Equipo para monotorización invasiva de presiones','1028');addOption(formu.SUBFAMILIA,'Intracraneal','1029');addOption(formu.SUBFAMILIA,'Para espacio subaracnoideo','1030');addOption(formu.SUBFAMILIA,'Para espacio subdural','1031');addOption(formu.SUBFAMILIA,'Para ventrículo','1032');addOption(formu.SUBFAMILIA,'Arterial','1033');addOption(formu.SUBFAMILIA,'Escalas de presión','1034');addOption(formu.SUBFAMILIA,'Venotonómetro','1035');addOption(formu.SUBFAMILIA,'Manómetro','1036');addOption(formu.SUBFAMILIA,'Termómetros','1037');addOption(formu.SUBFAMILIA,'Convencional','1038');addOption(formu.SUBFAMILIA,'Termodilución','1039');addOption(formu.SUBFAMILIA,'Miocárdico','1040');addOption(formu.SUBFAMILIA,'electronicos','1041');
+            }
+          
+            if (valor_familia=='13'){          	             
+              addOption(formu.SUBFAMILIA,'Nebulizadores y accesorios','1045');addOption(formu.SUBFAMILIA,'Nebulizadores','1046');addOption(formu.SUBFAMILIA,'Accesorios','1047');addOption(formu.SUBFAMILIA,'Cámara de retención para la administración de aerosoles','1048');addOption(formu.SUBFAMILIA,'Filtros bacteriano-virales','1049');addOption(formu.SUBFAMILIA,'Convencional','1050');addOption(formu.SUBFAMILIA,'Humidificador','1051');addOption(formu.SUBFAMILIA,'Sistemas para humidificación','1052');addOption(formu.SUBFAMILIA,'Por agua fría','1053');addOption(formu.SUBFAMILIA,'Por agua caliente','1054');addOption(formu.SUBFAMILIA,'Intecambiador de calor y humedad (nariz artificial)','1055');addOption(formu.SUBFAMILIA,'espirómetro incentivo o de estimulación','1056');addOption(formu.SUBFAMILIA,'Circuitos de ventilación','1057');addOption(formu.SUBFAMILIA,'Mecánica','1058');addOption(formu.SUBFAMILIA,'Convencionales','1059');addOption(formu.SUBFAMILIA,'Especiales','1060');addOption(formu.SUBFAMILIA,'Accesorios','1061');addOption(formu.SUBFAMILIA,'Manual o espontánea','1062');addOption(formu.SUBFAMILIA,'Para aerosolterapia','1063');addOption(formu.SUBFAMILIA,'Cal sodada','1064');addOption(formu.SUBFAMILIA,'Mascarillas','1042');addOption(formu.SUBFAMILIA,'Tipo Venturi','1043');addOption(formu.SUBFAMILIA,'Para nebulizador','1044');
+            }
+          
+            if (valor_familia=='14'){          	             
+              addOption(formu.SUBFAMILIA,'Tijeras','1065');addOption(formu.SUBFAMILIA,'Pinza disección','1066');addOption(formu.SUBFAMILIA,'Sierra gigli','1067');addOption(formu.SUBFAMILIA,'Limpiador bisturí eléctrico','1068');addOption(formu.SUBFAMILIA,'Tira de nilón','1069');addOption(formu.SUBFAMILIA,'Nbandeja portainjerto dérmico','1070');addOption(formu.SUBFAMILIA,'Varilla de sujeción','1071');addOption(formu.SUBFAMILIA,'Manipulador de lente','1072');addOption(formu.SUBFAMILIA,'Rasuradores','1073');addOption(formu.SUBFAMILIA,'Normal','1074');addOption(formu.SUBFAMILIA,'Con peine y protector de la hoja','1075');
+            }
+          
+            if (valor_familia=='15'){          	             
+              addOption(formu.SUBFAMILIA,'Celulosa para limpieza industrial','1076');addOption(formu.SUBFAMILIA,'Celulosa para limpieza industrial de uso limitado','1077');addOption(formu.SUBFAMILIA,'Celulosa para limpieza industrial de uso prolongado','1078');addOption(formu.SUBFAMILIA,'Paños especiales','1079');addOption(formu.SUBFAMILIA,'Otros papeles limpieza industrial','1080');addOption(formu.SUBFAMILIA,'Plástico','1081');addOption(formu.SUBFAMILIA,'Bolsas basura','1082');addOption(formu.SUBFAMILIA,'Guantes','1083');addOption(formu.SUBFAMILIA,'Otros materiales de plástico','1084');addOption(formu.SUBFAMILIA,'Recipientes para residuos no sanitarios','1085');addOption(formu.SUBFAMILIA,'Cubos','1086');addOption(formu.SUBFAMILIA,'Containers','1087');addOption(formu.SUBFAMILIA,'Papeleras','1088');addOption(formu.SUBFAMILIA,'Detergentes','1089');addOption(formu.SUBFAMILIA,'Detergentes para ropa','1090');addOption(formu.SUBFAMILIA,'Detergentes para suelos','1091');addOption(formu.SUBFAMILIA,'Detergentes para mobiliario','1092');addOption(formu.SUBFAMILIA,'Detergentes para áreas quirúrgicas','1093');addOption(formu.SUBFAMILIA,'Otros detergentes','1094');addOption(formu.SUBFAMILIA,'Dispensadores de productos de limpieza','1095');addOption(formu.SUBFAMILIA,'Dispensadores de celulosa industrial','1096');addOption(formu.SUBFAMILIA,'Dispensadores de gel industrial','1097');addOption(formu.SUBFAMILIA,'Dosificadores para bidones','1098');addOption(formu.SUBFAMILIA,'Bayetas','1099');addOption(formu.SUBFAMILIA,'Bayetas microfibras','1100');addOption(formu.SUBFAMILIA,'Insecticidas','1101');addOption(formu.SUBFAMILIA,'Cargas de insecticidas','1102');addOption(formu.SUBFAMILIA,'Dispensadores para insecticidas','1103');addOption(formu.SUBFAMILIA,'Otros materiales de limpieza','1104');
+            }
+          
+            if (valor_familia=='16'){          	             
+              addOption(formu.SUBFAMILIA,'Celulosa','1105');addOption(formu.SUBFAMILIA,'Papel higienico','1106');addOption(formu.SUBFAMILIA,'Rollo ','1107');addOption(formu.SUBFAMILIA,'Maxi jumbo','1108');addOption(formu.SUBFAMILIA,'Mini jumbo','1109');addOption(formu.SUBFAMILIA,'Servicios individuales','1110');addOption(formu.SUBFAMILIA,'Otros','1111');addOption(formu.SUBFAMILIA,'Faciales','1112');addOption(formu.SUBFAMILIA,'Faciales cubo','1113');addOption(formu.SUBFAMILIA,'Faciales estuche','1114');addOption(formu.SUBFAMILIA,'Otros faciales','1115');addOption(formu.SUBFAMILIA,'Toallas secamanos','1116');addOption(formu.SUBFAMILIA,'Toalla en rollo','1117');addOption(formu.SUBFAMILIA,'Toalla bobina','1118');addOption(formu.SUBFAMILIA,'Toalla individual','1119');addOption(formu.SUBFAMILIA,'Toallas plegadas','1120');addOption(formu.SUBFAMILIA,'Otras toallas','1121');addOption(formu.SUBFAMILIA,'Cubreasientos','1122');addOption(formu.SUBFAMILIA,'Otros productos de celulosa','1123');addOption(formu.SUBFAMILIA,'Geles','1124');addOption(formu.SUBFAMILIA,'Gel lavamanos','1125');addOption(formu.SUBFAMILIA,'Gel corporal','1126');addOption(formu.SUBFAMILIA,'Gel desinfectante','1127');addOption(formu.SUBFAMILIA,'Otros geles','1128');addOption(formu.SUBFAMILIA,'Ambientadores e higienizadores','1129');addOption(formu.SUBFAMILIA,'Cargas ambientadores','1130');addOption(formu.SUBFAMILIA,'Cargas higienizadores','1131');addOption(formu.SUBFAMILIA,'Dispensadores cargas ambientador','1132');addOption(formu.SUBFAMILIA,'Dispensadores para higienizador','1133');addOption(formu.SUBFAMILIA,'Dispensadores para productos de celulosa','1134');addOption(formu.SUBFAMILIA,'Dispensadores de toallas secamanos','1135');addOption(formu.SUBFAMILIA,'Dispensadores papel higiénico','1136');addOption(formu.SUBFAMILIA,'Dispensadores de faciales','1137');addOption(formu.SUBFAMILIA,'Dispensadores de cubreasientos','1138');addOption(formu.SUBFAMILIA,'Dispensadores para jabones','1139');addOption(formu.SUBFAMILIA,'Escobilleros','1140');addOption(formu.SUBFAMILIA,'Papeleras aseo','1141');
+            }
+          
+            if (valor_familia=='17'){          	             
+              addOption(formu.SUBFAMILIA,'Papel impresora','1142');addOption(formu.SUBFAMILIA,'Papel fotocopiadora','1143');addOption(formu.SUBFAMILIA,'Blocs y cuadernos','1144');addOption(formu.SUBFAMILIA,'Sobres y Bolsas','1145');addOption(formu.SUBFAMILIA,'Blocs de Notas Autoadhesivas','1146');addOption(formu.SUBFAMILIA,'Bobinas papel calculadoras','1147');addOption(formu.SUBFAMILIA,'Etiq. Auto. Fotocopiadora','1148');addOption(formu.SUBFAMILIA,'Etiq. Auto. Ordenador','1149');addOption(formu.SUBFAMILIA,'Etiq. Auto. Oficina','1150');addOption(formu.SUBFAMILIA,'Papel Carbón','1151');addOption(formu.SUBFAMILIA,'Papel Especial Imp. Ink-Jet','1152');addOption(formu.SUBFAMILIA,'Papel para Fax','1153');addOption(formu.SUBFAMILIA,'Papel Fotocopiadora e Impresora','1154');addOption(formu.SUBFAMILIA,'Papel Ordenador','1155');addOption(formu.SUBFAMILIA,'Tacos de Notas','1156');addOption(formu.SUBFAMILIA,'Envoltorios','1157');addOption(formu.SUBFAMILIA,'Etiquetas Autoadhesivas Impresoras','1158');addOption(formu.SUBFAMILIA,'Papeles especiales Plotter','1159');addOption(formu.SUBFAMILIA,'Pantone','1160');
+            }
+          
+            if (valor_familia=='18'){          	             
+              addOption(formu.SUBFAMILIA,'Hardware','1161');addOption(formu.SUBFAMILIA,'Consumibles','1162');addOption(formu.SUBFAMILIA,'Complementos y Organización','1163');addOption(formu.SUBFAMILIA,'Informática Varios','1164');
+            }
+          
+            if (valor_familia=='19'){          	             
+              addOption(formu.SUBFAMILIA,'Fichas','1165');addOption(formu.SUBFAMILIA,'Libros Registro','1166');addOption(formu.SUBFAMILIA,'Impresos en Continuo','1167');addOption(formu.SUBFAMILIA,'Talonarios','1168');
+            }
+          
+            if (valor_familia=='20'){          	             
+              addOption(formu.SUBFAMILIA,'Dossiers','1177');addOption(formu.SUBFAMILIA,'Ficheros','1178');addOption(formu.SUBFAMILIA,'Fundas','1179');addOption(formu.SUBFAMILIA,'Indices y Separadores','1180');addOption(formu.SUBFAMILIA,'Subcarpetas','1181');addOption(formu.SUBFAMILIA,'Archivo de Palanca','1169');addOption(formu.SUBFAMILIA,'Archivo definitivo','1170');addOption(formu.SUBFAMILIA,'Archivo Carpetas Colgantes','1171');addOption(formu.SUBFAMILIA,'Archivo Papel Continuo','1172');addOption(formu.SUBFAMILIA,'Carpetas Colgantes','1173');addOption(formu.SUBFAMILIA,'Carpetas de Fundas','1174');addOption(formu.SUBFAMILIA,'Carpetas y Cajas','1175');addOption(formu.SUBFAMILIA,'Clasificadores Acordeón','1176');
+            }
+          
+            if (valor_familia=='21'){          	             
+              addOption(formu.SUBFAMILIA,'Calculadoras','1182');addOption(formu.SUBFAMILIA,'Destructoras','1183');addOption(formu.SUBFAMILIA,'Fax','1184');addOption(formu.SUBFAMILIA,'Fotocopiadoras','1185');addOption(formu.SUBFAMILIA,'Guillotinas y Cizallas','1186');addOption(formu.SUBFAMILIA,'Maquinas de Escribir','1187');addOption(formu.SUBFAMILIA,'Detectores de Billetes','1188');
+            }
+          
+            if (valor_familia=='22'){          	             
+              addOption(formu.SUBFAMILIA,'Bolígrafos','1189');addOption(formu.SUBFAMILIA,'Marcadores fluorescentes','1190');addOption(formu.SUBFAMILIA,'Correctores Líquidos','1191');addOption(formu.SUBFAMILIA,'Corrector De Papel','1192');addOption(formu.SUBFAMILIA,'Gomas De Borrar','1193');addOption(formu.SUBFAMILIA,'Afilalápices','1194');addOption(formu.SUBFAMILIA,'Lápices','1195');addOption(formu.SUBFAMILIA,'Cintas Correctoras','1196');addOption(formu.SUBFAMILIA,'Minas y Recambios','1197');addOption(formu.SUBFAMILIA,'Plumas','1198');addOption(formu.SUBFAMILIA,'Portaminas','1199');addOption(formu.SUBFAMILIA,'Rotuladores','1200');addOption(formu.SUBFAMILIA,'Dibujo','1201');
+            }
+          
+            if (valor_familia=='23'){          	             
+              addOption(formu.SUBFAMILIA,'Agendas','1202');addOption(formu.SUBFAMILIA,'Apoya Libros','1203');addOption(formu.SUBFAMILIA,'Bandejas Clasificación','1204');addOption(formu.SUBFAMILIA,'Cajas de Monedas','1205');addOption(formu.SUBFAMILIA,'Carpetas Portablocs','1206');addOption(formu.SUBFAMILIA,'Ceniceros','1207');addOption(formu.SUBFAMILIA,'Cintas Adhesivas','1208');addOption(formu.SUBFAMILIA,'Clasificación Llaves','1209');addOption(formu.SUBFAMILIA,'Colas y Pegamentos','1210');addOption(formu.SUBFAMILIA,'Complementos Sobremesa','1211');addOption(formu.SUBFAMILIA,'Conjunto de Escritorio','1212');addOption(formu.SUBFAMILIA,'Cutters','1213');addOption(formu.SUBFAMILIA,'Dibujo','1214');addOption(formu.SUBFAMILIA,'Embalaje','1215');addOption(formu.SUBFAMILIA,'Grapadoras y Grapas','1216');addOption(formu.SUBFAMILIA,'Maletines Bolsas','1217');addOption(formu.SUBFAMILIA,'Papeleras','1218');addOption(formu.SUBFAMILIA,'Plannings','1219');addOption(formu.SUBFAMILIA,'Revisteros','1220');addOption(formu.SUBFAMILIA,'Sellos y Tampones','1221');addOption(formu.SUBFAMILIA,'Sujeción','1222');addOption(formu.SUBFAMILIA,'Taladros','1223');addOption(formu.SUBFAMILIA,'Tarjeteros','1224');addOption(formu.SUBFAMILIA,'Tijeras','1225');addOption(formu.SUBFAMILIA,'Diccionarios y Guías','1226');
+            }
+          
+            if (valor_familia=='24'){          	             
+              addOption(formu.SUBFAMILIA,'Complementos para Proyecciones','1227');addOption(formu.SUBFAMILIA,'Consumibles y Complementos de Encuadernación','1228');addOption(formu.SUBFAMILIA,'Identificadores','1229');addOption(formu.SUBFAMILIA,'Pizarras','1230');addOption(formu.SUBFAMILIA,'Consumibles y Complementos de Plastificación','1231');addOption(formu.SUBFAMILIA,'Consumibles de Retroproyección','1232');addOption(formu.SUBFAMILIA,'Rotulación','1233');addOption(formu.SUBFAMILIA,'Etiquetaje','1234');addOption(formu.SUBFAMILIA,'Máquinas de Encuadernación','1235');addOption(formu.SUBFAMILIA,'Máquinas de Plastificación','1236');addOption(formu.SUBFAMILIA,'Máquinas de Retroproyección','1237');addOption(formu.SUBFAMILIA,'Complementos de Congresos','1238');addOption(formu.SUBFAMILIA,'Carpetas porta-blocks','1239');
+            }
+          
+            if (valor_familia=='25'){          	             
+              addOption(formu.SUBFAMILIA,'Telefonía Varios','1240');addOption(formu.SUBFAMILIA,'Accesorios Telefonía Movil','1241');addOption(formu.SUBFAMILIA,'Teléfonos Inalámbricos','1242');addOption(formu.SUBFAMILIA,'Teléfonos Sobremesa','1243');
+            }
+          
+            if (valor_familia=='26'){          	             
+              addOption(formu.SUBFAMILIA,'Mobiliario para zonas comunes','1244');addOption(formu.SUBFAMILIA,'Complementos','1245');addOption(formu.SUBFAMILIA,'Mobiliario para despachos','1246');addOption(formu.SUBFAMILIA,'Sillas','1247');addOption(formu.SUBFAMILIA,'Mesas','1248');addOption(formu.SUBFAMILIA,'Muebles Metálicos','1249');addOption(formu.SUBFAMILIA,'Sistemas Modulares','1250');addOption(formu.SUBFAMILIA,'Librerias','1251');addOption(formu.SUBFAMILIA,'Estanterias','1252');addOption(formu.SUBFAMILIA,'Armarios','1253');addOption(formu.SUBFAMILIA,'Complementos de Mobiliario','1254');addOption(formu.SUBFAMILIA,'Mobiliario para dormitorios','1255');addOption(formu.SUBFAMILIA,'Mobiliario no clínico para consultas','1256');addOption(formu.SUBFAMILIA,'Mobiliario para aseos','1257');addOption(formu.SUBFAMILIA,'Otro mobiliario no clínico ','1258');
+            }
+          
+            if (valor_familia=='27'){          	             
+              addOption(formu.SUBFAMILIA,'Mobiliario clínico para zonas comunes','1259');addOption(formu.SUBFAMILIA,'Mobiliario clínico para consultas','1260');addOption(formu.SUBFAMILIA,'Mobiliario clínico para habitaciones','1261');addOption(formu.SUBFAMILIA,'Mobiliario clínico para zonas quirúrgicas','1262');addOption(formu.SUBFAMILIA,'Mobiliario clínico para rehabilitación','1263');addOption(formu.SUBFAMILIA,'Mobiliario clínico para zonas especiales','1264');addOption(formu.SUBFAMILIA,'Mobiliario clínico para zonas con cargas magnéticas','1265');addOption(formu.SUBFAMILIA,'Mobiliario clínico para zonas con exposición radiológica','1266');addOption(formu.SUBFAMILIA,'Mobiliario clínico para zonas UCI','1267');addOption(formu.SUBFAMILIA,'Otro mobiliario clínico para zonas especiales','1268');addOption(formu.SUBFAMILIA,'Otro mobiliario  clínico ','1269');
+            }
+          
+            if (valor_familia=='28'){          	             
+              
+            }
+          
+            if (valor_familia=='29'){          	             
+              addOption(formu.SUBFAMILIA,'Bombillas','1270');addOption(formu.SUBFAMILIA,'Fluorescentes','1271');addOption(formu.SUBFAMILIA,'Otros materiales para iluminación','1272');
+            }
+          
+            if (valor_familia=='30'){          	             
+              addOption(formu.SUBFAMILIA,'Pintura','1273');addOption(formu.SUBFAMILIA,'Elementos para pintar','1274');addOption(formu.SUBFAMILIA,'Otros materiales de pintura','1275');
+            }
+          
+            if (valor_familia=='31'){          	             
+              addOption(formu.SUBFAMILIA,'Pilas','1276');addOption(formu.SUBFAMILIA,'Baterias','1277');addOption(formu.SUBFAMILIA,'Otros materiales de carga de energia','1278');
+            }
+          
+            if (valor_familia=='32'){          	             
+              addOption(formu.SUBFAMILIA,'Servilletas y servilleteros','1279');addOption(formu.SUBFAMILIA,'Servilletas','1280');addOption(formu.SUBFAMILIA,'Servilletas impresas','1281');addOption(formu.SUBFAMILIA,'Servillestas en dispensador','1282');addOption(formu.SUBFAMILIA,'Servilletero','1283');addOption(formu.SUBFAMILIA,'Vasos','1284');addOption(formu.SUBFAMILIA,'Vasos refresco','1285');addOption(formu.SUBFAMILIA,'Vasos café','1286');addOption(formu.SUBFAMILIA,'Cubiertos','1287');addOption(formu.SUBFAMILIA,'Cucharas soperas','1288');addOption(formu.SUBFAMILIA,'Tenedores','1289');addOption(formu.SUBFAMILIA,'Cuchillos','1290');addOption(formu.SUBFAMILIA,'Cucharillas postre','1291');addOption(formu.SUBFAMILIA,'Paletinas café','1292');addOption(formu.SUBFAMILIA,'Platos','1293');addOption(formu.SUBFAMILIA,'Manteles','1294');addOption(formu.SUBFAMILIA,'Otros materiales de servicios de mesa  ','1295');
+            }
+          
+            if (valor_familia=='33'){          	             
+              
+            }
+          
+            if (valor_familia=='34'){          	             
+              
+            }
+          
+            if (valor_familia=='35'){          	             
+              
+            }
+          
+            if (valor_familia=='36'){          	             
+              
+            }
+          
+            if (valor_familia=='37'){          	             
+              
+            }
+          
+            if (valor_familia=='38'){          	             
+              
+            }
+          
+            if (valor_familia=='39'){          	             
+              
+            }
+          
+            if (valor_familia=='40'){          	             
+              
+            }
+          
+            if (valor_familia=='41'){          	             
+              
+            }
+          
+            if (valor_familia=='42'){          	             
+              
+            }
+                         	    	    	   	    	              
+          formu.SUBFAMILIA.selectedIndex=0;           
+	 
+	}
+	
+	function Actualizar() {
+	  var formu = window.document.forms[0];	  	  
+	    
+	      seleccionarCombo(formu.elements['CATEGORIA'],'');
+	      refillFamilias(formu,''); 	      
+	    
+	      seleccionarCombo(formu.elements['FAMILIA'],'');
+	      refillSubfamilias(formu,'');
+	    
+	      seleccionarCombo(formu.elements['SUBFAMILIA'],'');
+	    
+	}
+	
+	function Actua(formu){
+	    SubmitForm(formu); 
+	}		
+	//-->
+	</script>	
+        </head>
+   <body>
+      <form name="BuscaProductos" method="post" action="PROPLista.xsql">
+         <input type="hidden" name="LLP_CERTIFICACION" value="">
+         <input type="hidden" name="OPERACION" value="">
+         <input type="hidden" name="LLP_ID" value="">
+         <input type="hidden" name="LP_ID" value="">
+         <input type="hidden" name="LLP_PROVEEDOR" value="Medical VM">
+         <input type="hidden" name="EMP_ID" value="1">
+         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+               <td colspan="4" align="center">
+                  <p class="tituloPag">Mantenimiento de Productos
+        de Medical VM</p>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+               <td colspan="4"></td>
+            </tr>
+            <tr>
+               <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr bgcolor="#A0D8D7">
+               <td colspan="4">
+                  <p class="tituloForm">Productos:
+        </p>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4">&nbsp;</td>
+            </tr>
+            <input type="hidden" name="LLP_CATEGORIA">
+            <input type="hidden" name="LLP_FAMILIA">
+            <input type="hidden" name="LLP_SUBFAMILIA">
+            <tr>
+               <td colspan="4">
+                  <table size="100%" border="0" cellspacing="0" cellpadding="0">
+                     <tr>
+                        <td width="16%">&nbsp;</td>
+                        <td width="28%">
+                           <p class="tituloCamp">Categor&iacute;a:
+        </p>
+                        </td>
+                        <td width="28%">
+                           <p class="tituloCamp">Familia:
+        </p>
+                        </td>
+                        <td width="28%">
+                           <p class="tituloCamp">Subfamilia:
+        </p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="4">
+                           <table width="100%" cellspacing="0" cellpadding="0">
+                              <tr>
+                                 <td>
+                                    <select name="CATEGORIA" size="3" onChange="refillFamilias(this.form,this.options[this.selectedIndex].value);">
+                                       <option selected>Seleccione categor&iacute;a</option>
+                                       <option value="1">Material sanitario</option>
+                                       <option value="2">Material no sanitario</option>
+                                       <option value="3">Material de laboratorio</option>
+                                       <option value="4">Equipamiento médico</option>
+                                       <option value="5">Electromedicina</option>
+                                       <option value="6">Fármacos</option>
+                                       <option value="7">Mobiliario clínico</option>
+                                       <option value="8">Mobiliario no clínico</option>
+                                       <option value="9">Servicios</option>
+                                       <option value="50">Material de limpieza y aseo</option>
+                                       <option value="51">Material de oficina</option>
+                                       <option value="52">Mobiliario</option>
+                                       <option value="53">Material de mantenimiento</option>
+                                       <option value="56">Material de hosteleria</option>
+                                       <option value="57">material de Jardineria</option>
+                                       <option value="58">uniformes laborales</option>
+                                    </select>
+                                 </td>
+                                 <td>
+                                    <select name="FAMILIA" size="3" onChange="refillSubfamilias(this.form,this.options[this.selectedIndex].value);">
+                                       <option selected>Seleccione familia</option>
+                                    </select>
+                                 </td>
+                                 <td>
+                                    <select name="SUBFAMILIA" size="3">
+                                       <option selected>Seleccione subfamilia</option>
+                                    </select>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <td width="15%">
+                  <p class="tituloCamp">Nombre:
+        </p>
+               </td>
+               <td width="35%">
+                  <input type="text" size="27" name="LLP_NOMBRE" value="">
+               </td>
+               <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+               <td width="15%">
+                  <p class="tituloCamp">Marca:
+        </p>
+               </td>
+               <td width="35%">
+                  <input type="text" size="27" name="LLP_MARCA" value="">
+               </td>
+               <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+               <td>
+                  <p class="tituloCamp">Fabricante:
+        </p>
+               </td>
+               <td colspan="3">
+                  <input type="text" size="27" name="LLP_FABRICANTE" value="">
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <p class="tituloCamp">Tipo de producto</p>
+               </td>
+               <td colspan="3">
+                  <select name="LLP_TIPO_PRODUCTO">
+                     <option value="1">Tipo de producto</option>
+                     <option value="2">Nuevo</option>
+                     <option value="3">Segunda mano</option>
+                     <option value="4">Servicio</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4">
+                  <br>
+               </td>
+            </tr>
+            <tr bgcolor="#A0D8D7">
+               <td colspan="4">
+                  <p class="tituloform">Opciones de la b&uacute;squeda:</p>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+               <td>
+                  <p class="tituloCamp">Orden:
+      </p>
+               </td>
+               <td colspan="3">
+                  <select name="ORDERBY">
+                     <option value="DEF">Por defecto</option>
+                     <option value="ALF">Alfabetico</option>
+                     <option value="FAB">Por Fabricante</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2"></td>
+            </tr>
+            <tr>
+               <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr align="center">
+               <td>
+                  <a href="javascript:Linka(&#39;PROPValida.xsql&#39;);">
+                     <img src="http://www.newco.dev.br/images/Botones/Aceptar.gif" border="0" onMouseOver="this.src=&#39;http://www.newco.dev.br/images/Botones/Aceptar_mov.gif&#39;;window.status=&#39;&#39;;return true" onMouseOut="this.src=&#39;http://www.newco.dev.br/images/Botones/Aceptar.gif&#39;;window.status=&#39;&#39;;return true">
+                  </a>
+                  <br>Confirmar Productos</td>
+               <td colspan="2" width="80%">&nbsp;</td>
+               <td>
+                  <a href="javascript:Actua(document.forms[0]);">
+                     <img src="http://www.newco.dev.br/images/Botones/Buscar.gif" border="0" onMouseOver="this.src=&#39;http://www.newco.dev.br/images/Botones/Buscar_mov.gif&#39;;window.status=&#39;&#39;;return true" onMouseOut="this.src=&#39;http://www.newco.dev.br/images/Botones/Buscar.gif&#39;;window.status=&#39;&#39;;return true">
+                  </a>
+                  <br>Buscar Productos</td>
+            </tr>
+         </table>
+      </form>
+      <script>
+             Actualizar();
+            </script>
+   </body>
+</html>

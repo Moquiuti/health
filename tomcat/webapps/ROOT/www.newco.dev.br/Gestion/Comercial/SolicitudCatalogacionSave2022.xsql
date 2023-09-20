@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Solicitud de Catalogacion [SAVE]. Nuevo disenno 2022.
+	Ultima revision: ET 16may22 10:42
+-->
+<?xml-stylesheet type="text/xsl" href="SolicitudCatalogacionHTML2022.xsl"?>
+
+<SolicitudCatalogacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		SC_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SolicitudCatalogacionSave');
+		IF US_ID > 0 THEN
+			SC_ID:=SOLICITUDESCATALOGACION_PCK.ModificarSolicitud(
+				US_ID,
+				'{@SC_ID}',
+				'{@SC_DESCRIPCION}',
+				'{@SC_DIAGNOSTICO}',
+				'{@SC_SOLUCION}',
+				'{@SC_IDDOCSOLICITUD}',
+				'{@SC_IDDOCDIAGNOSTICO}',
+				'{@SC_IDDOCSOLUCION}',
+				'{@SC_IDESTADO}'
+			);
+
+			IF SC_ID > 0 THEN
+				HTP.P('<OK>'||SC_ID||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SolicitudCatalogacion');
+		IF US_ID>=0 THEN		   
+			SOLICITUDESCATALOGACION_PCK.Solicitud_XML(
+				US_ID,
+				'{@SC_ID}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</SolicitudCatalogacion>

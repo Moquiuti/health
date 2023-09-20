@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EMPMantenComercialSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EMPMantenComercialSaveHTML.xsl"?>
+
+<MantenimientoEmpresas xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-param name="ID"/>
+ 
+	<xsql:dml>
+	<![CDATA[
+	BEGIN
+	        EMPRESAS_PCK.AsignarComercialDefecto (
+	                                '{@EMP_ID}',
+	                                '{@EMP_COMERCIAL_DEFECTO}');
+	END;	  
+	]]>	  
+	</xsql:dml>
+
+</MantenimientoEmpresas>
+

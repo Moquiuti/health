@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	COpia el logo de la empresa a todos sus centros
+	Ultima revision: ET 25nov19 14:10
+-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href = "http://www.newco.dev.br/General/General.xsl"/>
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+<xsl:param name="lang" select="@lang"/>
+
+<xsl:template match="/CopiarLogo">
+
+	<xsl:text>{"CopiarLogo":</xsl:text>
+		<xsl:text>{"estado":"</xsl:text>
+		<xsl:if test="OK">
+			<xsl:text>OK",</xsl:text>
+			<xsl:text>"id":"</xsl:text>
+			<xsl:value-of select="OK"/>
+		</xsl:if>
+		<xsl:if test="ERROR">
+			<xsl:text>ERROR</xsl:text>
+		</xsl:if>
+		<xsl:text>"}</xsl:text>
+	<xsl:text>}</xsl:text>
+
+</xsl:template>
+</xsl:stylesheet>

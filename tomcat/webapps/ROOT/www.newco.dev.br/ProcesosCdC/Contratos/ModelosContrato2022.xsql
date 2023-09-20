@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Listado/Buscador de modelos contratos. Nuevo disenno 2022.
+	Ultima reviosión: ET 12may22 12:38
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="ModelosContratoHTML2022.xsl"?>
+
+<ModelosContrato xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ModelosContratos');
+		IF US_ID>=0 THEN		   
+			Contratos_Modelos_PCK.Modelos_XML(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+				'{@FIDRESPONSABLE}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+				'{@ORDEN}',
+				'{@SENTIDO}',
+				20,
+				0,
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModelosContrato>

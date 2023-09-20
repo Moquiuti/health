@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Listado del catalogo privado en formato CSV
+	Ultima revision: ET 10mar20 08:45
+-->
+<?xml-stylesheet type="text/xsl" href="ExcelesHTML.xsl"?>
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="VENTANA"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="PRODUCTO"/>
+	<xsql:include-param name="ORIGEN"/>
+	<xsql:include-param name="TYPE"/>
+
+        <xsql:include-param name="IDLICITACION"/>
+
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="IDINFORME" value="{@IDINFORME}"/>
+        
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		PRODUCTO_ID	NUMBER := NULL;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PreciosYComisiones');
+		IF US_ID>=0 THEN
+
+			IF '{@IDPRODUCTO}' IS NOT NULL THEN
+				PRODUCTO_ID := '{@IDPRODUCTO}';
+			END IF;
+
+			CATALOGOPRIVADO_SEG_PCK.FamiliasYProductos_Excel
+			(
+				US_ID,
+				'{@IDCLIENTE}',		--	'IDCliente'
+				'{@IDINFORME}',		--	'Comisiones'
+				'{@IDCATEGORIA}',
+				'{@IDFAMILIA}',
+				'{@IDSUBFAMILIA}',
+				'{@IDGRUPO}',
+				'{@IDPROVEEDOR}',
+				'{@PRODUCTO}',
+				'{@PROVEEDOR}',
+				'{@IDCENTROCLIENTE}',
+				'{@SINUSAR}',
+				'{@ADJUDICADO}',
+				'{@MES}',
+				'{@ANNO}',
+				'{@TIPOFILTRO}',
+				PRODUCTO_ID,			-- 11mar14 - solo MVM - Anyadir textbox al buscador para buscar por IDPRODUCTO (solo MVM)
+				'{@PRIMEROSPEDIDOS}',	-- 13mar14 - solo MVM
+				'{@CON_CONSUMO}',		-- 13mar14 - solo MVM
+				'{@SIN_CONSUMO}',		-- 13mar14 - solo MVM
+				'{@CONSUMO_MINIMO}',	-- 11abr14 - solo MVM
+				'{@INFORMAR_X_CENTRO}',	-- 11abr14 - solo MVM
+				'{@IDLICITACION}',
+                '{@SOLO_PROD_ESTANDAR}',
+                '{@CON_CONTRATO}',		--	7jun17	Solo con contrato
+                '{@REGULADOS}',			--	16ene19	Regulados
+                '{@ORDEN1}',			--	16ene19	Orden1
+				'{@SIN_STOCK}',			--	16ene19 Sin stock
+				'{@PROV_BLOQUEADO}',	--	16ene19 Proveedor bloqueado
+				'{@TRASPASADOS}',		--	15nov19
+				'{@CLASIF_PROVISIONAL}'	--	15nov19
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</DescargaExcel>

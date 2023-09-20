@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+	Confirma que se ha enviado el comentario sobre una celda de eis matriz
+
+	Llamada ajax - no incluir juego de caracteres en la cabecera xml
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmComentarioMatriz.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmComentarioMatriz.xsl"?>
+
+<confirmComentarioMatriz xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="COMENTARIO"/>
+
+<xsql:include-request-params/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		RES		VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISMatriz');
+		IF US_ID>=0 THEN
+			RES := EIS_MATRIZ_PCK.GuardarComentario_2(
+				'{@US_ID}',
+				'{@IDEMPRESA}',
+				'{@IDINDICADOR}',
+				'{@IDAGRUPARPOR_HOR}',
+				'{@IDAGRUPARPOR_VER}',
+				'{@IDHOR}',
+				'{@IDVER}',
+				'{@FILTROS}',
+				'{@COMENTARIO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF RES = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</confirmComentarioMatriz>

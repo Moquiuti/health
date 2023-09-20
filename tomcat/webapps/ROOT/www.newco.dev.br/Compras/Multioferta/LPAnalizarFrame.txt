@@ -1,0 +1,46 @@
+2dic16	ET Problema para inicializar lugar de entrega en usuarios multicentro
+21dic16	ET Nuevo diseño
+26may17	ET Para plantillas muy grandes (las de Vitaldent por ejemplo) no mostraremos las líneas no seleccionadas -> cambio a LPAnalizar_260517.js
+26may17	ET Empezamos a mostrar resultados a partir de 3 caracteres de la cadena de búsqueda, para evitar demasiados resultados
+27may17 ET Cargar pedidos desde excel (codigo:cantidad)
+28may17 ET Algunos ajustes necesarios para el punto anterior
+01jun17	ET Limite de plantilla máximo para el funcionamiento tradicional ampliado a 150 por defecto -> cambio a LPAnalizar_010617.js
+03nov17	ET Cambios para aceptar divisas independientes del idioma
+06nov17	ET Cambios para aceptar divisas independientes del idioma
+13dic17	ET Quitar el límite de importe de 10.000 euros en los pedidos
+24ene18	ET Marcar productos regulados, no permitir comprar producto normal y regulado en el mismo pedido
+26mar18	ET Quitamos el filtro de mínimo 3 caracteres en el buscador. Cambiamos JS: LPAnalizar_260318.js
+4may18	ET Marcar packs, no permitir comprar producto normal y pack en el mismo pedido. Cambiamos JS: LPAnalizar_040518.js
+20jun18	ET Si no se informa la cantidad en la carga desde fichero, poner la unidad por lote -> cambio a LPAnalizar_200618.js
+22ago18	ET Revisión decimales, quitar divisa junto a cada precio (dejar solo en cabecera)
+16ago19	ET No se validan correctamente los pedidos mínimos elevados
+30ago19 ET Permitir saltar el pedido mínimo a las empresas configuradas así. LPAnalizar_300819.js
+04set19 ET Se produce un error en OHSJD y el pedido no pasa al segundo paso. LPAnalizar_040919.js
+25set19 ET Se mostraba R$R$ en el pedido minimo 
+04oct19 ET Pasar de 150 a 175 productos visibles por defecto (solicitado por HealtHTime). LPAnalizar_041019.js
+04feb20 ET Permitir a los compradores que se pueden saltar el pedido mínimo, saltarse también el plazo de entrega (solicitado por Unimed). LPAnalizar_040220.js
+07feb20 ET Problema con el desplegable de plazos de entrega (se mostraban plazos inferiores al mínimo del proveedor para clientes que no permiten esta opción) LPAnalizar_070220.js
+10feb20 ET Al guardar el primer paso del pedido, LPAnalizarSave abre CVGenerarHTML.xsl en lugar de la página que recargaba esta
+05jun20 ET No se comprueban bien las unidades por lote al cargar pedidos desde el Area de texto LPAnalizar_050620.js
+07set20 ET Permitir 7 digitos para Cantidad (Solicitado por Imbanaco). LPAnalizar_070920.js
+13oct20 ET Incluir filtro de "tipo de negociación" para los productos
+20oct20 ET Error validando pedido mínimo LPAnalizar_201020.js
+26oct20 ET En caso de rotura de stock, la frase "NO SOLICITAR" impide la compra. LPAnalizar_261020.js
+27oct20 ET Todavía podían cambiando cantidad, bloqueamos también este campo. LPAnalizar_271020.js
+09nov20 ET Incluir (i) para información sobre bonificaciones LPAnalizar_091120.js
+25nov20 ET Indicar con semaforo ambar cuando no sea opción 1 (OHSJD) LPAnalizar_251120.js
+23dic20 ET Normalizamos en la base de datos las cantidades en funcion de Unidades por lote: no hace falta volver a normalizar al cargar la pagina. LPAnalizar_231220.js
+11ene21 ET Multidivisa: marcar lineas de producto en DIVISA no por defecto. LPAnalizar_110121.js
+22ene21 ET Multidivisa: incluir tipo de cambio, desactivar pedido minimo. LPAnalizar_220121.js
+10feb21 ET Carga paso a paso de lineas de producto en plantillas grandes. LPAnalizar_100221.js
+08mar21 ET Ajustes en XSQL para pedidos desde catalogo
+03may21 ET Extraer a Excel la seleccion realizada por el usuario  LPAnalizar_030521a.js
+19may21 ET Mostrar texto de pedido minimo si el pedido minimo es 0
+01jul21 ET Separar pedidos de convenio o deposito, igual que lso regulados LPAnalizar_010721.js
+23jul21 ET En la exportacion excel, si no hay ref.cliente, utilizar ref.MVM  LPAnalizar_230721.js
+16ago21 ET En la carga paso a paso, no se esta recupando correctamente las marcas de deposito y convenio (LPProductosPlantillaJSON)
+16ago21 ET En los pedidos desde catalogo, ocultar la opcion de incluir mas productos 
+16ago21 ET Para carga CSV, si el producto ya esta incluido, sumaremos la cantidad solicitada. LPAnalizar_180821
+17set21 ET Obligar a informar el tipo de cambio. LPAnalizar_170921
+04oct21 ET Al cargar desde el areatext, comprobar tambien la divisa
+15mar22 ET Desplegable de categoria (solicitado por ITA Salud Mental). LPAnalizar_150322.js

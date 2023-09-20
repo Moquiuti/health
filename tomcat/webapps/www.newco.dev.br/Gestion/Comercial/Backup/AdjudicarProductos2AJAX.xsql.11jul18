@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Adjudica productos en las licitaciones por productos
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AdjudicarProductosJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AdjudicarProductosJSON.xsl"?>
+
+<AdjudicarProductos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdjudicarProductos2AJAX');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.AdjudicarProductos2(
+				US_ID,
+				'{@IDLIC}',
+				'{@LISTAOFERTAS}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = 'ERROR' THEN
+				HTP.P('<\ERROR>');
+			ELSE
+				HTP.P('<OK>'||v_res||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</AdjudicarProductos>

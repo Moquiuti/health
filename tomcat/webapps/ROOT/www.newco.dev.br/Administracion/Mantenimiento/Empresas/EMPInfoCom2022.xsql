@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<!-- 
+	Subficha de gestión comercial en la ficha de empresa
+	Ultima revision: ET 22feb22 11:15
+-->
+<?xml-stylesheet type="text/xsl" href="EMPInfoComHTML2022.xsl"?>
+
+<InfoCom xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<!--  obtenemos el vendedor para el usuario que esta visualizando la pagina de empresa -->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InformacionComercialEmpresa');
+		IF US_ID>0 THEN
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			--EMPRESAS_PCK.Mostrar(US_ID,'{@EMP_ID}','EMPRESA DESDE="Manten"', 'N');
+			EMPRESAS_PCK.FichaCompleta_XML(US_ID,'{@EMP_ID}','EMPRESA', 'N', 'COMERCIAL');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</InfoCom>

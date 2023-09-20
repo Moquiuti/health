@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PalabrasMasBuscadas.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PalabrasMasBuscadas.xsl"?>
+
+<Busquedas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT COUNT(LGC_ID) AS BUSQUEDAS, LGC_NOMBRE AS CADENA
+		FROM LOG_CONSULTAS, EMPRESAS
+		WHERE EMP_ID=LGC_IDEMPRESACONSULTA
+		AND EMP_ID<>1
+		AND LGC_TIMESTAMP>SYSDATE-30
+		AND LGC_NOMBRE IS NOT NULL
+		GROUP BY LGC_NOMBRE
+		ORDER BY COUNT(LGC_ID) DESC
+    ]]>
+  </xsql:query>
+  <returnHome/>
+</Busquedas>
+

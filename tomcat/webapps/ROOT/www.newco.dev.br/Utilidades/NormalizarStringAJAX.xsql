@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+ *
+ *	Dado un string, se normaliza mediante funcion PL/SQL
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NormalizarStringJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NormalizarStringJSON.xsl"?>
+
+<NormalizarString xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="FECHAREALADJ"/>
+<xsql:include-param name="FECHAREALCAD"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NormalizarStringAJAX');
+		IF US_ID>=0 THEN
+			v_res := NORMALIZAR_PCK.NormalizarString(
+				'{@CADENA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			HTP.P('<STRING_NORM>'||v_res||'</STRING_NORM>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NormalizarString>

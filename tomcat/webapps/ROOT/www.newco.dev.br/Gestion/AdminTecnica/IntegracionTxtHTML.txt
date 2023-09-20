@@ -1,0 +1,8 @@
+//	21jun17 ET	Primera versión de la página que permitirá copiar y pegar desde excel pedidos para varios centros, varios proveedores
+//	28jun17	ET	ERROR GRAVE CON & EN NOMBRE PRODUCTO O MARCA: AltaLicitacionesAjax_27jun17.js
+//	1dic17	ET	Poder escoger las referencias en el buscador del catalogo privado
+//	13dic17	ET	Se abría siempre el catálogo MVM, no el del cliente
+//	14dic17	ET	Revisión y solución varios errores
+
+
+

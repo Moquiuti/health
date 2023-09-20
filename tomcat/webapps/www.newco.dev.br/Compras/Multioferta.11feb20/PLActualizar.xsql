@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PLActualizarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PLActualizarHTML.xsl"?>
+
+<!--
+    Esta pagina solo se llama desde LPLista cuando estamos en EDICION de una 
+      plantilla. Nos permite Guardar la plantilla sin generar una Oferta.
+ +-->
+
+
+<Plantilla xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+<!--
+ |  Nombre de la página. Parametro para guardar el error en caso de xsql-error
+ +-->  
+<pagename>PLActualizar.xsql</pagename>
+<xsql:include-param name="BUSQUEDA"/>
+
+<xsql:include-owa>
+<![CDATA[
+BEGIN
+  PLANTILLAS_PCK.ActualizarPlantilla ( p_LP_ID=> '{@LP_ID}', 
+                                       p_RESPUESTA=> 'SI' );
+END;   
+]]>	  
+</xsql:include-owa>
+
+<!-- Saltamos a LPLista +-->
+
+ <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>     
+    <page>G-0010</page>
+    <caption>G-0001</caption>    
+ </jumpTo> 
+</Plantilla>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<!--
+	Guarda datos en la tabla CONDICIONESPROVEEDORES
+
+	Llamada ajax - no incluir juego de caracteres en la cabecera xml
+	Ultima revision: 20oct17 10:17
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CondProvSaveJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CondProvSaveJSON.xsl"?>
+
+<CondProveedorSave xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="FORMA_PAGO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CondProvSave');
+		IF US_ID>=0 THEN
+			v_res:=EMPRESAS_PCK.GuardarCondicionesProveedor(
+				US_ID,
+				'{@PROV_ID}',
+				'{@CODIGO}',
+				NULL,								--	No se esta utilizando, seria la forma de pago en formato texto
+				'{@GESTION_CADUCIDAD}',
+				'{@OTRAS_LICITACIONES}',
+				'{@OBSERVACIONES}',
+				'{@IDFORMAPAGO}',
+				'{@IDPLAZOPAGO}',
+				--19oct16 Nuevos campos datos bancarios
+				'{@NOMBREBANCO}',
+				'{@CODBANCO}',
+				'{@CODOFICINA}',
+				'{@CODCUENTA}',
+				'{@INFOPRIVADA}'						--	17oct17
+ 			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+
+			IF v_res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CondProveedorSave>

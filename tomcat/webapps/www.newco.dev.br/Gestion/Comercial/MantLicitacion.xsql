@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de Licitaciones
+	Ultima revisión: ET 17jun20 15:00
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="MantLicitacionHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID" value="{@LIC_ID}"/>
+<xsql:include-owa>
+
+	<![CDATA[
+	DECLARE
+		US_ID				NUMBER;
+		v_IDLicitacion		LICITACIONES.LIC_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantLicitacion');
+		
+		
+		IF US_ID>=0 AND '{@LIC_ID}' IS NULL AND NVL('{@ACCION}','XXXX')<>'NUEVO' THEN
+			LICITACIONES_PCK.NuevaLicitacion_XML
+			(
+				US_ID
+			);
+		ELSIF US_ID>=0 AND ('{@LIC_ID}' IS NOT NULL OR '{@ACCION}'='NUEVO') THEN
+		
+			IF '{@ACCION}' = 'MODIFICAR' THEN
+				v_IDLicitacion:=LICITACIONES_PCK.ModificarLicitacion(
+					US_ID,
+					'{@LIC_ID}',
+					'{@LIC_TITULO}',
+					'{@LIC_DESCRIPCION}',
+					'{@LIC_CONDENTREGA}',
+					'{@LIC_CONDPAGO}',
+					'{@LIC_CONDOTRAS}',
+					'{@LIC_MESES}',
+					'{@LIC_CONSUMO}',
+					'{@LIC_FECHADECISION}',
+					'{@LIC_PORPRODUCTO}',
+                    '{@LIC_FARMACIA}',
+                    '{@LIC_IDUSUARIOPEDIDO}',
+                    '{@LIC_IDLUGARENTREGA}',
+                    '{@LIC_CODIGOPEDIDO}',
+                    '{@LIC_OBSPEDIDO}',
+                    '{@LIC_IDFORMAPAGO}',
+                    '{@LIC_IDPLAZOPAGO}',
+					'{@LIC_FECHAADJUDICACION}',
+					'{@LIC_HORADECISION}',
+					'{@LIC_MINUTODECISION}',
+					'{@LIC_CONTINUA}',
+					'{@LIC_URGENTE}',					--	24may18
+					'{@LIC_SOLICDATOSPROV}'	,			--	24may18
+					'{@LIC_MULTIOPCION}',				--	4jul18
+					'{@LIC_IDDOCUMENTO}',				--	5mar19
+					'{@LIC_FECHAENTREGAPEDIDO}',		--	19set19
+					'{@LIC_FRETECIFOBLIGATORIO}',		--	17jun20
+					'{@LIC_PAGOAPLAZODOOBLIGATORIO}',	--	17jun20
+					'{@LIC_PRECIOOBJETIVOESTRICTO}'		--	17jun20
+				);
+			ELSIF '{@ACCION}' = 'NUEVO' THEN
+				v_IDLicitacion:=LICITACIONES_PCK.NuevaLicitacion(
+					US_ID,
+					'{@LIC_IDEMPRESA}',
+					'{@LIC_TITULO}',
+					'{@LIC_DESCRIPCION}',
+					'{@LIC_CONDENTREGA}',
+					'{@LIC_CONDPAGO}',
+					'{@LIC_CONDOTRAS}',
+					'{@LIC_MESES}',
+					'{@LIC_CONSUMO}',
+					'{@LIC_FECHADECISION}',
+					'{@LIC_PORPRODUCTO}',
+                    NULL,
+                    '{@LIC_FARMACIA}',
+                    '{@LIC_IDUSUARIOPEDIDO}',
+                    '{@LIC_IDLUGARENTREGA}',
+                    '{@LIC_CODIGOPEDIDO}',
+                    '{@LIC_OBSPEDIDO}',
+                    '{@LIC_IDFORMAPAGO}',
+                    '{@LIC_IDPLAZOPAGO}',
+					NULL,
+					NULL,
+					'{@LIC_AGREGADA}',
+					'{@LIC_HORADECISION}',
+					'{@LIC_MINUTODECISION}',
+					'{@LIC_CONTINUA}',
+					'{@LIC_URGENTE}',					--	24may18
+					'{@LIC_SOLICDATOSPROV}',			--	24may18
+					'{@LIC_MULTIOPCION}',				--	4jul18
+					'{@LIC_IDDOCUMENTO}',				--	5mar19
+					'{@LIC_FECHAENTREGAPEDIDO}',		--	19set19
+					'{@LIC_FRETECIFOBLIGATORIO}',		--	17jun20
+					'{@LIC_PAGOAPLAZODOOBLIGATORIO}',	--	17jun20
+					'{@LIC_PRECIOOBJETIVOESTRICTO}',	--	17jun20
+					NULL,
+					NULL
+				);
+			ELSIF '{@ACCION}' = 'INFOPEDIDO' THEN
+				v_IDLicitacion:=LICITACIONES_PCK.ModificarCamposPedidos(
+					US_ID,
+					'{@LIC_ID}',
+					'{@LIC_IDUSUARIOPEDIDO}',
+					'{@LIC_IDLUGARENTREGA}',
+					'{@LIC_CODIGOPEDIDO}',
+					'{@LIC_OBSPEDIDO}',
+                    '{@LIC_IDFORMAPAGO}',
+                    '{@LIC_IDPLAZOPAGO}'
+				);
+			ELSE
+				v_IDLicitacion:='{@LIC_ID}';
+			END IF;
+		
+			LICITACIONES_PCK.Licitacion_XML(
+				US_ID,
+				v_IDLicitacion,
+				NULL,
+				'{@IDCENTROAINFORMAR}'
+			);
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

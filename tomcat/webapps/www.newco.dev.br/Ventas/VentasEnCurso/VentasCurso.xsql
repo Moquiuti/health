@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VentasCursoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VentasCursoHTML.xsl"?>
+
+<Generar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <pagename>CVAnalisis</pagename>
+
+ <xsql:include-owa>
+   MULTIOFERTAS_SEGUIMIENTO_PCK.MultiofertasEnCurso('{@US_ID}','VENTAS','{@ESTADO}'); 
+ </xsql:include-owa>
+
+ <!--<button label="Analizar" caption="IMG-0300">
+   <name_function>Envia</name_function>
+   <param>document.forms[0]</param>
+   <param>'CVAnalizar.xsql'</param>   
+ </button>-->
+
+ <!--<button label="Seleccionar" caption="IMG-0440">
+   <name_function>Envia</name_function>
+   <param>document.forms[0]</param>
+   <param>'CVAnalizar.xsql'</param>
+ </button>-->
+ 
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>IMG-0040</caption> 
+  </jumpTo> 
+</Generar>

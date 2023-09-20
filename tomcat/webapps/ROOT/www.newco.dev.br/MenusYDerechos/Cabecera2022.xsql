@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Cabecera de la página principal MVM
+	ultima revision: ET 5dic22 16:30
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="CabeceraHTML2022.xsl"?>
+
+
+<Cabecera xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LANG"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="ACCION" value="{@ACCION}"/>
+
+  <xsql:include-owa>
+        MENUS_PCK.Cabecera(SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Cabecera'));
+  </xsql:include-owa>
+  
+  <xsql:include-owa>
+        MENUS_PCK.menuPrincipal(SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MenuPrincipal'));
+  </xsql:include-owa>
+  
+</Cabecera>
+

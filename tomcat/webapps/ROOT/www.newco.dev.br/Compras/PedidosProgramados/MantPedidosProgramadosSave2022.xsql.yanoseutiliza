@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ficha de PROGRAMA guardado. Nuevo disenno 2022
+	Ultima revision: ET 22ago22 09:30
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="MantPedidosProgramadosSaveHTML2022.xsl"?>
+-->
+<PedidosProgramados xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="VENTANA"/>
+  <xsql:include-param name="IDUSUARIOCONSULTA"/>
+  <xsql:include-param name="FECHANO_ENTREGA"/>
+  <xsql:include-param name="ACTUALIZARPAGINA"/>
+  <xsql:include-param name="MANUAL"/>
+  <xsql:include-param name="EDITAR_FECHAS"/>
+  <xsql:include-param name="DESDEOFERTA"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidosProgramadosSave');
+		IF US_ID>=0 THEN
+			PEDIDOSPROGRAMADOS_PCK.PedidoProgramado(
+			  '{@PEDP_ID}',
+			  '{@IDOFERTAMODELO}',
+			  '{@IDEMPRESA}',
+			  '{@IDCENTRO}',
+			  '{@IDUSUARIO}',
+			  '{@IDFRECUENCIA}',
+			  '{@FECHA_INICIO}',
+			  '{@FINALICACION_FECHA}',
+			  '{@FECHANO_LANZAMIENTO}',
+			  '{@PLAZOENTREGA}',
+			  '{@DESCRIPCION}',
+			  '{@ACTIVO}',
+			  '{@CONFIRMAR}',
+			  '{@COMENTARIOS}',
+			  '{@MOSTRARALPROVEEDOR}',
+			  '{@MANUAL}',
+			  '{@RECALCULAR}'
+			);
+
+		END IF;
+	END;
+    ]]>
+  </xsql:include-owa>
+  
+  <button label="Cerrar" caption="IMG-0190">
+    <name_function>CerrarVentana</name_function>
+  </button>
+  
+  <returnHome/>
+</PedidosProgramados>
+

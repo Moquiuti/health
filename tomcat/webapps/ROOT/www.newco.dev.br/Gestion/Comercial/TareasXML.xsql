@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Mantenimiento de tareas de la gestión comercial
+	Ultima revision: ET 6jun19 17:48
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="TareasHTML.xsl"?>
+-->
+<Tareas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="FESTADO"/>
+  <xsql:include-param name="IDEMPRESA"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+      v_IDRendimiento NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','GestionComercial Tareas');
+
+			--v_IDRendimiento:=Rendimiento_Pck.Iniciar('IO','Consulta','','FIC EMP');
+
+	 		IF US_ID>0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				GESTIONCOMERCIAL_PCK.Inicio_XML(
+					US_ID,
+					'{@FIDAUTOR}',
+					'{@FIDRESPONSABLE}',
+					'{@FIDEMPRESA}',
+					'{@FIDCENTRO}',
+					'{@FTEXTO}',
+					'{@FESTADO}',
+					'{@FPRIORIDAD}',
+					'{@FIDTIPO}',
+					'{@ORDEN}',
+					'{@SENTIDO}',
+					'{@ACCION}',
+					'{@PARAMETROS}'
+				);
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+    	END IF;
+--Rendimiento_Pck.Terminar(v_IDRendimiento);
+		END;
+]]>
+</xsql:include-owa>
+</Tareas>

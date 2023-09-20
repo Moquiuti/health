@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Modifica una linea de productos de la tabla INT_LINEASFICHEROS
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ModificarLineaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ModificarLineaJSON.xsl"?>
+
+<ModificarLinea xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_LineaFichero	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ModificarLinea');
+		IF US_ID>=0 THEN
+			v_LineaFichero:=ADMINISTRACIONTECNICA_PCK.ModificarLinea(
+				US_ID,
+				'{@INTL_IDFICHERO}',
+				'{@INTL_LINEA}',
+				'{@NUEVO_TEXTO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_LineaFichero > 0 THEN
+				HTP.P('<OK>'||v_LineaFichero||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModificarLinea>

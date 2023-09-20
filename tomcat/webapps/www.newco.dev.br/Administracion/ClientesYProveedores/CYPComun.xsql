@@ -1,0 +1,109 @@
+  
+  <form xmlns:xsql="urn:oracle-xsql" connection="newco" name="Busca"  method="post" action="CYPEditaSave.xsql">
+   <!--
+    //[[ Copiamos los parametros dentro del form para volver a enviar la consulta ]]//
+   +-->
+  <!--
+      Parametros de estado de la consulta
+   +--> 
+  <!--
+      Parametros de seleccion
+   +-->
+  <xsql:include-param name="EMP_NIF"/>             
+  <xsql:include-param name="EMP_NOMBRE"/>          
+  <xsql:include-param name="EMP_DIRECCION"/>       
+  <xsql:include-param name="EMP_PROVINCIA"/>       
+  <xsql:include-param name="EMP_CPOSTAL"/>         
+  <xsql:include-param name="EMP_POBLACION"/>       
+  <xsql:include-param name="EMP_IDTIPO"/>          
+  <xsql:include-param name="EMP_TELEFONO"/>        
+  <xsql:include-param name="EMP_FAX"/>             
+  <xsql:include-param name="EMP_REFERENCIAS"/>     
+  <xsql:include-param name="ORDERBY"/>             
+  <xsql:include-param name="CONSULTAPREDEFINIDA"/>             
+   <xsql:include-param name="STYLE"/>    
+     
+  <!-- ULTIMAPAGINA es defineix a partir dels butons -->
+
+  <xsql:include-owa>
+    <![CDATA[
+    BEGIN
+      CLIENTESYPROVEEDORES_PCK.BuscarEmpresas(
+                    p_ULTIMAPAGINA => '{@ULTIMAPAGINA}',
+                    p_REGISTROSPORPAGINA => 40,
+                    p_US_ID           => SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CYPComun'),          																				
+           	    p_EMP_NIF         => '{@EMP_NIF}',        																				    
+        	    p_EMP_NOMBRE      => '{@EMP_NOMBRE}',     																				    
+        	    p_EMP_DIRECCION   => '{@EMP_DIRECCION}',  																				     
+        	    p_EMP_PROVINCIA   => '{@EMP_PROVINCIA}',  																				    
+        	    p_EMP_CPOSTAL     => '{@EMP_CPOSTAL}',    																				    
+        	    p_EMP_POBLACION   => '{@EMP_POBLACION}',  																				    
+        	    p_EMP_IDTIPO      => '{@EMP_IDTIPO}',     																				    
+        	    p_EMP_TELEFONO    => '{@EMP_TELEFONO}',   																				    
+        	    p_EMP_FAX         => '{@EMP_FAX}',        																				    
+        	    p_EMP_REFERENCIAS => '{@EMP_REFERENCIAS}',																				    
+        	    p_ORDERBY         => 'ALF',               																				
+                    p_REGISTROS_DESPUES => '{@SELECCIONARTOTAL}',
+                    p_CONSULTAPREDEFINIDA => '{@CONSULTAPREDEFINIDA}'
+                    );
+     END;                
+   ]]>     
+  </xsql:include-owa>
+
+<!--
+  La nota de calidad se pone de forma numerica.
+
+<field name="NOTACALIDAD">                             
+ <xsql:query rowset-element="dropDownList"          
+           row-element="listElem">                  
+   <![CDATA[          
+          select -1 AS "ID",                          
+                 'Seleccione nota' AS "listItem"              
+          from TIPOSCALIDADES
+          union                                   
+  select TC_ID AS "ID",                          
+         TC_DESCRIPCION AS "listItem"              
+  from TIPOSCALIDADES
+
+   ]]>                                              
+                                                    
+  <xsql:no-rows-query>                              
+     Select 'No existen calidades' "Sorry" from dual 
+  </xsql:no-rows-query>                             
+ </xsql:query>                                      
+</field>                                            
+  
++-->  
+  
+  <button label="Aceptar" caption="IMG-0030">
+    <name_function>Actua</name_function>
+    <param>document.forms[0]</param>
+  </button>  
+  
+  <ExtraButtons>
+    <button label="Seleccionar" caption="IMG-0310">
+      <name_function>TodosClientes</name_function>      
+      <param>document.forms[0]</param>
+    </button>
+    <button label="Seleccionar" caption="IMG-0320">
+      <name_function>TodosProveedores</name_function>      
+      <param>document.forms[0]</param>
+    </button>  
+    <button label="Seleccionar" caption="IMG-0330">
+      <name_function>TodosProveedoresHabituales</name_function>      
+      <param>document.forms[0]</param>
+    </button>    
+  </ExtraButtons>
+  
+  <jumpTo>
+    <picture-on>Buscar_mov</picture-on>    
+    <picture-off>Buscar</picture-off>   
+    <page>CYP-0320</page>
+    <caption>CYP-0340</caption>    
+  </jumpTo> 
+  
+  <button label="VolverBusqueda" caption="CYP-0340">
+      <name_location>http://www.newco.dev.br/Administracion/ClientesYProveedores/CYPBusca.xsql</name_location>      
+  </button>
+   
+</form>  

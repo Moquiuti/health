@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--  -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantenimientoReducidoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantenimientoReducidoHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="MantenimientoReducidoSave"/>
+        <xsql:include-param name="ORIGEN"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		Res		VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoReducido');
+		IF US_ID>=0 THEN
+			Res:=CATALOGOPRIVADO_V4_PCK.GuardarCambiosCatalogacion(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDPRODUCTO}',
+				'{@REFERENCIACLIENTE}',
+				'{@IDPRODUCTOESTANDAR}',
+				--'{@IDPROVEEDOR_CP}',
+				'{@PRECIO}',
+				'{@EXPANDIR}',
+				--'{@ADJUDICADO}',
+				'{@LISTA_PRECIOREFERENCIA}',
+				--'N',
+				--'S',
+				'{@COMENTARIOS}',
+				'{@DERECHOS_PLANTILLAS}',
+				--'{@ENTRADA_HISTORICO}',
+				--'{@ENTRADA_HISTORICO_TODOSPRODUCTOS}',
+				'{@PRECIO_EXCLUSIVO}'
+			);
+
+			IF Res='OK' THEN
+				CATALOGOPRIVADO_V4_PCK.infoProducto_XML(
+					US_ID,
+					'{@IDPRODUCTO}',
+					'{@IDEMPRESA}',
+					'{@DERECHOS_PLANTILLAS}',
+					'S',
+					'S',
+					'N',
+					'S'
+				);
+			ELSE
+				HTP.P('<ERROR msg="'||Res||'" titulo="Error guardando cambios"/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

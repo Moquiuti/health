@@ -1,0 +1,2 @@
+15feb22 ET Nuevo disenno 2022. Busqueda2022_150222.js
+14mar22 ER Resuelto error en bton buscar (QuitaEspacios() -> trim() )

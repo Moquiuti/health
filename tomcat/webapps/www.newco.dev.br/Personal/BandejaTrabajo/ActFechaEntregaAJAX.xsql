@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que comprueba si una referencia de producto -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ActFechaEntregaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ActFechaEntregaJSON.xsl"?>
+
+
+<ActFechaEntregaJSON xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_fecha 	VARCHAR2(100);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ActualizarFechaEntregaPedido');
+			IF US_ID>=0 THEN
+
+				v_fecha:=PedidosProblematicos_Pck.FechaDeEntrega( 
+                                    US_ID,
+                                    '{@IDPEDIDO}',
+                                    '{@TIPO}',
+                                    '{@FECHA}'
+                                );
+
+				HTP.P(Utilidades_Pck.CabeceraXML);
+                                    HTP.P('<FECHA>'||v_fecha||'</FECHA>');
+                                    
+			END IF;
+                        
+		END;
+	]]>
+	</xsql:include-owa>
+</ActFechaEntregaJSON>

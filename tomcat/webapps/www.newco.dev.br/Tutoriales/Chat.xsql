@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Página de soporte para los usuarios
+	ultima revision: ET 24ene20
+-->
+<?xml-stylesheet type="text/xsl" href="ChatHTML.xsl"?>
+
+<Ayuda xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Ayuda');
+		IF US_ID>=0 THEN
+			HTP.P('<IDUSUARIO>'||US_ID||'</IDUSUARIO>');
+		ELSE
+			HTP.P('<ERROR/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Ayuda>

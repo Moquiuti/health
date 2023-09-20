@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+
+ |
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MOListadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MOListadoHTML.xsl"?>
+
+
+<Multiofertas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+   <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   
+  <xsql:include-param name="ROL"/>
+  <xsql:include-param name="TIPO"/> <!-- Que tipo de documentos queremos ver? OFERTA | PEDIDO -->
+  
+  <xsql:include-owa>
+        MULTIOFERTAS_SEGUIMIENTO_PCK.ComprasEnCurso ('{@US_ID}','{@TIPO}');
+  </xsql:include-owa>
+  
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0015</page>
+    <caption>G-0001</caption> 
+  </jumpTo>
+  
+</Multiofertas>

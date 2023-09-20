@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--  
+	Mantenimiento de empresas, guardar registro
+	Ultima revision: ET 20oct21 17:36
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="EMPMantenHTML.xsl"?>
+
+<MantenimientoEmpresas xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="IDEMPRESA"/>
+<xsql:include-param name="DESDE"/>
+<xsql:include-param name="EMP_REFERENCIAS"/>
+<xsql:include-param name="ADMINISTRADORMVM"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="EMP_IDUSUARIORECLAMACIONES"/>
+<!--<ACTUALIZADA/>-->
+
+<form name="MantenEmpresa" action="EMPMantenSave.xsql" method="post">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+    BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPMantenSave');
+		IF US_ID>=0 THEN
+			IF '{@ACCION}'='MODIFICAR' THEN
+        		v_Res:=EMPRESAS_PCK.Modificar
+				(
+					US_ID,
+					'{@IDEMPRESA}',
+					'{@EMP_IDPAIS}',					--	23set11	ET
+                	'{@EMP_IDPORTAL}',               --    22set14    ET Diferentes portales
+					'{@EMP_NIF}',
+					'{@EMP_NOMBRE}',
+					'{@EMP_NOMBRE_CORTO}',
+					'{@EMP_DIRECCION}',
+					'{@EMP_PROVINCIA}',
+					'{@EMP_CPOSTAL}',
+					'{@EMP_POBLACION}',
+					'{@EMP_IDTIPO}',
+					'{@EMP_TELEFONO}',
+					'{@EMP_FAX}',
+					'{@EMP_REFERENCIAS}',
+					'{@EMP_ZONACOMERCIAL}',
+					'{@EMP_ESPECIALIDAD}',
+					'{@EMP_ENLACE}',
+					'{@EMP_PUBLICAR}',
+					--'{@EMP_LOGOTIPO}',					--	3dic08	ET
+					'{@EMP_COMISION_TRANSACCIONES}',		--	3dic08	ET
+					'{@EMP_COMISION_AHORRO}',				--	3dic08	ET
+					'{@EMP_COMERCIAL_DEFECTO}',
+					'{@EMP_PEDIDOMINIMO}',	
+					'{@EMP_DESCRIPCIONPEDIDOMINIMO}',
+					'{@EMP_PEDMINIMOACTIVO}',
+					'{@EMP_SERVICIOSCDC}',
+					'{@EMP_IDUSUARIOMUESTRAS}',				--	13mar08	ET
+					'{@EMP_PROVNONAVEGAR}',					--	10jul09	ET
+					'{@EMP_IDUSUARIORECLAMACIONES}',		--	reanudado para incidencias'{@ID_RESP_INC}'
+					'{@ID_RESP_EVAL}',
+					'{@ID_RESP_CAT}',
+					'{@ID_RESP_NEG}',
+					'{@EMP_EXTERNA}',
+					'{@DEP_NOMBRE}',   						--ok
+					'{@US_TITULO}',
+					'{@US_NOMBRE}',
+					'{@US_APELLIDO_1}',
+					'{@US_APELLIDO_2}',
+					'{@US_EMAIL}',
+					'{@US_TF_FIJO}',
+					'{@US_TF_MOVIL}',
+					'{@US_OPERADOR}',
+					'{@US_IDTIPO}',
+					'{@US_USUARIOGERENTE}',
+					'{@US_PEDIDO_MAXIMO}',
+					'{@US_COMPRAMENSUALMAXIMA}',
+					'{@US_COMPRAANUALMAXIMA}',
+					'{@IDLOGOTIPO}',						--	Logotipo
+					'{@IDESTILO}',							--	Estilos personalizables
+					'{@EMP_PLAZOENTREGA}',					--	Plazo de entrega y envío
+					'{@EMP_PLAZOENVIO}'	,					--	
+					'{@EMP_OCULTARPRECIOREF}',				--	
+					'{@EMP_BLOQUEARBANDEJA}',				--	
+					'{@EMP_MOSTRARCOMISIONES_NM}',			--	
+					'{@EMP_BLOQUEARMUESTRAS}',				--	
+					'{@EMP_PROVNONAVEGARPORDEFECTO}',		--	
+					'{@EMP_COSTETRANSPORTE}',	
+					'{@EMP_DESCRIPCIONCOSTETRANSPORTE}',	
+					'{@EMP_COSTETRANSPORTEACTIVO}',
+					'{@EMP_PEDIDOMINIMO_NM}',				--	Pedido mínimo según nuevo modelo
+					'{@EMP_CATPRIV_CATEGORIAS}',				
+					'{@EMP_CATPRIV_GRUPOS}',					
+					'{@EMP_CATALOGOVISIBLE}',					
+					'{@EMP_OCULTARREFPROVEEDOR}',			-- 31ene19 Ocultar ref. proveedor
+					'{@EMP_PRECIOSCONIVA}',
+                	'{@EMP_LIC_TITULO}',					
+					'{@EMP_LIC_DESCRIPCION}',				            
+					'{@EMP_LIC_COND_ENTREGA}',				
+					'{@EMP_LIC_COND_PAGO}',					
+					'{@EMP_LIC_OTRAS_COND}',				
+					'{@EMP_LIC_PLAZO_NEG}',					
+					'{@EMP_SOLICITUDCATALOGACION}',         
+					'{@EMP_INTEGRADA}',                     --11nov19
+					'{@EMP_ENVIARPDF}',                     
+					'{@EMP_SEGUIMIENTO}',                   
+					'{@EMP_POTENCIAL_COMPRAS}',             
+					'{@EMP_POTENCIAL_CATALOGO}',            
+					'{@EMP_NOMBRECORTOPUBLICO}',			
+					'{@EMP_IDUSUARIOLICITACIONESAUT}',      
+					'{@EMP_PRECIOSHISTINFORMADOS}',         
+					'{@EMP_PRECIOSHISTPORCENTRO}',			
+					'{@EMP_PEDIDO_SINCATEGORIAS}',			--	Nuevo campo: no mostramos las categorías en el pedido
+					'{@EMP_SINSEPARARFARMACIA}',			--10ma16 Nuevo campo: quitamos las pestañas de Farmacia/Fungible
+					'{@EMP_PERMITIRCONTROLPEDIDOS}',		--26may16 Nuevo campo: permitir control pedidos
+					'{@EMP_BARRIO}',						--11jul16 MVMB: Campo Barrio
+					'{@EMP_LICITACIONESAGREGADAS}',			--18jul16 MVMB: Campo permitir licitaciones agregadas
+					'{@EMP_PRECIOREFSEGUNULTPEDIDO}',		--08may17 MVMB: Campo precio referencia se actualiza con el último pedido
+					'{@EMP_PED_FORMAPAGO}',					--10oct17 MVMB: mostrar y permitir editar forma de pago en pedidos y licitaciones
+					'{@EMP_PEDIDOHASTAPAGO}',				--27nov17 MVMC: Procedimiento de pedido llega hasta control de pago
+					'{@EMP_OCULTARFECHAENTREGA}',			--17ago18 MVMC: Ocultar fecha de entrega en los pedidos
+					'{@EMP_SINSEGUIMIENTOPEDIDOS}',			--20ago18 MVMB: Sin seguimiento pedidos: cerrar automáticamente pedidos tras 15 días.
+					'{@EMP_REFCLIENTEPORCENTRO}',		  	--21dic18 Ref.cliente por centro
+					'{@EMP_CATALOGOMULTIOPCION}',			--21dic18 MVMC: Catálogo multiopcion.
+					'{@EMP_INT_SOLOPEDIDOS}',				--15ene19 Las entradas de solicitudes por intyegración generarán pedidos, no licitaciones
+					'{@EMP_OBLIGARPEDIDOSCOMPLETOS}',		--01mar19 Ocultar los botones BACKORDER, ABONO, etc en la recepción del pedido
+					'{@EMP_SEPFICCARGAPEDIDOS}',			--12jun19 COnfig.fichero carga pedidos: separador
+					'{@EMP_CABFICCARGAPEDIDOS}',			--12jun19 COnfig.fichero carga pedidos: modelo cabecera
+					'{@EMP_MODELOFICCARGAPEDIDOS}',			--12jun19 COnfig.fichero carga pedidos: modelo campos
+					'{@EMP_LIC_DESPLEGABLEMARCAS}',			--20jun19 Mostrar un desplegable con las marcas autorizadas, permite incluir un "otros" para informar otras marcas
+					'{@EMP_LIC_SOLOMARCASAUTORIZADAS}',		--20jun19 No permitir al proveedor ninguna marca que no esté autorizada
+					'{@EMP_INT_MANDACATALOGOERP}',			--08jul19 Manda el catálogo del ERP sobre el catálogo en plataforma
+					'{@EMP_PED_SALTARPEDIDOMINIMO}',		--28ago19 Permite enviar pedidos por debajo del pedido minimo
+					'{@IDCOMUNICADO}',						--03set19 Comunicado que se presentará a los proveedores en las licitaciones de este cliente
+					'{@EMP_LIC_OCULTARTITULO}',				--12set19 Ocultar titulo en listado de licitaciones
+					'{@EMP_BLOQUEADA}',						--03oct19 Bloquear la empresa
+					'{@EMP_LIC_FORZARCAJAS}',				--22oct19 Tipos de unidades básicas que deben ser forzadas como cajas (requerido por Unimed)
+					'{@EMP_LIC_MOSTRARAUTOR}',				--29oct19 Mostrar autor en listado de licitaciones (requerido por Unimed)
+					'{@EMP_DERECHOSPRODUCTOSPORCENTRO}',	--30oct19 Separar derechos sobre productos pro centro de referencias por centro (necesario para Recoletas)
+					'{@EMP_LIC_COMPRADORINFOFERTAS}',	  	--06nov19 Permitir a los compradores informar directamente ofertas en las licitaciones (solicitado por Unimed)
+					'{@EMP_LIC_ADJUDICADOSAOFERTA}',	 	--20nov19 Licitaciones por integración: convertir adjudicados en ofertas
+					'{@EMP_PED_DIFERENCIARDEPOSITO}',	 	--31mar20 Diferenciar los pedidos de depósito (necesario para IMBANACO)
+					'{@EMP_ESCATALOGOMAESTRO}',			 	--19abr20 Algunos campos necesarios para las GPO. 'S': catalogo maestro que podrá ser utilizado por otras empresas
+					'{@EMP_ADJUDICACIONESDECATPADRE}',	 	--19abr20 Este catálogo heredará adjudicadicaciones del catálogo padre
+					'{@EMP_CATPRIV_PADRE}',	 				--19abr20 Catálogo padre. Antes se creaba desde el menú "Admin técnica"
+					'{@EMP_JUSTIFICARMANTENPEDIDOS}',	 	--06jul20 Obligar a justificar cambios en el mantenimiento de pedidos (MVMB)
+					'{@EMP_ABC_PLAZOCALCULO}',	 			--04mar21
+					'{@EMP_ABC_PORCENTAJEA}',	 			--04mar21
+					'{@EMP_ABC_PORCENTAJEB}',	 			--04mar21
+					'{@EMP_ABC_PERIODOCONSUMO}', 			--04mar21
+					'{@EMP_LIC_SEPARARCATEGORIA}',	 		--04mar21
+					'{@EMP_SEGUIMIENTOPEDIDOSDESDEMVM}', 	--05may21
+					'{@EMP_PED_CONTROLCAMBIOTARIFA}',	 	--02jun21 Informar del cambio de precio en el primer paso del pedido
+					--13dic21'{@EMP_AVISARATODOSSEGUNDERECHOS}'	 	--30set21 Enviar avisos de pedidos o licitaciones a todos los usuarios autorizados del proveedor
+					'{@EMP_PED_AVISARATODOS}',	 			--13dic21 Enviar avisos de pedidos o licitaciones a todos los usuarios autorizados del proveedor
+					'{@EMP_LIC_AVISARATODOS}',	 			--13dic21 Enviar avisos de pedidos o licitaciones a todos los usuarios autorizados del proveedor
+					'{@EMP_LIC_COMPARTIR}'	 				--13dic21 Compartir licitaciones entre los usuarios autorizados del proveedor
+        	  );	
+			END IF;
+
+
+			 --	Llamada a la ficha de mantenimiento de empresa
+			EMPRESAS_PCK.Mantenimiento_XML(US_ID,'{@IDEMPRESA}','EMPRESA DESDE="Manten"', 'S');
+			
+        END IF;
+					   
+    END;
+    ]]>	  
+</xsql:include-owa>
+</form>
+</MantenimientoEmpresas>
+

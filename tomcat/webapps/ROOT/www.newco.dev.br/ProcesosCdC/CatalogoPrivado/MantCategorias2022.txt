@@ -1,0 +1,1 @@
+07mar22 ET	Catalogo Privado. Mantenimiento de categorias. Nuevo disenno+separar JS. MantCategorias2022_070322.js

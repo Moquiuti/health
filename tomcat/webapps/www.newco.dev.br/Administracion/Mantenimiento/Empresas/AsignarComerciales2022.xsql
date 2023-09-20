@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--	
+	Mantenimiento de comerciales asignados a clientes. Nuevo disenno 2022.
+	Ultima revision: ET 16may22 11:08
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AsignarComercialesHTML2022.xsl"?>
+
+<ListadoComerciales xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AsignarComerciales');
+			IF US_ID>=0 THEN
+				IF '{@ACCION}' IS NOT NULL AND '{@IDVENDEDOR}' IS NOT NULL AND '{@IDCENTROCLIENTE}' IS NOT NULL THEN
+					Comerciales_PCK.EjecutarAccion(US_ID, '{@ACCION}','{@IDVENDEDOR}','{@IDCENTROCLIENTE}');
+				END IF;
+				Comerciales_PCK.Listado_XML(US_ID, '{@IDEMPRESA}');
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+</ListadoComerciales>
+

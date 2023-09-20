@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Recupera lista de usuarios para firmar de una licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="RecuperaUsuariosCentroJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="RecuperaUsuariosCentroJSON.xsl"?>
+
+<UsuariosCentro xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaUsuariosCentro');
+		IF US_ID>=0 THEN
+			EVALUACIONPRODUCTOS_PCK.ListaUsuarios_XML(
+				'{@ID_CENTRO}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</UsuariosCentro>

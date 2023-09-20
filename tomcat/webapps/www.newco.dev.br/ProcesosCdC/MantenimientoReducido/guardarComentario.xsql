@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!---->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantenimientoReducidoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantenimientoReducidoHTML.xsl"?>
+
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+		<![CDATA[
+			DECLARE
+				US_ID	NUMBER;
+				v_PRODUCTO_HISTORICO		VARCHAR2(200);
+      BEGIN
+		  	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoReducido');
+		  	IF US_ID>=0 THEN
+				
+				IF '{@ENTRADA_HISTORICO_TODOSPRODUCTOS}' = 'on' THEN
+					v_PRODUCTO_HISTORICO := NULL;
+				ELSE v_PRODUCTO_HISTORICO := '{@IDPRODUCTO}';
+				
+				END IF;
+					
+			
+					CATALOGOPRIVADO_V4_PCK.HistProv_NuevaEntrada(
+						US_ID,
+						'{@IDPROVEEDOR}',
+						v_PRODUCTO_HISTORICO,
+						'{@ENTRADA_HISTORICO}'
+					); 
+				
+					CATALOGOPRIVADO_V4_PCK.infoProducto_XML(
+						US_ID, 
+						v_PRODUCTO_HISTORICO,
+						utilidades_pck.empresaDelUsuario(US_ID),
+						'{@DERECHOS_PLANTILLAS}',
+						'S',
+						'S',
+						'N',
+						'S'
+					);
+	
+				END IF;
+			END;
+		]]>
+ 	</xsql:include-owa>	
+ 	
+</Mantenimiento>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Informe de proveedores y ofertas de la licitación
+	Revisado ET 01abr22 10:15
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="licInformeProveedoresYOfertasHTML2022.xsl"?>
+
+<InformeProveedores xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="STYLE"/>
+ 
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(6);
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ProveedoresYOfertas');
+
+		IF US_ID>=0 and '{@LIC_ID}' IS NOT NULL THEN
+		
+			LICITACIONESINFORMES_PCK.ProveedoresYOfertas_XML(
+				US_ID,
+				'{@LIC_ID}'
+			);
+
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</InformeProveedores>

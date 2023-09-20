@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Recupera las fichas tecnicas de un proveedor
+	Ultima revision: ET 12nov21 12:21
+-->
+<?xml-stylesheet type="text/xsl" href="RegistrosSanitariosProveedorJSON.xsl"?>
+
+
+<FichasProveedor xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+     <xsql:include-owa>
+    	<![CDATA[
+		DOCUMENTOS_PCK.ListaOfertasDelProveedor_XML ('{@IDPROVEEDOR}',NULL,0,'OFERTAS','','{@IDDOC_ACTUAL}','RS','S');
+        ]]>   					
+    </xsql:include-owa>
+	
+</FichasProveedor>
+
+

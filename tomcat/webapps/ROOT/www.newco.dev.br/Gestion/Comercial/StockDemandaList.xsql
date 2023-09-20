@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockDemandaListHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockDemandaListHTML.xsl"?>
+
+<StockDemandaList xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockDemandaList');
+		IF US_ID>=0 THEN
+			ANUNCIOSSTOCKS_PCK.Demandas_XML(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+				'{@FIDRESPONSABLE}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+				'{@ORDEN}',
+				'{@SENTIDO}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</StockDemandaList>

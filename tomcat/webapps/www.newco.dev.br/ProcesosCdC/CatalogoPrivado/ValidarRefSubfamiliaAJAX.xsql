@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que comprueba si una referencia de subfamilia ya existe -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ValidarRefSubfamiliaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ValidarRefSubfamiliaJSON.xsl"?>
+
+
+<ValidarRefSubfamilia xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDEMPRESA"/>
+	<xsql:include-param name="REFERENCIA"/>
+	<xsql:include-param name="IDFAMILIA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID			NUMBER;
+			v_IDSubfam		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ValidarRefSubfamiliaAJAX');
+			IF US_ID>=0 THEN
+				v_IDSubfam := CATALOGOPRIVADO_V4_PCK.IDSubfamilia(
+					'{@IDEMPRESA}',
+					'{@REFERENCIA}',
+					'{@IDFAMILIA}'
+				);
+
+				HTP.P(Utilidades_Pck.CabeceraXML);
+				IF v_IDSubfam = -1 THEN
+					HTP.P('<OK/>');
+				ELSE
+					HTP.P('<ERROR/>');
+				END IF;
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ValidarRefSubfamilia>

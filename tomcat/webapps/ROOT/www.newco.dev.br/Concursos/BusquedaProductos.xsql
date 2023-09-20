@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BusquedaProductosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BusquedaProductosHTML.xsl"?>
+
+
+<!--
+
+
+	Buscador de productos dentro de las tablas de datos de concursos
+
+	9 set 03	ET
+-->
+
+
+<Productos xmlns:xsql="urn:oracle-xsql" connection="concursossanitarios" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="PRODUCTO"/>
+  <xsql:include-param name="CONC_SES_ID"/>
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-owa>
+    <![CDATA[
+        DECLARE
+			US_ID		NUMBER;
+			V_ENTORNO varchar2(10);
+		BEGIN
+			
+	IF '{@SES_ID}' IS NOT NULL THEN
+    		V_ENTORNO:='MVM';
+        	US_ID:=Seguridad_Pck.CompruebaCodigoDeSesion('{@SES_ID}','Concursos.BuscadorProductos(MVM)',NULL);
+    	END IF;
+		
+			
+			CONCURSOS_PCK.ListadoProductos_XML
+			(
+				US_ID,
+				V_ENTORNO,
+				'{@PRODUCTO}',
+				'{@DESPLEGABLEPRODUCTO}',
+				'{@FAMILIA}',
+				'{@PROVEEDOR}',
+				'{@CENTRO}',
+				'{@EXPEDIENTE}',
+				'{@ANNO}',
+				'{@MARCA}',
+				'{@PRECIOMIN}',
+				'{@PRECIOMAX}',
+				'{@INCLUIRFAMILIAS}',
+				'{@IDNOMENCLATOR}',
+				'{@AVANZADA}',
+				'{@PAGINA}'
+			);
+     END;
+    ]]>
+  </xsql:include-owa>
+  
+  
+  
+  <returnHome/>
+</Productos>
+

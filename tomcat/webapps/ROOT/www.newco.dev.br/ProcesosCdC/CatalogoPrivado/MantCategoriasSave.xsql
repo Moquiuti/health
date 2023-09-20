@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantCategoriasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantCategoriasHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param  name="CATPRIV_IDEMPRESA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param  name="STYLE"/>
+	<!--<xsql:include-param name="ACCION"/>-->
+	<ACCION>MODIFICARCATEGORIA</ACCION>
+  
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);
+        BEGIN
+		  	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantCategoria');	
+		  	IF US_ID>=0 THEN	
+          		v_Res:=CATALOGOPRIVADO_MANT_PCK.ModificarCategoria
+				(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+ 					'{@CATPRIV_IDCATEGORIA}',
+					'{@CATPRIV_REFERENCIACATEGORIA}',
+					'{@CATPRIV_NOMBRE}',
+					'{@CATPRIV_REFCLIENTE}',
+					'{@CP_CAT_IDSELECCION}',
+					'{@ACCION}'
+				);
+	
+							
+          		CATALOGOPRIVADO_MANT_PCK.Categoria_XML
+				(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					utilidades_pck.Piece(v_Res,'|',0),		--	10oct12	v_Res
+					utilidades_pck.Piece(v_Res,'|',1)		--	10oct12	v_Res
+					
+				);
+        	END IF;
+        END;
+        ]]>
+  </xsql:include-owa>
+  <botones>
+  
+    <button label="Aceptar" caption="CATPRIV-0110">
+      <name_function>RecargarZonaCatalogo</name_function>
+      <param>'zonaCatalogo'</param>                
+    </button>
+    
+    <button label="Volver" caption="CATPRIV-0270">
+      <name_function>history.go</name_function> 
+      <param>-1</param>              
+    </button>
+    
+    
+  </botones>
+  
+  
+</Mantenimiento>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	Ultima revisión: ET 20nov19 11:00
+-->
+<?xml-stylesheet type="text/xsl" href="LPListaHTML.xsl"?>
+
+
+<ListaProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<pagename>LPLista</pagename>
+  <xsql:include-owa>
+  <![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LPLista');
+		IF US_ID>=0 THEN
+	
+			IF 	'{@CAMBIOS}' IS NOT NULL THEN
+				MVM_V3_PCK.CambiosProductos_XML(US_ID, '{@PL_ID}','{@CAMBIOS}');
+			ELSE
+				MVM_V3_PCK.Plantilla(US_ID,'{@PL_ID}');
+			END IF;
+		END IF;
+     END;
+    ]]>
+  </xsql:include-owa>
+
+</ListaProductos>

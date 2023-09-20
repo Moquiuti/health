@@ -1,0 +1,16 @@
+
+t
+java:S2293k"YReplace the type specification in this constructor call with the diamond operator ("<>").(‡Æº¢úÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Àèö
+t	java:S115C"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(”É•Èùÿÿÿÿ
+E	java:S1062"+Replace this use of System.out by a logger.(³ïŸ¢ÿÿÿÿÿ
+E	java:S106v"+Replace this use of System.out by a logger.(‰µ©¡ùÿÿÿÿ
+A	java:S106€"+Replace this use of System.out by a logger.(ºÜ³
+A	java:S106Š"+Replace this use of System.out by a logger.(¼¤î‰
+F	java:S106 "+Replace this use of System.out by a logger.(ş˜‹ğşÿÿÿÿ
+Q
+java:S1117£":Rename "stream" which hides the field declared at line 74.(şì¬”
+@	java:S106Ê"+Replace this use of System.out by a logger.(±ñÙ@
+F	java:S106à"+Replace this use of System.out by a logger.(ö‡òáşÿÿÿÿ
+F	java:S106ù"+Replace this use of System.out by a logger.(ÆñÖÖıÿÿÿÿ
+F	java:S106ı"+Replace this use of System.out by a logger.(¹½ï¤ÿÿÿÿÿ

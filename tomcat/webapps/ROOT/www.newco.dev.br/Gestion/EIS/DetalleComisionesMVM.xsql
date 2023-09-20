@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="DetalleComisionesMVM.xsl"?>
+<?xml-stylesheet type="text/xsl" href="DetalleComisionesMVM.xsl"?>
+
+<ListadoComisiones xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+  
+  <xsql:include-param name="FECHAINICIO"/>
+  <xsql:include-param name="FECHAFINAL"/>
+  <xsql:include-param name="IDPROVEEDOR"/>
+  <xsql:include-param name="STYLE"/>
+  
+  <xsql:query tag-case="upper" row-element="PROVEEDOR" rowset-element="">
+    <![CDATA[
+	SELECT Utilidades_PCK.NombreEmpresa({@IDPROVEEDOR}) NOMBREEMPRESA FROM DUAL
+    ]]>
+  </xsql:query>
+  
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+	SELECT 		to_char(clc_fecha,'dd/mm/yyyy') 	As Fecha, 
+				ped_numero							AS NUMERO,
+				Cliente.cen_nombre 					AS NombreCliente, 
+				SUM(Divisas_PCK.ConvertirImporte(clc_comision,clc_iddivisa,0)) AS Comision,
+				SUM(Divisas_PCK.ConvertirImporte(clc_cantidad*clc_preciounitario,clc_iddivisa,0)) AS Importe
+		FROM 	com_lineascomisiones, centros Cliente, pedidos
+		WHERE 	clc_idpedido=ped_id
+		AND 	ped_cli_idcentro=Cliente.cen_id
+		AND		clc_idagente={@IDPROVEEDOR}
+		AND 	clc_fecha>=to_date('{@FECHAINICIO}','dd/mm/yyyy')
+		AND 	clc_fecha<=to_date('{@FECHAFINAL}','dd/mm/yyyy')
+		GROUP BY to_char(clc_fecha,'dd/mm/yyyy'), clc_fecha, Cliente.cen_nombre, PED_NUMERO
+		ORDER BY clc_fecha, PED_NUMERO, Cliente.cen_nombre
+    ]]>
+  </xsql:query>
+  <returnHome/>
+</ListadoComisiones>
+
+<!--
+	La version antigua de la consulta presentaba las comisiones por linea de pedido, ahora
+	agregamos por proveedor
+
+-->

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--   
+	Página central del menún de "Enviar pedidos"
+	Ultima revision: ET 25feb19 16:55
+-->
+<?xml-stylesheet type="text/xsl" href="PaginaEnBlanco.xsl"?>
+
+
+<!--
+ |   Mostramos algunos datos de interés sobre cambios en el catálogo privado del usuario
+ +-->
+
+
+<PaginaEnBlanco xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+ 
+	<xsql:include-owa>
+        <![CDATA[
+			DECLARE
+				US_ID		NUMBER;
+    		BEGIN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PaginaEnBlanco');	
+				IF US_ID>=0 THEN
+					HTP.P(Utilidades_Pck.CabeceraXML
+							||'<INICIO>');
+						Catalogoprivado_Seg_Pck.UltimosCambiosCatalogo_XML(US_ID,'S','S','S','S',300,5);
+						--	17set12	Empresas_Pck.AvisarAutorizaciones_Cli_XML(US_ID);
+						--	17set12	ENCUESTAS_PCK.EncuestasDelUsuario_XML(US_ID,'N');
+					HTP.P('</INICIO>');
+				END IF;
+			END;
+        ]]>
+	</xsql:include-owa>
+</PaginaEnBlanco>
+
+

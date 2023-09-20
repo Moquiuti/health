@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ficha de empresa, montada como FrameNuevo disenno 2022.
+	Ultima revision: ET 21feb22 18:42
+-->
+<?xml-stylesheet type="text/xsl" href="EMPDetalleCabeceraHTML2022.xsl"?>
+
+<CabeceraEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+<!--<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="DEST"/>-->
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="PESTANNA"/>
+
+<!--  obtenemos el vendedor para el usuario que esta visualizando la pagina de empresa -->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CabeceraEmpresa');
+		IF US_ID>0 THEN
+			EMPRESAS_PCK.CabeceraFicha(US_ID,'{@EMP_ID}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CabeceraEmpresa>

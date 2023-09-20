@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="InvitacionNoAfiliadosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="InvitacionNoAfiliadosHTML.xsl"?>
+
+<!--	Parametro @IDTIPO: 1-> Proveedores, 2->Centros sanitarios	-->
+
+<NoAfiliados xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+    <xsql:include-param name="OPCION"/>
+  
+  <xsql:query tag-case="upper" row-element="EMPRESA" rowset-element="">
+    <![CDATA[
+		SELECT	IE_NIF NIF, IE_NOMBRE NOMBRE, IE_IDTIPO TIPO
+		FROM	IE_EMPRESASNOAFILIADAS
+		WHERE	IE_STATUS IS NULL
+		AND		IE_IDTIPO={@IDTIPO}
+		ORDER BY	IE_NOMBRE
+    ]]>
+  </xsql:query>
+  
+  <xsql:query tag-case="upper" row-element="USUARIO" rowset-element="">
+    <![CDATA[
+		SELECT	US_NOMBRE||' '||US_APELLIDO1 	NOMBRE,
+				EMP_NOMBRE						NOMBREEMPRESA
+		FROM	USUARIOS, CENTROS, EMPRESAS
+		WHERE	US_ID={@US_ID}
+		AND		US_IDCENTRO=CEN_ID
+		AND		CEN_IDEMPRESA=EMP_ID
+    ]]>
+  </xsql:query>
+  
+  
+  <!--
+  <jumpTo>
+    <picture-on>Cancelar_mov</picture-on>
+    <picture-off>Cancelar</picture-off> 
+    <page>G-0035</page>
+    <caption>IMG-0190</caption>    
+  </jumpTo>    
+  
+  <jumpTo>
+    <picture-on>Enviar_mov</picture-on>
+    <picture-off>Enviar</picture-off> 
+    <page>G-0035</page>
+    <caption>IMG-0100</caption>    
+  </jumpTo>    
+  -->
+  
+  <returnHome/>
+</NoAfiliados>
+

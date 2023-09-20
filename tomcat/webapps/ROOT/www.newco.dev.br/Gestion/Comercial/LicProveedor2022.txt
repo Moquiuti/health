@@ -1,0 +1,13 @@
+27jul22 ET Nueva pagina para informar licitaciones por parte de proveedores. lic2022_260122.js, lic_proveedor2022_040422.js
+24ene23 ET Mostrar Precio Objetivo en icono de informacion y en mensaje de error. Nuevos ajustes en el disenno. LicProveedor2022_240123.js
+30ene23 ET Incluir nuevo tipo de documento asociado a producto "Ficha de seguridad". LicProveedor2022_300123.js
+02feb23 ET Incluir nuevos campos solicitados por OHSJD: CodExpediente, CodCUM, CodIUM, etc. LicProveedor2022_020223.js
+06feb23 ET Proceso de carga para los nuevos campos. LicProveedor2022_060223.js
+07feb23 ET Solucionados errores. LicProveedor2022_070223.js
+15feb23 ET Incluir nuevos campos en exportacion CSV. LicProveedor2022_150223.js
+20feb23 ET Quitar campo "Cod.Invima", incluir validacion de fecha para "fecha caducidad Invima". LicProveedor2022_200223.js
+14abr23 ET Se muestran los titulos de columnas desplazados para Espanna.
+27abr23 ET Cambios solicitados por Tatui para permitir programacion de pedidos. LicProveedor2022_270423.js
+06jun23 ET Solucionado error en caso de que las cantidades de la programacion de entregas incluyan decimales. LicProveedor2022_060623.js
+19jun23 ET Otros ajustes cuando las cantidades de la programacion de entregas incluyan decimales. LicProveedor2022_190623.js
+07jul23 ET Se producia un error con un proveedor de Brasil marcado "precio con IVA". lic2022_060723.js

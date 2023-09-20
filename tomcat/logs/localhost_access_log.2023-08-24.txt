@@ -1,0 +1,129 @@
+179.43.191.194 - - [24/Aug/2023:00:10:19 +0000] "-" 400 -
+119.156.84.161 - - [24/Aug/2023:00:55:37 +0000] "GET / HTTP/1.1" 200 11217
+138.68.44.77 - - [24/Aug/2023:01:03:25 +0000] "GET / HTTP/1.1" 200 11217
+193.35.18.33 - - [24/Aug/2023:01:16:08 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+45.128.232.152 - - [24/Aug/2023:01:26:57 +0000] "CONNECT duckduckgo.com:443 HTTP/1.1" 400 -
+141.98.11.60 - - [24/Aug/2023:01:41:41 +0000] "GET / HTTP/1.1" 200 11217
+109.123.243.220 - - [24/Aug/2023:02:28:28 +0000] "GET / HTTP/1.1" 200 11217
+109.123.243.220 - - [24/Aug/2023:02:28:28 +0000] "GET /gui HTTP/1.1" 404 751
+64.227.146.163 - - [24/Aug/2023:02:44:30 +0000] "GET /aaa9 HTTP/1.1" 404 752
+64.227.146.163 - - [24/Aug/2023:02:44:34 +0000] "GET /aab8 HTTP/1.1" 404 752
+64.227.146.163 - - [24/Aug/2023:02:44:38 +0000] "GET / HTTP/1.1" 200 11217
+45.128.232.140 - - [24/Aug/2023:02:46:46 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+64.227.43.13 - - [24/Aug/2023:02:47:17 +0000] "-" 400 -
+198.98.58.175 - - [24/Aug/2023:03:25:21 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+146.190.111.237 - - [24/Aug/2023:03:27:34 +0000] "GET /cdn-cgi/trace HTTP/1.1" 404 761
+146.190.111.237 - - [24/Aug/2023:03:27:47 +0000] "-" 400 -
+198.235.24.244 - - [24/Aug/2023:03:32:23 +0000] "GET / HTTP/1.0" 200 11197
+162.216.150.27 - - [24/Aug/2023:03:58:31 +0000] "GET / HTTP/1.1" 200 11217
+178.32.197.82 - - [24/Aug/2023:04:40:03 +0000] "GET / HTTP/1.1" 200 11217
+205.210.31.42 - - [24/Aug/2023:05:10:55 +0000] "-" 400 -
+90.167.94.49 - - [24/Aug/2023:05:15:21 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 29983
+90.167.94.49 - - [24/Aug/2023:05:18:13 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 264
+90.167.94.49 - - [24/Aug/2023:05:25:55 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 264
+90.167.94.49 - - [24/Aug/2023:05:26:02 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 247
+90.167.94.49 - - [24/Aug/2023:05:27:20 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 264
+90.167.94.49 - - [24/Aug/2023:05:28:01 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 264
+184.105.139.119 - - [24/Aug/2023:05:38:54 +0000] "GET / HTTP/1.1" 200 11217
+184.105.139.103 - - [24/Aug/2023:05:39:37 +0000] "GET /favicon.ico HTTP/1.1" 200 21630
+184.105.139.111 - - [24/Aug/2023:05:40:03 +0000] "GET /?format=json HTTP/1.1" 200 11217
+184.105.139.79 - - [24/Aug/2023:05:40:30 +0000] "CONNECT www.shadowserver.org:443 HTTP/1.1" 400 -
+209.141.40.248 - - [24/Aug/2023:05:55:13 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+45.128.232.140 - - [24/Aug/2023:06:05:57 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+5.196.102.69 - - [24/Aug/2023:06:21:37 +0000] "GET /favicon.ico HTTP/1.1" 200 21630
+90.167.94.49 - - [24/Aug/2023:06:30:36 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 325
+184.105.139.108 - - [24/Aug/2023:07:17:12 +0000] "-" 400 -
+186.136.47.8 - - [24/Aug/2023:07:46:38 +0000] "GET / HTTP/1.0" 200 11197
+103.149.192.137 - - [24/Aug/2023:07:53:44 +0000] "GET / HTTP/1.1" 200 11217
+212.28.242.208 - - [24/Aug/2023:08:03:29 +0000] "GET / HTTP/1.1" 200 11217
+45.128.232.183 - - [24/Aug/2023:09:41:15 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+193.35.18.33 - - [24/Aug/2023:09:49:06 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+185.36.81.33 - - [24/Aug/2023:09:54:01 +0000] "GET / HTTP/1.1" 200 11217
+198.98.58.175 - - [24/Aug/2023:09:56:34 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+45.128.232.125 - - [24/Aug/2023:10:52:42 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+185.170.144.3 - - [24/Aug/2023:11:30:36 +0000] "-" 400 -
+192.241.195.83 - - [24/Aug/2023:12:36:36 +0000] "GET / HTTP/1.1" 200 11217
+118.99.84.57 - - [24/Aug/2023:12:59:20 +0000] "GET / HTTP/1.1" 200 11217
+83.97.73.87 - - [24/Aug/2023:13:41:55 +0000] "GET /?XDEBUG_SESSION_START=phpstorm HTTP/1.1" 200 11217
+83.97.73.87 - - [24/Aug/2023:13:55:49 +0000] "GET /actuator/gateway/routes HTTP/1.1" 404 771
+162.243.149.12 - - [24/Aug/2023:14:09:22 +0000] "-" 400 -
+45.128.232.183 - - [24/Aug/2023:15:11:51 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+193.35.18.33 - - [24/Aug/2023:15:23:35 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+84.78.248.34 - - [24/Aug/2023:16:11:24 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 29983
+84.78.248.34 - - [24/Aug/2023:16:11:28 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+84.78.248.34 - - [24/Aug/2023:16:11:28 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+84.78.248.34 - - [24/Aug/2023:16:11:28 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+84.78.248.34 - - [24/Aug/2023:16:11:34 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+84.78.248.34 - - [24/Aug/2023:16:11:34 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+84.78.248.34 - - [24/Aug/2023:16:11:34 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+84.78.248.34 - - [24/Aug/2023:16:11:44 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=HG6RF6_I HTTP/1.1" 200 23
+84.78.248.34 - - [24/Aug/2023:16:13:20 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 29983
+84.78.248.34 - - [24/Aug/2023:16:13:48 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+84.78.248.34 - - [24/Aug/2023:16:13:48 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+84.78.248.34 - - [24/Aug/2023:16:13:48 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+84.78.248.34 - - [24/Aug/2023:16:13:56 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=HG6RF6_I HTTP/1.1" 200 22
+84.78.248.34 - - [24/Aug/2023:16:15:59 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 -
+84.78.248.34 - - [24/Aug/2023:16:18:11 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 -
+84.78.248.34 - - [24/Aug/2023:16:26:29 +0000] "GET /www.newco.dev.br/Noticias.xsql HTTP/1.1" 200 29983
+84.78.248.34 - - [24/Aug/2023:16:27:06 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+84.78.248.34 - - [24/Aug/2023:16:27:06 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+84.78.248.34 - - [24/Aug/2023:16:27:06 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+84.78.248.34 - - [24/Aug/2023:16:27:14 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=HG6RF6_I HTTP/1.1" 200 23
+84.78.248.34 - - [24/Aug/2023:16:28:28 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+84.78.248.34 - - [24/Aug/2023:16:28:28 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+84.78.248.34 - - [24/Aug/2023:16:28:28 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+84.78.248.34 - - [24/Aug/2023:16:28:48 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=H146F67G676R14_I HTTP/1.1" 200 23
+84.78.248.34 - - [24/Aug/2023:16:31:30 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 -
+209.141.40.248 - - [24/Aug/2023:16:31:55 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+84.78.248.34 - - [24/Aug/2023:16:33:03 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 -
+84.78.248.34 - - [24/Aug/2023:16:48:15 +0000] "GET /www.newco.dev.br/Gestion/AdminTecnica/AdminTecnica2022.xsql HTTP/1.1" 200 -
+198.98.58.175 - - [24/Aug/2023:16:48:18 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+179.43.191.194 - - [24/Aug/2023:16:52:31 +0000] "-" 400 -
+84.78.248.34 - - [24/Aug/2023:16:52:36 +0000] "GET /www.newco.dev.br/Gestion/AdminTecnica/AdminTecnica2022.xsql HTTP/1.1" 200 -
+83.51.51.46 - - [24/Aug/2023:16:57:28 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+83.51.51.46 - - [24/Aug/2023:16:57:28 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+83.51.51.46 - - [24/Aug/2023:16:57:28 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+83.51.51.46 - - [24/Aug/2023:16:57:47 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=nme_qvoaz HTTP/1.1" 200 15
+83.51.51.46 - - [24/Aug/2023:16:58:05 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=nIeZqZo_zva HTTP/1.1" 200 23
+84.78.248.34 - - [24/Aug/2023:16:58:50 +0000] "GET /www.newco.dev.br/Gestion/AdminTecnica/AdminTecnica2022.xsql HTTP/1.1" 200 -
+84.78.248.34 - - [24/Aug/2023:16:58:54 +0000] "GET /www.newco.dev.br/Gestion/AdminTecnica/AdminTecnica2022.xsql HTTP/1.1" 200 -
+83.51.51.46 - - [24/Aug/2023:17:02:21 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 -
+84.78.248.34 - - [24/Aug/2023:17:11:44 +0000] "GET /www.newco.dev.br/Gestion/AdminTecnica/AdminTecnica2022.xsql HTTP/1.1" 200 -
+46.174.191.32 - - [24/Aug/2023:17:32:41 +0000] "GET / HTTP/1.0" 200 11197
+92.118.39.40 - - [24/Aug/2023:17:39:29 +0000] "GET / HTTP/1.1" 200 11217
+192.99.9.171 - - [24/Aug/2023:17:41:12 +0000] "GET /cdn-cgi/trace HTTP/1.1" 404 761
+96.65.114.33 - - [24/Aug/2023:17:42:03 +0000] "GET / HTTP/1.1" 200 11217
+35.203.210.132 - - [24/Aug/2023:17:51:12 +0000] "GET / HTTP/1.1" 200 11217
+45.128.232.125 - - [24/Aug/2023:18:01:58 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+205.210.31.10 - - [24/Aug/2023:18:21:51 +0000] "-" 400 -
+185.36.81.33 - - [24/Aug/2023:18:39:47 +0000] "GET / HTTP/1.1" 200 11217
+84.78.248.34 - - [24/Aug/2023:18:54:42 +0000] "GET /www.newco.dev.br/images/2022/icones/computer.svg HTTP/1.1" 200 2338
+84.78.248.34 - - [24/Aug/2023:18:54:42 +0000] "GET /www.newco.dev.br/images/2022/icones/aggregation.svg HTTP/1.1" 200 1267
+84.78.248.34 - - [24/Aug/2023:18:54:42 +0000] "GET /www.newco.dev.br/images/2022/icones/shopping_center.svg HTTP/1.1" 200 3942
+84.78.248.34 - - [24/Aug/2023:18:54:49 +0000] "GET /www.newco.dev.br/Login.xsql?PARAMETRO=nIeZqZo_zva HTTP/1.1" 200 21
+84.78.248.34 - - [24/Aug/2023:18:59:05 +0000] "GET /www.newco.dev.br/MenusYDerechos/Main2022.xsql HTTP/1.1" 200 -
+84.78.248.34 - - [24/Aug/2023:19:00:45 +0000] "GET /www.newco.dev.br/Gestion/AdminTecnica/AdminTecnica2022.xsql HTTP/1.1" 200 -
+185.180.143.49 - - [24/Aug/2023:19:11:41 +0000] "GET / HTTP/1.1" 200 11217
+45.79.181.94 - - [24/Aug/2023:20:05:02 +0000] "-" 400 -
+84.54.51.27 - - [24/Aug/2023:20:38:25 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+207.180.223.28 - - [24/Aug/2023:20:44:10 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+78.108.177.51 - - [24/Aug/2023:20:46:08 +0000] "GET / HTTP/1.0" 200 11197
+143.198.32.136 - - [24/Aug/2023:21:01:31 +0000] "-" 400 -
+143.198.32.136 - - [24/Aug/2023:21:01:31 +0000] "-" 400 -
+143.198.32.136 - - [24/Aug/2023:21:01:32 +0000] "GET / HTTP/1.1" 200 11217
+143.198.32.136 - - [24/Aug/2023:21:01:32 +0000] "-" 400 -
+143.198.32.136 - - [24/Aug/2023:21:01:32 +0000] "GET / HTTP/1.1" 200 11217
+143.198.32.136 - - [24/Aug/2023:21:01:33 +0000] "-" 400 -
+67.207.81.121 - - [24/Aug/2023:21:41:49 +0000] "-" 400 -
+67.207.81.121 - - [24/Aug/2023:21:41:49 +0000] "-" 400 -
+67.207.81.121 - - [24/Aug/2023:21:41:49 +0000] "GET / HTTP/1.1" 200 11217
+67.207.81.121 - - [24/Aug/2023:21:41:49 +0000] "-" 400 -
+67.207.81.121 - - [24/Aug/2023:21:41:49 +0000] "GET / HTTP/1.1" 200 11217
+67.207.81.121 - - [24/Aug/2023:21:41:50 +0000] "-" 400 -
+45.88.90.114 - - [24/Aug/2023:21:58:36 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+45.128.232.125 - - [24/Aug/2023:22:47:42 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+205.210.31.183 - - [24/Aug/2023:22:48:35 +0000] "GET / HTTP/1.0" 200 11197
+205.210.31.142 - - [24/Aug/2023:22:59:59 +0000] "GET / HTTP/1.0" 200 11197
+84.54.51.142 - - [24/Aug/2023:23:01:05 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -
+198.98.58.175 - - [24/Aug/2023:23:03:28 +0000] "CONNECT ip138.com:443 HTTP/1.1" 400 -
+193.35.18.33 - - [24/Aug/2023:23:26:44 +0000] "CONNECT google.com:443 HTTP/1.1" 400 -

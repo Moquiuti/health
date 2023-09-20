@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="FormAltaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="FormAltaHTML.xsl"?>
+
+<AltaMedicos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+  <!-- Especialidades -->
+  <especialidades>
+  <field name="MED_CEN_ESPECIALIDAD1"> 
+   <xsql:query rowset-element="dropDownList"  row-element="listElem">
+   <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+    <![CDATA[
+		SELECT 
+		ESP_ID 			AS ID,
+		ESP_DESCRIPCION	AS "listItem"
+		FROM ESPECIALIDADES
+		ORDER BY ESP_DESCRIPCION
+    ]]>
+  </xsql:query>
+  </field>
+  </especialidades>
+  <!-- Provincias -->
+  <provincias>
+  <field name="MED_CEN_PROVINCIA1">
+    <xsql:query rowset-element="dropDownList" row-element="listElem">
+    <![CDATA[
+		SELECT zon_nombre as ID, zon_nombre as "listItem" 
+		from geo_zonas
+		order by zon_nombre
+	
+    ]]>
+  </xsql:query>
+  </field>
+  </provincias>
+  <!--  cargo -->
+  <cargo>
+  <field name="MED_CARGO">
+    <xsql:query rowset-element="dropDownList" row-element="listElem">
+    <![CDATA[
+		SELECT tu_id as ID,
+		       tu_descripcion as "listItem"
+	         from tiposusuarios
+	       order by tu_orden
+	
+    ]]>
+  </xsql:query>
+  </field>
+  </cargo>
+  <!-- tipos de centros -->
+  <centros>
+  <field name="MED_CEN_TIPO_CENTRO1">
+    <xsql:query rowset-element="dropDownList" row-element="listElem">
+    <![CDATA[
+		SELECT te_id as ID,
+		       te_descripcion as "listItem"
+	         from tiposempresas
+	         where te_id in (1,2,4,5,6,7,8,10)
+	       order by te_descripcion
+	
+    ]]>
+  </xsql:query>
+  </field>
+  </centros>
+  
+  <returnHome/>
+</AltaMedicos>
+

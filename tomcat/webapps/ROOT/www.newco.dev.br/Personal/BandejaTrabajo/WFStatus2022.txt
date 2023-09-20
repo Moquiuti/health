@@ -1,0 +1,24 @@
+11ene22 ET Nuevo disenno. WFStatus2022_110122.js
+14ene22 ET Incluir paginacion para proveedores y compradores normales
+21feb22 ET No se abren correctamente los pedidos pendientes
+14mar22 ET No se muestran botones ANTERIOR/SIGUIENTE
+25mar22 ET Quitar desplegable de numero de lineas
+
+
+
+
+
+PENDIENTE: 
+- Quitar el logo y desplegables de columna izquierda en el caso "Solo pedidos"
+- Poner estilo y pie de tabla en el caso "sin resultados"
+
+
+- COMPROBAR FUNCIONAMIENTO SEGUN PERFIL DE USUARIO
+- Maquetar licitaciones, incidencias, evaluaciones, solicitudes de catalogacion,...
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--  -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="cambiarSeleccionJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="cambiarSeleccionJSON.xsl"?>
+
+<CambiarSeleccion xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <!--
+  	Anyadir o quitar un registro de un grupo de seleccion ya creado (desde ficha de empresa)
+  -->
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+    v_IDSel	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambiarSeleccion');
+		IF US_ID>=0 THEN
+
+      v_IDSel := EISSelecciones_pck.CambiarRegistro(
+        US_ID,
+        '{@IDSELECCION}',
+        '{@IDREGISTRO}'
+      );
+
+      HTP.P(utilidades_pck.CabeceraXML);
+      IF v_IDSel > 0 THEN
+				HTP.P('<OK>'||v_IDSel||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+    END IF;
+  END;
+]]>
+</xsql:include-owa>
+</CambiarSeleccion>

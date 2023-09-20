@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guardar datos de usuario. Nuevo disenno 2022.
+	Ultima revisión: ET 21mar22 16:30 
+-->
+<?xml-stylesheet type="text/xsl" href="USMantenHTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="US_IDCENTRO"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_USUARIOGERENTE" value="{@US_USUARIOGERENTE}"/>
+<xsql:include-param name="US_GERENTECENTRO" value="{@US_GERENTECENTRO}"/>
+<xsql:include-param name="VER_USUARIO"/>
+
+<form name="frmDPManten" action="USManten2022.xsql">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		IDUsuarioMant		NUMBER;
+		v_Error			VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','USMantenSave');
+		IF US_ID>=0 THEN
+			IF '{@ACCION}'='MODIFICAR' THEN
+				IDUsuarioMant:=USUARIOS_PCK.Modificar(
+					US_ID,                      --17mar15
+                	'{@ID_USUARIO}',
+					'{@US_NOMBRE}',
+					'{@US_APELLIDO1}',
+					'{@US_APELLIDO2}',
+					'{@US_USUARIO}',
+					'{@US_CLAVE}',
+					'{@US_CLAVE_REP}',
+					'{@US_IDCENTRO}',
+					'{@US_EMAIL}',
+					'{@US_EMAIL2}',
+					'{@US_PEDIDOMAXIMO}',
+					'{@US_COMPRAMENSUALMAXIMA}',
+					'{@US_COMPRAANUALMAXIMA}',
+					'{@US_LIMITACIONFAMILIAS}',
+					'{@US_CENTRALCOMPRAS}', 		--centralcompras
+					'{@US_USUARIOGERENTE}',
+					'{@US_GERENTECENTRO}',
+					'{@US_IDTIPO}',
+					'{@US_IDDEPARTAMENTO}',
+					'{@US_IDIDIOMA}',
+					'{@US_IDSEXO}',
+					'{@US_TF_FIJO}',
+					'{@US_TF_MOVIL}',
+					'{@US_OPERADOR}',
+					'{@US_AVISOS_EMAIL}',		--on
+					'{@US_CONTROLACCESOS}',
+					'{@US_VEROFERTAS}',
+					'{@US_BLOQUEAROCULTOS}',
+					'{@US_AVISOSCAMBIOSCAT}',	--on
+					'{@US_AVISOS_MOVIL}',
+					'{@US_TITULO}',
+					'{@US_PLANTILLASNORMALES}',	--on
+					'{@US_PLANTILLASURGENCIAS}',	--on
+					'{@US_EIS_ACCESOGERENTE}',
+					'{@US_EIS_ACCESOCENTRO}',
+					'{@US_AR_PEDIDOSENVIADOS}',
+					'{@US_AR_PEDIDOSRECIBIDOS}',
+					'{@US_EISSIMPLIFICADO}',	--on
+					'{@CAMBIOS_DEPTS}',
+					'{@US_IDUSUARIOCONTROL}',
+					'{@US_MULTICENTROS}',					--26may09
+					'{@US_CENTROSAUTORIZADOS}',				--26may09	2ene18: incluye lugares de entrega
+					'{@US_NAVEGARPROVEEDORES}',				--on 		
+					'{@US_EIS_FILTROPRODUCTOS}',			--7jul09
+					'{@US_VERCARPETAS}',					--20jul09
+					'{@US_PEDIDOANTIGUO}',					--29dic10
+					'{@US_IDUSUARIOEMPLANTILLADOR}',		--26ene11
+					'{@US_DELEGADOURGENCIAS}',				--31ene11
+					'{@US_DELEGADOZONA}',					--31ene11
+					'{@US_AVISOSRESUMENPEDIDOS}',			--31ene11
+					'{@US_CREARLICITACIONES}',				--28jun13
+					'{@US_VERLICITACIONES}',				--28jun13
+                	'{@US_OBSERVADOR}',	        			--19jun14
+                	'{@US_COMERCIAL}',	        			--19jun14
+					'{@US_CP_ID}',							--3jul13
+					'{@US_CP_NOMBRE}',						--3jul13
+                	'{@US_INTEGRACION}',					--1jul14
+                	'{@US_BLOQUEADO}',              		--29sep14
+                	'{@US_IDPERFIL}',               		--17mar15
+                	'{@US_MINIMALISTA}',            		--21may15	proveedores.com
+                	'{@US_CLAVE_MD5}',              		--29may15	proveedores.com
+                	'{@US_IMPORTESINSUPERVISION}',  		--25ene16 
+                	'{@US_VENDERLOTES}', 					--2may16	ClubVipTiendas
+                	'{@US_COAUTORLICITACIONES}', 			--17ene18
+                	'{@US_MANTENIMIENTOPEDIDOS}', 			--17ene18
+                	'{@US_MANTPEDIDOSPRECIOS}', 			--10abr20
+                	'{@US_DESCRIPCION}', 					--17ene18
+                	'{@US_UTILIZARCODIFICACION}', 			--17ene18
+                	'{@US_LEGALIZADOR}', 					--3dic18
+                	'{@US_OCULTARREFPROVEEDOR}', 			--6feb19
+                	'{@US_OCULTARNOMBREPROVEEDOR}', 		--31ene19
+                	'{@US_IDLUGARENTREGA}',			 		--31ene19
+                	'{@US_IDCENTROCOSTE}', 					--31ene19
+                	'{@US_CODIGO}', 						--12abr19
+                	'{@US_AVISOSDOCUMENTACION}', 			--11jun19
+                	'{@US_SKYPE}',				 			--29ago19
+                	'{@US_LIC_BLOQUEARAVISOS}',				--24oct19
+					'{@US_EIS_IDCONTROLSELECCION}',			--09mar20
+					'{@US_IDEXTERNO}',						--15jul20
+					'{@US_IDGESTORLICITACIONES}',			--27oct20
+					'{@US_APROBARPEDIDOSOTROS}',			--23abr21
+					'{@US_INICIO_GRAFICO}',					--11abr22
+					v_Error
+				);
+		ELSE
+			IDUsuarioMant:='{@ID_USUARIO}';
+		END IF;
+
+		HTP.P(utilidades_pck.CabeceraXML);
+			IF v_Error IS NULL THEN
+				USUARIOS_PCK.Usuario_XML(US_ID,IDUsuarioMant,'{@EMP_ID}','{@CEN_ID}');
+			ELSE
+				HTP.P(v_Error);
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<field name="US_TITULO">
+	<dropDownList>
+		<listElem>
+			<ID>-1</ID>
+			<listItem>Elija una Opción</listItem>
+		</listElem>
+		<listElem>
+			<ID>DR|H</ID>
+			<listItem>Dr.</listItem>
+		</listElem>
+		<listElem>
+			<ID>DRA|M</ID>
+			<listItem>Dra.</listItem>
+		</listElem>
+		<listElem>
+			<ID>SR|H</ID>
+			<listItem>Sr.</listItem>
+		</listElem>
+		<listElem>
+			<ID>SRA|M</ID>
+			<listItem>Sra.</listItem>
+		</listElem>
+	</dropDownList>
+</field>
+</form>
+
+</Mantenimiento>
+

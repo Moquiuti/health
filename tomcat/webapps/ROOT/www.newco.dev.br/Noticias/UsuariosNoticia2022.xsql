@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Usuarios que han consultado una noticia
+	Ultima revision: ET 1jun22 09:30
+-->
+<?xml-stylesheet type="text/xsl" href="UsuariosNoticiaHTML2022.xsl"?>
+
+<UsuariosNoticia xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="IDNOTICIA"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+  <![CDATA[
+    DECLARE
+      US_ID		NUMBER;
+    BEGIN
+      US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','UsuariosNoticia');
+      IF US_ID>=0 THEN
+		    Noticias_PCK.Noticia_XML(
+          US_ID,
+          '{@IDNOTICIA}',
+          'S'
+        );
+      END IF;
+    END;
+  ]]>
+  </xsql:include-owa>
+
+  <returnHome/>
+</UsuariosNoticia>

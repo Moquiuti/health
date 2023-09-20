@@ -1,0 +1,44 @@
+14nov16 ET Adaptación al nuevo diseño de Breno, recuperando código desde WFStatusHTML
+31ene17	ET Incluimos desplegable de plazo de tiempo de consulta
+23oct17	El numero de licitacion también debe enlazar a la ficha de la licitación
+28may18 ET Licitaciones: icono de urgente cuando corresponda
+24jul18 ET Botón "Vencedores" para consultar la situación global de los proveedores -> "Convocatorias"
+5oct18	ET Corregir encabezado listado (aparece "Empresa" para usuarios no MVM)
+16oct18	ET El botón de "Convocatorias" apunta al nuevo resumen por proveedor, no a "Vencedores"
+7dic18	ET Filtro de convocatorias
+12dic18	ET Columna: proveedores pendientes de publicar
+14may19	ET Columna: número de centros de la licitación
+21ago19 ET Quitar columna situación, incluir centro si hay alguna licitación spot (solicitado por UNIMED)
+26ago19 ET Incluir desplegable de categoría para filtrar licitaciones (solo para búsquedas en una única empresa)
+02set19 ET Incluir desplegable y columna de área geográfica (solo Brasil)
+11set19 ET Unimed: Ocultar columna de título
+16set19 ET Desplegable de plazo de consulta para los proveedores
+17set19 ET Nueva revisión alineación tabla
+04oct19 ET Semáforo de aviso a los proveedores si no han publicado la oferta
+05oct19 ET Quitar semáforo, mantener fuente roja destacada
+10oct19 ET Para usuarios MVM, mostrar categorías con icono de información
+22oct19 ET Por defecto solo activas, permitir ordenar por código y por centro
+29oct19 ET Incluir columna "autor" para Unimed, en base al nuevo campo EMP_LIC_MOSTRARAUTOR
+22ene20 ET Incluir columnas pedidos pendientes, pedidos enviados (solo si hay licitaciones SPOT)
+27ene20 ET Quitar la columna "Informada" para compradores de Brasil (mantener para proveedores y otros países). No utilizar color Naranja en columna de pedidos pendientes.
+30ene20 ET Búsquedas "especiales" para indicadores de la página de inicio
+07feb20 ET Corregido error en la ordenación con cambio de sentido
+07feb20 ET Incluir código de solicitud cuando haya alguna informada (integración)
+10mar20 ET Error con ' en título de licitación de UNIMED
+13abr20 ET Destacar la linea al pasar el cursor <tr class="conhover">
+15jul20 ET Marcar las licitaciones de Federassantas
+27oct20 ET Informar motivo para suspender/borrar licitación + Separar JS. Licitaciones_271020.js
+26nov20 ET En caso de Creador/Gestor, incluir la nueva columna (Solicitado por Unimed)
+28nov20 ET Corregido error: muchas columnas en blanco
+30nov20 ET Desplegables de Autor y Gestor
+02dic20 ET Incluir las columnas de Autor y Gestor si el usuario es MULTICENTROS
+21dic20 ET Texto para ampliar la explicacion del motivo para suspender la licitacion. Licitaciones_211220.js
+16nov21 ET Ampliar espacio para texto libre, permitir utilizar nombre de cliente, cnpj, etc...
+03dic21 ET Cambios solicitados por MVMB: Cambio orden de los desplegables, ampliar tamanno filtros, etc...
+07dic21 ET Se produce un error si el titulo de la licitacion incluye ', corregir  a items['Titulo']		= "<xsl:value-of select="LIC_TITULO_JS"/>";
+
+PENDIENTE: Presentación gráfica, útil para negociaciones con periodos largos
+
+
+
+

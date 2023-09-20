@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Catalogo privado, para consultas de proveedores desde el área pública de la página
+	Ult.revisión: ET 7mar22 11:30
+-->
+<?xml-stylesheet type="text/xsl" href="CatalogoPrivadoProductoHTML2022.xsl"?>
+
+<CatalogoPrivado  xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+    <xsql:include-param name="ORIGEN"/>
+    <xsql:include-param name="STYLE"/>
+	
+  <xsql:include-owa>
+      <![CDATA[
+	BEGIN
+		CATALOGOPRIVADO_SEG_PCK.ListadoCatalogoMVM_XML
+		(
+			'{@REFERENCIA}', 
+			'{@DESCRIPCION}'
+		);
+     END;
+     ]]>
+  </xsql:include-owa>
+
+  
+</CatalogoPrivado>

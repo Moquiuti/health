@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CenListaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CenListaHTML.xsl"?>
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:query tag-case="upper">
+      <![CDATA[
+        select CEN_ID as ID,
+               CEN_NOMBRE,
+               CEN_DIRECCION,
+               CEN_POBLACION
+        from CENTROS
+        where cen_idempresa = {@EMP_ID}
+        ]]>
+    <xsql:no-rows-query>
+        select 0 as ID,
+               null CEN_NOMBRE,
+               null CEN_DIRECCION,
+               null CEN_POBLACION
+        from dual
+    </xsql:no-rows-query>
+   </xsql:query>
+   
+ <ExtraButtons>
+    <!-- Para evitar el problema con los FORMS ANIDADOS -->
+    <formu name="dummy" action="none">
+    </formu>
+ 
+    <!-- Para el boton Anyadir -->  
+    <formu name="frmCentro" action="CENManten.xsql">
+     <field type="hidden" name="EMP_ID">
+      <xsql:include-param name="EMP_ID"/>
+     </field>
+     <field type="hidden" name="ID"><CEN_ID>0</CEN_ID> </field>
+     <button label="Insertar" caption="IMG-0530">
+       <name_function>document.forms['frmCentro'].submit</name_function>    
+     </button>
+    </formu>
+  </ExtraButtons>   
+   
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>    
+    <picture-off>Anterior</picture-off>   
+    <page>CEN-0090</page>
+    <caption>G-0001</caption>    
+  </jumpTo>
+  
+</Lista>
+

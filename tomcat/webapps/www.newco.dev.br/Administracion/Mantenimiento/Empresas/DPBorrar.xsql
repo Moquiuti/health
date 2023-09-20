@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="DPBorrarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="DPBorrarHTML.xsl"?>
+
+<MantenimientoBorrar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+<xsql:include-owa>
+
+<![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DPBorrar');
+		if us_id>=0 then
+                  DEPARTAMENTOS_PCK.DP_Borrar({@DP_ID});
+		end if;		   
+        END;
+        ]]>		  
+</xsql:include-owa>
+
+ <boton label="Cerrar" caption="IMG-0190">
+    <name_function>tienePadre</name_function> 
+  </boton>
+  
+</MantenimientoBorrar>
+

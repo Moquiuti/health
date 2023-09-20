@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de noticias
+	Ultima revisión: ET 13jun19 12:41
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="VerTodasNoticiasHTML.xsl"?>
+
+<MantenimientoNoticias xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+   <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoNoticiasSave');
+			IF US_ID>=0 THEN
+				Noticias_PCK.ActualizarNoticia_XML
+					(
+						US_ID,
+						'{@IDNOTICIA}',		--	ID de la noticia, NULL para noticia nueva
+						'{@FECHA}',			--	NULL para noticia nueva
+						'{@TITULO}',
+						'{@TEXTO}',
+						'{@COMENTARIOS}',	--	Comentarios sobre la noticia, NO OPERATIVO TODAVÍA
+						'{@PUBLICA}',
+						'{@ESTADO}',
+						'{@DESTINATARIOS}',
+						'{@ANCHOR}',	--	9dic08	ET	incluimos enlace
+						'{@URL}',
+                        '{@CADENA_IMAGENES}',
+                        '{@IMAGENES_BORRADAS}',
+						'{@IDPORTAL}',		--	ID de Portal
+						'{@IDDOCUMENTO}'	--	ID documento
+					);
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+    
+</MantenimientoNoticias>

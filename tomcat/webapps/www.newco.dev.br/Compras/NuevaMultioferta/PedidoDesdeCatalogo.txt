@@ -1,0 +1,2 @@
+02mar21 ET Primera version del buscador para preparar pedidos desde catalogo. PedidoDesdeCatalogo_040321.js
+11may21 ET Los titulos de columna de ref. estandar y ref.cliente estaban cruzados

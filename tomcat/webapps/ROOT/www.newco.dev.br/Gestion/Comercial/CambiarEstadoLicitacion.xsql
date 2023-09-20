@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Cambia el estado de la licitacion
+	
+	Ultima revision: ET 21dic20 16:10
++-->
+<?xml-stylesheet type="text/xsl" href="CambiarEstadoLicitacionJSON.xsl"?>
+
+<EstadoLicitacion xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EstadoLic	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambioEstadoLicitacion');
+		IF US_ID>=0 THEN
+			v_EstadoLic:=LICITACIONES_PCK.CambiarEstadoLicitacion(
+				US_ID,
+				'{@ID_LIC}',
+				'{@ID_ESTADO}',
+				'{@ID_PROVEEDOR}',
+				'{@COMENTARIOS}',
+				'{@ID_MOTIVO}',					--	27oct20
+				'{@MOTIVO}'						--	21dic20
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_EstadoLic > 0 THEN
+				HTP.P('<OK>'||v_EstadoLic||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EstadoLicitacion>

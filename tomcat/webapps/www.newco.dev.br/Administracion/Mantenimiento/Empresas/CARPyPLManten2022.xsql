@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+   Mantenimiento de carpetas y plantillas de un usuario. Nuevo disenno 2022.
+   Ultima revision: ET 16may22 12:07
+-->
+<?xml-stylesheet type="text/xsl" href="CARPyPLMantenHTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="ID_PROPIETARIO"/>
+	<xsql:include-param name="ID_USUARIO"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+    <xsql:include-owa>
+      <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(100);
+		BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CARPyPLManten');
+		  IF US_ID>=0 THEN
+		  
+ 			IF '{@ACCION}' IS NOT NULL THEN
+				v_Res:=Usuarios_PCK.PermitirAccesoCarpYPlant('{@ID_PROPIETARIO}','{@ID_USUARIO}','{@DERECHOSCARPETAS}','{@DERECHOSPLANTILLAS}');
+			END IF;
+		  
+            CarpetasYPlantillas_pck.ListaCarpetasYPlantillasXML(US_ID,'{@ID_USUARIO}');
+          END IF;				   
+        END;
+        ]]>
+    </xsql:include-owa>
+</Mantenimiento>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que comprueba si un producto estandar tiene c onsumo historico -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ProductoEstandarConConsumoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ProductoEstandarConConsumoJSON.xsl"?>
+
+<ProductoEstandarConConsumo xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="ID_PROD_EST"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(1);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ValidarRefClienteAJAX');
+		IF US_ID>=0 THEN
+			v_Res:=CATALOGOPRIVADO_MANT_PCK.ProductoEstandarConConsumo(
+				'{@ID_PROD_EST}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Res = 'N' THEN
+				HTP.P('<SIN_CONSUMO/>');
+			ELSIF v_Res = 'S' THEN
+				HTP.P('<CON_CONSUMO/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ProductoEstandarConConsumo>

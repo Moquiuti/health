@@ -1,0 +1,17 @@
+<POLICY name="mvmPolicy" discuri="http://www.newco.dev.br/QuienesSomos.xsql">
+<!--
+Because some browsers require a P3P policy, we have created a compact P3P policy
+that outlines some, but not all, of the details of our privacy practices.  The
+compact policy relates primarily to our use of HTML cookies and personally
+identifiable information associated with such cookies.  However, we have not
+included a full P3P policy because the binary limitations of the required XML
+code currently do not fully and adequately express our policies and practices.
+Instead, we ask that you read our full Privacy Notice at www.mvmnucleo.com/QuienesSomos.xsql
+-->
+<ENTITY>
+<DATA-GROUP>
+<DATA ref="#business.name">Medical Virtual Market</DATA>
+<DATA ref="#business.contact-info.online.uri">http://www.newco.dev.br/Contacto.xsql</DATA>
+</DATA-GROUP>
+</ENTITY>
+</POLICY> 

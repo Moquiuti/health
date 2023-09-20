@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VisualizarPedidosProgramadosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VisualizarPedidosProgramadosHTML.xsl"?>
+
+<PedidosProgramados xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="VENTANA"/>
+  <xsql:include-param name="LISTAUSUARIOSCENTRO"/>
+  <xsql:include-param name="DESDE"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidosProgramados');
+		IF US_ID>=0 THEN
+
+			PEDIDOSPROGRAMADOS_PCK.PedidoProgramado_XML('{@PEDP_ID}','{@IDOFERTAMODELO}',US_ID,'{@LISTAPEDIDOS}','{@LISTAUSUARIOSCENTRO}');
+
+		END IF;
+	END;
+    ]]>
+  </xsql:include-owa>
+
+  <field name="IDFRECUENCIA">
+    <dropDownList>
+      <listElem>
+        <ID>-1</ID>
+        <listItem>Seleccione la frecuencia de envío</listItem>
+      </listElem>
+      <listElem>
+        <ID>1</ID>
+        <listItem>1 sola vez</listItem>>
+      </listElem>
+      <listElem>
+        <ID>S</ID>
+        <listItem>Semanal</listItem>>
+      </listElem>
+      <listElem>
+        <ID>Q</ID>
+        <listItem>Quincenal</listItem>>
+      </listElem>
+      <listElem>
+        <ID>M</ID>
+        <listItem>Mensual</listItem>>
+      </listElem>
+      <listElem>
+        <ID>B</ID>
+        <listItem>Bimensual</listItem>>
+      </listElem>
+      <listElem>
+        <ID>T</ID>
+        <listItem>Trimestral</listItem>>
+      </listElem>
+    </dropDownList>
+  </field>
+  
+  
+  
+  <button label="Cerrar" caption="IMG-0190">
+    <name_function>CerrarVentana</name_function>
+  </button>
+ 
+  <button label="Imprimir" caption="IMG-1490">
+    <name_function>window.print</name_function> 
+  </button> 
+  
+  <returnHome/>
+</PedidosProgramados>
+

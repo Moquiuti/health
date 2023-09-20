@@ -1,0 +1,2 @@
+18ago21 ET No se guardan correctamente las fechas de documentos opcionales. CENDocs_180821.js
+16set21 ET Cambio estructura XML documentos para EMPDocs, actualizar también en CENDocs

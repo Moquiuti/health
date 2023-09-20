@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	ultima revision ET 9abr19
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="IdentificarProductoJSON.xsl"?>
+
+<EnvioLineaFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NUMLINEA" value="NUMLINEA"/>
+	<xsql:include-param name="TEXTO" value="{@TEXTO}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	
+	<!--	Datos que devolvera el PL/SQL	
+	<OK/>
+	-->	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PrecioReferenciaProducto');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL:CatPrivado_fic_pck.IdentificarProducto {@IDFICHERO},{@NUMLINEA},{@IDCLIENTE},{@NIFPROVEEDOR},{@REFPROVEEDOR},{@PRODUCTO}');
+
+				v_Res:=CatPrivado_fic_pck.IdentificarProducto
+				(
+					US_ID,
+					'{@INTF_ID}',
+					'{@NUMLINEA}',
+					'{@IDCLIENTE}',
+					'{@NIFPROVEEDOR}',
+					'{@REFPROVEEDOR}',
+					'{@PRECIO}',
+					'{@CANTIDAD}',
+					'{@PRODUCTO}'
+				);
+				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P(	'<OK>'
+						||	'<NUMLINEA>{@NUMLINEA}</NUMLINEA>'
+						||	'<DATOSPRODUCTO>'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'</DATOSPRODUCTO>'
+						||	'</OK>');
+				ELSE
+
+					HTP.P(utilidades_pck.CabeceraXML||'<ERROR msg="'||utilidades_pck.Piece(v_Res,'|',1)||'"/>');
+				
+				END IF;
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnvioLineaFichero>

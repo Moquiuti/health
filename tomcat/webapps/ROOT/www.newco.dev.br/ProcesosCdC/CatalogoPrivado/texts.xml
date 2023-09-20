@@ -1,0 +1,1783 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="iso-8859-1" ?> -->
+
+<translation>
+<texts xml:lang="es">
+	<!-- meta.i.xsl -->
+
+	<item name="meta_general">Punto de encuentro de la tecnología hospitalaria y sanitaria: Arquitectura, Ingeniería y Gestión</item>
+	<item name="meta_EDIFICACION">Edificación</item>
+	<item name="meta_SERVICIOS-HOSPITALARIOS">Servicios Hospitalarios</item>
+	<item name="meta_TIPOLOGIA">Hospitales, Clínicas, Residencias, Laboratorios, Centros de Salud</item>
+
+	<item name="hospitecnia.com">Hospitecnia.com</item>
+	<item name="hospitecnia">Hospitecnia</item>
+	<item name="hospitecnia_def">Punto de encuentro para los profesionales que precisan información referente a la tecnología hospitalaria y sanitaria: Arquitectura, Ingeniería, Gestión, Construcción y Diseño</item>
+	<item name="hospitecnia_defcorta">Arquitectura, Ingeniería, Tecnología y Gestión hospitalaria y sanitaria</item>
+	<item name="hospitecnia_defmuycorta">Tecnología hospitalaria y sanitaria</item>
+	
+	<!-- header.i.xsl -->
+	<item name="texto_cabecera">Punto de encuentro de la tecnología hospitalaria y sanitaria: Arquitectura, Ingeniería y Gestión.</item>
+	<item name="contrasena_login"> Contraseña </item>
+	<item name="olvide_contrasena">Olvidé contraseña</item>
+	<item name="zona_privada_header">Zona privada</item>
+	<item name="cerrar_sesion">Salir</item>
+	<item name="cerrar">Cerrar</item>
+	<item name="registra">¡Regístrate gratis!</item>
+	<item name="informacion">Información</item>
+	<item name="hola">¡Hola </item>
+	<item name="todo">Todo</item>
+	<item name="inicio">Inicio</item>
+	<item name="siguenos">Síguenos</item>
+	<item name="login_text"><a href="http://www.hospitecnia.com/AltaPaso01.xsql" title="Regístrate en Hospitecnia">Regístrate</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="thickbox" id="LoginID" title="Accede a Hospitecnia.com" href="http://www.hospitecnia.com/LoginRapido.html?height=220&amp;width=330&amp;modal=true">Entra</a></item>
+
+	<!--Nuevo Buscador-->
+	<item name="buscador_title">¿Qué buscas?</item>
+	<item name="buscador_por_texto">Texto, título, autor...</item>
+	<item name="buscador_por_categoria">Categoría:</item>
+	<item name="buscador_por_subcategoria">Tipo:</item>
+	<item name="buscador_por_pais">País:</item>
+	<item name="todos_paises">Todos</item>
+	<item name="buscador_por_provincia">Provincia:</item>
+	<item name="todas_prov">Todas</item>
+	<item name="buscador_por_fecha_desde">Desde:</item>
+	<item name="buscador_por_fecha_hasta">Hasta:</item>
+	<item name="buscador_ordenar_por">Ordenar:</item>
+	<item name="buscador_ordenar_por_precio">por precio</item>
+	<item name="buscador_ordenar_por_fecha">por fecha</item>
+	<item name="buscador_ordenar_por_titulo">por título</item>
+	<item name="buscador_avanzado">Buscador Avanzado</item>
+	<item name="cierra_buscador_avanzado">Ocultar Buscador</item>
+
+	<!--path-->
+	<item name="alta_usuario">Alta usuario</item>
+	<item name="confirmacion">Confirmación Alta</item>
+	<item name="mantene_anuncio">Mantenimiento</item>
+	<item name="mantene_usuario">Mantenimiento usuario</item>
+	<item name="home">Inicio</item>
+
+	<!--index listado-->
+	<item name="hospitecnia_info_remake">Hospitecnia es el punto de encuentro de la Tecnología Hospitalaria y Sanitaria en la red desde el punto de vista de la Arquitectura, la Ingeniería y la Gestión.</item>
+	
+	<item name="hospitecnia_info">Arquitectura, Ingeniería, Gestión Hospitalaria y Sanitaria. </item>
+	<item name="hospitecnia_infoOld">Arquitectura, Ingeniería y Gestión en Tecnología Hospitalaria y Sanitaria en la red.</item>
+	<item name="contacte">Contacte con nosotros</item>
+	<item name="abonos">Abonos</item>
+	<item name="abonos_text">Descubre las ventajas de abonarte a Hospitecnia</item>
+	<item name="publicar_articulo">Publicar un artículo</item>
+	<item name="publicar_noticia">Publicar una noticia</item>
+	<item name="publicar_proveedor">Nuevo proveedor</item>
+	<item name="publicar_cursos">Publicar formación</item>
+	<item name="cursos">CURSOS</item>
+	<item name="noticias">NOTICIAS</item>
+	<item name="articulos">ARTÍCULOS</item>
+	<item name="preguntas">PREGUNTAS</item>
+        <item name="compra_venta">compra-venta</item>
+	<item name="destacados">DOCUMENTOS DESTACADOS</item>
+	
+	<item name="documentacion_menu">Documentación</item>
+	<item name="documentacion_norm">Documentacion</item>
+	<item name="documentos_menu">Documentos</item>
+	<item name="cursos_menu">Formación</item>
+	<item name="proveedores_menu">Proveedores</item>
+	<item name="proyectos_menu">Proyectos</item>
+	<item name="concursos_menu">Concursos</item>
+	<item name="videos_menu">Vídeos</item>
+	<item name="centros_sanitarios_menu">Centros Sanitarios</item>
+	<item name="noticias_menu">Noticias</item>
+	<item name="articulos_menu">Artículos</item>
+	<item name="normativas_menu">Normativas</item>
+	<item name="preguntas_menu">Preguntas</item>
+	<item name="compraventa_menu">Compra/Venta</item>
+	<item name="centros_menu">Centros Sanitarios</item>
+	<item name="bibliografias_menu">Bibliografías</item>
+	<item name="enlaces_menu">Enlaces</item>
+	<item name="doc_cortos_menu">Documentos Cortos</item>
+	<item name="doc_largos_menu">Documentos Largos</item>
+	<item name="eq_materiales_menu">Equipos y Materiales</item>
+	<item name="prog_funcionales_menu">Programas funcionales</item>
+	<item name="alta_boletin">Recibe nuestro boletín</item>
+	<item name="confirm_alta_boletin">Tu alta en el boletín se ha realizado correctamente</item>
+	
+	<item name="proveedores_may">Proveedores destacados</item>
+	<item name="proveedores_destacados">PROVEEDORES DESTACADOS</item>
+	<item name="otras_secciones">Otras secciones</item>
+	<item name="centros_sanitarios">Centros Sanitarios</item>
+	<item name="concursos">CONCURSOS</item>
+	<item name="fecha_listado">Fecha</item>
+	<item name="tamano">Tamaño</item>
+	<item name="ver_documento">Ver documento</item>
+	<item name="tipos_documentos">Tipos documentos</item>
+	<item name="no_disponible">No disponible</item>
+	<item name="ultimos">Últimos</item>
+	<item name="ultimos_videos">ÚLTIMOS VÍDEOS</item>
+	<item name="documento">Documento</item>
+	<item name="documento_maiu">DOCUMENTO</item>
+	<item name="documentos_maiu">DOCUMENTOS</item>	
+	<item name="documentos">Documentos</item>
+	<item name="relacionados_con">relacionados con </item>
+	<item name="documentos_maiuscolo"> DOCUMENTOS </item>
+	<item name="faq_maiuscolo"> PREGUNTAS Y RESPUESTAS </item>
+	<item name="de_arquitectura">DE ARQUITECTURA, INGENIERÍA Y GESTIÓN </item>
+	<item name="hoy_destacamos">HOY DESTACAMOS</item>
+	<item name="ultimas_noticias">ÚLTIMAS NOTICIAS</item>
+	<item name="proveedores">Proveedores</item>
+	<item name="text_no_reg"><p>Tienes que estar registrado en la página para contactar</p></item>
+	<item name="ultimas_cursos">ÚLTIMA FORMACIÓN</item>
+	<item name="proximos_cursos">PRÓXIMA FORMACIÓN</item>
+	<item name="ultimas_concursos">ÚLTIMOS CONCURSOS</item>
+	<item name="ultimas_compraventa">PRODUCTOS</item>
+	<item name="oferta">Vendo</item>
+	<item name="demanda">Compro</item>
+	<item name="faq">FAQ</item>
+	<item name="documentos_pago">Documentos Premium</item>
+	<item name="text_no_anuncios"><strong><p>Lo sentimos, no hemos encontrado ningún anuncio que contenga las palabras de tu búsqueda.</p><p><br/><br/>Te aconsejamos que realices de nuevo la búsqueda por palabras o bien escojas la categoría que mejor se adapte a lo que estás buscando.</p><p><br/>Gracias por confiar en Hospitecnia.</p></strong></item>
+	<item name="plazo_abierto">EN PLAZO</item>
+	<item name="plazo_cerrado">CERRADA</item>
+	<item name="publicacion">Publicación:</item>
+	<item name="inicio_curso">Inicio:</item>
+	<item name="final_curso">Final:</item>
+	<item name="lo_mas_buscado">Lo más buscado</item>
+	<item name="filtro_por_pais">Búsqueda por país</item>
+	<item name="filtro_por_provincia">Búsqueda por provincia</item>
+	<item name="filtro_por_poblacion">Búsqueda por población</item>
+	<item name="filtro_por_categoria">Búsqueda por categoría</item>
+	<item name="filtro_por_tipo">Búsqueda por tipo</item>
+	<item name="filtro_por_subcategoria">Búsqueda por subcategoría</item>
+	<item name="filtro_por_situacion">Búsqueda por situación</item>
+	<item name="filtro_por_interes">¿Cuál es tu interés?</item>
+	<item name="filtro_por_estado">Estado</item>
+	<item name="consulta_hemeroteca">Consulta la hemeroteca</item>
+	<item name="ver_mas_proyectos">Ver más proyectos</item>
+	
+	<!--alta01 mantenimiento usuario-->
+	<item name="alta01_text">
+		<p>Para acceder a la mayoría de documentos y recibir el boletín basta con estar <strong>registrado gratuitamente:</strong><br /> Noticias,<br /> Normativa, <br /> Artículos,<br /> Bibliografía,<br /> Directorio de Proveedores,<br /> cierta Documentación propia,<br /> ciertas Fichas de Equipos y Materiales.</p><p>&nbsp;</p>
+		<p>Sin embargo, para acceder a la totalidad de la documentación, el usuario debe <strong>ABONARSE</strong> a la tarifa plana (particular o colectiva), o comprar el documento que le interese, mediante el carrito de la compra.</p>
+		<p>&nbsp;</p>
+		<p><strong>Infórmate sobre nuestras tarifas de abonos:</strong></p>
+		<p>&nbsp;</p>
+		<p><a href="http://www.hospitecnia.com/AbonosUsuarios.xsql" title="Abonate en Hospitecnia.com">Abonos Usuarios</a></p>
+		<p><a href="http://www.hospitecnia.com/AbonosProveedores.xsql" title="Abonate en  Hospitecnia.com">Abonos empresas</a></p>
+	</item>
+	<item name="inserta_datos">Inserta tus datos </item>
+	<item name="alta01_titulo">Regístrese gratuitamente en Hospitecnia</item>
+	<item name="he_leido_y_acepto">He leído y acepto la </item>
+	<item name="politica_de_datos">política de datos de carácter personal</item>
+	<item name="politica_datos">política de datos</item>
+	<item name="de_hospitecnia"> de Hospitecnia</item>
+	<item name="selecciona">Selecciona</item>
+	<item name="pais">País</item>
+        <item name="mail">E-mail</item>
+        <item name="mail2">Repite E-mail</item>
+	<item name="nombre">Nombre</item>
+	<item name="nombre_empresa">Nombre de empresa</item>
+	<item name="apellidos">Apellidos</item>
+	<item name="actividad">Actividad</item>
+	<item name="empresa">Empresa</item>
+	<item name="cif_empresa">CIF Empresa</item>
+	<item name="telefono_empresa">Teléfono empresa</item>
+	<item name="cod_postal">Cód. Postal</item>
+	<item name="provincia">Provincia</item>
+	<item name="poblacion">Población</item>
+	<item name="direccion">Dirección</item>
+	<item name="codigo_promo">Código Promocional</item>
+	<item name="texto_image">Añadir imagen</item>
+	<item name="texto_documento">Añadir documento</item>
+	<item name="imagen">Imagen</item>
+	<item name="texto_formato_imagenes">Las imágenes pueden ser .gif, .jpg, .png pero no deben superar el tamaño de 400KB.</item>
+	<item name="datos_obligatorios">Datos Obligatorios</item>
+	<item name="recibir_novedades"> Deseo recibir las novedades de Hospitecnia</item>
+	<item name="recibir_estadisticas"> Deseo recibir estadísticas semanales de los anuncios que publique</item>
+	<item name="confirm_alta01"><p>Gracias por darte de alta en Hospitecnia.</p>
+	<p>Para tu propia seguridad te hemos enviado la contraseña a tu dirección de correo electrónico así podrás entrar en Hospitecnia.</p>
+	</item>
+	<item name="volver_anuncio">Para descargar el documento que estabas mirando pincha en el enlace siguiente, y luego identifícate en la cabecera de la página.</item>
+	<item name="vuelvi_anuncio">Volver al Documento</item>
+	<item name="tus_datos">Tus datos</item>
+	<item name="datos_acceso">Datos de acceso</item>
+	<item name="clave">Clave</item>
+	<item name="clave_antigua">Clave antigua</item>
+	<item name="repite_clave">Repite clave</item>
+	<item name="email">E-mail</item>
+	<item name="se_ha_producido_un_error">Se ha producido un error al guardar los datos. Si no encuentra solución contacte con </item>
+	<item name="confirmacion_alta">Confirmación Alta</item>
+	<item name="date_baja">Quiero darme de baja de Hospitecnia.</item>
+	<item name="quitarse_newsletter">Quiero darme de baja del servicio de newsletter.</item>
+	
+	<!--proteccion de datos-->
+	<item name="proteccion_datos_titulo">Política de datos de carácter personal</item>
+	<item name="proteccion_datos_text">
+	<p>Se le informa de que sus datos personales serán incorporados a un fichero debidamente registrado en la Agencia Española de Protección de Datos, propiedad y responsabilidad de HOSPITECNIA, S.L., con domicilio en Barcelona, calle Comte d'Urgell, 240, 2ºB y provista de C.I.F nº B-62681770. Usted consiente expresamente la recogida de dichos datos con la finalidad de la gestión de los anunciantes y usuarios de la Compañía, así como la transferencia internacional de los mismos.</p>
+	<p>Los datos podrán ser cedidos a empresas del grupo de HOSPITECNIA, S.L.</p>
+	<p>En cualquier momento, Usted tendrá la posibilidad de ejercitar sus derechos de acceso, rectificación o cancelación y oposición previstos en la mencionada Ley. A tal efecto, Usted podrá contactar con nosotros enviándonos una carta certificada por correo ordinario junto con una copia de su DNI al domicilio social de la Compañía (ref. protección datos personales).</p></item>
+	
+	
+	<!--alta02-->
+	<item name="alta02_title">Alta Publicación</item>
+	<item name="alta_anuncio">Alta Publicación</item>
+	<item name="alta02_documento">Publicación de documentos</item>
+	<item name="alta02_proyecto">Publicación de proyectos</item>
+	<item name="alta02_proveedor">Publicación de proveedores</item>
+	<item name="alta02_noticia">Publicación de noticias</item>
+	<item name="alta02_preguntas">Publicación de preguntas</item>
+	<item name="alta02_curso">Publicación de formación</item>
+	<item name="alta02_normativa">Publicación de una normativa</item>
+	<item name="alta02_concurso">Publicación de un concurso</item>
+	<item name="alta02_compraventa">Publicación en compra/venta</item>
+	<item name="alta02_centros">Publicación de centros sanitarios</item>
+	<item name="clasificacion_anuncio">Clasificación</item>
+	<item name="localizacion_anuncio">Localización</item>
+	<item name="localizacion_explicacion">Completa todos los apartados si quieres que aparezca el mapa de google en tu ficha de anuncio.</item>
+	<item name="datos_proveedor_anuncio">Datos del proveedor</item>
+	<item name="datos_centro_anuncio">Datos del centro</item>
+	<item name="productos_anuncio">Productos</item>
+	<item name="contacto_anuncio">Datos de contacto</item>
+	<item name="delegaciones_anuncio">Delegaciones</item>
+	<item name="calle">Calle</item>
+	<item name="descripcion_anuncio">Descripción</item>
+	<item name="videos_anuncio">VÍDEOS</item>
+	<item name="cp_provee">Código Postal</item>
+	<item name="ciudad">Ciudad</item>
+	<item name="responsable">Responsable</item>
+	<item name="cargo">Cargo</item>
+	<item name="anadir_delegaciones">Añadir delegaciones</item>
+	<item name="anadir_colaboradores">Añadir colaboradores</item>
+	<item name="anadir_producto">Añadir Productos</item>
+	<item name="anadir_actividad">Añadir Especialidad</item>
+	<item name="anadir_imagen">Añadir Imagen</item>
+	<item name="anadir_documento">Añadir Documento</item>
+	<item name="colaboradores_anuncio">Colaboradores</item>
+	<item name="especialidades_anuncio">Especialidades</item>
+	<item name="especialidad">Especialidad</item>
+	<item name="familia_producto">Tipo/Familia del producto</item>
+	<item name="nombre_producto">Producto</item>
+	<item name="nombre_producto_expli">Nombre comercial del producto</item>
+	<item name="marca_producto">Marca</item>
+	<item name="imagenes_anuncio">Imágenes</item>
+	<item name="documentos_anuncio">Documentos</item>
+	<item name="documentos_externos_anuncio">Documentos externos</item>
+	<item name="galeria_imagenes">Galería imágenes</item>
+	<item name="origen_anuncio">Origen</item>
+	<item name="tipo_producto">Tipo de producto</item>
+	<item name="tipo_producto_expli">Selecciona la categoría que más se adecúa al tipo de producto</item>
+	<item name="estado_producto">Estado del producto</item>
+	<item name="estado_producto_expli">Dinos si el producto es nuevo o de segunda mano</item>
+	<item name="pregunta_anuncio">Formulación pregunta</item>
+	<item name="marca">Marca</item>
+	<item name="marca_expli">Informa la marca del producto</item>
+	<item name="modelo">Modelo</item>
+	<item name="modelo_expli">Informa el modelo del producto</item>
+	<item name="ano_fabricacion">Año de fabricación</item>
+	<item name="ano_fabricacion_expli">Informa el año de fabricación del producto</item>
+	<item name="antiguedad_producto">Antigüedad</item>
+	<item name="antiguedad_expli">Informa el año de compra del producto (valor numérico)</item>
+	<item name="descripcion_producto_expli">Describe el producto de la manera más detallada posible. Cuanta más información aportes tendrás más probabilidades de contactar con gente interesada.</item>
+	<item name="donde">Donde</item>
+        <item name="formato_fecha">(formato aceptado: dd/mm/aaaa)</item>
+	<item name="precio_producto">Precio</item>
+	<item name="formato_precio">   (euros)</item>
+	<item name="precio_producto_expli">En euros (). Formato aceptado: numérico, ej: 0000,00</item>
+	<item name="garantia_producto">Garantía del producto</item>
+	<item name="garantia_producto_expli">Informa si el producto está en garantía y su validez</item>
+	<item name="portes_incluido">Portes incluidos</item>
+        <item name="portes_no_incluido">Portes no incluidos</item>
+	<item name="portes_incluido_expli">Informa si los gastos de envío están incluidos en el precio</item>
+	<item name="info_envio">Información sobre el envío</item>
+	<item name="info_envio_expli">En el caso que los gastos de envío dependan del lugar del destinatario, explícalos aquí</item>
+	<item name="observaciones_producto">Observaciones</item>
+	<item name="observaciones_producto_expli">Escribe aquí algunos datos adicionales que creas que son de interés</item>
+	<item name="terminos_y_condiciones">Términos y condiciones</item>        
+	<item name="marketplace_checkbox_text">Este anuncio está sujeto al <a id="verExpliCV" style="text-decoration:underline;cursor:pointer;">servicio de gestión de compras de Hospitecnia</a>: el precio se incrementará en un 10% al comprador y Hospitecnia se encargará de coordinar la negociación, resolver las dudas, recibir el pago y transferirle el importe cuando el comprador confirme que todo está correcto. ¿Está usted de acuerdo?</item>
+
+	<item name="marketplace_comprador_title">Servicio de gestión de compras de Hospitecnia</item>
+	<item name="marketplace_comprador_text"><b>Aviso:</b> Este anuncio está sujeto al <a id="verExpliCV" style="text-decoration:underline;cursor:pointer;">servicio de gestión de compras de Hospitecnia</a>: su mensaje se enviará a Hospitecnia, quién se encargará de coordinar la negociación, resolver las dudas, recibir el pago y transferirlo al vendedor cuando usted confirme la recepción correcta del artículo.</item>
+        <item name="marketplace_comprador_text_pop_up"><b>Aviso:</b> Este anuncio está sujeto al <a id="verExpliPopUpCV" style="text-decoration:underline;cursor:pointer;">servicio de gestión de compras de Hospitecnia</a>: su mensaje se enviará a Hospitecnia, quién se encargará de coordinar la negociación, resolver las dudas, recibir el pago y transferirlo al vendedor cuando usted confirme la recepción correcta del artículo.</item>
+	<item name="marketplace_comprador_text_plano"><b>Aviso:</b> Este anuncio está sujeto al servicio de gestión de compras de Hospitecnia: su mensaje se enviará a Hospitecnia, quién se encargará de coordinar la negociación, resolver las dudas, recibir el pago y transferirlo al vendedor cuando usted confirme la recepción correcta del artículo.</item>
+	<item name="compraventa_comprador_text_plano"><b>Aviso:</b> Los datos que aparecen en el anuncio son aportados por los propios usuarios. Pueden producirse errores en el precio, en las características o en la descripción del anuncio: es necesaria una confirmación directa con el anunciante, no haciéndose responsable este sitio web de dichos errores.</item>
+        
+
+	<item name="donacion_ong">Donación ONG:</item>
+        
+	<item name="condiciones_anuncio">Condiciones compra/venta</item>
+	<item name="categoria1">Categoría 1</item>
+	<item name="categoria2">Categoría 2</item>
+	<item name="categoria3">Categoría 3</item>
+	<item name="categoria4">Categoría 4</item>
+	<item name="comprasovendes">¿Compras o Vendes?</item>
+	<item name="comprasovendes_expli">Elige si quieres publicar un anuncio de oferta o de demanda</item>
+	<item name="datos_anuncio">Datos de Publicación</item>
+	<item name="categoria">Categoría</item>
+	<item name="categorias">Categorías</item>
+	<item name="busca_por_categoria">Busca por categoría</item>
+	<item name="descripcion_empresa">Descripción empresa</item>
+	<item name="clasificacion">Clasificación</item>
+	<item name="tema">Tema</item>
+	<item name="apartado">Apartado</item>
+	<item name="tipo_curso">Tipo de Formación</item>
+	<item name="tipo_concurso">Anuncio</item>
+	<item name="categoria_concurso">Categoría</item>
+	<item name="fecha_inicio">Fecha inicio</item>
+	<item name="fecha_explicacion">Explicación de las fechas</item>
+	<item name="fecha_modifica">Fecha modifica</item>
+	<item name="fecha_final">Fecha final</item>
+        <item name="fecha_entrega">Fecha límite de presentación de ofertas</item>
+	<item name="autor">Autor</item>
+	<item name="autor_proyecto">Autor del proyecto</item>
+	<item name="superficie">Superficie</item>
+	<item name="numero_camas">Número de camas</item>
+	<item name="web">Web</item>
+	<item name="web_noticia"> Ver información completa</item>
+	<item name="ver_web">Ver web</item>
+	<item name="info_curso">Consultar más información del curso</item>
+	<item name="procedencia">Procedencia</item>
+	<item name="promotor">Promotor</item>
+	<item name="cliente">Cliente</item>
+	<item name="disenyo_estructural">Diseño Estructural</item>
+	<item name="disenyo_instalaciones">Diseño Instalaciones</item>
+	<item name="construccion">Construcción</item>
+	<item name="fotografias">Fotografías</item>
+	<item name="direccion_obra">Dirección de obra</item>
+	<item name="direccion_ejecucion">Dirección de ejecución</item>
+	<item name="nombre_procedencia">Nombre procedencia</item>
+	<item name="titulo">Título (corto y conciso)</item>
+	<item name="pregunta_titulo">Título de la pregunta</item>
+	<item name="pregunta_explica">Explicación de la pregunta</item>
+	<item name="pregunta_respuesta">Respuesta</item>
+	<item name="argumento">Argumento</item>
+	<item name="contenido">Contenido</item>
+	<item name="mail_autor">Autor</item>
+	<item name="mail_contacto">E-mail de contacto</item>
+	<item name="cpostal">Código Postal</item>
+	<item name="modo_vista">Modo de vistas</item>
+	<item name="precio">Precio documento</item>
+	<item name="idioma">Idioma</item>
+	<item name="ambito">Ámbito</item>
+	<item name="grupo">Grupo</item>
+	<item name="universal">Universal</item>
+	<item name="area">Área</item>
+	<item name="entradilla">Entradilla</item>
+	<item name="explicacion">Explicación</item>
+	<item name="texto_noticia">Texto noticia</item>
+	<item name="texto_respuesta">Respuesta</item>
+	<item name="texto_respuestas">RESPUESTAS</item>
+	<item name="texto_curso">Descripción curso</item>
+	<item name="palabras_clave">Palabras clave (separadas por coma)</item>
+	<item name="palabras_clave_expli">Las palabras clave dan más visiblidad a tus anuncios en las búsquedas que realizan los usuarios.</item>
+	<item name="ficheros_adjuntos">FICHEROS ADJUNTOS</item>
+	<item name="ficheros_externos">ENLACES A FICHEROS EXTERNOS</item>
+	<item name="carga_de_documentos">AÑADIR DOCUMENTO</item>
+	<item name="carga_de_imagenes">AÑADIR IMAGEN</item>
+	<item name="text_imagenes">Se recomienda usar fotos en formato JPG, GIF o PNG de tamaños inferiores a 50 KB.</item>
+	<item name="text_documentos">Se permite cargar documentos de tamaños inferiores a 10 MB.</item>
+	<item name="carga_de_videos">Añadir url del vídeo</item>
+	<item name="text_videos">Te sugerimos que subas tus vídeos a video.google.es o www.youtube.com y que copies el enlace a continuación</item>
+	<item name="video">Vídeo</item>
+	<item name="videos">Vídeos</item>
+	<item name="video_expli">Añade un texto explicativo</item>
+	<item name="logo">LOGO</item>
+	<item name="Planos">Planos</item>
+	<item name="planos_anuncio">Planos</item>
+	<item name="destacado">Destacado</item>
+	<item name="estado">Modo Vista</item>
+	<item name="gratuito">Gratuito</item>
+	<item name="premium_oro">Premium Oro</item>
+	<item name="premium_plata">Premium Plata</item>
+	<item name="activo">Activo</item>
+	<item name="parado">Parado</item>
+	<item name="borrado">Borrado</item>
+	<item name="finalizado">Finalizado</item>
+	<item name="tienes_que_estar_registrado">Tienes que estar <a class="thickbox colorHospi bold" href="http://www.hospitecnia.com/AltaRapida.html?height=350&amp;width=680&amp;modal=true">registrado</a> en Hospitecnia.com para poder acceder a esta página.</item>
+	<item name="logo_anuncio">Logo</item>
+	<item name="LOGO">Logo</item>
+	<item name="tipo_de_formacion">Tipo de formación</item>
+	<item name="formacion_continua">Formación continuada</item>
+	<item name="presencial">Presencial</item>
+	<item name="semipresencial">Semipresencial</item>
+	<item name="online">Online</item>
+	<item name="adjudicacion">Adjudicación</item>
+	<item name="licitacion">Licitación</item>
+	<item name="num_expediente">Número de Expediente</item>
+
+	<!-- PagoDatosFacturacionHTML -->
+        <item name="realizar_pago_1">Realizar pago - Datos Facturación</item>
+	<item name="sin_datos_anuncio_pago">No hemos encontrado este anuncio para mostrar los datos de pago.</item>
+        <item name="datos_compra_curso">PAGO CURSO: Datos de la compra</item>
+        <item name="datos_compra">PAGO: Datos de la compra</item>
+	<item name="ver_ficha_completa">Ver ficha completa</item>
+	<item name="datos_usuario">Datos del Usuario</item>
+	<item name="datos_facturacion">Datos de Facturación</item>
+	<item name="nombre_facturacion">Nombre o Razón Social</item>
+	<item name="nif_facturacion">Cód. Identificación Fiscal</item>
+	<item name="telefono_facturacion">Teléfono</item>
+	<item name="direccion_facturacion">Dirección</item>
+	<item name="codigo_postal_facturacion">Código Postal</item>
+	<item name="poblacion_facturacion">Población</item>
+	<item name="pais_facturacion">País</item>
+	<item name="siguiente_paso">Siguiente Paso</item>
+	<item name="todos_datos_obligatorios">* Todos los campos son obligatorios</item>
+	<item name="nombre_obligatorio_facturacion">El campo "Nombre o Razón Social" es obligatorio</item>
+	<item name="nif_obligatorio_facturacion">El campo "Cód. Identificación Fiscal" es obligatorio</item>
+	<item name="telefono_obligatorio_facturacion">El campo "Teléfono" es obligatorio</item>
+	<item name="direccion_obligatorio_facturacion">El campo "Dirección" es obligatorio</item>
+	<item name="codigo_postal_obligatorio_facturacion">El campo "Código Postal" es obligatorio</item>
+	<item name="poblacion_obligatorio_facturacion">El campo "Población" es obligatorio</item>
+	<item name="pais_obligatorio_facturacion">Debes seleccionar un valor para el campo "País"</item>
+	<item name="pago_proteccion_datos">Hospitecnia S.L. se compromete a cumplir las condiciones legales en materia de privacidad que se detallan en la siguiente <a href="http://www.hospitecnia.com/Legislacion.xsql" class="colorHospi" target="_blank">página</a></item>
+	<item name="pago_contacto">En caso de duda contacte con nosotros a través de: +34 93 241 33 61 L-V 9:00 a 14:00 GMT+1 o envíe un e-mail a <a href="mailto:info@hospitecnia.com" class="colorHospi">info[arroba]hospitecnia.com</a></item>
+
+	<!-- PagoConfirmacionHTML -->
+        <item name="realizar_pago_2">Realizar pago - Confirmación Datos</item>
+        <item name="datos_pago_curso">PAGO CURSO: Confirmación de datos</item>
+        <item name="datos_pago">PAGO: Confirmación de datos</item>
+        <item name="realizar_pago_2_intro">Comprueba que todos los datos sean correctos y procede a realizar el pago haciendo click en el botón</item>
+        <item name="datos_compra2">Datos de la compra</item>        
+        <item name="iva_21">21% IVA</item>
+        <item name="pago_total">TOTAL</item>
+        <item name="button_realizar_pago">Realizar Pago</item>
+        <item name="button_volver_atras">Volver Atrás</item>
+
+
+        <item name="confirmacion_pago">Confirmación pago</item>
+        <item name="pago_incorrecto">El pago no se ha realizado correctamente, <br />rogamos revise sus datos y lo intente de nuevo.<br /><br />Disculpe las molestias.</item>
+        <item name="pago_correcto">El pago se ha realizado correctamente y se ha enviado<br />un email de confirmación a su dirección de correo.<br /><br />Gracias por confiar en Hospitecnia.com</item>
+
+	<!--zona privada-->
+	<item name="zona_privada">Zona Privada</item>
+	<item name="publicar_un_nuevo_anuncio">Publica un nuevo Registro</item>
+	<item name="modifica_anuncios">Modificación de Registros</item>
+	<item name="alta_documento">Altas de Documentos</item>
+	<item name="alta_proyecto">Altas de Proyectos</item>
+	<item name="alta_noticia">Altas de Noticias</item>
+	<item name="alta_proveedor">Altas de Proveedores</item>
+	<item name="alta_curso">Altas de Formación</item>
+	<item name="max_curso"> (máximo tres anuncios de formación)</item>
+	<item name="max_proveedor"> (máximo un anuncio de proveedor)</item>
+	<item name="max_centros"> (máximo un anuncio de centros sanitarios)</item>
+	<item name="max_compra_venta"> (máximo tres anuncios de compra-venta)</item>
+
+	<item name="alta_concurso">Altas de Concursos</item>
+	<item name="alta_normativa">Altas de Normativas</item>
+	<item name="alta_centros">Altas de Centros Sanitarios</item>
+	<item name="alta_compraventa">Altas en Compra-Venta</item>
+	<item name="alta_preguntas">Altas de Preguntas</item>
+	<item name="modifica_documento">Modificación de Documentos</item>
+	<item name="modifica_proyecto">Modificación de Proyectos</item>
+	<item name="modifica_noticias">Modificación de Noticias</item>
+	<item name="modifica_proveedores">Modificación de Proveedores</item>
+	<item name="modifica_cursos">Modificación de Formación</item>
+	<item name="modifica_concursos">Modificación de Concursos</item>
+	<item name="modifica_normativa">Modificación de Normativas</item>
+	<item name="modifica_preguntas">Modificación de Preguntas</item>
+	<item name="modifica_centros">Modificación de Centros Sanitarios</item>
+	<item name="modifica_compraventa">Modificación de Compra Venta</item>
+	<item name="total">totales:</item>
+	<item name="gestion_anuncios">GESTIÓN REGISTROS EN </item>
+	<item name="no_anuncios_category">NO TIENES NINGÚN REGISTRO EN </item>
+	<item name="documentos_gestion">DOCUMENTOS </item>
+
+	
+	<item name="explica_zona_privada"> ésta es tu zona privada donde podrás dar de alta publicaciones, modificar tus datos y tus registros, y gestionar tus mensajes.</item>
+	<item name="man_datos">Mantenimiento datos</item>
+	<item name="us_modificacion">Modificar datos de usuario</item>
+	<item name="gestion_mesajes">Correo, gestión mensajes y comentarios</item>
+	<item name="gestion_comentarios">Gestión comentarios</item>
+	<item name="no_tienes_anuncios">No tienes registros publicados </item>
+	<item name="gestion_de_anuncios">Gestión de tus registros</item>
+	<item name="gest_anuncio">Nombre del registro</item>
+	<item name="gest_modificar">Modificar el registro</item>
+	<item name="caducidad_modificar">Modificar caducidad</item>
+	<item name="gest_visitas">Visitas</item>
+	<item name="gest_mensaje">Mensajes</item>
+	<item name="gest_fecha">Fecha</item>
+	<item name="gest_estado">Estado</item>
+	<item name="gest_acciones">Acciones</item>
+	<item name="anuncios_total">Registros Totales</item>
+	<item name="sin_titulo">Sin título</item>
+	<item name="gest_parar">Parar</item>
+	<item name="gest_reanudar">Reanudar</item>
+	<item name="gest_eliminar">Eliminar</item>
+	
+	<item name="fecha_publicacion">Fecha de publicación</item>
+	<item name="creado_por">Creador Foro</item>
+	<item name="posts">Posts</item>
+	<item name="entradas">Entradas</item>
+	<item name="fecha_last_posts">Fecha post</item>	
+	<item name="gest_modificar_foro">Modificar</item>
+	<item name="gest_modifica">Modifica</item>
+	<item name="admin_gestion">Usuario Admin: </item>
+	<item name="gestion_foros">Foros: gestión</item>
+	<item name="gestion_altas">Anuncios: altas, gestión</item>
+	<item name="publicar_un_nuevo_foro">Publicar un nuevo Foro</item>
+	<item name="gestionar_foros">Gestión de los Foros</item>
+	
+	<item name="foros">Foros</item>
+	<item name="crear_foro">Crear un Nuevo Foro</item>
+	<item name="title">Title</item>
+	<item name="descripcion">Descripción</item>
+	<item name="num_posts">Posts</item>
+	<item name="num_entradas">Entradas</item>
+	<item name="fecha">Fecha</item>
+        <item name="fecha_anuncio">Fecha anuncio</item>
+	<item name="fecha_finalizacion">Fecha de finalización</item>
+	<item name="man_foro">Mantenimiento del Foro</item>
+	<item name="de_quien">De Quien</item>
+	<item name="foros_total">Foros totales</item>
+	
+	<!--foro-->
+	<item name="listado_foros">Listado de Foros</item>
+	<item name="foros_listado">Listado de Foros</item>
+	<item name="post_foro">Conversaciones Foro</item>
+	<item name="foro">Foro</item>
+	<item name="conversaciones">Conversaciones</item>
+	<item name="conversacion">Conversación</item>
+	<item name="visita">Visitas</item>
+	<item name="ultimo_mensaje">Último mensaje</item>
+	<item name="anadir_mensaje">Añadir un mensaje a la conversación</item>
+	<item name="crear_conversacion">Crear una nueva conversación</item>
+	<item name="en_el_foro"> en el Foro:</item>
+	<item name="botones_formato">Botones Formato</item>
+	<item name="ver_fuente">Ver código fuente</item>
+	<item name="escrito_por">Escrito por</item>
+	<item name="ver_botones">Ver botones</item>
+	<item name="respuesta_rapida"><strong>Respuesta rápida</strong></item>
+	<item name="recomandacion_text_foro">(Te recomendamos que primero escribas el texto de tu mensaje y sólo una vez terminado pases a mejorar su apariencia con los botones de formato. Gracias.)</item>
+	<item name="titulo_conversacion">Título conversación:</item>
+	<item name="titulo_mensaje">Título mensaje:</item>
+	<item name="por"> por </item>
+	<item name="no_reg_foro"><p>Para contestar en esta conversación o crear una nueva en nuestros foros es preciso que accedas con tus datos de usuario.</p>
+	<p>Si aún no tienes un usuario en canguroencasa.com, puedes <a href="http://www.canguroencasa.com/AltaParticulares.xsql" title="Date de alta en canguroencasa.com">crearlo gratuitamente</a>.</p>
+	</item>
+	<item name="confirm_mensaje_foro"><p><strong>Tu mensaje ha sido enviado.</strong></p></item>
+	<item name="volver_foros"><p><img src="http://img.hospitecnia.com/volverForos.gif" title="Volver a Listado de Foros" alt="imagen volver a Listado Foros"/>&nbsp;<a href="http://www.hospitecnia.com/Foros_ListadoForos.xsql" title="Listado Foros TiendasEnLiquidacion">Volver a Listado Foros</a></p></item>
+	<item name="volver_foro">Volver Foro</item>
+	<item name="volver_conversacion">Volver Conversación</item>
+	<item name="error_mensaje_foro"><p><strong>Ha ocurrido un error. Inténtalo de nuevo.</strong></p></item>
+	
+	<!--anuncio-->
+	<item name="centro_sanitario">Centro Sanitario</item>
+	<item name="tipo_documento">Tipo documento</item>
+	<item name="origin_documento">Origen documento</item>
+	<item name="telefono">Teléfono</item>
+	<item name="tel">Teléfono</item>
+	<item name="fax">Fax</item>
+	<item name="fuente">Fuente</item>
+	<item name="proveedor">Proveedor</item>
+	<item name="noticias_relacionadas">Noticias relacionadas</item>
+	<item name="referencia">Referencia</item>
+	<item name="pais_referencia">País de referencia</item>
+	<item name="ciudad_referencia">Ciudad de referencia</item>
+	<item name="comunidad">Comunidad</item>
+	<item name="tipo_id7">id7</item>
+	<item name="normativa">Normativa</item>
+	<item name="ubicacion_curso">Ubicación</item>
+	<item name="ubicacion">Ubicación</item>
+	<item name="expediente">Expediente</item>
+	<item name="en"> en </item>
+	<item name="de"> de </item>
+	<item name="para"> para </item>
+	<item name="doc_de_pago"> Documentos premium</item>
+        <item name="contenido_relacionado">RELACIONADOS</item>
+	<item name="fotos">FOTOS</item>
+	<item name="videos_ficha">VÍDEOS</item>
+	<item name="ficheros">DOCUMENTOS</item>
+	<item name="info_ficha">INFORMACIÓN</item>
+	<item name="mapa">MAPA</item>
+	<item name="contactar">CONTACTAR</item>
+        <item name="contactar_anunciante">Contactar con el anunciante</item>
+	<item name="colab_ficha">PLANTILLA</item>
+	<item name="espec_ficha">ESPECIALIDADES</item>
+	<item name="productos_ficha">PRODUCTOS</item>
+	<item name="deleg_ficha">DELEGACIONES</item>
+	<item name="palabras_clave_documento">Tags</item>
+	<item name="documentos_relacionados">Documentos relacionados</item>
+	<item name="proveedores_relacionados">Proveedores relacionados</item>	
+	<item name="con"> con</item>
+	<item name="mensaje">Mensaje</item>
+	<item name="title_opinion">Título</item>
+	<item name="deja_comentarios">Añade tu comentario</item>
+	<item name="comentarios">COMENTARIOS</item>
+	<item name="opinion_text">Comentario</item>
+	<item name="puntuacion">Puntuación</item>
+	<item name="puntua_el_anuncio">Puntúa el registro</item>
+	<item name="excelente">Excelente</item>
+	<item name="muy_malo">Muy malo</item>
+	<item name="opinion">Opinión</item>
+	<item name="ver_parecidos">VER RELACIONADOS</item>
+	<item name="ver_comentarios">Ver comentarios</item>
+	<item name="valoracion">Valoración</item>
+	<item name="ver_noticias">Ver noticias</item>
+	<item name="ver_documentos">Ver documentos</item>
+	<item name="ver_detalles">Ver detalles</item>
+	<item name="ver_contactar">Contactar</item>
+	<item name="link_video">Ver el vídeo</item>
+	<item name="noticias_proveedor">Noticias del Proveedor</item>
+	<item name="download_no_reg"><p>Para descargar este documento es necesario estar registrado en Hospitecnia.com:</p>
+	<p>- si usted es usuario registrado es necesario que introduzca su mail y contraseña (arriba en la cabecera de la página) antes de descargar el archivo</p>
+	
+	<p>- si usted es nuevo en Hospitecnia.com debe registrarse primero. El registro es inmediato y gratuito.</p>
+	<p><a id="registroFicha" title="Registro usuario" target="_blank"><img src="http://img.hospitecnia.com/registraButton.gif" alt="Registro usuario Hospitecnia" title="Registro usuario Hospitecnia"/></a></p>
+	</item>
+	<item name="text_doc_pago"><strong><a href="http://www.hospitecnia.com/AbonosUsuarios.xsql" title="Abónate en Hospitecnia.com">Para ver las modalidades de descarga de los documentos premium pulsa aquí</a></strong>
+	</item>
+	<item name="google_map_text">
+		<p>Si Google Maps no te devuelve un resultado suficientemente 
+			exacto <a href="javascript:GM_gotoGoogle();">ir a GoogleMaps</a> y ajusta la dirección 
+			quitando todos los elementos distintos a: calle número ciudad 
+			provincia (por ejemplo: Velázquez 25, Madrid, Madrid, Spain).
+		</p>
+	</item>
+	
+	<!--confirmacion-->
+	<item name="ver_anuncio">Pulsa aquí para ver el anuncio</item>
+	<item name="confirm_alta_proveedores_1">
+		<p>Bienvenido,</p>
+		<p>&nbsp;</p>                
+ 		<p>Acaba de darse de alta como proveedor en <a href="http://www.hospitecnia.com" class="colorHospi"><strong>Hospitecnia.com</strong></a>:</p>
+		<p>&nbsp;</p>
+	</item>
+	<item name="confirm_alta_proveedores_2">
+		<p>&nbsp;</p>                
+		<p>Descubra los servicios que Hospitecnia ofrece a sus <a href="http://www.hospitecnia.com/AbonosProveedores.xsql" class="colorHospi"><strong>Proveedores</strong></a>.</p>
+		<p>Su empresa tendrá un lugar destacado en la web y la opción de anunciar sus productos y servicios a través del <a href="http://www.hospitecnia.com/Hemeroteca.xsql" target="_blank" class="colorHospi"><strong>boletín semanal</strong></a>.</p>
+		<p>&nbsp;</p>
+		<p id="actEstadisticas"><img src="http://img.hospitecnia.com/Warning.png" align="middle" width="30"/>&nbsp;Actualmente no tiene activado el servicio de estadísticas semanales para sus anuncios. Si desea activarlo <a href="#" class="colorHospi">pulse aquí.</a></p>
+		<p id="estadActivada"><img src="http://img.hospitecnia.com/Info.png" align="middle" width="30"/>&nbsp;La funcionalidad para recibir semanalmente las estadísticas de visita de sus anuncios ha sido <strong>activada correctamente</strong>.</p>
+		<p>&nbsp;</p>
+		<p>Para más información sobre servicios y tarifas contacte con <a href="mailto:info@hospitecnia.com" class="email">info[arroba]hospitecnia.com</a> o llame al +34 93 241 33 61. GMT+1 de lunes a jueves de 9:00 a 14:00.</p>
+		<p>&nbsp;</p>
+		<p>Cordialmente,</p>
+		<p>El equipo de Hospitecnia.com</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+	</item>
+	<item name="confirm_alta_compra-venta_1">
+		<p>Hola,</p>
+		<p>&nbsp;</p>                
+ 		<p>Acaba de publicar el siguiente anuncio en <a href="http://www.hospitecnia.com" class="colorHospi"><strong>Hospitecnia.com</strong></a>:</p>
+		<p>&nbsp;</p>
+	</item>
+	<item name="confirm_alta_compra-venta_2">
+		<p>&nbsp;</p>
+		<p>Su anuncio estará visible en la web para que nuestros usuarios puedan contactar con usted a través de la <a href="http://www.hospitecnia.com/mailbox.xsql" class="colorHospi"><strong>gestión de mensajes</strong></a>.</p>
+		<p>Para modificar o dar de baja su anuncio debe hacerlo a través de su <a href="http://www.hospitecnia.com/ZonaPrivada.xsql" target="_blank" class="colorHospi"><strong>zona privada</strong></a>.</p>
+		<p>Pasado un año sin actividad su anuncio se desactivará automáticamente previo aviso.</p>
+		<p>&nbsp;</p>
+		<p id="actEstadisticas"><img src="http://img.hospitecnia.com/Warning.png" align="middle" width="30"/>&nbsp;Actualmente no tiene activado el servicio de estadísticas semanales para sus anuncios. Si desea activarlo <a href="#" class="colorHospi">pulse aquí.</a></p>
+		<p id="estadActivada"><img src="http://img.hospitecnia.com/Info.png" align="middle" width="30"/>&nbsp;La funcionalidad para recibir semanalmente las estadísticas de visita de sus anuncios ha sido <strong>activada correctamente</strong>.</p>
+		<p>&nbsp;</p>
+		<p>Para más información contacte con <a href="mailto:info@hospitecnia.com" class="email">info[arroba]hospitecnia.com</a> o llame al +34 93 241 33 61. GMT+1 de lunes a jueves de 9:00 a 14:00.</p>
+		<p>&nbsp;</p>
+		<p>Cordialmente,</p>
+		<p>El equipo de Hospitecnia.com</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+	</item>
+	<item name="confirm_alta_cursos_1">
+		<p>Hola,</p>
+		<p>&nbsp;</p>                
+ 		<p>Acaba de publicar el siguiente anuncio en <a href="http://www.hospitecnia.com" class="colorHospi"><strong>Hospitecnia.com</strong></a>:</p>
+		<p>&nbsp;</p>
+	</item>
+	<item name="confirm_alta_cursos_2">
+		<p>&nbsp;</p>                
+		<p>Su curso estará activo y visible por los usuarios hasta la fecha de inicio, cuando se desactivará automáticamente.</p>
+		<p>Para modificar o dar de baja su anuncio debe hacerlo a través de su <a href="http://www.hospitecnia.com/ZonaPrivada.xsql" target="_blank" class="colorHospi"><strong>zona privada</strong></a>.</p>
+		<p>&nbsp;</p>
+		<p id="actEstadisticas"><img src="http://img.hospitecnia.com/Warning.png" align="middle" width="30"/>&nbsp;Actualmente no tiene activado el servicio de estadísticas semanales para sus anuncios. Si desea activarlo <a href="#" class="colorHospi">pulse aquí.</a></p>
+		<p id="estadActivada"><img src="http://img.hospitecnia.com/Info.png" align="middle" width="30"/>&nbsp;La funcionalidad para recibir semanalmente las estadísticas de visita de sus anuncios ha sido <strong>activada correctamente</strong>.</p>
+		<p>&nbsp;</p>
+		<p>Para más información sobre <strong>cómo destacar su curso en nuestra newsletter</strong> y las tarifas contacte con <a href="mailto:info@hospitecnia.com" class="email">info[arroba]hospitecnia.com</a> o llame al +34 93 241 33 61. GMT+1 de lunes a jueves de 9:00 a 14:00.</p>
+		<p>&nbsp;</p>
+		<p>Cordialmente,</p>
+		<p>El equipo de Hospitecnia.com</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+	</item>
+
+	<item name="ver_el_anuncio">Ver la publicación</item>
+	<item name="gracias_por_confirmar_anuncio">Gracias por confirmar tu publicación.</item>
+	
+	<!-- mailbox.i.xsl --><!-- js vars -->
+	<item name="json_error">Se ha producido un error, si se repite por favor contacta con</item>
+	<item name="global_unkownuser">*no informado*</item>
+	<item name="global_notregistered">no registrado</item>
+	<item name="info_messagesbefore">Mensajes </item>
+	<item name="info_messagesmiddle"> de </item>
+	<item name="info_messagesafter"> </item>
+	<item name="changemessagestatus_textbefore">Se ha trasladado </item>
+	<item name="changemessagestatus_textafter"> mensaje(s).</item>
+	<item name="changemessagestatus_deletedbefore">Se ha borrado </item>
+	<item name="listmessages_today">Hoy</item>
+	<item name="listmessages_subject">Asunto</item>
+	<item name="listmessages_date">Fecha</item>
+	<item name="listmessages_origen">Origen</item>
+	<item name="listmessages_from">De</item>
+	<item name="listmessages_to">Para</item>
+	<item name="listmessages_emptylist">¡No tienes mensajes en esta categoría!</item>
+	<item name="openmessage_reply">responder</item>
+	<item name="openmessage_delete">eliminar</item>
+	<item name="openmessage_archive">archivar</item>
+	<item name="openmessage_back">volver</item>
+	<item name="openmessage_from">De: </item>
+	<item name="openmessage_to">Para: </item>
+	<item name="openmessage_date">Fecha: </item>
+	<item name="sendmessage_sepbefore">\n\n\nEl </item>
+	<item name="sendmessage_sepmiddle">, </item>
+	<item name="sendmessage_sepafter"> escribió: \n</item>
+	<item name="sendmessage_to">Para: </item>
+	<item name="sendmessage_subject">Asunto: </item>
+	<item name="sendmessage_send"> enviar</item>
+	<item name="sendmessage_cancel">cancelar</item>
+	<item name="sendmessage_notitle">Por favor escribe el asunto de tu mensaje</item>
+	<item name="sendmessage_notext">Por favor escribe el texto de tu mensaje</item>
+	<item name="pagelinks_page">Página:  </item>
+	<item name="datasheet_expired">caducado</item>
+	<item name="datasheet_aboutoffer">sobre la Publicación</item>
+	<item name="datasheet_from">de </item>
+	<item name="datasheet_noprofile"> ya se ha dado de baja</item>
+		<!-- xsl vars -->
+	<item name="buzon_electronico">Buzón de mensajes y comentarios</item>
+	<item name="abrir_buzon_mensajes">Abrir buzón de mensajes privados [expandir]</item>
+	<item name="cerrar_buzon_mensajes">Cerrar buzón de mensajes privados [contraer]</item>
+	<item name="abrir_buzon_comentarios">Abrir buzón de comentarios recibidos [expandir]</item>
+	<item name="cerrar_buzon_comentarios">Cerrar buzón de comentarios recibidos [contraer]</item>
+	<item name="loading">Cargando ...</item>
+	<item name="no_new_messages">¡No tienes mensajes nuevos!</item>
+	<item name="unread">no leído</item>
+	<item name="read">leído</item>
+	<item name="sent">enviado</item>
+	<item name="filed">archivado</item>
+	<item name="select">Selecciona: </item>
+	<item name="all">todos</item>
+	<item name="none">ninguno</item>
+	<item name="invert">invertir</item>
+	<item name="conversation_with">Conversación con </item>
+	<item name="showmessages_show">mostrar</item>
+	<item name="showmessages_hide">ocultar</item>
+	<item name="showmessages_conversation"> toda la conversación correspondiente</item>
+	<item name="comprobar_disponibilidad">Comprobar disponibilidad</item>
+	<item name="nick_is_empty">El nick es obligatorio</item>
+	<item name="nick_is_available">está disponible</item>
+	<item name="nick_is_notavailable">no está disponible</item>
+	<item name="nick_proposal">pero los siguientes estan disponibles</item>
+
+
+	<!-- ZPComentarios.i.xsl --><!-- js vars -->
+	<item name="info_commentsbefore">Comentarios </item>
+	<item name="info_commentsmiddle"> de </item>
+	<item name="info_commentsafter"> </item>
+	<item name="listcomment_subject">Anuncio</item>
+	<item name="listcomment_text">Comentario</item>
+	<item name="opencomment_reply_as_private">responder como privado</item>
+	<item name="opencomment_reply_as_comment">añadir comentario público</item>
+	<item name="sendcomment_to">Anuncio:</item>
+	<item name="sendcomment_notext">Por favor escribe el texto de tu comentario</item>
+	<!-- xsl vars -->
+	<item name="buzon_comentarios">Buzón de comentarios</item>
+	<item name="no_new_comments">¡No tienes comentarios nuevos!</item>
+	<item name="send_private_message">Envía mensaje privado</item>
+	<item name="add_comment">Añade un comentario</item>
+	<item name="comment_from">Comentario de </item>
+
+
+
+
+	<!--footer-->
+	<item name="contacta">Contacta</item>
+	<item name="sitemap">Mapa web</item>
+	<item name="tel_footer">Tel: +34 93 241 33 61</item>
+	
+	<!--hemeroteca-->
+	<item name="hemeroteca">Hemeroteca Boletines Hospitecnia</item>
+	<item name="hemeroteca_solo">Hemeroteca</item>
+	<item name="hemeroteca_titulo">Hemeroteca de Boletines de Hospitecnia</item>
+	<item name="hemeroteca_text">
+            <div class="oneLineHemeroteca">
+                <div class="hemeroAnobloque">
+                <p class="hemeroAno" id="2016">2016</p>
+		<ul class="hemeroMes" id="boletin2016">
+				    <li class="mesList" id="mesDic2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesDic2016List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_12_2016.htm" target="_blank">Boletín 22-12-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_12_2016.htm" target="_blank">Boletín 15-12-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_12_2016.htm" target="_blank">Boletín 06-12-2016</a></li>
+			</ul>							
+				    <li class="mesList" id="mesNov2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2016List" style="display:none;">
+								<li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_11_2016.htm" target="_blank">Boletín 29-11-2016</a></li>
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_11_2016.htm" target="_blank">Boletín 22-11-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_11_2016.htm" target="_blank">Boletín 15-11-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_11_2016.htm" target="_blank">Boletín 08-11-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_11_2016.htm" target="_blank">Boletín 01-11-2016</a></li>
+			</ul>						
+				    <li class="mesList" id="mesOct2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Octubre 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesOct2016List" style="display:none;">
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_10_2016.htm" target="_blank">Boletín 25-10-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_10_2016.htm" target="_blank">Boletín 18-10-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_10_2016.htm" target="_blank">Boletín 11-10-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_10_2016.htm" target="_blank">Boletín 04-10-2016</a></li>
+			</ul>						
+				    <li class="mesList" id="mesSep2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Septiembre 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesSep2016List" style="display:none;">
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_09_2016.htm" target="_blank">Boletín 27-09-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_09_2016.htm" target="_blank">Boletín 20-09-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_09_2016.htm" target="_blank">Boletín 13-09-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_09_2016.htm" target="_blank">Boletín 06-09-2016</a></li>
+			</ul>						
+				    <li class="mesList" id="mesJul2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Julio 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesJul2016List" style="display:none;">
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_07_2016.htm" target="_blank">Boletín 28-07-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_19_07_2016.htm" target="_blank">Boletín 19-07-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_07_2016.htm" target="_blank">Boletín 13-07-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_07_2016.htm" target="_blank">Boletín 06-07-2016</a></li>
+			</ul>						
+				    <li class="mesList" id="mesJun2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Junio 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesJun2016List" style="display:none;">
+								<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_06_2016.htm" target="_blank">Boletín 28-06-2016</a></li>
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_06_2016.htm" target="_blank">Boletín 22-06-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_06_2016.htm" target="_blank">Boletín 16-06-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_06_2016.htm" target="_blank">Boletín 09-06-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_06_2016.htm" target="_blank">Boletín 02-06-2016</a></li>
+			</ul>			
+			        <li class="mesList" id="mesMay2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Mayo 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesMay2016List" style="display:none;">
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_05_2016.htm" target="_blank">Boletín 26-05-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_19_05_2016.htm" target="_blank">Boletín 19-05-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_05_2016.htm" target="_blank">Boletín 12-05-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_05_2016.htm" target="_blank">Boletín 05-05-2016</a></li>
+			</ul>			
+                    <li class="mesList" id="mesAbr2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Abril 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesAbr2016List" style="display:none;">
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_04_2016.htm" target="_blank">Boletín 28-04-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_04_2016.htm" target="_blank">Boletín 20-04-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_04_2016.htm" target="_blank">Boletín 14-04-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_04_2016.htm" target="_blank">Boletín 07-04-2016</a></li>
+			</ul>			
+                    <li class="mesList" id="mesMar2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Marzo 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesMar2016List" style="display:none;">
+								<li><a href="http://www.hospitecnia.com/Boletin/Boletin_31_03_2016.htm" target="_blank">Boletín 31-03-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_03_2016.htm" target="_blank">Boletín 23-03-2016</a></li>
+				                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_03_2016.htm" target="_blank">Boletín 18-03-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_03_2016.htm" target="_blank">Boletín 16-03-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_03_2016.htm" target="_blank">Boletín 10-03-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_03_2016.htm" target="_blank">Boletín 02-03-2016</a></li>
+			</ul>
+                     <li class="mesList" id="mesFeb2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Febrero 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesFeb2016List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_02_2016.htm" target="_blank">Boletín 24-02-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_02_2016.htm" target="_blank">Boletín 17-02-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_02_2016.htm" target="_blank">Boletín 16-02-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_02_2016.htm" target="_blank">Boletín 10-02-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_02_2015.htm" target="_blank">Boletín 04-02-2016</a></li>
+			</ul>
+                    <li class="mesList" id="mesEne2016"><span class="arrow">&nbsp;&nbsp;</span><strong>Enero 2016</strong></li>
+			<ul class="hemeroBoletin" id="mesEne2016List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_01_2016.htm" target="_blank">Boletín 27-01-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_01_2016.htm" target="_blank">Boletín 21-01-2016</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_01_2016.htm" target="_blank">Boletín 13-01-2016</a></li>
+			</ul>
+                </ul>
+                </div> 
+                <!--inicio ano 2015-->
+                <div class="hemeroAnobloque">
+                <p class="hemeroAno" id="2015">2015</p>
+		<ul class="hemeroMes" id="boletin2015">
+                <li class="mesList" id="mesDic2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesDic2015List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_12_2015.htm" target="_blank">Boletín 16-12-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_12_2015.htm" target="_blank">Boletín 09-12-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_12_2015.htm" target="_blank">Boletín 01-12-2015</a></li>
+			</ul>
+                     <li class="mesList" id="mesNov2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2015List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_11_2015.htm" target="_blank">Boletín 24-11-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_11_2015.htm" target="_blank">Boletín 17-11-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_11_2015.htm" target="_blank">Boletín 11-11-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_11_2015.htm" target="_blank">Boletín 03-11-2015</a></li>
+			</ul>
+                    <li class="mesList" id="mesOct2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Octubre 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesOct2015List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_10_2015.htm" target="_blank">Boletín 27-10-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_10_2015.htm" target="_blank">Boletín 20-10-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_10_2015.htm" target="_blank">Boletín 13-10-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_10_2015.htm" target="_blank">Boletín 06-10-2015</a></li>
+			</ul>
+                     <li class="mesList" id="mesSep2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Septiembre 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesSep2015List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_09_2015.htm" target="_blank">Boletín 29-09-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_09_2015.htm" target="_blank">Boletín 22-09-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_09_2015.htm" target="_blank">Boletín 15-09-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_09_2015.htm" target="_blank">Boletín 08-09-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_09_2015.htm" target="_blank">Boletín 01-09-2015</a></li>
+			</ul>
+                    <li class="mesList" id="mesJul2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Julio 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesJul2015List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_07_2015.htm" target="_blank">Boletín 21-07-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_07_2015.htm" target="_blank">Boletín 14-07-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_07_2015.htm" target="_blank">Boletín 07-07-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_30_06_2015.htm" target="_blank">Boletín 01-07-2015</a></li>
+			</ul>
+                    <li class="mesList" id="mesJun2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Junio 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesJun2015List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_06_2015.htm" target="_blank">Boletín 23-06-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_06_2015.htm" target="_blank">Boletín 16-06-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_06_2015.htm" target="_blank">Boletín 09-06-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_06_2015.htm" target="_blank">Boletín 02-06-2015</a></li>
+			</ul>
+                    <li class="mesList" id="mesMay2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Mayo 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesMay2015List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_05_2015.htm" target="_blank">Boletín 26-05-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_19_05_2015.htm" target="_blank">Boletín 19-05-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_05_2015.htm" target="_blank">Boletín 12-05-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_05_2015.htm" target="_blank">Boletín 05-05-2015</a></li>
+			</ul>
+                    <li class="mesList" id="mesAbr2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Abril 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesAbr2015List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_04_2015.htm" target="_blank">Boletín 28-04-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_04_2015.htm" target="_blank">Boletín 21-04-2015</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_04_2015.htm" target="_blank">Boletín 14-04-2015</a></li>
+			</ul>
+                    <li class="mesList" id="mesMar2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Marzo 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesMar2015List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_31_03_2015.htm" target="_blank">Boletín 31-03-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_03_2015.htm" target="_blank">Boletín 24-03-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_03_2015.htm" target="_blank">Boletín 17-03-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_03_2015.htm" target="_blank">Boletín 10-03-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_03_2015.htm" target="_blank">Boletín 03-03-2015</a></li>
+			</ul>
+                     <li class="mesList" id="mesFeb2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Febrero 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesFeb2015List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_02_2015.htm" target="_blank">Boletín 24-02-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_02_2015.htm" target="_blank">Boletín 17-02-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_02_2015.htm" target="_blank">Boletín 10-02-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_02_2015.htm" target="_blank">Boletín 03-02-2015</a></li>
+			</ul>
+                <li class="mesList" id="mesEne2015"><span class="arrow">&nbsp;&nbsp;</span><strong>Enero 2015</strong></li>
+			<ul class="hemeroBoletin" id="mesEne2015List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_01_2015.htm" target="_blank">Boletín 27-01-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_01_2015.htm" target="_blank">Boletín 20-01-2015</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_01_2015.htm" target="_blank">Boletín 13-01-2015</a></li>
+			</ul>
+                </ul>
+                 </div>
+		<!--fin año 2015-->
+		<div class="hemeroAnobloque">
+		<p class="hemeroAno" id="2014">2014</p>
+		<ul class="hemeroMes" id="boletin2014">
+                <li class="mesList" id="mesDic2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesDic2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_12_2014.htm" target="_blank">Boletín 23-12-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_12_2014.htm" target="_blank">Boletín 16-12-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_12_2014.htm" target="_blank">Boletín 10-12-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_12_2014.htm" target="_blank">Boletín 02-12-2014</a></li>
+			</ul>
+                <li class="mesList" id="mesNov2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_11_2014.htm" target="_blank">Boletín 24-11-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_11_2014.htm" target="_blank">Boletín 18-11-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_11_2014.htm" target="_blank">Boletín 11-11-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_11_2014.htm" target="_blank">Boletín 04-11-2014</a></li>
+			</ul>
+                <li class="mesList" id="mesOct2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Octubre 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesOct2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_10_2014.htm" target="_blank">Boletín 28-10-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_10_2014.htm" target="_blank">Boletín 21-10-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_10_2014.htm" target="_blank">Boletín 14-10-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_10_2014.htm" target="_blank">Boletín 07-10-2014</a></li>
+			</ul>
+                <li class="mesList" id="mesSep2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Septiembre 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesSep2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_30_09_2014.htm" target="_blank">Boletín 30-09-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_09_2014.htm" target="_blank">Boletín 23-09-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_09_2014.htm" target="_blank">Boletín 16-09-2014</a></li>                            
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_09_2014.htm" target="_blank">Boletín 09-09-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_09_2014.htm" target="_blank">Boletín 02-09-2014</a></li>
+			</ul>
+                <li class="mesList" id="mesAgo2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Agosto 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesAgo2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_08_2014.htm" target="_blank">Boletín 26-08-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_08_2014.htm" target="_blank">Boletín 05-08-2014</a></li>
+			</ul>
+                <li class="mesList" id="mesJul2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Julio 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesJul2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_07_2014.htm" target="_blank">Boletín 29-07-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_07_2014.htm" target="_blank">Boletín 22-07-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_07_2014.htm" target="_blank">Boletín 15-07-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_07_2014.htm" target="_blank">Boletín 08-07-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_07_2014.htm" target="_blank">Boletín 01-07-2014</a></li>
+			</ul>
+                <li class="mesList" id="mesJun2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Junio 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesJun2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_06_2014.htm" target="_blank">Boletín 23-06-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_06_2014.htm" target="_blank">Boletín 17-06-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_06_2014.htm" target="_blank">Boletín 10-06-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_06_2014.htm" target="_blank">Boletín 03-06-2014</a></li>
+			</ul>
+                <li class="mesList" id="mesMay2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Mayo 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesMay2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_05_2014.htm" target="_blank">Boletín 27-05-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_05_2014.htm" target="_blank">Boletín 20-05-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_05_2014.htm" target="_blank">Boletín 13-05-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_05_2014.htm" target="_blank">Boletín 06-05-2014</a></li>
+			</ul>
+		<li class="mesList" id="mesAbr2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Abril 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesAbr2014List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_04_2014.htm" target="_blank">Boletín 29-04-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_04_2014.htm" target="_blank">Boletín 23-04-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_04_2014.htm" target="_blank">Boletín 15-04-2014</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_04_2014.htm" target="_blank">Boletín 08-04-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_04_2014.htm" target="_blank">Boletín 01-04-2014</a></li>
+			</ul>
+		<li class="mesList" id="mesMar2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Marzo 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesMar2014List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_03_2014.htm" target="_blank">Boletín 25-03-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_03_2014.htm" target="_blank">Boletín 18-03-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_03_2014.htm" target="_blank">Boletín 11-03-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_03_2014.htm" target="_blank">Boletín 04-03-2014</a></li>
+			</ul>
+		<li class="mesList" id="mesFeb2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Febrero 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesFeb2014List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_02_2014.htm" target="_blank">Boletín 25-02-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_02_2014.htm" target="_blank">Boletín 18-02-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_02_2014.htm" target="_blank">Boletín 11-02-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_02_2014.htm" target="_blank">Boletín 04-02-2014</a></li>
+			</ul>
+		<li class="mesList" id="mesEne2014"><span class="arrow">&nbsp;&nbsp;</span><strong>Enero 2014</strong></li>
+			<ul class="hemeroBoletin" id="mesEne2014List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_01_2014.htm" target="_blank">Boletín 28-01-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_01_2014.htm" target="_blank">Boletín 21-01-2014</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_01_2014.htm" target="_blank">Boletín 13-01-2014</a></li>
+			</ul>
+		</ul>
+        </div>
+		<!--fin año 2014-->
+		<div class="hemeroAnobloque">
+		<p class="hemeroAno" id="2013">2013</p>
+		<ul class="hemeroMes" id="boletin2013">
+		<li class="mesList" id="mesDic2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesDic2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_12_2013.htm" target="_blank">Boletín 23-12-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_12_2013.htm" target="_blank">Boletín 17-12-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_12_2013.htm" target="_blank">Boletín 10-12-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_12_2013.htm" target="_blank">Boletín 03-12-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesNov2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2013List" style="display:none;">
+			    <li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_11_2013.htm" target="_blank">Boletín 26-11-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_19_11_2013.htm" target="_blank">Boletín 19-11-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_11_2013.htm" target="_blank">Boletín 12-11-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_11_2013.htm" target="_blank">Boletín 05-11-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesOct2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Octubre 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesOct2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_10_2013.htm" target="_blank">Boletín 29-10-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_10_2013.htm" target="_blank">Boletín 22-10-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_10_2013.htm" target="_blank">Boletín 15-10-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_10_2013.htm" target="_blank">Boletín 08-10-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_10_2013.htm" target="_blank">Boletín 01-10-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesSep2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Septiembre 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesSep2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_09_2013.htm" target="_blank">Boletín 23-09-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_09_2013.htm" target="_blank">Boletín 17-09-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_09_2013.htm" target="_blank">Boletín 09-09-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_09_2013.htm" target="_blank">Boletín 03-09-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesAgo2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Agosto 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesAgo2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_08_2013.htm" target="_blank">Boletín 27-08-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_08_2013.htm" target="_blank">Boletín 06-08-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesJul2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Julio 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesJul2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_30_07_2013.htm" target="_blank">Boletín 30-07-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_07_2013.htm" target="_blank">Boletín 23-07-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_07_2013.htm" target="_blank">Boletín 16-07-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_07_2013.htm" target="_blank">Boletín 09-07-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_07_2013.htm" target="_blank">Boletín 02-07-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesJun2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Junio 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesJun2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_06_2013.htm" target="_blank">Boletín 26-06-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_06_2013.htm" target="_blank">Boletín 18-06-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_06_2013.htm" target="_blank">Boletín 11-06-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_06_2013.htm" target="_blank">Boletín 04-06-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesMay2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Mayo 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesMay2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_05_2013.htm" target="_blank">Boletín 28-05-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_05_2013.htm" target="_blank">Boletín 22-05-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_05_2013.htm" target="_blank">Boletín 14-05-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_05_2013.htm" target="_blank">Boletín 08-05-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesAbr2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Abril 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesAbr2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_30_04_2013.htm" target="_blank">Boletín 30-04-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_04_2013.htm" target="_blank">Boletín 23-04-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_04_2013.htm" target="_blank">Boletín 17-04-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_04_2013.htm" target="_blank">Boletín 10-04-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_04_2013.htm" target="_blank">Boletín 04-04-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesMar2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Marzo 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesMar2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_03_2013.htm" target="_blank">Boletín 26-03-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_03_2013.htm" target="_blank">Boletín 20-03-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_03_2013.htm" target="_blank">Boletín 13-03-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_03_2013.htm" target="_blank">Boletín 05-03-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesFeb2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Febrero 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesFeb2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_02_2013.htm" target="_blank">Boletín 28-02-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_02_2013.htm" target="_blank">Boletín 21-02-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_02_2013.htm" target="_blank">Boletín 14-02-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_02_2013.htm" target="_blank">Boletín 07-02-2013</a></li>
+			</ul>
+		<li class="mesList" id="mesEne2013"><span class="arrow">&nbsp;&nbsp;</span><strong>Enero 2013</strong></li>
+			<ul class="hemeroBoletin" id="mesEne2013List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_01_2013.htm" target="_blank">Boletín 29-01-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_01_2013.htm" target="_blank">Boletín 22-01-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_01_2013.htm" target="_blank">Boletín 15-01-2013</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_01_2013.htm" target="_blank">Boletín 08-01-2013</a></li>
+			</ul>
+		</ul>
+        </div>
+		<!--fin año 2013-->
+        <div class="hemeroAnobloque">
+		<p class="hemeroAno" id="2012">2012</p>
+		<ul class="hemeroMes" id="boletin2012">
+		<li class="mesList" id="mesDic2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesDic2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_12_2012.htm" target="_blank">Boletín 18-12-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_12_2012.htm" target="_blank">Boletín 11-12-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_12_2012.htm" target="_blank">Boletín 04-12-2012</a></li>
+			</ul>
+		<li class="mesList" id="mesNov2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_11_2012.htm" target="_blank">Boletín 27-11-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_11_2012.htm" target="_blank">Boletín 20-11-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_11_2012.htm" target="_blank">Boletín 13-11-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_11_2012.htm" target="_blank">Boletín 06-11-2012</a></li>
+			</ul>
+		<li class="mesList" id="mesOct2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Octubre 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesOct2012List" style="display:none;">
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_30_10_2012.htm" target="_blank">Boletín 30-10-2012</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_10_2012.htm" target="_blank">Boletín 23-10-2012</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_10_2012.htm" target="_blank">Boletín 16-10-2012</a></li>
+                                <li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_10_2012.htm" target="_blank">Boletín 09-10-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_10_2012.htm" target="_blank">Boletín 02-10-2012</a></li>
+			</ul>
+		<li class="mesList" id="mesSep2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Septiembre 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesSep2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_09_2012.htm" target="_blank">Boletín 25-09-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_09_2012.htm" target="_blank">Boletín 18-09-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_09_2012.htm" target="_blank">Boletín 12-09-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_09_2012.htm" target="_blank">Boletín 04-09-2012</a></li>
+			</ul>
+			<li class="mesList" id="mesJul2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Julio 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesJul2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_31_07_2012.htm" target="_blank">Boletín 31-07-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_07_2012.htm" target="_blank">Boletín 24-07-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_07_2012.htm" target="_blank">Boletín 17-07-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_07_2012.htm" target="_blank">Boletín 10-07-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_07_2012.htm" target="_blank">Boletín 03-07-2012</a></li>
+				
+			</ul>
+			<li class="mesList" id="mesJun2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Junio 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesJun2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_06_2012.htm" target="_blank">Boletín 26-06-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_19_06_2012.htm" target="_blank">Boletín 19-06-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_06_2012.htm" target="_blank">Boletín 12-06-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_06_2012.htm" target="_blank">Boletín 05-06-2012</a></li>
+				
+			</ul>
+			<li class="mesList" id="mesMay2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Mayo 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesMay2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_05_2012.htm" target="_blank">Boletín 29-05-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_05_2012.htm" target="_blank">Boletín 22-05-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_05_2012.htm" target="_blank">Boletín 15-05-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_05_2012.htm" target="_blank">Boletín 08-05-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_05_2012.htm" target="_blank">Boletín 02-05-2012</a></li>
+			</ul>
+			<li class="mesList" id="mesAbr2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Abril 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesAbr2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_04_2012.htm" target="_blank">Boletín 24-04-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_04_2012.htm" target="_blank">Boletín 17-04-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_04_2012.htm" target="_blank">Boletín 10-04-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_04_2012.htm" target="_blank">Boletín 04-04-2012</a></li>
+			</ul>
+			<li class="mesList" id="mesMar2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Marzo 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesMar2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_03_2012.htm" target="_blank">Boletín 27-03-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_03_2012.htm" target="_blank">Boletín 20-03-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_03_2012.htm" target="_blank">Boletín 13-03-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_03_2012.htm" target="_blank">Boletín 06-03-2012</a></li>
+			</ul>
+			<li class="mesList" id="mesFeb2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Febrero 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesFeb2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_02_2012.htm" target="_blank">Boletín 28-02-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_02_2012.htm" target="_blank">Boletín 21-02-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_02_2012.htm" target="_blank">Boletín 14-02-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_02_2012.htm" target="_blank">Boletín 07-02-2012</a></li>
+			</ul>
+			<li class="mesList" id="mesEne2012"><span class="arrow">&nbsp;&nbsp;</span><strong>Enero 2012</strong></li>
+			<ul class="hemeroBoletin" id="mesEne2012List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_31_01_2012.htm" target="_blank">Boletín 31-01-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_01_2012.htm" target="_blank">Boletín 24-01-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_17_01_2012.htm" target="_blank">Boletín 17-01-2012</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_01_2012.htm" target="_blank">Boletín 10-01-2012</a></li>
+			</ul>
+		</ul>
+                </div>
+		<!--fin año 2012-->
+                </div><!--fin de oneLineHemeroteca-->
+                <div class="oneLineHemeroteca">
+                <div class="hemeroAnobloque">
+		<p class="hemeroAno" id="2011">2011</p>
+		<ul class="hemeroMes" id="boletin2011" style="display:none;">
+			<li class="mesList" id="mesDic2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesDic2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_12_2011.htm" target="_blank">Boletín_20_12_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_12_2011.htm" target="_blank">Boletín_13_12_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_12_2011.htm" target="_blank">Boletín_05_12_2011</a></li>			
+			</ul>
+			<li class="mesList" id="mesNov2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_11_2011.htm" target="_blank">Boletín_22_11_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_11_2011.htm" target="_blank">Boletín_15_11_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_11_2011.htm" target="_blank">Boletín_08_11_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_11_2011.htm" target="_blank">Boletín_02_11_2011</a></li>			
+			</ul>
+			<li class="mesList" id="mesOct2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Octubre 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesOct2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_10_2011.htm" target="_blank">Boletín_25_10_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_10_2011.htm" target="_blank">Boletín_18_10_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_10_2011.htm" target="_blank">Boletín_11_10_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_10_2011.htm" target="_blank">Boletín_04_10_2011</a></li>			
+			</ul>
+			<li class="mesList" id="mesSep2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Septiembre 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesSep2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_09_2011.htm" target="_blank">Boletín_27_09_2011</a></li>	
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_09_2011.htm" target="_blank">Boletín_20_09_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_09_2011.htm" target="_blank">Boletín_13_09_2011</a></li>	
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_09_2011.htm" target="_blank">Boletín_06_09_2011</a></li>			
+			</ul>
+			<li class="mesList" id="mesJul2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Julio 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesJul2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_07_2011.htm" target="_blank">Boletín_26_07_2011</a></li>	
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_07_2011.htm" target="_blank">Boletín_12_07_2011</a></li>	
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_07_2011.htm" target="_blank">Boletín_05_07_2011</a></li>			
+			</ul>
+			<li class="mesList" id="mesJun2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Junio 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesJun2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_06_2011.htm" target="_blank">Boletín_28_06_2011</a></li>	
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_06_2011.htm" target="_blank">Boletín_21_06_2011</a></li>	
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_06_2011.htm" target="_blank">Boletín_14_06_2011</a></li>	
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_06_2011.htm" target="_blank">Boletín_07_06_2011</a></li>			
+			</ul>
+			<li class="mesList" id="mesMay2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Mayo 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesMay2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_31_05_2011.htm" target="_blank">Boletín_31_05_2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_24_05_2011.htm" target="_blank">Boletín_24_05_2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_10_05_2011.htm" target="_blank">Boletín_10_05_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_03_05_2011.htm" target="_blank">Boletín_03_05_2011</a></li>			
+				
+			</ul>
+			<li class="mesList" id="mesAbr2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Abril 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesAbr2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_04_2011.htm" target="_blank">Boletín_28_04_2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_19_04_2011.htm" target="_blank">Boletín_19_04_2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_04_2011.htm" target="_blank">Boletín_12_04_2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_04_2011.htm" target="_blank">Boletín_05_04_2011</a></li>			
+				
+			</ul>
+			<li class="mesList" id="mesMar2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Marzo 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesMar2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_03_2011.htm" target="_blank">Boletín 29-03-2011</a></li>			
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_03_2011.htm" target="_blank">Boletín 22-03-2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_03_2011.htm" target="_blank">Boletín 15-03-2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_03_2011.htm" target="_blank">Boletín 08-03-2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_03_2011.htm" target="_blank">Boletín 01-03-2011</a></li>
+			</ul>
+			<li class="mesList" id="mesFeb2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Febrero 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesFeb2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_02_2011.htm" target="_blank">Boletín 22-02-2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_02_2011.htm" target="_blank">Boletín 15-02-2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_02_2011.htm" target="_blank">Boletín 08-02-2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_02_2011.htm" target="_blank">Boletín 02-02-2011</a></li>
+			</ul>
+			<li class="mesList" id="mesEne2011"><span class="arrow">&nbsp;&nbsp;</span><strong>Enero 2011</strong></li>
+			<ul class="hemeroBoletin" id="mesEne2011List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_01_2011.htm" target="_blank">Boletín 25-01-2011</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_01_2011.htm" target="_blank">Boletín 11-01-2011</a></li>
+			</ul>
+		</ul><!--fin de hemeroAno-->
+                 </div>
+            
+                 <div class="hemeroAnobloque">
+		<p class="hemeroAno" id="2010">2010</p>
+		<ul class="hemeroMes" id="boletin2010" style="display:none;">
+			<li class="mesList" id="mesDic2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesDic2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_12_2010.htm" target="_blank">Boletín 09-12-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_12_2010.htm" target="_blank">Boletín 21-12-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesNov2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_11_2010.htm" target="_blank">Boletín 02-11-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_11_2010.htm" target="_blank">Boletín 09-11-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_11_2010.htm" target="_blank">Boletín 16-11-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_11_2010.htm" target="_blank">Boletín 25-11-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_30_11_2010.htm" target="_blank">Boletín 30-11-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesOct2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Octubre 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesOct2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_05_10_2010.htm" target="_blank">Boletín 05-10-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_10_2010.htm" target="_blank">Boletín 15-10-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_19_10_2010.htm" target="_blank">Boletín 19-10-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_26_10_2010.htm" target="_blank">Boletín 26-10-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesSep2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Septiembre 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesSep2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_09_2010.htm" target="_blank">Boletín 07-09-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_14_09_2010.htm" target="_blank">Boletín 14-09-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_21_09_2010.htm" target="_blank">Boletín 21-09-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_28_09_2010.htm" target="_blank">Boletín 28-09-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesJul2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Julio 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesJul2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_06_07_2010.htm" target="_blank">Boletín 06-07-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_13_07_2010.htm" target="_blank">Boletín 13-07-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_07_2010.htm" target="_blank">Boletín 20-07-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_07_2010.htm" target="_blank">Boletín 27-07-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesJun2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Junio 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesJun2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_01_06_2010.htm" target="_blank">Boletín 01-06-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_08_06_2010.htm" target="_blank">Boletín 08-06-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_06_2010.htm" target="_blank">Boletín 16-06-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_22_06_2010.htm" target="_blank">Boletín 22-06-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_29_06_2010.htm" target="_blank">Boletín 29-06-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesMay2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Mayo 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesMay2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_04_05_2010.htm" target="_blank">Boletín 04-05-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_11_05_2010.htm" target="_blank">Boletín 11-05-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_05_2010.htm" target="_blank">Boletín 18-05-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_05_2010.htm" target="_blank">Boletín 25-05-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesAbr2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Abril 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesAbr2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_12_04_10.htm" target="_blank">Boletín 12-04-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_15_04_10.htm" target="_blank">Boletín 15-04-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_20_04_2010.htm" target="_blank">Boletín 20-04-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_27_04_2010.htm" target="_blank">Boletin 27-04-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesMar2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Marzo 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesMar2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_03_10.htm" target="_blank">Boletín 02-03-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_03_10.htm" target="_blank">Boletín 09-03-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_03_10.htm" target="_blank">Boletín 16-03-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesFeb2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Febrero 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesFeb2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_02_02_10.htm" target="_blank">Boletín 02-02-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_09_02_10.htm" target="_blank">Boletín 09-02-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_16_02_10.htm" target="_blank">Boletín 16-02-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_23_02_10.htm" target="_blank">Boletín 23-02-2010</a></li>
+			</ul>
+			<li class="mesList" id="mesEne2010"><span class="arrow">&nbsp;&nbsp;</span><strong>Enero 2010</strong></li>
+			<ul class="hemeroBoletin" id="mesEne2010List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_18_01_10.htm" target="_blank">Boletín 18-02-2010</a></li>
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_25_01_10.htm" target="_blank">Boletín 25-02-2010</a></li>
+			</ul>
+		</ul><!--fin de hemeroMes-->
+                 </div>
+                 <div class="hemeroAnobloque">
+		<p class="hemeroAno" id="2009">2009</p>
+		<ul class="hemeroMes" id="boletin2009" style="display:none;">
+			<li class="mesList" id="mesDec2009"><span class="arrow">&nbsp;&nbsp;</span><strong>Diciembre 2009</strong></li>
+			<ul class="hemeroBoletin" id="mesDec2009List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_07_12_09.htm" target="_blank">Boletín 07-12-09</a></li>
+			</ul>
+			<li class="mesList" id="mesNov2009"><span class="arrow">&nbsp;&nbsp;</span><strong>Noviembre 2009</strong></li>
+			<ul class="hemeroBoletin" id="mesNov2009List" style="display:none;">
+				<li><a href="http://www.hospitecnia.com/Boletin/Boletin_30_11_09.htm" target="_blank">Boletín 30-11-09</a></li>
+			</ul>
+		</ul>
+                </div>
+            </div><!--fin de oneLineHemeroteca-->
+	</item>
+	
+	<!--quienes somos-->
+	<item name="quienes">Quiénes Somos</item>
+	<item name="quienes_titulo">Quiénes Somos</item>
+	<item name="sobre_nosotros">SOBRE NOSOTROS</item>
+	<item name="servicios">SERVICIOS / TARIFAS</item>
+	<item name="usuarios">USUARIOS / VISITAS</item>
+	<item name="contenido_maiu">CONTENIDO</item>
+	<item name="newsletter">NEWSLETTER</item>
+	<item name="como_publicar">CÓMO PUBLICAR</item>	
+	<item name="contacto">CONTACTO</item>	
+	
+	<item name="sobre_nosotros_text">
+	<h2>INFORMACIÓN CORPORATIVA</h2>
+	<p><strong>Hospitecnia</strong> nace el año 2001 con la voluntad de aglutinar el máximo volumen de conocimiento funcional y tecnológico en el ámbito hospitalario y socio-sanitario.</p>
+	<p>La iniciativa surge de un amplio grupo de profesionales (arquitectos, ingenieros, aparejadores...) con dilatada experiencia, en el terreno de la programación funcional, el diseño arquitectónico y tecnológico, y la gestión tecnológica de centros sanitarios.</p>
+	<p><strong> Hospitecnia se dirige a tres sectores relacionados con la sanidad muy definidos:</strong></p>
+	<ul class="listNumero">
+		<li>El sector de la construcción</li>
+		<ul class="listInside">
+			<li>Consultores técnicos.</li>
+			<li>Contratistas de obras.</li>
+			<li>Proveedores de materiales y equipos.</li>
+		</ul>
+		<li>El sector de la gestión y la explotación</li>
+		<ul class="listInside">
+			<li>Propiedades y consorcios hospitalarios.</li>
+			<li>Compañías de gestión.</li>
+			<li>Empresas de mantenimiento.</li>
+			<li>Proveedores de materiales y consumibles.</li>
+			<li>Proveedores de servicios.</li>
+		</ul>
+		<li>La Administración</li>
+		<ul class="listInside">
+			<li>Ayuntamientos.</li>
+			<li>Departamentos de sanidad de comunidades autónomas.</li>
+			<li>Administraciones centrales.</li>
+			<li>Comunidad europea.</li>
+			<li>Organismos supranacionales (OMS, UNESCO..)</li>
+		</ul>
+	</ul>
+	<p>&nbsp;</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> con domicilio social en Barcelona, calle Mare de Déu de la Salut, 40 entresuelo 1a, código postal 08024, CIF: B-62681770, inscrita en el Registro Mercantil de Barcelona, al Tomo 34026, Folio 11, Hoja B239209. Tel: +34 93 241 33 61 Fax: +34 93 600 49 01</p>	
+	</item>
+	
+	<item name="contenido_text">
+	<h2>CONTENIDO WEB</h2>
+	<p>En <strong>Hospitecnia</strong> encontrará toda la información necesaria para diseñar, desarrollar y gestionar y completar proyectos en los ámbitos hospitalarios y socio-sanitarios. Esta información la conforman los documentos y los servicios que hospitecnia.com ofrece.</p>
+	<p>Las diversas categorías se dividen en: Documentos, Noticias, Concursos, Proveedores, Compra-Venta, Cursos y FAQ.</p>
+	<p><strong>Hospitecnia</strong> recoge las <strong>noticias</strong> más destacadas del entorno sanitario en arquitectura y construcción, los <strong>artículos</strong> más interesantes publicados en los últimos años, la <strong>normativa</strong> que afecta al proyecto, las <strong>reseñas bibliográficas</strong> imprescindibles, los concursos públicos actualizados y los <strong>proveedores</strong> relacionados con el sector sanitario.</p>
+	<p>Ofrecemos la posibilidad a los usuarios de publicar sus anuncios relacionados con la <strong>compra y venta de material sanitario, empresas relacionadas con el sector, etc.</strong></p>
+	<p><strong>Hospitecnia</strong> contiene una serie de documentos con un alto valor añadido para los usuarios, pensados y elaborados por auténticos profesionales que intervienen en todas las fases de un proyecto global de arquitectura e ingeniería de un centro hospitalario.</p>
+	<p>Estos documentos son la base de las condiciones técnicas en las que debería desarrollarse un proyecto hospitalario en sus aspectos más concretos y específicos. Se analizan materiales y equipos con sus correspondientes fichas de mantenimiento.</p>
+	<p><strong>Hospitecnia</strong> también dispone de Cursos propios on-line, elaborados por expertos de cada rama, actores en partes concretas del proyecto, o gestores de los mismos.</p>
+	<p><img src="http://img.hospitecnia.com/contenidoQS.gif" alt="contenido hospitecnia"/></p>
+	</item>
+	
+	<item name="usuarios_text">
+	<h2>VISITAS</h2>
+	<p>La web cuenta con un volumen medio de 23.000 visitas mensuales el 70% de las cuales provenientes de España. No obstante Hospitecnia está creciendo en número de visitas procedentes de países de habla hispana sobretodo en Centroamérica y Sudamérica. Fuente: Google analytics</p>
+	<p><img src="http://img.hospitecnia.com/visitasQS.gif" alt="visitas hospitecnia"/></p>
+	<p>El envío de nuestra newsletter se efectúa semanamente y llega a casi 19.000 usuarios.</p>
+	<p>&nbsp;</p>
+	<h2>USUARIOS</h2>
+	<p>&nbsp;</p>
+	<p><img src="http://img.hospitecnia.com/usuariosQS.gif" alt="visitas hospitecnia"/></p>
+	<p>Hospitecnia cuenta con más de 35.000 usuarios registrados. Nuestros usuarios provienen mayoritariamente del entorno de la gestión, diseño y mantenimiento de edificios sanitarios. Información facilitada por los usuarios.</p>
+	<p><img src="http://img.hospitecnia.com/usuarios1QS.gif" alt="visitas hospitecnia"/></p>
+	</item>
+	
+	<item name="servicios_text">
+	<h2>SERVICIOS / TARIFAS</h2>
+	<p><strong>DOCUMENTOS / NORMATIVAS</strong></p>
+	<p>Hospitecnia ofrece a sus usuarios una selección de documentación y normativas relacionadas en su gran mayoría de consulta gratuita. También ofrece la posibilidad a los usuarios que nos envíen sus publicaciones.</p>
+	<p><strong>CURSOS</strong></p>
+	<p>A través de la web y el boletín ofrecemos la posibilidad a nuestros usuarios de anunciar gratuitamente cursos. También pueden destacar el curso a través de nuestra newsletter semanal. Hospitecnia organiza también el <span class="verdeOscuro">Curso General de Instalaciones en un Hospital</span>.</p>
+	<p><strong>COMPRA-VENTA</strong></p>
+	<p>Los usuarios que deseen comprar o vender material médico pueden hacerlo de manera gratuita a través de nuestra página <span class="verdeOscuro">colgando un anuncio</span> o contactando con el anunciante. Hospitecnia garantiza la total privacidad de sus usuarios gestionando la comunicación a través de una plataforma de mensajería propia.</p>
+	<p><strong>NOTICIAS / CONCURSOS</strong></p>
+	<p>Diariamente revisamos las últimas novedades del sector y las introducimos en nuestra web. Además revisamos e introducimos una selección de concursos públicos relacionados con la construcción, gestión, mantenimiento, suministro y equipamiento sanitario.</p>
+	<p><strong>BOLETÍN SEMANAL</strong></p>
+	<p>Hospitecnia envía a sus usuarios semanalmente una newsletter con las últimas novedades destacadas en la web, noticias, documentos y concursos públicos.</p>
+	<p><strong>USUARIOS</strong></p>
+	<p>En Hospitecnia encontrará toda la información necesaria para diseñar, desarrollar, completar proyectos y gestionar edificios en ámbitos hospitalarios y socio-sanitarios.</p>
+	<p>Para la obtención de documentos de pago consulte las tarifas y condiciones. Para darse de alta como usuarios <a href="http://www.hospitecnia.com/AltaPaso01.xsql" title="Regístrate Hospitecnia" target="_blank">Regístrate gratis</a></p>
+	<p><strong>EMPRESAS</strong></p>
+	<p>Las empresas del sector pueden <strong>anunciarse gratuitamente</strong> en Hospitecnia dándose de <span class="verdeOscuro"><a href="http://www.hospitecnia.com/Alta-Proveedor.xsql?BOLETIN=1&amp;utm_source=QuienesSomos" title="AltaProveedor">alta como Proveedores</a></span>. Los Proveedores que lo deseen pueden dar una difusión extra a su anuncio como <strong>Proveedores Premium</strong> y aparecer destacados en el portal y en nuestro boletín semanal, poder publicar sus datos de contacto, noticias, documentos, productos y otros servicios.</p>
+	<p>&nbsp;</p>
+	<h2>TARIFAS SERVICIOS HOSPITECNIA</h2>
+	<p>&nbsp;</p>
+	<p><img src="http://img.hospitecnia.com/tarifasServiciosQS.jpg" alt="Tarifas servicios hospitecnia"/></p>
+	</item>
+	
+	<item name="newsletter_text">
+	<h2>NEWSLETTER / BOLETÍN</h2>
+	<p><strong>Semanalmente enviamos a 21.000 de nuestros usuarios un boletín informándolos de las últimas novedades.</strong></p>
+	<div class="contentLeftQS">
+		<p><strong>PROVEEDORES DESTACADOS</strong></p>
+		<p><strong>CURSOS</strong></p>
+		<p><strong>DOCUMENTOS</strong></p>
+		<p><strong>NOTICIAS</strong></p>
+		<p><strong>FAQ - PREGUNTAS</strong></p>
+		<p><strong>CONCURSOS PUBLICOS</strong></p>
+		<p><strong><a href="http://www.hospitecnia.com/Hemeroteca.xsql" title="Hemeroteca Hospitecnia" target="_blank">CONSULTE LA HEMEROTECA</a></strong></p>
+	</div>
+	<div class="contentRightQS">
+		<p><img src="http://img.hospitecnia.com/boletinQS.jpg" alt="Boletín Hospitecnia"/></p>
+		
+	</div>
+	</item>
+	
+	<item name="como_publicar_text">
+	<h2>CÓMO PUBLICAR</h2>
+	<p>Desde Hospitecnia ofrecemos la posibilidad a los usuarios de publicar diversos anuncios en nuestra web. Si usted dispone de algún artículo o documento que considere interesante, puede mandárnoslo a: <a href="mailto:info@hospitecnia.com">info@hospitecnia.com</a></p>
+	<ul class="listQS">
+	<li>Primeramente debe <a href="http://www.hospitecnia.com/AltaPaso01.xsql" title="Registrarse en Hospitecnia" target="_blank">Registrarse gratis</a> como usuario. Si ya está registrado debe <a href="http://www.hospitecnia.com/LoginRapido.html?height=220&amp;width=330&amp;modal=true" title="Entra en Hospitecnia">Entrar</a> con su nombre de usuario y contraseña.</li>
+	<li>Una vez registrado, en la esquina superior aparecerá su nombre de usuario:</li>
+	<p><img src="http://img.hospitecnia.com/usuarioRegistradoQS.gif" alt="usuario registrado hospitecnia"/></p>
+	<li>Deberá acceder a su Zona Privada donde podrá gestionar sus datos y correos que reciba:</li>
+		<ul class="listQSIn">
+			<li>Modificar datos de usuario</li>
+			<li>Correo, gestión mensajes y comentarios</li>
+		</ul>
+	<li>E incluso dar de alta y/o modificar anuncios de:</li>
+		<ul class="listQSIn">
+			<li>Proveedores</li>
+			<li>Compra-Venta</li>
+		</ul>
+	</ul>
+	</item>
+	
+	<item name="contacto_text">
+	<h2>CONTACTO</h2>
+	<p>&nbsp;</p>
+	<p>Para contactar con nosotros: <a href="mailto:info@hospitecnia.com">info@hospitecnia.com</a></p>
+	<p>Tel: +34 93 241 33 61 -  Fax: +34 93 600 49 01</p>
+	<p>Lunes a jueves de 9:00 a 14:00  -  GMT+ 01:00</p>
+	<p>C/ Compte Urgell 240, 2º Planta</p>
+	<p>08036 Barcelona - España</p>
+	</item>
+	
+	
+	<!--faq-->
+	<item name="FAQ">FAQ</item>
+	<item name="FAQ_titulo">FAQ - Preguntas Habituales</item>
+	<item name="FAQ_text">
+	<ul class="listNumero">
+		<li>¿Qué es Hospitecnia.com?</li>
+		<p>Es un portal que aglutina información y ofrece contenidos y servicios sobre ingeniería, arquitectura y gestión hospitalaria.</p>
+		<li>¿A quién puede interesar Hospitecnia.com?</li>
+		<p>A todos los profesionales vinculados al mundo de la ingeniería y la construcción así como al sector de la gestión y la explotación hospitalaria además de las administraciones públicas.</p>
+		<li>¿Qué ofrece Hospitecnia.com?</li>
+			<ul class="listInside">
+				<li>Acceso ágil a información técnica.</li>
+				<li>Ahorro en costes, recursos humanos y tiempo.</li>
+				<li>Respuesta interactiva a necesidades concretas mediante nuestro servicio de consultas.</li>
+			</ul>
+		<li>¿Qué es regístrese?</li>
+		<p>Un usuario registrado le permite recibir mensuamente el boletín de noticias y disponer de correo web. Inicialmente podrà hacer consultas online. Estar <strong>"registrado"</strong> permite tener acceso a la información de libre acceso.</p>
+		<li>¿Qué es "abónese"?</li>
+		<p>Un usuario <strong>"abonado"</strong> dispone de todos los privilegios para obtener los documentos adjuntos, ademas de los servicios de usuario registrado.</p>
+		<p><strong>Hay tres modalidades:</strong></p>
+		<ul class="listNumeroInside">
+			<li><span class="color"><strong>Tarifa plana:</strong></span> acceso a toda la información del portal excepto las normas AENOR se pagan aparte.</li>
+			<li><span class="color"><strong>Artículos:</strong></span> Acceso a una selección de artículos de arquitectura, ingeniería y gestión hospitalaria de los últimos 25 años.</li>
+			<li><span class="color"><strong>Normativa:</strong></span> Acceso a TODA la normativa especializada y categorizada-excepto normas UNE de AENOR- (general, calidad, accesibilidad, medio ambiente, seguridad y salud, urbanismo, administrativo) tales como NBE, NTE, instrucciones, pliegos, usos sanitarios, etc. Por su carácter especial , Hospitecnia se encarga de gestionar el pedido de las normas UNE de AENOR.</li>
+		</ul>
+		
+		<li>¿Quiere aparecer en nuestra base de datos como proveedor?</li>
+		<p>Si usted como proveedor del sector, quiere aparecer en nuestra base de datos envíenos un email <a href="mailto:marketing@hospitecnia.com">marketing[arroba]hospitecnia.com</a></p>
+		<li>¿Cómo puedo resolver mis dudas?</li>
+		<p>Puede ponerse en contacto con nosotros a través del 93.241.33.61 o mandarnos un e-mail <a href="mailto:info@hospitecnia.com">info[arroba]hospitecnia.com</a></p>
+	</ul> 
+	</item>
+	<!--legislacion-->
+	<item name="legislacion">Condiciones legales</item>
+	<item name="legislacion_title">CONDICIONES LEGALES</item>
+	<item name="legislacion_text">
+	<p><strong>CONDICIONES GENERALES DE ACCESO AL PORTAL Y NAVEGACIÓN Y USO DE LOS SERVICIOS DE HOSPITECNIA PARA LOS USUARIOS</strong></p>
+	<p>Las presentes Condiciones Generales regulan los servicios prestados por HOSPITECNIA, S.L., con domicilio social en Barcelona, calle Mare de Déu de la Salut, 40, entresuelo 1ª, Código Postal 08024, CIF: B-62681770, inscrita en el Registro Mercantil de Barcelona, al Tomo 34026, Folio 11, Hoja B239209 (en adelante, Servicios) en Internet y a través del su portal HOSPITECNIA.COM (en adelante, Portal)</p>
+	<ul class="listNumero">
+		<li>CONDICIONES DE ACCESO Y USO DEL PORTAL</li>
+		<p>La utilización del Portal por parte de cualquier persona, le atribuye la condición de usuario (en adelante, Usuario), y ello implica su aceptación de las presentes Condiciones Generales.</p>
+		<p>Es obligación del Usuario leer las presentes Condiciones Generales. En caso de no aceptarlas en su integridad, el Usuario se abstendrá de acceder al Portal y utilizar los Servicios.</p>
+		<p>En el Portal se encontrará información de todo tipo, relacionada con diversos ámbitos y en especial en los ámbitos relativos a los sectores de arquitectura e ingeniería hospitalaria, y todo lo relacionado. En consecuencia, en el Portal se encontrarán informes, dibujos, fotografías, y todo tipo de material relacionado, o no, con lo descrito en este párrafo (en adelante, Contenidos).</p>
+		<p>Los Servicios y Contenidos ofertados tienen carácter gratuito a no ser que se especifique lo contrario. Aún así, el acceso a alguno de los Servicios o Contenidos ofertados requerirá el registro previo del Usuario.</p>
+		<p>El Usuario se obliga a no utilizar los Servicios y Contenidos para la realización de actividades contrarias a la ley, moral y orden público así como a respetar las condiciones generales de acceso, navegación y uso del Portal vigentes en cada momento. En concreto, el Usuario se abstendrá de:</p>
+		<p><strong>- Copiar, reproducir o distribuir con ánimo de lucro los Contenidos, salvo autorización expresa de HOSPITECNIA, S.L.</strong></p>
+		<p><strong>- No utilizar el Portal para transmitir, difundir o poner a disposición de terceros cualquier tipo de material o información que:</strong></p>
+		<ul class="listInside">
+			<li>Contravenga cualquier normativa aplicable.</li>
+			<li>Se encuentre protegido por cualquier derecho de propiedad industrial o intelectual de terceros, sin contar con autorización expresa del titular de dichos derechos.</li>
+			<li>Constituya publicidad ilícita o engañosa.</li>
+			<li>Induzca, incite o promueva actividades delictivas o ilícitas.</li>
+			<li>Sea contrario al honor, intimidad o propia imagen de terceros.</li>
+			<li>De acceso a materiales violentos, pornográficos o degradantes.</li>
+		</ul>
+		<p>&nbsp;</p>
+		<p><strong>HOSPITECNIA, S.L.</strong> no garantiza que la utilización de los Servicios se encuentre libre de errores. Asimismo, <strong>HOSPITECNIA, S.L.</strong> podrá denegar el acceso, navegación y uso de los Servicios y del Portal a cualquier Usuario que incumpla con lo establecido en las Condiciones Generales aplicables, vigentes en cada momento.</p>
+		<p><strong>HOSPITECNIA, S.L </strong>se reserva el derecho de dejar de prestar cualquiera de los Servicios, bastando para ello comunicarlo en la pantalla de acceso al servicio. Se reserva, asimismo, el derecho de modificar unilateralmente, en cualquier momento y sin previo aviso, la presentación y condiciones del Portal, así como los Servicios y las condiciones requeridas para su utilización.</p>
+		
+	<li>REGISTRO Y CONTRASEÑAS</li>
+	<p>Los Usuarios que se registren con un mail valido obtendrán una contraseña que le servirá para acceder a determinados Servicios y Contenidos (en adelante, Contraseñas). La Contraseñas son personales e intransferibles. Es obligación del Usuario hacer un uso diligente de las mismas así como a mantenerlas en secreto.</p>
+	<p>El Usuario será responsable ante <strong>HOSPITECNIA, S.L.</strong> y terceros, de los daños y perjuicios que pueda ocasionar el mal uso de las Contraseñas.</p>
+	
+	<li>CONTENIDOS</li>
+	<p>El Usuario tendrá acceso a Contenidos elaborados internamente por <strong>HOSPITECNIA, S.L.</strong> o por colaboradores externos (en adelante, Contenidos Externos).</p>
+	<p>Los Contenidos publicados en las páginas web de <strong>HOSPITECNIA, S.L.</strong> no la vinculan, ni constituyen opiniones, consejos o asesoramiento técnico de ningún tipo pues su finalidad es únicamente la de informar a los Usuarios y la de divulgar dichos Contenidos e informaciones.</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> no garantiza la veracidad, precisión, exactitud, actualidad, integridad y exhaustividad de los Contenidos. Con los límites establecidos en la ley, <strong>HOSPITECNIA, S.L.</strong> no asume ninguna responsabilidad por los daños y perjuicios de toda naturaleza que pudieran derivar de la falta de veracidad, precisión, exactitud, actualidad, integridad y exhaustividad de los Contenidos de sus páginas web.</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> podrá, sin previo aviso, modificar y eliminar total o parcialmente todos aquellos Contenidos Externos que considere contravengan las Condiciones Generales aplicables en cada momento.</p>
+	
+	<li>RESPONSABILIDADES</li>
+	<p>El Usuario acepta que el uso del Portal, los Servicios y los Contenidos se efectúa bajo su exclusiva responsabilidad, por lo que <strong>HOSPITECNIA, S.L.</strong> no será, bajo ninguna circunstancia, responsable por cualquier daño sufrido por el Usuario como consecuencia del acceso y uso de los mismos.</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> no controla ni garantiza la ausencia de virus informáticos en los servicios y contenidos prestados por terceros a través del Portal que puedan producir alteraciones en su sistema informático o en los documentos y ficheros electrónicos almacenados en su sistema informático.</p>
+	<p><strong>HOSPITECNIA, S.L</strong> no garantiza a los Usuarios la disponibilidad y continuidad del funcionamiento del Portal y los Servicios, aunque hará lo posible para que así sea.</p>
+	<p>Las páginas web de <strong>HOSPITECNIA, S.L.</strong> pueden contener links (vínculos) a páginas web de terceras personas ajenas a HOSPITECNIA, S.L. En consecuencia, <strong>HOSPITECNIA, S.L.</strong> no asume ningún tipo de responsabilidad por la información y los contenidos de dichas páginas web.</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> no garantiza el buen uso y funcionamiento que los Usuarios hagan del Portal, los Servicios, los Contenidos. <strong>HOSPITECNIA, S.L.</strong> no garantiza que los Usuarios vayan a utilizar el Portal conforme a la ley aplicable, ni según las condiciones de uso.</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> no ofrece ningún tipo de garantía sobre la identidad de los usuarios, ni sobre la veracidad, vigencia y/o autenticidad de los datos que los Usuarios proporcionan al Portal.</p>
+	
+	<li>PROPIEDAD INTELECTUAL</li>
+	<p><strong>HOSPITECNIA, S.L.</strong> se reserva todos los derechos de propiedad intelectual derivados del contenido de sus páginas web. La reproducción total o parcial de los Contenidos deberá contar con el consentimiento expreso de <strong>HOSPITECNIA, S.L.</strong></p>
+	<p>En el caso de que cualquier Usuario o un tercero considere que cualquiera de los Contenidos han sido introducidos en el portal con violación de sus derechos de propiedad intelectual deberá ponerse en contacto, lo antes posible, con <strong>HOSPITECNIA, S.L.</strong></p>
+	<p>Si se decidiera que se está violando el derecho intelectual de un tercero, <strong>HOSPITECNIA, S.L.</strong> suspenderá de inmediato el acceso al público de dicha información.</p>
+
+	<li>DATOS PERSONALES</li>
+	<p>De conformidad con lo establecido en la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter Personal, se informa que los datos personales que se recojan de los Usuarios serán objeto de tratamiento automatizado y serán incorporados a ficheros de titularidad de <strong>HOSPITECNIA, S.L.</strong></p>
+	<p><strong>HOSPITECNIA, S.L.</strong> es una sociedad plenamente concienciada con el tratamiento de los datos personales y las responsabilidades que ello conlleva razón por la que el uso que hará en todo momento de los datos personales, será licito y consentido en todo momento por el Usuario.</p>
+	<p>De acuerdo con la Ley Orgánica 15/1999 sobre Protección de Datos de Carácter Personal, <strong>HOSPITECNIA, S.L.</strong> asume la obligación de secreto de los datos de carácter personal y el deber de tratarlos con confidencialidad. A tal efecto, los datos recabados de los propios Usuarios serán introducidos en una Base de Datos automatizada, propiedad de <strong>HOSPITECNIA, S.L.</strong>, que está dotada de medidas de seguridad conforme a lo dispuesto en el Reglamento de Medidas de Seguridad, en virtud de los datos recabados. El fin perseguido es garantizar la seguridad de los datos personales y evitar de esta forma su alteración, pérdida, tratamiento o acceso no autorizado, habida cuenta en todo momento del estado de la tecnología.</p>
+	<p>El Usuario acepta que los datos personales que aporte sean incorporados a ficheros automatizados con el fin de poderle prestar y ofrecer los servicios y de mantenerle informado de novedades, productos y ofertas especiales relacionados con <strong>HOSPITECNIA, S.L.</strong> y otras empresas del grupo.</p>
+	<p>Dicho fichero o bases de datos está plenamente identificado e inscrito en la Agencia de Protección de Datos, garantizándose en todo momento que los datos solicitados son adecuados, pertinentes y no excesivos para el uso para el que han sido recabados.</p>
+	<p>Asimismo, el Usuario presta su consentimiento para que HOSPITECNIA, S.L. ceda sus datos a otras empresas del Grupo, radicadas en España o en el extranjero, si existiesen servicios o productos ofertados por estas últimas que pudiesen ser de su interés, respetando, en todo caso, la legislación española sobre protección de datos.</p>
+	<p>El Usuario responderá, en cualquier caso, de la veracidad de los datos facilitados, reservándose <strong>HOSPITECNIA, S.L.</strong> el derecho a excluir de los servicios registrados a todo Usuario que haya facilitado datos falsos, sin perjuicio de las demás acciones que procedan en Derecho. El Usuario será el único responsable de cualquier daño o perjuicio, directo o indirecto, que pudiera ocasionar a <strong>HOSPITECNIA, S.L.</strong> o a cualquier tercero a causa de la cumplimentación de los formularios con datos falsos, incompletos o no actualizados.</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> informa a los Usuarios que las distintas páginas de su Portal utilizan "cookies". Los "cookies" son pequeños ficheros de datos que se generan en el ordenador del usuario y nos permiten conocer la siguiente información:</p>
+	<ul class="listInside">
+		<li>La fecha y hora de la última vez que el usuario visitó nuestra web site</li>
+		<li>El diseño de contenidos que el usuario escogió en su primera visita a nuestra web site</li>
+		<li>Elementos de seguridad que intervienen en el acceso a áreas restringidas</li>
+		<li>Estimar el número de visitas realizadas</li>
+	</ul>
+	<p>Y todo ello para poder ofrecer los servicios de <strong>HOSPITECNIA, S.L.</strong> de manera más personalizada.</p>
+	<p>Informamos al Usuario que su programa navegador tiene la opción de impedir la generación de "cookies" así como de eliminar las ya generadas.</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> informa a los usuarios sobre la posibilidad si así lo desean, de acceder, modificar o rectificar, cancelar y en su caso oponerse al tratamiento los datos personales que estuviesen en poder de <strong>HOSPITECNIA, S.L.</strong></p>
+	<p>Para el ejercicio de los citados derechos así como cualesquiera otros que considerase de interés, podrá hacerlo dirigiéndose personalmente mediante carta dirigida, adjuntando fotocopia de su DNI, a la atención del responsable del fichero a la siguiente dirección:</p>
+	<p>&nbsp;</p>
+	<p><strong>HOSPITECNIA, S.L.</strong> - Responsable del Fichero</p>
+	<p>Mare de Déu de la Salut, 40 Entl 1a</p>
+	<p>08024, BARCELONA.</p>
+	<p>&nbsp;</p>
+	<p>Se entenderá que el Usuario acepta las condiciones establecidas y presta todos los consentimientos requeridos si presiona el botón de aceptación que se encuentra en los formularios de recogidas de datos.</p>
+	
+	<li>LEGISLACIÓN APLICABLE Y JURISDICCIÓN COMPETENTE</li>
+	<p>Para la inteligencia e interpretación de las presentes Condiciones Generales, ambas partes, con renuncia expresa a su propio fuero y domicilio se someten a los Juzgados de Barcelona y sus Tribunales Superiores.</p>
+	<p>Las presentes Condiciones Generales se regirán por los pactos establecidos en las mismas y, en lo no previsto, se regulará por la legislación española.</p>
+	</ul>
+</item>
+
+<!--AbonosUsuarios-->
+	<item name="abonos_usuarios">Abonos Usuarios</item>
+	<item name="abonos_usuarios_title">ABONOS USUARIOS</item>
+	<item name="abonos_usuarios_text">
+	<p>Como <strong>usuario particular</strong> una vez registrado en Hospitecnia Ud. <strong>puede acceder de forma gratuita a gran parte de la documentación</strong> (aproximadamente un 80 %).<br />Además recibirá el <strong>boletín semanal</strong>.</p> 
+	<p>Se puede acceder al resto de documentación generada por el equipo de Hospitecnia o sus colaboradores (documentación de pago) a través de las siguientes opciones:</p>
+	<ul class="listAbonos">
+	<li>Tarifa plana anual de acceso para un usuario: 360 (+IVA) (*)
+	</li>
+	<li>Pack de 5 documentos: 50 (+IVA)</li>
+	</ul>
+	
+	
+	<p><strong>Una vez se abone en la cuenta de Hospitecnia</strong> el importe correspondiente y nos envien el comprobante de pago por fax o mail se le <strong>activará el acceso a los contenidos de pago</strong>.</p>
+
+	<p>Si está interesado en conocer más información de las opciones descritas y  las tarifas vigentes, <strong>envíenos un mail a  <a href="mailto:info@hospitecnia.com?subject=Abonos Usuarios">info[arroba]hospitecnia.com</a></strong></p>
+	<p>&nbsp;</p>
+	<p>(*)Esta opción le permite también tener un 10% de descuento en los cursos monográficos elaborados por Hospitecnia.<br /> Actualmente disponemos del curso General de Instalaciones en un Hospital.</p>
+	<p>(*)Para más de un usuario y colectivos se aplicarán descuentos importantes.</p>
+	</item>
+
+<!--AbonosProveedores-->
+	<item name="abonos_proveedores">Abonos Proveedores</item>
+	<item name="abonos_proveedores_title">ABONOS PROVEEDORES</item>
+<!--
+	<item name="abonos_proveedores_text">
+	<p>Si Ud. es <strong>Proveedor de materiales y equipos del sector sanitario</strong>, puede anunciarse y hacer llegar su mensaje y dar a conocer sus productos a los usuarios registrados en el portal de dos formas muy eficaces:</p>
+	<ul class="listAbonos">
+		<li>A través de su presencia en la web (como colaborador Premium ORO o Premium PLATA)<br />
+		<span class="grisClaro">Premium Oro: 130 Mensuales (+IVA)</span><br />
+		<span class="grisClaro">Premium Plata: 75 Mensuales (+IVA)</span> 
+		</li>
+		<li>A través de un espacio publicitario en el boletín semanal.<br />
+		<span class="grisClaro">Publicidad en Boletín Hospitecnia: 10 CPM (*)</span><br />
+		<span class="grisClaro">Newsletter proveedor: 15 CPM (*)</span>
+		</li>
+	</ul>
+	<p>Si está interesado en conocer más información de las opciones descritas y  las tarifas vigentes, <strong>envíenos un mail a  <a href="mailto:info@hospitecnia.com?subject=Abonos Proveedores">info[arroba]hospitecnia.com</a></strong></p>
+	<p>&nbsp;</p>
+	<p>(*)CPM: por cada mil mails enviados</p>
+	</item>
+-->
+	<item name="abonos_proveedores_text">
+		<p>Los <span class="bold colorHospi">Proveedores Premium</span> tienen la oportunidad de sacar el <span class="bold colorHospi">máximo rendimiento</span> del portal Hospitecnia y difundir los productos y servicios de su empresa a los <span class="bold colorHospi">300.000 usuarios</span> que anualmente visitan la página de una forma más eficaz y directa.</p>
+
+		<img src="http://img.hospitecnia.com/abonoProveedoresPrecios.gif" alt="Abonos Proveedores Precio" style="margin-left:100px;"/>
+
+		<p class="bold">SERVICIOS</p>
+		<p class="bold colorHospi">WEB</p>
+		<ul class="listAbonos">
+			<li><span class="bold colorHospi">Banner en la Home:</span> el logotipo de la empresa se mostrará de forma permanente en la página principal de portal de la web.</li>
+			<li><span class="bold colorHospi">Datos de contacto:</span> en el anuncio de la empresa aparecerán sus datos de contacto (dirección y teléfono) y los usuarios tendrán la posibilidad de contactar directamente con ella mediante el botón "CONTACTAR" que aparecerá en el mismo anuncio.</li>
+			<li><span class="bold colorHospi">Acceso documentación Premium:</span> acceso a toda la documentación Premium del portal.</li>
+			<li><span class="bold colorHospi">Destacado en la web:</span> todas las noticias, documentación o cursos de la empresa aparecerán en la página principal del portal.</li>
+			<li><span class="bold colorHospi">Destacado en el buscador:</span> su empresa  tendrá un lugar destacado en el buscador del portal obteniendo las primeras posiciones en las búsquedas que hagan los usuarios.</li>
+		</ul>
+
+		<p class="bold colorHospi">BOLETÍN</p>
+		<ul class="listAbonos">
+			<li><span class="bold colorHospi">Curso:</span> publicación de los cursos de la empresa en el boletín semanal.</li>
+			<li><span class="bold colorHospi">Documento:</span> publicación de documentos de la empresa en el boletín semanal.</li>
+			<li><span class="bold colorHospi">Noticias:</span> publicación de las noticias de la semana relacionadas con la empresa en el boletín semanal.</li>
+		</ul>
+
+		<p class="bold">OTROS SERVICIOS</p>
+		<p>Si solamente desea hacer publicidad de los productos y servicios de su empresa de forma puntual Hospitecnia le ofrece:</p>
+		<ul class="listAbonos">
+			<li>
+				<p><span class="bold colorHospi">Publicación de documento en el boletín:</span> publicación de documentos, cursos y noticias en el boletín semanal con su correspondiente imagen o banner.</p>
+				<p class="descTarifa">TARIFA: 200€ (+ IVA) por inserción</p>
+			</li>
+			<li>
+				<p><span class="bold colorHospi">Boletín especial dedicado a su empresa:</span> preparación de un boletín dedicado exclusivamente a promocionar y difundir  los productos y servicios de su empresa (noticias, cursos y documentos) que será enviado a los 20.000 usuarios (que actualmente reciben el boletín semanal de Hospitecnia.</p>
+				<p class="descTarifa">TARIFA: 500€ (+ IVA)</p>
+			</li>
+		</ul>
+
+		<p class="bold clear">Si está interesado en contratar alguna de las tarifas descritas o en conocer más información de las opciones descritas envíenos un mail a <a class="email" href="mailto:info@hospitecnia.com">info[arroba]hospitecnia.com</a> o llame al <span class="colorHospi">93 241 33 61</span>.</p>
+
+	</item>
+	<item name="siguientes_10">Sig. 10</item>
+	<item name="anteriores_10">10 Ant.</item>
+
+	<item name="nuevo_mensaje">Nuevo Mensaje</item>
+        
+        <!--explicación compra/venta de más de 1000 euros-->
+        <item name="expli_compra_venta_1000">
+            <ol class="expliCVlist">
+                <li><a>El anunciante publica gratuitamente un anuncio informando que un producto está en venta y de las principales características del mismo.</a></li>
+                <li><a>Un usuario interesado envía, gratuitamente, un mensaje a Hospitecnia preguntando por el producto anunciado.</a></li>
+                <li><a>El contacto llega a Hospitecnia que comprobarán el interés y seriedad de comprador y vendedor, y resolverán cualquier duda que pueda haber sobre el producto, envío (lugar de entrega, plazos, etc), garantía, etc.</a></li>
+                <li><a>Si el comprador confirma su interés, realizará el pago a Hospitecnia que retendrá dicho pago hasta que el comprador confirme que ha recibido correctamente el pedido.</a></li>
+                <li><a>Se generará el pedido en MedicalVM, dentro del área correspondiente a Hospitecnia, para que se pueda hacer un buen seguimiento del mismo por parte de Hospitecnia, del cliente y del proveedor.</a></li>
+                <li><a>Cuando el comprador confirme la recepción correcta del pedido, Hospitecnia transferirá al proveedor el importe pagado por el cliente, descontando la comisión del 10% por las gestiones anteriores.</a></li>
+                <li><a>En caso de problemas con el pedido, Hospitecnia realizará la labor de arbitraje, de forma a proteger los intereses de todas las partes contra engaños.</a></li>
+            </ol>
+        </item>
+
+        <item name="nota_contacto_marketplace">Para solicitar información sobre el marketplace de Hospitecnia (sobre su funcionamiento, o compra de equipos o material), por favor contactad con marketplace[arroba]hospitecnia.com</item>
+        <item name="nota_contacto_marketplace2">
+            <p><strong>DEMANDAS:</strong></p>            
+            <p>&nbsp;</p>
+            <p>Para un cliente español estamos buscando los siguientes equipos, preferiblemente de segunda mano, pero podría ser de interés nuevo si el precio es competitivo:</p>
+            <p>&nbsp;</p>
+            <p><strong>1.- CAMPIMETRO HUMPHREY</strong></p>
+            <p><strong>2.- BIOMETRO IOL MASTER 500</strong></p>
+            <p>&nbsp;</p>
+            <p>También estamos buscando el siguiente equipo, preferiblemente de alquiler:</p>
+            <p>&nbsp;</p>
+            <p><strong>Ecógrafos de oftalmologia modelo B.</strong></p>
+            <p>&nbsp;</p>
+            <p>En caso de estar interesados por favor contactad con marketplace[arroba]hospitecnia.com</p>        
+        </item>
+</texts>
+<texts>
+</texts>
+</translation>

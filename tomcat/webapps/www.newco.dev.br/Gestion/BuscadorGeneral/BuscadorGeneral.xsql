@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BuscadorGeneralHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BuscadorGeneralHTML.xsl"?>
+
+
+
+<!--
+	Buscador con paginacion y filtros de uso general
+	para el uso en diversos proyectos de MedicalVM
+	
+	(c) feb 2004 ET
+-->
+<Buscador xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISDatos');
+			IF US_ID>=0 THEN
+				BuscadorGeneral_PCK.Consulta_XML(US_ID,'{@IDCONSULTA}','{@RESTRICCION}','{@RESTRICCIONEXTERNA}','{@ACCION}','{@PAGINA}');
+			END IF;
+		END;
+        ]]>
+  </xsql:include-owa>
+</Buscador>

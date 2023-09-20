@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |   Lista las Sugerencias pendientes para el usuario.
+ |
+ |   Dependiendo del estado del documento llamamos al proceso correspondiente.
+ |
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SUListadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SUListadoHTML.xsl"?>
+
+<ListaSugerencias xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="usuario" value="{@US_ID}"/> 
+
+  <xsql:query tag-case="upper">
+    <![CDATA[
+        select {@US_ID} USUARIO,
+               SU_CODIGO, 
+	       SU_SUBCODIGO, 
+	       SU_IDESTADO as ESTADO_ACTUAL,
+	       SU_IDAUTOR,
+	       US_NOMBRE || ' ' || US_APELLIDO1 || ' ' || US_APELLIDO2 AS "AUTOR",
+               NVL(SU_RESUMEN, '[Resumen]' ) as "SU_RESUMEN", 
+	       NVL(TO_CHAR(SU_FECHA_IN,'DD/MM/YYYY HH24:MI'),'[Sin Fecha]') as "Su_Fecha_IN"
+	from sugerencias, usuarios
+	where su_idautor = us_id 
+	 and (su_codigo,su_subcodigo,su_idestado) in (
+	select wf_codigo,wf_subcodigo,max(su_idestado)
+	from workflow, sugerencias
+	where wf_idtipo = 1
+	  and wf_idresponsable = {@US_ID}
+	  and wf_codigo = su_codigo
+	  and wf_subcodigo = su_subcodigo
+	  and wf_idestado < 5
+	group by wf_codigo, wf_subcodigo)    
+     ]]>
+    <xsql:no-rows-query>
+      Select 'Sorry' "Sorry" from dual
+    </xsql:no-rows-query>
+  </xsql:query>
+
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on> 
+    <page>G-0015</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+   
+</ListaSugerencias>

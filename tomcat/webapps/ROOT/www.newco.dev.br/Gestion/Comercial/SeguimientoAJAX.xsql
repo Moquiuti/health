@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Recupera los datos de una entrada de seguimiento
+	Ultima revision: ET 4jun19 17:48
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="SeguimientoJSON.xsl"?>
+
+<Seguimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDENTRADA"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+      v_IDRendimiento NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','GestionComercial Seguimiento');
+
+	 		IF US_ID>0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				SEGUIMIENTO_PCK.Seguimiento_XML(
+					US_ID,
+					'{@IDENTRADA}',
+          'S'
+				);
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</Seguimiento>

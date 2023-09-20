@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para ver los resumenes disponibles
+		
+	(c) 2/1/2002 E.Torrellas
+-->
+
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VerTodosResumenesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VerTodosResumenesHTML.xsl"?>
+
+<Resumenes xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:include-param name="TIPO"/>
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:query tag-case="upper" row-element="RESUMEN" rowset-element="">
+    <![CDATA[
+			SELECT
+					RS_ID					ID, 
+					to_char(RS_FECHAENVIO,'dd/mm/yyyy')	FECHAENVIO, 
+					to_char(RS_FECHAREAL,'dd/mm/yyyy')	FECHAREAL, 
+					RSE_DESCRIPCION			ESTADO, 
+					US_APELLIDO1||' '||US_APELLIDO2||','||US_NOMBRE	USUARIO
+			FROM 	RESUMENSEMANAL, RESUMENSEMANAL_ESTADOS, USUARIOS
+			WHERE	RS_IDESTADO=RSE_ID
+				AND	RS_IDUSUARIO=US_ID
+			ORDER 	BY RS_FECHAENVIO DESC
+    ]]>
+  </xsql:query>
+  <Mantenimiento>
+  	1
+  </Mantenimiento>
+  <button label="Cancelar" alt="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button> 
+  <returnHome/>
+</Resumenes>
+

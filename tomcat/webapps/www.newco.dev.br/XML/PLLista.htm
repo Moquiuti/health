@@ -1,0 +1,629 @@
+<html>
+   <head>
+      <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/Estilos.css" type="text/css"/>
+        <script type="text/javascript" src="http://www.newco.dev.br/General/general.js">
+        </script>
+	<SCRIPT type="text/javascript">
+	<!--
+	
+	Actualitza_Cookie('PLLista','Iniciar');	
+        //
+        // Hacemos el cambio de la PLANTILLA ACTUAL.
+        //
+     	function CambioPlantilla(accion,pl_id){
+     	  parent.location.href='CambioPlantilla.xsql?PL_ID='+pl_id;
+     	}    
+     	
+     	function BorrarPlantilla(pl_id) {
+     	
+     	contestacion = confirm("¿Esta seguro de querer eliminar la plantilla?");
+	  if (!contestacion) return;
+	  else document.location.href='../Multioferta/PLBorrar.xsql?PL_ID='+pl_id+'&amp;BOTON=Eliminar';
+     	}
+     	
+     	function CopiarPlantilla(pl_id) {
+     	document.location.href='../Multioferta/PLManten.xsql?PL_ID='+pl_id+'&amp;BOTON=Copiar';
+     	}	
+     	
+     	function NuevaPlantilla() {
+     	document.location.href='../Multioferta/PLManten.xsql?BOTON=Nueva';
+     	}            			
+	-->
+	</SCRIPT>
+	</head>
+   <body bgcolor="#EEFFFF" onLoad="Actualitza_Cookie('PLLista','Terminar');">
+      <form name="plantillas" method="post">
+         <input type="hidden" name="PL_NOMBRE">
+         <input type="hidden" name="PL_DESCRIPCION">
+         <input type="hidden" name="PL_ID">
+         <input type="hidden" name="LP_ID">
+         <input type="hidden" name="BOTON" value="Editar">
+      </form>
+      <br>
+      <table width="80%" align="center" bgcolor="#A0D8D7" border="0" cellspacing="2" cellpadding="2">
+         <tr>
+            <td align="center" width="3%">&nbsp;</td>
+            <td align="center" width="3%">&nbsp;</td>
+            <td align="center" width="43%">
+               <p class="tituloForm">Lista de Plantillas</p>
+            </td>
+            <td align="center" width="51%">
+               <p class="tituloForm">Descripci&oacute;n</p>
+            </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla('95');" onMouseOver="
+            document.EliminarPlantilla_95.src='http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif';window.status='Eliminar plantilla';return true
+          " onMouseOut="
+            document.EliminarPlantilla_95.src='http://www.newco.dev.br/images/Botones/EliminarPeq.gif';window.status='';return true
+          ">
+                  <img name="EliminarPlantilla_95" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla('95');" onMouseOver="
+            document.CopiarPlantilla_95.src='http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif';window.status='Copiar plantilla';return true
+          " onMouseOut="
+            document.CopiarPlantilla_95.src='http://www.newco.dev.br/images/Botones/CopiarPeq.gif';window.status='';return true
+          ">
+                  <img name="CopiarPlantilla_95" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla('LPListaTest.xsql',95);" onMouseOver="window.status='Selecciona plantilla COMPRA MENSUAL';return true">COMPRA MENSUAL</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;72&#39;);" onMouseOver="
+            document.EliminarPlantilla_72.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_72.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_72" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;72&#39;);" onMouseOver="
+            document.CopiarPlantilla_72.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_72.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_72" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,72);" onMouseOver="window.status=&#39;Selecciona plantilla Compras oficina semanal&#39;;return true">Compras oficina semanal</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;280&#39;);" onMouseOver="
+            document.EliminarPlantilla_280.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_280.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_280" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;280&#39;);" onMouseOver="
+            document.CopiarPlantilla_280.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_280.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_280" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,280);" onMouseOver="window.status=&#39;Selecciona plantilla Consumibles&#39;;return true">Consumibles</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;348&#39;);" onMouseOver="
+            document.EliminarPlantilla_348.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_348.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_348" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;348&#39;);" onMouseOver="
+            document.CopiarPlantilla_348.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_348.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_348" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,348);" onMouseOver="window.status=&#39;Selecciona plantilla Copia de 326&#39;;return true">Copia de 326</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;303&#39;);" onMouseOver="
+            document.EliminarPlantilla_303.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_303.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_303" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;303&#39;);" onMouseOver="
+            document.CopiarPlantilla_303.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_303.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_303" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,303);" onMouseOver="window.status=&#39;Selecciona plantilla Fungible servicio urgencias&#39;;return true">Fungible servicio urgencias</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;283&#39;);" onMouseOver="
+            document.EliminarPlantilla_283.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_283.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_283" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;283&#39;);" onMouseOver="
+            document.CopiarPlantilla_283.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_283.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_283" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,283);" onMouseOver="window.status=&#39;Selecciona plantilla jerin&#39;;return true">jerin</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;246&#39;);" onMouseOver="
+            document.EliminarPlantilla_246.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_246.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_246" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;246&#39;);" onMouseOver="
+            document.CopiarPlantilla_246.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_246.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_246" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,246);" onMouseOver="window.status=&#39;Selecciona plantilla Lo de siempres&#39;;return true">Lo de siempres</a>
+            </td>
+            <td bgcolor="#EEFFFF">'Jeringas'</td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;138&#39;);" onMouseOver="
+            document.EliminarPlantilla_138.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_138.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_138" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;138&#39;);" onMouseOver="
+            document.CopiarPlantilla_138.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_138.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_138" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,138);" onMouseOver="window.status=&#39;Selecciona plantilla Material de Oficina&#39;;return true">Material de Oficina</a>
+            </td>
+            <td bgcolor="#BBDDDD">Compra de Material de Oficina</td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;323&#39;);" onMouseOver="
+            document.EliminarPlantilla_323.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_323.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_323" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;323&#39;);" onMouseOver="
+            document.CopiarPlantilla_323.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_323.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_323" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,323);" onMouseOver="window.status=&#39;Selecciona plantilla Mobiliario Clinico&#39;;return true">Mobiliario Clinico</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;341&#39;);" onMouseOver="
+            document.EliminarPlantilla_341.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_341.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_341" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;341&#39;);" onMouseOver="
+            document.CopiarPlantilla_341.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_341.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_341" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,341);" onMouseOver="window.status=&#39;Selecciona plantilla moi&#39;;return true">moi</a>
+            </td>
+            <td bgcolor="#BBDDDD">Compra de Material de Oficina</td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;298&#39;);" onMouseOver="
+            document.EliminarPlantilla_298.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_298.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_298" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;298&#39;);" onMouseOver="
+            document.CopiarPlantilla_298.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_298.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_298" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,298);" onMouseOver="window.status=&#39;Selecciona plantilla Nueva2&#39;;return true">Nueva2</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;197&#39;);" onMouseOver="
+            document.EliminarPlantilla_197.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_197.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_197" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;197&#39;);" onMouseOver="
+            document.CopiarPlantilla_197.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_197.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_197" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,197);" onMouseOver="window.status=&#39;Selecciona plantilla Papel&#39;;return true">Papel</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;325&#39;);" onMouseOver="
+            document.EliminarPlantilla_325.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_325.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_325" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;325&#39;);" onMouseOver="
+            document.CopiarPlantilla_325.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_325.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_325" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,325);" onMouseOver="window.status=&#39;Selecciona plantilla Plantilla #1&#39;;return true">Plantilla #1</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;296&#39;);" onMouseOver="
+            document.EliminarPlantilla_296.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_296.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_296" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;296&#39;);" onMouseOver="
+            document.CopiarPlantilla_296.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_296.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_296" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,296);" onMouseOver="window.status=&#39;Selecciona plantilla Plantilla 26&#39;;return true">Plantilla 26</a>
+            </td>
+            <td bgcolor="#BBDDDD">Plantilla para Compras menores</td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;304&#39;);" onMouseOver="
+            document.EliminarPlantilla_304.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_304.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_304" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;304&#39;);" onMouseOver="
+            document.CopiarPlantilla_304.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_304.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_304" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,304);" onMouseOver="window.status=&#39;Selecciona plantilla Plantilla de Sinver&#39;;return true">Plantilla de Sinver</a>
+            </td>
+            <td bgcolor="#EEFFFF">Varios materiales sanitarios</td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;192&#39;);" onMouseOver="
+            document.EliminarPlantilla_192.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_192.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_192" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;192&#39;);" onMouseOver="
+            document.CopiarPlantilla_192.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_192.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_192" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,192);" onMouseOver="window.status=&#39;Selecciona plantilla Plantilla ejemplo IVA&#39;;return true">Plantilla ejemplo IVA</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;326&#39;);" onMouseOver="
+            document.EliminarPlantilla_326.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_326.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_326" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;326&#39;);" onMouseOver="
+            document.CopiarPlantilla_326.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_326.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_326" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,326);" onMouseOver="window.status=&#39;Selecciona plantilla Plantilla Prim&#39;;return true">Plantilla Prim</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;357&#39;);" onMouseOver="
+            document.EliminarPlantilla_357.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_357.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_357" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;357&#39;);" onMouseOver="
+            document.CopiarPlantilla_357.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_357.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_357" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,357);" onMouseOver="window.status=&#39;Selecciona plantilla Plantilla Septiembre&#39;;return true">Plantilla Septiembre</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;312&#39;);" onMouseOver="
+            document.EliminarPlantilla_312.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_312.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_312" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;312&#39;);" onMouseOver="
+            document.CopiarPlantilla_312.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_312.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_312" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,312);" onMouseOver="window.status=&#39;Selecciona plantilla Plantilla Unidades&#39;;return true">Plantilla Unidades</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;200&#39;);" onMouseOver="
+            document.EliminarPlantilla_200.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_200.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_200" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;200&#39;);" onMouseOver="
+            document.CopiarPlantilla_200.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_200.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_200" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,200);" onMouseOver="window.status=&#39;Selecciona plantilla Protesis&#39;;return true">Protesis</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;202&#39;);" onMouseOver="
+            document.EliminarPlantilla_202.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_202.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_202" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;202&#39;);" onMouseOver="
+            document.CopiarPlantilla_202.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_202.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_202" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#EEFFFF">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,202);" onMouseOver="window.status=&#39;Selecciona plantilla REF 300 - Protesis Rodilla&#39;;return true">REF 300 - Protesis Rodilla</a>
+            </td>
+            <td bgcolor="#EEFFFF">
+                  &nbsp;
+                </td>
+         </tr>
+         <tr>
+            <td align="center">
+               <a href="javascript:BorrarPlantilla(&#39;282&#39;);" onMouseOver="
+            document.EliminarPlantilla_282.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq_mov.gif&#39;;window.status=&#39;Eliminar plantilla&#39;;return true
+          " onMouseOut="
+            document.EliminarPlantilla_282.src=&#39;http://www.newco.dev.br/images/Botones/EliminarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="EliminarPlantilla_282" border="0" src="http://www.newco.dev.br/images/Botones/EliminarPeq.gif" alt="Eliminar plantilla">
+               </a>
+            </td>
+            <td align="center">
+               <a href="javascript:CopiarPlantilla(&#39;282&#39;);" onMouseOver="
+            document.CopiarPlantilla_282.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq_mov.gif&#39;;window.status=&#39;Copiar plantilla&#39;;return true
+          " onMouseOut="
+            document.CopiarPlantilla_282.src=&#39;http://www.newco.dev.br/images/Botones/CopiarPeq.gif&#39;;window.status=&#39;&#39;;return true
+          ">
+                  <img name="CopiarPlantilla_282" border="0" src="http://www.newco.dev.br/images/Botones/CopiarPeq.gif" alt="Copiar plantilla">
+               </a>
+            </td>
+            <td bgcolor="#BBDDDD">
+               <a href="javascript:CambioPlantilla(&#39;LPListaTest.xsql&#39;,282);" onMouseOver="window.status=&#39;Selecciona plantilla Sin importes 2&#39;;return true">Sin importes 2</a>
+            </td>
+            <td bgcolor="#BBDDDD">
+                  &nbsp;
+                </td>
+         </tr>
+      </table>
+      <br>
+      <table width="80%" border="0" align="center">
+         <tr>
+            <td align="center">
+               <a onMouseOver="cambiaImagen(&#39;Nuevo&#39;,&#39;http://www.newco.dev.br/images/Botones/Nuevo_mov.gif&#39;);window.status=&#39;Nueva plantilla&#39;;return true" onMouseOut="cambiaImagen(&#39;Nuevo&#39;,&#39;http://www.newco.dev.br/images/Botones/Nuevo.gif&#39;);window.status=&#39;&#39;;return true" href="javascript:NuevaPlantilla();">
+                  <img name="Nuevo" src="http://www.newco.dev.br/images/Botones/Nuevo.gif" border="0" alt="Nueva plantilla">
+               </a>
+               <br>Nueva plantilla</td>
+         </tr>
+      </table>
+   </body>
+</html>

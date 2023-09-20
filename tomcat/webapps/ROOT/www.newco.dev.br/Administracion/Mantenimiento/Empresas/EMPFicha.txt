@@ -1,0 +1,2 @@
+27mar18	ET	Utilizamos un procedimiento que devuelve menos XML para la ficha de empresa
+18abr18	ET	Incluir plazo de entrega y forma de pago en la ficha

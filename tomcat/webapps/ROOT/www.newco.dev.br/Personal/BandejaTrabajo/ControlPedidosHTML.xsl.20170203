@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!--
+    Ficha de control de pedido
+ 
+	Ultima revision 5ene17 10:26
+-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" /> 
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:template match="/">
+    <html> 
+      <head> 
+       <!--style-->
+      <xsl:call-template name="estiloIndip"/>
+      <!--fin de style-->
+      	
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Personal/BandejaTrabajo/controlPedidos240117.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Personal/BandejaTrabajo/cargaDoc.js"></script><!--usado tb en bandeja inicio wfstatus-->
+	<script type="text/javascript" src="http://www.newco.dev.br/General/stringFormatEncode.js"></script>
+	<xsl:text disable-output-escaping="yes"><![CDATA[
+
+	<script type="text/javascript">
+        <!--
+      
+      
+        //-->
+	</script>
+	]]></xsl:text>
+   
+   
+		<title>
+			<xsl:value-of select="ControlPedidos/PEDIDO/NOMBRE_CENTRO"/>:&nbsp;<xsl:value-of select="ControlPedidos/PEDIDO/NUMERO_PEDIDO"/> a <xsl:value-of select="ControlPedidos/PEDIDO/NOMBRE_PROVEEDOR"/>
+		</title>
+      </head>
+      <body onload="RecuperoCheck({ControlPedidos/PEDIDO/SITUACION});">
+        <xsl:choose>
+           <xsl:when test="//SESION_CADUCADA">
+             <xsl:apply-templates select="//SESION_CADUCADA"/>
+           </xsl:when>
+           <xsl:when test="//xsql-error">
+             <xsl:apply-templates select="//xsql-error"/>
+           </xsl:when>
+           <xsl:when test="//Status">
+             <xsl:apply-templates select="//Status"/>         
+           </xsl:when>
+          <xsl:otherwise>
+			<xsl:apply-templates select="ControlPedidos/PEDIDO"/>         	
+          </xsl:otherwise>
+       </xsl:choose> 
+       
+       <div id="uploadFrame" style="display:none;"><iframe src="" id="uploadFrame" name="uploadFrame" style="width: 100%;"></iframe></div>
+       <div id="uploadFrameBoxDoc" style="display:none;"><iframe src="" id="uploadFrameDoc" name="uploadFrameDoc" style="width: 100%;"></iframe></div>
+      </body>
+    </html>
+  </xsl:template>
+
+<!--
+ |  Templates
+ +-->
+
+<xsl:template match="PEDIDO">
+
+ <!--idioma-->
+        <xsl:variable name="lang">
+        	<xsl:value-of select="../LANG" />
+        </xsl:variable>
+        <xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+
+  <!--idioma fin-->
+      
+	<form method="post" name="Cabecera" id="Cabecera" action="ControlPedidosSave.xsql">
+		<input type="hidden" name="SOLO_COMENTARIOS_PARA_CLINICA" value="?" />
+        <input type="hidden" name="SOLO_ACCION" value="?" />
+		<input type="hidden" name="IDEMPRESA" value="{/ControlPedidos/IDEMPRESA}" />
+		<input type="hidden" name="IDCENTRO" value="{/ControlPedidos/IDCENTRO}" />
+		<input type="hidden" name="IDPROVEEDOR" value="{/ControlPedidos/IDPROVEEDOR}" />
+		<input type="hidden" name="IDFILTROMOTIVO" value="{/ControlPedidos/IDFILTROMOTIVO}" />
+		<input type="hidden" name="IDPEDIDO" value="{PED_ID}" />
+		<input type="hidden" name="ELIMINAR_ENTRADA" value="NO_ELIMINAR" />
+        <input type="hidden" name="ELIMINAR_COME_PROVE" value="NO_ELIMINAR" />
+        
+        <!--subir documentos-->
+        <input type="hidden" name="CADENA_DOCUMENTOS" />
+        <input type="hidden" name="DOCUMENTOS_BORRADOS"/>
+        <input type="hidden" name="BORRAR_ANTERIORES"/>
+        <input type="hidden" name="ID_USUARIO" value="" />
+        <input type="hidden" name="TIPO_DOC" value="ALBARAN"/>
+        <input type="hidden" name="CHANGE_PROV"/>
+        <input type="hidden" name="DOC_DESCRI" />
+        <input type="hidden" name="REMOVE" value="{document($doc)/translation/texts/item[@name='remove']/node()}"/>
+
+        <input type="hidden" id="textoConfirmPDFCliente" value="{document($doc)/translation/texts/item[@name='desea_enviar_pdf_cliente']/node()}"/>
+        <input type="hidden" id="textoConfirmPDFProveedor" value="{document($doc)/translation/texts/item[@name='desea_enviar_pdf_prov']/node()}"/>
+
+	
+		<!--	Titulo de la página		-->
+		<div class="ZonaTituloPagina">
+			<p class="Path">
+				<xsl:value-of select="document($doc)/translation/texts/item[@name='Inicio']/node()"/>&nbsp;/&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='Pedidos']/node()"/>&nbsp;/&nbsp;<span class="FinPath"><xsl:value-of select="document($doc)/translation/texts/item[@name='control_pedidos']/node()"/></span>
+				<span class="CompletarTitulo">
+					<xsl:if test="SITUACION>=0">
+					<img src="../../images/Situacion{SITUACION}de3.gif"/>&nbsp;
+					</xsl:if>
+					<xsl:value-of select="ESTADO"/>&nbsp;
+            		<xsl:choose>
+            		<xsl:when test="RETRASADO = 'S'"><span style="background:#F9B247;padding:2px 4px;"><xsl:value-of select="document($doc)/translation/texts/item[@name='entregado_con_retraso']/node()"/></span></xsl:when>
+            		<xsl:when test="PED_ENTREGADOPARCIAL = 'S'"><span style="background:#F9B247;padding:2px 4px;"><xsl:value-of select="document($doc)/translation/texts/item[@name='entregado_parcialmente']/node()"/></span></xsl:when>
+            		</xsl:choose>
+					&nbsp;<span style="padding:5px; font-weight:bold;" class="amarillo">MO_ID: <xsl:value-of select="MO_ID"/></span>
+				</span>
+			</p>
+			<p class="TituloPagina">
+                <xsl:value-of select="document($doc)/translation/texts/item[@name='pedido']/node()"/>&nbsp;
+                    <a style="font-size:20px;">
+                        <xsl:attribute name="href">javascript:MostrarPag('<xsl:value-of select="ENLACETAREA"/>&amp;SES_ID=<xsl:value-of select="//SES_ID"/>','Multioferta')</xsl:attribute>
+                        <xsl:value-of select="NUMERO_PEDIDO"/>
+                    </a>&nbsp;<xsl:value-of select="NOMBRE_CENTRO"/>
+				<span class="CompletarTitulo" style="width:400px;">
+					<!--	PENDIENTE	-->
+					<a class="btnNormal">
+						<xsl:attribute name="href">javascript:EnviarPDF('<xsl:value-of select="MO_ID"/>','CLIENTE');</xsl:attribute>
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='enviar_pdf_cliente']/node()"/>
+					</a>&nbsp;
+					<a class="btnNormal">
+						<xsl:attribute name="href">javascript:EnviarPDF('<xsl:value-of select="MO_ID"/>','PROVEE');</xsl:attribute>
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='enviar_pdf_provee']/node()"/>
+					</a>&nbsp;
+					<a class="btnDestacado" href="javascript:Enviar();" title="Actualizar">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+					</a>&nbsp;
+				</span>
+			</p>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+        
+	<!--
+        <h1 class="titlePage" style="float:left;width:20%;">
+            <xsl:choose>
+            <xsl:when test="RETRASADO = 'S'"><span style="background:#F9B247;padding:2px 4px;"><xsl:value-of select="document($doc)/translation/texts/item[@name='entregado_con_retraso']/node()"/></span></xsl:when>
+            <xsl:when test="PED_ENTREGADOPARCIAL = 'S'"><span style="background:#F9B247;padding:2px 4px;"><xsl:value-of select="document($doc)/translation/texts/item[@name='entregado_parcialmente']/node()"/></span></xsl:when>
+            </xsl:choose>
+		</h1>	
+        <h1 class="titlePage" style="float:left;width:60%;">
+                	<xsl:value-of select="document($doc)/translation/texts/item[@name='pedido']/node()"/>&nbsp;
+                        <a style="font-size:16px;">
+                            <xsl:attribute name="href">javascript:MostrarPag('<xsl:value-of select="ENLACETAREA"/>&amp;SES_ID=<xsl:value-of select="//SES_ID"/>','Multioferta')</xsl:attribute>
+                            <xsl:value-of select="NUMERO_PEDIDO"/>
+                        </a>
+					&nbsp;
+					<xsl:if test="SITUACION>=0">
+					<img src="../../images/Situacion{SITUACION}de3.gif"/>
+					</xsl:if>
+                    &nbsp;<xsl:value-of select="ESTADO"/>
+		</h1>
+        <h1 class="titlePage" style="float:left;width:20%">
+                    <span style="float:right; padding:5px; font-weight:bold;" class="amarillo">MO_ID: <xsl:value-of select="MO_ID"/></span>
+		</h1>
+	-->	
+	
+        <div class="divLeft">
+        <!--<table class="infoTable" border="0">-->
+        <table class="buscador">
+   			<tr class="sinLinea">
+            	<td class="uno">&nbsp;</td>
+				<td class="labelRight diez"><xsl:value-of select="document($doc)/translation/texts/item[@name='clinica']/node()"/>:&nbsp;</td>
+                <td class="datosLeft veinte">
+                	<a>
+                    <xsl:attribute name="href">javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID=<xsl:value-of select="DATOSCLIENTE/EMP_ID"/>&amp;VENTANA=NUEVA','Centro',100,80,0,0);</xsl:attribute>
+                    <xsl:value-of select="NOMBRE_CENTRO"/></a>
+                </td>
+                <td class="labelRight diez"><xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor']/node()"/>:&nbsp;</td>
+                <td class="datosLeft veinte">
+                	<a>
+                    <xsl:attribute name="href">javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID=<xsl:value-of select="DATOSPROVEEDOR/EMP_ID"/>&amp;VENTANA=NUEVA','Centro',100,80,0,0);</xsl:attribute>
+                    <xsl:value-of select="NOMBRE_PROVEEDOR"/>
+                    </a>
+                </td> 
+                <td class="labelRight diez"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha']/node()"/>:&nbsp;</td>
+                <td class="datosLeft quince"><xsl:value-of select="FECHA_PEDIDO"/></td>
+			</tr>
+   			<tr class="sinLinea">
+            	<td>&nbsp;</td>
+				<td class="labelRight" valign="top"><xsl:value-of select="document($doc)/translation/texts/item[@name='comprador']/node()"/>:&nbsp;</td>
+                <td class="datosLeft" valign="top">
+                
+                <input type="hidden" name="NUMEROPEDIDO" value="{NUMERO_PEDIDO}" />
+                <input type="hidden" name="NOMBRECENTRO" value="{NOMBRE_CENTRO}" />
+                <input type="hidden" name="FECHAENTREGA" value="{FECHA_ENTREGA}" />
+                <input type="hidden" name="ESTADO" value="{ESTADO}" />
+                <input type="hidden" name="MO_ID" value="{MO_ID}" />
+                <input type="hidden" name="IDNUEVOCOMPRADOR"/>
+                <input type="hidden" name="IDNUEVOVENDEDOR"/>
+                
+                	<!--<xsl:value-of select="COMPRADOR/NOMBRE"/>&nbsp;-->
+					<xsl:call-template name="desplegable">
+        				<xsl:with-param name="path" select="COMPRADOR/field"/>
+        				<xsl:with-param name="onChange">javascript:CambioComprador();</xsl:with-param>
+      				</xsl:call-template>	&nbsp;			
+                    <a class="btnDestacadoPeq" id="btnGuardarComprador" href="javascript:GuardarComprador();" style="display:none"><xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/></a>
+                   	<img id="imgCompradorOK" src="http://www.newco.dev.br/images/check.gif" style="vertical-align:text-bottom;display:none;"/>
+					<img id="imgCompradorKO" src="http://www.newco.dev.br/images/error.gif" style="vertical-align:text-bottom;display:none;"/>
+				    &nbsp;<a href="javascript:MailEstimados('{COMPRADOR/EMAIL}','COMPRADOR');"><img src="http://www.newco.dev.br/images/mail.gif" alt="Enviar Mail" title="Enviar Mail" style="vertical-align:middle;" /></a>
+					<br />
+                    <xsl:value-of select="document($doc)/translation/texts/item[@name='fijo']/node()"/>: <xsl:value-of select="COMPRADOR/FIJO"/>&nbsp;
+                    <xsl:if test="COMPRADOR/MOVIL != ''">
+                    <xsl:value-of select="document($doc)/translation/texts/item[@name='movil']/node()"/>: <xsl:value-of select="COMPRADOR/MOVIL"/><br />
+                    </xsl:if>
+                </td>
+                <td class="labelRight" valign="top"><xsl:value-of select="document($doc)/translation/texts/item[@name='vendedor']/node()"/>:&nbsp;</td>
+                <td class="datosLeft" valign="top">
+                	<!--<xsl:value-of select="VENDEDOR/NOMBRE"/>&nbsp;-->
+					<xsl:call-template name="desplegable">
+        				<xsl:with-param name="path" select="VENDEDOR/field"/>
+        				<xsl:with-param name="onChange">javascript:CambioVendedor();</xsl:with-param>
+      				</xsl:call-template>&nbsp;
+					<span id="spDatosVendedor"  style="display:none;">
+					<input type="checkbox" class="muypeq" name="cbTodos"/><xsl:value-of select="document($doc)/translation/texts/item[@name='todos']/node()"/>&nbsp;
+                    <a class="btnDestacadoPeq" id="btnGuardarVendedor" href="javascript:GuardarVendedor();"><xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/></a>
+                   	</span>
+					<img id="imgVendedorOK" src="http://www.newco.dev.br/images/check.gif" style="vertical-align:text-bottom;display:none;"/>
+					<img id="imgVendedorKO" src="http://www.newco.dev.br/images/error.gif" style="vertical-align:text-bottom;display:none;"/>
+                    &nbsp;<a href="javascript:MailEstimados('{VENDEDOR/EMAIL}','VENDEDOR');"><img src="http://www.newco.dev.br/images/mail.gif" alt="Enviar Mail" title="Enviar Mail" style="vertical-align:middle;" /></a>
+					<br />
+                    <xsl:value-of select="document($doc)/translation/texts/item[@name='fijo']/node()"/>:&nbsp;<xsl:value-of select="VENDEDOR/FIJO"/>&nbsp;
+                    <xsl:if test="VENDEDOR/MOVIL != ''">
+                    <xsl:value-of select="document($doc)/translation/texts/item[@name='movil']/node()"/>:&nbsp;<xsl:value-of select="VENDEDOR/MOVIL"/><br />
+                    </xsl:if>
+                </td> 
+                <td class="labelRight dies"><xsl:value-of select="document($doc)/translation/texts/item[@name='aceptacion']/node()"/>:&nbsp;</td>
+                <td class="datosLeft"><xsl:value-of select="FECHA_ACEPTACION"/></td>
+			</tr>
+            <tr class="sinLinea">
+            	<td>&nbsp;</td>
+				<td class="labelRight"> <xsl:value-of select="document($doc)/translation/texts/item[@name='datos_acceso']/node()"/>:&nbsp;</td>
+                <td class="datosLeft">
+                	<xsl:value-of select="COMPRADOR/USUARIO"/><!--&nbsp;|&nbsp;
+                    <xsl:value-of select="COMPRADOR/CLAVE"/>-->
+                </td>
+                
+                <td class="labelRight"> <xsl:value-of select="document($doc)/translation/texts/item[@name='datos_acceso']/node()"/>:&nbsp;</td>
+                <td class="datosLeft">
+                	<xsl:value-of select="VENDEDOR/USUARIO"/><!--&nbsp;|&nbsp;
+                    <xsl:value-of select="VENDEDOR/CLAVE"/>-->
+                </td> 
+                
+                <td class="labelRight"> <xsl:value-of select="document($doc)/translation/texts/item[@name='entrega_prevista']/node()"/>:&nbsp;</td>
+                <td class="datosLeft"><xsl:value-of select="FECHA_ENTREGA" />&nbsp;
+                </td>
+			</tr>
+            <tr class="sinLinea">
+            	<td>&nbsp;</td>
+				<td colspan="2">
+					<xsl:call-template name="desplegable">
+        				<xsl:with-param name="path" select="FORMASPAGO/field"/>
+        				<xsl:with-param name="onChange">javascript:CambioFormaPago();</xsl:with-param>
+      				</xsl:call-template>&nbsp;
+					<xsl:call-template name="desplegable">
+        				<xsl:with-param name="path" select="PLAZOSPAGO/field"/>
+        				<xsl:with-param name="onChange">javascript:CambioFormaPago();</xsl:with-param>
+      				</xsl:call-template>&nbsp;
+					<span id="spFormaPago"  style="display:none;">
+					<!--<input type="checkbox" class="muypeq" name="cbFormaPagoTodos"/><xsl:value-of select="document($doc)/translation/texts/item[@name='todos']/node()"/>&nbsp;-->
+                    <a class="btnDestacadoPeq" id="btnGuardarFormaPago" href="javascript:GuardarFormaPago();"><xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/></a>
+                   	</span>
+					<img id="imgFormaPagoOK" src="http://www.newco.dev.br/images/check.gif" style="vertical-align:text-bottom;display:none;"/>
+					<img id="imgFormaPagoKO" src="http://www.newco.dev.br/images/error.gif" style="vertical-align:text-bottom;display:none;"/>
+				</td>
+                <!--delegados-->
+                <xsl:choose>
+                <xsl:when test="count(DELEGADOS/DELEGADO) &gt; 0">
+                <td class="labelRight" valign="top">
+                    <xsl:value-of select="document($doc)/translation/texts/item[@name='delegados']/node()"/>:</td>
+                <td class="datosLeft" valign="top">
+                	<xsl:for-each select="DELEGADOS/DELEGADO">
+                        <p class="separation">
+                        <xsl:value-of select="NOMBRE"/>&nbsp;
+                        <xsl:value-of select="ZONA"/>&nbsp;
+                    
+                       <a href="javascript:MailEstimados('{EMAIL}','DELEGADO_VEND');">
+                       <img src="http://www.newco.dev.br/images/mail.gif" alt="Enviar Mail" title="Enviar Mail" style="vertical-align:middle;" /></a>
+                        <br /> 
+                       <xsl:value-of select="document($doc)/translation/texts/item[@name='fijo']/node()"/>: <xsl:value-of select="FIJO"/>&nbsp;
+                        <xsl:if test="MOVIL != ''">
+                        <xsl:value-of select="document($doc)/translation/texts/item[@name='movil']/node()"/>: <xsl:value-of select="MOVIL"/>
+                        </xsl:if>
+                        <br />
+                        </p>
+                    </xsl:for-each>
+                </td>
+                </xsl:when>
+                <xsl:otherwise>
+                   <td>&nbsp;</td>
+                   <td>&nbsp;</td>
+                </xsl:otherwise>
+                </xsl:choose>
+                
+                 <!--fecha entrega real enseño solo si 1,2 o 3 verdes-->
+                <xsl:if test="SITUACION = '1' or SITUACION = '2' or SITUACION = '3'">
+                    <td class="labelRight"> <xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_entrega_real']/node()"/>:</td>
+                    <td class="datosLeft"><input type="text" name="FECHA_ENTREGA_REAL" id="FECHA_ENTREGA_REAL" value="{FECHA_ENTREGA_REAL}" size="10"/>&nbsp;
+                    <a href="javascript:ActFechaEntrega();"><img src="http://www.newco.dev.br/images/actualizarFlecha.gif" alt="Actualizar" /></a>
+                    </td>
+                </xsl:if>
+               
+            </tr>
+            <tr class="sinLinea" style="height:5px;"><td colspan="7"></td></tr>
+		</table>
+		</div><!--fin de divLeft-->
+        
+       <!--seguimiento mvm comentarios-->  
+        <div class="divLeft marginTop15" style="padding-top:15px;">
+        <!--comentarios globales-->
+        <!--<div class="divleft70" style="border:2px solid #999999;">-->
+        <div class="divleft70">
+        <!--table class="grandeInicio" >--> 
+        <table class="buscador" > 
+        	<thead>
+            <xsl:choose>
+            <xsl:when test="count(CONTROL/ENTRADA) &gt; 0">
+   			<tr class="subTituloTabla">
+				<td class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha']/node()"/></td>
+				<td class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='autor']/node()"/></td>
+				<td class="quince"><xsl:value-of select="document($doc)/translation/texts/item[@name='interlocutor']/node()"/></td>
+				<td class="cuatro"><xsl:value-of select="document($doc)/translation/texts/item[@name='sit']/node()"/>.</td>
+                <td class="cinco"><xsl:value-of select="document($doc)/translation/texts/item[@name='enviado']/node()"/></td>
+                <td class="cinco"><xsl:value-of select="document($doc)/translation/texts/item[@name='alb']/node()"/>.</td>
+                <td class="dos"><xsl:value-of select="document($doc)/translation/texts/item[@name='entr']/node()"/>.</td>
+				<td class="tres">&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='ok']/node()"/></td>
+				<td><xsl:value-of select="document($doc)/translation/texts/item[@name='comentarios']/node()"/></td>
+				<td class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='siguiente']/node()"/></td>
+				<td class="seis"><xsl:value-of select="document($doc)/translation/texts/item[@name='accion']/node()"/></td>
+				<td class="dos">&nbsp;</td>
+			</tr>
+            </xsl:when>
+            <xsl:otherwise>
+            <tr class="subTituloTabla">
+				<td colspan="9"><xsl:value-of select="document($doc)/translation/texts/item[@name='ningun_control_realizado']/node()"/></td>
+			</tr>
+            </xsl:otherwise>
+            </xsl:choose>
+            </thead>
+            <tbody>
+        	<xsl:for-each select="CONTROL/ENTRADA">
+   				<tr>
+					<td><xsl:value-of select="PCM_FECHA"/></td>
+					<td><xsl:value-of select="PCM_USUARIO"/></td>
+					<td><xsl:value-of select="PCM_INTERLOCUTOR"/></td>
+					<td class="textLeft">
+						<xsl:if test="PCM_SITUACION>=0">
+						<img src="../../images/Situacion{PCM_SITUACION}de3.gif"/>&nbsp;
+						</xsl:if>
+                    </td>
+					<td><xsl:if test="PCM_FECHAENVIO!=''">
+                    	<a>
+                        <xsl:attribute name="href">javascript:CopiarDatos('<xsl:value-of select="PCM_FECHAENVIO"/>','<xsl:value-of select="PCM_ALBARAN"/>');</xsl:attribute>							
+                        	<xsl:value-of select="PCM_FECHAENVIO"/>
+                        </a>
+                        </xsl:if>
+                    </td>
+                    <td><xsl:if test="PCM_ALBARAN!=''"><xsl:value-of select="PCM_ALBARAN"/></xsl:if></td>
+                    <td><xsl:if test="PCM_ENTREGADO='S'">S</xsl:if>
+                    	<xsl:if test="PCM_ENTREGADO!='S'">N</xsl:if>
+                    </td>
+					
+					<td>
+                    	<xsl:choose>
+									<xsl:when test="PCM_ACEPTASOLUCION='N'">
+                                    	<img src="http://www.newco.dev.br/images/bolaRoja.gif"/>
+									</xsl:when>
+									<xsl:when test="PCM_ACEPTASOLUCION='S'">
+										<img src="http://www.newco.dev.br/images/bolaVerde.gif"/>
+									</xsl:when>
+                                    <xsl:when test="PCM_ACEPTASOLUCION='Z'">
+										<img src="http://www.newco.dev.br/images/bolaAmbar.gif"/>
+									</xsl:when>
+								</xsl:choose>
+                    </td>
+					<td class="textLeft">&nbsp;<xsl:value-of select="PCM_COMENTARIOS"/></td>
+					<td><xsl:value-of select="PCM_USUARIOSIGUIENTE"/></td>
+					<td><xsl:value-of select="PCM_PROXIMAACCION"/></td>
+					<td align="center"><a href="javascript:EliminarEntrada('{PCM_ID}');"><img src="http://www.newco.dev.br/images/borrar.gif"/></a></td>
+				</tr>
+			</xsl:for-each>
+            </tbody>
+           <!--quitado 28-8-13 peticion de carla
+            <xsl:if test="RETRASADO='N' and count(CONTROL/ENTRADA) &gt; 0">
+            <tfoot>
+            	<tr>
+            	<td colspan="12" style="padding:4px 0px;">
+					<a href="javascript:EliminarEntrada('TODAS');"><span class="rojoScuro"><xsl:value-of select="document($doc)/translation/texts/item[@name='este_pedido_no_es_problematico']/node()"/></span></a>
+                </td>
+                </tr>
+            </tfoot>
+           </xsl:if>-->
+		</table>
+        </div><!-- fin de comenatarios seguimiento-->
+        <div class="divLeft28"> 
+        <!--<div class="divLeft28" style="border:2px solid #999999;"> 
+		<table class="grandeInicio">-->
+		<table class="buscador"  style="border-left:1px solid #999999;width:28%;">
+        <thead>
+   			<tr class="subTituloTabla">
+				<td colspan="4">
+                	<xsl:choose>
+                	<xsl:when test="count(COMENTARIOSCLINICAS/COMENTARIO) &gt; 0"><xsl:value-of select="document($doc)/translation/texts/item[@name='comentarios_visibles_para_clinicas']/node()"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="document($doc)/translation/texts/item[@name='no_comentarios_para_clinicas']/node()"/>
+                    </xsl:otherwise>
+                    </xsl:choose>
+				</td>
+			</tr>
+            </thead>
+        	<xsl:for-each select="COMENTARIOSCLINICAS/COMENTARIO">
+   				<tr>
+					<td><xsl:value-of select="PCC_FECHA"/></td>
+					<td><xsl:value-of select="PCC_USUARIO"/></td>
+					<td class="textLeft"><xsl:value-of select="PCC_COMENTARIOS"/></td>
+                    <td align="center"><a href="javascript:EliminarComentProve('{PCC_ID}');"><img src="http://www.newco.dev.br/images/borrar.gif"/></a></td>
+				</tr>
+			</xsl:for-each>
+             <xsl:if test="RETRASADO='N' and count(COMENTARIOSCLINICAS/COMENTARIO) &gt; 0">
+            
+           </xsl:if>
+		</table>
+        </div><!--fin de divLeft30 comentarios clinicas-->
+        </div><!--fin de divleft id=controlRealizado-->
+        
+       <!--info proveedor-->  
+       <div class="divLeft marginTop20" style="padding-top:20px;">
+		
+       <div class="divLeft40nopa">
+       <!--<table class="infoTable incidencias" cellspacing="5" style="border:none;">-->
+       <table class="buscador">
+       		<!--<tr style="height:5px;"><td colspan="2"></td></tr>-->
+			<input type="hidden" name="SEMAFORO" value="R"/>
+   			<tr class="sinLinea">
+				<!--<td class="labelRight dies grisMed">-->
+				<td class="labelRight trenta">
+					<label><xsl:value-of select="document($doc)/translation/texts/item[@name='autor']/node()"/>:&nbsp;</label>
+				</td>
+				<td class="datosLeft">
+                    <select name="USUARIO" id="USUARIO">
+                    	<option value="-1">
+                    	<xsl:if test="PCM_USUARIO = '-1'"><xsl:attribute name="selected">true</xsl:attribute></xsl:if>
+                    		* <xsl:value-of select="document($doc)/translation/texts/item[@name='seleccionar_responsable']/node()"/> *</option>
+                            
+                    	<xsl:for-each select="/ControlPedidos/PEDIDO/USUARIOSCONTROL/field/dropDownList/listElem">
+                    		<xsl:choose>
+                            <xsl:when test="ID = ../../@current"><option value="{ID}" selected="selected"><xsl:value-of select="listItem"/></option></xsl:when>
+                            <xsl:otherwise><option value="{ID}"><xsl:value-of select="listItem"/></option></xsl:otherwise>
+                            </xsl:choose>                          	
+                        </xsl:for-each>
+                    </select>
+				</td>
+                
+			</tr>
+            <tr class="sinLinea">
+            	<xsl:choose>
+            	<xsl:when test="BLOQUEAR">
+				<td class="labelRight grisMed">
+					<label><xsl:value-of select="document($doc)/translation/texts/item[@name='bloquear_desbloquear']/node()"/>:&nbsp;</label>
+				</td>
+				<td class="datosLeft">
+					<xsl:call-template name="desplegable">
+        				<xsl:with-param name="path" select="BLOQUEAR/field">
+        				</xsl:with-param>
+      				</xsl:call-template>				
+				</td>
+                </xsl:when>
+                <xsl:otherwise>
+                	<td>&nbsp;</td>
+                    <td class="datosLeft">
+                	<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='este_proveedor_no_se_puede_bloquear']/node()"/></strong>
+                    </td>
+                    
+                </xsl:otherwise>
+                </xsl:choose>
+				
+			</tr>
+   			<tr class="sinLinea">
+				<!--<td class="labelRight grisMed trenta">-->
+				<td class="labelRight">
+                	<label><xsl:value-of select="document($doc)/translation/texts/item[@name='interlocutor']/node()"/>:&nbsp;</label>
+				<input type="hidden" name="PROVEEDOROCLIENTE" value="P" />
+				</td>
+                <!--SE VE INTERLOCUTOR DEL PROVEEDOR POR DEFECTO-->
+				<td class="datosLeft" colspan="3" id="Interlocutor_Proveedor">
+					<input type="text" name="INTERLOCUTOR" size="40" maxlength="50">
+                    	<xsl:attribute name="value">
+                        <xsl:choose>
+                        <xsl:when test="CONTROL/ENTRADA">
+                      
+                        	<xsl:for-each select="CONTROL/ENTRADA">
+                				<xsl:if test="position() = 1">
+                                <xsl:choose>
+                                <xsl:when test="PCM_USUARIO != 'PROV' and PCM_INTERLOCUTOR != '-' and PCM_INTERLOCUTOR != ''">
+                                	<xsl:value-of select="PCM_INTERLOCUTOR"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                            		<xsl:value-of select="../../VENDEDOR/NOMBRE"/>
+                                </xsl:otherwise>
+                                </xsl:choose>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:otherwise>
+                        	<xsl:value-of select="VENDEDOR/NOMBRE"/>
+                        </xsl:otherwise>
+                        </xsl:choose>
+                        </xsl:attribute>
+                    </input>
+				</td>
+                <!--INTERLOCUTOR DEL CLIENTE-->
+                <td class="datosLeft" colspan="3" id="Interlocutor_Cliente" style="display:none;">
+					<input type="text" name="INTERLOCUTOR_CLI" size="40" maxlength="50">
+                    	<xsl:attribute name="value">
+                            	<xsl:value-of select="COMPRADOR/NOMBRE"/>
+                        </xsl:attribute>
+                    </input>
+				</td>
+               
+			</tr>
+			<!--<tr style="height:5px;"><td colspan="2"></td></tr>-->
+			<input type="hidden" name="COSTE" value="10"/>
+			</table>
+            </div><!--fin de divLeft50-->
+            
+            <!--info proveedor |situacion=0:todo NO | situacion=1:enviado SI | situacin=2:albaran SI, enviado SI | situacion=3:entregado si, alb si, enviado si | situacion=-1:blanco sin datos-->
+            <div class="divLeft60nopa">
+            <!--<table id="Estado_Pedido_Proveedor" class="infoTable incidencias" border="0" style="border-collpse:separate;border:none;" cellspacing="5">-->
+            <table id="Estado_Pedido_Proveedor" class="buscador">
+                     <!--<tr style="height:5px;"><td colspan="4"></td></tr>-->
+   					<tr class="sinLinea">
+						<td class="labelRight trenta"><xsl:value-of select="document($doc)/translation/texts/item[@name='enviado_en_su_totalidad']/node()"/>:&nbsp;</td>
+						<td class="datosLeft" style="width:130px;">
+							<input type="checkbox" class="muypeq" name="CHK_ENVIADO" onclick="javascript:ControlChecks('ENVIADO','S'); ControlEnviado('S');"  />
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='si_maiu']/node()"/>
+							&nbsp;&nbsp;
+							<input type="checkbox" class="muypeq" name="CHK_NOENVIADO" onclick="javascript:ControlChecks('ENVIADO','N'); ControlEnviado('N');" />
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='no_maiu']/node()"/>
+                        </td>
+						<input type="hidden" name="ENVIADO" value="" />
+						<td class="labelRight dieciocho"><div id="Texto_fecha_enviado" style="display:block;"><xsl:value-of select="document($doc)/translation/texts/item[@name='enviado_el']/node()"/>:&nbsp;</div><div id="Texto_fecha_enviara" style="display:none;"><xsl:value-of select="document($doc)/translation/texts/item[@name='enviado_el']/node()"/>:&nbsp;</div></td>
+						<td class="datosLeft">
+							<input type="text" class="peq" name="ENVIADO_CUANDO" size="10" maxlength="10">
+                            <xsl:for-each select="CONTROL/ENTRADA">
+                            	<xsl:if test="position() = 1 and PCM_USUARIO != 'PROV'">
+                            	   <xsl:attribute name="value">
+                                	   <xsl:if test="PCM_FECHAENVIO!=''"><xsl:value-of select="PCM_FECHAENVIO"/></xsl:if>
+                            	   </xsl:attribute>
+                            	</xsl:if>
+                            </xsl:for-each>
+                       		</input>
+                       &nbsp;(dd/mm/aa)
+						</td>
+					</tr>
+   					<tr class="sinLinea">
+						<td class="labelRight" ><xsl:value-of select="document($doc)/translation/texts/item[@name='albaran_salida']/node()"/>:&nbsp;</td>
+						<td class="datosLeft"><input type="checkbox" class="muypeq" name="CHK_CONFIRMADO" onclick="javascript:ControlChecks('CONFIRMADO','S');" /> 
+                        <xsl:value-of select="document($doc)/translation/texts/item[@name='si_maiu']/node()"/>
+						&nbsp;&nbsp;&nbsp;<input type="checkbox" class="muypeq" name="CHK_NOCONFIRMADO" onclick="javascript:ControlChecks('CONFIRMADO','N');" />
+                         <xsl:value-of select="document($doc)/translation/texts/item[@name='no_maiu']/node()"/>
+                        </td>
+						<input type="hidden" name="CONFIRMADO" value="" />
+						<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='albaran']/node()"/>:&nbsp;</td>
+						<td class="datosLeft">
+							<input type="text" name="ALBARAN" size="10" maxlength="50">
+                                <xsl:if test="CONTROL/ENTRADA">
+                                     <xsl:for-each select="CONTROL/ENTRADA">
+                                     <xsl:if test="position() = 1 and PCM_USUARIO != 'PROV'">
+                                        <xsl:attribute name="value">
+                                            <xsl:if test="PCM_ALBARAN!=''"><xsl:value-of select="PCM_ALBARAN"/></xsl:if>
+                                        </xsl:attribute>
+                                     </xsl:if>
+                                     </xsl:for-each>
+                                 </xsl:if>
+                            </input>
+						</td>
+					</tr>
+                    
+   					<tr class="sinLinea">
+						<td class="labelRight" ><xsl:value-of select="document($doc)/translation/texts/item[@name='fichero_albaran']/node()"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='albaran']/node()"/>:&nbsp;</td>
+						<td class="datosLeft" colspan="3">
+                            <input type="hidden" name="TIPO_DOC" class="tipoDoc" value="ALBARAN" />
+                            <input type="hidden" name="TYPE" class="type" value="ALBARAN" />
+                            <input type="hidden" name="IDALBARAN" id="IDALBARAN"/>
+                            <xsl:if test="ALBARANENVIO/URL != ''">
+                                <a href="http://www.newco.dev.br/Documentos/{ALBARANENVIO/URL}" title="{ALBARANENVIO/NOMBRE}" id="ficheroAlbaranOld" style="width:80px;margin-top:4px;float:left;vertical-align:middle;">
+                                    <img src="http://www.newco.dev.br/images/descarga.gif" alt="Descarga" />
+                                </a>
+                            </xsl:if>
+                            <a id="download_ALBARAN" style="display:none;"><img src="http://www.newco.dev.br/images/descarga.gif" alt="Descarga" /></a>
+                            <xsl:call-template name="documentos">
+                                <xsl:with-param name="num" select="number(1)" />
+                                <xsl:with-param name="type">ALBARAN</xsl:with-param>
+                            </xsl:call-template>
+
+                        </td>
+					</tr>
+                    <tr class="sinLinea">
+						<td class="labelRight"><xsl:value-of select="document($doc)/translation/texts/item[@name='albaran_entrega_sellado']/node()"/>:&nbsp;</td>
+						<td class="datosLeft">
+							<input type="checkbox" class="muypeq" name="CHK_ENTREGADOPROVEEDOR" onclick="javascript:ControlChecks('ENTREGADOPROVEEDOR','S');"  />
+                        	<xsl:value-of select="document($doc)/translation/texts/item[@name='si_maiu']/node()"/>
+							&nbsp;&nbsp;&nbsp;<input type="checkbox" class="muypeq" name="CHK_NOENTREGADOPROVEEDOR" onclick="javascript:ControlChecks('ENTREGADOPROVEEDOR','N');" />
+                        	<xsl:value-of select="document($doc)/translation/texts/item[@name='no_maiu']/node()"/>
+                        	<input type="hidden" name="ENTREGADOPROVEEDOR" value="" />
+                        </td>
+            			<xsl:choose>
+            			<xsl:when test="$lang='spanish'">
+            				<td class="datosLeft"><a id="verAvanzado"><img src="http://www.newco.dev.br/images/avanzado.gif" alt="Avanzado" /></a></td>
+            			</xsl:when>
+            			<xsl:when test="$lang='portugues'">
+            				<td class="datosLeft"><a id="verAvanzado"><img src="http://www.newco.dev.br/images/avanzado-BR.gif" alt="Avanzado" /></a></td>
+            			</xsl:when>
+            			</xsl:choose>
+<!-- PS 5jul17
+						<td class="datosLeft"><a id="verAvanzado"><img src="http://www.newco.dev.br/images/avanzado.gif" alt="Avanzado" /></a></td>
+-->
+                        <td>&nbsp;</td>
+					</tr>
+                    <!--<tr>
+                    	<td colspan="4">&nbsp;</td>
+					</tr>-->
+                    <tr class="opcionesAvanzadas sinLinea" id="incidenciaFuera" style="display:none;">
+						<td class="labelRight" colspan="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='incidencia_despues_cerrar_pedido']/node()"/></td>
+						<td class="datosLeft">
+                            <input type="checkbox" class="muypeq" name="CHK_FUERA_PLAZO" onchange="javascript:ControlChecks('FUERA_PLAZO','S');">
+                                 <xsl:if test="/ControlPedidos/PEDIDO/PED_INCIDENCIAFUERAPLAZO = 'S'"><xsl:attribute name="checked">true</xsl:attribute></xsl:if>
+                            </input>
+                            <input type="hidden" name="FUERA_PLAZO">
+                                <xsl:if test="/ControlPedidos/PEDIDO/PED_INCIDENCIAFUERAPLAZO = 'S'"><xsl:attribute name="value">S</xsl:attribute></xsl:if>
+                            </input>
+                        </td>
+					</tr>
+                    <tr class="opcionesAvanzadas sinLinea" style="display:none;">
+						<td class="labelRight" colspan="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='pedido_anadido_items']/node()"/></td>
+						<td class="datosLeft">
+                            <input type="checkbox" class="muypeq" name="CHK_PRODUCTOS_ANADIDOS" onchange="javascript:ControlChecks('PRODUCTOS_ANADIDOS','S');">
+                                 <xsl:if test="/ControlPedidos/PEDIDO/PED_PRODUCTOSANYADIDOS = 'S'"><xsl:attribute name="checked">true</xsl:attribute></xsl:if>
+                            </input>
+                            <input type="hidden" name="PRODUCTOS_ANADIDOS">
+                                <xsl:if test="/ControlPedidos/PEDIDO/PED_PRODUCTOSANYADIDOS = 'S'"><xsl:attribute name="value">S</xsl:attribute></xsl:if>
+                            </input>
+                        </td>
+					</tr>
+                    <tr class="opcionesAvanzadas sinLinea" style="display:none;">
+						<td class="labelRight" colspan="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='pedido_quitado_items']/node()"/></td>
+						<td class="datosLeft">
+                            <input type="checkbox" class="muypeq" name="CHK_PRODUCTOS_RETIRADOS" onchange="javascript:ControlChecks('PRODUCTOS_RETIRADOS','S');">
+                                 <xsl:if test="/ControlPedidos/PEDIDO/PED_PRODUCTOSRETIRADOS = 'S'"><xsl:attribute name="checked">true</xsl:attribute></xsl:if>
+                            </input>
+                            <input type="hidden" name="PRODUCTOS_RETIRADOS">
+                                <xsl:if test="/ControlPedidos/PEDIDO/PED_PRODUCTOSRETIRADOS = 'S'"><xsl:attribute name="value">S</xsl:attribute></xsl:if>
+                            </input>
+                        </td>
+					</tr>
+                    <tr class="opcionesAvanzadas sinLinea" style="display:none;">
+						<td class="labelRight" colspan="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='pedido_no_atendido_correctamente_prove']/node()"/></td>
+						<td class="datosLeft">
+                            <input type="checkbox" class="muypeq" name="CHK_NO_INFORMADO_PLATAFORMA" onchange="javascript:ControlChecks('NO_INFORMADO_PLATAFORMA','S');">
+                                 <xsl:if test="/ControlPedidos/PEDIDO/PED_NOINFORMADOENPLATAFORMA = 'S'"><xsl:attribute name="checked">true</xsl:attribute></xsl:if>
+                            </input>
+                            <input type="hidden" name="NO_INFORMADO_PLATAFORMA">
+                                <xsl:if test="/ControlPedidos/PEDIDO/PED_NOINFORMADOENPLATAFORMA = 'S'"><xsl:attribute name="value">S</xsl:attribute></xsl:if>
+                            </input>
+                        </td>
+					</tr>
+                    <tr class="opcionesAvanzadas sinLinea" style="display:none;">
+						<td class="labelRight" colspan="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='pedido_sin_documentacion_tecnica']/node()"/></td>
+						<td class="datosLeft">
+                        	<input type="checkbox" class="muypeq" name="CHK_RETRASO_DOC_TECNICA" onchange="javascript:ControlChecks('RETRASO_DOC_TECNICA','S');">
+                            	 <xsl:if test="/ControlPedidos/PEDIDO/PED_RETRASODOCTECNICA = 'S'"><xsl:attribute name="checked">true</xsl:attribute></xsl:if>
+                        	</input>
+                        	<input type="hidden" name="RETRASO_DOC_TECNICA">
+                            	<xsl:if test="/ControlPedidos/PEDIDO/PED_RETRASODOCTECNICA = 'S'"><xsl:attribute name="value">S</xsl:attribute></xsl:if>
+                        	</input>
+                    	</td>
+					</tr>
+                    <tr class="opcionesAvanzadas sinLinea" style="display:none;">
+						<td class="labelRight" colspan="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='pedido_no_coincide']/node()"/></td>
+						<td class="datosLeft">
+                            <input type="checkbox" class="muypeq" name="CHK_PEDIDO_NO_COINCIDE" onchange="javascript:ControlChecks('PEDIDO_NO_COINCIDE','S');">
+                                 <xsl:if test="/ControlPedidos/PEDIDO/PED_PEDIDONOCOINCIDE = 'S'"><xsl:attribute name="checked">true</xsl:attribute></xsl:if>
+                            </input>
+                            <input type="hidden" name="PEDIDO_NO_COINCIDE">
+                                <xsl:if test="/ControlPedidos/PEDIDO/PED_PEDIDONOCOINCIDE = 'S'"><xsl:attribute name="value">S</xsl:attribute></xsl:if>
+                            </input>
+                        </td>
+					</tr>
+					<tr class="opcionesAvanzadas sinLinea" style="display:none;">
+						<td class="labelRight" colspan="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='mala_atencion_proveedor']/node()"/></td>
+						<td class="datosLeft">
+                            <input type="checkbox" class="muypeq" name="CHK_MALA_ATENCION_PROV" onchange="javascript:ControlChecks('MALA_ATENCION_PROV','S');">
+                                 <xsl:if test="/ControlPedidos/PEDIDO/PED_MALAATENCIONPROV = 'S'"><xsl:attribute name="checked">true</xsl:attribute></xsl:if>
+                            </input>
+                            <input type="hidden" name="MALA_ATENCION_PROV">
+                                <xsl:if test="/ControlPedidos/PEDIDO/PED_MALAATENCIONPROV = 'S'"><xsl:attribute name="value">S</xsl:attribute></xsl:if>
+                            </input>
+                        </td>
+					</tr>
+                    <!--<tr style="height:5px;"><td colspan="4"></td></tr>-->
+				</table> 
+               
+         </div><!--fin de divLeft50-->
+         
+         </div><!--fin de divLeft-->
+         
+        <!--acciones a realizar-->
+        <div class="divLeft marginTop20" style="padding-top:20px;">
+         <div class="divLeft40nopa">
+               <!--comentarios-->
+				<!--<table id="Comentarios" class="infoTable incidencias" cellspacing="5" style="border:none;">-->
+ 				<table id="Comentarios" class="buscador">
+  					<tr class="sinLinea">
+						<td class="labelRight trenta"><xsl:value-of select="document($doc)/translation/texts/item[@name='la_clinica_aguanta']/node()"/>:&nbsp;</td>
+						<td class="datosleft"><input type="checkbox" class="muypeq" name="CHK_ACEPTASOLUCION" onclick="javascript:ControlAguanta('ACEPTASOLUCION','S');"  >
+                        
+                          <!--<xsl:for-each select="CONTROL/ENTRADA"><xsl:if test="position() = 1">
+                        	<xsl:if test="PCM_ACEPTASOLUCION ='S'">-->
+                            <xsl:if test="PED_ACEPTASOLUCION ='S'">
+                            <xsl:attribute name="checked">checked</xsl:attribute> 
+                            <input type="hidden" name="ACEPTASOLUCION" value="S" />
+                            </xsl:if>
+                        </input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='si_maiu']/node()"/>
+                        
+                        
+						&nbsp;&nbsp;&nbsp;<input type="checkbox" class="muypeq" name="CHK_NOACEPTASOLUCION" onclick="javascript:ControlAguanta('ACEPTASOLUCION','N');"  >
+                         <!-- <xsl:for-each select="CONTROL/ENTRADA"><xsl:if test="position() = 1">
+                        	<xsl:if test="PCM_ACEPTASOLUCION ='N'">-->
+                             <xsl:if test="PED_ACEPTASOLUCION ='N'">
+                            <xsl:attribute name="checked">checked</xsl:attribute> 
+                            <input type="hidden" name="ACEPTASOLUCION" value="N" />
+                            </xsl:if>
+                        </input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='no_maiu']/node()"/>
+                        &nbsp;&nbsp;&nbsp;<input type="checkbox" class="muypeq" name="CHK_AVISOACEPTASOLUCION" onclick="javascript:ControlAguanta('ACEPTASOLUCION','Z');"  >
+                         <!-- <xsl:for-each select="CONTROL/ENTRADA"><xsl:if test="position() = 1">
+                        	<xsl:if test="PCM_ACEPTASOLUCION ='Z'">-->
+                            <xsl:if test="PED_ACEPTASOLUCION ='Z'">
+                            <xsl:attribute name="checked">checked</xsl:attribute> 
+                            <input type="hidden" name="ACEPTASOLUCION" value="Z" />
+                            </xsl:if>
+                        </input>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='aviso_interno']/node()"/>
+                        <xsl:choose>
+                        <xsl:when test="CONTROL/ENTRADA">
+                         <!-- <xsl:for-each select="CONTROL/ENTRADA"><xsl:if test="position() = 1">
+                        	<xsl:if test="PCM_ACEPTASOLUCION =''">-->
+                            <xsl:if test="PED_ACEPTASOLUCION =''">
+                            <input type="hidden" name="ACEPTASOLUCION" value="" />
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:otherwise> <input type="hidden" name="ACEPTASOLUCION" value="" /></xsl:otherwise>
+                        </xsl:choose>
+                        </td>
+                      
+						
+                    </tr>
+                    <tr class="sinLinea">
+					<!--comentarios para mvm-->
+						<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='comentarios_internos']/node()"/>:&nbsp;</td>
+						<td class="datosleft">
+                        <textarea name="COMENTARIOS" cols="50" rows="1">
+                        
+                            <xsl:choose>
+                            <xsl:when test="CONTROL/ENTRADA">
+                          
+                                <xsl:for-each select="CONTROL/ENTRADA">
+                                    <xsl:if test="position() = 1">
+                                    <xsl:choose>
+                                    <xsl:when test="PCM_USUARIO != 'PROV' and PCM_COMENTARIOS != '-' and PCM_COMENTARIOS != ''">
+                                        <xsl:value-of select="PCM_COMENTARIOS"/>
+                                    </xsl:when>
+                                    </xsl:choose>
+                                    </xsl:if>
+                                </xsl:for-each>
+                            </xsl:when>
+                           
+                            </xsl:choose>
+                         </textarea>
+                        </td>
+					</tr>
+				</table> 
+			</div><!--fin de divLeft40-->
+            
+            <div class="divLeft60nopa">
+                <!--revisar comentario-->
+				<!--<table id="Proxima_accion" class="infoTable incidencias" cellspacing="5" style="border:none;">-->
+				<table id="Proxima_accion" class="buscador">
+   					<tr class="sinLinea">
+						<td class="labelRight trenta"><xsl:value-of select="document($doc)/translation/texts/item[@name='comentario_para_la_clinica']/node()"/>:&nbsp;
+                        </td>
+						<td class="datosLeft">
+							<textarea name="COMENTARIOS_PARA_CLINICA" rows="3" cols="50">
+                               		<xsl:value-of select="PED_COMENTARIOSPARACLINICA"/>
+                             </textarea>
+						</td>
+						<td class="quince" colspan="2">
+							<!--<div class="boton">-->
+                            	<a class="btnDestacado" href="javascript:EnviarSoloComentario();"><xsl:value-of select="document($doc)/translation/texts/item[@name='enviar']/node()"/></a>
+							<!--</div>-->
+						</td>
+					</tr>
+   					<tr class="sinLinea">
+						<td class="labelRight trenta"><xsl:value-of select="document($doc)/translation/texts/item[@name='siguiente_responsable']/node()"/>:&nbsp;</td>
+						<td class="datosleft quince"> 
+                        
+                         <select name="USUARIOSIGUIENTE" id="USUARIOSIGUIENTE">
+                            <option value="-1">
+                            <xsl:if test="PCM_USUARIO = '-1'"><xsl:attribute name="selected">true</xsl:attribute></xsl:if>
+                                * <xsl:value-of select="document($doc)/translation/texts/item[@name='seleccionar_responsable']/node()"/> *</option>
+                                
+                            <xsl:for-each select="/ControlPedidos/PEDIDO/USUARIOSCONTROL/field/dropDownList/listElem">
+                                <xsl:choose>
+                                <xsl:when test="ID = ../../@current"><option value="{ID}" selected="selected"><xsl:value-of select="listItem"/></option></xsl:when>
+                                <xsl:otherwise><option value="{ID}"><xsl:value-of select="listItem"/></option></xsl:otherwise>
+                                </xsl:choose>                          	
+                            </xsl:for-each>
+                        </select>
+                           
+						</td>
+                        <td colspan="2">&nbsp;</td>
+                   </tr>
+                   <tr class="sinLinea">
+						<td class="labelRight veinte"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_proxima_accion']/node()"/>:&nbsp;</td>
+						<td class="datosleft dies">
+							<select name="FECHAPROXIMAACCION">
+							<option value="-1">
+                             <xsl:if test="SITUACION != '2' and SITUACION = '3'"><xsl:attribute name="selected">true</xsl:attribute></xsl:if>
+                            * <xsl:value-of select="document($doc)/translation/texts/item[@name='seleccionar_fecha']/node()"/> *</option>
+                            <option value="">
+                            <xsl:if test="SITUACION = '2' or SITUACION = '3'"><xsl:attribute name="selected">true</xsl:attribute></xsl:if>
+                            <xsl:value-of select="document($doc)/translation/texts/item[@name='sin_fecha_accion']/node()"/></option>
+                            <option value="0"><xsl:value-of select="document($doc)/translation/texts/item[@name='hoy']/node()"/></option>
+                            <option value="1"><xsl:value-of select="document($doc)/translation/texts/item[@name='manana']/node()"/></option>
+                            <option value="2"><xsl:value-of select="document($doc)/translation/texts/item[@name='pasado_manana']/node()"/></option>
+                            <option value="3"><xsl:value-of select="document($doc)/translation/texts/item[@name='dentro_3_dias']/node()"/></option>
+                            <option value="4"><xsl:value-of select="document($doc)/translation/texts/item[@name='dentro_4_dias']/node()"/></option>
+							</select>
+                        </td>
+					</tr>
+				</table> 
+           </div><!--fin de divLeft50-->
+		</div><!--fin de divLeft-->
+        
+       <!--buttons- ->  
+        <div class="divLeft marginTop20" style="padding:30px 0px;">
+                <div class="divLeft20">&nbsp;</div>
+               
+                <div class="divLeft15nopa">
+                    <div class="boton">
+                    <a>
+                    <xsl:attribute name="href">javascript:EnviarPDF('<xsl:value-of select="MO_ID"/>','CLIENTE');</xsl:attribute>
+                             <xsl:value-of select="document($doc)/translation/texts/item[@name='enviar_pdf_cliente']/node()"/>
+                    </a>
+                     </div>
+                </div>
+                <div class="divLeft15nopa">
+                    <div class="boton">
+                     <a>
+                     <xsl:attribute name="href">javascript:EnviarPDF('<xsl:value-of select="MO_ID"/>','PROVEE');</xsl:attribute>
+                             <xsl:value-of select="document($doc)/translation/texts/item[@name='enviar_pdf_provee']/node()"/>
+                    </a>
+                     </div>
+                </div>
+                <div class="divLeft10">&nbsp;</div>
+                <div class="divLeft15nopa">
+                	<div class="boton">
+                		<a href="javascript:Enviar();" title="Actualizar">
+                        	<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+                        </a>
+                     </div>
+				</div>
+                <br /><br />
+				</div><!- -fin divleft-->
+	</form>
+    
+    
+     <!--FORM DE MENSAJES DE JS-->
+     <form name="MensajeJS">
+		<input type="hidden" name="NUM_DE_PEDIDO" value="{document($doc)/translation/texts/item[@name='num_de_pedido']/node()}"/>
+		<input type="hidden" name="DE" value="{document($doc)/translation/texts/item[@name='de']/node()}"/>
+
+		<input type="hidden" name="ESTIMADOS" value="{document($doc)/translation/texts/item[@name='estimados']/node()}"/>
+		<input type="hidden" name="SI_PEDIDO_OS_HA_LLEGADO" value="{document($doc)/translation/texts/item[@name='si_pedido_os_ha_llegado']/node()}"/>
+
+		<input type="hidden" name="GRACIAS" value="{document($doc)/translation/texts/item[@name='gracias']/node()}"/>
+		<input type="hidden" name="SALUDOS" value="{document($doc)/translation/texts/item[@name='saludos']/node()}"/>
+		<input type="hidden" name="RESPONSABLE_PEDIDOS" value="{document($doc)/translation/texts/item[@name='responsable_pedidos']/node()}"/>
+		<input type="hidden" name="WWW_MEDICALVM_COM" value="{document($doc)/translation/texts/item[@name='www.mvmnucleo.com']/node()}"/>
+		<input type="hidden" name="TEL_MVM" value="{document($doc)/translation/texts/item[@name='tel_medicalvm']/node()}"/>
+		<input type="hidden" name="FAX_MVM" value="{document($doc)/translation/texts/item[@name='fax_medicalvm']/node()}"/>
+
+		<input type="hidden" name="ACEPTAR_PEDIDO_SISTEMA" value="{document($doc)/translation/texts/item[@name='aceptar_pedido_sistema']/node()}"/>
+		<input type="hidden" name="BUENOS_DIAS" value="{document($doc)/translation/texts/item[@name='buenos_dias']/node()}"/>
+		<input type="hidden" name="EL_PEDIDO" value="{document($doc)/translation/texts/item[@name='el_pedido']/node()}"/>
+		<input type="hidden" name="AGUARDA_RESCATE" value="{document($doc)/translation/texts/item[@name='aguarda_rescate']/node()}"/>
+
+		<input type="hidden" name="INFORMAD_SALIDA_PEDIDO" value="{document($doc)/translation/texts/item[@name='informad_salida_pedido']/node()}"/>
+
+
+		<input type="hidden" name="OBLIGATORIO_USUARIO" value="{document($doc)/translation/texts/item[@name='obligatorio_usuario']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_CAMPO_TAREA" value="{document($doc)/translation/texts/item[@name='obligatorio_campo_tarea']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_PROVE_ENVIADO" value="{document($doc)/translation/texts/item[@name='obligatorio_prove_enviado']/node()}"/>
+		<input type="hidden" name="ERROR_FECHA_ENVIO_PEDIDO" value="{document($doc)/translation/texts/item[@name='error_fecha_envio_pedido']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_FECHA_ENVIO" value="{document($doc)/translation/texts/item[@name='obligatorio_fecha_envio']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_ALBARAN" value="{document($doc)/translation/texts/item[@name='obligatorio_albaran']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_INTERLOCUTOR" value="{document($doc)/translation/texts/item[@name='obligatorio_interlocutor']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_RESP_PROXIMA_ACCION" value="{document($doc)/translation/texts/item[@name='obligatorio_resp_proxima_accion']/node()}"/>
+		<input type="hidden" name="INFORMAR_USUARIO_COMENTARIO" value="{document($doc)/translation/texts/item[@name='informar_usuario_comentario']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_COMENTARIO_CLINICA" value="{document($doc)/translation/texts/item[@name='obligatorio_comentario_clinica']/node()}"/>
+		<input type="hidden" name="DATOS_PENDIENTE_PERDERA" value="{document($doc)/translation/texts/item[@name='datos_pendientes_perdera']/node()}"/>
+
+		<input type="hidden" name="ELIMINAR_TODAS_ENTRADAS_MES" value="{document($doc)/translation/texts/item[@name='eliminar_todas_entradas']/node()}"/>
+		<input type="hidden" name="ELIMINAR_ENTRADA_MES" value="{document($doc)/translation/texts/item[@name='eliminar_entrada']/node()}"/>
+
+		<input type="hidden" name="ELIMINAR_TODOS_COMENTARIOS_MES" value="{document($doc)/translation/texts/item[@name='eliminar_todas_entradas']/node()}"/>
+		<input type="hidden" name="ELIMINAR_COMENTARIO_MES" value="{document($doc)/translation/texts/item[@name='eliminar_entrada']/node()}"/>
+		<input type="hidden" name="OBLIGATORIO_CAMPO_PROXIMA_ACCION" value="{document($doc)/translation/texts/item[@name='obligatorio_campo_proxima_accion']/node()}"/>
+		<input type="hidden" name="PDF_ENVIADO_CON_EXITO" value="{document($doc)/translation/texts/item[@name='pdf_enviado_con_exito']/node()}"/>
+		<input type="hidden" name="PDF_ENVIADO_CLIENTE" value="{document($doc)/translation/texts/item[@name='pdf_enviado_cliente']/node()}"/>
+		<input type="hidden" name="PDF_ENVIADO_PROVEE" value="{document($doc)/translation/texts/item[@name='pdf_enviado_provee']/node()}"/>
+		<input type="hidden" name="ERROR_PDF_ENVIADO_CLIENTE" value="{document($doc)/translation/texts/item[@name='error_pdf_enviado_cliente']/node()}"/>
+		<input type="hidden" name="ERROR_PDF_ENVIADO_PROVEE" value="{document($doc)/translation/texts/item[@name='error_pdf_enviado_provee']/node()}"/>
+    </form>
+    <!--FIN DE FORM DE MENSAJES DE JS-->
+    
+    
+</xsl:template> 
+
+<!--documentos-->
+<xsl:template name="documentos">
+    <xsl:param name="num" />
+    <xsl:param name="type" />
+
+     <!--idioma-->
+        <xsl:variable name="lang">
+         	<xsl:choose>
+                <xsl:when test="/Mantenimiento/LANG"><xsl:value-of select="/Mantenimiento/LANG" /></xsl:when>
+                <xsl:otherwise>spanish</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+      <!--idioma fin-->
+
+	<xsl:choose>
+		<xsl:when test="$num &lt; number(5)">
+                    <div class="docLine" id="docLine_{$type}" style="float:left;">
+				<!--<xsl:if test="number($num) &gt; number(1)">
+						<xsl:attribute name="style">display: none;</xsl:attribute>
+				</xsl:if>-->
+				<div class="docLongEspec" id="docLongEspec_{$type}" style="float:left;clear:both;">
+					<input id="inputFileDoc_{$type}" name="inputFileDoc" type="file" onChange="addDocFile('{$type}','Form1');" />
+				</div>
+                        <div id="waitBoxDoc{$type}" class="waitBoxDoc" style="display:none;">&nbsp;</div>
+                        <div id="confirmBox{$type}" class="confirmBoxDoc" style="display:none;">&nbsp;</div>
+                   
+                        <a class="botonPeque cargar" id="botonCargar_{$type}" style="display:none;margin:5px 10px 0 0;float:left;cursor:pointer;">
+                          <xsl:value-of select="document($doc)/translation/texts/item[@name='cargar']/node()"/>
+                        </a>
+                        <a href="javascript:removeDoc('{$type}')" id="remove{$type}" class="botonPeque" style="display:none;margin-top:5px;float:left;cursor:pointer;">Remove</a>
+                    </div>
+		
+		</xsl:when>
+
+	</xsl:choose>
+    </xsl:template>
+<!--fin de documentos-->
+
+</xsl:stylesheet>

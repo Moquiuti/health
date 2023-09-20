@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |   XSQL que Guarda Errores en la base de datos.
+ | 
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="GErrorHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="GErrorHTML.xsl"?>
+<GuardaError xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+
+  <!--
+   |   Guardamos la información del error en la base de datos.
+   |    En caso que todavia no este dentro del sistema guardamos 
+   |	  los datos de usuario/password.
+   |
+   |    El parametro ERR_JUMPTO nos indica el atributo JumpTo.page
+   |	  por defecto tiene el valor de G-0015. <Salto a Bandeja de Entrada>.
+   |	JumpTo.page donde saltara cuando el error se haya almacenado.
+   |
+   +-->
+  <xsql:include-owa>
+    <![CDATA[
+            MVM.TratarErrorGeneral (
+                          '{@US_ID}',
+                          '{@ERR_TABLA}',
+                          '{@ERR_FICHERO}',
+                          '{@ERR_DATO1}',
+                          '{@ERR_DATO2}',
+                          '{@ERR_DATO3}',
+                          '{@ERR_JUMPTO}');
+    ]]>
+  </xsql:include-owa>
+</GuardaError>

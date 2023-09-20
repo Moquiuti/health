@@ -1,0 +1,2 @@
+09dic21 ET Proveedores de Brasil acceden directamente a Relatorios en lugar de INICIO. Cabecera_091221.js
+11ene22 ET Empezamos a trabajar con Cabecera 2022. Cabecera2022_120122.js

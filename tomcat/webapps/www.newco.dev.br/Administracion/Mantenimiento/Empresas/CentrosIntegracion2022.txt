@@ -1,0 +1,4 @@
+17may22 ET Configuración de la integración por centro. Nuevo disenno 2022.
+30mar23 ET La recarga llama a la version antigua
+30mar23 ET Nueva carga de Confirmacion de pedidos.
+31mar23 ET cambio al nombre. CentrosIntegracion2022

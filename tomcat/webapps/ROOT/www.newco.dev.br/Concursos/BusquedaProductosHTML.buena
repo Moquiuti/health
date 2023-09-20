@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!--
+ |	Estadisticas de acceso de los usuarios en MedicalVM
+ |
+ |	(c) 12/1/2001 ET
+ |	
+ +-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.ConcursosSanitarios.com/General/General.xsl" />
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>  
+  <xsl:template match="/">
+    <html>
+      <head>
+       <title>ConcursosSanitarios.com - Precios de productos en concursos del Sector Sanitario</title>
+	<xsl:text disable-output-escaping="yes"><![CDATA[
+	<link rel="stylesheet" href="http://www.ConcursosSanitarios.com/General/Estilos.css" type="text/css">
+	<script type="text/javascript" src="http://www.ConcursosSanitarios.com/General/general.js">
+	</script>
+	<script type="text/javascript">
+	  <!--
+
+
+	//	Muestra una nueva ventana con el formulario de contacto
+	function Contacto()
+	{
+		//MostrarPag('http://www.ConcursosSanitarios.com/Contacto.html', 'ContactoConcursos');
+		MostrarPagPersonalizada('http://www.ConcursosSanitarios.com/Contacto.html', 'ContactoConcursos',60,60,0,0);
+		
+	}
+
+	//	Muestra una nueva ventana con el formulario de contacto
+	function Recomendar()
+	{
+		//MostrarPag('http://www.ConcursosSanitarios.com/Recomendar.html', 'RecomendarConcursos');
+	}
+
+	//	Muestra una nueva ventana con los datos "acerca de"
+	function AcercaDe()
+	{
+		//MostrarPag('http://www.ConcursosSanitarios.com/AcercaDe.html', 'AcercaDeConcursos');
+		MostrarPagPersonalizada('http://www.ConcursosSanitarios.com/AcercaDe.html', 'AcercaDeConcursos',50,90,0,-50);
+		
+	}
+
+
+	function ValidarNumero(obj,decimales){
+          
+          if(checkNumberNulo(obj.value,obj)){
+            if(parseFloat(reemplazaComaPorPunto(obj.value))!=0){
+              var valor=parseInt(reemplazaComaPorPunto(obj.value));
+              
+              if(valor<10){
+                decimales=4;
+              }
+              else{
+                if(valor<100){
+                  decimales=3;
+                }
+                else{
+                  if(valor<1000){
+                    decimales=2;
+                  }
+                  else{
+                    decimales=0;
+                  }
+                }
+              
+              }
+              
+              
+              obj.value=anyadirCerosDecimales(reemplazaPuntoPorComa(Round(reemplazaComaPorPunto(obj.value),decimales)),decimales);
+            }
+          return true;
+          }
+          return false;
+        }
+	
+	
+	function Busqueda(formu)
+	{
+		//PresentaCampos(formu);
+		
+	    SubmitForm(formu);
+	}
+
+	function BusquedaSinFiltros(formu)
+	{
+		if (formu.elements['NUMEROPRODUCTOS'].value>0)
+		{
+			formu.elements['DESPLEGABLEPRODUCTO'].value='';
+			formu.elements['CENTRO'].value='';
+			formu.elements['PROVEEDOR'].value='';
+			formu.elements['FAMILIA'].value='';
+			//formu.elements['ANNO'].value='';
+			//formu.elements['MARCA'].value='';
+			formu.elements['PRECIOMIN'].value='';
+			formu.elements['PRECIOMAX'].value='';
+			formu.elements['AVANZADA'].value='S';
+		}
+		Busqueda(formu);
+	}
+
+
+	//	Busqueda avanzada
+	function BusquedaAvanzada(formu)
+	{
+		formu.elements['AVANZADA'].value='S';
+		Busqueda(formu);
+	}
+
+	//	Funcion llamada al seleccionar algun desplegable
+	//	Simplemente llama a 'recargar formulario'
+	function SeleccionFiltro(formu)
+	{
+		BusquedaAvanzada(formu);
+	}
+
+	//	Muestra la siguiente pagina de precios
+	function SiguientesPrecios(formu)
+	{
+		formu.elements['PRECIOMIN'].value=formu.elements['NUEVOPRECIOMINIMO'].value;
+		Busqueda(formu);
+	}
+
+	//	Presenta la ficha de un producto
+	function FichaProducto(ID)
+	{
+		//MostrarPag('http://www.ConcursosSanitarios.com/FichaProducto.xsql?ID='+ID, 'Concursos_FichaProducto');
+		MostrarPagPersonalizada('http://www.ConcursosSanitarios.com/FichaProducto.xsql?ID='+ID,'Concursos_FichaProducto',60,60,0,0);
+	}
+
+	// 
+	// 
+	// 
+	function handleKeyPress(e) {
+	  var keyASCII;
+	  
+	  if(navigator.appName.match('Microsoft'))
+	    var keyASCII=event.keyCode;
+	  else
+            keyASCII = (e.which);
+            
+          if (keyASCII == 13) {
+             BusquedaSinFiltros(document.forms[0]);
+          }
+        }
+        
+	// Asignamos la función handleKeyPress al evento 
+	if(navigator.appName.match('Microsoft')==false)
+	  document.captureEvents();
+	document.onkeypress = handleKeyPress;
+
+	function EnviarBusqueda()
+	{
+		if (LimitarCantidadPalabras(document.forms[0].elements['PRODUCTO'],5))
+			Busqueda(document.forms[0],'BusquedaProductos.xsql');
+	}
+	
+	function LimitarCantidadPalabras(obj, numPalabras){
+	  var nombreCampo;
+	  
+	   if(obj.name=='PRODUCTO')
+	     nombreCampo='Producto';
+	   else
+	     if(obj.name=='LLP_PROVEEDOR')
+	       nombreCampo='Proveedor';
+	       
+	  var numEspacios=0;
+	  obj.value=quitarEspacios(obj.value);
+	  
+	  for(var n=0;n<obj.value.length;n++){
+	    if(obj.value.substring(n,n+1)==' '){
+	      numEspacios++;
+	    }
+	    if(numEspacios>=numPalabras){
+	      var cadTemp=obj.value.substring(0,n);
+	      if(confirm(msg_DemasiadosCriteriosDefault+nombreCampo+msg_DemasiadosCriteriosExtra_1+cadTemp+msg_DemasiadosCriteriosExtra_2)){
+	        obj.value=obj.value.substring(0,n);
+	        return true;
+	      }
+	      else{
+	        return false;
+	      }
+	    }
+	  }
+	  return true;
+	}
+
+	   
+	  //-->
+	</script>
+        ]]></xsl:text>
+      </head>
+      <body class="blanco" text="#000000" link="#333366" vlink="#333366" alink="#3399ff">      
+        <xsl:choose>
+      	<!-- ET Desactivado control errores: Habra que reactivarlo
+          <xsl:when test="ListaDerechosUsuarios/xsql-error">
+            <xsl:apply-templates select="ListaDerechosUsuarios/xsql-error"/>          
+          </xsl:when>
+	-->
+        <xsl:when test="Productos/SESION_CADUCADA">
+          <xsl:apply-templates select="FamiliasYProductos/SESION_CADUCADA"/> 
+        </xsl:when>
+        <xsl:when test="Productos/ROWSET/ROW/Sorry">
+          <xsl:apply-templates select="FamiliasYProductos/ROWSET/ROW/Sorry"/> 
+        </xsl:when>
+        <xsl:otherwise>
+        
+        
+		<!--<xsl:value-of select="FamiliasYProductos/LISTADO_FAMILIAS_Y_PRODUCTOS/FAMILIA/v_SQL"/>-->
+		
+  <table width="100%" border="0" align="center" cellspacing="1" cellpadding="1">
+	<form name="Form1" method="POST">
+    <tr>
+      <td width="70%">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<input type="hidden" name="AVANZADA">
+				<xsl:attribute name="value"><xsl:value-of select="Productos/PRODUCTOS/CRITERIOS/AVANZADA"/></xsl:attribute>
+			</input>
+			<input type="hidden" name="NUEVOPRECIOMINIMO">
+				<xsl:attribute name="value"><xsl:value-of select="Productos/PRODUCTOS/CRITERIOS/NUEVOPRECIOMINIMO"/></xsl:attribute>
+			</input>
+			<table width="100%" class="blanco" cellpadding="1" cellspacing="1" border="0" align="left" valign="center">
+				<tr>
+  					<td colspan="2">
+							<table width="100%" class="blanco" cellpadding="0" cellspacing="0" border="0" align="center">
+        						<tr class="blanco">
+									<td width="10%">&nbsp;</td>
+        							<td width="40%" align="center">&nbsp;<a href="javascript:AcercaDe()">Acerca de</a></td>
+        							<td width="40%" align="center">&nbsp;<a href="javascript:Contacto()">Contacto</a></td>
+        							<!--<td width="45%" align="center">&nbsp;<a href="javascript:Recomendar()">Recomendar</a></td>-->
+									<td width="10%">&nbsp;</td>
+        						</tr>
+							</table>
+					</td>
+				</tr>
+        		<tr class="claro">
+        		<td width="85%" align="center">
+				<table width="100%" class="oscuro" cellpadding="1" cellspacing="1" border="0" align="left" valign="center">
+        			<tr class="claro">
+        			   <td width="70%" align="center">
+					   	<input type="text" name="PRODUCTO" maxlength="200" size="75">
+							<xsl:attribute name="value"><xsl:value-of select="Productos/PRODUCTOS/CRITERIOS/PRODUCTO"/></xsl:attribute>
+							</input>
+        			   </td>
+        			   <td width="*" align="center" valign="middle">
+            			  <table cellpadding="3" cellspacing="1" border="0" width="0px" class="muyoscuro">
+                			 <tr class="medio">
+                    			<td align="center"><a href="javascript:BusquedaSinFiltros(document.forms[0]);" onMouseOver="window.status='Nueva Búsqueda'; return true;" onMouseOut="window.status=''; return true;">Nueva Búsqueda</a>
+                    			</td>
+                			 </tr>
+
+            			  </table>
+        			   </td>
+        			</tr>
+				</table>
+        		</td>
+        		</tr>
+				<!--
+        		<tr>
+        		   <td align="center" colspan="2">
+					El buscador acepta cualquiera de los siguientes campos: Producto, Proveedor, Centro y Marca
+        		   </td>
+        		</tr>
+				-->
+			</table>
+		</td>
+		<td width="30%">
+			<img src="http://www.ConcursosSanitarios.com/Images/ConcursosSanitarios.gif" />
+		</td>
+	</tr>
+    <tr>
+      <td colspan="2">
+			<br/>
+			<br/>
+			<br/>
+		<input type="hidden" name="NUMEROPRODUCTOS">
+			<xsl:attribute name="value"><xsl:value-of select="Productos/PRODUCTOS/TOTALES/PRODUCTOS"/></xsl:attribute>
+		</input>
+		<xsl:choose>
+		<xsl:when test="Productos/PRODUCTOS/TOTALES/PRODUCTOS=0">
+				<table width="100%" class="oscuro" cellspacing="1" cellpadding="1" align="center">
+				    <tr  class="blanco">
+				      <td align="left">
+				        <B>Listado de Productos y Precios.</B>	
+				        <br/>
+				        <i>
+						No se han encontrado productos. Por favor, modifique los criterios de búsqueda.
+						</i>
+				        <br/>
+				        <br/>
+						<table cellpadding="3" cellspacing="1" border="0" width="0px" class="muyoscuro" align="center">
+							<tr class="medio">
+            				<td align="center"><a href="javascript:history.back(-1)" onMouseOver="window.status='Volver'; return true;" onMouseOut="window.status=''; return true;">Volver</a>
+            				</td>
+							</tr>
+						</table>
+				        <br/>
+				      </td>
+				    </tr>
+				  </table>
+		</xsl:when>
+		<xsl:otherwise>
+        <table width="100%" border="0" align="center" cellspacing="1" cellpadding="1" class="gris">
+		<tr class="grisclaro">
+		<td align="left">
+				<table width="100%" class="blanco" cellspacing="1" cellpadding="1">
+				    <tr  class="grisclaro">
+				      <td align="left" class="grisclaro">
+				        <B>Listado de Productos y Precios.</B>	
+				        <br/>
+				        <i>
+						<xsl:value-of select="Productos/PRODUCTOS/TOTALES/PRODUCTOS"/> productos
+						<xsl:value-of select="Productos/PRODUCTOS/TOTALES/MARCAS"/> marcas
+						<!--incluidos en <xsl:value-of select="Productos/PRODUCTOS/TOTALES/SUBFAMILIAS"/> familias-->
+						<xsl:value-of select="Productos/PRODUCTOS/TOTALES/PROVEEDORES"/> proveedores
+						ordenados por precio. Puede utilizar los filtros y pulsar 'Buscar en sus resultados' para refinar la búsqueda.
+						<!--en <xsl:value-of select="Productos/PRODUCTOS/TOTALES/EXPEDIENTES"/> expedientes-->
+						</i>
+				      </td>
+				    </tr>
+				  </table>
+        			<table width="100%" border="0" align="center" cellspacing="1" cellpadding="1" class="medio">
+            			<tr class="medio">
+                		<td align="center" width="5%">Ref.<br/>Interna</td>
+                		<td align="center" width="5%">Ref.<br/>Prov.</td>
+                		<td align="center" width="10%">Centro
+						<xsl:if test="Productos/PRODUCTOS/CRITERIOS/AVANZADA='S'">
+							<br/>
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="Productos/PRODUCTOS/DESPLEGABLES/CENTRO/field">
+        						</xsl:with-param>
+      						</xsl:call-template>	
+						</xsl:if>
+						</td>
+                		<td align="center" width="5%">Año
+						<!--
+						<xsl:if test="Productos/PRODUCTOS/CRITERIOS/AVANZADA='S'">
+							<br/>
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="Productos/PRODUCTOS/DESPLEGABLES/ANNO/field">
+        						</xsl:with-param>
+      						</xsl:call-template>				
+						</xsl:if>
+						-->
+						</td>
+                		<td align="center" width="*%">Familia
+						<xsl:if test="Productos/PRODUCTOS/CRITERIOS/AVANZADA='S'">
+							<br/>
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="Productos/PRODUCTOS/DESPLEGABLES/FAMILIA/field">
+        						</xsl:with-param>
+      						</xsl:call-template>				
+						</xsl:if>
+						</td>
+                		<td align="center" width="*%">Producto
+						<xsl:if test="Productos/PRODUCTOS/CRITERIOS/AVANZADA='S'">
+							<br/>
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="Productos/PRODUCTOS/DESPLEGABLES/DESPLEGABLEPRODUCTO/field">
+        						</xsl:with-param>
+      						</xsl:call-template>				
+						</xsl:if>
+						</td>
+                		<td align="center" width="15%">Proveedor
+						<xsl:if test="Productos/PRODUCTOS/CRITERIOS/AVANZADA='S'">
+							<br/>
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="Productos/PRODUCTOS/DESPLEGABLES/PROVEEDOR/field">
+        						</xsl:with-param>
+      						</xsl:call-template>				
+						</xsl:if>
+						</td>
+						<!--
+                		<td align="center" width="5%">Marca
+						<xsl:if test="Productos/PRODUCTOS/CRITERIOS/AVANZADA='S'">
+							<br/>
+							<xsl:call-template name="desplegable">
+        						<xsl:with-param name="path" select="Productos/PRODUCTOS/DESPLEGABLES/MARCA/field">
+        						</xsl:with-param>
+      						</xsl:call-template>				
+						</xsl:if>
+						</td>
+						-->
+						<!--
+                		<td align="center" width="5%">Ud.Base</td>
+						-->
+                		<td align="center" width="5%">Precio<br/>Ud.Base<br/>s/IVA</td>
+                		<!--<td align="center" width="5%">Consumo<br/>Anual</td>-->
+						</tr>
+          				<xsl:for-each select="Productos/PRODUCTOS/PRODUCTO">
+            			<tr class="blanco" onMouseOver="this.className='claro'" onMouseOut="this.className='blanco'">
+						<!--
+                			<td align="left" colspan="3">
+                			  <table width="95%" align="right">
+                    			<tr>
+                    			  <td width="15%">
+                        			<a href="javascript:Seleccion('zonaCatalogo',{ID});"  onMouseOver="window.status='Activa el Producto Estándar';return true;" onMouseOut="window.status='';return true;">
+                        			  <b><xsl:value-of select="REFERENCIAMVM"/></b>
+                        			</a>
+                        			&nbsp;
+                    			  </td>
+                    			  <td>
+                        			<a href="javascript:Seleccion('zonaCatalogo',{ID});"  onMouseOver="window.status='Activa el Producto Estándar';return true;" onMouseOut="window.status='';return true;">
+                        			  &nbsp;<xsl:value-of select="REFERENCIAPROVEEDOR"/>
+                        			</a>
+                    			  </td>
+                    			</tr>
+                			  </table>
+                			</td>
+							-->
+                			<td align="center">
+							<!--	Muestra la referencia MVM o el ID	-->
+							<!--	ET 2/10/03 La eleccion entre una u otra se hace en la base de datos<xsl:choose>
+								<xsl:when test="REFERENCIAMVM">	-->
+									<xsl:value-of select="REFERENCIAMVM"/>
+							<!--	</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="ID"/>
+								</xsl:otherwise>
+							</xsl:choose>	-->
+							</td>
+                			<td align="center"><xsl:value-of select="REFERENCIAPROVEEDOR"/></td>
+                			<td align="center"><xsl:value-of select="NOMBRECORTOCENTRO"/></td>
+                			<td align="center"><xsl:value-of select="ANNO"/></td>
+                			<td align="center"><xsl:value-of select="FAMILIA"/></td>
+                			<td align="left">
+								<a>
+									<xsl:attribute name="href">javascript:FichaProducto('<xsl:value-of select="ID"/>')</xsl:attribute>
+									<xsl:value-of select="NOMBREPRODUCTO"/>
+								</a>
+							</td>
+                			<td align="center"><xsl:value-of select="NOMBRECORTOPROVEEDOR"/></td>
+							<!--
+                			<td align="center"><xsl:value-of select="MARCA"/></td>
+                			<td align="center"><xsl:value-of select="UNIDADBASICA"/></td>
+							-->
+                			<td align="center"><xsl:value-of select="PRECIO"/></td>
+                			<!--<td align="center"><xsl:value-of select="CONSUMOUNIDADES"/></td>-->
+						</tr>
+		  				</xsl:for-each>	    
+                	</table> 
+              </td>
+	    </tr>
+		<tr class="blanco" height="30px" valign="center">
+			<td align="center" colspan="1"> 
+     			<xsl:for-each select="/Productos/PRODUCTOS/PAGINAS/PAGINA">
+					<xsl:choose>
+						<xsl:when test="./FIJO">
+							<xsl:value-of select="TEXTO"/>&nbsp;
+						</xsl:when>
+						<xsl:otherwise>
+						<a>
+							<xsl:attribute name="href">http://www.concursos.com/BusquedaProductos.xsql?<xsl:value-of select="URL"/></xsl:attribute>
+							<xsl:value-of select="TEXTO"/>
+						</a>&nbsp;
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each>
+			</td>
+		</tr>
+		<tr class="blanco">
+			<td>
+				<input type="hidden" name="INCLUIRFAMILIAS" value=""/>
+				<br/>
+				<xsl:choose>
+				<xsl:when test="/Productos/PRODUCTOS/CRITERIOS/AVANZADA='S'">
+					<table cellpadding="0" cellspacing="0" border="0" width="100%" class="blanco" align="center">
+						<tr>
+							<td align="left" width="45%">				
+							&nbsp;* Incluir productos con importe incluido entre <input type="text" name="PRECIOMIN" maxlength="10" size="8" onBlur="ValidarNumero(this,4);">
+							<xsl:attribute name="value"><xsl:value-of select="/Productos/PRODUCTOS/CRITERIOS/PRECIOMINIMO"/></xsl:attribute>
+							</input> 
+							y <input type="text" name="PRECIOMAX" maxlength="10" size="8" onBlur="ValidarNumero(this,4);">
+							<xsl:attribute name="value"><xsl:value-of select="/Productos/PRODUCTOS/CRITERIOS/PRECIOMAXIMO"/></xsl:attribute>
+							</input>
+							</td>
+							
+							<td align="left" width="15%">
+							<table cellpadding="3" cellspacing="1" border="0" width="0px" class="muyoscuro" align="center">
+								<tr class="medio">
+									<td align="center"><a href="javascript:EnviarBusqueda(document.forms[0]);" onMouseOver="window.status='Buscar'; return true;" onMouseOut="window.status=''; return true;">Buscar Precios</a>
+									</td>
+								</tr>
+							</table>
+							</td>
+							
+							<td align="right" width="40%">
+							&nbsp;
+							</td>
+
+							<td align="right" width="5%">
+							&nbsp;
+							</td>
+						</tr>
+        				<tr class="blanco">
+        				   <td align="left" colspan="4">&nbsp;* Comprador: Si desea más información sobre este servicio o sobre <b>como puede ahorrar en sus compras</b> de productos sanitarios, <a href="javascript:Contacto()">CONTACTE</a> con nosotros.</td>
+        				</tr>
+        				<tr class="blanco">
+        				   <td align="left" colspan="4">&nbsp;* Proveedor: Si quiere que <b>incluyamos gratuitamente sus productos</b> adjudicados en concursos sanitarios, <a href="javascript:Contacto()">CONTACTE</a> con nosotros.</td>
+        				</tr>
+        				<tr class="blanco">
+        				   <td align="left">&nbsp;</td>
+        				</tr>
+					</table>
+				</xsl:when>
+				<xsl:otherwise>
+				&nbsp;* Puede utilizar la <u><a href="javascript:BusquedaAvanzada(document.forms[0]);">BUSQUEDA AVANZADA</a></u> para realizar selecciones más precisas 
+				</xsl:otherwise>
+				</xsl:choose>
+			</td>
+	    </tr>
+
+	  </table>
+	</xsl:otherwise>
+	</xsl:choose>
+	</td>
+  </tr>
+  </form>
+  </table>
+        </xsl:otherwise>
+        </xsl:choose>
+      </body>
+    </html>
+  </xsl:template>  
+</xsl:stylesheet>

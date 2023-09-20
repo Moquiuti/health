@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	ultima revision 2ene17 20:00
+-->
+<?xml-stylesheet type="text/xsl" href="PrepararEnvioFicheroJSON.xsl"?>
+
+
+<EnvioFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NOMBRE" value="{@NOMBRE}"/>
+	
+	<!--	Datos que devolvera el PL/SQL	
+	<OK/>
+	<INTF_ID>101</INTF_ID>
+	-->	
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID			NUMBER;
+			v_IDFichero		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PrepararEnvioFichero');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL: Integracion_pck.NuevoFichero {@US_ID}, {@NOMBRE}');
+
+				v_IDFichero:=Integracion_pck.NuevoFichero
+				(
+					US_ID,					--	p_IDUsuario
+					NULL,					--	p_IDCentro
+					NULL,					--	p_Directorio
+					'{@NOMBRE}',			--	p_NombreFichero
+					'{@CODIGOCLIENTE}',		--	p_CodigoCliente
+					'{@DATOSFICHERO}'		--	p_InfoFichero
+				);
+				
+				HTP.P('<OK><INTF_ID>'||v_IDFichero||'</INTF_ID></OK>');
+			
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnvioFichero>
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ultima revision: ET 20feb19 15:05
+-->
+<?xml-stylesheet type="text/xsl" href="ActualizarComentarioJSON.xsl"?>
+<ActualizarComentarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+     <xsql:include-owa>
+    	<![CDATA[  
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DatosProducto');
+			IF US_ID>=0 THEN
+			
+				v_Res:=MantenimientoPedidos_PCK.ActualizarComentarios (
+					US_ID,
+					'{@MO_ID}',
+					'{@COMENTARIOS}'
+					);
+				
+				IF v_Res>0 THEN
+					HTP.P('<OK/>');
+				ELSE
+					HTP.P('<ERROR/>');
+				END IF;
+					
+			END IF;
+		END;
+			
+        ]]>   					
+    </xsql:include-owa>	
+</ActualizarComentarios>
+
+

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |   Sugerencias Genericas
+ |
+ |   Parametros de entrada:
+ |		US_ID - Codigo del usuario actual
+ |	        CODIGO - (Opcional) Codigo de la sugerencia
+ |
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="formSugIncHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="formSugIncHTML.xsl"?>
+<DOCUMENTOWORKFLOW xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<SUGERENCIA>
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+ <!--
+  |   Obtenemos la informacion de las sugerencias. Todos los datos anteriores/historicos
+  |
+  +-->
+   <xsql:query tag-case="upper" rowset-element="" row-element="SUGERENCIAPASO"  null-indicator="yes">
+    <![CDATA[
+     SELECT    SU_CODIGO,
+	       SU_SUBCODIGO, 
+	       SU_IDESTADO as ESTADO,
+	       SU_IDEMPRESA,
+	       EMP_NOMBRE,
+	       SU_IDAUTOR,
+	       U1.US_NOMBRE || ' ' || U1.US_APELLIDO1 || ' ' || U1.US_APELLIDO2 AS NOMBRE,
+	       TU_DESCRIPCION AS CARGO,
+	       NVL(TO_CHAR(SU_FECHA_IN,'DD/MM/YYYY HH24:MI'),'[Sin Fecha]') as FECHA,
+	       TO_CHAR(SU_FECHA_OUT,'DD/MM/YYYY HH24:MI') as SU_FECHA_OUT,
+	       TO_CHAR(SU_FECHAPREVISTA,'DD/MM/YYYY') as SU_FECHAPREVISTA,
+	       SU_IDRESPONSABLE,
+	       U2.US_NOMBRE || ' ' || U2.US_APELLIDO1 || ' ' || U2.US_APELLIDO2 as RESPONSABLE,
+	       OVS_DESCRIPCION OPCIONVARIABLE,
+               NVL(SU_RESUMEN, '[Resumen]' ) as SU_RESUMEN,
+               NVL(SU_DETALLE, '[Detalle]' ) as SU_DETALLE		   
+	FROM SUGERENCIAS, EMPRESAS, USUARIOS U1, TIPOSUSUARIOS, USUARIOS U2 , OPCIONESVARIABLESSUGERENCIAS OVS
+	WHERE SU_IDAUTOR = U1.US_ID
+	  AND U1.US_IDTIPO = TU_ID
+	  AND EMP_ID = SU_IDEMPRESA
+	  AND SU_IDRESPONSABLE = U2.US_ID (+)
+	  AND SU_CODIGO = {@CODIGO}
+	  AND SU_OPCIONVARIABLE = OVS_ID (+) 
+	ORDER BY SU_CODIGO,SU_SUBCODIGO,SU_IDESTADO
+    ]]>
+    <xsql:no-rows-query rowset-element="" row-element="SUGERENCIAPASO">
+      Select 'Sorry' "Sorry" from dual
+    </xsql:no-rows-query>
+  </xsql:query>
+  
+</SUGERENCIA>
+
+<!--
+ |
+ |    Mostramos la información para el *paso actual*.
+ |
+ +-->
+
+ 
+ <SUGERENCIAPASO action="SUGenSave.xsql">
+ <!--
+  |   Datos Comunes:
+  |       - ESTADO
+  |       - AUTOR, EMPRESA
+  |       - FECHA
+  |
+  +-->
+  
+  <xsql:set-session-param name="WF_IDESTADO" value="1"/>
+  <xsql:set-session-param name="WF_IDESTADO">
+     SELECT WF_IDESTADO
+     FROM WORKFLOW
+     WHERE WF_CODIGO = {@CODIGO}
+       AND WF_IDTIPO = 1
+  </xsql:set-session-param>
+    
+   <xsql:query rowset-element="" row-element="">
+    SELECT {@WF_IDESTADO} ESTADO
+    FROM DUAL
+   </xsql:query>
+   
+   <xsql:query rowset-element="" row-element="">
+    SELECT WF_SUBCODIGO SU_SUBCODIGO
+    FROM WORKFLOW
+    WHERE WF_CODIGO = {@CODIGO}
+      AND WF_IDTIPO = 1    
+   </xsql:query>
+
+
+ <xsql:query rowset-element="" row-element="" tag-case="upper">
+    <![CDATA[
+	select us_id, 
+	       us_nombre ||' '||us_apellido1||' '||us_apellido2 as nombre,
+	       emp_id,
+	       emp_nombre,
+		   TU_DESCRIPCION CARGO
+	from usuarios,empresas,centros,tiposusuarios	
+	where US_ID = {@US_ID}
+	  AND EMP_ID = CEN_IDEMPRESA
+	  AND US_IDCENTRO = CEN_ID
+	  AND US_IDTIPO = TU_ID
+    ]]>
+  </xsql:query>
+
+ <xsql:query rowset-element="" row-element="" tag-case="upper">
+    <![CDATA[
+	select to_char(sysdate,'DD/MM/YYYY') as Fecha
+	from dual
+    ]]>
+  </xsql:query>
+
+ <!-- 
+  |  ESTADO_ACTUAL = 1 => ALTA DE LA SUGERENCIA 
+  |
+  +--> 
+ <DEPARTAMENTOS>
+ <field name="DEPARTAMENTOS">
+ <xsql:query rowset-element="dropDownList" row-element="listElem" id-attribute="">
+<!--    
+	select DP_ID as "ID",
+	       DP_NOMBRE as "listItem"
+	from departamentos
+	where {@WF_IDESTADO}=1
+	and   dp_idempresa = (SELECT  EMP_ID
+	FROM USUARIOS, CENTROS, EMPRESAS
+	WHERE US_ID = {@US_ID}
+	  AND US_IDCENTRO = CEN_ID
+	  AND CEN_IDEMPRESA = EMP_ID)
+	  
+	  Seleccionamos todos los departamentos de Medical Virtual Market
+-->
+	select DP_ID as "ID",
+	       DP_NOMBRE as "listItem"
+	from departamentos
+	where {@WF_IDESTADO}=1
+	and   dp_idempresa = 1
+ </xsql:query>
+ </field>
+ </DEPARTAMENTOS>
+
+ <!-- 
+  |   ESTADO_ACTUAL = 2 => ANALISIS DE LA SUGERENCIA
+  |   
+  +-->	
+ <PRIORIDAD>
+  <xsql:query rowset-element="" row-element="DESCARTADO" id-attribute="" tag-case="upper">
+    <![CDATA[
+	SELECT OVS_ID as "ID",
+	       OVS_DESCRIPCION as "listItem"
+	FROM OPCIONESVARIABLESSUGERENCIAS
+	WHERE {@WF_IDESTADO}=2
+	    AND OVS_IDESTADO=2
+	    AND OVS_ID=4
+    ]]>
+  </xsql:query>
+  <RESTOPRIORIDADES>
+  <field name="PRIORIDAD">
+  <xsql:query rowset-element="dropDownList" row-element="listElem" id-attribute="">
+    <![CDATA[
+	SELECT OVS_ID as "ID",
+	       OVS_DESCRIPCION as "listItem"
+	FROM OPCIONESVARIABLESSUGERENCIAS
+	WHERE {@WF_IDESTADO}=2
+	    AND OVS_IDESTADO = 2
+	    AND OVS_ID<>4
+    ]]>
+  </xsql:query>
+  </field>
+  </RESTOPRIORIDADES>
+ </PRIORIDAD>  
+ 
+ 
+ <RESPONSABLE>
+ <field name="RESPONSABLE">
+ <xsql:query  rowset-element="dropDownList" row-element="listElem" id-attribute="">
+ <![CDATA[
+ 	SELECT  US_ID As "ID", 
+	US_NOMBRE || ' '|| US_APELLIDO1||' '|| US_APELLIDO2||' ('||TU_DESCRIPCION||')' As "listItem"
+	FROM USUARIOS, CENTROS, EMPRESAS, TIPOSUSUARIOS
+	WHERE {@WF_IDESTADO}=2
+	  AND TU_ID = US_IDTIPO
+	  AND US_IDCENTRO = CEN_ID
+	  AND CEN_IDEMPRESA = EMP_ID
+	  AND EMP_ID = (SELECT  EMP_ID
+	        FROM USUARIOS, CENTROS, EMPRESAS
+	        WHERE US_ID = {@US_ID}
+	        AND US_IDCENTRO = CEN_ID
+	        AND CEN_IDEMPRESA = EMP_ID)
+	  ]]>
+ </xsql:query>	
+ </field>  
+ </RESPONSABLE>
+  
+  <!--
+   |   ESTADO_ACTUAL = 3 => IMPLEMENTACION DE LA SUGERENCIA 
+   |
+   +-->
+  
+  <OBJETIVO>
+  <field name="OBJETIVO">
+	 <xsql:query  rowset-element="dropDownList" row-element="listElem" id-attribute="">
+	 <![CDATA[
+		SELECT OVS_ID as "ID",
+		       OVS_DESCRIPCION as "listItem"
+		FROM OPCIONESVARIABLESSUGERENCIAS
+		WHERE OVS_IDESTADO = 3
+		  AND {@WF_IDESTADO} = 3
+		  ]]>
+	 </xsql:query>	
+  </field>
+  </OBJETIVO>
+
+  <!--
+   |   ESTADO_ACTUAL = 4 => CONFORMIDAD DEL CLIENTE
+   |
+   +-->
+
+  <CONFORMIDAD>
+  <field name="CONFORMIDAD">
+	 <xsql:query  rowset-element="dropDownList" row-element="listElem" id-attribute="">
+	 <![CDATA[
+		SELECT OVS_ID as "ID",
+		       OVS_DESCRIPCION as "listItem"
+		FROM OPCIONESVARIABLESSUGERENCIAS
+		WHERE OVS_IDESTADO = 4
+		  AND {@WF_IDESTADO} = 4
+		  ]]>
+	 </xsql:query>	
+  </field>
+  </CONFORMIDAD>
+  
+ 
+ <!--
+  |   Final de la parte variable: SUGERENCIAPASO
+  | 
+  +-->
+  
+   <button label="Enviar" caption="IMG-0100">
+     <name_function>Actua</name_function>
+     <param>document.forms[0]</param>
+   </button>
+   
+   
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>   
+    <page>G-0010</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+  
+  <!--
+   |   Borramos las variables de session
+   +-->
+  <xsql:set-session-param name="WF_IDESTADO" value=""/>
+
+  </SUGERENCIAPASO>
+
+ </DOCUMENTOWORKFLOW>  
+ 

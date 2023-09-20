@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmEliminaOferta.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmEliminaOferta.xsl"?>
+
+ 
+
+<confirmEliminaOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+    <xsql:include-param name="TIPO"/>
+    <xsql:include-param name="PRO_BUSQUEDA"/>
+    <xsql:include-param name="ID_USUARIO"/>
+    <xsql:include-param name="HISTORY"/>
+	<xsql:include-param name="ID_PROVEEDOR"/>
+     <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	    
+   
+	<xsql:include-owa>
+		  <![CDATA[
+	
+	    	DECLARE
+		        US_ID		NUMBER;
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DetalleEmpresa');
+				IF US_ID>0 THEN
+				
+					DOCUMENTOS_PCK.BorrarDocumento_XML(
+					 US_ID, 
+					 '{@ID_DOCUMENTO}'
+					
+					);	
+							   
+				END IF;
+			END;
+   		
+	      ]]>	  
+    	  
+	</xsql:include-owa>
+    
+  
+</confirmEliminaOferta>
+

@@ -1,0 +1,4 @@
+16feb22 ET Nuevo disenno 2022
+15mar22 ET Desplegable de categoria (solicitado por ITA Salud Mental)
+09may22 ET Solucionado error JS. LPAnalizar2022_160222a.js
+07jul22 ET Blauclinic solicita que los nombre de subfamilias aparezcan sobre el nombre del producto. LPAnalizar2022_070722.js

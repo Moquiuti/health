@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Catalogo privado, para consultas de proveedores desde el �rea p�blica de la p�gina
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CatalogoPrivadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CatalogoPrivadoHTML.xsl"?>
+
+<CatalogoPrivado  xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+	
+	
+	<LANG>spanish</LANG>
+	
+  <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		CATALOGOPRIVADO_SEG_PCK.ListadoCatalogoMVM_XML
+		(
+			'{@REFERENCIA}', 
+			'{@DESCRIPCION}'
+		);
+     END;
+    ]]>
+  </xsql:include-owa>
+
+  
+</CatalogoPrivado>

@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" />
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>  
+  <xsl:template match="/">
+  
+  
+<html>
+  <head>
+    <title>Mantenimiento de Productos Estándar</title>
+    <xsl:text disable-output-escaping="yes"><![CDATA[
+    <link rel="stylesheet" href="http://www.newco.dev.br/General/Estilos.css" type="text/css">
+    <script language="javascript" src="http://www.newco.dev.br/General/general.js"></script>
+    <script language="javascript">
+      <!--
+        
+        
+        
+        var msgSubfamilia='Debe seleccionar una familia para el nuevo Producto Estándar';
+        var msgReferenciaProductoEstandar='Debe introducir una referencia para el nuevo Producto Estándar';
+        var msgNombreProductoEstandar='Debe introducir un nombre para el nuevo Producto Estándar';
+        var msgUnidadBasicaProductoEstandar='Debe introducir la unidad básica para el nuevo Producto Estándar';
+        var msgMismaReferencia='Debe introducir una referencia diferente para el nuevo Producto Estándar';
+        var msgReferenciaEstrictaProductoEstandar='La referencia del producto estandar no es correcta. introduzca una con el formato siguiente: ';
+        var msgSinDerechosParaCopiar='No tiene derechos suficientes para crear nuevos productos estandar. Por favor, pongase en contacto con MedicalVM';
+        
+        var msgPrecioReferenciaInventado='El precio de referencia está marcado como NO BASADO EN LOS HISTÓRICOS pero no se ha introducido ningún valor.\nPor favor, introduzca uno o desmarque la casilla correspondiente.';
+        
+        var msgRestaurarNombre='¿Desea restaurar el nombre del producto?';
+        
+        var msgMismoNombre='Debe introducir un nombre diferente para el nuevo Producto Estándar';
+      
+      
+      ]]></xsl:text>
+				var catpriv_estricto='<xsl:value-of select="/Mantenimiento/PRODUCTOESTANDAR/CATPRIV_ESTRICTO"/>';
+      <xsl:text disable-output-escaping="yes"><![CDATA[
+      
+      
+      var arrTodasSubfamilias=new Array();     
+      
+      
+      ]]></xsl:text>
+      
+        <xsl:for-each select ="/Mantenimiento/PRODUCTOESTANDAR/TODASSUBFAMILIAS/FAMILIA">
+          var arrayFamilia=new Array();
+          arrayFamilia[arrayFamilia.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem2"/>');
+          <xsl:for-each select ="SUBFAMILIA">
+            arrayFamilia[arrayFamilia.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="listItem2"/>');
+          </xsl:for-each> 
+          arrTodasSubfamilias[arrTodasSubfamilias.length]=arrayFamilia;
+        </xsl:for-each>  
+      
+      
+      <xsl:text disable-output-escaping="yes"><![CDATA[
+     
+     
+     
+      function ValidarFormulario(form){
+        
+        var errores=0;
+       
+        /* quitamos los espacios sobrantes  */
+        
+        for(var n=0;n<form.length;n++){
+          if(form.elements[n].type=='text'){
+            form.elements[n].value=quitarEspacios(form.elements[n].value);
+          }
+        }
+        
+        if((!errores) && (esNulo(form.elements['CATPRIV_IDSUBFAMILIA'].value))){
+          errores++;
+          alert(msgSubfamilia);
+          document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].focus();
+        }
+        
+        if((!errores) && (esNulo(form.elements['CATPRIV_REFERENCIA'].value))){
+          errores++;
+          alert(msgReferenciaProductoEstandar);
+          document.forms[0].elements['CATPRIV_REFERENCIA'].focus();
+        }
+        // miramos que si el catalogo es estricto, la refeencia lo sea, esto es, ref=ref_fam+ref_subfam+2 o mas digitos
+        else{
+        	if(catpriv_estricto=='S'){
+        		if(!esReferenciaEstricta(document.forms[0])){
+        			errores++;
+        			alert(msgReferenciaEstrictaProductoEstandar+montarReferenciaEstricta(document.forms[0])+'XX');
+        			document.forms[0].elements['CATPRIV_REFERENCIA'].focus();
+        		}
+        	}
+        }
+        
+        if((!errores && esNulo(form.elements['CATPRIV_NOMBRE'].value))){
+          errores++;
+          alert(msgNombreProductoEstandar);
+          document.forms[0].elements['CATPRIV_NOMBRE'].focus();
+        }
+        
+        /*
+        if((!errores) && (esNulo(form.elements['CATPRIV_UDBASE'].value))){
+          errores++;
+          alert(msgUnidadBasicaProductoEstandar);
+          document.forms[0].elements['CATPRIV_UDBASE'].focus();
+        }
+        */
+        
+        if((!errores) && (!esNulo(form.elements['CATPRIV_PRECIOREFERENCIA'].value))){
+          if(!ValidarNumero(form.elements['CATPRIV_PRECIOREFERENCIA'],4)){
+            errores++;
+            form.elements['CATPRIV_PRECIOREFERENCIA'].focus();
+          }
+          //else{
+            //form.elements['CATPRIV_PRECIOREFERENCIA'].value=reemplazaComaPorPunto(form.elements['CATPRIV_PRECIOREFERENCIA'].value);
+          //}
+        }
+        
+        
+        
+        if((!errores) && (form.elements['CATPRIV_PRECIOREFERENCIA_INVENTADO'].checked==true)){
+          if(esNulo(form.elements['CATPRIV_PRECIOREFERENCIA'].value)){
+            errores++;
+            alert(msgPrecioReferenciaInventado);
+            form.elements['CATPRIV_PRECIOREFERENCIA_INVENTADO'].focus();
+          }
+        }
+        
+        
+        if((!errores) && (!esNulo(form.elements['CATPRIV_CONSUMOESTIMADO'].value))){
+          if(!ValidarNumero(form.elements['CATPRIV_CONSUMOESTIMADO'],4)){
+            errores++;
+            form.elements['CATPRIV_CONSUMOESTIMADO'].focus();
+          }
+          //else{
+            //form.elements['CATPRIV_CONSUMOESTIMADO'].value=reemplazaComaPorPunto(form.elements['CATPRIV_CONSUMOESTIMADO'].value);
+          //}
+        }
+        
+        
+            /* si los datos son correctos enviamos el form  */
+        
+        if(!errores){
+          EnviarCambios(form)
+        }
+          
+        
+      }
+        
+        
+        function esReferenciaEstricta(form){
+
+        	if(form.elements['CATPRIV_REFERENCIA'].value.substring(0,montarReferenciaEstricta(form).length)==montarReferenciaEstricta(form) && form.elements['CATPRIV_REFERENCIA'].value.length==8){
+        		return 1;
+        	}
+        	else{
+        	return 0;
+        	}
+        }
+        
+        function montarReferenciaEstricta(form){
+        
+        	// buscamos la ref de familia y de subfamilia
+        	var encontrado=0;
+        	var refFamilia='';
+        	var refSubfamilia='';
+        	for(var n=0;n<arrTodasSubfamilias.length && !encontrado;n++){
+          	var arrFamilia=arrTodasSubfamilias[n][0];
+            if(arrFamilia[0]==form.elements['CATPRIV_IDFAMILIA'].value){
+            	refFamilia=arrFamilia[1];
+            	for(var i=1;i<arrTodasSubfamilias[n].length;i++){
+            		var arrSubfamilia=arrTodasSubfamilias[n][i];
+            		if(arrSubfamilia[0]==form.elements['CATPRIV_IDSUBFAMILIA'].value){
+            			var refSubfamilia=arrSubfamilia[2];
+            			encontrado=1;
+            		}
+            	}
+            }
+          }
+        	return refFamilia+refSubfamilia;
+
+        }
+        
+        
+        
+        function EnviarCambios(form){
+        		SubmitForm(form);
+        }
+        
+        function ValidarNumero(obj,decimales){
+          
+          if(checkNumberNulo(obj.value,obj)){
+            if(parseFloat(reemplazaComaPorPunto(obj.value))!=0){
+              obj.value=anyadirCerosDecimales(reemplazaPuntoPorComa(Round(reemplazaComaPorPunto(obj.value),decimales)),decimales);
+            }
+          return true;
+          }
+          return false;
+        }
+        
+        
+        function CopiarProducto(form,accion){
+        
+          var nuevaReferencia=quitarEspacios(form.elements['CATPRIV_REFERENCIA'].value.toUpperCase());
+          var ReferenciaOriginal=quitarEspacios(form.elements['REFERENCIAORIGINAL'].value.toUpperCase());
+          
+          var nuevoNombre=quitarEspacios(form.elements['CATPRIV_NOMBRE'].value.toUpperCase());
+          var NombreOriginal=quitarEspacios(form.elements['NOMBREORIGINAL'].value.toUpperCase());
+          
+          if(nuevaReferencia==ReferenciaOriginal){
+          
+          	if(form.elements['CATPRIV_REFERENCIA'].type=='hidden'){
+          		alert(msgSinDerechosParaCopiar);
+          	}
+          	else{
+          		alert(msgMismaReferencia);
+          		return;
+          	}
+          }
+          else{
+          
+          	if(catpriv_estricto=='S'){
+        			if(!esReferenciaEstricta(document.forms[0])){
+        				alert(msgReferenciaEstrictaProductoEstandar+montarReferenciaEstricta(document.forms[0])+'xx');
+        				document.forms[0].elements['CATPRIV_REFERENCIA'].focus();
+        				return;
+        			}
+        			/*else{
+        				form.elements['ACCION'].value=accion;
+            		ValidarFormulario(form);
+        			}*/
+        		}
+        		/*else{
+        			form.elements['ACCION'].value=accion;
+            	ValidarFormulario(form);
+        		}*/
+          }
+          
+          if(nuevoNombre==NombreOriginal){
+          	alert(msgMismoNombre);
+          	document.forms[0].elements['CATPRIV_NOMBRE'].focus();
+          	return;
+          }
+          else{
+          	form.elements['ACCION'].value=accion;
+            ValidarFormulario(form);
+          }
+        }
+        
+        function CambioFamiliaActual(valor,accion){
+    			
+          var objName='CATPRIV_IDSUBFAMILIA';
+          var encontrado=0;
+          var arrSubfamilias=new Array();
+          for(var n=0;n<arrTodasSubfamilias.length && !encontrado;n++){
+          	var arrFamilia=arrTodasSubfamilias[n][0];
+          	//alert(arrFamilia);
+            if(arrFamilia[0]==valor){
+               encontrado=1;
+               arrSubfamilias=arrTodasSubfamilias[n];
+            }
+          }
+          
+          document.forms['form1'].elements['IDFAMILIA'].value=document.forms['form1'].elements['CATPRIV_IDFAMILIA'].value;
+          
+          document.forms['form1'].elements[objName].length=0;
+          
+          for(var n=1;n<arrSubfamilias.length;n++){
+            var id=arrSubfamilias[n][0];  
+            var elemento=arrSubfamilias[n][1];  
+            
+            var addOption=new Option(elemento,id);
+            document.forms['form1'].elements[objName]
+            document.forms['form1'].elements[objName].options[document.forms['form1'].elements[objName].length]=addOption;
+          }
+          
+        }
+        
+        function restaurarNombre(objTexto,valor,objPadre){
+          if(confirm(msgRestaurarNombre+'\n\nNombre Actual: '+objTexto.value+'\nNuevo Nombre: '+valor)){
+            objTexto.value=valor;
+            objPadre.value='S';
+          }
+        }
+        
+        function debugando(form){
+        	var id_1=form.elements['CATPRIV_IDFAMILIA'].value;
+        	var id_2=form.elements['CATPRIV_IDSUBFAMILIA'].value;
+        	if(confirm('idfamilia: '+id_1+' idsubfamilia: '+id_2+' ¿Enviamos los datos?')){
+        		return 1;
+        	}
+        	else{
+        		return 0;
+        	}
+        }
+        
+        function CambioFamiliaActualInicio(form,valor,accion){
+					selecionarValor(form.elements['CATPRIV_IDFAMILIA'],document.forms['form1'].elements['IDFAMILIA'].value);
+        	if(form.elements['CATPRIV_IDSUBFAMILIA'].type=='select-one'){
+        		CambioFamiliaActual(valor,accion);
+        		selecionarValor(form.elements['CATPRIV_IDSUBFAMILIA'],document.forms['form1'].elements['IDSUBFAMILIA'].value);
+        	}
+        }
+        
+        function selecionarValor(elemento,valor){
+        	
+        	var valorSeleccionado=0;
+        	
+        	if(elemento.type=='select-one'){
+        		for(var n=0;n<elemento.options.length;n++){
+        			if(elemento.options[n].value==valor){
+        				valorSeleccionado=n;
+        			}
+        		}
+        		elemento.selectedIndex=valorSeleccionado;
+        	}
+        }
+        
+        
+        // !!!!!! IMPORTANTE  ¡¡¡¡¡¡¡
+        // Mantenemos el nombre de la funcion porque se usa en otras paginas a pesar de que no hece referencia 
+        // a su nombre
+        
+        function actualizarValorPorDefectoEnElArray(valor,accion){
+        	document.forms['form1'].elements['IDSUBFAMILIA'].value=document.forms['form1'].elements['CATPRIV_IDSUBFAMILIA'].value;
+        }
+        
+      //-->
+    </script>
+    ]]></xsl:text>
+  </head>
+  <body>
+<xsl:choose>
+  <xsl:when test="//SESION_CADUCADA">
+    <xsl:apply-templates select="//SESION_CADUCADA"/> 
+  </xsl:when>
+  <xsl:when test="//Sorry">
+    <xsl:apply-templates select="//Sorry"/> 
+  </xsl:when>
+  <xsl:otherwise>
+  	<xsl:if test="Mantenimiento/TIPO!='CONSULTA'">
+  		<xsl:attribute name="onLoad">CambioFamiliaActualInicio(document.forms['form1'],document.forms['form1'].elements['CATPRIV_IDFAMILIA'].value,'<xsl:value-of select="/Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field/@current"/>','CAMBIOFAMILIA');</xsl:attribute>
+  	</xsl:if>
+    <form name="form1" action="MantProductosEstandarSave.xsql" method="post">
+    <p align="center" class="tituloPag">
+      Mantenimiento de Productos Estándar
+    </p>
+    <table width="75%" align="center">
+      <tr>
+        <td>
+          <table width="100%" cellpadding="0" cellspacing="1" class="gris" align="center">
+            <tr class="grisClaro">
+              <td class="grisClaro">
+              <b>Producto Estándar</b>
+              <br/>
+              <br/>
+              </td>
+            </tr>
+            <tr class="grisClaro">
+              <td class="grisClaro">
+              <input type="hidden" name="CATPRIV_IDUSUARIO" VALUE="{Mantenimiento/US_ID}"/>
+              <input type="hidden" name="CATPRIV_IDEMPRESA" VALUE="{Mantenimiento/CATPRIV_IDEMPRESA}"/>
+              <input type="hidden" name="CATPRIV_ID" VALUE="{Mantenimiento/PRODUCTOESTANDAR/ID}"/>
+              <input type="hidden" name="CATPRIV_IDDIVISA" VALUE="{Mantenimiento/PRODUCTOESTANDAR/IDDIVISA}"/>
+              <input type="hidden" name="ACCION" VALUE="{Mantenimiento/ACCION}"/>
+              <input type="hidden" name="VENTANA" VALUE="{Mantenimiento/VENTANA}"/>
+              <input type="hidden" name="REFERENCIAORIGINAL" VALUE="{Mantenimiento/PRODUCTOESTANDAR/REFERENCIA}"/>
+              <input type="hidden" name="NOMBREORIGINAL" VALUE="{Mantenimiento/PRODUCTOESTANDAR/NOMBRE}"/>
+              <input type="hidden" name="IDFAMILIA" VALUE="{Mantenimiento/PRODUCTOESTANDAR/FAMILIAS/field/@current}"/>
+              <input type="hidden" name="IDSUBFAMILIA" VALUE="{Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field/@current}"/>
+                <table width="100%" cellpadding="2" cellspacing="1" class="medio" border="0">
+                  <tr class="oscuro">
+                    <td class="oscuro" colspan="2">
+                    Datos:
+                    </td>
+                  </tr>
+                  <tr class="blanco">
+                    <td class="claro" align="right" width="180px">
+                      Fecha de alta:
+                    </td>
+                    <td class="claro">              
+                      &nbsp;<xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/FECHAALTA"/>
+                    </td>
+                  </tr>
+                  <tr class="blanco">
+                    <td class="claro" align="right">
+                      Familia de Productos:<span class="camposObligatorios">*</span>
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                      <!-- SOLO CONSULTA -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:for-each select="Mantenimiento/PRODUCTOESTANDAR/FAMILIAS/field/dropDownList/listElem">
+                            <xsl:if test="ID=../../@current">
+                              <xsl:value-of select="listItem"/>
+                            </xsl:if>
+                          </xsl:for-each>
+                        </xsl:when>
+                        <!-- MODIFICACION -->
+                        <xsl:otherwise>
+                          <xsl:choose>
+                            <!-- USUARIO MASTER_UNICO, PUEDE HACER CUALQUIER TIPO DE EDICION -->
+                            <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER_UNICO">
+                              <xsl:call-template name="desplegable">
+                                <xsl:with-param name="path" select="Mantenimiento/PRODUCTOESTANDAR/FAMILIAS/field"></xsl:with-param>
+            	              </xsl:call-template>
+            	            </xsl:when>
+            	            <!-- PUEDE CREAR NUEVOS O MODIFICAR EL NOMBRE Y DATOS DE CONSUMO -->
+            	            <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER">
+                              <!-- NUEVO -->
+                              <xsl:choose>
+                                <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/ID='0'">
+                                  <xsl:call-template name="desplegable">
+                                    <xsl:with-param name="path" select="Mantenimiento/PRODUCTOESTANDAR/FAMILIAS/field"></xsl:with-param>
+            	                  </xsl:call-template>
+            	                </xsl:when>
+            	                <!-- modificacion -->
+            	                <xsl:otherwise>
+            	                	<xsl:call-template name="desplegable">
+                                    <xsl:with-param name="path" select="Mantenimiento/PRODUCTOESTANDAR/FAMILIAS/field"></xsl:with-param>
+            	                  </xsl:call-template>
+            	                  <!--<xsl:for-each select="Mantenimiento/PRODUCTOESTANDAR/FAMILIAS/field/dropDownList/listElem">
+                                    <xsl:if test="ID=../../@current">
+                                      <input type="hidden" name="CATPRIV_IDFAMILIA" value="{ID}"/>
+                                      <xsl:value-of select="listItem"/>
+                                    </xsl:if>
+                                  </xsl:for-each>-->
+            	                </xsl:otherwise>
+            	              </xsl:choose>
+            	            </xsl:when>
+            	            <!-- USUARIO EDICION, EDICIONES RESTRINGIDAS, SOLO EL NOMBRE Y DATOS DE CONSUMO -->
+            	            <xsl:otherwise>
+            	              <xsl:for-each select="Mantenimiento/PRODUCTOESTANDAR/FAMILIAS/field/dropDownList/listElem">
+                                <xsl:if test="ID=../../@current">
+                                  <xsl:value-of select="listItem"/>
+                                  <input type="hidden" name="CATPRIV_IDFAMILIA" value="{ID}"/>
+                                </xsl:if>
+                              </xsl:for-each>
+            	            </xsl:otherwise>
+            	          </xsl:choose>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <tr class="blanco">
+                    <td class="claro" align="right">
+                      Subfamilia de Productos:<span class="camposObligatorios">*</span>
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                        <!-- CONSULTA -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:for-each select="Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field/dropDownList/listElem">
+                            <xsl:if test="ID=../../@current">
+                              <xsl:value-of select="listItem"/>
+                            </xsl:if>
+                          </xsl:for-each>
+                        </xsl:when>
+                        <!-- MODIFICACION -->
+                        <xsl:otherwise>
+                          <xsl:choose>
+                            <!-- usuario master_unico, cualquier tipo de modificacion -->
+                            <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER_UNICO">
+                              <xsl:call-template name="desplegable">
+                                <xsl:with-param name="path" select="Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field"></xsl:with-param>
+                                <xsl:with-param name="sincontenido">SINCONTENIDO</xsl:with-param>
+            	              </xsl:call-template>
+            	            </xsl:when>
+            	            <!-- usuario master, solo nuevos o modificaciones de nombre y datos de consumo -->
+                            <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER">
+                              <!-- NUEVO -->
+                              <xsl:choose>
+                                <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/ID='0'">
+                                  <xsl:call-template name="desplegable">
+                                    <xsl:with-param name="path" select="Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field"></xsl:with-param>
+                                    <xsl:with-param name="sincontenido">SINCONTENIDO</xsl:with-param>
+            	                  </xsl:call-template>
+            	                </xsl:when>
+            	                <!-- modificacion -->
+            	                <xsl:otherwise>
+            	                	<xsl:call-template name="desplegable">
+                                    <xsl:with-param name="path" select="Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field"></xsl:with-param>
+                                    <xsl:with-param name="sincontenido">SINCONTENIDO</xsl:with-param>
+            	                  </xsl:call-template>
+            	                  <!--<xsl:for-each select="Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field/dropDownList/listElem">
+                                    <xsl:if test="ID=../../@current">
+                                      <xsl:value-of select="listItem"/>
+                                      <input type="hidden" name="CATPRIV_IDSUBFAMILIA" value="{ID}"/>
+                                    </xsl:if>
+                                  </xsl:for-each>-->
+                                  
+            	                </xsl:otherwise>
+            	              </xsl:choose>
+            	            </xsl:when>
+            	            <!-- usuario edicion, modificaciones restringidas, solo nombre y datos de consumo -->
+            	            <xsl:otherwise>
+            	              <xsl:for-each select="Mantenimiento/PRODUCTOESTANDAR/SUBFAMILIAS/field/dropDownList/listElem">
+                                <xsl:if test="ID=../../@current">
+                                  <xsl:value-of select="listItem"/>
+                                  <input type="hidden" name="CATPRIV_IDSUBFAMILIA" value="{ID}"/>
+                                </xsl:if>
+                              </xsl:for-each>
+            	            </xsl:otherwise>
+            	          </xsl:choose>
+                        </xsl:otherwise>
+                      </xsl:choose>
+ 
+                    </td>
+                  </tr>
+                  <tr class="blanco">
+                    <td class="claro" align="right">
+                      Referencia:<span class="camposObligatorios">*</span>
+                    </td>
+                    <td class="claro">  
+                      <xsl:choose>
+                        <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/REFERENCIA"/>
+                        </xsl:when>
+                        <!-- modificacion -->
+                        <xsl:otherwise>
+                          <xsl:choose>
+                            <!-- usuario master_unico, cualquier tipo de modificacion -->
+                            <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER_UNICO">
+                              <input type="text" name="CATPRIV_REFERENCIA" value="{Mantenimiento/PRODUCTOESTANDAR/REFERENCIA}" size="30" maxlength="100"/>
+                            </xsl:when>
+                            <!-- usuario master, solo nombre y datos de consumos -->
+                            <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER">
+                              <!-- NUEVO -->
+                              <xsl:choose>
+                                <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/ID='0'">
+                                  <input type="text" name="CATPRIV_REFERENCIA" value="{Mantenimiento/PRODUCTOESTANDAR/REFERENCIA}" size="30" maxlength="100"/>
+            	                </xsl:when>
+            	                <!-- modificacion -->
+            	                <xsl:otherwise>
+            	                  
+            	                  <input type="text" name="CATPRIV_REFERENCIA" value="{Mantenimiento/PRODUCTOESTANDAR/REFERENCIA}" size="30" maxlength="100"/>
+            	                  <!--<xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/REFERENCIA"/>
+            	                  <input type="hidden" name="CATPRIV_REFERENCIA" value="{Mantenimiento/PRODUCTOESTANDAR/REFERENCIA}" size="30" maxlength="100"/>-->
+            	                </xsl:otherwise>
+            	              </xsl:choose>
+                            </xsl:when>
+                            <!-- usuario edicion, solo ediciones restringidas, nombre y datos de consumo -->
+                            <xsl:otherwise>
+                              <xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/REFERENCIA"/>
+                              <input type="hidden" name="CATPRIV_REFERENCIA" value="{Mantenimiento/PRODUCTOESTANDAR/REFERENCIA}"/>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </xsl:otherwise>
+                      </xsl:choose>            
+                          
+                    </td>
+                  </tr>
+                  <tr class="medio">
+                    <td class="claro" align="right">
+                      Nombre:<span class="camposObligatorios">*</span>
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                        <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/NOMBRE"/>
+                        </xsl:when>
+                        <!-- edicion -->
+                        <xsl:otherwise>
+                          <input type="text" name="CATPRIV_NOMBRE" value="{Mantenimiento/PRODUCTOESTANDAR/NOMBRE}" size="70" maxlength="300"/>
+                          <!-- si es un producto que sigue un catpriv_de otra empresa
+                               mostramos el boton de restaurtar nombre, en el caso de que se hubiera salido del catalogo -->
+                          <xsl:if test="not(Mantenimiento/PRODUCTOESTANDAR/MASTER_UNICO) and not(Mantenimiento/PRODUCTOESTANDAR/MASTER)">
+                            <xsl:if test="Mantenimiento/PRODUCTOESTANDAR/NOMBREPADRE='N'">
+                              
+                              <input type="hidden" name="CATPRIV_PADRE" value="{Mantenimiento/PRODUCTOESTANDAR/NOMBREPADRE}"/>
+                              
+                              <xsl:call-template name="botonPersonalizado">
+                                <xsl:with-param name="funcion">restaurarNombre(document.forms['form1'].elements['CATPRIV_NOMBRE'],'<xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/NOMBREPRODUCTO_PADRE"/>',document.forms['form1'].elements['CATPRIV_PADRE']);</xsl:with-param>
+                                <xsl:with-param name="label">Restaurar Nombre</xsl:with-param>
+                                <xsl:with-param name="status">Restaura el nombre del producto con el del catálogo que sigue</xsl:with-param>
+                                <xsl:with-param name="ancho">120px</xsl:with-param>
+                              </xsl:call-template>
+                            </xsl:if>
+                          </xsl:if>
+                          
+                        </xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <tr class="medio">
+                    <td class="claro" align="right">
+                      Descripción:
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                        <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:copy-of select="Mantenimiento/PRODUCTOESTANDAR/DESCRIPCION_HTML"/>
+                        </xsl:when>
+                        <!-- edicion -->
+                        <xsl:otherwise>
+                          <textarea name="CATPRIV_DESCRIPCION" cols="50" rows="5">
+                            <xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/DESCRIPCION"/>
+                          </textarea>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                  <xsl:choose>
+                  	<xsl:when test="Mantenimiento/PRODUCTOESTANDAR/ORIGEN_PRECIOREF='E'">
+                  		<tr class="medio">
+                    		<td class="claro" align="right">
+                      		Precio de Referencia:
+                    		</td>
+                    		<td class="claro">
+                      		<xsl:choose>
+                        		<!-- consulta -->
+                        		<xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                        			<table align="center" cellpadding="0" cellspacing="0" width="100%">
+                        				<tr>
+                        					<td width="50%">
+                          					<xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/PRECIOREFERENCIA"/>
+                          				</td>
+                          				<td width="*">
+                          					<xsl:choose>
+                          						<xsl:when test="Mantenimiento/PRODUCTOESTANDAR/PRECIOREFERENCIA_INVENTADO='S'">
+                          							<font color="red">El precio de referencia es real (no teórico)</font>
+                          						</xsl:when>
+                          						<xsl:otherwise>
+                          							El precio de referencia es teórico
+                          						</xsl:otherwise>
+                          					</xsl:choose>
+                          				</td>
+                          			</tr>
+                          		</table>
+                        		</xsl:when>
+                        		<!-- edicion -->
+                        		<xsl:otherwise>
+                          		<table align="center" cellpadding="0" cellspacing="0" width="100%">
+                        				<tr>
+                        					<td width="45%">
+                          					<input type="text" name="CATPRIV_PRECIOREFERENCIA" value="{Mantenimiento/PRODUCTOESTANDAR/PRECIOREFERENCIA}" size="20" maxlength="9" onBlur="ValidarNumero(this,4);"/>&nbsp;<xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/DIV_SUFIJO"/>.
+                          				</td>
+                          				<td width="*">
+                          					<input type="checkbox" name="CATPRIV_PRECIOREFERENCIA_INVENTADO">
+                          						<xsl:if test="Mantenimiento/PRODUCTOESTANDAR/PRECIOREFERENCIA_INVENTADO='S'">
+                          							<xsl:attribute name="checked">checked</xsl:attribute>
+                          						</xsl:if>
+                          					</input>
+                          					El precio de referencia es teórico
+                          				</td>
+                          			</tr>
+                          		</table>
+                        		</xsl:otherwise>
+                      		</xsl:choose>
+                    		</td>
+                  		</tr>
+                  		<tr class="medio">
+                  			<td class="claro" align="right">
+                  				Proveedor anterior:
+                  			</td>
+                  			<td class="claro">
+                      		<xsl:choose>
+                        		<!-- consulta -->
+                        		<xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                        			<xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/PROVEEDOR_ANTERIOR"/>
+                        		</xsl:when>
+                        		<!-- edicion -->
+                        		<xsl:otherwise>
+                          		<input type="text" name="CATPRIV_PROVEEDOR_ANTERIOR" size="15" maxlength="200" value="{Mantenimiento/PRODUCTOESTANDAR/PROVEEDOR_ANTERIOR}"/>
+                        		</xsl:otherwise>
+                      		</xsl:choose>
+                  			</td>
+                  		</tr>
+                  	</xsl:when>
+                  	<xsl:otherwise>
+                  		<tr class="medio">
+                  			<td class="claro" align="right">
+                      		Precio de Referencia:
+                    		</td>
+                  			<td class="claro" align="left">
+                  				<b>El precio de referencia se obtiene de los centros</b>
+                  				<input type="hidden" name="CATPRIV_PRECIOREFERENCIA"/>
+                  				<input type="hidden" name="CATPRIV_PRECIOREFERENCIA_INVENTADO"/>
+                  			</td>
+                  		</tr>
+                  	</xsl:otherwise>
+                  </xsl:choose>
+                  <tr class="medio">
+                    <td class="claro" align="right">
+                      Consumo Estimado:
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                        <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/CONSUMOESTIMADO"/>
+                        </xsl:when>
+                        <!-- edicion -->
+                        <xsl:otherwise>
+                          <input type="text" name="CATPRIV_CONSUMOESTIMADO" value="{Mantenimiento/PRODUCTOESTANDAR/CONSUMOESTIMADO}" size="20" maxlength="9" onBlur="ValidarNumero(this,4);"/>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                      
+                    </td>
+                  </tr>
+                  <tr class="medio">
+                    <td class="claro" align="right">
+                      Unidad Básica:<!--<span class="camposObligatorios">*</span>-->
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                        <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/UNIDAD_BASICA"/>
+                        </xsl:when>
+                        <!-- edicion -->
+                        <xsl:otherwise>
+                          <input type="text" name="CATPRIV_UDBASE" value="{Mantenimiento/PRODUCTOESTANDAR/UNIDAD_BASICA}" size="20" maxlength="100"/>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                      
+                    </td>
+                  </tr>
+                  <tr class="medio">
+                    <td class="claro" align="right">
+                      Muestra:
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                        <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MUESTRA='S'">
+                              Si
+                            </xsl:when>
+                            <xsl:otherwise>
+                              No
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </xsl:when>
+                        <!-- edicion -->
+                        <xsl:otherwise>
+                          <input type="checkbox" name="CATPRIV_MUESTRA">
+                            <xsl:choose>
+                              <xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MUESTRA='S'">
+                                <xsl:attribute name="checked">checked</xsl:attribute>
+                              </xsl:when>
+                              <xsl:otherwise>
+                                <xsl:attribute name="unchecked">unchecked</xsl:attribute>
+                              </xsl:otherwise>
+                            </xsl:choose>
+                          </input>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                      
+                    </td>
+                  </tr>
+                  <tr class="medio">
+                    <td class="claro" align="right">
+                      Comentarios:
+                    </td>
+                    <td class="claro">
+                      <xsl:choose>
+                      <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+                          <xsl:copy-of select="Mantenimiento/PRODUCTOESTANDAR/COMENTARIOS_HTML"/>
+                        </xsl:when>
+                        <!-- edicion -->
+                        <xsl:otherwise>
+                          <textarea name="CATPRIV_COMENTARIOS" cols="50" rows="5">
+                            <xsl:value-of select="Mantenimiento/PRODUCTOESTANDAR/COMENTARIOS"/>
+                          </textarea>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>  
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Los campos marcados con (<span class="camposObligatorios">*</span>) son obligatorios.
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <br/>
+    <table width="75%" align="center">
+      <tr align="center">
+        <xsl:choose>
+                        <!-- consulta -->
+                        <xsl:when test="Mantenimiento/TIPO='CONSULTA'">
+
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/VENTANA='NUEVA'">
+                              <td align="center">
+                                <xsl:call-template name="boton">
+                                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Cerrar']"/>
+                                </xsl:call-template>
+                              </td>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <td align="center">
+                                <xsl:call-template name="boton">
+                                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Cancelar']"/>
+                                </xsl:call-template>
+                              </td>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                          
+                          
+                        </xsl:when>
+                        <!-- edicion -->
+                        <xsl:otherwise>
+                          <!-- boton cerrar/cancelar  -->
+                          <xsl:choose>
+                            <xsl:when test="Mantenimiento/VENTANA='NUEVA'">
+                              <td align="center">
+                                <xsl:call-template name="boton">
+                                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Cerrar']"/>
+                                </xsl:call-template>
+                              </td>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <td align="center">
+                                <xsl:call-template name="boton">
+                                  <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Cancelar']"/>
+                                </xsl:call-template>
+                              </td>
+                            </xsl:otherwise>
+                          </xsl:choose>
+                          <!-- guardar cambios -->  
+                          <td align="center">
+                            <xsl:call-template name="boton">
+                              <xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Aceptar']"/>
+                            </xsl:call-template>
+                          </td>
+                          <!-- copiar producto -->
+                          <xsl:if test="Mantenimiento/ACCION='MODIFICARPRODUCTOESTANDAR'">
+                          <!-- solo lo permitimos al usuario MASTER_UNICO o MASTER-->
+                          	<xsl:choose>
+                            	<xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER_UNICO">
+                              	<td align="center">
+                                	<xsl:call-template name="boton">
+                                  	<xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Copiar']"/>
+                                	</xsl:call-template>
+                              	</td>
+                            	</xsl:when>
+                            	<xsl:when test="Mantenimiento/PRODUCTOESTANDAR/MASTER">
+                              	<td align="center">
+                                	<xsl:call-template name="boton">
+                                  	<xsl:with-param name="path" select="Mantenimiento/botones/button[@label='Copiar']"/>
+                                	</xsl:call-template>
+                              	</td>
+                            	</xsl:when>
+                            </xsl:choose>
+                          
+                          </xsl:if>
+                          
+                        </xsl:otherwise>
+                      </xsl:choose>
+      </tr>
+    </table>
+    
+    </form>
+  </xsl:otherwise>
+</xsl:choose>
+  </body>
+  </html>
+</xsl:template>  
+
+
+
+</xsl:stylesheet>

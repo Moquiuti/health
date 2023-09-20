@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmPROImageSave.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmPROImageSave.xsl"?>
+
+<confirmPROImageSave xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+ 
+<xsql:include-param name="TIPO"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="CADENA_IMAGENES"/>    
+<xsql:include-param name="PRO_BUSQUEDA"/>
+<xsql:include-param name="HAYPRODUCTOS"/>
+<xsql:include-param name="HISTORY"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+  <![CDATA[
+
+ BEGIN
+	Imagenes_pck.guardarFotos(
+	'{@CADENA_IMAGENES}',
+	'{@IMAGENES_BORRADAS}',
+	'{@PRO_ID}'
+	);	
+  END;	  
+   
+  ]]>	  
+</xsql:include-owa>
+</confirmPROImageSave>
+

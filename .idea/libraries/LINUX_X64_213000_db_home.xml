@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="LINUX.X64_213000_db_home">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/kits/LINUX.X64_213000_db_home.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

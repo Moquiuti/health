@@ -1,0 +1,4 @@
+22mar22 ET Mantenimiento de circuitos de aprobacion. Nuevo disenno 2022. CircuitosAprobacion2022_220322.js
+05ago22 ET Permitir configurar segun "Centro de coste". CircuitosAprobacion2022_050822.js
+05ago22 ET Separar circuitos para pedidos de circuitos para licitacion. CircuitosAprobacion2022_050822.js
+12set22 ET Simplificar circuitos para licitaciones, renombrar <TD>. CircuitosAprobacion2022_120922.js

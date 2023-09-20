@@ -1,0 +1,87 @@
+
+^Web:DoctypePresenceCheck":Insert a <!DOCTYPE> declaration to before this <html> tag.(ÃéÙó
+U	Web:S5254"@Add "lang" and/or "xml:lang" attributes to this "<html>" element(ÃéÙó
+@	Web:S1827O"+Remove this deprecated "bgcolor" attribute.(ÉÏ‚§
+=	Web:S1827O"(Remove this deprecated "text" attribute.(ÉÏ‚§
+=	Web:S1827O"(Remove this deprecated "link" attribute.(ÉÏ‚§
+>	Web:S1827O")Remove this deprecated "alink" attribute.(ÉÏ‚§
+>	Web:S1827O")Remove this deprecated "vlink" attribute.(ÉÏ‚§
+HWeb:TableWithoutCaptionCheckO" Add a description to this table.(ÉÏ‚§
+:	Web:S5256O"%Add "<th>" headers to this "<table>".(ÉÏ‚§
+>	Web:S1827O")Remove this deprecated "width" attribute.(ÉÏ‚§
+D	Web:S1827O"/Remove this deprecated "cellspacing" attribute.(ÉÏ‚§
+>	Web:S1827O")Remove this deprecated "align" attribute.(ÉÏ‚§
+QWeb:UnsupportedTagsInHtml5CheckQ"&Remove this deprecated "font" element.(§¼ïª
+QWeb:UnsupportedTagsInHtml5CheckQ"&Remove this deprecated "font" element.(§¼ïª
+>	Web:S1827Q")Remove this deprecated "align" attribute.(§¼ïª
+HWeb:TableWithoutCaptionCheckQ" Add a description to this table.(§¼ïª
+:	Web:S5256Q"%Add "<th>" headers to this "<table>".(§¼ïª
+>	Web:S1827Q")Remove this deprecated "width" attribute.(§¼ïª
+D	Web:S1827Q"/Remove this deprecated "cellspacing" attribute.(§¼ïª
+@	Web:S1827Q"+Remove this deprecated "noshade" attribute.(§¼ïª
+=	Web:S1827Q"(Remove this deprecated "size" attribute.(§¼ïª
+>	Web:S1827Q")Remove this deprecated "width" attribute.(§¼ïª
+?	Web:S1827Q"*Remove this deprecated "valign" attribute.(§¼ïª
+?	Web:S1827Q"*Remove this deprecated "nowrap" attribute.(§¼ïª
+>	Web:S1827Q")Remove this deprecated "width" attribute.(§¼ïª
+?	Web:S1827Q"*Remove this deprecated "valign" attribute.(§¼ïª
+>	Web:S1827Q")Remove this deprecated "align" attribute.(§¼ïª
+HWeb:TableWithoutCaptionCheckQ" Add a description to this table.(§¼ïª
+:	Web:S5256Q"%Add "<th>" headers to this "<table>".(§¼ïª
+D	Web:S1827Q"/Remove this deprecated "cellspacing" attribute.(§¼ïª
+D	Web:S1827Q"/Remove this deprecated "cellpadding" attribute.(§¼ïª
+@	Web:S1827Q"+Remove this deprecated "bgcolor" attribute.(§¼ïª
+QWeb:UnsupportedTagsInHtml5CheckQ"&Remove this deprecated "font" element.(§¼ïª
+=	Web:S1827Q"(Remove this deprecated "name" attribute.(§¼ïª
+=	Web:S1827Q"(Remove this deprecated "name" attribute.(§¼ïª
+HWeb:TableWithoutCaptionCheckS" Add a description to this table.(õ¥Ð¨
+:	Web:S5256S"%Add "<th>" headers to this "<table>".(õ¥Ð¨
+D	Web:S1827S"/Remove this deprecated "cellspacing" attribute.(õ¥Ð¨
+D	Web:S1827S"/Remove this deprecated "cellpadding" attribute.(õ¥Ð¨
+@	Web:S1827S"+Remove this deprecated "bgcolor" attribute.(õ¥Ð¨
+QWeb:UnsupportedTagsInHtml5CheckS"&Remove this deprecated "font" element.(õ¥Ð¨
+=	Web:S1827S"(Remove this deprecated "name" attribute.(õ¥Ð¨
+HWeb:TableWithoutCaptionChecko" Add a description to this table.(†Ó¡†
+:	Web:S5256o"%Add "<th>" headers to this "<table>".(†Ó¡†
+D	Web:S1827o"/Remove this deprecated "cellspacing" attribute.(†Ó¡†
+D	Web:S1827o"/Remove this deprecated "cellpadding" attribute.(†Ó¡†
+@	Web:S1827o"+Remove this deprecated "bgcolor" attribute.(†Ó¡†
+QWeb:UnsupportedTagsInHtml5Checko"&Remove this deprecated "font" element.(†Ó¡†
+=	Web:S1827o"(Remove this deprecated "name" attribute.(†Ó¡†
+=	Web:S1827o"(Remove this deprecated "name" attribute.(†Ó¡†
+IWeb:TableWithoutCaptionCheck£" Add a description to this table.(õÉÍø
+;	Web:S5256£"%Add "<th>" headers to this "<table>".(õÉÍø
+E	Web:S1827£"/Remove this deprecated "cellspacing" attribute.(õÉÍø
+E	Web:S1827£"/Remove this deprecated "cellpadding" attribute.(õÉÍø
+A	Web:S1827£"+Remove this deprecated "bgcolor" attribute.(õÉÍø
+RWeb:UnsupportedTagsInHtml5Check£"&Remove this deprecated "font" element.(õÉÍø
+>	Web:S1827£"(Remove this deprecated "name" attribute.(õÉÍø
+>	Web:S1827£"(Remove this deprecated "name" attribute.(õÉÍø
+IWeb:TableWithoutCaptionCheck¸" Add a description to this table.(¥èç 
+;	Web:S5256¸"%Add "<th>" headers to this "<table>".(¥èç 
+E	Web:S1827¸"/Remove this deprecated "cellspacing" attribute.(¥èç 
+E	Web:S1827¸"/Remove this deprecated "cellpadding" attribute.(¥èç 
+A	Web:S1827¸"+Remove this deprecated "bgcolor" attribute.(¥èç 
+RWeb:UnsupportedTagsInHtml5Check¸"&Remove this deprecated "font" element.(¥èç 
+>	Web:S1827¸"(Remove this deprecated "name" attribute.(¥èç 
+>	Web:S1827¸"(Remove this deprecated "name" attribute.(¥èç 
+IWeb:TableWithoutCaptionCheckÑ" Add a description to this table.(€ê³ï
+;	Web:S5256Ñ"%Add "<th>" headers to this "<table>".(€ê³ï
+E	Web:S1827Ñ"/Remove this deprecated "cellspacing" attribute.(€ê³ï
+E	Web:S1827Ñ"/Remove this deprecated "cellpadding" attribute.(€ê³ï
+A	Web:S1827Ñ"+Remove this deprecated "bgcolor" attribute.(€ê³ï
+RWeb:UnsupportedTagsInHtml5CheckÑ"&Remove this deprecated "font" element.(€ê³ï
+>	Web:S1827Ñ"(Remove this deprecated "name" attribute.(€ê³ï
+>	Web:S1827Ñ"(Remove this deprecated "name" attribute.(€ê³ï
+IWeb:TableWithoutCaptionCheckÛ" Add a description to this table.(ÄµÕ¥
+;	Web:S5256Û"%Add "<th>" headers to this "<table>".(ÄµÕ¥
+E	Web:S1827Û"/Remove this deprecated "cellspacing" attribute.(ÄµÕ¥
+E	Web:S1827Û"/Remove this deprecated "cellpadding" attribute.(ÄµÕ¥
+A	Web:S1827Û"+Remove this deprecated "bgcolor" attribute.(ÄµÕ¥
+RWeb:UnsupportedTagsInHtml5CheckÛ"&Remove this deprecated "font" element.(ÄµÕ¥
+>	Web:S1827Û"(Remove this deprecated "name" attribute.(ÄµÕ¥
+>	Web:S1827Û"(Remove this deprecated "name" attribute.(ÄµÕ¥
+F	Web:S1827•"+Remove this deprecated "noshade" attribute.(úÿ·­ýÿÿÿÿ
+C	Web:S1827•"(Remove this deprecated "size" attribute.(úÿ·­ýÿÿÿÿ
+D	Web:S1827•")Remove this deprecated "align" attribute.(úÿ·­ýÿÿÿÿ
+WWeb:UnsupportedTagsInHtml5Check•"&Remove this deprecated "font" element.(úÿ·­ýÿÿÿÿ

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Margen izquierdo del mantenimiento del catálogo privado
+	ultima revision: 28nov18 11:00
+-->
+<?xml-stylesheet type="text/xsl" href="ZonaCatalogoHTML2022.xsl"?>
+
+<ZonaCatalogo xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="TIPOVENTANA" value="{@TIPOVENTANA}"/>
+	<xsql:include-param name="PROPAGAR" value="{@PROPAGAR}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaFamilias');
+		IF US_ID>=0 THEN
+			CATALOGOPRIVADO_PCK.zonacatalogoprivado(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDNUEVACATEGORIA}',
+				'{@IDNUEVAFAMILIA}',
+				'{@IDNUEVASUBFAMILIA}',
+				'{@IDNUEVOGRUPO}',
+				'{@IDNUEVOPRODUCTOESTANDAR}',
+				-- '{@IDPRODUCTO}',
+				'{@ANCHODESPLEGABLE}',
+				'{@ACCION}'
+			);
+			--HTP.P('<PRUEBA/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ZonaCatalogo>

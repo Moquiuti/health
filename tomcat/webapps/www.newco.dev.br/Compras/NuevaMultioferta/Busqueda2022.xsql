@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Buscador en "Enviar Pedidos". Nuevo disenno 2022.
+	Ultima revision:ET 15feb22 11:40
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="BusquedaHTML2022.xsl"?>
+
+<BusquedaProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LP_ID"/>
+  <xsql:include-param name="STYLE" value="{@PRMLANG}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="DESCRIPCION" />
+  
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Buscador');
+			IF US_ID>=0 THEN
+        		BUSCADOR_PCK.Buscador_XML( US_ID );
+			END IF;
+		END;
+        ]]>
+  </xsql:include-owa>
+  
+</BusquedaProductos>  
+
+        

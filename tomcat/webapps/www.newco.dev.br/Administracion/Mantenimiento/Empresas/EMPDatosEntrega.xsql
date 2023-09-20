@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guardar datos de entrega
+	ultima revision: ET 25set18 10:00
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EMPFichaCompletaHTML.xsl"?>
+<!--
+	Guardar datos de entrega
+	ultima revision: ET 25set18 10:10
+-->
+
+<FichaEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<xsql:include-owa>
+	  <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','GuardarEntregas');
+			IF US_ID>=0 THEN
+			
+				IF '{@EMP_ID}' IS NOT NULL THEN
+				
+					v_Res:=Empresas_FicComp_Pck.GuardarEntregas
+					(
+						US_ID,
+						'{@EMP_ID}',
+						'{@EMP_FIE_NORM_PLAZO_CENTRO}',
+						'{@EMP_FIE_NORM_PEDMIN_CENTRO}',
+						'{@EMP_FIE_NORM_PLAZO_EJECAFE}',
+						'{@EMP_FIE_NORM_PEDMIN_EJECAFE}',
+						'{@EMP_FIE_NORM_PLAZO_PACIFICO}',
+						'{@EMP_FIE_NORM_PEDMIN_PACIFICO}',	
+						'{@EMP_FIE_EMER_PLAZO_CENTRO}',
+						'{@EMP_FIE_EMER_PEDMIN_CENTRO}',
+						'{@EMP_FIE_EMER_PLAZO_EJECAFE}',
+						'{@EMP_FIE_EMER_PEDMIN_EJECAFE}',
+						'{@EMP_FIE_EMER_PLAZO_PACIFICO}',
+						'{@EMP_FIE_EMER_PEDMIN_PACIFICO}'
+					);
+				
+				END IF;
+			
+				Empresas_FicComp_Pck.Empresa_XML(US_ID,'{@EMP_ID}');
+			END IF;				   
+		END;
+	]]>
+	</xsql:include-owa>
+  
+</FichaEmpresa>
+

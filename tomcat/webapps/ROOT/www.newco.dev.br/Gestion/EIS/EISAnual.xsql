@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+	Devuelve la pagina del EIS Anual
+	Ultima revision: ET 26mar20 16:34
+-->
+<?xml-stylesheet type="text/xsl" href="EISAnualHTML.xsl"?>
+
+<EIS_ANUAL_XML xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISAnual');
+		IF US_ID>=0 THEN
+			EIS_ANUAL_PCK.Listado_XML(
+				US_ID,
+				'{@INDICADOR}',
+				'{@IDEMPRESA}',
+				'{@IDCENTRO}',
+				'{@IDEMPRESA2}',
+				'{@IDCENTRO2}',
+				'{@IDCATEGORIA}',
+				'{@IDFAMILIA}',
+				'{@AGRUPARPOR}',
+				'TABLADATOS'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</EIS_ANUAL_XML>

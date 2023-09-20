@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- 
+	Marca los productos que tienen albaran de entrega como entregados
+	Ultima revision: ET 9ene20
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="marcarEntregados.xsl"?>
+
+<marcarEntregados xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+    
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+                res             NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MarcarEntregados');
+		IF US_ID>0 THEN
+			res:= PedidosProblematicos_Pck.MarcarPedidosEntregados(
+				US_ID,
+				'{@IDPAIS}',
+				'{@IDCLIENTE}',
+				'{@IDPROVEEDOR}',
+				'{@DIAS_ENTREGADO}',
+				'N'
+			);
+    
+            HTP.P(Utilidades_Pck.CabeceraXML);
+            IF res >= 0 THEN
+				HTP.P('<OK>'||res||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+        
+</xsql:include-owa>
+</marcarEntregados>

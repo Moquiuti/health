@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmAsociaDocuCome.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmAsociaDocuCome.xsl"?>
+
+ 
+
+<confirmAsociaDocuCome xmlns:xsql="urn:oracle-xsql" connection="newco" >
+    <xsql:include-param name="TIPO"/>
+    <xsql:include-param name="PRO_BUSQUEDA"/>
+    <xsql:include-param name="ID_USUARIO"/>
+    <xsql:include-param name="HISTORY"/>
+	<xsql:include-param name="ID_PROVEEDOR"/>
+     <xsql:include-param name="STYLE"/>
+    <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	    
+   
+	<xsql:include-owa>
+		  <![CDATA[
+	
+	    	DECLARE
+		        US_ID		NUMBER;
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DetalleEmpresa');
+				IF US_ID>0 THEN
+				
+				 	DOCUMENTOS_PCK.AsociarDocumentoAProductos_XML(
+					 US_ID, 
+					 '{@ID_EMPRESA}', 
+					 '{@ID_DOCUMENTO}',
+					 '{@ID_TIPO}'
+					);	
+							   
+				END IF;
+			END;
+   		
+	      ]]>	  
+    	  
+	</xsql:include-owa>
+    
+  
+</confirmAsociaDocuCome>
+

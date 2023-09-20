@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:import href="http://www.newco.dev.br/General/General.xsl"/>
+	<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="/Main/USUARIO/LANG != ''">
+			<xsl:value-of select="/Main/USUARIO/LANG"/>
+		</xsl:when>
+		<xsl:when test="/Main/LANG != ''">
+			<xsl:value-of select="/Main/LANG"/>
+		</xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>   
+	<xsl:value-of select="$lang"/>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+
+<xsl:template match="/">     
+<html>
+<head>
+	<script type="text/javascript">
+		var lang='<xsl:value-of select="/Main/USUARIO/LANG"/>';
+		
+		if (lang=='') 
+		{
+			window.location=location.protocol+'//'+document.domain
+		}
+		
+        //solodebug
+        console.log("JS MainHTML INICIO");
+	</script>
+
+	<!--<title><xsl:value-of select="document($doc)/translation/texts/item[@name='main_title']/node()"/></title>-->
+	<title><xsl:value-of select="/Main/USUARIO/CENTRO"/>&nbsp;:&nbsp;<xsl:value-of select="/Main/USUARIO/NOMBRECOMPLETO"/></title>
+
+ 	<!--style-->
+	<xsl:call-template name="estiloIndip"/> 
+	<!--fin de style--> 
+
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script> 
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>    
+	<!--<script type="text/javascript" src="http://www.newco.dev.br/General/main.js"></script>    
+	<script type="text/javascript" src="http://www.newco.dev.br/General/ValidaCamps.js"></script> -->
+
+	<!--	SOLODEBUG: pruebas porequé se producen errores al llamar a la API de Google desde el interior del DIV	
+	<script type="text/javascript" src="http://www.google.com/jsapi"/>
+	<script type="text/javascript">
+        //solodebug
+        console.log("JSAPI CARGADA");
+	</script>-->
+
+
+	<script type="text/javascript">
+		var noEmail	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='no_email']/node()"/>';
+		var okEmail	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='ok_email']/node()"/>';
+		var errEmailSQL	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_email_plsql']/node()"/>';
+
+		<!-- Variables necesarias para crear las cookies -->
+		var cookieSESSID	='<xsl:value-of select="/Main/USUARIO/SES_ID"/>';
+		var cookieUSID		='<xsl:value-of select="/Main/USUARIO/US_ID"/>';
+		var cookieIdioma	='<xsl:value-of select="/Main/USUARIO/LANG"/>';
+        var cookieEstilo	='<xsl:value-of select="/Main/USUARIO/STYLE"/>';
+		var cookieNombre	='<xsl:value-of select="/Main/USUARIO/US_NOMBRE"/>';
+	</script>
+
+	<xsl:text disable-output-escaping="yes"><![CDATA[
+	<script type="text/javascript">
+	<!--
+
+		setCookie('SES_ID',cookieSESSID);
+		setCookie('US_ID',cookieUSID);
+		setCookie('LANG',cookieIdioma);
+        setCookie('STYLE',cookieEstilo);
+
+		//function setCookie(nombre,valor,time){
+		function setCookie(nombre,valor){
+			// Asignamos la cookie... Caducidad de la cookie 'At end of session'
+			document.cookie = nombre+ "=" + encodeURIComponent(valor) + '; path=/; host=' + location.hostname + ';';
+		}
+		
+		function PresentarPaginas()
+		{
+			//solodebug	alert('PresentarPaginas');
+		
+			var IDPortal=jQuery("#IDPORTAL").val();
+			var IDSesion=jQuery("#SES_ID").val();
+			var Lang=jQuery("#LANG").val();
+			
+			var	URLCabecera;
+			var URLMain;
+			
+			
+			URLCabecera="http://www.newco.dev.br/MenusYDerechos/Cabecera.xsql";				//SES_ID=IDSesion&PRMLANG=Lang
+			if (IDPortal=='CVTIENDAS')
+				URLMain="http://www.newco.dev.br/Gestion/Comercial/InicioStocks.xsql";
+			else
+				URLMain="http://www.newco.dev.br/Personal/BandejaTrabajo/WFStatus.xsql";	//SES_ID=IDSesion&PRMLANG=Lang
+
+			jQuery("#Cabecera").load(URLCabecera);
+			jQuery("#Main").load(URLMain);
+		}
+
+		//solodebug
+		console.log("JS Main finalizado");
+		
+	//-->
+	</script>
+	]]></xsl:text>
+
+</head> 
+<xsl:choose>
+<xsl:when test="Main/xsql-error">
+	<body onLoad="resizeTo(800, 500);moveTo(200,200);"> 
+		<xsl:apply-templates select="//xsql-error"/>
+	</body>
+</xsl:when>
+<!--
+	|
+	| Mostramos el mensaje de acceso
+	|
++-->
+<xsl:when test="Main/USUARIO/MENSAJE_ACCESO">
+	<body onLoad="resizeTo(800, 500);moveTo(200,200);">
+		<xsl:variable name="msgacc"><xsl:value-of select="Main/USUARIO/MENSAJE_ACCESO"/></xsl:variable>
+		<div id="mensaje_acceso" style="position:absolute; visibility:hidden;z-index:1">
+			<p class="tituloForm"><xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id=$msgacc and @lang=$lang]" disable-output-escaping="yes"/></p>
+<!--
+	Acceso Correcto con cookies.
++-->
+			<xsl:choose>
+			<xsl:when test="Main/USUARIO/ACCESO">
+				<xsl:variable name="code-img-on">DB-Siguiente</xsl:variable>
+				<xsl:variable name="code-img-off">DB-Siguiente_mov</xsl:variable>
+				<xsl:variable name="code-link">G-0010</xsl:variable>
+				<xsl:variable name="code-status">G-0005</xsl:variable>
+				<xsl:variable name="status">
+					<xsl:choose>
+					<xsl:when test="status">
+						<xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id=$code-status]" disable-output-escaping="yes"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:variable name="caption"><xsl:value-of select="caption"/></xsl:variable>
+						<xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id=$caption]" disable-output-escaping="yes"/>
+					</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				<xsl:variable name="code-alt"><xsl:value-of select="alt"/></xsl:variable>
+				<xsl:variable name="alt">
+					<xsl:choose>
+					<xsl:when test="alt">
+						<xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id=$code-alt]" disable-output-escaping="yes"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:variable name="caption"><xsl:value-of select="caption"/></xsl:variable>
+						<xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id=$caption]" disable-output-escaping="yes"/>
+					</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+
+				<center>
+					<!-- Relanzamos el acceso con la cookie ya guardada -->
+					<a>
+						<xsl:attribute name="href">http://www.newco.dev.br/MenusYDerechos/Main.xsql?PARAMETRO=<xsl:value-of select="Main/request/parameters/PARAMETRO"/></xsl:attribute>
+						<xsl:attribute name="onMouseOver">cambiaImagen('Siguiente','<xsl:value-of select="$draw-on"/>');window.status='<xsl:value-of select="$status"/>';return true</xsl:attribute>
+						<xsl:attribute name="onMouseOut">cambiaImagen('Siguiente','<xsl:value-of select="$draw-off"/>');window.status='';return true</xsl:attribute>
+						<img name="Siguiente" alt="{$alt}" src="{$draw-off}" border="0"/>
+					</a>
+					<br/>
+					<xsl:variable name="caption">G-0005</xsl:variable><xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id=$caption]" disable-output-escaping="yes"/>
+				</center>
+			</xsl:when>
+			<!--  Acceso con cookies, cookie erronea (Intruso) -->
+			<xsl:otherwise>
+				<form name="mensaje_acceso" action="http://www.newco.dev.br/General/GError.xsql" method="POST">
+				<input type="hidden" name="ERR_TABLA" value="Main.AccesoCookiesErroneo"/>
+				<input type="hidden" name="ERR_JUMPTO" value="G-0011"/>
+
+					<div class="tituloCamp">
+						<p><xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='G-1090' and @lang=$lang]" disable-output-escaping="yes"/></p>
+						<textarea name="ERR_DATO3" cols="40" rows="5"/>
+					</div>
+					<a>
+						<xsl:attribute name="href">javascript:SubmitForm(document.mensaje_acceso);</xsl:attribute>Enviar
+					</a>
+					<br/><xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='IMG-0100']" disable-output-escaping="yes"/>
+
+					<xsl:apply-templates select="//jumpTo"/>
+				</form>
+			</xsl:otherwise> 
+			</xsl:choose>
+		</div>
+	</body>
+</xsl:when>
+<!--
+	|
+	| Error en usuario o clave. 
+	|
++-->
+<xsl:when test="Main/Status">
+	<body onLoad="resizeTo(800, 350);moveTo(200,200);">
+		<input type="hidden" name="ERR_DATO2" value="{Main/request/parameters/USER}"/>
+		<input type="hidden" name="ERR_DATO3" value="{Main/request/parameters/PASS}"/>
+
+		<xsl:apply-templates select="Main/Status"/>
+		<!--<xsl:call-template name="errorLogin"/>-->
+	</body>
+</xsl:when>
+<!--
+	|
+	| Acceso correcto.
+	|
++-->
+<xsl:otherwise>
+	
+	<frameset rows="80,*" frameborder="NO" border="0" framespacing="0">
+		<frame src="UntitledFrame-1" name="topFrame" scrolling="NO" noresize="noresize">
+			<xsl:attribute name="src">http://www.newco.dev.br/MenusYDerechos/Cabecera.xsql?SES_ID=<xsl:value-of select="Main/USUARIO/SES_ID"/>&amp;PRMLANG=<xsl:value-of select="Main/USUARIO/LANG"/></xsl:attribute>
+		</frame>
+		<!--
+        <xsl:choose>
+            <xsl:when test="Main/USUARIO/EMP_IDPORTAL = 'CVTIENDAS'">
+                <frame name="mainFrame" noresize="noresize" scrolling="auto" src="http://www.newco.dev.br/Gestion/Comercial/InicioStocks.xsql?SES_ID={Main/USUARIO/SES_ID}&amp;PRMLANG={Main/USUARIO/LANG}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <frame name="mainFrame" noresize="noresize" scrolling="auto" src="http://www.newco.dev.br/Personal/BandejaTrabajo/WFStatus.xsql?SES_ID={Main/USUARIO/SES_ID}&amp;PRMLANG={Main/USUARIO/LANG}"/>
+            </xsl:otherwise>
+        </xsl:choose>-->
+        <frame name="mainFrame" noresize="noresize" scrolling="auto" src="http://www.newco.dev.br/{Main/USUARIO/URL_INICIO}"/>
+	</frameset>
+	<!--
+	<noframes>
+		<body onLoad="resizeTo(screen.availWidth, screen.availHeight);">
+			<hr/>
+			Su navegador no esta preparado para acceder a la web.<br/>
+			Necesita un navegador más moderno.<br/>
+			<hr/>
+		</body>
+	</noframes>
+	-->
+	<!-- NOFRAME
+	<input type="hidden" id="IDPORTAL" value="{Main/USUARIO/EMP_IDPORTAL}"/>
+	<input type="hidden" id="SES_ID" value="{Main/USUARIO/SES_ID}"/>
+	<input type="hidden" id="LANG" value="{Main/USUARIO/LANG}"/>
+	<body onLoad="javascript:PresentarPaginas();">
+	<div id="Cabecera" Style="height:104px; background-color:#D6D6D6;"/> 
+	<div id="Main" style="max-height: 750px; overflow-y: scroll;"/> 
+	</body>-->
+	<xsl:apply-templates select="Main/USUARIO"/>
+</xsl:otherwise>
+</xsl:choose>
+</html>
+</xsl:template>
+
+<!-- TEMPLATES --><!-- TEMPLATES --><!-- TEMPLATES --><!-- TEMPLATES --><!-- TEMPLATES -->
+
+<xsl:template name="errorLogin">
+	<!-- <table width="90%">
+		<tr>
+			<td>
+				<xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='G-1030' and @lang=$lang]" disable-output-escaping="yes"/>
+				<br/>
+				<xsl:value-of select="document('http://www.newco.dev.br/General/messages.xml')/messages/msg[@id='G-1031' and @lang=$lang]" disable-output-escaping="yes"/>
+			</td>
+		</tr>
+	</table>-->
+</xsl:template>
+
+<xsl:template match="USUARIO">
+	Nombre: <xsl:value-of select="US_NOMBRE"/><br/>
+	Código: <xsl:value-of select="SES_ID"/><br/>
+</xsl:template>
+
+<xsl:template match="AUTORIZADO">
+	<a>
+		<xsl:attribute name="href">USDERManten.xsql?LANG=<xsl:value-of select="$lang"/>&amp;US_ID=<xsl:value-of select="../IDUSUARIO"/>&amp;IDMENU=<xsl:value-of select="../IDMENU"/></xsl:attribute>
+		<xsl:value-of select="."/>
+	</a>
+</xsl:template>
+</xsl:stylesheet>

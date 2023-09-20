@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NoticiaSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NoticiaSaveHTML.xsl"?>
+
+<NuevoAnuncio xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <field>
+   <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		Noticias_PCK.ActualizarNoticia
+			(	'{@US_ID}',
+				'{@ID}',
+				'{@IDTIPO}',
+				'{@IDGRUPO}',
+				'{@FECHAENTRADA}',
+				'{@FECHASALIDA}',
+				'{@TITULO}',
+				'{@RESPUESTA}',
+				'{@IDMENU}',
+				'{@NOTICIADELDIA}',
+				'{@PUBLICA}',
+				'{@ENVIARCONSULTAS}',
+				'{@ENVIARCLINICAS}',
+				'{@ENVIARPROVEEDORES}'
+				
+			);
+	END;
+    ]]>
+  </xsql:include-owa>
+  </field>
+    
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0026</page>
+    <caption>G-0001</caption> 
+  </jumpTo>  
+    
+  <returnHome/>
+</NuevoAnuncio>
+
+
+
+<!--
+Prueba del proceso:
+
+EXEC TablonAnuncios_PCK.NuevoAnuncio('72',0,'11/8/2001','Titulo de prueba','Pedazo de rollo de explicacion de prueba');
+
+-->

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Adjudica un producto en el catálogo del cliente
+	Ultima revision: ET 29ago20 11:22
+-->
+<?xml-stylesheet type="text/xsl" href="CatalogarOfertaJSON.xsl"?>
+
+<CatalogarOferta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CatalogarOfertaAJAX');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONES_PCK.ActualizarCatalogoCliente(
+				US_ID,
+				'{@LIC_ID}',
+				'{@IDPRODUCTOLIC}',
+				'{@IDOFERTALIC}',
+				'S'								--	29ago20
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = '-1' THEN
+				HTP.P('<ERROR/>');
+			ELSE
+				HTP.P('<OK>'||v_res||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CatalogarOferta>

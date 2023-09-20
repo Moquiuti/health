@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--	
+	Mostrar los historicos (logs) de la empresa
+	Ultima revision: ET 28dic22 11:45
+-->
+<?xml-stylesheet type="text/xsl" href="LogsEmpresaHTML2022.xsl"?>
+
+<LogsEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LogsEmpresa');
+			IF US_ID>=0 THEN
+				empresas_pck.Logs_XML(US_ID, {@EMP_ID});
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+</LogsEmpresa>
+

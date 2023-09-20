@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Lista de productos
+	Ultima revision: ET 31oct18 15:19
+	No parece ser necesario, revisar
+-->
+<?xml-stylesheet type="text/xsl" href="PLListaHTML.xsl"?>
+
+<Plantillas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:set-cookie host="www.nucleo-medicalvm.com" path="/" name="BUSQUEDA" value="STANDAR" only-if-unset="no"/>
+  
+  <xsql:include-owa>
+  <![CDATA[
+        PLANTILLAS_PCK.ListarPlantillas('{@US_ID}');
+  ]]>
+  </xsql:include-owa>
+  
+</Plantillas>
+

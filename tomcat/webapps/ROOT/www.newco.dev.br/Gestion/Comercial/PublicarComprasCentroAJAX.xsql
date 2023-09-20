@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Anyade una entrada en la tabla LIC_PRODUCTOSOFERTAS
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PublicarComprasCentroJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PublicarComprasCentroJSON.xsl"?>
+
+
+<PublicarDatosCompra xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="IDLICITACION"/>
+<xsql:include-param name="IDCENTRO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PublicarCompra');
+		IF US_ID>=0 THEN
+			Licitacionesagregadas_pck.PublicarCompra_XML(
+				US_ID,
+				'{@IDLICITACION}',
+				'{@IDCENTRO}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</PublicarDatosCompra>

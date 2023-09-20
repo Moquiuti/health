@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+	Comprueba si existe el NIF para una empresa y un pais
+	Ultima revision ET 4nov21 17:00
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ComprobarNifJSON.xsl"?>
+
+<ComprobarNif xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(12);
+		v_Res		NUMBER(12);
+	BEGIN
+		--	NO COMPROBAR SESION, no esta creada en el primer paso del alta
+		v_res:=empresas_pck.IDEmpresaSegunNif(
+			'{@IDPAIS}',
+			'{@NIF}'
+		);
+
+		IF v_res IS NOT NULL THEN
+			HTP.P('<EXISTE/>');
+		ELSE
+			HTP.P('<NO_EXISTE/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ComprobarNif>

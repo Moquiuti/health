@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EvaluacionesExcelJSON.xsl"?>
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="VENTANA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="SES_ID"/>
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EvaluacionesExcel');
+		IF US_ID>=0 THEN
+			EVALUACIONPRODUCTOS_PCK.Evaluaciones_Excel(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+				'{@FIDAUTOR}',
+				'{@FIDPROVEEDOR}',
+				'{@FIDPRODUCTO}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+        '{@FDIAGNOSTICO}',
+				'',
+				''
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</DescargaExcel>

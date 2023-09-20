@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="LPListaTestHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="LPListaTestHTML.xsl"?>
+-->
+
+<ListaProductos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+ 
+<!--
+ |  Nombre de la pagina. Parametro para guardar el error en caso de xsql-error
+ +-->
+ 
+ 
+<pagename>LPLista</pagename>
+  <xsql:include-owa>
+  <![CDATA[
+     Calendar;
+  ]]>
+  </xsql:include-owa>
+ 
+
+  
+</ListaProductos>

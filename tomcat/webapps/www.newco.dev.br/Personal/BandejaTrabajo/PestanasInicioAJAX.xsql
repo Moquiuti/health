@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que devuelve los valores para recargar la zona de pestañas de Bandeja Inicio -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PestanasInicioJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PestanasInicioJSON.xsl"?>
+
+
+<PestanasInicio xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ActualizarFechaEntregaPedido');
+		IF US_ID>=0 THEN
+			EISSeguimiento_PCK.ResumenProcedimientosCDC_XML(
+              US_ID
+      );
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</PestanasInicio>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="HistoricosCentrosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="HistoricosCentrosHTML.xsl"?>
+
+<HistoricosCentros xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Historicos por centros');
+		IF US_ID>=0 THEN
+			HistoricosPorCentro_pck.HistoricosPorCentro_XML(
+				US_ID,
+				'{@ID_EMP}',
+				'{@ID_PROD_ESTANDAR}',
+				'S',
+                                'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</HistoricosCentros>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Envia PDF de un pedido a un usuario
+	Ultima revision: ET 26ago20 18:15
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="enviarPDF.xsl"?>
+
+<enviarPDF xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="TIPO" />
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	  RES			VARCHAR2 (100);
+	BEGIN
+    US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','enviarPDFcliente');
+		IF US_ID>0 THEN
+		
+		--utilidades_pck.debug('enviarPDF.xsql. IDUsuario:'||US_ID||' IDMultioferta:'||'{@MO_ID}');
+		
+      --envio pdf a cliente
+      IF '{@TIPO}' = 'CLIENTE' THEN
+        --informamos del usuario que ha llamado esta funcion
+        /*Integracion_PCK.LogIntegracion(
+          US_ID,
+          '{@MO_ID}',
+          'Integracion_PCK.MultiofertaACliente_13: solicitud de enviar fichero.'
+        );*/
+
+        RES := Integracion_PCK.EnviarPDFACliente(
+          NULL,
+          '{@MO_ID}'
+        );
+
+      --envio pdf a proveedor
+      ELSIF '{@TIPO}' = 'PROVEE' THEN
+        --informamos del usuario que ha llamado esta funcion
+        /*Integracion_PCK.LogIntegracion(
+          US_ID,
+          '{@MO_ID}',
+          'Integracion_PCK.MultiofertaAProveedor_11: solicitud de enviar fichero.'
+        );*/
+
+        RES:= Integracion_PCK.MultiofertaAProveedor_11(
+          '{@MO_ID}',
+          'S'
+        );
+
+       --envio pdf al usuario
+      ELSIF '{@TIPO}' = 'USUARIO' THEN
+        --informamos del usuario que ha llamado esta funcion
+        /*Integracion_PCK.LogIntegracion(
+          US_ID,
+          '{@MO_ID}',
+          'Integracion_PCK.MultiofertaAUsuario: solicitud de enviar fichero.'
+        );*/
+
+        RES:= Integracion_PCK.EnviarPDFAUsuario(
+          US_ID,
+          '{@MO_ID}'
+        );
+     END IF;
+
+      HTP.P(Utilidades_Pck.CabeceraXML);
+      HTP.P('<res>'||RES||'</res>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</enviarPDF>

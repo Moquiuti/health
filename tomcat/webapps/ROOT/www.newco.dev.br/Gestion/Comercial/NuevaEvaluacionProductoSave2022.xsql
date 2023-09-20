@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Nueva Evaluacion de producto. Nuevo disenno 2022.
+	Ultima revision ET 12may22 10:40
+-->
+<?xml-stylesheet type="text/xsl" href="NuevaEvaluacionProductoHTML2022.xsl"?>
+
+<NuevaEvaluacionProducto xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+                RES             NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevaEvaluacion Guardar');
+		IF US_ID>=0 THEN
+                    
+			RES:= EVALUACIONPRODUCTOS_PCK.NuevaEvaluacion(
+                            US_ID,                      --p_IDUsuario 
+                            '{@ID_PROD}',
+                            '{@LIC_OFE_ID}',    
+                            '{@IDCENTROCLIENTE}',         --p_IDCentroEvaluacion       
+                            '{@ID_USUARIO_COOR}',       --p_IDUsuarioCoordinador       
+                            '{@ID_USUARIO_EVALUADOR}',        --p_IDUsuarioEvaluador       
+                            '{@REF_CLIENTE}',           --p_RefCliente               
+                            '{@REF_ESTANDAR}',          --p_RefEstandar              
+                            '{@DESCR_ESTANDAR}',        --p_DescEstandar              
+                            '{@REF_PROV}',             --p_RefProveedor               
+                            '{@DESCR_PROV}',           --p_DescProveedor               
+                            '{@MOTIVO}',                --p_IDMotivo                  
+                            '{@INSTRUCCIONES}',         --p_Instrucciones              
+                            '{@FECHA_LIMITE}',          --p_FechaLimite               
+                            '{@NUM_MUESTRAS}'          --p_NumeroMuestras           
+                        );
+                        
+                        IF RES >0 THEN
+                        	EVALUACIONPRODUCTOS_PCK.Evaluacion_XML(
+								US_ID,
+								RES,
+								'S'
+                            );
+                            
+                        ELSE
+                            HTP.P('<ERROR/>');
+                        END IF;
+                        
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevaEvaluacionProducto>

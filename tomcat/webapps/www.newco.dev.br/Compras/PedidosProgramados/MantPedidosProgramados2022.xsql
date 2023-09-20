@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ficha de PROGRAMA. Nuevo disenno 2022
+	Ultima revision: ET 13set22 18:23
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="MantPedidosProgramadosHTML2022.xsl"?>
+
+<PedidosProgramados xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="PEDP_ID"/>
+  <xsql:include-param name="IDOFERTAMODELO"/>
+  <xsql:include-param name="LISTAPEDIDOS"/>
+  <xsql:include-param name="LISTAUSUARIOSCENTRO"/>
+
+  <xsql:include-param name="VENTANA"/>
+  <xsql:include-param name="IDUSUARIOCONSULTA"/>
+  <xsql:include-param name="FECHANO_ENTREGA"/>
+  <xsql:include-param name="ACTUALIZARPAGINA"/>
+  <xsql:include-param name="MANUAL"/>
+  <xsql:include-param name="EDITAR_FECHAS"/>
+  <xsql:include-param name="DESDEOFERTA"/>
+
+  
+  <xsql:include-param name="VENTANA"/>
+  <xsql:include-param name="DESDE"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  
+  <xsql:include-owa>
+    <![CDATA[
+	DECLARE
+		US_ID				NUMBER(12);
+		v_IDPrograma		PEDIDOS_PROGRAMACION.PEDP_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidosProgramados');
+		IF US_ID>=0 THEN
+			
+			utilidades_pck.debug('PedidosProgramados. IDProg:{@PEDP_ID} Accion:{@ACCION}');
+		
+			IF '{@ACCION}'='MODIFICAR' THEN
+			
+				utilidades_pck.debug('PedidosProgramados. IDProg:{@PEDP_ID} Accion:{@ACCION} IDOfMod:{@IDOFERTAMODELO} IDEmp:{@IDEMPRESA} FecLanz:{@FECHANO_LANZAMIENTO} FecEnt:{@FECHANO_ENTREGA}');
+
+				v_IDPrograma:=PEDIDOSPROGRAMADOS_PCK.PedidoProgramado(
+				  '{@PEDP_ID}',
+				  '{@IDOFERTAMODELO}',
+				  '{@IDEMPRESA}',
+				  '{@IDCENTRO}',
+				  '{@IDUSUARIO}',
+				  '{@IDFRECUENCIA}',
+				  '{@FECHA_INICIO}',
+				  '{@FINALICACION_FECHA}',
+				  '{@FECHANO_LANZAMIENTO}',
+				  '{@PLAZOENTREGA}',
+				  '{@DESCRIPCION}',
+				  '{@ACTIVO}',
+				  '{@CONFIRMAR}',
+				  '{@COMENTARIOS}',
+				  '{@MOSTRARALPROVEEDOR}',
+				  '{@MANUAL}',
+				  '{@RECALCULAR}',
+				  '{@FECHANO_ENTREGA}'			--	7oct22
+				);
+			ELSE
+				v_IDPrograma:='{@PEDP_ID}';
+			END IF;		
+		
+			PEDIDOSPROGRAMADOS_PCK.PedidoProgramado_XML(v_IDPrograma,'{@IDOFERTAMODELO}',US_ID,'{@LISTAPEDIDOS}','S');			--	14set22 '{@LISTAUSUARIOSCENTRO}'
+		END IF;
+	END;
+    ]]>
+  </xsql:include-owa>
+
+  <field name="IDFRECUENCIA">
+    <dropDownList>
+      <listElem>
+        <ID>-1</ID>
+        <listItem>Frecuencia de entregas</listItem>
+      </listElem>
+      <listElem>
+        <ID>1</ID>
+        <listItem>1 sola vez</listItem>>
+      </listElem>
+      <listElem>
+        <ID>S</ID>
+        <listItem>Semanal</listItem>>
+      </listElem>
+      <listElem>
+        <ID>Q</ID>
+        <listItem>Quincenal</listItem>>
+      </listElem>
+      <listElem>
+        <ID>M</ID>
+        <listItem>Mensual</listItem>>
+      </listElem>
+      <listElem>
+        <ID>B</ID>
+        <listItem>Bimensual</listItem>>
+      </listElem>
+      <listElem>
+        <ID>T</ID>
+        <listItem>Trimestral</listItem>>
+      </listElem>
+      <listElem>
+        <ID>Z</ID>
+        <listItem> -- Manual -- </listItem>>
+      </listElem>
+    </dropDownList>
+  </field>
+  
+  <returnHome/>
+</PedidosProgramados>
+

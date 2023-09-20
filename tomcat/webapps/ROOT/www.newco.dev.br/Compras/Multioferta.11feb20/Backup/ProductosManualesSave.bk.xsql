@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Aquí -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ProductosManualesSaveJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ProductosManualesSaveJSON.xsl"?>
+
+<ProductosManualesSave xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="US_ID"/>	
+  <xsql:include-param name="PRO_ID"/>	
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Prod		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ProductosManualesSave');
+		IF US_ID>=0 THEN
+			
+			v_Prod:= MULTIOFERTAS_PCK.InsertarProductoManual(
+				'{@MOID}',
+				'{@REFPROVEEDOR}',
+                '{@DESCRIPCION}',
+                '{@UNIDADBASICA}',
+                '{@CANTIDAD}',
+				'{@PRECIOUNITARIO}',
+				'{@TIPO_IVA}'
+				
+			);
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Prod > 0 THEN
+				HTP.P('<OK>'||v_Prod||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+			
+			
+				
+			
+		END IF;			   
+    END;
+        ]]>  
+</xsql:include-owa>
+
+</ProductosManualesSave>

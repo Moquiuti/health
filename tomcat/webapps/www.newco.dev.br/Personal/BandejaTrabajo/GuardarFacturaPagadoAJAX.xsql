@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+	Mantenimiento de facturas y control de pagos
+	Ultima revision: ET 14nov19 14:45
++-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="GuardarFacturaPagadoJSON.xsl"?>
+
+<FacturaPagado xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidoMinimoLicitacion');
+		IF US_ID>=0 THEN
+			v_Res:=PEDIDOS_PCK.GuardarFacturaYPagado(
+				US_ID,
+				'{@MO_ID}',
+				'{@FACTURA}',
+				'{@PAGADO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML||'<'||v_Res||'/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</FacturaPagado>

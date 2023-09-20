@@ -1,0 +1,5 @@
+20nov19 ET MostrarPlantilla y EditarPlantilla en ambos casos mantienen el buscador en la parte superior del marco central ZonaPlantilla_201119.js
+04ago20 ET IMBANACO: Arrastramos la hoja de gasto hasta el primer pedido ZonaPlantilla_040820.js
+12oct20 ET Nuevos campos NUMCEDULA, NOMBREPACIENTE
+
+

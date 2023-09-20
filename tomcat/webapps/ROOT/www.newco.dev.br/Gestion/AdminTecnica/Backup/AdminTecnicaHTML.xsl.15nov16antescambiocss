@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |	Estadisticas de acceso de los usuarios en MedicalVM
+ |
+ |	(c) 12/1/2001 ET
+ |
++-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href = "http://www.newco.dev.br/General/General.xsl"/>
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+<xsl:param name="lang" select="@lang"/>
+<xsl:template match="/">
+
+<html>
+<head>
+	<title>Administración técnica</title>
+	<xsl:call-template name="estiloIndip"/>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/AdminTecnica/admintecnica_220816.js"></script>
+</head>
+
+<body>
+<xsl:choose>
+<xsl:when test="/Administracion/ERROR">
+	<h1 class="titlePage">Administración Técnica</h1>
+	<h2 class="titlePage">No tiene derechos para acceder a esta página</h2>
+</xsl:when>
+<xsl:otherwise>
+	<!-- Bloque de título -->
+	<xsl:choose>
+	<xsl:when test="/Administracion/INICIO/RESULTADO">
+		<h1 class="titlePage">Administración Técnica - Resultado: <xsl:value-of select="/Administracion/INICIO/RESULTADO"/></h1>
+	</xsl:when>
+	<xsl:otherwise>
+		<h1 class="titlePage">Administración Técnica</h1>
+	</xsl:otherwise>
+	</xsl:choose>
+        
+	<!-- Bloque de info para los paquetes -->
+	<xsl:if test="/Administracion/INICIO/ACCION='PAQUETES' or /Administracion/INICIO/ACCION='RECOMPILAR'">
+		<xsl:choose>
+		<xsl:when test="/Administracion/INICIO/PAQUETES_INVALIDOS/PAQUETE">
+			<table align="center" class="encuesta">
+			<thead>
+				<tr class="titulos">
+                                        <th align="center">Pos.</th>
+					<th align="center">Fecha</th>
+					<th align="center">Tipo</th>
+					<th align="left">Paquetes inválidos</th>
+					<th align="center">Estado</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			<xsl:for-each select="/Administracion/INICIO/PAQUETES_INVALIDOS/PAQUETE">
+				<tr>
+                                        <td align="center"><xsl:value-of select="position()"/></td>
+					<td align="center"><xsl:value-of select="FECHA"/></td>
+					<td align="center"><xsl:value-of select="TIPO"/></td>
+					<td align="left">&nbsp;<xsl:value-of select="NOMBRE"/></td>
+					<td align="center"><xsl:value-of select="ESTADO"/></td>
+				</tr>
+			</xsl:for-each>
+			</tbody>
+			</table>
+		</xsl:when>
+		<xsl:otherwise>
+                    <table align="center" class="encuesta">
+                            <tr class="amarillo">
+                                <td class="cuarenta">&nbsp;</td>
+                                <td><h2>No se han encontrado paquetes inválidos</h2></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                    </table>
+		</xsl:otherwise>
+		</xsl:choose>
+	</xsl:if>
+
+	<!-- Bloque de info para los logs -->
+	<xsl:if test="/Administracion/INICIO/ACCION='LOGS'">
+	<xsl:choose>
+	<xsl:when test="/Administracion/INICIO/LOG/ENTRADA/COLUMNA">
+		<table align="center" class="encuesta">
+		<thead>
+			<tr class="titulos">
+				<th>
+					<xsl:attribute name="colspan"><xsl:value-of select="/Administracion/INICIO/LOG/NUMCOLUMNAS"/></xsl:attribute>
+					<xsl:value-of select="/Administracion/INICIO/LOG/TABLA"/>
+				</th>
+			</tr>
+			<tr class="titulos">
+			<xsl:for-each select="/Administracion/INICIO/LOG/CABECERA/COLUMNA">
+				<th><xsl:copy-of select="."/></th>
+			</xsl:for-each>
+			</tr>
+                </thead>
+
+		<tbody>
+		<xsl:choose>
+		<xsl:when test="/Administracion/INICIO/LOG/ENTRADA">
+			<xsl:for-each select="/Administracion/INICIO/LOG/ENTRADA">
+				<tr>
+                                
+				<xsl:choose>
+				<xsl:when test="TEXTO">
+					<td align="center">
+						<xsl:attribute name="colspan"><xsl:value-of select="/Administracion/INICIO/LOG/NUMCOLUMNAS"/></xsl:attribute>
+						<xsl:value-of select="TEXTO"/>
+					</td>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:for-each select="COLUMNA">
+						<td>
+							<xsl:attribute name="align">
+								<xsl:choose>
+								<xsl:when test="IZQ">left</xsl:when>
+								<xsl:when test="DER">right</xsl:when>
+								<xsl:otherwise>center</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<xsl:attribute name="class">
+								<xsl:choose>
+								<xsl:when test="VERDE">celdaconverde</xsl:when>
+								<xsl:when test="ROJO">celdaconrojo</xsl:when>
+								<xsl:when test="AZUL">azul</xsl:when>
+								</xsl:choose>
+							</xsl:attribute>
+							<xsl:copy-of select="."/>
+						</td>
+					</xsl:for-each>
+				</xsl:otherwise>
+				</xsl:choose>
+				</tr>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:otherwise>
+			<tr class="amarillo">
+				<td align="center">
+					<xsl:attribute name="colspan"><xsl:value-of select="/Administracion/INICIO/LOG/NUMCOLUMNAS"/></xsl:attribute>
+					<h2>No se han encontrado entradas</h2>
+				</td>
+			</tr>
+		</xsl:otherwise>
+		</xsl:choose>
+		</tbody>
+		</table>
+	</xsl:when>
+	<xsl:otherwise>
+		<xsl:choose>
+		<xsl:when test="/Administracion/INICIO/LOG/ENTRADA">
+			<table align="center" class="encuesta">
+			<thead>
+				<tr class="titulos">
+                                    <th>Pos.</th>
+                                    <th align="center">Fecha</th>
+                                    <th align="left">Mensaje</th>
+                                </tr>
+			</thead>
+
+			<tbody>
+                        <xsl:variable name="linea" select="/Administracion/INICIO/LOG/ENTRADA[1]/LINEA" />
+			<xsl:for-each select="/Administracion/INICIO/LOG/ENTRADA">
+                            
+				<tr>
+                                    <td>
+                                        <xsl:choose>
+                                            <xsl:when test="LINEA != ''"><xsl:value-of select="LINEA" /></xsl:when>
+                                            <xsl:when test="LINEA != '' and $linea = ''"><xsl:value-of select="position()"/></xsl:when>
+                                        </xsl:choose>
+                                    </td>
+                                    <td align="center"><xsl:value-of select="FECHA"/></td>
+                                    <td align="left">&nbsp;<xsl:value-of select="TEXTO"/></td>
+				</tr>
+			</xsl:for-each>
+			</tbody>
+			</table>
+		</xsl:when>
+		<xsl:otherwise>
+                    <table align="center" class="encuesta">
+                            <tr class="amarillo">
+                                <td class="cuarenta">&nbsp;</td>
+                                <td><h2>No se han encontrado entradas</h2></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                    </table>
+		</xsl:otherwise>
+		</xsl:choose>
+	</xsl:otherwise>
+	</xsl:choose>
+	</xsl:if>
+
+	<!-- Bloque de info para los ficheros de integración -->
+	<xsl:if test="/Administracion/INICIO/ACCION='INT_CONSULTA' or /Administracion/INICIO/ACCION='INT_EJECUTAR' or /Administracion/INICIO/ACCION='INT_OKMANUAL'">
+		<xsl:choose>
+		<xsl:when test="/Administracion/INICIO/INTEGRACION/FICHERO">
+			<table align="center" class="encuesta">
+			<thead>
+				<tr class="titulos">
+                    <th align="center">Pos.</th>
+					<th align="center">Fecha</th>
+					<th align="center">Cliente</th>
+					<th align="center">Proveedor</th>
+					<th align="center">Fichero</th>
+					<th align="center">Acción</th>
+					<!--<th align="center">Estado</th> Siempre será con errores-->
+					<th align="center">Comentarios</th>
+					<th align="center">Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+            <xsl:variable name="linea" select="/Administracion/INICIO/INTEGRACION/FICHERO[1]/LINEA" />
+			<xsl:for-each select="/Administracion/INICIO/INTEGRACION/FICHERO">
+				<tr>
+                    <td>
+                    <xsl:choose>
+                        <xsl:when test="LINEA != ''"><xsl:value-of select="LINEA" /></xsl:when>
+                        <xsl:when test="LINEA != '' and $linea = ''"><xsl:value-of select="position()"/></xsl:when>
+                    </xsl:choose>
+                    </td>
+					<td align="left">&nbsp;<xsl:value-of select="FECHA"/></td>
+					<td align="left">&nbsp;<xsl:value-of select="CLIENTE"/></td>
+					<td align="left">&nbsp;<xsl:value-of select="PROVEEDOR"/></td>
+					<td align="left">&nbsp;<xsl:value-of select="NOMBRE"/></td>
+					<td align="left">&nbsp;<xsl:value-of select="ACCION"/></td>
+					<!--<td align="left">&nbsp;<xsl:value-of select="ESTADO"/></td>-->
+					<td align="left">&nbsp;<xsl:value-of select="COMENTARIOS"/></td>
+					<td align="center">&nbsp;
+						<a href="javascript:EjecutarFichero({ID});">Ejecutar</a>&nbsp;
+						<a href="javascript:OkManualFichero({ID});">OkManual</a>&nbsp;
+						<a href="javascript:EditarFichero({ID});">Editar</a>
+					</td>
+				</tr>
+			</xsl:for-each>
+			</tbody>
+			</table>
+		</xsl:when>
+		<xsl:otherwise>
+                    <table align="center" class="encuesta">
+                            <tr class="amarillo">
+                                <td class="cuarenta">&nbsp;</td>
+                                <td><h2>No se han encontrado ficheros pendientes</h2></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                    </table>
+		</xsl:otherwise>
+		</xsl:choose>
+	</xsl:if>
+	<br/>
+	<br/>
+	<!-- Formulario, menús -->
+	<form name="Admin" method="post" action="AdminTecnica.xsql">
+	<input type="hidden" name="ACCION"/>
+	<input type="hidden" name="PARAMETROS"/>
+
+		<table align="center" class="encuesta">
+		<tbody>
+			<tr>
+				<td class="uno">&nbsp;</td>
+				<td class="label trenta">1.- Asociar empresa a catálogo:</td>
+				<td class="veinte" colspan="3">
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/CLIENTESSINCATALOGO/field"></xsl:with-param>
+					</xsl:call-template>
+					&nbsp;&nbsp;&nbsp;&nbsp;catálogo:&nbsp;
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/CATALOGOSPADRE/field"></xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td colspan="2"><a href="javascript:AsociarEmpresa();">Asociar</a></td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">2.- Desbloquear proveedor:</td>
+				<td colspan="3">
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/PROVEEDORESBLOQUEADOS/field"></xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td colspan="2"><a href="javascript:DesbloquearProveedor();">Desbloquear</a></td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">3.- Bloquear proveedor:</td>
+				<td colspan="3">
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/PROVEEDORESDESBLOQUEADOS/field"></xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td colspan="2"><a href="javascript:BloquearProveedor();">Bloquear</a></td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">4.- Copiar derechos generales:</td>
+				<td colspan="3">
+					de US_ID: <input type="text" size="5" name="CDG_ORIGEN"/> a US_ID: <input type="text" size="5" name="CDG_DESTINO"/>
+				</td>
+				<td colspan="2">
+					<a href="javascript:CopiarDerechosGenerales();">Copiar</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;(no se copian derechos de pedidos sobre varios centros)
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">5.- Copiar derechos menus:</td>
+				<td colspan="3">
+					de US_ID: <input type="text" size="5" name="CDM_ORIGEN"/> a US_ID: <input type="text" size="5" name="CDM_DESTINO"/>
+				</td>
+				<td colspan="2"><a href="javascript:CopiarDerechosMenu();">Copiar</a></td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">6.- Copiar derechos carpetas y plantillas:</td>
+				<td colspan="3">
+					de US_ID: <input type="text" size="5" name="CDP_ORIGEN"/> a US_ID: <input type="text" size="5" name="CDP_DESTINO"/>
+				</td>
+				<td colspan="2"><a href="javascript:CopiarDerechosCarpetasYPlantillas();">Copiar</a></td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">7.- Ocultar productos no comprados en empresa:</td>
+				<td colspan="3">
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/CLIENTES/field"></xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td colspan="2"><a href="javascript:OcultarProductosNoCompradosAEmpresa();">Ocultar</a></td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">8.- Derechos productos en plantillas del usuario:</td>
+				<td colspan="3">
+					<input type="text" size="5" name="IDUSUARIOOCULTAR"/>
+				</td>
+				<td colspan="2">
+					<a href="javascript:DerechosProductosUsuario('OCULTARNOCOMPRADOS');">Ocultar productos no comprados</a>&nbsp;|&nbsp;
+					<a href="javascript:DerechosProductosUsuario('OCULTARTODOS');">Ocultar todos</a>&nbsp;|&nbsp;
+					<a href="javascript:DerechosProductosUsuario('MOSTRARTODOS');">Mostrar Todos</a>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">9.- Ocultar y bloquear proveedor a usuario:</td>
+				<td colspan="3">
+					Bloquear:
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/PROVEEDORES/field"></xsl:with-param>
+					</xsl:call-template>
+					&nbsp;al usuario:
+					<input type="text" size="5" name="IDUSUARIOOCULTARPROVEEDOR"/>
+				</td>
+				<td colspan="2">
+					<a href="javascript:OcultarProveedorAUsuario();">Ocultar y bloquear</a>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">10.- Forzar avisos por mail:</td>
+				<td colspan="5">
+					<a href="javascript:Accion('AVISOS_CAMBIOSCATALOGOASISA');">Cambios catálogo ASISA</a>&nbsp;|&nbsp;
+					<a href="javascript:Accion('AVISOS_DERECHOSCRISTOREY');">Control derechos Cristo Rey</a>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">11.- Otras acciones:</td>
+				<td colspan="5">
+					<a href="javascript:Accion('COMPROBAR_PROGRAMAS');">Comprobar programas</a>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">12.- Consultar situación ficheros integración :</td>
+				<td colspan="5">
+					<a href="javascript:Accion('INT_CONSULTA');">Consulta</a>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td class="label">13.- Otras consultas</td>
+				<td>
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/TIPOLOG/field"></xsl:with-param>
+					</xsl:call-template>
+					<!--<select name="TIPOLOG">
+						<option value="ERRORES" selected="yes">Log de ERRORES</option>
+						<option value="DEBUG">Log de depuración</option>
+						<option value="ADMIN">Log de administración</option>
+					</select>-->
+				</td>
+				<td>
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/PLAZO/field"></xsl:with-param>
+					</xsl:call-template>
+					<!--<select name="PLAZO">
+						<option value="1DIA" selected="yes">1 día</option>
+						<option value="2DIAS">2 días</option>
+						<option value="1SEMANA">1 semana</option>
+						<option value="1MES">1 semana</option>
+					</select>-->
+				</td>
+				<td class="dies">
+					<xsl:call-template name="desplegable">
+						<xsl:with-param name="path" select="/Administracion/INICIO/LINEAS/field"></xsl:with-param>
+					</xsl:call-template>
+					<!--<select name="LINEAS">
+						<option value="10" selected="yes">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
+					</select>-->
+				</td>
+				<td class="dies">
+					<input type="text" size="20" name="FILTRO" value="{/Administracion/INICIO/RESTRICCION}"/>
+				</td>
+				<td><a href="javascript:ConsultarLogs();">Consultar</a>&nbsp;<a href="javascript:BorrarLogs();">Borrar</a></td>
+			</tr>
+		</tbody>
+		</table>
+
+		<xsl:if test="/Administracion/INICIO/ADMINISTRADOR_TECNICO">
+			<table align="center" class="encuesta">
+				<tr><td colspan="5">&nbsp;</td></tr>
+
+				<tr class="subCategorias"><th colspan="3" align="center">AVANZADO</th><th colspan="2">&nbsp;</th></tr>
+
+			<tbody>
+				<tr>
+					<td class="uno">&nbsp;</td>
+					<td class="label trenta">A.- Ver paquetes invalidos</td>
+					<td class="cuarenta">&nbsp;</td>
+					<td class="veinte"><a href="javascript:Accion('PAQUETES');">Consulta</a></td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<td>&nbsp;</td>
+					<td class="label">B.- Recompilar paquetes</td>
+					<td>&nbsp;</td>
+					<td><a href="javascript:Accion('RECOMPILAR');">Recompilar</a></td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<td>&nbsp;</td>
+					<td class="label">C.- Matar sesión ():</td>
+					<td>
+						<input type="text" size="8" name="IDSESION"/> [sid,serial#]
+					</td>
+					<td><a href="javascript:MatarSesion();">Matar</a></td>
+					<td>&nbsp;</td>
+				</tr>
+<!--	DC - 20/03/14 - Pide Eduardo ocultar estas dos opciones
+				<tr>
+					<td>&nbsp;</td>
+					<td class="label">D.- Lanzar "Select"</td>
+					<td><TEXTAREA cols="40" rows="3" name="SQL_SELECT"/></td>
+					<td><a href="javascript:SQLSelect();">Select</a></td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<td>&nbsp;</td>
+					<td class="label">E.- Lanzar "Update"</td>
+					<td><TEXTAREA cols="40" rows="3" name="SQL_UPDATE"/></td>
+					<td><a href="javascript:SQLUpdate();">Update</a></td>
+					<td>&nbsp;</td>
+				</tr>
+-->
+			</tbody>
+			</table>
+		</xsl:if>
+	</form>
+</xsl:otherwise>
+</xsl:choose>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

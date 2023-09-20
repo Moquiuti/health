@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Procesa un contrato y crea el fichero en el directorio de Descargas, devuelve el nombre del fichero 
+	Ultima revision: ET 26feb20 12:00
+-->
+<?xml-stylesheet type="text/xsl" href="ProcesarContratoJSON.xsl"?>
+<Contrato xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER(6);
+		v_Res			VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Contrato');
+		IF US_ID > 0 THEN
+		
+			v_Res:=CONTRATOS_PCK.ProcesarContrato_File(
+				US_ID,
+				'{@IDCONTRATO}'
+			);
+			
+			IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+				HTP.P('<OK>'
+					||'<NOMBREFICHERO>'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'</NOMBREFICHERO>'
+					||'</OK>');
+			
+			ELSE
+				HTP.P('<ERROR>'
+					||'<MENSAJE>'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'</MENSAJE>'
+					||'</ERROR>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Contrato>

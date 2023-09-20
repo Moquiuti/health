@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ContactoSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ContactoSaveHTML.xsl"?>
+
+<!--
+
+	Guardar los datos de un contacto
+
+	13 MAYO 11 MC
+-->
+
+<ContactoSave xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+ <xsql:set-cookie host="www.mvmnucleo.com" path="" names="LANG"  value="spanish"/>
+
+	<LANG>spanish</LANG>
+	
+  <xsql:include-owa>
+    <![CDATA[
+        DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			mensajeria_pck.Contacto_mail_XML
+			(
+				'{@CONTACTO_MAIL}',
+				'{@CONTACTO_NOMBRE}',
+				'{@CONTACTO_CARGO}',								
+				'{@CONTACTO_TIPO_EMP}',		
+				'{@CONTACTO_EMPRESA}',
+				'{@CONTACTO_TEL}',
+				'{@CONTACTO_TEXT}',
+				'{@PAIS}',
+                                'MVM'
+			);
+     END;
+    ]]>
+  </xsql:include-owa>
+  
+	 
+  <returnHome/>
+</ContactoSave>
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Primer paso del pedido manual
+	ultima revision ET 8mar21 12:20
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="LPAnalizarFrameHTML.xsl"?>
+
+<Analizar xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="PL_ID"/>
+<xsql:include-param name="LP_ID"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+
+<!--
+ |	Parametros para soportar el reload cuando se cambia de escalado.
++-->
+<xsql:include-param name="FECHA_PAGO"/>
+<xsql:include-param name="STRING_SELECCIONADOS"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		
+		
+		v_IDPlantilla			NUMBER;
+		v_IDListaProductos		NUMBER;
+		
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LPAnalizarFrame');
+		IF US_ID>=0 THEN
+
+			--solodebug	utilidades_pck.debug('LPAnalizar. IDPlantilla:{@PL_ID} IDEMPRESA: {@IDEMPRESA} IDProveedor:{@IDPROVEEDOR}**');
+		
+			IF '{@PL_ID}' IS NULL THEN
+				v_IDPlantilla:=Catalogoprivado_v4_Pck.IDPlantillaProveedor('{@IDEMPRESA}','{@IDPROVEEDOR}','N');
+			ELSE
+				v_IDPlantilla:='{@PL_ID}';
+			END IF;
+		
+			v_IDListaProductos:=Multiofertas_PCK.CrearListaDeProductos(v_IDPlantilla, US_ID);
+			
+			--solodebug	utilidades_pck.debug('LPAnalizar.. v_IDPlantilla:'||v_IDPlantilla||' IDListaProductos:'||v_IDListaProductos);
+
+			--	utilidades_pck.debug('LPAnalizar.. Parametros:{@HOJADEGASTOS}|{@NOMBREPACIENTE}|{@NUMCEDULA}|{@HABITACION}');
+			
+			ANALIZAR.Analizar(
+				v_IDListaProductos,
+				US_ID,
+				'DIRECTO',				--  ACCION
+				'0',					--  IDDIVISA
+				'1000',					--	LINEASPORPAGINA
+				NULL,					--	PAGINA
+				'{@HOJADEGASTOS}|{@NOMBREPACIENTE}|{@NUMCEDULA}|{@HABITACION}',		--	04ago20, 12oct20: nuevos campos
+				'{@SELECCIONADOS}'													--	8mar21 Seleccionados
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+</Analizar>

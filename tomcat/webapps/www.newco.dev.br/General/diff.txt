@@ -1,0 +1,36 @@
+6,7d5
+< //aceptacion de los cookie
+< var aceptoCookie = GetCookie('ACEPTO_COOKIE');
+17c15
+< 		SetCookieAcepta('ACEPTO_COOKIE','S','365');
+---
+> 		SetCookie('ACEPTO_COOKIE','S');
+22,32d19
+< function SetCookieAcepta(name, value,expires) {
+<   var fecha = new Date();
+<   fecha.setTime(fecha.getTime() + (expires*24*60*60*1000));
+<   document.cookie = name + "=" + escape(value) + 
+<   ((expires == null) ? "" : "; expires=" + fecha.toGMTString()) + ";host=www.mvmnucleo.com;path=/";	
+<   /*((path == null) ? "" : "; path=" + path) +
+<   ((domain == null) ? "" : "; domain=" + domain) +
+<   ((secure == null) ? "" : "; secure")*/
+< }
+< 
+< 
+132a120
+> 
+136,139d123
+<         
+<         SetCookieAcepta('ACEPTO_COOKIE','S','365');
+<        
+<             location.reload();
+153,154c137,138
+< 	//if(getCookie2('US_ID')!='')
+< 		//document.cookie = 'US_ID=; path=/; host=' + location.hostname + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+---
+> 	if(getCookie2('US_ID')!='')
+> 		document.cookie = 'US_ID=; path=/; host=' + location.hostname + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+159c143
+< 	//SetCookie('RESOLUCION', form.elements['RESOLUCION'].value);
+---
+> 	SetCookie('RESOLUCION', form.elements['RESOLUCION'].value);

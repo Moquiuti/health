@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="HistoricosPorCentroAgregadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="HistoricosPorCentroAgregadoHTML.xsl"?>
+
+<HistoricosPorCentroAgregado xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="IDEMPRESA"/>
+<xsql:include-param name="AGRUPAR_POR"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','HistoricosPorCentro');
+		IF US_ID>=0 THEN
+			HISTORICOSPORCENTRO_PCK.TablaPorCentroAgregada_XML(
+				'{@IDEMPRESA}',
+				'{@AGRUPAR_POR}',
+				NULL
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</HistoricosPorCentroAgregado>

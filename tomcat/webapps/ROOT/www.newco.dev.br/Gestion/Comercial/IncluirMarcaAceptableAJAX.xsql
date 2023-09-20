@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Incluye una marca en la lista de marcas aceptables
+	Ultima revision: ET 12ago22 12:15
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="IncluirMarcaAceptableJSON.xsl"?>
+
+<IncluirMarcaAceptable xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER(12);
+		v_Res			VARCHAR2(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IncluirMarcaAceptable');
+		IF US_ID>=0 THEN
+			v_Res:=LICITACIONES_SEG_PCK.IncluirMarcaAceptable
+			(
+				US_ID,
+				'{@LIC_ID}',
+				'{@IDOFERTALIC}',
+				'{@MARCA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR>'||v_Res||'</ERROR>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</IncluirMarcaAceptable>

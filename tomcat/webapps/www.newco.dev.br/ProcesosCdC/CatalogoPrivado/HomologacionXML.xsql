@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ficha de homologación de producto. También permite informar de roturas de stock o bloqueos de proveedores. Nuevo disenno.
+	Ultima revisión ET 19may22 12:30
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="HomologacionHTML2022.xsl"?>
+-->
+<Homologacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Homologacion');	
+		  IF US_ID>=0 THEN		   
+          	CatalogoPrivado_Centros_pck.Inicio_XML
+			(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDCENTRO}',
+				'{@REFERENCIA}',
+				'{@ACCION}',
+				'{@PARAMETROS}'
+			);
+          END IF;
+        END;
+        ]]>
+  </xsql:include-owa>
+  
+</Homologacion>

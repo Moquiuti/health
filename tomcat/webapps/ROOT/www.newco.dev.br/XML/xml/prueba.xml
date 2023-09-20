@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Nodos>
+  <Nodo1 p="3" a="4">
+	<N1V1>10</N1V1>
+	<N1V2>20</N1V2>
+  </Nodo1>
+  <Nodo2 a="1" b="2">
+	<N2V1>10</N2V1>
+	<N2V2>20</N2V2>
+  </Nodo2>
+</Nodos>
+

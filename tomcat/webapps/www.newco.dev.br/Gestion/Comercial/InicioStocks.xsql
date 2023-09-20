@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |  Mostramos un mensaje en caso que tengamos Documentos de WORKFLOW pendientes.
+ |	9ene07	ET	Incluimos los pedidos problematicos
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="InicioStocksHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="InicioStocksHTML.xsl"?>
+
+
+<StockOfertaList xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+  
+	<!--	Pedidos problematicos, alarmas, bandeja y licitaciones en curso	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Inicio Stocks');
+					IF US_ID>=0 THEN
+                        ANUNCIOSSTOCKS_PCK.Ofertas_XML(
+                                US_ID,
+                                '{@FIDEMPRESA}',
+                                NULL,					--'{@FIDCENTRO}',
+                                NULL,					--'{@FIDRESPONSABLE}',
+                                '{@FTEXTO}',
+                                '{@FESTADO}',
+                                '{@ORDEN}',
+                                '{@SENTIDO}',
+                                '{@LINEASPORPAGINA}',
+                                '{@PAGINA}',
+                                'S',
+                                NULL,					--'{@IDCATEGORIA}',
+                                NULL,					--'{@IDFAMILIA}',
+                                NULL,					--'{@IDSUBFAMILIA}',
+                                '{@FIDPRODUCTOESTANDAR}',
+                                '{@FIDMARCA}'
+                        );
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</StockOfertaList>

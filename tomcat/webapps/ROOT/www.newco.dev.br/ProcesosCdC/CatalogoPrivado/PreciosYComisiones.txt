@@ -1,0 +1,11 @@
+22ago18 ET Mostrar enlace a ficha de adjudicación para usuarios CDC (antes solo MVM)
+29ago18 ET Enlazar la ref. MVM a la ficha de catalogación rápida para productos no adjudicados
+30ago18 ET Quitar tooltip con el CP_PRO_ID
+14ene19 ET Para usuarios de centros con referencia propia, mostrar dicha referencia
+16ene19	ET Incluir filtros de búsqueda para Colombia "Regulados" y "Orden 1", mostrar diferenciados estos casos
+16ene19	ET Incluir filtros de búsqueda "Sin stock" y "Bloq.cartera"
+12jun19	ET Destacar los productos traspasados
+14oct20 ET Incluir el campo "Marcas aceptables" en el listado
+20oct20 ET Condiciones de tipo "<=" y ">=" en las busquedas por fecha límite de la tarifa
+23dic20 ET Incluir principio activo
+15set21 ET Incluir DIVISA cuando corresponda

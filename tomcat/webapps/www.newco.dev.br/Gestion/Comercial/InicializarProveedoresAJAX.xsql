@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+	Inicializa los proveedores insertados desde Seleccion en una licitacion
+	21dic21 Ahora se devuelve un contador de proveedores insertados
+
+	Ultima revision: ET 21dic21 10:45
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="InicializarProveedoresJSON.xsl"?>
+
+<NuevaSeleccion xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_NumProvs		NUMBER(6);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InicializarProveedores');
+		IF US_ID>=0 THEN
+			v_NumProvs:=LICITACIONES_PCK.InicializarProveedores(
+				US_ID,
+				'{@LIC_ID}',
+				'{@MAXPROVEEDORES}'				--	
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_NumProvs >= 0 THEN
+				HTP.P('<NUM_PROVEEDORES>'||v_NumProvs||'</NUM_PROVEEDORES>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevaSeleccion>

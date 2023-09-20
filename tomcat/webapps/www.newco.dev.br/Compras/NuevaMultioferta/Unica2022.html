@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+	Pagina principal de "Enviar pedidos"
+	Ultima revision: ET 16feb22 09:25
+-->
+<html>
+	<head>
+		<title>Buscador MVM</title>  
+		<!--<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+		<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script><!- -	Piece	-->
+		<script src="http://www.newco.dev.br/General/jquery-3.6.0.js"></script>	
+		<script type="text/javascript" src="http://www.newco.dev.br/General/basic2022_010822.js"></script>
+		<script type="text/javascript">
+		var URLactual = window.location.toString();
+		
+		function Inicio()
+		{
+			//alert('Unica. URLactual:'+URLactual);
+			var	Sep='?';
+			var HojaDeGastos,NumCedula,NombrePaciente,Habitacion;
+			var src="http://www.newco.dev.br/Compras/NuevaMultioferta/ZonaPlantilla2022.xsql";
+
+			console.log('Unica.html (rev9ene21). URLactual:'+URLactual);
+			
+			var pos=URLactual.indexOf('HOJADEGASTOS');
+			if (pos>0)
+			{
+				HojaDeGastos=Piece(URLactual.substring(pos+13),'&',0);
+				
+				console.log('HojaDeGastos:'+HojaDeGastos);
+				
+				src+=Sep+"HOJADEGASTOS="+encodeURIComponent(HojaDeGastos);
+				Sep='&';
+			}
+			
+			var pos=URLactual.indexOf('NUMCEDULA');
+			if (pos>0)
+			{
+				NumCedula=Piece(URLactual.substring(pos+10),'&',0);
+				console.log('NumCedula:'+NumCedula);
+				
+				src+=Sep+"NUMCEDULA="+encodeURIComponent(NumCedula);
+				Sep='&';
+			}
+			
+			var pos=URLactual.indexOf('NOMBREPACIENTE');
+			if (pos>0)
+			{
+				NombrePaciente=Piece(URLactual.substring(pos+15),'&',0);
+				console.log('NombrePaciente:'+NombrePaciente);
+				
+				src+=Sep+"NOMBREPACIENTE="+encodeURIComponent(NombrePaciente);
+			}
+
+			var pos=URLactual.indexOf('HABITACION');
+			if (pos>0)
+			{
+				Habitacion=Piece(URLactual.substring(pos+11),'&',0);
+				console.log('Habitacion:'+Habitacion);
+				
+				src+=Sep+"HABITACION="+encodeURIComponent(Habitacion);
+			}
+
+			//alert('Unica. src:'+src);
+			
+			document.getElementsByName('zonaPlantilla')[0].src = src;
+		}
+		
+		</script>
+		<!--	Estilos para colocar los iframes	
+		<style>
+			iframe {
+				display: block;
+				position: fixed;
+				left: 0;
+				border: none;
+				width: 100%;
+			}
+
+			#zonaPlantilla {
+				top: 0;
+				width: 200px;
+				height: 52px;
+			}
+
+			#zonaProducto {
+				top: 0;
+				width: 200px;
+				height: 52px;
+			}
+
+			#areaTrabajo {
+				top: 0;
+				left: 201;
+				width: 100%;
+				height: 100%;
+			}
+
+		</style>-->
+	</head>
+	<frameset cols="200px,*" frameborder="no" border="0" framespacing="1" onLoad="javascript:Inicio();">
+		<!--	Frame que contiene la informacion de plantillas	-->
+		<frameset rows="200px,*" frameborder="no" border="0" framespacing="0">
+			<!--	Frame que contiene la informacion de plantillas	-->
+			 <frame name="zonaPlantilla" scrolling="auto" />
+			 <frame name="zonaProducto" src="about:blank" scrolling="auto" noresize="yes"/>
+		</frameset>
+		<frame name="areaTrabajo" src="http://www.newco.dev.br/Compras/NuevaMultioferta/AreaTrabajo2022.html" scrolling="auto" noresize="yes"/>
+	</frameset>
+	<!--
+	<body>
+		<iframe name="zonaPlantilla" id="zonaPlantilla" scrolling="auto" />
+		<iframe name="zonaProducto" id="zonaProducto" src="about:blank" scrolling="auto" noresize="yes"/>
+		<iframe name="areaTrabajo" id="areaTrabajo" src="http://www.newco.dev.br/Compras/NuevaMultioferta/AreaTrabajo2022.html" scrolling="auto" noresize="yes"/>
+	</body>
+	-->
+</html>
+
+
+

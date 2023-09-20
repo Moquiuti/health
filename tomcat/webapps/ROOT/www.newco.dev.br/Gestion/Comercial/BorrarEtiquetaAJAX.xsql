@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Llamada ajax
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BorrarEtiquetaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BorrarEtiquetaJSON.xsl"?>
+
+<BorrarEtiqueta xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="IDREGISTRO"/>
+  <xsql:include-param name="TIPO"/>
+  <xsql:include-param name="TEXTO"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		       NUMBER;
+		v_IDEtiqueta	 NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarEtiqueta');
+		IF US_ID>=0 THEN
+			v_IDEtiqueta := ETIQUETAS_PCK.Borrar(
+				US_ID,
+				'{@IDETIQUETA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDEtiqueta > 0 THEN
+				HTP.P('<OK>'||v_IDEtiqueta||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+  END;
+]]>
+</xsql:include-owa>
+</BorrarEtiqueta>

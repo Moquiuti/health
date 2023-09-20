@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	ultima revision: ET 4feb17 10:10
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EMPMantenHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EMPMantenHTML.xsl"?>
+
+
+<MantenimientoEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  
+	<xsql:include-param name="ID"/>
+	<xsql:include-param name="ADMINISTRADORMVM"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+ 
+	<form name="MantenEmpresa" action="EMPMantenSave.xsql" method="post">
+	<xsql:include-owa>
+	  <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPManten');
+			IF US_ID>=0 THEN
+				EMPRESAS_PCK.MostrarEmpresas('{@ID}',US_ID);
+			END IF;				   
+		END;
+	]]>
+	</xsql:include-owa>
+   
+ 
+    <button label="Aceptar" caption="IMG-0020">
+      <name_function>ActualizarDatos</name_function>
+      <param>document.forms['MantenEmpresa']</param>
+    </button>
+    
+    <button label="Cancelar" caption="IMG-0050">       
+      <name_location>javascript:document.location='about:blank'</name_location>
+    </button>
+    
+    <button label="Cerrar" caption="IMG-0190">       
+      <name_location>javascript:document.location='about:blank'</name_location>
+    </button>
+    
+    <button label="Comentarios" caption="SU-0490">       
+       <name_function>Comentarios</name_function>
+    </button>
+    
+    <button label="PedidoMinimo" caption="IMG-1510">       
+      <name_function>PedidoMinimoPorCliente</name_function>
+    </button>
+    
+    <button label="ZonaComercial" caption="IMG-1515">       
+      <name_function>ModificarZonaComercial</name_function>
+      <param>document.forms[0].elements['EMP_ID'].value</param>
+      <param>''</param>
+      <param>''</param>
+    </button>
+    
+</form>
+
+
+
+  <!--
+	Només s'ha de mostrar quan es tracta de l'administrador de MVM.
+	
+	EMPRESA DESDE="Manten"
+  -->
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>    
+    <page>G-0010</page>
+    <caption>G-0001</caption>    
+  </jumpTo>
+  
+  <departamentos>
+    <xsql:query tag-case="upper">
+      <![CDATA[
+        select DP_ID as DP_ID,
+               DP_IDEMPRESA as EMP_ID,
+               DP_NOMBRE,
+               DP_IDRESPONSABLE,
+               NVL(TRIM(US_NOMBRE ||' '||US_APELLIDO1||' '||US_APELLIDO2),'[Sin responsable]') AS NOMBRE
+        from DEPARTAMENTOS, usuarios
+        where DP_idempresa = {@ID} 
+          and us_id (+) = dp_idresponsable
+        ]]>
+    <xsql:no-rows-query>
+        select 0 DP_ID,
+               {@EMP_ID} EMP_ID,
+               null DP_NOMBRE,
+               null DP_IDRESPONSABLE,
+               null AS NOMBRE
+        from dual
+    </xsql:no-rows-query>
+   </xsql:query>
+   
+   <ExtraButtons>
+    <formu name="dummy" action="none">
+    </formu>
+ 
+    <!-- Para el boton Anyadir -->  
+    <formu name="frmDept" action="DPManten.xsql">
+     <field type="hidden" name="EMP_ID">
+      <xsql:include-param name="EMP_ID"/>
+     </field>
+     <field type="hidden" name="DP_ID"><DP_ID>0</DP_ID> </field>
+     <button label="InsertarDepartamento" caption="IMG-0540"/>     
+    </formu>
+  </ExtraButtons>     
+  </departamentos>
+ 
+    <xsql:include-owa>
+    
+	
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPManten, PedidoMinimoPorCliente');
+			IF US_ID>=0 THEN
+			
+			HTP.P(	Utilidades_Pck.CabeceraXML
+					||'<PEDIDOSMINIMOS>');
+			
+
+				EMPRESAS_PCK.PedidoMinimoPorCLiente(
+				'{@ID}',
+				'',
+				'',
+				'',
+				'',	
+				'',
+				'',
+				'',
+				''
+				);  
+			
+				
+			EMPRESAS_PCK.PedidoMinimoPorCLiente_XML
+			(
+           		'{@ID}',
+           		'{@NUEVO_CLIENTE}',
+           		'{@NUEVO_CENTRO}'
+			);
+			HTP.P('</PEDIDOSMINIMOS>');
+				
+			end if;
+        END;
+        ]]>
+</xsql:include-owa>
+
+
+  
+</MantenimientoEmpresas>
+

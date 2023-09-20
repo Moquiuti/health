@@ -1,0 +1,46 @@
+                     <tr align="right" class="claro" onMouseOver="this.className='blanco'" onMouseOut="this.className='claro'">
+                        <td align="left" width="95%"><input type="hidden" name="IDPRODUCTO_118597" value="118597"><a class="suave" onmouseover="window.status='Ver detalle del producto';return true" onmouseup="window.status=' ';return true" onmousedown="window.status=' ';return true" href="javascript:MostrarPag('../../Administracion/Mantenimiento/Productos/PRODetalle.xsql?PRO_ID=118597&amp;SES_ID=');">Bobina de esterilización termosellable, mixta (papel/plástico), con indicador de esterilización, ancho 150cm</a>
+                           <table width="100%">
+                              <tr>
+                                 <td align="left"><a class="suave" onmouseover="window.status=' ';return true" onmouseup="window.status=' ';return true" onmousedown="window.status=' ';return true" href="javascript:MostrarPag('../../Administracion/Mantenimiento/Productos/PRODetalle.xsql?PRO_ID=118597&amp;SES_ID=');"></a>
+                                 </td>
+                                 <td align="right"><a style="color:#015E4B" href="javascript:MostrarPag('http://www.newco.dev.br/Administracion/Mantenimiento/Empresas/EMPDetalleFrame.xsql?EMP_ID=1878&amp;VENTANA=NUEVA')" onMouseOver="window.status='Información sobre la empresa.';return true;" class="suave" onMouseOut="window.status='';return true;">PERGUT SME  </a>
+                                 </td>
+
+                              </tr>
+                           </table>
+                        </td>
+                        <td>
+                           <table cellpadding="1" cellspacing="1" border="0" width="20px" class="muyoscuro">
+                              <tr class="letrasRojas">
+                                 <td align="center" class="letrasRojas"><a href="javascript:BorrarProducto('BORRARPRODUCTO','118597');" onMouseOver="window.status='Eliminar Producto';return true;" onMouseOut="window.status=''; return true;"><font color="red">X</font>
+                                    </a>
+
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+Version original (antes 3 julio 2003) 2265 bytes por producto, 1593 sin tener en cuenta aspa
+
+
+                     <tr align="right" class="claro">
+                        <td align="left" width="95%"><input type="hidden" name="IDPRODUCTO_118374" value="118374">Bata convencional tejido sin tejer, no estéril, manga corta azul celeste, 70g<table width="100%">
+                              <tr>
+                                 <td align="right">Sumevet S.L.</td>
+                              </tr>
+                           </table>
+
+                        </td>
+                        <td>
+                           <table cellpadding="1" cellspacing="1" border="0" width="20px" class="muyoscuro">
+                              <tr class="letrasRojas">
+                                 <td align="center" class="letrasRojas"><a href="javascript:BorrarProducto('BORRARPRODUCTO','118374');" onMouseOver="window.status='Eliminar Producto';return true;" onMouseOut="window.status=''; return true;"><font color="red">X</font>
+                                    </a>
+                                 </td>
+                              </tr>
+
+                           </table>
+                        </td>
+                     </tr>
+Version minimalista (3 julio 2003) 1144 bytes por producto, 472 sin tener en cuenta aspa

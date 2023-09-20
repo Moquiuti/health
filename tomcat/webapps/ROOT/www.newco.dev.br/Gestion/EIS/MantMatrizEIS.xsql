@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantMatrizEISHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantMatrizEISHTML.xsl"?>
+
+<MatrizEIS xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Mant Matriz EIS');
+
+			IF US_ID>0 THEN -- el control de derechos se hace en el PL/SQL
+				--	Devuelve el XML, ejecuta la acción
+				EIS_MATRIZ_PCK.Inicio_XML(US_ID, '{@ACCION}', '{@PARAMETROS}');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</MatrizEIS>

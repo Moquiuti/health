@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<!--
+
+Esta version de EISDatos sirve para presentar el resultado en XML
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISDatos.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISDatos.xsl"?>
+-->
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  
+  <!--
+  
+  
+ *  
+ *   Preparar una estructura
+ *   EIS_XML
+ *   \
+ *		DATOSEIS
+ *			CUADRODEMANDO
+ *				LISTAMESES
+ *					MES
+ *				INDICADOR
+ *					NOMBREINDICADOR
+ *					GRUPO
+ *						NOMBREGRUPO
+ *						ROW
+ *							MES
+ *							TOTAL
+ *     
+ *    
+  
+      Url = "http://nucleo.medicalvm.com/xsql/mvm/EIS/EISCuadrosMando.xsql"
+
+	Los filtros predefinidos todavia no funcionan
+
+	    		CURSOR(SELECT EIS_FP_ID AS IDFiltroPredefinido,
+	    		EIS_FP_Nombre AS NombreFiltroPredefinido
+	    		FROM EIS_FILTROSPREDEFINIDOS 
+	    		WHERE EIS_FP_IDINDICADOR=EIS_IN_ID) AS FILTROSPREDEFINIDOS
+
+	Falta filtrar los cuadros de mando por usuario
+  -->
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="SES_ID"/>
+  
+  <xsql:include-request-params/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISDatos');
+		  IF US_ID>=0 THEN
+                    EIS_PCK.CuadroDeMando(US_ID,'{@IDCUADROMANDO}', '{@ANNO}','{@IDEMPRESA}','{@IDCENTRO}',
+									'{@IDUSUARIO}','{@IDEMPRESA2}','{@IDCENTRO2}','{@IDPRODUCTO}',
+									'{@IDGRUPO}','{@IDSUBFAMILIA}','{@IDFAMILIA}','{@IDCATEGORIA}',
+									--'{@IDNOMENCLATOR}','{@URGENCIA}',
+									'{@IDESTADO}',
+									--'{@IDTIPOINCIDENCIA}','{@IDGRAVEDAD}',
+									'{@REFERENCIA}','{@CODIGO}',
+									'{@AGRUPARPOR}','{@IDRESULTADOS}',null,'TABLADATOS','{@IDRATIO}');
+                 end if;
+					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</EIS_XML>

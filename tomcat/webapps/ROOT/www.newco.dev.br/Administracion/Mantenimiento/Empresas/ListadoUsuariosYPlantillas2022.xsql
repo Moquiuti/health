@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+	Listado de usuarios y plantillas de la empresa. Nuevo disenno 2022.
+	Ultima revision: ET 26may22 11:50
+-->
+<?xml-stylesheet type="text/xsl" href="ListadoUsuariosYPlantillasHTML2022.xsl"?>
+
+<ListadoUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <!--
+  	Listado de usuarios de una empresa o centro (segun derechos del usuario que realiza la consulta)
+	con el numero de carpetas y plantillas de cada uno.
+  -->
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="CEN_ID" />
+  
+  <xsql:include-request-params/>
+  
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListadoUsuarios');
+		  IF US_ID>=0 THEN
+                  
+                    CarpetasYPLantillas_PCK.ListadoUsuariosXML(
+                    US_ID,
+                    '{@CEN_ID}'
+                    
+                    );
+                    
+                  END IF;					   
+                END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</ListadoUsuarios>

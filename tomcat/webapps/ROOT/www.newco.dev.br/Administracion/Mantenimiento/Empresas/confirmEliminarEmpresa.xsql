@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmEliminarEmpresa.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmEliminarEmpresa.xsl"?>
+
+ 
+
+<confirmEliminarEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco">
+   
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	    
+   
+	<xsql:include-owa>
+		<![CDATA[
+	    	DECLARE
+		        US_ID		NUMBER;
+				RES			VARCHAR2 (100);
+				
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EmpresaPedidos');
+				IF US_ID>0 THEN
+					
+					RES:= Empresas_Pck.TienePedidos(
+					 '{@IDEMPRESA}'
+					);
+					
+					IF RES = 'S' THEN
+						HTP.P('<EMPRESA_PEDIDOS/>');
+					ELSE
+						HTP.P('<EMPRESA_SIN_PEDIDOS/>');
+					END IF;	
+							   
+				END IF;
+			END;
+   		
+	      	  
+    	  ]]>
+	</xsql:include-owa>
+    
+  
+</confirmEliminarEmpresa>
+

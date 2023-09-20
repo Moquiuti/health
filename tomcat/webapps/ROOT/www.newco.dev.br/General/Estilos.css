@@ -1,0 +1,1740 @@
+/* $Id$ */
+/* $Author$ */
+/* $Date$ */
+/* $Revision$ */
+/* Purpose */
+/* Colors: blu:#396BAD; blu+claro:#396394; azzurro:#ADBDDE;  gris/maron scuro:#6E6358*/
+
+/*global*/
+html, body {
+	/*background-color: #FFF;*/
+	font-size: 12px;
+	width: 100%;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	}
+/*global*/
+*{
+	padding:0px;
+	margin:0px;
+}
+a {
+	color:#3b5998;
+	text-decoration: underline;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+}
+a:hover {
+	text-decoration: underline;
+	color:#8a8b8c;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+}
+
+p {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	padding:0px;
+	margin:0px;
+}
+img {
+	border: none;
+	margin:0px;
+	padding:0px;
+	vertical-align:middle;
+}
+h1 {
+	font-weight:bold;
+	color:#000;
+	font-size:16px;	
+}
+
+h2 {
+	font-weight:bold;
+	color:#000;
+	font-size:14px;
+}
+h3  {
+	font-weight:bold;
+	font-size:12px;
+	color:#000;
+}
+label{
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+	width:200px;
+}
+input{
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+	vertical-align:middle;
+}
+textarea{
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+}
+fieldset{
+border:none;
+}
+select.select200{
+	width:200px;
+}
+select.select120{
+	width:120px;
+}
+input.inright{ text-align:right;}
+
+.celdaconrojo { color:#e40e3c }
+.celdaconverde { color:#36970b }
+.camposObligatorios{ color:#FF0000;}
+strong{color:#333333;}
+.strongAzul{color:#3b5998; font-weight:bold;}
+.textAzul{ color:#3b5998; font-weight:bold; font-size:14px;}
+.rojo{ color:#FF0000; font-weight:bold;}
+.rojo14{ color:#FF0000; font-weight:bold; font-size:14px;}
+rojoScuro{ color:#e52028; font-weight:bold;}
+a.rojoScuro{ color:#e52028; font-weight:bold;}
+.fondoRojo{ background:#FE4162;}
+.fondoRojo:hover{ background:#FE4162;}
+.verAlign{ vertical-align:middle;}
+.inputNo{ border:none; text-align:center; font-weight:bold; background:transparent;}
+.gris14{ color:#333333; font-weight:bold; font-size:14px;}
+.oblique{ font-weight:bold; font-style:oblique; color:6d6e6f;}
+.bold{ font-weight:bold;}
+.gris { background:#f5f5f5;}
+.font11{ font-size:11px;}
+.urgente{ 
+	color:#FF0000; 
+	font-weight:bold; 
+	font-size:16px;
+	background:#FFFF99; 
+	float:left;
+	border:1px solid #FF0000;
+	padding:5px;
+}
+input.noinput{ 
+	border:0;
+	background:transparent;
+	align:center;
+	text-align:left;
+} 
+/*home, index*/
+.homeBox {
+	width:650px;
+	height:435px;
+	border:0px solid green;
+	margin:100px auto 0px 20%;
+	float:center;
+}
+.home{
+	float:;
+	width:650px;
+	height:435px;
+	border:0px solid red;
+	background: url(http://www.newco.dev.br/images/fondoHomeTotal.jpg) no-repeat ;
+}
+.logoLogin{
+	float:left;
+	width:640px;
+	height:150px;
+	margin-top:120px;
+	border:0px solid red;
+}
+.logo{
+	float:left;
+	width:520px;
+	height:150px;
+	border:0px solid blue;
+}
+.login{
+	float:left;
+	width:110px;
+	height:150px;
+	border:0px solid blue;
+	margin-left:5px;
+}
+.login p{
+	text-align:center;
+	color:#787979;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	margin:5px 0px 0px 0px;
+	border:0px solid blue;
+}
+.login input.intext{
+	height:20px;
+	width:100px;
+	border:1px solid #d7d9db;
+	margin-left:5px;
+}
+.login input.buttonLogin{
+	margin-left:5px;
+}
+.menu{
+	float:left;
+	width:640px;
+	height:30px;
+	margin-top:120px;
+	border:0px solid blue;
+}
+.menu p{
+	margin:5px 0px 0px 10px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	color:#4d4e4e;
+}
+.menu a{ color:#4d4e4e; }
+/*login en quienes somos...paginas estaticas*/
+.loginStatic{
+	float:left;
+	width:400px;
+	height:45px;
+	border:0px solid blue;
+	margin:5px 0px 0px 5px;
+}
+.loginLeft{
+	float:left;
+	width:250px;
+	border:0px solid blue;
+}
+.loginRight{
+	float:left;
+	width:100px;
+	border:0px solid blue;
+	margin-left:5px;
+}
+.loginStatic label{
+	width:80px;
+	float:left;
+	font-weight:bold;
+	color:#999999;
+}
+.loginStatic p{	margin:3px 0px;}
+/*ancho columnas tablas*/
+.uno{ width:1%; }
+.dos{ width:2%; }
+.tres{ width:3%; }
+.cuatro{ width:4%; }
+.seis{ width:6%; }
+.siete{ width:7%; }
+.cinco{ width:5%; }
+.ocho{ width:8%; }
+.dies{ width:10%; }
+.once{ width:11%; }
+.doce{ width:12%; }
+.catorce{ width:14%; }
+.quince{ width:15%; }
+.dieciseis{ width:16%; }
+.veinte{ width:20%; }
+.veintedos{ width:22%; }
+.veintecinco{ width:25%; }
+.trenta{ width:30%; }
+.trentacinco{ width:35%; }
+.cuarenta{ width:40%; }
+.cuarentacinco{ width:45%; }
+.cinquenta{ width:50%; }
+.cinquentasiete{ width:57%;}
+.sesanta{ width:60%; }
+.setanta{ width:70%; }
+.ochanta{ width:80%; }
+.noventacinco{ width:90%; }
+.noventa{ width:95%; }
+.cien{ width:100%; }
+.margin25{ margin-left:2.5%;}
+.margin5{ margin-left:5%;}
+.marginTop15{ margin-top:15px;}
+.aster{ width:*; }
+.textRight{ text-align:right; padding-right:3px;}
+.textLeft{ text-align:left; padding-left:3px;}
+.textTop{ align:top}
+.right{ text-align:right;}
+.label{ font-weight:bold; color:#6d6e6f; } 
+.center{ text-align:center; }
+.centerRight{ text-align:right; margin-right:10px; }
+.lineBorderBottom{ border-bottom:1px solid #e4e4e5;}
+.lineBorderBottom5{ border-bottom:5px solid #e4e4e5;}
+.lineBorderTop{ border-top:1px solid #e4e4e5;}
+
+/*tituloPag*/
+.tituloPag{
+	float:left;
+	width:100%;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+	border-top:2px solid #3b5998;
+	border-bottom:1px solid #939494;
+}
+.tituloLeft{
+	float:left;
+	width:70%;
+	margin:10px 0px 10px 10px;
+	font-size:16px;
+	font-weight:bold;
+	color:#333333;
+}
+.tituloRight{
+	float:right;
+	width:24%;
+	margin:10px 10px 0px 0px;
+}
+.tituloCamp{
+	float:left;
+	width:100%;
+	border-bottom:1px solid #e4e4e5;
+	background:#f5f5f5;
+}
+.tituloCamp p{
+	color:#333333;
+	margin:10px;
+	font-weight:bold;
+}
+.tituloForm{
+	background:#f5f5f5;
+}
+.tituloForm p{
+	color:#333333;
+	margin:15px 10px;
+	font-weight:bold;
+}
+.tituloForm textarea{
+	margin:5px 10px;
+}
+/*CabeceraHTML.xsl*/
+.cabeceraBox{
+	float:left;
+	width:100%;
+	border:0px solid red;
+	height:70px;
+	margin-bottom:10px;
+}
+.logoPage{
+	float:left;
+	width:21.5%;
+	border:0px solid red;
+	height:70px;
+}
+.logoPageInside{
+	width:130px;
+	margin:0px auto 0px auto;
+	height:70px;
+	/*background:url(http://www.newco.dev.br/images/logo-pagGr.gif) no-repeat;*/
+}
+.logoPage h1{
+	float:right;
+	width:100%;
+	height:70px;
+	text-indent:-9999px;
+	border:none;
+	text-decoration:none;
+}
+.cabeceraImage{
+	float:left;
+	width:77%;
+	border:0px solid red;
+	height:47px;
+}
+.cabeceraImage p.usuario{
+	float:left;
+	border:0px solid blue;
+	text-align:center;
+	line-height:20px;
+	margin-top:5px;
+	margin-left:0%;
+}
+.cabeceraImage .fecha{
+	margin-top:10px;
+	font-size:11px;
+}
+.cabeceraMenu{
+	float:left;
+	width:77%;
+	height:23px;
+}
+table.menuButton { 
+	align:center;
+	border-top:1px solid #fff;
+	border-collapse:collapse;
+}
+table.menuButton .medio{ 
+	background: #b9e1fb; 
+}
+table.menuButton tbody td.claro{ 
+	background: url(http://www.newco.dev.br/images/buscaFondoAzulCl.gif) repeat-x;
+	border-bottom:2px solid #3b5998;
+}
+table.menuButton tbody td.medio{ 
+	background: url(http://www.newco.dev.br/images/buscaFondoAzul.gif) repeat-x;
+	border-bottom:2px solid #3b5998;
+}
+table.menuButton .borderRight{ border-right:1px solid #FFFFFF; }
+table.menuButton .borderLeft{ border-left:1px solid #FFFFFF; }
+.inicioMenu{ 
+	background: url(http://www.newco.dev.br/images/sepInicio.gif) no-repeat;
+	width:10px;
+	height:23px;
+	border-bottom:2px solid #3b5998;
+}
+.finMenu{ 
+	background: url(http://www.newco.dev.br/images/sepFin.gif) no-repeat;
+	width:10px;
+	height:23px;
+	border-bottom:2px solid #3b5998;
+}
+table.menuButton a{ 
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#333333;
+	text-decoration:none;
+}
+table.menuButton a:hover{ 
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	color:#000;
+	text-decoration:none;
+}
+/*template boton*/
+.botonBox{
+	height:25px;
+	float:left;
+	margin:10px 0px;
+}
+.botonPre{
+	width:7px;
+	height:25px;
+	float:left;
+	ackground: url(http://www.newco.dev.br/images/botonPre.gif) no-repeat;
+}
+.botonPre img{ height:25px; border:0px solid red;}
+.botonPost{
+	width:7px;
+	height:25px;
+	float:left;
+	ackground: url(http://www.newco.dev.br/images/botonPost.gif) no-repeat;
+}
+.boton{
+	width:150px;
+	height:20px;
+	padding-top:5px;
+	float:left;
+	text-align:center;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+.boton a{
+	font-weight:bold;
+	color:#333333;
+	margin-top:4px;
+	text-decoration:none;
+}
+.boton a:hover{
+	font-weight:bold;
+	color:#6d6e6f;
+	text-decoration:none;
+}
+.botonCenter{
+	width:150px;
+	height:20px;
+	margin:0px auto;
+	padding-top:5px;
+	text-align:center;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+.botonCenter a{
+	font-weight:bold;
+	color:#333333;
+	margin-top:4px;
+	text-decoration:none;
+}
+.botonCenter a:hover{
+	font-weight:bold;
+	color:#6d6e6f;
+	text-decoration:none;
+}
+.botonLargo{
+	height:20px;
+	margin:0px auto;
+	padding-top:5px;
+	text-align:center;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+.botonEstrecho{
+	height:17px;
+	width:120px;
+	margin:0px auto;
+	padding-top:3px;
+	text-align:center;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+.botonEstrecho a{
+	font-weight:bold;
+	color:#333333;
+	margin-top:2px;
+	text-decoration:none;
+}
+.botonLargo a{
+	font-weight:bold;
+	color:#333333;
+	margin-top:4px;
+	text-decoration:none;
+}
+.botonLargo a:hover{
+	font-weight:bold;
+	color:#6d6e6f;
+	text-decoration:none;
+}
+.botonMenu{
+	width:140px;
+	text-align:center;
+}
+.botonDinamico{
+	width:140px;
+	text-align:center;
+}
+table.botonperso { 
+	align:center;
+	border:2px solid black;
+}
+
+/*clasificacion*/
+table.clasificacion{
+	width:615px;
+	float:left;
+	border-collapse:collapse;
+}
+table.clasificacion th{
+	height:40px;
+	color:#333333;
+	text-align:center;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background: url(http://www.newco.dev.br/images/titulosFondo70.gif) repeat-x;
+}
+table.clasificacion tr.subTitulo td{
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	padding:3px 5px;
+	border-bottom:1px solid #939494;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+}
+.clasificacion tbody {
+	color:#666;
+	order:1px solid #ccc;
+	font-size:12px;
+	font-weight:bold;
+}
+.clasificacion td.margin{
+	width:60px;
+}
+.clasificacion td.num{
+	width:25px;
+	color:#FF0000;
+	text-align:center;
+	border-right:1px solid #CCCCCC;
+}
+.clasificacion td{ padding:2px; border-bottom:0px solid #CCCCCC; }
+clasificacion tbody tr:hover td, #vacaciones tbody tr:hover th:before { background:#d0f8f7;}
+/*quien somos*/
+.zonaPublicaBox{
+	width:615px;
+	margin:20px auto 0px 21.5%;
+	float:left;
+	text-align:justify;
+}
+.zonaPublicaBox p{ padding:0px 10px;}
+.quienesLeft{ width:50%; float:left;}
+.quienesRight{ width:50%; float:right;}
+
+table { font-size: 12px}
+/*pagina con left y right*/
+.left{ 
+	width:18%; 
+	float:left; 
+	padding:15px 0px 0px 0.8%;
+	border:0px solid red;
+}
+.right{ 
+	width:80%; 
+	float:right;
+	padding-top:15px;
+	border:0px solid red;
+}
+.divLeft h2{ 
+	margin-left:30px;
+	text-align:center;
+}
+/*eis consultas tabla inicio del eis*/
+table.eisConsultas { 
+	width:90%;
+	border-collapse:collapse;
+	background:#f5f5f5;
+} 
+table.eisConsultas tbody tr:hover td, table.eisConsultas tbody tr:hover th:before { background:#fff;}
+
+table.eisConsultas tr{ 
+	margin:5px 0px;
+	padding:3px 0px;
+} 
+table.eisConsultas tr.tituloTabla{ 
+	height:40px;
+	color:#333333;
+	text-align:left;
+	border-bottom:1px solid #e4e4e5;
+	border-top:2px solid #939494;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+}
+table.eisConsultas tr.tituloTabla p{ padding:3px 5px; color:#333333;} 
+table.eisConsultas img{ vertical-align:middle; } 
+table.eisConsultas td.subTitle{ 
+	height:30px;
+	background: url(http://www.newco.dev.br/images/subTitleFondo.gif) repeat-x;
+} 
+table.eisConsultas tr:hover td.subTitle{ 
+	background: url(http://www.newco.dev.br/images/subTitleFondo.gif) repeat-x;
+} 
+table.eisConsultas td.subTitle p{ 
+	margin-left:20px;
+	font-weight:bold;
+}
+table.eisConsultas td{ text-align:left; }
+/*fin de eisConsultas*/
+
+/*paginas del eis*/
+table.azul { 
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+} 
+table.azul th{ 
+	height:30px;
+	color:#6d6e6f;
+	/*background: url(http://www.newco.dev.br/images/subTitleFondo.gif) repeat-x;*/
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+	border-bottom:1px solid #939494;
+} 
+table.azul th.thleft{ text-align:left; padding-left:10px; } 
+table.azul th.thright{ text-align:right; padding-right:5px; } 
+table.azul tr.titleTabla{ 
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+}
+table.azul tr.lineGris{ 
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:left;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#e9e8e8;
+	/*background: url(http://www.newco.dev.br/images/subTitleFondo.gif) repeat-x;*/
+}
+p.verEIS { font-weight:bold; margin-left:10px; float:left; height:35px;}
+p.verEIS img { vertical-align:middle;}
+table.azul img{ vertical-align:middle; } 
+table.azul tr.tituloTabla p{ padding:3px 5px; color:#333333;} 
+table.azul tr.subTituloTabla{ 
+	height:40px;
+	color:#333333;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #e4e4e5;
+	padding:3px 5px; 
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+}
+table.azul tr{ 
+	margin:5px 0px;
+	height:25px;
+	background:#f2f4f6;
+	border-bottom:1px solid #e4e4e5;
+} 
+table.azul tr.body td{ background:#fff;} 
+table.azul tr.body:hover td, table.compras tr.body:hover th:before { background:#f2f4f6; }
+table.azul td{ padding:0px 4px;} 
+table.azul .tdcenter td{ padding:0px 4px; text-align:center;} 
+table.azul .textLeft{ 
+	text-align:right; 
+	padding-right:0.5%;
+	width:22%; 
+	border-right:1px solid #e4e4e4;
+} 
+/*en eis matriz*/
+table.azul .textArriba{ 
+	text-align:center; 
+	width:6%;
+	border-right:1px solid #e4e4e4;
+} 
+table.azul td.labelLeft{ 
+	text-align:left; 
+	padding-left:15%;
+	font-weight:bold; 
+	color:#6d6e6f;
+	background:#FFFFFF;
+} 
+
+table.azul tfoot tr{ 
+	height:30px;
+	color:#6d6e6f;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/subTitleFondoClaro.gif) repeat-x;
+} 
+/*eisDatos buttones selecion*/
+table.selecion{
+	font-weight:bold;
+	width:100%;
+	border:0px solid red;
+}
+
+/*fin de azul tabla*/
+/*info tabla, buscador en el eis EISDatos*/
+table.infoTable { 
+	width:100%;
+	margin:0px auto 0px auto;
+	border-collapse:collapse;
+	font-family:Arial, Helvetica, sans-serif;
+} 
+table.infoTable td{ 
+	border:0px solid red;
+} 
+table.borderTable { 
+	border:1px solid #3b5998;
+	background:#FFF;
+} 
+table.borderTable { background:#FFF; } 
+table.borderTable tr.body:hover td { background:#f2f4f6; }
+
+table.infoTable th{ 
+	height:35px;
+	color:#333333;
+	border-bottom:2px solid #3b5998;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+} 
+
+table.infoTable tr{ 
+	margin:5px 0px;
+	height:30px;
+} 
+table.infoTable tr.lejenda p{ padding-right:5px; text-align:left;} 
+
+table.infoTable tr.tituloTabla{ 
+	height:30px;
+	color:#333333;
+	text-align:center;
+
+	font-weight:bold;
+	font-size:14px;
+}
+table.infoTable tr.titulosAzul{ 
+	font-weight:bold;
+	text-align:center;
+	color:#333;
+	border-bottom:1px solid #3b5998;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+} 
+table.infoTable tr.subTituloTabla{ 
+	height:30px;
+	color:#666666;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #999999;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+}
+table.infoTable tr.titulos{ 
+	font-weight:bold;
+	text-align:center;
+	color:#666666;
+	border-bottom:2px solid #e4e4e5;
+	border-top:2px solid #3b5998;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+} 
+table.infoTable tr.gris{ 
+	font-weight:bold;
+	text-align:center;
+	color:#666666;
+	border-bottom:2px solid #e4e4e5;
+	background:#f5f5f5;
+} 
+table.infoTable td{ padding-left:2px; text-align:center;} 
+table.infoTable .labelRight{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:5px;} 
+table.infoTable .labelRightTop{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:5px; vertical-align:top;} 
+
+table.infoTable .label{ text-align:left; font-weight:bold; color:#6d6e6f; padding-left:5px;} 
+
+table.infoTable .select{ float:left; color:#6d6e6f; border:0px solid red;} 
+table.infoTable .margin5{ margin:10px 0px; padding:10px; border:0px solid red;} 
+
+table.infoTable .datosLeft{ text-align:left;} 
+table.infoTable .datosLeft textarea{ margin:5px 0px;} 
+table.infoTable .multiInputs input{ margin:2px 0px;}
+
+table.infoTable tfoot tr{ height:15px; padding:0px; } 
+
+table.infoTable tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+table.infoTable tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+
+/*fin de info tabla*/
+
+/*enviar pedidos*/
+table.busca{ 
+	width:95%;
+	height:50px;
+	border-collapse:collapse;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+} 
+table.busca th { 
+	margin:2px 5px;
+	border:1px solid blue;
+} 
+table.busca td { 
+	margin:5px 5px;
+	border-top:2px solid #3b5998;
+} 
+table.busca label{ 
+	color:#333333;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+}
+table.busca img{ padding-top:12px; border:none; } 
+table.busca tr{ 
+	margin:5px 0px;
+	height:50px;
+	background: url(http://www.newco.dev.br/images/buscaFondoAzul.gif) repeat-x;
+} 
+table.busca td.buscaLeft{ 
+	height:50px;
+	width:10px;
+	background: url(http://www.newco.dev.br/images/buscaLeftAzul.gif) no-repeat;
+} 
+table.busca td.buscaRight{ 
+	height:50px;
+	width:10px;
+	background: url(http://www.newco.dev.br/images/buscaRightAzul.gif) no-repeat;
+} 
+table.busca td{ text-align:center;} 
+table.busca .labelRight{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:5px;} 
+table.busca .datosLeft{ text-align:left;} 
+table.busca .datosLeft textarea{ margin:5px 0px;} 
+
+table.busca th.veinticinco { width:25%;}
+
+table.busca tfoot tr{ 
+	height:30px;
+	color:#6d6e6f;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/subTitleFondoClaro.gif) repeat-x;
+} 
+
+/*plantilla*/
+table.plantilla{ 
+	width:90%;
+	border-collapse:collapse;
+	margin:0px 0px 0px 2%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#f5f5f5;
+} 
+table.plantilla td { border:0px solid red; } 
+table.plantilla p{ color:#333333; padding-top:3px;} 
+table.plantilla img{ padding:0px 4px 0px 3px; vertical-align:middle;} 
+table.plantilla th { 
+	margin:2px 5px;
+	color:#333333;
+	height:25px;
+	border-top:2px solid #3b5998;
+	border-bottom:1px solid #ffffff;
+	background: url(http://www.newco.dev.br/images/fondoPlantilla.gif) repeat-x;
+} 
+
+table.plantilla tr.lineBorderTop td{ border-top:1px solid silver;}
+
+table.plantilla tr.lineBorderTop td img{ margin:2px 0px;}
+table.plantilla td.botones{ 
+	width:33%; 
+	text-align:center;
+}
+table.plantilla td.botonesLargo{ 
+	text-align:center;
+} 
+table.plantilla td.textLeft{ 
+	text-align:left;
+	align:left;
+} 
+table.plantilla .textCenter{ 
+	text-align:center;
+	align:center;
+	float:center;
+} 
+table.plantilla td.botones, td.botonesLargo a{ 
+	padding:2px 5px 3px; 	
+	color:#333333;
+	text-decoration:none;
+	font-weight:bold;
+	border:1px solid #ccc;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+} 
+table.plantilla td.botones a:hover{ 
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/titleGris.gif) repeat-x;
+} 
+table.plantilla td.select{ text-align:center; height:40px; margin:10px 0px; } 
+table.plantilla td.select select{ width:200px;} 
+
+table.plantilla tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+
+table.plantilla tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+table.plantilla tfoot td.foot{ 
+	height:15px;
+	width:15px;
+} 
+/*fin plantilla*/
+/*botones pedidos*/
+.botonGrande{
+	width:95px;
+	height:35px;
+	padding:6px 0px 4px;
+	margin-left:30%;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/botonGrandeFondo.gif) no-repeat;
+}
+.botonGrande a{ 
+	color:#333333;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:13px;
+	margin:10px 5px;
+	float:center;
+} 
+.botonGrande a:hover{ 
+	color:#666;
+} 
+.botonPedido{
+	text-decoration:none;
+	padding:4px 7px;
+	border:1px solid #CCCCCC;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+/*encuestas pagina enviar pedidos*/
+table.encuesta { 
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+} 
+table.encuesta tr.tituloTabla{ 
+	height:40px;
+	color:#333333;
+	border-bottom:1px solid #e4e4e5;
+	border-top:2px solid #939494;
+	padding:3px 5px;
+	font-size:14px;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+}
+table.encuesta tr.center{ text-align:center; }
+
+table.encuesta tr.lejenda{ 
+	height:40px;
+	color:#333333;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	padding:0px 10px;
+	background: url(http://www.newco.dev.br/images/fondoGrisCla50.gif) repeat-x;
+}  
+table.encuesta img{ vertical-align:middle; } 
+table.encuesta tr.titulos{ 
+	margin:5px 0px;
+	height:40px;
+	color:#333333;
+	font-size:12px;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	/*background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;*/
+	border-bottom:1px solid #e4e4e5;
+} 
+table.encuesta tr.subCategorias{ 
+	height:30px;
+	color:#000;
+	text-align:left;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	border-top:1.5px solid #3b5998;
+	padding-left:10px;
+}
+table.encuesta tr.subCategorias th{ 
+	font-weight:normal;
+}
+table.encuesta .paddingLeft{ 
+	padding-left:10px;
+}
+table.encuesta th{ 
+	color:#333333;
+	padding:0px 3px; 
+} 
+table.encuesta tr.titulosNoAlto{ 
+	margin:5px 0px;
+	color:#333333;
+	height:45px;
+	border-top:1px solid #FFF;
+	background: url(http://www.newco.dev.br/images/titulosNoAlto.gif) repeat-x;
+} 
+table.encuesta tr.titulosNoAlto th{ 
+	margin:5px 0px;
+	color:#333333;
+	height:45px;
+	font-weight:normal;
+	font-size:11px;
+	border-top:1px solid #FFF;
+	background: url(http://www.newco.dev.br/images/titulosNoAlto.gif) repeat-x;
+} 
+table.encuesta tr.titulos img{ vertical-align:middle; } 
+table.encuesta tr.titulos td{ 
+	padding-left:2px;
+} 
+table.encuesta tr.lineBorder{ border-bottom:1px solid #e4e4e5; } 
+table.encuesta tr.center td{ text-align:center; } 
+table.encuesta tr.center img{ align:center; } 
+
+table.encuesta tbody td{ 
+	padding:5px 5px; 
+	background:#ffffff;
+	border-bottom:2px solid #e4e4e5;
+} 
+table.encuesta tbody tr:hover td, table.encuesta tbody tr:hover th:before { background:#f2f4f6;}
+
+table.encuesta td.center{ text-align:center;} 
+table.encuesta td.textLeft{ text-align:left;} 
+table.encuesta td.textRight{ text-align:right;} 
+
+table.encuesta textarea{ width:400px; height:100px; } 
+table.encuesta tfoot tr{ background:#f2f4f6;} 
+table.encuesta tfoot td{ height:15px; padding:0px; background:#f2f4f6;} 
+table.encuesta tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+table.encuesta tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+.centerDiv{
+	text-align:center;
+}
+
+/*fin de encuestas*/
+
+/*pagina inicio*/
+.divCenter{ width:100%; margin:0px auto; border:0px solid red;}
+.divCenter90{ width:90%; margin-left:5%; border:0px solid red;}
+.divCenter70{ width:70%; margin:0px auto; border:0px solid red;}
+.divCenter50{ width:50%; margin:0px auto; border:0px solid red;}
+.divCenter40{ width:40%; margin:0px auto; border:0px solid red;}
+.divCenter30{ width:30%; margin:0px auto; border:0px solid red;}
+.divCenter20{ width:20%; margin:0px auto; border:0px solid red;}
+.divCenter10{ width:10%; margin:0px auto; border:0px solid red;}
+.divLeft90{ float:left; width:95%; margin:0px auto; border:0px solid red;}
+
+.divLeft80{ float:left; width:80%; margin:0px auto; border:0px solid red;}
+
+.divLeft70{ float:left; width:70%; margin:0px auto; border:0px solid red;}
+.divLeft50{ float:left; width:50%; margin:0px auto; border:0px solid red; padding:5px;}
+.divLeft50nopa{ float:left; width:49.5%; margin:0px 0px; border:0px solid red; }
+.divLeft60nopa{ float:left; width:60%; margin:0px auto; }
+.divLeft48{ float:left; width:48%; margin:0px 1% 20px; border:0px solid red;}
+.divLeft40{ float:left; width:40%; margin:0px 0px 0px 1.5%; border:0px solid red; padding:5px;}
+.divLeft40nopa{ float:left; width:40%;}
+.divLeft35{ float:left; width:35%; border:0px solid red;}
+.divLeft30{ float:left; width:30%; border:0px solid red; padding:5px;}
+.divLeft30nopa{ float:left; width:30%; border:0px solid red;}
+.divLeft25{ float:left; width:25%; border:0px solid red; padding:5px;}
+.divLeft25nopa{ float:left; width:25%; border:0px solid red; }
+.divLeft20{ float:left; width:20%; border:0px solid red; }
+.divLeft15nopa{ float:left; width:15%; border:0px solid red; }
+.divLeft10{ float:left; width:10%; border:0px solid red; }
+
+.divLeft3{ float:left; width:3%; border:0px solid red; }
+.divLeft{ float:left; width:100%; clear:both; border:0px solid red; }
+
+.left50td{ float:left; width:50%;}
+
+.sombra { 
+	height:15px;
+	border:0px solid red;
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/sombraMediaTabla.gif) repeat-x;
+} 
+.lineaAzul { 
+	height:3px;
+	border-top:2px solid #3b5998;
+	background: #c9d7f5;
+} 
+.divRight{ float:right; }
+
+.middle{ width:90%; margin:0px auto 10px 5%; }
+.middle p{ text-align:center; }
+.titlePage{ 
+	text-align:center; 
+	color:#333333; 
+	font-weight:bold;
+	padding-top:10px;
+	height:30px;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+	border-bottom:2px solid #3b5998;
+	font-size:14px;
+}
+.breadcrumbs{ 
+	color:#333333; 
+	padding:0px 5px 0px 5px;
+	color:#333333; 
+	font-weight:bold;
+}
+.salir{ padding:10px 0px 0px 5px; border-top:2px solid #3b5998; margin-top:10px; }
+.botonLeft{ float:left; margin-left:2%; }
+.botonRight{ float:right; margin-right:2%; }
+
+.evidenciado{ 
+	float:left; 
+	margin-left:5%;
+	margin-right:2%;
+	height:130px; 
+	width:250px;
+	background: url(http://www.newco.dev.br/images/postit.gif) no-repeat;
+}
+.evidenciado p{
+	text-align:left;
+	width:230px;
+	font-weight:bold;
+	color:#666666;
+	font-family:Arial, Helvetica, sans-serif;
+	margin:10px;
+	font-size:11px;
+}
+/*cuadro abajo para pedidos problematicos*/
+.problematicos{ 
+	float:left; 
+}
+.problematicos p{
+	text-align:justify;
+	font-weight:bold;
+	color:#666666;
+	font-family:Arial, Helvetica, sans-serif;
+	margin:10px;
+	font-size:11px;
+	padding:10px;
+	border:1px dotted #FF0000;
+	background-color:#FFFF99;
+}
+.contacto{ 
+	float:left; 
+	height:40px; 
+	background: url(http://www.newco.dev.br/images/fondoGrisCla50.gif) repeat-x;
+	border-bottom:2px solid #CCCCCC;
+}
+.contacto p.contact{
+	text-align:center;
+	font-weight:bold;
+	color:#666666;
+	font-size:11px;
+	margin-top:5px;
+}
+.contacto p.derechos{
+	text-align:center;
+	color:#666666;
+	font-size:10px;
+	margin-top:5px;
+}
+/*noticias inicio*/
+table.noticiasMvm{ 
+	width:90%;
+	border-collapse:collapse;
+	margin:0px 10%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#f5f5f5;
+} 
+table.noticiasMvm td { padding:3px 4px; color:#6d6e6f;} 
+table.noticiasMvm p{ color:#6d6e6f; padding:5px 4px; text-align:left;} 
+table.noticiasMvm img{ padding:0px 4px 0px 3px; vertical-align:middle;} 
+table.noticiasMvm tr.tituloTabla p{ text-align:left; color:#333333; }
+
+table.noticiasMvm th.plegado{ 
+	width:30px;
+	height:30px;
+	background: url(http://www.newco.dev.br/images/plegadoNoticias.gif) no-repeat;
+}  
+/*resumen ahorro inicio*/
+table.resumen{ 
+	width:97%;
+	border-collapse:collapse;
+	margin:0px 1.5%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#f5f5f5;
+} 
+table.resumen tr.tituloTabla { 
+	border-top:2px solid #6d6e6f;
+	height:30px;
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/fondoGrisResumen.gif) repeat-x;
+} 
+table.resumen tr.tituloTabla p{ text-align:center; color:#333333; margin:3px 0px; }
+table.resumen tr.titulos p{ color:#6d6e6f; margin-top:3px;} 
+table.resumen td { text-align:center; color:#333333;} 
+table.resumen tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+table.resumen tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+/*alarmas ahorro inicio*/
+table.alarmas{ 
+	width:97%;
+	border-collapse:collapse;
+	margin:0px 0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#f5f5f5;
+} 
+table.alarmas tr.tituloPrinc { 
+	border-top:2px solid #3b5998;
+	height:40px;
+	color:#6d6e6f;
+	padding:0px 5px 0px 5px;
+	ackground: url(http://www.newco.dev.br/images/fondoGrisCla50.gif) repeat-x;
+} 
+table.alarmas tr.tituloTabla { 
+	border-top:2px solid #3b5998;
+	height:35px;
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+} 
+table.alarmas tr.tituloTabla p{ text-align:left; color:#333333; padding:0px 5px 0px 5px;}
+table.alarmas td img{ vertical-align:middle; border:none; margin-top:2px;} 
+table.alarmas td p{ text-align:left; color:#333333; padding:3px 0px 3px 5px;} 
+table.alarmas tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+table.alarmas tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+table.alarmas tbody tr:hover td, table.alarmas tbody tr:hover th:before { background:#fff;}
+
+/*tabla grande abajo inicio*/
+table.grandeInicio { 
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	border:0px solid black;
+} 
+table .grandeInicio th{ 
+	height:auto;
+	color:#333333;
+	font-size:15px;
+	padding:3px 0px;
+	text-align:center;
+} 
+table.grandeInicio th.grisCla{ background:#fff;}
+table.grandeInicio th.grisOscuro{ background:#f5f5f5;}
+table.grandeInicio tr.tituloTabla{ 
+	height:40px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	font-size:13px;
+	background: url(http://www.newco.dev.br/images/titulosFondo70.gif) repeat-x;
+}
+table.grandeInicio tr.tituloTablaPeq{ 
+	height:40px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	font-size:13px;
+	background: url(http://www.newco.dev.br/images/titulosFondo70.gif) repeat-x;
+}
+table.grandeInicio img{ vertical-align:middle; } 
+table.grandeInicio tr.subTituloTabla{ 
+	text-align:center;
+	height:30px;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #999999;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	padding:3px 5px; 
+	color:#333333;
+}
+
+table.grandeInicio tr.lejenda{ 
+	height:40px;
+	color:#333333;
+	font-weight:bold;
+}  
+table.grandeInicio tr.lejenda p{ padding-right:5px; text-align:left;} 
+
+table.grandeInicio tr.titulos{ 
+	margin:5px 0px;
+	height:40px;
+	color:#3b5998;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+} 
+table.grandeInicio tr.titulosAzul{ 
+	font-weight:bold;
+	text-align:center;
+	color:#666666;
+	border-bottom:2px solid #e4e4e5;
+	border-top:2px solid #3b5998;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+} 
+
+table.grandeInicio tr.titulos img{ vertical-align:middle; } 
+table.grandeInicio tr.titulos th{ 
+	padding:4px 2px 2px 2px;
+	color:#3b5998;
+	border:0px solid red;
+} 
+table.grandeInicio tr.fondoRojo{ 
+	background:#FE4162;
+} 
+table.grandeInicio tr.titulosAzul th{ padding:4px 2px 2px 2px; } 
+table.grandeInicio tr.familia td{ 
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background:#dfdede;
+}
+table.grandeInicio tr.subFamilia td{ 
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background:#eeedee;
+}
+
+table.grandeInicio tr.producto td{ 
+	color:#666666;
+	text-align:left;
+	padding-left:5%;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+}
+
+table.grandeInicio tr.select{ 
+	text-align:center; 
+	height:42px; 
+	padding:0px;
+	background:#f5f5f5;
+	border:none;
+} 
+table.grandeInicio tr.separator{ 
+	height:5px; 
+	padding:0px;
+	background:#e4e4e5;
+} 
+table.grandeInicio input.noinput{ 
+	border:none;
+	background:transparent;
+	align:center;
+	text-align:center;
+	font-weight:bold;
+} 
+table.grandeInicio input.noinput:hover{ 
+	border:none;
+	background:#ffffff;
+	align:center;
+} 
+
+
+table.grandeInicio tbody tr{ 
+	height:30px;
+	background:#ffffff;
+	border-bottom:2px solid #e4e4e5;
+} 
+table.grandeInicio td.grisOscuro{ background:#f5f5f5;}
+table.grandeInicio tr.grisOscuroB{ background:#f5f5f5; font-weight:bold; color:#333333;}
+table.grandeInicio tr.grisOscuroB:hover{ background:#f5f5f5; font-weight:bold; color:#333333;}
+table.grandeInicio tr.subTituloTabla:hover td{ background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x; }
+
+table.grandeInicio tbody tr:hover td, table.grandeInicio tbody tr:hover th:before { background:#f5f5f5;}
+table.grandeInicio tbody tr.noChange:hover td, table.grandeInicio tbody tr:hover th:before { background:#ffffff;}
+table.grandeInicio tbody tr.familia:hover td, table.grandeInicio tbody tr:hover th:before { background:#dfdede;}
+table.grandeInicio tbody tr.subFamilia:hover td, table.grandeInicio tbody tr:hover th:before { background:#eeedee;}
+table.grandeInicio tbody tr.fondoRojo:hover td, table.grandeInicio tbody tr:hover th:before { background:#eeedee;}
+table.grandeInicio tbody tr.separator:hover td, table.grandeInicio tbody tr:hover th:before { background:#eeedee;}
+
+table.grandeInicio tbody tr:hover td.fondoRojo, table.grandeInicio tbody tr:hover th:before { background:#FE4162;}
+
+table.grandeInicio tbody tr.center{ text-align:center;} 
+table.grandeInicio tbody td{ padding:3px 2px;} 
+
+table.grandeInicio .borderLeft{ border-left:1px solid #CCCCCC;} 
+table.grandeInicio .borderRight{ border-right:1px solid #CCCCCC;} 
+
+table.grandeInicio .textLeft{ 
+	text-align:left; 
+	margin-top:3px;
+	border:none;
+} 
+table.grandeInicio .textRight{ text-align:right; } 
+table.grandeInicio tfoot tr{ 
+	height:auto;
+	color:#6d6e6f;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/fondoGrisResumen.gif) repeat-x;
+} 
+table.grandeInicio tfoot tr.gris{ 
+	height:30px;
+	color:#6d6e6f;
+	text-align:right;
+	background:#f5f5f5;
+	border-bottom:1px solid #e4e4e5;
+} 
+table.grandeInicio tfoot tr.gris td{ padding-right:4px; } 
+table.grandeInicio td.select{ text-align:center; height:40px; margin:10px 0px; } 
+table.grandeInicio select{ border:1px solid #ccc;} 
+table.grandeInicio td{ border:0px solid red; text-align:center;} 
+
+table.grandeInicio tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+table.grandeInicio tfoot td{ background:#f5f5f5; border:0px solid red; }
+table.grandeInicio tfoot td.quincepx{ width:15px; }
+table.grandeInicio tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+/*tabla buscador*/
+table.buscador { width:100%; background:#f5f5f5; border-collapse:collapse;} 
+table.buscador tr.select label{ 
+	font-weight:bold;
+	color:#6d6e6f;
+	width:100px;
+} 
+table.buscador tr.select select{ 
+	font-weight:bold;
+	color:#6d6e6f;
+	width:120px;
+	border:1px solid #ccc;
+} 
+/*multiframe tablas*/
+table.mediaTabla{
+	border-collapse:collapse;
+	width:100%;
+	border:0px solid red;
+}
+table.mediaTabla img{ vertical-align:middle;}
+table.mediaTabla td{ border:0px solid red; }
+table.mediaTabla p{ text-align:left; line-height:16px;}
+table.mediaTabla thead th { 
+	padding:5px 0px;
+	text-align:center;
+	color:#333333;
+	font-weight:bold;
+	background:#f5f5f5;
+} 
+table.mediaTabla th { 
+	padding:5px 0px;
+	text-align:center;
+	color:#333333;
+	font-weight:bold;
+} 
+table.mediaTabla thead tr.sombra { 
+	height:10px;
+	border:0px solid red;
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/sombraMediaTabla.gif) repeat-x;
+} 
+table.mediaTabla .center{
+	text-align:center;
+}
+table.mediaTabla tbody td{
+	padding:5px 0px;
+	color:#333333;
+	background:#f5f5f5;
+}
+.bgPestana{
+	background:#CC3300;
+}
+table.mediaTabla tr.tituloTabla{ 
+	height:30px;
+	color:#333333;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+}
+table.mediaTabla tr.tituloTabla p{ padding:3px 10px; text-align:center;} 
+/*linea pedido*/
+table.mediaTabla tr.tituloGris{ 
+	height:30px;
+	color:#333333;
+	text-align:left;
+	background:#f5f5f5; 
+	margin-left:10px;
+	color:#333333; 
+	font-size:13px;
+}
+table.mediaTabla td.label{
+	text-align:right;
+	color:#6d6e6f;
+	padding-right:2%;
+}
+table.mediaTabla td.datosLeft{ text-align:left; }
+table.mediaTabla td.datosCenter{ text-align:center; }
+table.mediaTabla td.datosRight{ text-align:left; }
+
+table.mediaTabla tr.redondo td{ background:#f5f5f5; height:15px; }
+table.mediaTabla tr.redondo td.headLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/headLeft.gif) no-repeat;
+} 
+table.mediaTabla tr.redondo td.headRight{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/headRight.gif) no-repeat;
+} 
+table.mediaTabla tfoot td{ background:#f5f5f5; border:0px solid red; }
+table.mediaTabla tfoot td.quincepx{ width:15px; }
+table.mediaTabla tfoot td.alto20{ height:19px; width:15px; border:0px solid red;  }
+table.mediaTabla tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+table.mediaTabla tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+/*tabla redonda*/
+table.redonda { 
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+} 
+table.redonda tr.tituloTabla{ 
+	height:25px;
+	color:#333333;
+	text-align:left;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+}
+table.redonda tr.tituloTabla p{ padding:3px 5px; color:#333333;} 
+table.redonda tbody td{
+	padding:3px 0px;
+	text-align:left;
+	color:#333333;
+	background:#f5f5f5;
+}
+table.redonda tr.lejenda{ 
+	height:40px;
+	color:#333333;
+}  
+table.redonda tr.lejenda p{ padding-right:5px; text-align:left;} 
+table.redonda td.label{
+	text-align:right;
+	color:#6d6e6f;
+	padding-right:1%;
+}
+table.redonda tbody tr:hover td, table.grandeInicio tbody tr:hover th:before { background:#fff;}
+
+table.redonda .borderLeft{ border-left:1px solid #e4e4e5;} 
+table.redonda .borderRight{ border-right:1px solid #e4e4e5;} 
+
+table.redonda .textLeft{ 
+	text-align:right; 
+	padding-right:0.5%;
+	width:32.5%; 
+	border-right:1px solid #e4e4e4;
+} 
+table.redonda tfoot tr{ 
+	height:30px;
+	color:#6d6e6f;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/subTitleFondoClaro.gif) repeat-x;
+} 
+table.redonda td.select{ text-align:center; height:40px; margin:10px 0px; } 
+table.redonda select{ border:1px solid #ccc;} 
+table.redonda tfoot td.footLeft{ 
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+} 
+
+table.redonda tfoot td.footRight{ 
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+} 
+
+/*botones compras multiofertaframe */
+table.botonesMOF{
+	width:100%;
+	border:0px solid red;
+}
+
+/*tabla grande abajo inicio*/
+table.oscuro { 
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	border:0px solid black;
+} 
+
+table.oscuro tr.tituloTabla{ 
+	height:40px;
+	color:#000;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/titulosFondo70.gif) repeat-x;
+}
+table.oscuro tr.subTituloTabla{ 
+	height:auto;
+	color:#666666;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #999999;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+}
+table.oscuro tr.titulos{ 
+	margin:5px 0px;
+	height:40px;
+	color:#3b5998;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+} 
+
+table.oscuro td.oscuro{ background:#e9e8e8;}
+table.oscuro tbody tr:hover td, table.grandeInicio tbody tr:hover th:before { background:#f5f5f5;}
+
+/*imagenes PROManten*/
+.imageLine{
+	float:left;
+	clear:both;
+	width:100%;
+	margin:0px 0px 15px 15px;
+}
+.imageManten{
+	float:left;
+	clear:both;
+	width:100%;
+}
+.imageLine label{  float:left; width:20px; }
+.imageLine input{  float:left; }
+.imageLine img{
+	float:left;
+	width:70px;
+	height:70px;
+	border:1px solid #396BAD;
+	
+}
+.imageLine a{	float:left; margin-left:10px; }
+.imageManten img{
+	float:left;
+	width:70px;
+	height:70px;
+	border:1px solid #396BAD;
+	
+}
+.imageManten a{	float:left; margin-left:10px; }
+/*mantenimiento imagenes proveedor en buscador*/
+.imageLineBusca{
+	float:left;
+}
+.imageBuscaManten{
+	float:left;
+}
+.imageBuscaManten img.manFotoBusca{
+	float:left;
+	width:20px;
+	height:20px;
+	border:1px solid #396BAD;
+	
+}
+.imageBuscaManten a{ float:left; margin-left:2px; }
+.imageBuscaManten img{float:left; }
+/*div donde aparecen las fotos en Admin/Manten/Produc/PROBuscadorHTML.xsl*/
+.divFotoProBusca{
+	padding-right:10px;
+	background:#FFF;
+}
+.divFotoProBusca img{
+	border:2px solid #D1D2D4;
+}
+/*imagenes en Compras/Multioferta/ListaProductos*/
+
+.imagenListaProd{
+	width:25px;
+	height:25px;
+	margin-left:2px;
+	border:1px solid #D1D2D4;
+}
+.imagenProDetalle{
+	margin-left:5px;
+	width:100px;
+	height:100px;
+	border:1px solid #D1D2D4;
+}
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PROPValidaSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PROPValidaSaveHTML.xsl"?>
+
+<Empresa xmlns:xsql="urn:oracle-xsql" connection="newco" >
+<pagename>PROPValidaSave</pagename>
+
+<xsql:include-param name="DESDE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+
+<xsql:include-owa>
+  <![CDATA[
+  BEGIN
+          EMPRESAS_PCK.ValidarEmpresa( '{@US_ID}');
+  END;	  
+  ]]>	  
+</xsql:include-owa>
+
+
+  
+</Empresa>
+

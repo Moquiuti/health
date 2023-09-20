@@ -1,0 +1,9 @@
+15ene18	ET	Permitir a los usuarios CDC editar los datos correspondientes a su empresa
+15ene18	ET	Incluir campos específicos para Colombia
+15ene18	ET	Presentar desplegable de IVA para Colombia
+15ene18	ET	Quitar checkbox "Farmacia"
+15ene18	ET	Cambio nombre fichero JS: PROManten_150118.js
+22ene18	ET	Error, los analistas no ven el desplegable de proveedores
+28jun18 ET	Pestañas para acceder al mantenimiento de documentos
+29jun18 ET	Simplificación formulario: quitar check "oculto", quitar FT (gestionar en pestaña documentos), quitar documentos comerciales (gestionar en pestaña documentos?)
+28mar22 ET Quitar campo ref. estandar

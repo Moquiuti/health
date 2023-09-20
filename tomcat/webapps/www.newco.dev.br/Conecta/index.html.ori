@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="./img/icon_conecta.png">
+    <title>Conecta</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+    <script type="text/javascript" src="http://www.newco.dev.br/Conecta/General/login_21jun17.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="content first-content">
+            <div class="second-column">
+                <img src="./img/logo_conecta.png" alt="" class="img">
+                <form class="form" method="post" name="frmLogin" ID="frmLogin">
+                    <div class="inputs">
+                        <label for="" class="text">Usuário: <br><input type="text" name="USER" placeholder=""></label>
+                        <label for="" class="text">Senha: &nbsp;<br><input type="password" name="PASS" placeholder=""></label>
+                        <input type="hidden" name="PARAMETRO" value=""/>
+                        <div id="textoOK" style="display:none">OK</div>
+                        <div id="textoKO" style="display:none">KO</div>
+                    </div>
+                    <!--<button class ="btn btn-primary" type="submit" onclick="loginDirecto();">Entrar </button>--> 
+
+                    <!--<a href="javascript:loginDirecto();"><button class ="btn btn-primary" type="submit" onclick="loginDirecto();MostrarPagPersonalizada('http://www.newco.dev.br/MenusYDerechos/Main2017.xsql');cerrarVentana();">Entrar </button></a> -->
+
+                    <a href="javascript:loginDirecto();"><button class ="btn btn-primary" type="submit" onclick="loginDirecto();cerrarVentana();">Entrar </button></a> 
+
+                    <br>
+                    <p><a href="#">Recuperar senha</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

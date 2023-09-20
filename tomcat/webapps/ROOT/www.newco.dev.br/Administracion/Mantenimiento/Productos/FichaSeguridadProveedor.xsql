@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Recupera las Fichas de  Seguridad de un proveedor
+	Ultima revision: ET 21feb23 17:11
+-->
+<?xml-stylesheet type="text/xsl" href="FichaSeguridadProveedorJSON.xsl"?>
+
+
+<FichasProveedor xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+     <xsql:include-owa>
+    	<![CDATA[
+		DOCUMENTOS_PCK.ListaOfertasDelProveedor_XML ('{@IDPROVEEDOR}',NULL,0,'OFERTAS','','{@IDDOC_ACTUAL}','FS','S');
+        ]]>   					
+    </xsql:include-owa>
+	
+</FichasProveedor>
+
+

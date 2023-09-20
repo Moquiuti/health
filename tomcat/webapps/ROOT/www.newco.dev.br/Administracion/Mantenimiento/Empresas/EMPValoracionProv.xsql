@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	13jul10	Sistema para poner comentarios que ayuden a la gestión comercial
+-->
+<?xml-stylesheet type="text/xsl" href="EMPValoracionProvHTML.xsl"?>
+
+<Valoracion xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="EMP_ID"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SeguimientoComercial');
+			IF US_ID>=0 THEN
+        SEGUIMIENTO_PCK.Inicio_XML(
+          US_ID,
+          NULL,
+          '{@EMP_ID}',
+          NULL,
+          NULL,
+          NULL,
+          '{@ACCION}',
+          '{@PARAMETROS}',
+          'VALORACION_PROV',
+          '{@NOTA_CALIDAD}',
+          '{@NOTA_SERVICIO}',
+          '{@NOTA_PRECIO}'
+        );
+			END IF;
+    END;
+  ]]>
+	</xsql:include-owa>
+</Valoracion>

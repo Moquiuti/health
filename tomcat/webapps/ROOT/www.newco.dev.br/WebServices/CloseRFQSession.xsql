@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+    Recepcion de mensaje soap
+-->
+<?xml-stylesheet type="text/xsl" href="CloseRFQSession.xsl"?>
+<page connection="newco" allow-client-style="no"
+                        xmlns:xsql="urn:oracle-xsql"
+                        xmlns:e="http://schemas.xmlsoap.org/soap/envelope/"
+                        xmlns:s="http://www.newco.dev.br/mvmSoap/mvmWS.wsdl">
+
+<xsql:set-page-param name="user" xpath="e:Envelope/e:Body/getNombreUser/user"/>
+<xsql:set-page-param name="password" xpath="e:Envelope/e:Body/getPasswordUser/password"/>
+<xsql:set-page-param name="session" xpath="e:Envelope/e:Body/getSession/IDRFQSession"/>
+<xsql:set-page-param name="lineTotal" xpath="e:Envelope/e:Body/getLineTotal/LineTotal"/>
+<xsql:set-page-param name="estado" xpath="e:Envelope/e:Body/getEstado/Estado"/>
+	<xsql:include-param name="close"/>
+
+	<xsql:include-owa bind-params="user password session lineTotal estado">
+		<![CDATA[
+			DECLARE
+				US_ID NUMBER;
+			BEGIN
+				WEBSERVICES_PCK.CloseRFQSession_XML(?,?,?,?,?);
+			END;
+		]]>
+	</xsql:include-owa>
+
+</page>
+

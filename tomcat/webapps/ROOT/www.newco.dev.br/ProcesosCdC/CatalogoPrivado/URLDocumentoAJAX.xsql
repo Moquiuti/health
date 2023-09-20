@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que devuelve la url del documento dado el id de documento u oferta -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="URLDocumentoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="URLDocumentoJSON.xsl"?>
+
+
+<URLDocumento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDCATEGORIA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_URL                   VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Recuperar URL del documento');
+		IF US_ID>=0 THEN
+			v_URL := DOCUMENTOS_PCK.URL(
+				'{@IDDOC}'
+			);
+
+			--HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_URL is not null THEN
+				HTP.P('<OK>'||v_URL||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</URLDocumento>

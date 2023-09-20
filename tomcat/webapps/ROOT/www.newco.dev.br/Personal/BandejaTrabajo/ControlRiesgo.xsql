@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Control de riesgo en los pedidos
+	15feb10	ET	Para control de Carla y supervisión de Alfonso
+
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ControlRiesgoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ControlRiesgoHTML.xsl"?>
+
+<ControlRiesgo xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<!--	Pedidos problematicos, alarmas	y bandeja		-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ControlRiesgo');
+					IF US_ID>=0 THEN
+						pedidosproblematicos_pck.ControlRiesgo_XML(US_ID,'{@PED_ID}','{@IDPRODUCTO}');
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+  
+</ControlRiesgo>

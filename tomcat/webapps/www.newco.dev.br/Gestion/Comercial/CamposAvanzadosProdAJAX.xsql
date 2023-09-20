@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Informa los campos avanzados de la tabla LIC_PRODUCTOS
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CamposAvanzadosProdJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CamposAvanzadosProdJSON.xsl"?>
+
+<CamposAvanzados xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="IDPRODUCTOLIC"/>
+<xsql:include-param name="IDDOC"/>
+<xsql:include-param name="INFOAMPLIADA"/>
+<xsql:include-param name="ANOTACIONES"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CamposAvanzadosProd');
+		IF US_ID>=0 THEN
+			v_Res:=LICITACIONES_PCK.Producto_CamposAvanzados(
+				US_ID,
+				'{@IDPRODUCTOLIC}',
+				'{@IDDOC}',
+				'{@INFOAMPLIADA}',
+				'{@ANOTACIONES}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Res > 0 THEN
+				HTP.P('<OK>'||v_Res||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CamposAvanzados>

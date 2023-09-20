@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevoAnuncioHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevoAnuncioHTML.xsl"?>
+
+<NuevoAnuncio xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="TIPO"/>
+  
+  <IDUSUARIO>
+   <xsql:query rowset-element="" row-element="">
+    <![CDATA[
+		SELECT SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}') IDUSUARIO FROM DUAL
+    ]]>
+  </xsql:query>
+  </IDUSUARIO>
+
+<!--
+  <TIPO>
+   <xsql:query rowset-element="" row-element="">
+    <![CDATA[
+  	SELECT {@TIPO} TIPO FROM DUAL
+    ]]>
+  </xsql:query>
+  </TIPO>-->
+  
+  <field>
+   <xsql:query rowset-element="dropDownList" row-element="listElem">
+    <![CDATA[
+		SELECT 
+		TA_ID 			AS ID,
+		TA_DESCRIPCION	AS "listItem"
+		FROM TIPOSANUNCIOS
+		ORDER BY TA_ID
+    ]]>
+  </xsql:query>
+  </field>
+
+  <Categorias>
+   <xsql:query rowset-element="" row-element="ROW">
+    <![CDATA[
+		SELECT 
+		NOM_ID 			AS ID,
+		NOM_NOMBRE		AS "listItem"
+		FROM NOMENCLATOR
+		WHERE NOM_NIVEL=1
+		ORDER BY NOM_NOMBRE
+    ]]>
+  </xsql:query>
+  </Categorias>
+    
+  <returnHome/>
+</NuevoAnuncio>
+

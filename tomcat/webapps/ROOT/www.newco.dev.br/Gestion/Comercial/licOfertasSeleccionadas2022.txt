@@ -1,0 +1,7 @@
+30mar22 ET Vencedores. Nuevo disenno 2022. licOfertasSeleccionadas2022_300322.js
+10jun22 ET Nuevos cambios propuestos por el equipo de Brasil
+21oct22 ET Faltaba incluir el campo "plazo de entrega" licOfertasSeleccionadas2022_031122.js
+19dic22 ET Si la licitacion requiere firma, no mostrar boton de pedido. licOfertasSeleccionadas2022_191222.js
+02ene22 ET Incluir botones de firma y rechazo
+21abr23 ET Incluir los principales informes en la parte inferior de Vencedores. licOfertasSeleccionadas2022_210423.js
+24abr23 ET COrregidos acampos en el bloque de "Productos no seleccionados"

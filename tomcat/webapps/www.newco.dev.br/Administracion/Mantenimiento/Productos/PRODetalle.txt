@@ -1,0 +1,13 @@
+9oct17	ET Quitada pestaña evaluación, añadidos botones para incidencias
+2feb18	ET Incluir campos Colombia. Mostrar IVA para Colombia.
+3abr18	ET Incluir documentos Colombia
+24may18	ET Mostrar la divisa correcta
+16ago18	ET Separar JS PRODetalle_16ago18.js
+16ago18	ET Eliminar pestañas
+16ago18	ET Botones de documentos y packs
+16ago18 ET Desactivada funcionalidad de Equivalentes
+09may19 ET Incluir log de cambios del productos
+07oct20 ET Incluir nuevos campos a nivel de tarifa
+24feb21 ET Divisas
+19may22 ET Incluir documentos
+10jun22 ET No se mostraba correctamente el boton "Pack"

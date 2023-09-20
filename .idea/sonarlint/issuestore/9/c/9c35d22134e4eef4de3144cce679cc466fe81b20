@@ -1,0 +1,39 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Àèö
+F	java:S106„"+Replace this use of System.out by a logger.(ìÿàîøÿÿÿÿ
+F	java:S106"+Replace this use of System.out by a logger.(“œ‰Õşÿÿÿÿ
+A	java:S106˜"+Replace this use of System.out by a logger.(Âà¸ë
+F	java:S106¥"+Replace this use of System.out by a logger.(Àèö ÿÿÿÿÿ
+A	java:S106±"+Replace this use of System.out by a logger.(Â–·Ø
+F	java:S106²"+Replace this use of System.out by a logger.(“ÂÂ‚ıÿÿÿÿ
+A	java:S106³"+Replace this use of System.out by a logger.(Èÿúö
+A	java:S106È"+Replace this use of System.out by a logger.(òöµº
+F	java:S106×"+Replace this use of System.out by a logger.(»ù½üøÿÿÿÿ
+F	java:S106Û"+Replace this use of System.out by a logger.(èç¢ùÿÿÿÿ
+F	java:S106î"+Replace this use of System.out by a logger.(°Áâ‘şÿÿÿÿ
+F
+java:S1197…"*Move the array designators [] to the type.(—‚ÄÙûÿÿÿÿ
+F
+java:S1197—"*Move the array designators [] to the type.(èöò¡şÿÿÿÿ
+A	java:S106š"+Replace this use of System.out by a logger.(ÿ‘ñ
+F	java:S106"+Replace this use of System.out by a logger.(Ú—¹ùÿÿÿÿ
+F	java:S106"+Replace this use of System.out by a logger.(¹èÆªÿÿÿÿÿ
+A	java:S106Ÿ"+Replace this use of System.out by a logger.(Èÿúö
+i
+java:S3776½"RRefactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.(æ„òŞ
+A
+java:S1197½"*Move the array designators [] to the type.(æ„òŞ
+F	java:S106À"+Replace this use of System.out by a logger.(ÃÑ··øÿÿÿÿ
+A	java:S106Ã"+Replace this use of System.out by a logger.(£„ø°
+F	java:S106Ä"+Replace this use of System.out by a logger.(¹èÆªÿÿÿÿÿ
+A	java:S106Å"+Replace this use of System.out by a logger.(Èÿúö
+A	java:S106É"+Replace this use of System.out by a logger.(çœÏ¸
+F	java:S106Ò"+Replace this use of System.out by a logger.(óìæ¯üÿÿÿÿ
+@	java:S106Ö"+Replace this use of System.out by a logger.(êÌ–
+F	java:S106á"+Replace this use of System.out by a logger.(¾±†ûÿÿÿÿ
+A	java:S106å"+Replace this use of System.out by a logger.(ÃÁêÜ
+A	java:S106ì"+Replace this use of System.out by a logger.(™ÒÉ¸
+F	java:S106ğ"+Replace this use of System.out by a logger.(²—éùÿÿÿÿ
+F	java:S106ô"+Replace this use of System.out by a logger.(ÒŒÉƒúÿÿÿÿ
+F
+java:S1197”"*Move the array designators [] to the type.(‘¤²ˆşÿÿÿÿ

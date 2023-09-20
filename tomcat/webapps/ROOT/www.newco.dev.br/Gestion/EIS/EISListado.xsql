@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+	Listado de resgistros desde el reumen mensual del EIS
+	Ultima revision: ET 13abr20 16:11
+-->
+<?xml-stylesheet type="text/xsl" href="EISListadoHTML.xsl"?>
+
+<ListadoEIS xmlns:xsql="urn:oracle-xsql" connection="newco">
+   <xsql:include-param name="STYLE"/>
+ <xsql:include-param name="LANG" value="{@PRMLANG}"/>   
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+  
+  <xsql:include-request-params/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+        BEGIN
+		 	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISListado');
+			IF US_ID>=0 THEN
+            	EIS_PCK.ListaResultados(US_ID,'{@IDINDICADOR}','{@ANNO}','{@MES}', '{@IDEMPRESA}','{@IDCENTRO}',
+									'{@IDUSUARIO}','{@IDEMPRESA2}','{@IDCENTRO2}','{@IDPRODUCTO}',
+									'{@IDGRUPOCAT}','{@IDSUBFAMILIA}','{@IDFAMILIA}','{@IDCATEGORIA}',
+									'{@IDESTADO}',
+									'{@REFERENCIA}','{@CODIGO}','{@AGRUPARPOR}','{@IDGRUPO}');
+        	END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</ListadoEIS>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISBuscaIDProductoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISBuscaIDProductoJSON.xsl"?>
+
+<BuscaIDProducto xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="REF"/>
+	<xsql:include-param name="IDEMPRESA"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDProdEstandar	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISBuscaIDProductoAJAX');
+		IF US_ID>=0 THEN
+                
+			v_IDProdEstandar := CatalogoPrivado_v4_PCK.IDProductoParaProdEstandar(CatalogoPrivado_v4_PCK.IDProductoEstandar(
+				'{@IDEMPRESA}',
+				'{@REF}'
+			));
+
+			IF v_IDProdEstandar > 0 THEN
+				HTP.P('<OK>'||v_IDProdEstandar||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</BuscaIDProducto>

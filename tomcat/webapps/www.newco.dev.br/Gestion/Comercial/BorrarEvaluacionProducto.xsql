@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Cambia el estado de la incidencia a 'B'
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BorrarEvaluacionProductoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BorrarEvaluacionProductoJSON.xsl"?>
+
+<BorrarEvaluacion xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDEval	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarEvaluacionProducto');
+		IF US_ID>=0 THEN
+			v_IDEval:=EVALUACIONPRODUCTOS_PCK.BorrarEvaluacion(
+				US_ID,
+				'{@IDINCIDENCIA}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDEval > 0 THEN
+				HTP.P('<OK>'||v_IDEval||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</BorrarEvaluacion>

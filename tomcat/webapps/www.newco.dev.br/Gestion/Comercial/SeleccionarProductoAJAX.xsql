@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Adjudica una unica oferta en la ficha de producto de la licitacion (FichaProductoLicitacionHTML.xsl)
+	Ultima revision ET 29jun22 14:34
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="SeleccionarProductoJSON.xsl"?>
+
+<SeleccionarProducto xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		NUMBER;
+		v_IDMotivo	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SeleccionarProductsAJAX');
+		IF US_ID>=0 THEN
+		
+			SELECT DECODE('{@IDMOTIVO}', 'undefined',NULL, 'null',NULL,'{@IDMOTIVO}') INTO v_IDMotivo FROM DUAL;			--	29jun22
+		
+			v_res:=LICITACIONES_PCK.SeleccionarProducto(
+				US_ID,
+				'{@IDLIC}',
+				'{@IDPRODUCTOLIC}',
+				'{@IDOFERTA}',
+				v_IDMotivo,
+				'{@MOTIVO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = '1' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</SeleccionarProducto>

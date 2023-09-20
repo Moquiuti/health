@@ -1,0 +1,2 @@
+04abr22 ET Envio de ficheros CSV para generar licitaciones o pedidos. Nuevo disenno 2022.
+02jul22 ET Se producen errores JS

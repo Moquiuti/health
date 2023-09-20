@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Genera el pedido de una licitacion para un proveedor y centro dado
+	Ultima revision: ET 1oct20 15:00
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="GenerarPedidoJSON.xsl"?>
+
+<GenerarPedido xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','GenerarPedidoProveedorCentro');
+		IF US_ID>=0 THEN
+			
+			v_res:=LICITACIONESPEDIDOS_PCK.CrearPedidosCentro(
+				US_ID,
+				'{@LIC_ID}',
+				'{@IDCENTRO}',
+				'{@IDPROVEEDORLIC}',
+				'{@CODPEDIDO}'	
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR>'||v_res||'</ERROR>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</GenerarPedido>

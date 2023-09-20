@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="PROPMantenHTML.xsl"?>
+
+<!--
+ |   
+ |  Mantenimiento de Productos Propios
+ |
+ +-->
+
+<BusquedaProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  
+<!--  <xsql:include-param name="OP"/>  -->
+
+  <!--<xsql:include-owa>
+        NOMENCLATOR_PCK.EstructuraProductos;
+  </xsql:include-owa>   -->
+
+  <BuscForm name="BuscaProductos"  method="post" action="PROPLista.xsql?xml-stylesheet=PROPListaHTML.xsl">
+     <xsql:query null-indicator="yes">
+                SELECT 
+                  null LLP_REFERENCIACLIENTE,
+                  null LLP_CATEGORIA,
+                  null LLP_FAMILIA,
+                  null LLP_SUBFAMILIA,
+                  null LLP_MARCA,
+                  null LLP_FABRICANTE,
+                  EMP_NOMBRE LLP_PROVEEDOR,
+                  EMP_ID,
+                  null LLP_NOMBRE,
+                  null LLP_NOMBREINTERNACIONAL,
+                  null LLP_UNIDADBASICA,
+                  null LLP_UNIDADESPORLOTE,
+                  null LLP_REFERENCIA,
+                  null LLP_DESCRIPCION,
+                  null LLP_HOMOLOGADO,
+                  null LLP_CERTIFICACION,
+                  null LLP_TIPO_CERTIFICACION,
+                  null LLP_VALOR_CERTIFICACION,
+                  null LLP_CANTIDAD,
+                  null LLP_PRECIO_MAXIMO,
+                  null LLP_IDDIVISA,
+                  null LLP_NIVEL_CALIDAD,
+                  null LLP_PROV_HABITUALES,
+                  null LLP_PRESENTACION,
+                  null LLP_ORDERBY,
+                  null LLP_LISTAR                 
+                FROM usuarios, centros, empresas
+                where us_id = SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROPListaHTML');
+                and cen_id = us_idcentro
+                and emp_id = cen_idempresa 
+     </xsql:query>
+     <!-- Añadimos una opción de menu especifica
+    <button label="Aceptar" caption="IMG-0510">
+      <name_function>Linka</name_function>
+      <param>'PROPValida.xsql'</param>
+    </button>  
+    -->
+           
+    <button label="Buscar" caption="IMG-0490">
+      <name_function>Actua</name_function>
+      <param>document.forms[0]</param>
+    </button>
+    
+    <button label="CatalogoProductos" alt="IMG-1010" status="IMG-1010" caption="IMG-1020">
+      <name_function>MostrarPag</name_function>
+      <param>'http://www.newco.dev.br/files/AyudaProductos/Plantillas.html'</param>
+    </button>
+         
+<!--
+        De momento solo implementamos la opción directa 
+        
+        <field name="LLP_TIPOS_PRESENTACION">
+        <dropDownList>
+          <listElem>  
+                <ID>LIN</ID>
+                <listItem>No</listItem>
+          </listElem>          
+          <listElem>  
+                <ID>AMP</ID>
+                <listItem>Si</listItem>
+          </listElem>
+          </dropDownList>    
+        </field>
+-->    
+
+        <!-- El elemento actual del combo es LLP_TIPO_CERTIFICACION -->
+        <!--
+        <field name="TIPOS_CERTIFICACIONES">
+        <dropDownList>
+          <listElem>  
+                <ID>SIN</ID>
+                <listItem>[Tipo Certificación]</listItem>
+          </listElem>
+          <listElem>  
+                <ID>CE</ID>
+                <listItem>CE</listItem>
+          </listElem>
+          <listElem>
+                <ID>EU</ID>
+                <listItem>EU</listItem>
+          </listElem> 
+          </dropDownList>    
+        </field>
+        -->
+        <!-- El elemento actual del combo es ORDERBY -->
+        <field name="ORDERBY">
+        <dropDownList>
+        <!--
+          <listElem>  
+                <ID>DEF</ID>
+                <listItem>Por defecto</listItem>
+          </listElem>
+          -->
+          <listElem>  
+                <ID>ALF</ID>
+                <listItem>Alfabetico</listItem>
+          </listElem>
+          <listElem>  
+                <ID>FAB</ID>
+                <listItem>Por Fabricante</listItem>
+          </listElem>
+          <!--
+            Pendiente de Implementar
+          <listElem>
+                <ID>PRE</ID>
+                <listItem>Por Precio</listItem>
+          </listElem>           
+          -->
+          </dropDownList>    
+        </field>
+
+        <!-- El elemento actual del combo es LLP_TIPO_PRODUCTO_ACTUAL -->
+	<xsql:include-owa>
+		<![CDATA[
+			TIPOSPRODUCTOS_PCK.ListadoTipos('LLP_TIPO_PRODUCTO');
+		]]>        
+	</xsql:include-owa>
+	        
+        <!-- El elemento actual del combo es LISTAR -->
+        <!--
+        <field name="LISTAR">
+        <dropDownList>
+          <listElem>  
+                <ID>0</ID>
+                <listItem>Productos</listItem>
+          </listElem>
+          <listElem>  
+                <ID>EMP</ID>
+                <listItem>Proveedores</listItem>
+          </listElem>
+          </dropDownList>    
+        </field>
+        -->            
+        
+        <!-- El elemento actual del combo es LLP_NIVEL_CALIDAD -->
+        <!--
+        <field name="COMBO_NIVEL_CALIDAD">                             
+         <xsql:query rowset-element="dropDownList"          
+                   row-element="listElem">                  
+           <![CDATA[                                        
+          select -1 AS "ID",                          
+                 'Seleccione nivel' AS "listItem"              
+          from TIPOSCALIDADES
+          union             
+          select TC_ID AS "ID",                          
+                 TC_DESCRIPCION AS "listItem"              
+          from TIPOSCALIDADES
+           ]]>                                              
+                                                            
+          <xsql:no-rows-query>                              
+             Select 'No existen calidades' "Sorry" from dual 
+          </xsql:no-rows-query>                             
+         </xsql:query>                                      
+        </field>          
+       -->
+
+
+  </BuscForm>
+
+</BusquedaProductos>     

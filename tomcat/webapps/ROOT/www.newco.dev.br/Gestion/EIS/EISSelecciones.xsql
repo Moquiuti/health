@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--  
+	Selecciones/agrupaciones para consultas
+	Ultima revision: ET 3abr20
+-->
+<?xml-stylesheet type="text/xsl" href="EISSeleccionesHTML.xsl"?>
+
+<EISSelecciones xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISSelecciones');
+			IF US_ID>=0 THEN
+
+				HTP.P(utilidades_pck.CabeceraXML||'<SEL>');
+				
+				IF '{@ACCION}' = 'BORRAR' THEN
+    				EISSelecciones_PCK.BorrarSeleccion_XML(
+        				US_ID,
+        				'{@IDSELECCION}'
+    				);
+				END IF;
+
+				EISSelecciones_PCK.Inicio_XML(
+    				US_ID,
+					'{@IDEMPRESALISTA}',
+    				'{@IDFILTROCLASIFICACION}',
+					'N'
+				);
+
+				HTP.P('</SEL>');
+
+           END IF;
+
+        END;
+        ]]>
+  </xsql:include-owa>
+
+</EISSelecciones>

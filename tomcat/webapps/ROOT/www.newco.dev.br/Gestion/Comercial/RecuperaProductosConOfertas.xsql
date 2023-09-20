@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  	Recupera lista de productos con las ofertas (estado CURS) de una licitacion
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="RecuperaProductosConOfertasJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="RecuperaProductosConOfertasJSON.xsl"?>
+
+
+<Productos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProveedor');
+		IF US_ID>=0 THEN
+			LICITACIONES_PCK.OfertasLicitacion_XML(
+				US_ID,
+				'{@LIC_ID}',
+				NULL,
+				NULL,
+				'{@IDIDIOMA}',
+				'S',		--	20set16	Devolvemos todas las ofertas, desde el javascript hay que evitar llamar si son muchos proveedores
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Productos>

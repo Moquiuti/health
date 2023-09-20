@@ -1,0 +1,124 @@
+<!--
+    Web Services: Introducir productos
+    20180907
+-->
+
+<html>
+ <head>
+    <title>Prueba SOAP por jQuery</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+    <META HTTP-EQUIV= "Content-Type"CONTENT="text/html;charset=es">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.newco.dev.br/WebServices/mvm.jquery.soap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnCallWebService").click(function (event) {
+
+                var wsUrl = "http://www.newco.dev.br/WebServices/GetRFQItemId.xsql"; 
+
+                var soapRequest =
+                '<?xml version="1.0" encoding="utf-8"?>'
+                +'<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'
+                +'<soap:Body>'
+		+'<getNombreUser>'
+		+'<user>'+$("#txtNombre").val()+'</user>'
+		+'</getNombreUser>'
+		+'<getPasswordUser>'
+		+'<password>'+$("#txtPassword").val()+'</password>'
+		+'</getPasswordUser>'
+                +'<getSession>'
+                +'<IDRFQSession>'+$("#txtSession").val()+'</IDRFQSession>'
+                +'</getSession>'
+                +'<getLineNumber>'
+                +'<LineNumber>'+$("#txtLineNumber").val()+'</LineNumber>'
+                +'</getLineNumber>'
+                +'<getProductCode>'
+                +'<ProductCode>'+$("#txtProductCode").val()+'</ProductCode>'
+                +'</getProductCode>'
+                +'<getProductName>'
+                +'<ProductName>'+$("#txtProductName").val()+'</ProductName>'
+                +'</getProductName>'
+                +'<getQuantity>'
+                +'<Quantity>'+$("#txtQuantity").val()+'</Quantity>'
+                +'</getQuantity>'
+                +'<getPrice>'
+                +'<Price>'+$("#txtPrice").val()+'</Price>'
+                +'</getPrice>'
+                +'<getEntregas>'
+                +'<Entregas>'+$("#txtEntregas").val()+'</Entregas>'
+                +'</getEntregas>'
+                +'<getExtraInfo>'
+                +'<ExtraInfo>'+$("#txtExtraInfo").val()+'</ExtraInfo>'
+                +'</getExtraInfo>'
+                +'<getCenter>'
+                +'<Center>'+$("#txtCenter").val()+'</Center>'
+                +'</getCenter>'
+                +'</soap:Body>'
+                +'</soap:Envelope>';
+
+                console.log("soapRequest: " + soapRequest);
+                
+		$.ajax({
+                    type: "POST",
+                    url: wsUrl,
+                    contentType: "text/xml",
+                    dataType: "text/xml",
+                    data: soapRequest,
+                    success: processSuccess,
+                    error: processError
+                });
+
+            });
+        });
+
+        function processSuccess(data, status, req) {
+            if (status == "success")
+			{
+                $("#response").text(data);
+		console.log("data: " + data);	
+                var varRes = data;
+                console.log("varRes: " + varRes);
+			} 
+        } 
+
+        function processError(data, status, req) {
+            alert('ERROR:'+req + " " + status);
+        } 
+
+
+    </script>
+</head>
+<body>
+    <h3>
+       Web Services SOAP: Introducción de productos, 12sep18 
+    </h3>
+    Nombre:
+    <input id="txtNombre" type "text" />
+    Clave:
+    <input id="txtPassword" type="text" />
+    Session:
+    <input id="txtSession" type="text" />
+    Line Number:
+    <input id="txtLineNumber" type="text" />
+    Product Code:
+    <input id="txtProductCode" type="text" />
+    Product Name:
+    <input id="txtProductName" type="text" />
+    Quantity:
+    <input id="txtQuantity" type="text" />
+    <br>
+    Price (optional):
+    <input id="txtPrice" type="text" />
+    Entregas (optional):
+    <input id="txtEntregas" type="text" />
+    Extra Info (optional):
+    <input id="txtExtraInfo" type="text" />
+    Center (optional):
+    <input id="txtCenter" type="text" />
+
+    <input id="btnCallWebService" value="Call web service" type="button" />
+    <div><p id="response" />RESPUESTA</div>
+</body>
+</html>

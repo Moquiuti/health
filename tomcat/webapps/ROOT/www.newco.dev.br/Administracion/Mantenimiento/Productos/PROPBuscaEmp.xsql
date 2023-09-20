@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PROPBuscaEmpHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PROPBuscaEmpHTML.xsl"?>
+
+<BusquedaEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  
+  <BuscForm name="BuscaEmpresa"  method="post">
+    <field name="EMP_IDTIPO">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+          select 0 as ID,
+                '[Seleccione opcion]' as "listItem"
+          FROM DUAL
+          UNION        
+	  select TE_ID AS ID,
+               TE_DESCRIPCION AS "listItem"
+	  from tiposempresas
+        ]]>
+       <xsql:no-rows-query>
+          Select 'No existen empresas' "Sorry" from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    <button label="Buscar" caption="IMG-0480">
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'CYPEdita.xsql'</param>
+    </button>
+    </BuscForm>
+
+
+  <jumpTo>
+    <picture-off>Salir</picture-off>     
+    <picture-on>Salir_mov</picture-on>  
+    <page>G-0015</page>
+    <caption>G-0005</caption>   
+  </jumpTo>
+
+</BusquedaEmpresas>
+

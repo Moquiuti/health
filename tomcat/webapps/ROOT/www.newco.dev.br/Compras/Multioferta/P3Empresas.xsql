@@ -1,0 +1,109 @@
+ 
+ 
+ 
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="P3EmpresasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="P3EmpresasHTML.xsl"?>
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  
+  <form name="SeleccionEmpresas" method="post" action="ListaProductos.xsql">
+   <!--
+    //[[ Copiamos los parametros dentro del form para volver a enviar la consulta ]]//
+   +-->
+  <xsql:include-param name="LLP_NOMBRE"/>    
+  <xsql:include-param name="LLP_PROVEEDOR"/>        
+
+<!--
+  <xsql:include-param name="LLP_CATEGORIA"/>
+  <xsql:include-param name="LLP_FAMILIA"/>  
+  <xsql:include-param name="LLP_SUBFAMILIA"/>  
+  <xsql:include-param name="LLP_DESCRIPCION"/>  
+  <xsql:include-param name="LLP_FABRICANTE"/>      
+  <xsql:include-param name="LLP_MARCA"/>        
+  <xsql:include-param name="LLP_HOMOLOGADO"/>        
+  <xsql:include-param name="LLP_CERTIFICACION"/>            
+  <xsql:include-param name="LLP_NIVEL_CALIDAD"/>            
+  <xsql:include-param name="LLP_TIPO_PRODUCTO"/>            
+  <xsql:include-param name="LLP_PROV_HABITUALES"/>            
+  <xsql:include-param name="LLP_PRODUCTO_DETERMINADO"/>     
+  <xsql:include-param name="LLP_PRESENTACION"/>              
+  <xsql:include-param name="LLP_ORDERBY"/>         
+  <xsql:include-param name="TIPO_BUSQUEDA"/>                       
+  <xsql:include-param name="LLP_LISTAR"/>          
+  <xsql:include-param name="OPERACION"/>          
+  <xsql:include-param name="LLP_IDESPECIALIDAD"/>            
+  
+  <xsql:include-param name="LLP_ID"/>
+  <xsql:include-param name="LP_ID"/>  
+  <xsql:include-param name="TCV_ID"/>  
+  -->  
+  <xsql:include-param name="REGISTROSPORPAGINA"/>
+  <!-- ULTIMAPAGINA es defineix a partir dels butons -->
+ 
+  <xsql:include-owa>
+    <![CDATA[
+         DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','P3Empresas');
+		  IF US_ID>=0 THEN
+      BUSCADOR_PCK.BuscaEmpresas(
+                    US_ID,
+                    p_CATEGORIA => '{@LLP_CATEGORIA}',
+				    p_FAMILIA => '{@LLP_FAMILIA}',
+				    p_SUBFAMILIA => '{@LLP_SUBFAMILIA}',
+				    p_NOMBRE => '{@LLP_NOMBRE}',
+				    p_DESCRIPCION => '{@LLP_DESCRIPCION}',
+				    p_FABRICANTE => '{@LLP_FABRICANTE}',
+				    p_MARCA => '{@LLP_MARCA}',
+				    p_TIPO_PRODUCTO => '{@LLP_TIPO_PRODUCTO}',
+				    p_PROVEEDOR => '{@LLP_PROVEEDOR}',
+				    p_HOMOLOGADO => '{@HOMOLOGADO}',
+				    p_CERTIFICACION => '{@CERTIFICACION}',
+				    p_NIVEL_CALIDAD => '{@LLP_NIVEL_CALIDAD}',
+				    p_PROV_HABITUALES => '{@LLP_PROV_HABITUALES}',
+				    p_ORDERBY => null,
+				    p_TIPO_BUSQUEDA => '{@TIPO_BUSQUEDA}',
+				    p_LLP_IDESPECIALIDAD => '{@LLP_IDESPECIALIDAD}'
+                    );
+               end if;
+     END;
+    ]]>
+  </xsql:include-owa>
+
+    <button label="Seleccionar" caption="IMG-0110"> 
+      <name_function>Seleccionar</name_function>
+      <param>document.forms[0]</param>
+      <param>'EMPRESA'</param>       
+    </button>
+
+    <button label="Continuar" caption="P3-0425">
+      <name_function>Actua</name_function>
+      <param>document.forms[0]</param>
+      <param>'EMPRESA'</param>
+      <param>'ListaProductos.xsql'</param>            
+    </button>
+    <!--
+    <button label="Siguiente" caption="P3-0455">
+      <name_function>Actua</name_function>
+      <param>document.forms[0]</param>
+      <param>'EMPRESA'</param>
+      <param>'P3Nomenclator.xsql'</param>            
+    </button>
+    -->
+</form>  
+<!--
+ <JUMPTO_LINK>G-0011</JUMPTO_LINK>
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0011</page>
+    <caption>G-0001</caption>
+  </jumpTo>
+  -->
+</Lista>

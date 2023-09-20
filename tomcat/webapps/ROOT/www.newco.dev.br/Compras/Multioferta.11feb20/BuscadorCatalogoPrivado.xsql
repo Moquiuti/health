@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	XSQL para la busqueda de productos en la plantilla
+
+	(c) 29/8/2001 E.Torrellas
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BuscadorCatalogoPrivadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BuscadorCatalogoPrivadoHTML.xsl"?>
+
+<ProductosEnPlantillas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="DONDE_SE_BUSCA"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="IDCLIENTE"/>
+  <xsql:include-param name="IDPRODUCTO"/>
+  <xsql:include-param name="IDUSUARIOCOMPROBAR"/>
+  <xsql:include-param name="SOLO_OCULTOS"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+  <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_IDusuario		NUMBER;
+    BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ProdEnPlant');
+			IF US_ID>=0 THEN
+				IF '{@IDPRODUCTO}' IS NOT NULL THEN
+
+					IF '{@IDUSUARIOCOMPROBAR}' IS NOT NULL THEN
+						v_IDusuario:='{@IDUSUARIOCOMPROBAR}';
+					ELSE
+						v_IDusuario := US_ID;
+					END IF;
+
+					CARPETASYPLANTILLAS_PCK.OcultarProductoEnPlantillas(v_IDusuario, '{@IDPRODUCTO}', '{@OCULTAR}', 'S');
+
+				END IF;
+
+        		ProductosEnPlantilla_PCK.ListaProductos_XML(
+							US_ID,
+							'{@LLP_NOMBRE}',
+							'{@LLP_PROVEEDOR}',
+							'{@PAGINA}',
+							'{@IDCLIENTE}',
+							'{@FIDProveedor}',
+							'{@ORDEN}',
+							'{@SENTIDO}',
+							'{@IDUSUARIOCOMPROBAR}',
+							'{@SIN_STOCKS}',
+							'{@SOLO_OCULTOS}'
+						);
+			END IF;
+		END;
+  ]]>
+  </xsql:include-owa>
+<returnHome/>
+
+<botones_nuevo>
+  <button label="Buscar" caption="PRO-0485">
+    <name_function>Enviar</name_function>
+    <param>document.forms[0]</param>
+    <param>'BUSCAR'</param>
+  </button>
+
+  <button label="NavegarAtras" caption="PRO-0480">
+    <name_function>Enviar</name_function>
+    <param>document.forms[0]</param>
+    <param>'ANTERIOR'</param>
+  </button>
+
+  <button label="NavegarAdelante" caption="PRO-0490">
+    <name_function>Enviar</name_function>
+    <param>document.forms[0]</param>
+    <param>'SIGUIENTE'</param>
+  </button>
+</botones_nuevo>
+</ProductosEnPlantillas>

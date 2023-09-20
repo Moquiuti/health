@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Guarda el primer paso del pedido. Nuevo disenno 2022.
+	Ultima revision: ET 16feb22 16:26
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="CVGenerarHTML2022.xsl"?>
+
+<Generar xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(6);
+		v_LP_ID		NUMBER(12);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LPAnalizarSave');
+		IF US_ID>=0 THEN
+			v_LP_ID:=MULTIOFERTAS_PCK.CrearMultiOferta(
+				US_ID,												--	23jul20
+				'{@IDCENTRO}',
+				'{@LP_ID}',
+				NULL,												--23ene21 Ya no se utiliza	'{@SELECCIONTOTAL}',
+				'{@FECHA_DECISION}',								-- F.Decision
+				'{@FECHA_ENTREGA}',									-- F.Entrega
+				NULL,												-- 29may15 Ya no se usa				FECHA_PAGO,	-- F.Pago
+				'DIRECTO',											-- 28may15 Se pasa siempre como 'DIRECTO'	ACCION,	-- DIRECTO | EDICION 
+				'{@LP_OFERTASVISIBLES}',
+				'{@LPP_IDFORMA}',
+				'{@STRING_CANTIDADES}',
+				'{@IDDIVISA}',										-- 13ene21 Recuperamos el campo de divisa
+				NULL,												-- 29may15 Ya no se usa				LP_IDFORMAPAGO
+				NULL,												-- 29may15 Ya no se usa				LP_IDPLAZOPAGO
+				NULL,												-- 29may15 Ya no se usa				LP_FORMAPAGO
+				'{@IDLUGARENTREGA}',
+				'{@IDCENTROCONSUMO}',
+				--'{@IDALMACENINTERNO}',
+				'{@LP_CONDICIONESGENERALES}',
+				'{@COSTE_LOGISTICA}',
+				'{@TIPOCAMBIODIVISA}'								--	22ene21
+			);
+
+			IF v_LP_ID>0 THEN
+				MULTIOFERTAS_SEGUIMIENTO_PCK.MostrarMultiOfertas(
+					'{@LP_ID}',
+					'0',		-- Siempre se utiliza la propia del pais ('0')	'{@IDDIVISA}',
+					US_ID
+				);
+			ELSE
+				HTP.P('<ERROR msj="No se ha podido crear multioferta"/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<!--
+	Devuelve XML con todos los datos de la consulta
+	+
+	Codigo de transaccion
++-->
+
+<jumpTo>
+	<picture-off>Anterior</picture-off>
+	<picture-on>Anterior_mov</picture-on>
+	<page>G-0010</page>
+	<caption>G-0001</caption>
+</jumpTo>
+</Generar>

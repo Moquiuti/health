@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NavegarNomenclatorHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NavegarNomenclatorHTML.xsl"?>
+
+<Nomenclator xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="IDPadre"/>
+  <xsql:include-param name="IDHijo"/>
+   <xsql:include-param name="iniciar"/>
+   <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		NavegarNomenclator_PCK.NodosHijos('PADRE', '{@IDPadre}');
+	END;
+    ]]>
+  </xsql:include-owa>
+
+<!--
+   <xsql:include-owa>
+    <![CDATA[
+	BEGIN
+		NavegarNomenclator_PCK.NodosHijos('HIJO', '{@IDHijo}');
+	END;
+    ]]>
+  </xsql:include-owa>
+  
+-->
+    
+  <returnHome/>
+
+</Nomenclator>

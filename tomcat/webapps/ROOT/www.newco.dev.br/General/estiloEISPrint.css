@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*estilo imprimir sobre todo para pedidos*/
+
+html, body {
+	background-color: #FFF;
+	font-size: 15px;
+	width: auto;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-weight:bold;
+	color:#333333;
+	font-size:15px;	
+	text-align:center;
+}
+
+
+.titlePage{ 
+	float:none;
+	color:#333333; 
+	font-weight:bold;
+	font-size:15px;
+}
+
+table.azul { 
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	font-size:15px;
+} 

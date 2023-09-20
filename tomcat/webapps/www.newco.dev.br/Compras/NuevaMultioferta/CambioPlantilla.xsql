@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CambioPlantilla.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CambioPlantilla.xsl"?>
+
+<!--
+ |   Seleccionamos una nueva plantilla.
+ +-->
+
+<Analizar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="PL_ID"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+	BEGIN
+		UNICA_NACHO_PCK.NewFrame('{@PL_ID}','{@US_ID}');
+	END;
+</xsql:include-owa>
+</Analizar>
+
+

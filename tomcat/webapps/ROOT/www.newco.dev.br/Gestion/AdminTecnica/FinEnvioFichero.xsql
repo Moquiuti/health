@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Finaliza el envio de un fichero de integracion
+	ultima revision 15nov22 11:02
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="FinEnvioFicheroJSON.xsl"?>
+
+<FinEnvioFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas
+	<xsql:include-param name="NOMBRE" value="{@NOMBRE}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	-->
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Descarga OC');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL: IntegracionRecepcion_pck.FinEnvio_XML {@US_ID}, {@IDFICHERO},{@NUMLINEAS},{@ESTADO},{@AMPLIADA}');
+
+				IntegracionRecepcion_pck.FinEnvio_XML('{@US_ID}','{@IDFICHERO}','{@NUMLINEAS}','{@ESTADO}', '{@AMPLIADA}');
+    		END IF;
+		END;
+]]>
+</xsql:include-owa>
+</FinEnvioFichero>

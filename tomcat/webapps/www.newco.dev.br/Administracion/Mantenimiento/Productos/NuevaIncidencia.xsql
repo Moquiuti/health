@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ultima revisión ET 13set18
+-->
+<?xml-stylesheet type="text/xsl" href="NuevaIncidencia.xsl"?>
+
+<NuevaIncidencia xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="IDEMPRESA_COMPRADORA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="PRO_NOMBRE"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="LIC_OFE_ID"/>
+<xsql:include-param name="USER"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevaIncidencia, Mostrar');
+		IF US_ID>=0 THEN
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			HTP.P('<PRODUCTO>');
+
+			PRODUCTOS_PCK.MostrarProducto('{@PRO_ID}','PRODUCTO',US_ID, '{@IDEMPRESA_COMPRADORA}','S','N');
+
+			HTP.P('</PRODUCTO>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevaIncidencia>

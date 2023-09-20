@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Cambio de clave del usuario
+	Ultima revision: ET 10mar22 11:15
+-->
+<?xml-stylesheet type="text/xsl" href="CambioClaveSaveHTML.xsl"?>
+
+<CambioClave xmlns:xsql="urn:oracle-xsql" connection="newco">
+   <xsql:include-param name="STYLE"/>
+   <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+   
+  <JUMPTO_LINK>G-0015</JUMPTO_LINK>
+<!--
+ |  Nombre de la pagina. Parametro para guardar el error en caso de xsql-error
+ +-->
+<pagename>CambioClaveSave</pagename>
+
+ <xsql:include-owa>
+    <![CDATA[
+                DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambioClave');
+			
+	 		IF US_ID>0 THEN		
+                        	
+                USUARIOS_PCK.CambioPassword (
+                    US_ID,
+                    '{@fClaveAntigua}',
+                    '{@fClaveNueva}',
+                    '{@fClaveNuevaRep}'
+                    );
+            END IF;
+			
+		END;
+    ]]>
+ </xsql:include-owa> 
+ 
+ 
+</CambioClave>

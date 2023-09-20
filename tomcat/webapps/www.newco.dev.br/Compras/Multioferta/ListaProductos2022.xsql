@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Buscador en catálogo proveedores
+	Ultima revision: ET 18mar22 08:20
+-->
+<?xml-stylesheet type="text/xsl" href="ListaProductosHTML2022.xsl"?>
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco">
+ <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="TITULO" />
+	<form name="BuscaProductos" method="post" action="P3Lista.xsql">
+
+
+  <xsql:include-param name="LLP_NOMBRE" />
+  <xsql:include-param name="LLP_PROVEEDOR" />
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			v_IDUsuario		NUMBER;
+    	BEGIN
+			v_IDUsuario:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListaProductos');
+
+			IF v_IDUsuario>=0 THEN
+
+				IF '{@STOCKS_ACCION}'='SIN_STOCKS' THEN
+					CONTROLSTOCKS_PCK.SinStocks(
+						'{@STOCKS_IDPRODUCTO}',
+						'{@STOCKS_TIPO}',
+						'{@STOCKS_COMENTARIOS}',
+						'{@STOCKS_REF_ALT}',
+						'{@STOCKS_PROD_ALT}'
+					);
+				END IF;
+
+				IF '{@STOCKS_ACCION}'='CON_STOCKS' THEN
+					CONTROLSTOCKS_PCK.ConStocks('{@STOCKS_IDPRODUCTO}');
+				END IF;
+
+				NUEVOBUSCADOR_PCK.Buscador
+				(
+					v_IDUsuario,
+					TRIM('{@ULTIMAPAGINA}'),
+					20,
+					'{@LLP_NOMBRE}',
+					'{@LLP_PROVEEDOR}',
+					'{@ORDEN}',
+					'{@SENTIDO}',
+					'{@LLP_LISTAPROVEEDORES}',
+					'{@EMPLANTILLAR}',
+					'{@SIN_STOCKS}',
+					'{@SOLO_VISIBLES}',
+					'{@IDPRODUCTO}',
+					'{@FIDProveedor}',
+					'{@FMarca}',
+					'{@GRUPOPRODUCTOS}'
+				);
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+  </form>
+</Lista>

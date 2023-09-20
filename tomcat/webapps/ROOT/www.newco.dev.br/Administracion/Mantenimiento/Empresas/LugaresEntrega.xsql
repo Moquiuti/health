@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de lugares de entrega
+	Ultima revisión: 20ene20 15:28
+-->
+<?xml-stylesheet type="text/xsl" href="LugaresEntregaHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="CEN_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+        <xsql:include-owa>
+          <![CDATA[
+          	DECLARE
+          	  US_ID		NUMBER;
+            BEGIN
+          	  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoLugaresEntrega');
+          	  if us_id>=0 then
+
+			  	HTP.P(Utilidades_Pck.CabeceraXML
+						||'<MANTENIMIENTOLUGARESENTREGA>');
+				
+				--	Devuelve los datos para el formulario de edición del lugar de entrega	
+				IF '{@ACCION}' IS NOT NULL THEN
+					CENTROS_PCK.MantenimientoLugaresEntrega(
+						US_ID,							--	3ene23
+					  '{@LUGAR_ID}',
+					  '{@CEN_ID}',
+					  '{@IDCENTROENTREGA}',
+					  '{@NUEVAREFERENCIA}',
+					  '{@NUEVAREFERENCIAERP}',			--	20ene20
+					  '{@NUEVONOMBRE}',
+					  '{@NUEVADIRECCION}',
+					  '{@NUEVAPOBLACION}',
+					  '{@NUEVOCPOSTAL}',
+					  '{@NUEVAPROVINCIA}',
+					  '{@NUEVOPORDEFECTO}',
+					  '{@NUEVOPORDEFECTOFARMACIA}',
+					  '{@IDPORDEFECTO}',
+					  '{@ACCION}',
+					  ''
+					  );
+				END IF;
+				  
+                CENTROS_PCK.LugaresEntregaPorCentroXML(NVL('{@CEN_ID}', usuarios_pck.IDCentro(us_id)),NULL);
+				HTP.P('</MANTENIMIENTOLUGARESENTREGA>');
+              end if;	
+            END;
+          ]]>	  
+        </xsql:include-owa>
+ 
+</Mantenimiento>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ContactoSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ContactoSaveHTML.xsl"?>
+
+
+<Contacto  xmlns:xsql="urn:oracle-xsql"  connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+ 
+        <xsql:include-owa>
+        <![CDATA[
+        BEGIN
+             CONTACTO_PCK.Contactar       (p_IDUsuarioOrigen  => '{@US_ID}',
+             				   p_IDUsuarioDestino => '{@CONT_US_DESTINO}',
+             				   p_Mensaje => 	 '{@CONT_MENSAJE}'
+             				   );
+        END;
+        ]]>
+        </xsql:include-owa>
+	  
+    <!-- Boton Aceptar para cerrar la ventana -->
+    <button label="Insertar" caption="IMG-0222" alt="IMG-0225">  
+      <name_function>InsertarProductos</name_function>
+      <param>document.forms[0]</param>
+      <param>'CANTIDAD_UNI'</param>
+      <param>'P3Insertar.xsql'</param>                  
+      <param>'NO'</param>   <!-- LLP_VARIAS_LINEAS -->               
+    </button>  
+  
+</Contacto>

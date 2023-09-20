@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Proveedor: Entrada de oferta para licitacion
+	Ultima revision: ET 1feb23 12:15
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="LicProveedorHTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID" value="{@LIC_ID}"/>
+<xsql:include-owa>
+
+	<![CDATA[
+	DECLARE
+		US_ID				NUMBER(12);
+		v_IDLicitacion		NUMBER(12);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LicProveedor');
+		
+		IF US_ID>=0 THEN
+
+			--1feb23 Incluimos llamada a ModificarLicitacion para cuando cambia el estado, por ejemplo al publicar
+			IF '{@ACCION}' = 'MODIFICAR' THEN
+				v_IDLicitacion:=LICITACIONES_PCK.ModificarLicitacion(
+					US_ID,
+					'{@LIC_ID}',
+					'{@LIC_TITULO}',
+					'{@LIC_DESCRIPCION}',
+					'{@LIC_CONDENTREGA}',
+					'{@LIC_CONDPAGO}',
+					'{@LIC_CONDOTRAS}',
+					'{@LIC_MESES}',
+					'{@LIC_CONSUMO}',
+					'{@LIC_FECHADECISION}',
+					'{@LIC_PORPRODUCTO}',
+                    '{@LIC_FARMACIA}',
+                    '{@LIC_IDUSUARIOPEDIDO}',
+                    '{@LIC_IDLUGARENTREGA}',
+                    '{@LIC_CODIGOPEDIDO}',
+                    '{@LIC_OBSPEDIDO}',
+                    '{@LIC_IDFORMAPAGO}',
+                    '{@LIC_IDPLAZOPAGO}',
+					'{@LIC_FECHAADJUDICACION}',
+					'{@LIC_HORADECISION}',
+					'{@LIC_MINUTODECISION}',
+					'{@LIC_CONTINUA}',
+					'{@LIC_URGENTE}',					--	24may18
+					'{@LIC_SOLICDATOSPROV}'	,			--	24may18
+					'{@LIC_MULTIOPCION}',				--	4jul18
+					'{@LIC_IDDOCUMENTO}',				--	5mar19
+					'{@LIC_FECHAENTREGAPEDIDO}',		--	19set19
+					'{@LIC_FRETECIFOBLIGATORIO}',		--	17jun20
+					'{@LIC_PAGOAPLAZODOOBLIGATORIO}',	--	17jun20
+					'{@LIC_PRECIOOBJETIVOESTRICTO}'		--	17jun20
+				);
+			END IF;
+		
+			LICITACIONES_PCK.Licitacion_XML(
+				US_ID,
+				'{@LIC_ID}',
+				NULL,
+				NULL						--	IDCentro
+			);
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+
+ -->
+<?xml-stylesheet type="text/xsl" href="PROCargaDocumentosHTML.xsl"?>
+
+ 
+
+<CargaDocumentos xmlns:xsql="urn:oracle-xsql" connection="newco">
+    <xsql:include-param name="TIPO"/>
+    <xsql:include-param name="PRO_BUSQUEDA"/>
+    <xsql:include-param name="IDCLIENTE"/>
+    <xsql:include-param name="HISTORY"/>
+	<xsql:include-param name="PROVEEDOR"/>
+	<xsql:include-param name="PRODUCTO"/>
+    <xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+    
+ 
+    <xsql:include-owa>
+       <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PrecioReferenciaProducto');
+    		IF US_ID > 0 THEN
+			 	MANTENIMIENTOPRODUCTOS_PCK.MostrarProducto ('{@PRO_ID}', US_ID);
+			END IF;
+		END;
+       ]]>	          					
+    </xsql:include-owa>
+	
+
+    <jumpTo>
+      <picture-on>Cancelar</picture-on>
+      <picture-off>Cancelar_mov</picture-off>   
+      <page>G-0010</page>
+      <caption>IMG-0050</caption>
+    </jumpTo>
+    
+    <button label="Cancelar" caption="IMG-0050"> 
+    	<!--26ago09	ET Ya no existe la función VolverBusquedaHistoria<name_function>VolverBusquedaHistoria</name_function>-->
+    	<name_function>history.go(-1)</name_function>
+  	</button>
+  	
+  	<button label="Volver" caption="IMG-0040"> 
+    	<!--<name_function>VolverBusquedaHistoria</name_function>-->
+    	<name_function>history.go(-1)</name_function>
+  	</button>
+
+<!--
+  
+-->
+</CargaDocumentos>
+

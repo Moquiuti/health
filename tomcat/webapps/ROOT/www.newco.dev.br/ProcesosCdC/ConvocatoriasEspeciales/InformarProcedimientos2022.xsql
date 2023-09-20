@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Informar procedimientos en convocatoria de elementos especiales. Nuevo disenno 2022.
+	Ultima revision ET 23may22 15:31
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="InformarProcedimientosHTML2022.xsl"?>
+
+<Productos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Conv.Esp.Inf.Procedimientos');
+		IF US_ID>=0 THEN
+		
+			ConvocatoriasEspeciales_pck.InicioProcedimiento_XML(
+				US_ID,
+                '{@FIDCONVOCATORIA}',
+                '{@FIDESPECIALIDAD}',
+                '{@FIDPROCEDIMIENTO}',
+                '{@FIDPROVEEDOR}',
+                '{@ACCION}',
+                '{@PARAMETROS}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Productos>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mvmSoap.wsdl	7sep18	10:05	-->
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.newco.dev.br/WebServices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.newco.dev.br/WebServices/mvmWS.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.newco.dev.br/WebServices/mvmWS.wsdl">
+      <s:element name="getNombreUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getNombreUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getNombreUserResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPasswordUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPasswordUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPasswordUserResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCentroUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Center" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCentroUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCentroUserResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getFileUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileID" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getFileUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getFileUserResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IDRFQSession" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getSessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getSessionResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLineNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LineNumber" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLineNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLineNumberResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getProductCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProductCode" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getProductCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getProductCodeResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getProductName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getProductNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getProductNameResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getQuantity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Quantity" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getQuantityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getQuantityResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPrice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Price" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPriceResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getEntregas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Entregas" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getEntregasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getEntregasResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getExtraInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExtraInfo" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getExtraInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getExtraInfoResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCenter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Center" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCenterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCenterResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLineTotal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LineTotal" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLineTotalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLineTotalResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getEstado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getEstadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getEstadoResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getNombreUserSoapIn">
+    <wsdl:part name="parameters" element="tns:getNombreUser"/>
+  </wsdl:message>
+  <wsdl:message name="getNombreUserSoapOut">
+    <wsdl:part name="parameters" element="tns:getNombreUserResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getPasswordUserSoapIn">
+    <wsdl:part name="parameters" element="tns:getPasswordUser"/>
+  </wsdl:message>
+  <wsdl:message name="getPasswordUserSoapOut">
+    <wsdl:part name="parameters" element="tns:getPasswordUserResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getCentroUserSoapIn">
+    <wsdl:part name="parameters" element="tns:getCentroUser"/>
+  </wsdl:message>
+  <wsdl:message name="getCentroUserSoapOut">
+    <wsdl:part name="parameters" element="tns:getCentroUserResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getFileUserSoapIn">
+    <wsdl:part name="parameters" element="tns:getFileUser"/>
+  </wsdl:message>
+  <wsdl:message name="getFileUserSoapOut">
+    <wsdl:part name="parameters" element="tns:getFileUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:getSession"/>
+  </wsdl:message>
+  <wsdl:message name="getSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:getSessionResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getLineNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:getLineNumber"/>
+  </wsdl:message>
+  <wsdl:message name="getLineNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:getLineNumberResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getProductCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:getProductCode"/>
+  </wsdl:message>
+  <wsdl:message name="getProductCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:getProductCodeResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getProductNameSoapIn">
+    <wsdl:part name="parameters" element="tns:getProductName"/>
+  </wsdl:message>
+  <wsdl:message name="getProductNameSoapOut">
+    <wsdl:part name="parameters" element="tns:getProductNameResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getQuantitySoapIn">
+    <wsdl:part name="parameters" element="tns:getQuantity"/>
+  </wsdl:message>
+  <wsdl:message name="getQuantitySoapOut">
+    <wsdl:part name="parameters" element="tns:getQuantityResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getPriceSoapIn">
+    <wsdl:part name="parameters" element="tns:getPrice"/>
+  </wsdl:message>
+  <wsdl:message name="getPriceSoapOut">
+    <wsdl:part name="parameters" element="tns:getPriceResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getEntregasSoapIn">
+    <wsdl:part name="parameters" element="tns:getEntregas"/>
+  </wsdl:message>
+  <wsdl:message name="getEntregasSoapOut">
+    <wsdl:part name="parameters" element="tns:getEntregasResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getExtraInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getExtraInfo"/>
+  </wsdl:message>
+  <wsdl:message name="getExtraInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getExtraInfoResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getCenterSoapIn">
+    <wsdl:part name="parameters" element="tns:getCenter"/>
+  </wsdl:message>
+  <wsdl:message name="getCentroSoapOut">
+    <wsdl:part name="parameters" element="tns:getCenterResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getLineTotalSoapIn">
+    <wsdl:part name="parameters" element="tns:getLineTotal"/>
+  </wsdl:message>
+  <wsdl:message name="getLineTotalSoapOut">
+    <wsdl:part name="parameters" element="tns:getLineTotalResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getEstadoSoapIn">
+    <wsdl:part name="parameters" element="tns:getEstado"/>
+  </wsdl:message>
+  <wsdl:message name="getEstadoSoapOut">
+    <wsdl:part name="parameters" element="tns:getEstadoResponse"/>
+  </wsdl:message>
+  <wsdl:service name="GetRFQSessionId">
+    <wsdl:port name="mvmPortUser" binding="tns:GetRFQSessionId">
+      <soap:address location="http://www.newco.dev.br/WebServices/GetRFQSessionId"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="GetRFQItemId">
+    <wsdl:port name="mvmPortProduct" binding="tns:GetRFQItemId">
+      <soap:address location="http://www.newco.dev.br/WebServices/GetRFQItemId"/>
+    </wsdl:port>
+  <wsdl:service name="CloseRFQSession">
+    <wsdl:port name="mvmPortProduct" binding="tns:CloseRFQSession">
+      <soap:address location="http://www.newco.dev.br/WebServices/CloseRFQSession_XML"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

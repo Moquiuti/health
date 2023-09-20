@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ResumenCatalogoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ResumenCatalogoJSON.xsl"?>
+
+<ResumenCatalogo xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ResumenCatalogo');
+		IF US_ID > 0 THEN
+			Catalogoprivado_Mant_Pck.ResumenCatalogo_XML(
+				'{@IDEMPRESA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ResumenCatalogo>

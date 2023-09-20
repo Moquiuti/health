@@ -1,0 +1,104 @@
+<comun>
+
+    <!-- Para el boton Borrar Seleccionadas -->  
+    <button label="EliminarPeq" alt="IMG-0500" status="IMG-0500">
+      <name_function>BorrarSeleccionados</name_function>
+      <param>document.forms[0]</param>
+      <param>'LLP_SELECCION'</param>
+      <param>'LLPBorrar.xsql'</param>
+      <param_msg>G-1040</param_msg>
+    </button>
+
+    <!-- Para el boton Analizar -->  
+    <!--
+    <button label="Siguiente" caption="IMG-0300">
+      <name_function>Analiza</name_function>
+      <param>document.forms[0]</param>
+      <param>'LPAnalizar.xsql'</param> 
+    </button>
+    -->
+    
+    <!-- guardar nuevas cantidades,  -->
+    <button label="Guardar" caption="IMG-0690">
+      	<name_function>GuardarCantidades</name_function>
+      	<param>document.forms[0]</param>
+      	<param>'LPListaSave.xsql'</param> 
+    </button>
+    
+    
+    <!-- Para el boton GuardarPlantilla  Cuando la accion es EDITAR or COPIAR or NUEVA -->
+    <!--
+    <button label="Guardar" caption="IMG-0170">
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'PLActualizar.xsql'</param> 
+    </button>
+    -->
+    
+    <!-- Para el boton Busqueda rapida -->
+    <button label="Buscar" caption="IMG-0120">
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'LLPRapida.xsql'</param>
+    </button>
+    
+    <!-- Preparar una Oferta -->
+    <button label="Multioferta" caption="PL-0500" alt="PL-0505" status="PL-0505">
+      <name_function>Analiza</name_function>
+      <param>document</param>
+      <param>'LPAnalizar.xsql?ACCION=EDICION'</param>     
+<!--      <param>'Analizar'</param>      -->
+    </button>
+    
+    <!-- Preparar un Pedido -->
+    <button label="EnviarPed" caption="IMG-0620" alt="IMG-0625" status="IMG-0625">
+      <name_function>Analiza</name_function>
+      <param>document</param>
+      <param>'LPAnalizar.xsql?ACCION=DIRECTO'</param>      
+    </button>    
+    
+   
+    
+   <!--   nuevo navegador nomenclator -->
+   
+    <button label="BuscarFino" status="IMG-0220" alt="IMG-0220" caption="IMG-0660">
+      <name_function>Catalogo</name_function>
+      <param>'http://www.newco.dev.br/Nomenclator/nomenclatorFrame.xsql'</param>
+    </button>
+    
+    <button label="Proveedores" alt="IMG-0710" status="IMG-0710" caption="IMG-0286">
+      <name_function>MostrarPag</name_function> 
+      <param>'http://www.newco.dev.br/Empresas/Proveedores.xsql?OPCION=P'</param>
+    </button>
+   
+  
+  
+    <!-- Catalogo 
+    <button label="BuscarFino" status="IMG-0220" alt="IMG-0220" caption="IMG-0660">
+      <name_function>Catalogo</name_function>
+      <param>'../Multioferta/LLPManten.xsql'</param>
+    </button>
+    -->
+    
+    <button label="CatalogoProductos" alt="IMG-1010" status="IMG-1010" caption="IMG-1020">
+      <name_function>MostrarPag</name_function>
+      <param>'http://www.newco.dev.br/files/AyudaProductos/Plantillas.html'</param>
+    </button>
+ 
+
+    
+
+  <ExtraButtons>
+    <!-- Para el boton Anyadir -->  
+    <!-- <button label="Insertar" caption="IMG-0520" status="IMG-0520"/> -->
+    <button label="Catalogo" caption="IMG-0220" status="IMG-0520"/>
+  </ExtraButtons> 
+
+ <jumpTo>
+    <picture-off>Cancelar</picture-off>
+    <picture-on>Cancelar_mov</picture-on>     
+    <page>PL-0370</page>
+    <caption>IMG-0050</caption>    
+ </jumpTo>
+
+</comun>

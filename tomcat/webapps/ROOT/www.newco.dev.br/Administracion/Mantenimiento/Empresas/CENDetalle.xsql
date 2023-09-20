@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Ficha de centro
+	Ultima revisión: 31oct18 12:36
+-->
+
+<?xml-stylesheet type="text/xsl" href="CENDetalleHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" >
+  
+  <xsql:include-param name="ID"/>
+  <xsql:include-param name="EMP_ID"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <!-- Inicio del formulario -->
+
+ <form name="frmManten" action="CENMantenSave.xsql" method="post">
+        <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CENDetalle');
+		  IF US_ID>=0 THEN
+          	CENTROS_PCK.Mostrar('{@ID}'||'{@CEN_ID}','S', US_ID);			--	13set16	Podemos utilizar los parametros ID o CEN_ID
+          END IF;					   
+        END;
+        ]]>
+
+        </xsql:include-owa>
+    
+  </form>
+  
+</Mantenimiento>
+

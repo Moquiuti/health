@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que devuelve la referencia de categoria dado un IDFamilia -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CopiaraLicitacionJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CopiaraLicitacionJSON.xsl"?>
+
+
+<CopiaraLicitacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDCATEGORIA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_prod          NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CopiaraLicitacionAJAX');
+		IF US_ID>=0 THEN
+			v_prod := Licitaciones_pck.ActualizaProdEstandar(
+				'{@IDPROD}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+                        
+			IF v_prod = '0' THEN
+				HTP.P('<NO_ENCONTRADA/>');
+                                
+                        ELSIF v_prod = '-1' THEN
+				HTP.P('<ERROR/>');
+                                
+			ELSE
+				HTP.P('<OK>'||v_prod||'</OK>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CopiaraLicitacion>

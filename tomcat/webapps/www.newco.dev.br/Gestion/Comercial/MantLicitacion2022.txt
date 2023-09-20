@@ -1,0 +1,19 @@
+26ene22 ET Nuevo disenno. lic2022_260122.js
+23mar22 ET Listado CSV para proveedores directamente desde JS
+24mar22 ET Permitir listado CSV para clinicas para licitaciones borradas
+04abr22 ET Maquetar lado proveedor lic_proveedor2022_040422.js
+
+
+
+
+
+--	PENDIENTE	Licitaciones multipedido: código de pedido para cada pedido
+--	PENDIENTE	Licitaciones multipedido: COMPROBAR QUE SE ACTUALIZAN BIEN LAS CANTIDADES
+--	PENDIENTE	Licitaciones multipedido: 
+					en las entradas de pedidos siempre debe estar informado el centro, si es para un solo centro, siempre el del pedido o del usuario. Si se cambia el centro del pedido, propagar a las
+					entradas existentes
+--	PENDIENTE	Licitaciones multipedido: incluir los pedidos en la pestaña de centros o en una de pedidos
+--	PENDIENTE	Licitaciones multipedido: control de pedido minimo agregando por fecha pedido además de por proveedor y centro
+--	PENDIENTE	Licitaciones multipedido: generar los pedidos agregando por fecha pedido además de por proveedor y centro
+--	PENDIENTE	La fecha de entrega será la fijada en la licitación. CUIDADO: se verá actualizada al lanzar el pedido, conservar fecha?
+

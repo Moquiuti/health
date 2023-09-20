@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de comentarios para pedidos, guardar campo "por defecto"
+	Ultima revisión: ET 20ago18 12:36
+-->
+
+<?xml-stylesheet type="text/xsl" href="UltimosComentariosHTML.xsl"?>
+
+<Multiofertas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="NOMBRE_OBJETO"/>
+  <xsql:include-param name="NOMBRE_FORM"/>
+  <!--
+  <xsql:include-param name="COMENTARIO"/>
+  <xsql:include-param name="TIPO"/>
+  <xsql:include-param name="ACCION"/>
+  -->
+  <xsql:include-param name="STYLE"/>
+  
+  <xsql:include-owa>
+    
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ComentarioDefectoSave');
+			
+			IF US_ID>=0 THEN
+			 	REPOSITORIOCOMENTARIOS_PCK.GuardarPorDefecto
+				(
+			   		US_ID,
+			    	'{@DEFECTO_SEL}'
+			    );
+				
+			 	REPOSITORIOCOMENTARIOS_PCK.Inicio_XML
+				(
+			    	US_ID,
+			    	'{@IDEMPRESA}',
+			    	'{@IDCENTRO}',
+			    	'{@COMENTARIO}',
+			    	'{@TIPO}',
+			    	'{@ACCION}',
+			    	'{@CAMBIOS}'
+			    	--,'20'
+			    );
+				
+			END IF;
+						
+		END;
+        
+  </xsql:include-owa>
+  
+ </Multiofertas>  
+
+        

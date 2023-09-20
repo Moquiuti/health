@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Zona de productos en "Enviar Pedidos". Estilos 2022.
+	Ultima revision: ET 18feb22
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="ZonaProductoHTML2022.xsl"?>
+-->
+<ZonaProducto xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="IDCARPETA"/>
+  <xsql:include-param name="IDPLANTILLA"/>
+  <xsql:include-param name="IDPRODUCTO"/>
+  <xsql:include-param name="ACCION"/>
+  <xsql:include-param name="STYLE"/>
+   <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+ 
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaProductos');	
+		  IF US_ID>=0 THEN	
+                    MVM_V3_PCK.AreaPlantillas_CambioProductos(US_ID, '{@IDCARPETA}', '{@IDPLANTILLA}','{@ACCION}','{@IDPRODUCTO}','N');
+        	  END IF;
+          END;
+        ]]>
+  </xsql:include-owa>
+  
+  <button label="AbrirPlantilla" caption="IMG-1250" status="IMG-1260">
+    <name_function>MostrarPlantilla</name_function>
+    <param>'zonaPlantilla'</param>
+  </button>
+
+</ZonaProducto>  
+
+        

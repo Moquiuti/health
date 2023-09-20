@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Marca un documento como borrado de la tabla DOCUMENTOS
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BorrarDocumentoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BorrarDocumentoJSON.xsl"?>
+
+<BorrarDocumento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarDocumento');
+		IF US_ID>=0 THEN
+			DOCUMENTOS_PCK.BorrarDocumento_XML(
+				US_ID,
+				'{@DOC_ID}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</BorrarDocumento>

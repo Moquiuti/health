@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+	Usuarios en control de accesos. Nuevo disenno 2022.
+	ultima revision: ET 17may22 11:38
+-->
+<?xml-stylesheet type="text/xsl" href="ListaUsuariosControlHTML2022.xsl"?>
+
+<ListadoUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISListado');
+		  IF US_ID>=0 THEN
+               USUARIOS_PCK.UsuariosBajoControl_XML(US_ID);
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</ListadoUsuarios>

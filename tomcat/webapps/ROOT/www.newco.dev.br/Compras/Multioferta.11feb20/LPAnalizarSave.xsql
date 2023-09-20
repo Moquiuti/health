@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="LPAnalizarSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="LPAnalizarSaveHTML.xsl"?>
+
+<AutoSubmit xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<xsql:include-param name="COMBO_ENTREGA"/>
+<xsql:include-param name="FECHA_ENTREGA"/>
+<xsql:include-param name="IDCENTRO"/>
+<xsql:include-param name="IDLUGARENTREGA"/>
+<xsql:include-param name="IDCENTROCONSUMO"/>
+<xsql:include-param name="COSTE_LOGISTICA"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LPAnalizarSave');
+		IF US_ID>=0 THEN
+			MULTIOFERTAS_PCK.CrearMultiOferta(
+				'{@US_ID}',
+				'{@IDCENTRO}',
+				'{@LP_ID}',
+				'{@SELECCIONTOTAL}',
+				--	16jul09	ET	'{@NOSELECCIONTOTAL}',	Eliminamos esta lista para descargar el proceso
+				'{@FECHA_DECISION}',	-- F.Decision
+				'{@FECHA_ENTREGA}',	-- F.Entrega
+				NULL,				-- 29may15 - DC - Ya no se usa				'{@FECHA_PAGO}',	-- F.Pago
+				'DIRECTO',			-- 28may15 - DC - Se pasa siempre como 'DIRECTO'	'{@ACCION}',	-- DIRECTO | EDICION 
+				'{@LP_OFERTASVISIBLES}',
+				'{@LPP_IDFORMA}',
+				'{@STRING_CANTIDADES}',
+				'0',				-- 28may15 - DC - Siempre se usa '0'			'{@IDDIVISA}',
+				NULL,				-- 29may15 - DC - Ya no se usa				'{@LP_IDFORMAPAGO}',
+				NULL,				-- 29may15 - DC - Ya no se usa				'{@LP_IDPLAZOPAGO}',
+				NULL,				-- 29may15 - DC - Ya no se usa				'{@LP_FORMAPAGO}',
+				'{@IDLUGARENTREGA}',
+				'{@IDCENTROCONSUMO}',
+				--'{@IDALMACENINTERNO}',
+				'{@LP_CONDICIONESGENERALES}',
+				'{@COSTE_LOGISTICA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<!--
+	Devuelve XML con todos los datos de la consulta
+	+
+	Codigo de transaccion
++-->
+
+<jumpTo>
+	<picture-off>Anterior</picture-off>
+	<picture-on>Anterior_mov</picture-on>
+	<page>G-0010</page>
+	<caption>G-0001</caption>
+</jumpTo>
+</AutoSubmit>

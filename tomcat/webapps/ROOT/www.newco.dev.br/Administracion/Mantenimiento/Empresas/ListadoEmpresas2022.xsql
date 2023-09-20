@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+	Listado de empresas reducido, con filtro
+	Ultima revision: ET 19oct21 17:20
+-->
+<?xml-stylesheet type="text/xsl" href="ListadoEmpresasHTML2022.xsl"?>
+
+<ListadoEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="tipo" value="{@FIDTIPO}"/>
+  
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListadoEmpresas');
+		  IF US_ID>=0 THEN
+          		EMPRESAS_PCK.ListadoEmpresas_XML
+				(
+					US_ID,
+			   		'{@IDPAIS}',
+					'{@FNOMBRE}',
+					'{@FPROVINCIA}',
+					'{@FIDTIPO}',
+					'{@FNUEVOMODELO}',
+					'{@FPEDIDOAMPLIADO}',
+					NULL,	--29jul16	'{@IDLOGOTIPO}',
+					NULL,	--29jul16	'{@IDESTILO}',
+					'{@FPEDIDOMINIMO}',
+					'{@FCOMISIONTRANS}',
+					'{@FCOMISIONAHORRO}',
+					'{@FBLOQUEARMUESTRAS}',
+					'{@FBLOQUEARBANDEJA}',
+					'{@FNONAVEGAR}',
+					'{@FNONAVEGARDEF}',
+					'{@FSOLICITUDES}',
+					'{@FSOLICITUDES30DIAS}',
+					'{@FBUSQUEDAS}',
+					'{@FBUSQUEDAS30DIAS}',
+					'{@FCATALOGOVISIBLE}',
+					'{@FCATPRIVCONCATEGORIAS}',
+					'{@FCATPRIVCONGRUPOS}',
+					'{@FCOMPRAS30DIAS}',
+					'{@FCOMPRAS}',
+					'{@FCATALOGO}',
+					NULL,											--	p_MEDDICC_Estado
+					NULL,											--	p_MEDDICC_Informado
+					NULL,											--	p_MEDDICC_OK
+					NULL,											--	p_MEDDICC_IN
+					NULL,											--	p_MEDDICC_KO
+					NULL,											--	p_TareasActivas
+					'{@FPENDIENTEAPROBAR}',							--	19oct21
+					NULL,											--	p_Orden
+					'{@FLINEASPORPAGINA}',
+					'{@PAGINA}'
+				);
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+			
+</ListadoEmpresas>

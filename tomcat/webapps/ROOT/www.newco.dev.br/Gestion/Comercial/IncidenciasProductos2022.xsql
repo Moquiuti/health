@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Buscador y Listado de Incidencias de Productos. Nuevo disenno. 
+	ultima revision: 10may22 17:01
+-->
+<?xml-stylesheet type="text/xsl" href="IncidenciasProductosHTML2022.xsl"?>
+
+<IncidenciasProd xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="FIDEMPRESA"/>
+<xsql:include-param name="FIDCENTRO"/>
+<xsql:include-param name="FIDRESPONSABLE"/>
+<xsql:include-param name="FIDPROVEEDOR"/>
+<xsql:include-param name="FIDPRODUCTO"/>
+<xsql:include-param name="FTEXTO"/>
+<xsql:include-param name="FESTADO"/>
+<xsql:include-param name="PROVEEDOR"/>
+
+
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantLicitacion');
+		IF US_ID>=0 THEN		   
+			INCIDENCIASPRODUCTOS_PCK.incidencias_xml(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+				'{@FIDRESPONSABLE}',
+				'{@FPROVEEDOR}',
+				'{@FPRODUCTO}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+				NULL,
+				NULL,
+				5,
+				0,
+				'S',
+				'{@PLAZOCONSULTA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</IncidenciasProd>

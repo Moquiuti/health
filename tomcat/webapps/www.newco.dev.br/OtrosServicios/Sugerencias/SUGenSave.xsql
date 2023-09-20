@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ |   Guardamos la sugerencia en la base de datos
+ |
+ +-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SUGenSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SUGenSaveHTML.xsl"?>
+<SugerenciaRecibida xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <JUMPTO_LINK>G-0011</JUMPTO_LINK>
+  <xsql:include-owa>
+    <![CDATA[
+       SUGERENCIAS_PCK.SalvarSugerencia('{@CODIGO}',
+                                 '{@ESTADO}',
+                                 '{@SU_IDEMPRESA}',
+                                 '{@US_ID}',
+                                 '{@SU_RESUMEN}',
+                                 '{@SU_DETALLE}',
+                                 '{@DEPARTAMENTOS}',
+                                 '{@FECHANO_PREVISTA}',
+                                 '{@RESPONSABLE}',
+                                 '{@DESCARTADO}',
+                                 '{@PRIORIDAD}',
+                                 '{@OBJETIVO}',
+                                 '{@CONFORMIDAD}');
+    ]]>
+  </xsql:include-owa>
+  
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>  
+    <caption>G-0001</caption>
+    <page>G-0015</page>
+  </jumpTo> 
+  
+<!--  <goTaskIndex/> -->
+  
+</SugerenciaRecibida>

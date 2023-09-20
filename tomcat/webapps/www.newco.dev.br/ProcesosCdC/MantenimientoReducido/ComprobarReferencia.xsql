@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ComprobarReferenciaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ComprobarReferenciaJSON.xsl"?>
+
+<ComprobarReferencia xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="US_ID"/>	
+  <xsql:include-param name="PRO_ID"/>	
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EliminaProd		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ComprobarReferencia');
+		IF US_ID>=0 THEN
+			
+			 CATALOGOPRIVADO_V4_PCK.ComprobarReferencia_XML(
+				US_ID,
+				'{@EMP_ID}',
+				'{@PRO_ID}',
+				'{@REF_MVM}',
+				'{@IDPRODUCTOESTANDAR}'
+				
+			);
+						
+		END IF;			   
+    END;
+        ]]>  
+</xsql:include-owa>
+
+</ComprobarReferencia>

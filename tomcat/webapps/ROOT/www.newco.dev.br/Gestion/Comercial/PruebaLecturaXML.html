@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--	
+	ultima revision ET 15ene17 10:12
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" lang="es-es">
+<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="http://www.newco.dev.br/Gestion/AdminTecnica/XML.js"></script>
+<script type="text/javascript" src="http://www.newco.dev.br/Gestion/AdminTecnica/PruebaLecturaXML.js"></script>
+<title>Leer archivo de texto XML</title>
+
+<style>
+div {
+margin-top: 30px;
+padding: 5px;
+}
+</style>
+
+</head>
+
+<body>
+Prueba lectura fichero XML: Revisado 17ene17 17:41
+<input id="fileInput" type="file" size="50" onchange="enviarFichero(this.files)">
+<div id="lineaActual"></div>
+<div id="siguienteTarea"></div>
+<div id="fileOutput" style="border: solid 1px black;">Esperando para cargar fichero</div>
+</body>
+</html> 

@@ -1,0 +1,16 @@
+10mar22 ET Pagina principal del EIS. Nuevo disenno 2022. EISConsultas2022_100322.js
+24may22 ET SOlucionado problema con pestannas. EISConsultas2022_240522.js
+
+
+
+IMPORTANTE: PROBLEMA CON LAS LIBRARIAS GRAFICAS DE GOOGLE
+Al cargar http://www.google.com/jsapi da un error CORS
+
+Páginas interesantes relacionadas:
+http://betabeers.com/forum/error-access-control-allow-origin-al-hacer-peticiones-ajax-otros-dominios-602/
+http://enable-cors.org/client.html
+
+Posible solución:
+http://www.html5rocks.com/en/tutorials/cors/
+
+

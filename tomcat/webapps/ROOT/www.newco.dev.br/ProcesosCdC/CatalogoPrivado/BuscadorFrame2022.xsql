@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Frame para el buscador. LLamado desde ZonaCatalogo2022_280222.js
+	Ultima revision: ET 20oct20 10:00
+-->
+<?xml-stylesheet type="text/xsl" href="BuscadorFrameHTML2022.xsl"?>
+
+<Buscador xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="PAGINARESULTADOS"/>
+	<xsql:include-param name="VENTANA"/>
+	<xsql:include-param name="STYLE"/>
+</Buscador>

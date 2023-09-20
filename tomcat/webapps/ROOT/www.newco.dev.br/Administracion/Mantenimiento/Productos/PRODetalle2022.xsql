@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ficha de producto (de proveedor)
+	Ultima revision: ET 28jun23 11:55
+-->
+<?xml-stylesheet type="text/xsl" href="PRODetalleHTML2022.xsl"?>
+
+<Productos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LIC_PROD_ID"/>
+  <xsql:include-param name="LIC_OFE_ID"/>
+  <xsql:include-param name="PRO_ID"/>
+  <xsql:include-param name="IDCLIENTE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+  BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PRODetalle, Mostrar');
+		IF US_ID>=0 THEN
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			HTP.P('<PRODUCTO>');
+
+			IF '{@PRO_ID}' IS NOT NULL THEN
+
+				--	Cuidado, en algunos casos el parametro que se pasa es IDCLIENTE y en otros IDEMPRESA_COMPRADORA
+				PRODUCTOS_PCK.MostrarProducto('{@PRO_ID}','PRODUCTO',US_ID, '{@IDCLIENTE}{@IDEMPRESA_COMPRADORA}','S','N');
+
+				/*
+				LA info de tarifas ya viene con el producto
+				
+				TARIFAS_PCK.EscribirTarifasUsuario(
+        			  '{@PRO_ID}',
+        			  US_ID,
+        			  '{@IDCLIENTE}'
+        			);
+				*/
+
+				CATALOGOPRIVADO_V4_PCK.CatalogosConProducto_XML(US_ID, '{@PRO_ID}');
+
+			ELSIF '{@LIC_PROD_ID}' IS NOT NULL THEN
+
+				LICITACIONES_PCK.ProductoConOfertas_XML(US_ID,'{@LIC_PROD_ID}','{@LIC_OFE_ID}','N');
+
+			END IF;
+
+			HTP.P('</PRODUCTO>');
+		END IF;
+  END;
+]]>
+</xsql:include-owa>
+
+<button label="Cancelar" alt="IMG-0190">
+  <name_function>window.close</name_function>
+</button>
+</Productos>

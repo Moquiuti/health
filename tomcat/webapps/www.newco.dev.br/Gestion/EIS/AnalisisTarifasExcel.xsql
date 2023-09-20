@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+    Analisis tarifas. Exportacion CSV
+	Ultima revision: ET 9jun23 09:40
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="AnalisisTarifasExcelHTML.xsl"?>
+
+
+<DescargaExcel xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDPRODUCTO" />
+  <xsql:include-param name="IDEMPRESA" />
+
+	<!--	Devuelve los datos para localizar el documento CSV creado con la consulta	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Analisis Tarifas');
+					IF US_ID>=0 THEN
+						AnalisisTarifas_Pck.ListadoExcel_XML
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDPRODESTANDAR}',
+							'{@IDPRODUCTO}',
+							'{@PRODUCTO}',
+							'{@FECHA_INICIO}',
+							'{@FECHA_FINAL}',
+							'{@PAGINA}',
+							'{@LINEA_POR_PAGINA}',
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+							'S'                             --CABECERA
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</DescargaExcel>

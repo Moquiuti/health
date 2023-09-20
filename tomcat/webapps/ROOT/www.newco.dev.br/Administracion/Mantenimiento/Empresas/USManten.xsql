@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+    Mantenimiento de Usuarios
+ 	Ultima revisión: ET 3dic18 13:11
+ +-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="USMantenHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="CEN_ID"/>
+	<xsql:include-param name="EMP_ID"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param name="GERENTECENTRO"/>
+	<xsql:include-param name="VER_USUARIO"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  
+<form name="frmDPManten" action="USMantenSave.xsql">
+ 
+    
+    <xsql:include-owa>
+      <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','USManten');
+		  IF US_ID>=0 THEN
+		  	HTP.P(utilidades_pck.CabeceraXML);
+				USUARIOS_PCK.Usuario_XML(US_ID,'{@ID_USUARIO}','{@EMP_ID}','{@CEN_ID}');
+          END IF;				   
+        END;
+        ]]>
+    </xsql:include-owa>
+    
+    <field name="US_TITULO">
+      <dropDownList>
+        <listElem>
+          <ID>-1</ID>
+          <listItem>
+            Elija una Opción
+          </listItem>
+        </listElem>
+        <listElem>
+          <ID>DR|H</ID>
+          <listItem>
+            Dr.
+          </listItem>
+        </listElem>
+        <listElem>
+          <ID>DRA|M</ID>
+          <listItem>
+            Dra.
+          </listItem>
+        </listElem>
+        <listElem>
+          <ID>SR|H</ID>
+          <listItem>
+            Sr.
+          </listItem>
+        </listElem>
+        <listElem>
+          <ID>SRA|M</ID>
+          <listItem>
+            Sra.
+          </listItem>
+        </listElem>
+      </dropDownList>
+    </field>
+	
+  </form>
+ 
+</Mantenimiento>
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  	Buscador y Listado de Solicitudes de oferta
+	Ultima revision: ET 21jul17
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SolicitudesOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SolicitudesOfertaHTML.xsl"?>
+
+<SolicitudesOferta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="FIDEMPRESA"/>
+<xsql:include-param name="FIDCENTRO"/>
+<xsql:include-param name="FIDRESPONSABLE"/>
+<xsql:include-param name="FTEXTO"/>
+<xsql:include-param name="FESTADO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SolicitudesOferta');
+		IF US_ID>=0 THEN		   
+			SOLICITUDESOFERTA_PCK.Solicitudes_XML(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+				'{@FIDRESPONSABLE}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+				'{@ORDEN}',
+				'{@SENTIDO}',
+				'20',
+				'0',
+				'S',
+				'{@PLAZOCONSULTA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</SolicitudesOferta>

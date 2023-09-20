@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantProductosEstandar.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantProductosEstandar.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param  name="CATPRIV_IDEMPRESA"/>
+  <xsql:include-param  name="ACCION"/>
+  <xsql:include-param  name="TIPO"/>
+  <xsql:include-param  name="VENTANA"/>
+  
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantProductoEstandar');	
+		  IF US_ID>=0 THEN		   
+                    CATALOGOPRIVADO_PCK.PRODUCTOESTANDAR(
+                      US_ID,
+                      '{@CATPRIV_IDEMPRESA}',
+                       '{@CATPRIV_IDSUBFAMILIA}',
+                       '{@CATPRIV_IDPRODUCTOESTANDAR}'
+                       );
+        	  END IF;
+                END;
+        ]]>
+  </xsql:include-owa>
+  
+  
+  <botones>
+  
+    <button label="Aceptar" caption="CATPRIV-0110">
+      <name_function>ValidarFormulario</name_function>
+      <param>document.forms[0]</param>                
+    </button>
+    
+    <button label="Copiar" caption="CATPRIV-0112">
+      <name_function>CopiarProducto</name_function>
+      <param>document.forms[0]</param>
+      <param>'NUEVOPRODUCTOESTANDAR'</param>                  
+    </button>
+    
+    <button label="Cancelar" caption="CATPRIV-0120">
+      <name_location>BuscadorFrame.xsql</name_location>               
+    </button>
+    
+    <button label="Cerrar" caption="CATPRIV-0115">
+      <name_function>window.close</name_function>               
+    </button>
+    
+  </botones>
+  
+  
+</Mantenimiento>

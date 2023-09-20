@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Calendario de lanzamiento de un PROGRAMA DE PEDIDOS
+	Ultima revision: ET 14set22 16:31
+-->
+<?xml-stylesheet type="text/xsl" href="LanzamientosPedidosProgramadosHTML2022.xsl"?>
+
+<PedidosProgramados xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <!--xsql:set-stylesheet-param name="lang" value="{@lang}"/>-->
+	<!--<xsql:include-param name="VENTANA"/>
+  <xsql:include-param name="FECHAACTIVA"/>
+  <xsql:include-param name="IDUSUARIO"/>-->
+  
+  <!-- almacenamos en esta cadena los cambios de los diferentes meses, antes del submit total -->
+  <!--<xsql:include-param name="RESULTADO_TMP"/>-->
+  <!-- almacenamos en esta cadena los anyos por los que hemos pasado ya-->
+  <!--<xsql:include-param name="ANYOS_VISITADOS"/>
+  <xsql:include-param name="PEDP_ID"/>
+  <xsql:include-param name="ACTUALIZARPAGINA"/>
+  <xsql:include-param name="READ_ONLY"/>
+  <xsql:include-param name="DESDEOFERTA"/>-->
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG"/>
+  <xsql:include-owa>
+    <![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LanzamientosPedidosProgramados');
+		IF US_ID>=0 THEN
+  			
+			IF '{@ACCION}'='MODIFICAR' THEN
+				PEDIDOSPROGRAMADOS_PCK.ActualizarProgramaManual_XML(US_ID,'{@PEDP_ID}','{@RESULTADO}','{@ANYOS_VISITADOS}','N');			--no devolvera XML
+			END IF;
+			
+			PEDIDOSPROGRAMADOS_PCK.CalendarioAnual_XML (US_ID,'{@PEDP_ID}','{@FECHAACTIVA}', '{@ACCION}', '{@TITULO}');
+		END IF;
+	END;
+    ]]>
+  </xsql:include-owa>
+  <returnHome/>
+</PedidosProgramados>
+

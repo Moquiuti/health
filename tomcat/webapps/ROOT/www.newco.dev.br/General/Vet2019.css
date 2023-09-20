@@ -1,0 +1,1684 @@
+/*
+	ESTILOS VET (por defecto)
+	Fuentes: Open Sans Regular e Open Sans BoldGeneva
+	Ultima revision: ET 11feb22 10:32
+*/
+
+:root {
+	--color-principal: #144F8B;
+	--enlaces:#101010;
+	--texto-titulo-tabla:#333;
+	--fondo-titulo-tabla:#c3d2e9;
+	--fondo-dest-form:#B1D34B;				
+	--color-texto_inv: #D0D0D0;
+}
+
+/*	global	*/
+html, body {
+	/*background-color: #FFF;*/
+	font-size: 13px;
+	width: 100%;
+	font-family:Open Sans Regular, sans-serif;
+	z-index: 0;
+}
+
+
+*{
+	padding:0px;
+	margin:0px;
+}
+
+a {
+	color:var(--enlaces);	/*ET: pasamos a utilizar el mismo azul oscuro de los menús 3b5998;*/
+	text-decoration: underline;
+	font-size:13px;
+	font-family:Open Sans Regular, sans-serif;
+}
+
+a.enlaceResaltado{	/*utilizado en los enlaces a los informes del EIS	*/
+	font-size:15px;
+	text-decoration: none;
+	font-weight:bold;
+}
+
+
+p {
+	font-family:Open Sans Regular, sans-serif;
+	padding:0px;
+	margin:0px;
+	font-size:13px;
+}
+
+td.textoResaltado{	/*utilizado en los enlaces a los informes del EIS	*/
+	font-size:15px;
+	text-decoration: none;
+	font-weight:bold;
+}
+
+
+img {
+	border: none;
+	margin:0px;
+	padding:0px;
+	vertical-align:middle;
+}
+h1 {
+	font-weight:bold;
+	color:#333333;
+	font-size:13px;
+}
+h2 {
+	font-weight:bold;
+	color:#333333;
+	font-size:13px;
+}
+h3  {
+	font-weight:bold;
+	font-size:13px;
+	color:#333333;
+}
+label{
+	font-size:13px;
+	font-family:Open Sans Regular, sans-serif;
+	color:#A0A0A0;
+	font-weight:bold;
+	/*padding:100px;*/
+	width:200px;
+}
+td{
+	font-size:13px;
+}
+
+.label{ font-weight:bold; color:#A0A0A0; }
+
+input{
+	border:1px solid #ccc;
+	font-size:13px;
+	font-family:Open Sans Regular, sans-serif;
+	color:#333333;
+	vertical-align:middle;
+}
+
+textarea{
+	font-size:13px;
+	font-family:Open Sans Regular, sans-serif;
+	color:#333333;
+}
+
+fieldset{
+	border:none;
+}
+
+select{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:120px;
+	border:1px solid #ccc;
+	font-size:12px;
+}
+
+select.grande{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:220px;
+	border:1px solid #ccc;
+	font-size:13px;
+}
+
+select.muygrande{	/* cabecera de la ficha de empresas	*/
+	font-weight:bold;
+	color:#6d6e6f;
+	width:300px;
+	border:1px solid #ccc;
+	font-size:16px;
+}
+
+/*	14dic16	Estilos necesarios para los Tooltips, los anteriores dan problemas	*/
+/*.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #D0D0D0;
+    color: #333333;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}*/
+/*	Recuperamos desde basic11*/
+.tooltip {
+	outline: none;
+	cursor: help; text-decoration: none;
+	position: relative;
+}
+.tooltip span {
+	margin-left: -999em;
+	position: absolute;
+	text-align: left;
+}
+.tooltip:hover span.classic {
+	border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+	position: absolute; left: 1em; top: 2em; z-index: 99;
+	margin-left: 0; width: 250px;
+	/*ET	25jul18*/
+    background-color: #D0D0D0;
+    color: #333333;
+}
+.tooltip:hover span {
+	border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+	position: absolute; left: 1em; top: 2em; z-index: 99;
+	margin-left: 0; width: 250px;
+	/*ET	25jul18*/
+    background-color: #D0D0D0;
+    color: #333333;
+}
+.tooltip:hover span.spanEIS {
+	position: absolute; left: -10em; top: 2em; z-index: 99;
+	margin-left: 0; width: 150px;
+}
+.tooltip:hover img {
+	border: 0; margin: -10px 0 0 -55px;
+	float: left; position: absolute;
+}
+.tooltip:hover img.static {
+	vertical-align: middle;
+	margin: 0; padding: 0; float: none; position: static;
+}
+.tooltip:hover em {
+	font-family: Candara, Tahoma, Geneva, sans-serif; font-size: 1.2em; font-weight: bold;
+	display: block; padding: 0.2em 0 0.6em 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table td.datosLeft{ text-align:left;}
+table td.datosRight{ text-align:right;}
+
+/* estilos generales de ancho de objeto	*/
+
+/*	Para textos, labels, etc	*/
+.anchomedio {width:200px;}
+
+.fuentePequenna {font-size:11px;}
+
+
+/*	Para botones: aplicar a un div, "a" no lo acepta		*/
+.btnAnchoMedio {width:80px; text-align:center;}
+
+.btnAnchoMedio:hover {
+	background: var(--color-principal);
+	color: #f5f5f5;
+	text-decoration: none;
+}
+
+.btnAnchoMedio	a {	text-decoration:none; }
+
+
+/*	
+	DIVs y elementos de la cabecera	
+*/
+.cabeceraBox{
+	position: absolute;
+	width:100%;
+	height:50px;
+	margin-top: 0px;
+	margin-bottom:0px;
+	background:var(--color-principal);	/* ET 11feb22 */
+	color:var(--color-texto_inv);		/* ET 11feb22 */
+}
+
+
+.logoPage{
+
+    position: absolute;
+	width:287px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	background:var(--color-principal);	/* ET 11feb22 */
+}
+
+.logoPageInside{
+	/*	
+		PENDIENTE ENCONTRAR SOLUCION PARA CENTRAR VERTICALMENTE IMAGEN EN UN DIV, O UN DIV DENTRO DE OTRO
+	*/
+
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	margin: auto;
+
+	width:287px;
+	height:50px;
+	border:0px solid red;
+}
+
+.cabeceraCenter{
+	position:relative;
+	width:990px; 
+	border:0;
+	height:auto;
+	margin-left:55px;
+	background:#F0F0F0;	/* ET 4dic18 #E3E3E3;*/
+}
+
+.cabeceraText{
+	/*position:absolute;
+	float:left;*/
+    width: 990px; 
+	border:0px solid red;
+	height:auto;
+	margin-left:10px;
+}
+
+.ClaveYLogout{
+	margin-top:15px;
+    float:right;
+    width:350px; 
+    margin-right:30px;
+}
+
+.ClaveYLogout a{
+    font-weight:bold;   
+	text-decoration: none;
+	background:var(--color-principal);	/* ET 11feb22 */
+	color:var(--color-texto_inv);		/* ET 11feb22 */
+}
+
+
+.cabeceraText p.usuario{
+	float:left;
+    width: 975px; 
+    text-align:center;
+	border:0px solid blue;
+	margin-top:6px;
+	margin-left:0px;
+}
+
+.cabeceraText .nombreCentro{
+	position:absolute;
+	top: 15px;
+	left: 300px;
+	font-family:Open Sans Regular, sans-serif;
+	font-size:13px;
+	margin-left:2px;
+	padding-right: 2px;
+	margin-right:2px;
+}
+
+
+/*
+	Menu principal
+	nav: menu horizontal/vertical navegable basado en CSS
+*/
+
+.MenuInicial{text-align:center;}	/* 1dic16	Clase para identificar menús	*/
+
+nav {
+    position: absolute;
+	width:100%;
+	height: 30px;
+	top: 50px;							/* 28ago19 da problemas en Chrome y Opera margin-top: 50px;*/
+	margin-right: 0px;
+	margin-left: 0px; 
+	font-size:15px;
+	z-index: 999;
+	background:var(--color-principal);	/* ET 11feb22 */
+}
+
+a.MenuActivo
+{
+	background:var(--color-texto_inv);	/* ET 11feb22 */
+	color:var(--color-principal);		/* ET 11feb22 */
+}
+
+a.MenuInactivo
+{
+	background:var(--color-principal);	/* ET 11feb22 */
+	color:var(--color-texto_inv);		/* ET 11feb22 */
+}
+
+/* Removing padding, margin and "list-style" from the "ul",
+ * and adding "position:reltive" */
+nav ul {
+    margin:0;
+    list-style: none;
+    position: absolute; 
+	background:var(--color-principal);	/* ET 11feb22 */
+    font-size:15px;
+    z-index: 999;
+}
+
+
+/* Positioning the navigation items inline */
+nav ul li {
+	height: 30px; 
+    display: inline-block;
+    padding:0px 5px 0px 5px;
+	background:var(--color-principal);	/* ET 11feb22 */
+    z-index: 999;
+}
+
+/* Styling the links */
+nav ul li a {
+    display:block;
+    padding:7px 5px 5px 5px;
+    color:#555555;
+    font-size:15px; 
+    text-decoration:none;
+	background:var(--color-principal);	/* ET 11feb22 */
+	width:100%;
+	z-index: 999;
+	cursor:pointer;
+}
+
+/* nav de segundo nivel */
+nav ul ul {
+    display: none;
+    position: absolute;
+	background:var(--color-principal);	/* ET 11feb22 */
+    width:20%;
+    z-index: 999;
+}
+/* Fisrt Tier Dropdown */
+nav ul li ul li {
+	position: absolute;
+    display: list-item; 
+    padding:8px 0px 0px 8px;
+	background:var(--color-principal);	/* ET 11feb22 */
+    z-index: 999;
+}
+
+nav ul li ul li a {
+    display:block; 
+    padding:8px 0px 0px 0px;
+    color:#555555;
+    font-size:15px; 
+    line-height: 20px;
+    text-decoration:none;
+	background:var(--color-principal);	/* ET 11feb22 */
+	width:100%;
+	z-index: 999;
+}
+
+/* menu horizontal sin NAV navegable basado en CSS: recomendaciones no oficiales indican utilizar un único nav por página */
+ul.Pestannas {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute; /*relative;*/
+    background:#E6E6E6;
+    font-size:15px;
+	width:100%;
+	display:block;
+}
+
+ul.Pestannas li {
+    display:inline-block;
+	padding:0;
+	/*padding:5px 10px 5px 10px;*/
+    background-color: #E6E6E6;
+}
+
+ul.Pestannas a {
+	display:block;
+	padding:5px 10px 5px 10px;
+	margin-right: 15px;
+	color:#555555;
+	font-size:15px; /*13px;*/
+	text-decoration:none;
+	background-color: #E6E6E6;
+	cursor:pointer;
+}
+
+ul.Pestannas a.MenuActivo
+{
+	background:var(--color-principal);
+	color:#E6E6E6;
+}
+
+ul.Pestannas a.MenuInactivo
+{
+	background:#E6E6E6;
+	color:#555555;
+}
+
+/*
+ul.Pestannas li a:hover {
+    padding:5px 10px 5px 10px;
+ 	background-color: var(--color-principal);
+	color:#F0F0F0;
+	text-decoration:none;
+}
+
+ul.Pestannas li:hover > ul {
+    padding:5px 10px 5px 10px;
+    display:inherit;
+	color:#F0F0F0;
+    background:var(--color-principal);
+}
+*/
+
+/*	Indicadores inicio	*/
+.IndicadorInicio{
+	border:1px solid var(--color-principal); 
+	-webkit-border-radius:20px; 
+	border-radius:20px; 
+	background-color:white; 
+	cursor:pointer;
+}
+
+
+/*	Boton normal, sin fondo ni margen, pero 	*/
+.btnNormal{
+	font-family: Open Sans Regular, sans-serif;
+	color: var(--color-principal);
+	font-size: 13px;
+	background: #f5f5f5;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.btnNormal:hover {
+	background: var(--color-principal);
+	color: #f5f5f5;
+	text-decoration: none;
+}
+
+/*	Botón deshabilitado	*/
+.btnDeshabilitado{
+	font-family: Open Sans Regular, sans-serif;
+	color: #d0d0d0;
+	font-size: 13px;
+	background: #f5f5f5;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+	border-style: solid;
+	border-width: 1px;
+}
+
+/*	Boton destacado		*/
+.btnDestacado {
+	font-family: Open Sans Regular, sans-serif;
+	color: #ffffff;
+	font-size: 13px;
+	padding: 5px 20px 5px 20px;
+	background: var(--color-principal);
+	text-decoration: none;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.btnDestacado:hover {
+	background: #ffffff;
+	color: var(--color-principal);
+	text-decoration: none;
+}
+
+/*	Boton destacado		*/
+.btnDestacadoPeq {
+	font-family: Open Sans Regular, sans-serif;
+	color: #ffffff;
+	font-size: 13px;
+	padding: 5px 10px 2px 10px;
+	background: var(--color-principal);
+	text-decoration: none;
+}
+
+.btnDestacadoPeq:hover {
+	background: #ffffff;
+	color: var(--color-principal);
+	text-decoration: none;
+}
+
+/*	Boton destacado	fondo rojo pequeño	*/
+.btnRojoPeq {
+	font-family: Open Sans Regular, sans-serif;
+	color: #ffffff;
+	font-size: 13px;
+	padding: 5px 10px 2px 10px;
+	background: #FE4162;
+	text-decoration: none;
+}
+
+.btnRojoPeq:hover {
+	background: #ffffff;
+	color: var(--color-principal);
+	text-decoration: none;
+}
+
+/*	Boton gris		*/
+.btnGris {
+	font-family: Open Sans Regular, sans-serif;
+	color: #ffffff;
+	font-size: 13px;
+	padding: 5px 20px 5px 20px;
+	background: #999999;
+	text-decoration: none;
+	cursor: not-allowed;
+}
+
+.btnGris:hover {
+	background: #eeeeee;
+	color: #999999;
+	text-decoration: none;
+}
+
+/*	Boton discreto, sin fondo ni borde 	*/
+.btnDiscreto{
+	font-family: Open Sans Regular, sans-serif;
+	color: var(--color-principal);
+	font-size: 10px;
+	text-decoration: none;
+}
+
+.btnDiscreto:hover {
+	background: #f5f5f5;
+	color: #555555;
+	text-decoration: none;
+}
+
+
+
+/*	botonPequeño utilizado en los diálogos de carga de ficheros	*/
+a.btnFile{
+	width:auto;
+	height:auto;
+	font-size:11px;
+	color:#555555;
+	padding:2px 5px;
+	text-decoration: none;
+	text-align:center;
+	border:1px solid #ccc;
+	background-color:#f5f5f5;  
+}
+
+a.btnFile:hover{
+	background-color:#555555;  
+	color:#f5f5f5;
+}
+
+
+
+/*	Cabecera de página, incluirá path y titulo	*/
+div.ZonaTituloPagina { width:100%; background:#E8E8E8;}
+
+p.Path{
+	font-family:Open Sans Regular, sans-serif;
+	padding:5px;
+	margin-left:50px;
+	font-size:13px;
+	color: #555555;
+}
+
+span.FinPath{
+	font-family:Open Sans Regular, sans-serif;
+	padding:5px;
+	margin-left:0px;
+	font-size:13px;
+	color: var(--color-principal);
+}
+
+p.TituloPagina{
+	font-family:Open Sans Regular, sans-serif;
+	padding:5px;
+	margin-left:50px;
+	font-size:20px;
+	color: #555555;
+	height:30px;
+}
+
+span.CompletarTitulo{
+	font-family:Open Sans Regular, sans-serif;
+	width:700px;
+	padding:2px;
+	float: right;
+	text-align:right;
+	margin-right:50px;
+	font-size:12px;
+	color: #555555;
+}
+
+
+/*	buscador estándar		*/
+table.buscador { 
+	width:100%; 
+	margin-top:0px;
+	background:#ffffff; 
+	border-collapse:collapse; 
+	border:0px solid black;
+	font-size:13px;
+}
+
+table.fondogris{
+	background:#F0F0F0; 
+}
+
+table.fondoamarillo{
+	background:#F6F6C9; 
+}
+
+table.buscador th{
+	/*	ET 22nov16	text-align:left;*/
+	text-align:center;
+	height:auto;
+	color:#333333;
+	font-size:13px;
+	padding:3px 0px;
+}
+
+table.buscador tr{
+	height:30px;
+	color:#333333;
+	font-size:13px;
+	padding:5px 0px;
+	text-align:center;
+}
+
+table.buscador tr.tituloTabla{
+	height:40px;
+	color:var(--texto-titulo-tabla); /*	#333;*/
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	font-size:13px;
+	background:var(--fondo-titulo-tabla);	/*	#c3d2e9;*/
+}
+
+table.buscador tr.filtros label{
+	text-align:left;
+	font-weight:bold;
+	color:#6d6e6f;
+	width:140px;
+	font-size:11px;
+}
+
+table.buscador tr.filtros input{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:100px;
+	font-size:10px;
+	padding:0px;
+}
+
+table.buscador tr.filtros select{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:120px;
+	border:1px solid #ccc;
+	font-size:10px;
+}
+
+table.buscador tr.filtros select.peq{
+	width:50px;
+}
+
+
+table.buscador tr.filtros input.peq{
+	width:50px;
+}
+
+table.buscador tr.filtros select.gran{
+	width:250px;
+}
+
+/*	Nuevos filtros grandes	INICIO */
+table.buscador tr.filtrosgrandes label{
+	text-align:left;
+	font-weight:bold;
+	color:#6d6e6f;
+	width:160px;
+	font-size:12px;
+}
+
+table.buscador tr.filtrosgrandes input{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:140px;
+	padding:0px;
+	font-size:16px;
+	height:20px;
+}
+
+table.buscador tr.filtrosgrandes select{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:150px;
+	border:1px solid #ccc;
+	font-size:16px;
+	height:20px;
+}
+
+table.buscador tr.filtrosgrandes select.peq{
+	width:80px;
+}
+
+table.buscador tr.filtrosgrandes input.peq{
+	width:50px;
+}
+
+table.buscador tr.filtrosgrandes select.gran{
+	width:250px;
+}
+
+/*	Nuevos filtros grandes FINAL */
+
+
+
+
+table.buscador select.peq{
+	width:50px;
+}
+
+table.buscador select.medio{
+	width:120px;
+}
+
+table.buscador input.medio{
+	width:120px;
+}
+
+table.buscador input.grande{
+	width:350px;
+}
+
+table.buscador input.muygrande{
+	width:500px;
+}
+
+table.buscador input.peq{
+	width:70px;
+}
+table.buscador td input.peq{
+	width:70px;
+}
+
+table.buscador input.muypeq{
+	width:30px;
+}
+table.buscador td input.muypeq{
+	width:30px;
+}
+
+
+/*	por defecto:sin hover, para evitar efectos en mantenimientos	*/
+table.buscador tr.conhover:hover { background:#FFFF69;}
+
+/*	por defecto:sin hover	table.buscador tr.filtros:hover { background:#FFFFFF;}	 sin hover en este caso	*/
+
+table.buscador tr.subTituloTabla{
+	text-align:center;
+	height:30px;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #999999;
+	font-weight:bold;
+	background:#E8E8E8;			/*	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;*/
+	padding:3px 5px;
+	color:#333333;
+}
+
+table.buscador tr.subTituloFondoRojo{
+	color:#333333;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+	background:#FE4162;
+}
+
+table.buscador tr{
+	border-bottom:1px solid #A7A8A9;
+}
+
+table.buscador tr.sinLinea{
+	border-bottom:0;
+}
+
+table.buscador td.labelRight{
+	text-align:right;
+	color:#A0A0A0;
+	font-weight:bold;
+}
+
+table.buscador td.labelLeft{
+	text-align:left;
+	color:#A0A0A0;
+	font-weight:bold;
+}
+
+/*	Para filas normales	*/
+table.buscador input{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:200px;
+	font-size:13px;
+	padding:0px;
+}
+
+table.buscador select{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:200px;
+	border:1px solid #ccc;
+	font-size:13px;
+	background-color:white;
+}
+
+table.buscador select.filtro{	/* se utiliza en algunas tablas que incluyen un desplegable en la línea de titulos	*/
+	font-weight:bold;
+	color:#6d6e6f;
+	width:100px;
+	border:1px solid #ccc;
+	font-size:12px;
+}
+
+table.buscador th.encabezadoBloque{		/*	Se utiliza en los pedidos para dar formato a las subfamilias	*/
+	text-align:left;
+	margin-left:2px;
+}
+
+/*	Fondos destacados para filas o columnas en tablas	*/
+tr.fondoRojo { background:#F0B2B2; }		/*	27jun19	{ background:#FE4162; }	*/
+tr.fondoNaranja { background:#FF9900; }
+tr.fondoAmarillo { background:#FFFF99; }
+
+td.fondoRojo { background:#F0B2B2; }		/*	27jun19	{ background:#FE4162; }	*/
+td.fondoNaranja { background:#FF9900; }
+td.fondoAmarillo { background:#FFFF99; }
+
+
+/*
+	Tabla del EIS
+*/
+table.tablaEIS {
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	font-size:13px;
+}
+table.tablaEIS a{ text-decoration:none; font-weight:bold; }
+table.tablaEIS th{
+	height:30px;
+	color:#6d6e6f;
+	background:#C3D2E9;
+	border-bottom:1px solid #939494;
+}
+table.tablaEIS th.thleft{ text-align:left; padding-left:10px; }
+table.tablaEIS th.thright{ text-align:right; padding-right:5px; }
+table.tablaEIS tr.titleTablaEIS{
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#C3D2E9;
+}
+
+table.tablaEIS td.selected{
+	background:#FFFF69;
+}
+table.tablaEIS tr.titleMatriz{
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/matrizTitulos.gif) repeat-x;
+}
+table.tablaEIS tr.lineGris{
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:left;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#e9e8e8;
+}
+p.verEIS { height:30px; float:left; border:0px solid red; width:100%; display:inline-block;}
+p.verEIS a{ float:left; margin-right:8px;display:inline-block;}
+
+table.tablaEIS img{ vertical-align:middle; }
+table.tablaEIS tr.tituloTabla p{ padding:3px 5px; color:#333333;}
+table.tablaEIS tr.subTituloTabla{
+	color:#333333;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+	background:#f5f5f5;
+/*	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;*/
+}
+table.tablaEIS tr{
+	margin:5px 0px;
+	height:25px;
+	border-bottom:1px solid #e4e4e5;
+}
+table.tablaEIS tr.body td{ background:#fff;}
+table.tablaEIS tbody tr:hover:not(.titleTablaEIS):not(.subTituloTabla) td, table.tablaEIS tbody tr:hover:not(.titleTablaEIS):not(.subTituloTabla)  { background:#FFFF69;}
+
+table.tablaEIS tr table.button{
+	float:left;
+	background: none repeat scroll 0 0 #F2F4F6;
+	border:1px solid #C0C0C0;
+}
+table.tablaEIS tr table.button tr{
+	height:20px;
+}
+
+/*matriz eis*/
+table.tablaEIS tr.matrizbody td{ border:1px solid #CCC;}
+table.tablaEIS tr.BLANCO{ background:#fff;}
+table.tablaEIS tr.matrizbody td.BLANCO{ background:#fff;}
+table.tablaEIS tr.matrizbody td.NORMAL{ background:#f2f4f6;}
+table.tablaEIS tr.matrizbody td.ROJO{ background:#fedfdf;}
+table.tablaEIS tr.matrizbody td.AZUL{ background:#cee6fe;}
+table.tablaEIS tr.matrizbody td.NEGRO{/ * background:#d9d8d8;* /}
+table.tablaEIS tr.matrizbody td.AMARILLO{ background:#fbfbca;}
+table.tablaEIS tr.matrizbody td.VERDE{ background:#C4FFC4;}
+table.tablaEIS tr.matrizbody td.NARANJA{ background:#fcd3ab;}
+
+.comentarioMatriz{
+	background:#FFFFFF;
+	border:5px solid #CCC;
+}
+.insertCome{
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 35%;
+	width:250px;
+	height:300px;
+	background:#FFFFFF;
+	border:25px solid #CCC;
+	z-index:1002;
+	overflow: auto;
+	text-align:center;
+}
+
+.insertCome textarea{
+	width:200px;
+	height:120px;
+	margin:15px 0px 10px;
+}
+.insertCome select{
+	width:160px;
+	margin-right:10px;
+	margin-bottom:10px;
+}
+.insertCome p.cerrarInsertCome{
+	text-align:right;
+	margin:5px;
+}
+table.tablaEIS td.colorComeMatriz{ background:#FFFF99;}
+    .fadebox {
+        display: none;
+        position:fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+    }
+/*fin de matriz eis*/
+table.tablaEIS td{ padding:0px 4px;}
+table.tablaEIS .tdcenter td{ padding:0px 4px; text-align:center;}
+table.tablaEIS .textLeft{ text-align:left; }
+table.tablaEIS .textRight{ text-align:right; }
+table.tablaEIS  td.borderLeft{ border-left:1px solid #e4e4e5;}
+
+
+/*en eis matriz*/
+table.tablaEIS .textArriba{
+	text-align:center;
+	width:6%;
+	border-right:1px solid #e4e4e4;
+}
+table.tablaEIS td.labelLeft{
+	text-align:left;
+	padding-left:15%;
+	font-weight:bold;
+	color:#6d6e6f;
+	background:#FFFFFF;
+}
+
+table.tablaEIS tfoot tr{
+	height:30px;
+	color:#6d6e6f;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/subTitleFondoClaro.gif) repeat-x;
+}
+table.tablaEIS tr.titletable{
+	height:35px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#C3D2E9;
+}
+table.tablaEIS tr.titletable td.selected{
+	background:#FFFF69;
+}
+
+/*	Colores textos EIS	*/
+.celdaconrojo { color:#e40e3c }
+.celdaconverde { color:#36970b }
+
+
+/*	Colores licitacion	*/
+.azul { color:#1922E9; font-weight:bold; }
+.verde { color:#36970b; font-weight:bold; }
+.rojo{ color:#FF0000 !important; font-weight:bold;}
+.naranja { color:#FF9900; font-weight:bold; }
+
+
+.rojo1{
+	color:#fa8322;
+}
+.rojo2{		/*	para destacar compras en matriz EIS	*/
+	color:#fb0d40;
+	font-weight:bold;
+}
+.verdeNormal { color:#36970b; font-weight:normal; }	/*	para destacar compras en matriz EIS	*/
+
+
+
+
+/*	Tablas en área izquierda	*/
+.areaizq{
+	background:#f5f5f5;
+}
+
+
+table.areaizq{
+	width:98%;
+	border-collapse:collapse;
+	margin:0px 2% 0px 2%;
+	font-size:13px;
+	background:#f5f5f5;
+}
+table.areaizq td 
+{
+	height:25px;
+	top:auto;
+}
+
+table.areaizq p{ color:#333333; padding-top:3px;}
+/*table.areaizq img{ padding:0px 4px 0px 3px; vertical-align:middle;}*/
+
+table.areaizq th {
+	margin:2px 5px;
+	color:#999999;
+	height:25px;
+	border-bottom:1px solid #ffffff;
+}
+
+table.areaizq td.textLeft{
+	text-align:left;
+	height:20px;
+}
+table.areaizq .textCenter{
+	text-align:center;
+	float:center;
+}
+
+table.areaizq select
+{
+	height:20px;
+	font-size:11px;
+	width:98%;
+}
+/*	FIN tablas en área izquierda	*/
+
+
+/*	16dic16	Tabla flotante utilizada en licitaciones	*/
+table.TableFB
+{
+	border:1px solid black;
+	font-size:11px;
+}
+
+table.TableFB th
+{
+	font-size:11px;
+	background:#C0C0C0;
+	color:#333333;
+}
+
+table.TableFB td
+{
+	background:#f5f5f5;
+	font-size:11px;
+	color:#333333;
+}
+
+
+/*	Formularios simples: "label:input" (fijar el width en cada formulario)	*/
+form.formEstandar{
+	font-size: 13px;
+	color:#333333;
+}
+
+.formEstandar ul {
+    /*width: 700px;*/
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 60px;
+    padding: 0px;
+}
+
+.formEstandar li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.formEstandar li.sinSeparador {
+    padding: 10px;
+    border-bottom: none;
+    position: relative;
+}
+
+/*	utilizado para destacar el fondo en la ficha de producto de la licitacion */
+li.fondoDest {
+	background:var(--fondo-dest-form);
+	text-align:center;
+}
+
+.formEstandar label {
+    width: 250px;
+    margin-top: 3px;
+    display: inline;
+    float: left;
+    padding: 3px;
+	font-weight:bold;
+	color:#A0A0A0;
+	vertical-align: middle;
+}
+
+.formEstandar label.leyenda {
+	width:100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;			/*	Coge toda la línea	*/
+	font-weight:bold;
+	color:#A0A0A0;
+	text-align: center;
+	border-bottom:0px;
+	vertical-align: middle;
+}
+
+.formEstandar input {
+    height: 28px;
+    width: 220px;
+    padding: 0px 8px;
+	vertical-align: middle;
+}
+
+.formEstandar input.corto {
+    width: 100px;
+}
+
+.formEstandar input.largo {
+    width: 500px;
+}
+
+.formEstandar textarea {
+    padding: 8px;
+    width: 500px;
+	vertical-align: middle;
+}
+
+.formEstandar select {
+    height: 28px;
+	vertical-align: middle;
+   /* padding: 5px 8px;*/
+}
+
+
+/*	Formularios complejos: "label:input	label:input" (fijar el width en cada formulario)	*/
+form.formComplejo{
+	font-size: 13px;
+	color:#333333;
+}
+
+.formComplejo ul {
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 0px;
+}
+
+.formComplejo li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.formComplejo li.sinSeparador {
+    padding: 10px;
+    border-bottom: none;
+    position: relative;
+}
+
+.formComplejo label {
+    width: 300px;
+    margin-top: 3px;
+    /*display: inline;*/
+    /*float: left;*/
+    padding: 3px;
+	font-weight:bold;
+	color:#A0A0A0;
+	vertical-align: middle;
+}
+
+.formComplejo input {
+    height: 28px;
+    width: 220px;
+    padding: 0px 8px;
+	vertical-align: middle;
+}
+
+.formComplejo input.corto {
+    width: 100px;
+}
+
+.formComplejo input.largo {
+    width: 500px;
+}
+
+.formComplejo textarea {
+    padding: 8px;
+    width: 500px;
+	vertical-align: middle;
+}
+
+.formComplejo select {
+    height: 28px;
+	vertical-align: middle;
+    /*padding: 5px 8px;	Cuidado: el padding da el margen del texto DENTRO del select*/
+}
+
+
+
+/*	Pestañas dentro de formularios (por ejemplo, ficha de licitación	*/
+div.pestannas {
+    background-color: #D6D6D6;
+	width:100%;
+}
+
+nav.pestannas ul {
+	border:0;
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute; 
+   	background:none;
+}
+
+nav.pestannas ul li { 
+	min-width: 70px;
+    margin: 10px -7px 0 0;
+    display:inline-block;
+    background-color: #D6D6D6; /*#F5F5F5; /*#4D4D4A; /*#F5F5F5;*/
+}
+
+/* Background color change on Hover 
+nav.pestannas a:hover {
+    background-color:var(--color-principal);
+	color:#F5F5F5;
+}*/
+
+/*	Menú de pestannas en la licitación	*/
+a.MenuLic{
+	background-color:#FFFFFF;
+}
+
+
+/*	Página de Licitaciones	*/
+/*	contenedores para las pestañas	*/
+div.posContenedorLic {
+	position:absolute; 
+	margin-top:30px;
+	width:100%;
+}
+/*	zona de datos sobre tabla productos	*/
+div.posCabTablaProd {
+	float:left;
+		width:100%;
+	text-align:left;
+	padding-left:20px;
+	line-height:30px; 
+	background-color: #F0F0F0;
+}
+
+div.posCabTablaProd a{
+	position: relative;
+	text-align:right;
+	padding-left:0px;
+	line-height:30px; 
+	background-color: #F0F0F0;
+}
+
+/*	Ancho columnas tablas:	Eliminadas varias opciones comprobar	*/
+.zerouno{ width:0.1%;}
+.uno{ width:1%; }
+.dos{ width:2%;}
+.tres{ width:3%; }
+.cuatro{ width:4%; }
+.seis{ width:6%; }
+.siete{ width:7%; }
+.cinco{ width:5%; }
+.ocho{ width:8%; }
+.diez{ width:10%; }			/* antes dies	*/
+.once{ width:11%; }
+.doce{ width:12%; }
+.catorce{ width:14%; }
+.quince{ width:15%; }
+.dieciseis{ width:16%; }
+.diecisiete{ width:17%; }
+.dieciocho{ width:18%; }
+.veinte{ width:20%; }
+.trenta{ width:30%; }
+.trentacinco{ width:35%; }
+.cuarenta{ width:40%; }
+.cuarentacinco{ width:45%; }
+.cincuenta{ width:50%; }
+.sesenta{ width:60%; }
+.setenta{ width:70%; }
+.ochenta{ width:80%; }
+.noventacinco{ width:95%; }
+.noventa{ width:90%; }
+.cien{ width:100%; }
+
+/*	Alineación de textos	*/
+.textRight{ text-align:right; padding-right:3px;}
+.textLeft{ text-align:left; padding-left:3px;}
+.textCenter{ text-align:center; }
+
+/*	Campos "input" utilizados como texto normal	*/
+input.noinput, textarea.noinput, select.noinput{
+	border:none;
+	background:transparent;
+	color:#000000;
+	width:auto;
+}
+
+/*	estilos generales	*/
+input.muypeq{
+	width:30px;
+	height:10px;
+}
+
+/*	Aviso con fondo destacado en verde, utilizado para el mensaje al proveedor en la licitacion, también en WFStatus	*/
+span.avisoFondoDestacado 
+{
+	padding:10px;
+	background-color:#BCF5A9;
+	border:2px solid #488214;
+}
+
+/*	Marca para el asteríco de "campos obligatorios" utilizado en varios formularios	*/
+span.camposObligatorios{
+	color:#FF0000;
+}
+
+
+/* Floating box utilizado en licitaciones	*/
+.FBox
+{
+	position: absolute;
+	top: 10px;
+	left: 1200px;
+	right: 10px;
+	border: 1px solid #CCC;
+	background-color: #F2F2F2;
+	width:300px;
+}
+
+table.TablaFBox
+{
+	width:100%;
+}
+
+
+table.TablaFBox th
+{
+	font-size:11px;
+	text-align:center;
+	font-weight:bold;
+}
+
+table.TablaFBox td
+{
+	font-size:11px;
+	text-align:center;
+}
+
+
+/*	Estilos utilizados en varias páginas	*/
+.divLeft{ float:left; width:100%; clear:both; border:0px solid red; }
+.divLeft30{ float:left; width:30%; border:0px solid red;}
+
+/*	Estilos utilizados en mantenimiento reducido	*/
+.divLeft25nopa{ float:left; width:25%; border:0px solid red; }
+.divLeft50nopa{ float:left; width:49.5%; margin:0px 0px; border:0px solid red; }
+
+/*	En ficha de producto	*/
+.divLeft30nopa{ float:left; width:30%; border:0px solid red; padding:0px;}
+.divLeft70{ float:left; width:70%; margin:0px auto; border:0px solid red;}
+
+/*	Utilizados en pedidos	*/
+.divLeft35{ float:left; width:35%; border:0px solid red; padding:0px;}
+.divLeft99{ float:left; width:100%; padding:0px; margin:0px auto; border:0px solid red;}
+
+/*	Utilizado en control de pedidos	*/
+.divLeft40nopa{ float:left; width:40%;}
+.divLeft60nopa{ float:left; width:60%; margin:0px auto; }
+
+
+/*	Para destacar últimos cambios en listados	*/
+.amarillo { background:#FFFF99; }
+
+
+/*	Pie de página con datos de contacto en WFStatusHTML	*/
+.contacto{
+	float:left;
+	height:40px;
+	/*background: url(http://www.newco.dev.br/images/fondoGrisCla50.gif) repeat-x;*/
+	border-bottom:2px solid #CCCCCC;
+}
+.contacto p.contact{
+	text-align:center;
+	font-weight:bold;
+	color:#666666;
+	font-size:11px;
+	margin-top:5px;
+}
+
+/*	noticias en la página de inicio*/
+table.noticiasMvm{
+	width:100%;
+	border-collapse:collapse;
+	margin-left:0px;
+	font-size:12px;
+	background:#FFFFFF;
+	border:2px solid #f9b247;
+}
+table.noticiasMvm td { padding:3px 4px; color:#6d6e6f;}
+table.noticiasMvm p{ color:#6d6e6f; padding:5px 4px; text-align:left;}
+table.noticiasMvm img{ padding:0px 4px 0px 3px; vertical-align:middle;}
+table.noticiasMvm tr.tituloTabla p{
+	text-align:left;
+	color:#f9b247;
+	font-size:16px;
+	font-size:20px;
+	font-family:"BebasNeue", sans-serif;
+}
+
+
+/*	cuadro abajo para pedidos problematicos, también utilizado en otros mensajes de aviso	*/
+.problematicos{
+	float:left;
+    border:1px dotted #FF0000;
+	background-color:#FFFF99;
+}
+.problematicos p{
+	text-align:justify;
+	font-weight:bold;
+	color:#666666;
+	font-family:Arial, Helvetica, sans-serif;
+	margin:5px;
+	font-size:11px;
+}
+.problematicos img{ vertical-align: middle;}
+.problematicos select{
+	font-size:12px;
+}
+
+/*	utilizado en el mantenimiento de categorias, familias, subfamilias, etc	*/
+.rojo{ color:#FF0000 !important; font-weight:bold;}
+
+
+/*	Valoración mediante estrellas	*/
+.rating-holder {
+  /*display: inline-block;*/
+  vertical-align: middle;
+}
+
+.rating-holder ul {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+
+.rating-holder ul li {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.rating-holder li {
+	margin: 0 3px 0;
+	float:left;
+}
+
+.rating-holder li a {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("http://www.newco.dev.br/images/ico-stars02.png");
+    background-origin: padding-box;
+    background-position: -22px 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 19px;
+    width: 20px;
+	display: block;
+	font-size: 0;
+	line-height: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-indent: -9999px;
+}
+
+.rating-holder ul li.active a, .rating-holder ul li a:hover {
+    background-position: 0 0;
+}
+
+.rating-holder .rating {
+    font-size: 14px;
+    line-height: 16px;
+	vertical-align: middle;
+}
+
+/*	8nov19 Recuperamos esta clase para destacar textos urgentes */
+.urgente{
+	color:#FF0000;
+	font-weight:bold;
+	font-size:16px;
+	background:#FFFF99;
+	float:left;
+	border:1px solid #FF0000;
+	padding:5px;
+}
+
+
+
+/*
+	18jul18 Estilo para las librerías PARSLEY.JS
+*/
+.l-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+/* Parsley CSS */
+
+.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}

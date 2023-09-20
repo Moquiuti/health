@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MOListadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MOListadoHTML.xsl"?>
+
+<Multiofertas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MOListado');
+		IF US_ID>=0 THEN
+			MULTIOFERTAS_SEGUIMIENTO_PCK.ListaTareas (US_ID,'{@ACTIVIDAD}','{@PROCESO}','{@ESTADO}',0,'S');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<jumpTo>
+	<picture-off>Anterior</picture-off>
+	<picture-on>Anterior_mov</picture-on>
+	<page>G-0015</page>
+	<caption>G-0001</caption>
+</jumpTo>
+
+<boton label="Cerrar" caption="IMG-0190">
+	<name_function>CerrarVentana</name_function>
+</boton>
+
+<boton label="Imprimir" caption="IMG-0130">
+	<name_function>Imprimir</name_function>
+</boton>
+
+</Multiofertas>

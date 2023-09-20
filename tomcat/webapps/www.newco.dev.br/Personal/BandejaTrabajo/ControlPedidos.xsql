@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Mantenimiento de los datos de control de pedidos problematicos
+	Ultima revision: 13nov19 13:05
+-->
+<?xml-stylesheet type="text/xsl" href="ControlPedidosHTML.xsl"?>
+
+<ControlPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+ 
+	<xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+	<xsql:include-param name="IDEMPRESA" value="{@IDEMPRESA}"/><!--	necesario para recuperar el filtro en la pagina de inicio-->
+	<xsql:include-param name="IDCENTRO" value="{@IDCENTRO}"/>
+	<xsql:include-param name="IDPEDIDO" value="{@IDPEDIDO}"/>
+	<xsql:include-param name="IDPROVEEDOR" value="{@IDPROVEEDOR}"/>
+	<xsql:include-param name="IDFILTROMOTIVO" value="{@IDFILTROMOTIVO}"/>
+	<xsql:include-param name="FUERA_PLAZO" value="{@FUERA_PLAZO}"/>
+
+	<!--	Muestra los datos de seguimiento por parte de MVM de un pedido		-->
+	<xsql:include-owa>
+    <![CDATA[ 
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ControlPedidos');
+		IF US_ID>=0 THEN
+		
+			--solodebug	utilidades_pck.debug('ControlPedidosSave. Accion:'||'{@ACCION}');
+		
+
+			IF ('{@ACCION}' = 'ELIMINARENTRADA') THEN
+
+				PedidosProblematicos_Pck.EliminarControl (US_ID, '{@IDPEDIDO}', '{@ELIMINAR_ENTRADA}');
+
+			ELSIF ('{@ACCION}' = 'ELIMINAR_COME_PROVE') THEN
+
+				PedidosProblematicos_Pck.EliminarComentarioClinica (US_ID, '{@ELIMINAR_COME_PROVE}');
+				
+			ELSIF '{@ACCION}'='PEDIDORECIBIDO' THEN
+				
+				PedidosProblematicos_Pck.PedidoRecibido
+				(
+					US_ID,
+					'{@MO_ID}'
+				);
+
+			ELSIF '{@ACCION}'='GUARDARCONTROL' THEN
+
+				PedidosProblematicos_Pck.GuardarControl
+					(
+						US_ID,
+						'{@IDPEDIDO}',
+						'{@IDUSUARIOCONTROL}',
+						'{@SEMAFORO}',
+						'{@COSTE}',
+						'{@MEDIO}',
+						'{@COMENTARIOS}',
+						'{@USUARIOSIGUIENTE}',
+						'{@INTERLOCUTOR}',
+						'{@FECHAPROXIMAACCION}',
+						'{@NUEVOERROR}',
+						'{@RESPONSABLEDELPROVEEDOR}',
+						'{@PROBLEMAFECHAREVISADA}',
+						'{@NUEVAPROPUESTA}',
+						'{@NUEVAACCIONMVM}',
+						'{@PROVEEDOROCLIENTE}',
+						'{@ENVIADO}',
+						'{@CUMPLIDO}',
+						'{@CONFIRMADO}',
+						'{@ALBARAN}',
+						'{@ENTREGADOPROVEEDOR}',
+						'{@ENTREGADOCLIENTE}',
+						'{@ENVIADO_CUANDO}',
+						'{@ENTREGADO_CUANDO}',
+						'{@RECIBIDO_CUANDO}',
+						'{@SEGUIMIENTOESPECIAL}',
+						'{@ACEPTASOLUCION}',
+						'{@ACCION_CONFIRMARFECHA}',
+						'{@ACCION_CONFIRMARALBARAN}',
+						'{@ACCION_CONSULTARCLINICA}',
+						'{@COMENTARIOS_PARA_CLINICA}',
+						'{@SOLO_COMENTARIOS_PARA_CLINICA}',
+						'{@BLOQUEAR}',
+                        '{@ERROR_CONDICIONES_COMERCIALES}',		--4mar19
+                        '{@ERROR_INTEGRIDAD_PRODUCTOS}',      	 --4mar19
+                        '{@MALA_ATENCION_PROV}',     
+                        '{@IDALBARAN}'
+					);
+
+			END IF;
+			
+			PedidosProblematicos_Pck.ControlPedido_XML(US_ID, '{@IDPEDIDO}', 'S');
+		END IF;
+	END;
+    ]]>
+	</xsql:include-owa>
+</ControlPedidos>

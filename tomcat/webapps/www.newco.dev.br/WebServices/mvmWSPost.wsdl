@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mvmSoap.wsdl	7sep18	10:05	-->
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.newco.dev.br/WebServices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.newco.dev.br/WebServices/mvmWSPost.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.newco.dev.br/WebServices/mvmWSPost.wsdl">
+		<!--	Parametros del Post		-->
+      <s:element name="getUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getUserResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPasswordResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+       <s:element name="getOperation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="operation" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getOperationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getOperationResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getParametersResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+     <s:element name="getFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileXML" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getFileResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getUserSoapIn">
+    <wsdl:part name="parameters" element="tns:getUser"/>
+  </wsdl:message>
+  <wsdl:message name="getUserSoapOut">
+    <wsdl:part name="parameters" element="tns:getUserResponse"/>
+  </wsdl:message>
+ <wsdl:message name="getPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:getPassword"/>
+  </wsdl:message>
+  <wsdl:message name="getPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:getPasswordResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getOperationSoapIn">
+    <wsdl:part name="parameters" element="tns:getOperation"/>
+  </wsdl:message>
+  <wsdl:message name="getOperationSoapOut">
+    <wsdl:part name="parameters" element="tns:getOperationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:getParameters"/>
+  </wsdl:message>
+  <wsdl:message name="getParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:getParametersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getFileSoapIn">
+    <wsdl:part name="parameters" element="tns:getFile"/>
+  </wsdl:message>
+  <wsdl:message name="getFileSoapOut">
+    <wsdl:part name="parameters" element="tns:getFileResponse"/>
+  </wsdl:message>
+  <wsdl:service name="GetRFQId_XMLFile">
+    <wsdl:port name="mvmPortUser" binding="tns:GetRFQId_XMLFile">
+      <soap:address location="http://www.newco.dev.br/WebServices/GetRFQId_XMLFile"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AlmacenInternoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AlmacenInternoHTML.xsl"?>
+
+
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="CEN_ID"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+        <xsql:include-owa>
+          <![CDATA[
+          	DECLARE
+          	  US_ID		NUMBER;
+            BEGIN
+          	  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoAlmaceninterno');
+          	  if us_id>=0 then
+                CENTROS_PCK.MantenimientoAlmacenesInternos(
+                  '{@ALMACENINTERNO_ID}',
+                  '{@CEN_ID}',
+                  '{@NUEVAREFERENCIA}',
+                  '{@NUEVONOMBRE}',
+                  '{@NUEVOPORDEFECTO}',
+                  '{@IDPORDEFECTO}',
+                  '{@ACCION}',
+                  'CABECERA');
+                end if;		   
+            END;
+          ]]>	  
+        </xsql:include-owa>
+        
+        
+        <xsql:include-owa>
+          <![CDATA[
+          	DECLARE
+          	  US_ID		NUMBER;
+            BEGIN
+          	  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AlmaceninternoPorCentroXML');
+          	  if us_id>=0 then
+                CENTROS_PCK.AlmacenesInternosPorCentroXML('{@CEN_ID}','CABECERA');
+                end if;		   
+            END;
+          ]]>	  
+        </xsql:include-owa>
+        
+        
+     
+     <button label="Cerrar" caption="IMG-0190">
+        <name_function>CerrarVentana</name_function>
+      </button>
+      
+      <button label="Insertar" caption="IMG-1520">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'INSERTAR'</param>
+      </button>
+      
+      <button label="Editar" caption="IMG-1560">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'GUARDAR'</param>
+      </button>
+      
+      <button label="PorDefecto" caption="IMG-1547">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'CAMBIARPORDEFECTO'</param>
+      </button>
+  
+ 
+</Mantenimiento>
+

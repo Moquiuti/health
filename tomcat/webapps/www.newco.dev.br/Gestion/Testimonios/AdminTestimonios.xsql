@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Testimonios de los clientes
+ *
+ 
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AdminTestimoniosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AdminTestimoniosHTML.xsl"?>
+
+<Testimonios xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+
+  <xsql:include-owa>
+    <![CDATA[
+	
+	DECLARE
+			US_ID			NUMBER;
+			v_pagina		NUMBER;
+			v_Pendiente	 	VARCHAR2(100);
+    	BEGIN
+		
+		HTP.P(Utilidades_Pck.CabeceraXML || '<TESTIMONIOSPENDIENTES>');
+			--param us_idconectado, us_testimonio, tipo listado, palabras clave, lineas por pag, pagina
+			
+		v_Pendiente:= NVL('{@PENDIENTE_TESTI}','TODOS');
+		
+			
+		TESTIMONIOS_PCK.Testimonios_XML ('{@US_ID}','',v_Pendiente,'{@BUSCA_TESTI}','10',NVL('{@PAG}',0));
+				
+		
+			
+			
+			
+			HTP.P('</TESTIMONIOSPENDIENTES>');
+			
+			
+			
+		END;
+		
+	 ]]>
+  </xsql:include-owa>	
+	
+  
+</Testimonios>

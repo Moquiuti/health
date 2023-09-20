@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Mant.Producto Estándar
+	Ultima revisión: ET 2ene20 12:45
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="MantProductosEstandarHTML.xsl"?>
+-->
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param  name="CATPRIV_IDEMPRESA"/>
+    <xsql:include-param  name="CATPRIV_IDPRODUCTOESTANDAR"/>        
+    <xsql:include-param  name="CATPRIV_IDSUBFAMILIA"/>        
+    <xsql:include-param  name="CATPRIV_IDGRUPO"/>        
+	<xsql:include-param  name="ACCION"/>
+	<xsql:include-param  name="TIPO"/>
+	<xsql:include-param  name="VENTANA"/>
+	<xsql:include-param  name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantProductoEstandar');
+		IF US_ID>=0 THEN
+			CATALOGOPRIVADO_MANT_PCK.PRODUCTOESTANDAR_XML(
+				US_ID,
+				'{@CATPRIV_IDEMPRESA}',
+				'{@CATPRIV_IDSUBFAMILIA}',
+				'{@CATPRIV_IDGRUPO}',
+				'{@CATPRIV_IDPRODUCTOESTANDAR}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

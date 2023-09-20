@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Login directo desde página externa
+	Ultima revisión: ET 05ene21 16:50
+-->
+
+<!---->
+<?xml-stylesheet type="text/xsl" href="LoginDirectoHTML.xsl"?>
+
+<Acceso xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<LANG>spanish</LANG>
+	<PORTAL>MVM</PORTAL>
+	<xsql:include-param name="ACCION"/>
+	<xsql:include-param name="HOJADEGASTOS"/>
+	<xsql:include-param name="NUMCEDULA"/>
+	<xsql:include-param name="NOMBREPACIENTE"/>
+	<xsql:include-param name="HABITACION"/>
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			SES_ID		NUMBER;
+		BEGIN
+			SES_ID:=SEGURIDAD_PCK.AccesoDirectoExterno('{@IDUSUARIOEXT}','{@PARAMETROS}');
+			
+			utilidades_pck.debug('LoginDirecto {@HOJADEGASTOS}|{@NOMBREPACIENTE}|{@NUMCEDULA}|{@HABITACION}');
+			
+			IF SES_ID>0 THEN
+				HTP.P('<ACCESO_OK>'
+					||'<SES_ID>'||SES_ID||'</SES_ID>'
+					||'</ACCESO_OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</Acceso>

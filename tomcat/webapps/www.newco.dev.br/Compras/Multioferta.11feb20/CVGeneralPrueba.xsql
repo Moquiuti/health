@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CVGenerarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CVGenerarHTML.xsl"?>
+
+<Generar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-param name="LP_ID"/>
+  
+  <xsql:include-owa>
+    MULTIOFERTAS_SEGUIMIENTO_PCK.MostrarMultiOfertas('{@LP_ID}');
+   </xsql:include-owa>
+   <!--
+  <jumpTo>
+    <picture-on>Aceptar_mov</picture-on>
+    <picture-off>Aceptar</picture-off>      
+    <page>CVG-0270</page>
+    <caption>IMG-0190</caption>
+  </jumpTo>
+  -->
+  <button label="Aceptar" caption="IMG-0100">
+    <name_function>GuardarComentarios</name_function>
+    <param>document.forms['Principal']</param>
+    <param>'CVGenerarSave.xsql'</param>
+    <param>document.forms['PedidoMinimo']</param>
+  </button>
+
+</Generar>

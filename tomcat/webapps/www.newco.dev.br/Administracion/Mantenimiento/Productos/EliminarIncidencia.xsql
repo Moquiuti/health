@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Elimina un producto de la licitacion seleccionada
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EliminarIncidenciaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EliminarIncidenciaJSON.xsl"?>
+
+<EliminarIncidencia xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EliminaInc	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EliminarIncidencia');
+		IF US_ID>=0 THEN
+			v_EliminaInc:=INCIDENCIASPRODUCTOS_PCK.BorrarIncidencia(
+				US_ID,
+				'{@PROD_INC_ID}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_EliminaInc > 0 THEN
+				HTP.P('<OK>'||v_EliminaInc||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EliminarIncidencia>

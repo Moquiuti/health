@@ -1,0 +1,359 @@
+Aug 24, 2023 12:10:19 AM org.apache.coyote.http11.AbstractHttp11Processor process
+INFO: Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [Z0xa50x01]. HTTP method names must be tokens
+	at org.apache.coyote.http11.InternalInputBuffer.parseRequestLine(InternalInputBuffer.java:140)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1108)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:654)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:317)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+
+Aug 24, 2023 3:27:47 AM org.apache.coyote.http11.AbstractHttp11Processor process
+INFO: Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x010x070x010x000x010x030x030x03}0xaf0xc5y0x12E%0xbe0x160xd3y0xb50xf870xfc0xfd0xf60xf80xbc0x9fY0x1f0x8d0xef0xa90xe10x94@0xae0x870x81H]. HTTP method names must be tokens
+	at org.apache.coyote.http11.InternalInputBuffer.parseRequestLine(InternalInputBuffer.java:140)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1108)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:654)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:317)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+
+Aug 24, 2023 5:10:55 AM org.apache.coyote.http11.AbstractHttp11Processor process
+INFO: Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xca0x010x000x000xc60x030x030x14x0xc5]0xc70x990x05-0xf50xb10xf00xcd0xd40xa9t20x120x110x16t0x9a]f0x990xd0I0xec0x0d0x18h0x1e.0x000x00h0xcc0x140xcc0x130xc0/0xc0+0xc000xc0,0xc00x110xc00x070xc0'0xc0#0xc00x130xc00x090xc0(0xc0$0xc00x140xc00x0a0xcc0x150x000x9e0x000x9f0x00g0x00k0x0030x0090x000x9c0x000x9d0x000x050x000x040x00<0x00=0x00/0x0050xc00x120x000x160x000x0a0x000x030x000x080x000x060x000x140x000x110x000x190x000x170x0020xc00x080x000x120x000x130x000x150x0080x00@0x00f0x00j0x000xa20x000xa30x010x000x0050x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x0c0x000x0a0x040x010x040x030x020x010x020x030x020x020xff0x010x000x010x000x000x0f0x000x010x01...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.InternalInputBuffer.parseRequestLine(InternalInputBuffer.java:140)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1108)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:654)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:317)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+
+Aug 24, 2023 5:14:50 AM org.apache.catalina.core.StandardServer await
+INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+Aug 24, 2023 5:14:50 AM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:14:50 AM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:14:50 AM org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service [Catalina]
+Aug 24, 2023 5:14:50 AM org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+SEVERE: The web application [/www.newco.dev.br] registered the JDBC driver [oracle.jdbc.driver.OracleDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+Aug 24, 2023 5:14:50 AM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:14:50 AM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:14:50 AM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:14:50 AM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            3.10.0-1160.95.1.el7.x86_64
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.372.b07-1.el7_9.x86_64/jre
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_372-b07
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Red Hat, Inc.
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /opt/tomcat
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /opt/tomcat
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/opt/tomcat/conf/logging.properties
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/opt/tomcat
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/opt/tomcat
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/opt/tomcat/temp
+Aug 24, 2023 5:14:58 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:14:58 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 785 ms
+Aug 24, 2023 5:14:58 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/ROOT]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/ROOT] has finished in [325] ms
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/docs]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/docs] has finished in [64] ms
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/examples]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/examples] has finished in [243] ms
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/host-manager]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/host-manager] has finished in [53] ms
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/manager]
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/manager] has finished in [49] ms
+Aug 24, 2023 5:14:58 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/www.newco.dev.br]
+Aug 24, 2023 5:14:59 AM org.apache.catalina.startup.TldConfig execute
+INFO: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+Aug 24, 2023 5:14:59 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/www.newco.dev.br] has finished in [192] ms
+Aug 24, 2023 5:14:59 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:14:59 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:14:59 AM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 998 ms
+Aug 24, 2023 5:17:59 AM org.apache.catalina.core.StandardServer await
+INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+Aug 24, 2023 5:17:59 AM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:17:59 AM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:17:59 AM org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service [Catalina]
+Aug 24, 2023 5:18:00 AM org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+SEVERE: The web application [/www.newco.dev.br] registered the JDBC driver [oracle.jdbc.driver.OracleDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+Aug 24, 2023 5:18:00 AM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:18:00 AM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:18:00 AM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:18:00 AM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            3.10.0-1160.95.1.el7.x86_64
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.372.b07-1.el7_9.x86_64/jre
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_372-b07
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Red Hat, Inc.
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /opt/tomcat
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /opt/tomcat
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/opt/tomcat/conf/logging.properties
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/opt/tomcat
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/opt/tomcat
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/opt/tomcat/temp
+Aug 24, 2023 5:18:04 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:18:04 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 772 ms
+Aug 24, 2023 5:18:04 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Aug 24, 2023 5:18:04 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/ROOT]
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/ROOT] has finished in [328] ms
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/docs]
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/docs] has finished in [59] ms
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/examples]
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/examples] has finished in [237] ms
+Aug 24, 2023 5:18:04 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/host-manager]
+Aug 24, 2023 5:18:05 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/host-manager] has finished in [53] ms
+Aug 24, 2023 5:18:05 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/manager]
+Aug 24, 2023 5:18:05 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/manager] has finished in [49] ms
+Aug 24, 2023 5:18:05 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/www.newco.dev.br]
+Aug 24, 2023 5:18:05 AM org.apache.catalina.startup.TldConfig execute
+INFO: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+Aug 24, 2023 5:18:05 AM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/www.newco.dev.br] has finished in [197] ms
+Aug 24, 2023 5:18:05 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 5:18:05 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 5:18:05 AM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 994 ms
+Aug 24, 2023 7:17:12 AM org.apache.coyote.http11.AbstractHttp11Processor process
+INFO: Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x00{0x010x000x00w0x030x030xd5FU1g0xae0xc6>0xbf0xa90x9db0xce0x1a_-0x01k0xd70xff0xec0x0c0xa010x9aD0x970x05_0xcf|0xbb0x000x000x1a0xc0/0xc0+0xc00x110xc00x070xc00x130xc00x090xc00x140xc00x0a0x000x050x00/0x0050xc00x120x000x0a0x010x000x0040x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x100x000x0e0x040x010x040x030x020x010x020x030x040x010x050x010x060x010xff0x010x000x010x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.InternalInputBuffer.parseRequestLine(InternalInputBuffer.java:140)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1108)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:654)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:317)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+
+Aug 24, 2023 3:49:10 PM org.apache.catalina.core.StandardServer await
+INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+Aug 24, 2023 3:49:10 PM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 3:49:10 PM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 3:49:10 PM org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service [Catalina]
+Aug 24, 2023 3:49:10 PM org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+SEVERE: The web application [/www.newco.dev.br] registered the JDBC driver [oracle.jdbc.driver.OracleDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+Aug 24, 2023 3:49:10 PM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 3:49:10 PM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 3:49:10 PM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 3:49:10 PM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            3.10.0-1160.95.1.el7.x86_64
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.372.b07-1.el7_9.x86_64/jre
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_372-b07
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Red Hat, Inc.
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /opt/tomcat
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /opt/tomcat
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/opt/tomcat/conf/logging.properties
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/opt/tomcat
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/opt/tomcat
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/opt/tomcat/temp
+Aug 24, 2023 3:49:21 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 3:49:21 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 783 ms
+Aug 24, 2023 3:49:21 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Aug 24, 2023 3:49:21 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Aug 24, 2023 3:49:21 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/ROOT]
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/ROOT] has finished in [339] ms
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/docs]
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/docs] has finished in [63] ms
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/examples]
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/examples] has finished in [244] ms
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/host-manager]
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/host-manager] has finished in [51] ms
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/manager]
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/manager] has finished in [50] ms
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [/opt/tomcat/webapps/www.newco.dev.br]
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.TldConfig execute
+INFO: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [/opt/tomcat/webapps/www.newco.dev.br] has finished in [188] ms
+Aug 24, 2023 3:49:22 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]
+Aug 24, 2023 3:49:22 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-0:0:0:0:0:0:0:1-8009"]
+Aug 24, 2023 3:49:22 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1006 ms
+Aug 24, 2023 4:52:31 PM org.apache.coyote.http11.AbstractHttp11Processor process
+INFO: Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [Z0xa50x01]. HTTP method names must be tokens
+	at org.apache.coyote.http11.InternalInputBuffer.parseRequestLine(InternalInputBuffer.java:140)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1108)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:654)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:317)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+

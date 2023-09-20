@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Recuperar contrasenna
+	Ultima revision: ET 8abr21 11:20
+ -->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="RecuperarClaveHTML.xsl"?>
+
+<AreaPublica xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:include-param name="LANG"/>
+</AreaPublica>

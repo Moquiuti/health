@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de proveedor en convocatoria + funciones avanzadas. Nuevo disenno 2022
+	ultima revision: ET 07abr22 16:20
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="ProveedorConvocatoriaHTML2022.xsl"?>
+
+<Proveedor xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<xsql:include-owa>
+	  <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Proveedor');
+			IF US_ID>=0 THEN
+			
+				utilidades_pck.debug('XSQL.Proveedor  US_ID:'||US_ID||' IDConv:'||'{@LIC_CONV_ID}'||' Accion:'||'{@ACCION}');
+			
+				IF NVL('{@ACCION}','N')='RESPONSABLE' THEN
+					
+					Convocatorias_pck.ModificarResponsable
+					(
+						US_ID,
+						'{@LIC_CONV_ID}',
+						'{@IDPROVEEDOR}',
+						'{@IDUSUARIO}'
+					);
+				
+				ELSIF NVL('{@ACCION}','N') IN ('BORRAR','SUSPENDER','RECUPERAR') THEN
+					
+					Convocatorias_pck.CambiarEstadoProveedor
+					(
+						US_ID,
+						'{@LIC_CONV_ID}',
+						'{@PARAMETROS}',
+						'{@ACCION}'
+					);
+				
+				ELSIF NVL('{@ACCION}','N') IN ('REACTIVAR') THEN
+					
+					Convocatorias_pck.ReactivarProveedor
+					(
+						'{@LIC_CONV_ID}',
+						'{@IDPROVEEDOR}'
+					);
+				
+				END IF;
+			
+				Convocatorias_pck.Proveedor_XML(US_ID,'{@LIC_CONV_ID}','{@IDPROVEEDOR}');
+			END IF;				   
+		END;
+	]]>
+	</xsql:include-owa>
+  
+</Proveedor>
+

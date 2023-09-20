@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+ *
+ *	Inserta nuevo proveedor para la licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevoProveedorJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevoProveedorJSON.xsl"?>
+
+<NuevoProveedor xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDLicitacionProv	LIC_PROVEEDORES.LIC_PROV_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProveedor');
+		IF US_ID>=0 THEN
+			v_IDLicitacionProv:=LICITACIONES_PCK.NuevoProveedor(
+				US_ID,
+				'{@LIC_ID}',
+				'{@PROV_ID}',
+				'{@PROV_US_ID}',
+				'{@IDESTADOEVALUACION}',
+				'{@COMENTARIOS}',
+				'{@BLOQUEARAVISOS}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDLicitacionProv > 0 THEN
+				HTP.P('<OK>'||v_IDLicitacionProv||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevoProveedor>

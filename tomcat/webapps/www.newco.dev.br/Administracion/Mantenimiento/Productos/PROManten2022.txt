@@ -1,0 +1,4 @@
+08mar22 ET Mantenimiento de producto (cat.proveedor). Nuevo disenno 2022.
+14mar22 ET Incluir pestanna "Empaquetamiento privado"
+28mar22 ET Quitar campo ref. estandar
+

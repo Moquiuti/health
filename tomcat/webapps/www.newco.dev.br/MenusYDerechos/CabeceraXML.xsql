@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	ultima revision: ET 9feb17 10:49
+-->
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CabeceraHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CabeceraHTML.xsl"?>
+-->
+
+<Cabecera xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="css" value="'{@SES_ID}'"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+
+  <xsql:include-owa>
+        MENUS_PCK.Cabecera(SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Cabecera'));
+  </xsql:include-owa>
+  
+  <xsql:include-owa>
+        MENUS_PCK.menuPrincipal(SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MenuPrincipal'));
+  </xsql:include-owa>
+  
+</Cabecera>
+

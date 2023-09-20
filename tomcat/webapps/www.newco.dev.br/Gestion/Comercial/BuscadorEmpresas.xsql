@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+	Listado de empresas reducido, con filtro
+
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="BuscadorEmpresasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="BuscadorEmpresasHTML.xsl"?>
+
+<ListadoEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+        BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListadoEmpresas');
+		  IF US_ID>=0 THEN
+          		EMPRESAS_PCK.ListadoEmpresas_XML
+				(
+					US_ID,
+					'{@FNOMBRE}',
+					'{@FPROVINCIA}',
+					'{@FIDTIPO}',
+					'{@FNUEVOMODELO}',
+					'{@FPEDIDOAMPLIADO}',
+					'{@IDLOGOTIPO}',
+					'{@IDESTILO}',
+					'{@FPEDIDOMINIMO}',
+					'{@FCOMISIONTRANS}',
+					'{@FCOMISIONAHORRO}',
+					'{@FBLOQUEARMUESTRAS}',
+					'{@FBLOQUEARBANDEJA}',
+					'{@FNONAVEGAR}',
+					'{@FNONAVEGARDEF}',
+					'{@FSOLICITUDES}',
+					'{@FSOLICITUDES30DIAS}',
+					'{@FBUSQUEDAS}',
+					'{@FBUSQUEDAS30DIAS}',
+					'{@FCATALOGOVISIBLE}',
+					'{@FCATPRIVCONCATEGORIAS}',
+					'{@FCATPRIVCONGRUPOS}',
+					'{@FCOMPRAS30DIAS}',
+					'{@FCOMPRAS}',
+					'{@FCATALOGO}',
+					'{@FMEDDICC_ESTADO}',
+					'{@FMEDDICC_INFORMADO}',
+					'{@FMEDDICC_OK}',
+					'{@FMEDDICC_IN}',
+					'{@FMEDDICC_KO}',
+					'{@FTAREASACTIVAS}',
+					NULL
+				);
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+			
+</ListadoEmpresas>

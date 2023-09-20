@@ -1,0 +1,30 @@
+10oct17	ET Incluir el campo "Mostrar y editar la forma de pago en pedidos y licitaciones"
+27nov17	ET Cod.Postal opcional, nuevo campo "Extender procedimiento de pedidos hasta el pago"
+30nov17 ET No se guardan bien proveedores, debido a un cambio incorrecto en la comprobación de cambios en campos ocultos
+17ago18 ET Incluir campo EMP_OCULTARFECHAENTREGA
+20ago18 ET Incluir campo EMP_SINSEGUIMIENTOPEDIDOS
+21dic18 ET Incluir campos EMP_REFCLIENTEPORCENTRO (OHSJD) y EMP_CATALOGOMULTIOPCION (OHSJD)
+21dic18 ET Incluir campos EMP_INT_SOLOPEDIDOS
+21feb19 ET Mostrar en COlombia el campo "precios con IVA" p_EMP_PRECIOSCONIVA
+08jul19 ET Incluir campo EMP_INT_MANDACATALOGOERP
+28ago19 ET Incluir campo EMP_PED_SALTARPEDIDOMINIMO
+03set19 ET Incluir campo EMP_LIC_IDCOMUNICADO
+03oct19 ET Incluir indicación de que la empresa dispone de asignacios particulares de vendedores con enlace a página de vendedores
+03oct19 ET Nuevo campo: EMP_BLOQUEADA
+21oct19 ET Incluir campo desplegable modelos OC para descarga. Separar configuración de integración.
+22oct19 ET Incluir campo EMP_LIC_FORZARCAJAS, solicitado por unimed
+29oct19 ET Incluir campo EMP_LIC_MOSTRARAUTOR, solicitado por unimed
+30oct19 ET Incluir campo EMP_DERECHOSPRODUCTOSPORCENTRO, necesario para Recoletas
+11nov19 ET Incluir campo EMP_LIC_COMPRADORINFOFERTAS
+20nov19 ET Incluir campo EMP_LIC_ADJUDICADOSAOFERTA
+31mar20 ET Incluir campo EMP_PED_DIFERENCIARDEPOSITO (IMBANACO)
+19abr20 ET Incluir campos EMP_ESCATALOGOMAESTRO, EMP_ADJUDICACIONESDECATPADRE (GPO), quitar EMPMantenSave. EMPManten_190420.js
+21abr20 ET Bloquear desplegable de maestros si la empresa ya tiene asociado el suyo. EMPManten_210420.js
+06jul20 ET Incluir campo EMP_JUSTIFICARMANTENPEDIDOS
+28ene21 ET Poner texto de apoyo para los ficheros de carga de pedidos/licitaciones
+04mar21 ET Nuevos campos: EMP_ABC_PLAZOCALCULO,EMP_ABC_PORCENTAJEA,EMP_ABC_PORCENTAJEB,EMP_LIC_SEPARARCATEGORIA
+05may21 ET Nuevo campo: EMP_SEGUIMIENTOPEDIDOSDESDEMVM EMPManten_050521.js
+30set21 ET Nuevo campo: EMP_AVISARATODOSSEGUNDERECHOS EMPManten_300921.js
+20oct12 ET Activar registro proveedor. EMPManten_201021.js
+13dic21 ET EMP_AVISARATODOSSEGUNDERECHOS se separa en 3: EMP_PED_AVISARATODOS, EMP_LIC_AVISARATODOS, EMP_LIC_COMPARTIR. EMPManten_131221.js
+14dic21 ET Solucionado error JS "form.elements" -> "document.forms[0].elements". EMPManten_141221a.js

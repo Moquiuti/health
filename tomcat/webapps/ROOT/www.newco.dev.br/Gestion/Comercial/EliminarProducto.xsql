@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Elimina un producto de la licitacion seleccionada
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EliminarProductoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EliminarProductoJSON.xsl"?>
+
+<EliminarProducto xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EliminaProd	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EliminarProducto');
+		IF US_ID>=0 THEN
+			v_EliminaProd:=LICITACIONES_PCK.ModificarProducto(
+				US_ID,
+				'{@ID_LIC_PROD}',
+				'{@ID_PRODESTANDAR}',
+				'',
+				'',
+				'',
+				'',
+				'',
+				'',
+				'{@ID_ESTADO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_EliminaProd > 0 THEN
+				HTP.P('<OK>'||v_EliminaProd||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EliminarProducto>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--	
+	Mantenimiento de circuitos de aprobacion
+	Ultima revision: ET 22mar22 19:15 CircuitosAprobacion2022_220322.js
+-->
+<?xml-stylesheet type="text/xsl" href="CircuitosAprobacionHTML2022.xsl"?>
+
+<CircuitosAprobacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CircuitosAprobacion');
+			IF US_ID>=0 THEN
+				utilidades_pck.debug('CircuitosAprobacion. Accion:{@ACCION} Parametros:{@PARAMETROS}');
+				IF '{@ACCION}' IS NOT NULL THEN
+					CircuitosAprobacion_PCK.EjecutarAccion(US_ID,'{@IDEMPRESA}','{@IDCIRCUITO}', '{@ACCION}','{@PARAMETROS}');
+				END IF;
+				CircuitosAprobacion_PCK.Listado_XML(US_ID, {@IDEMPRESA});
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+</CircuitosAprobacion>
+

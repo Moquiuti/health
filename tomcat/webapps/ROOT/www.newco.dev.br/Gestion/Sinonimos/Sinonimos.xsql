@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--	-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SinonimosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SinonimosHTML.xsl"?>
+
+<Sinonimos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdminTecnica');
+			
+	 		IF US_ID=1 OR US_ID=5 THEN			--	Solo superusuarios MVM
+				--	Devuelve el XML, ejecuta la acción
+				SINONIMOS_PCK.Inicio_XML(US_ID, '{@ACCION}', '{@PARAMETROS}');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+    		END IF;
+			
+		END;
+        	]]>
+	</xsql:include-owa>
+</Sinonimos>
+

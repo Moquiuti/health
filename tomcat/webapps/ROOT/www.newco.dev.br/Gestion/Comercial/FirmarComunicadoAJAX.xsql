@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Firma un comunicado desde una licitación
+	Ultima revisión: ET 5set19
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="FirmarComunicadoJSON.xsl"?>
+
+<FirmarComunicado xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','FirmarComunicado');
+		IF US_ID>=0 THEN
+			v_Res:=Comunicados_pck.FirmaComunicado(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDLICITACION}',
+				'{@IDCOMUNICADO}'
+			);
+			
+			IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+			
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</FirmarComunicado>

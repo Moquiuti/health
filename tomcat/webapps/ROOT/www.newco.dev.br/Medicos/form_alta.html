@@ -1,0 +1,1643 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0041)http://www.newco.dev.br/Medicos/form_alta.html -->
+<!--
+formulario para medicos 
+#######################
+
+fecha: 14 / 6 /2001
+autor: nacho
+
+-->
+
+<HTML>
+<HEAD>
+<TITLE>Formulario de alta de médicos</TITLE>
+<META content="text/html; charset=iso-8859-1" http-equiv=Content-Type>
+<script type="text/javascript" src="http://www.newco.dev.br/General/general.js">
+</script>
+
+<SCRIPT type=text/javascript>
+<!--
+
+var msgError='', msgErrorStd=' \n\nPor favor, corrija el error antes de enviar el Formulario.';
+
+function validarFormulario(form){
+
+ 
+  for(var n=0;n<form.length;n++){
+      switch (n){
+	  
+	  
+        case 0:// tipo de alta (checkBox)
+		  var error='Es necesario seleccionar al menos uno de los tipos de alta.'
+		  if(form.elements[n].checked==false && form.elements[n+1].checked==false){
+		    msgError=error+msgErrorStd;
+			return false;
+	      }
+		  break;
+		             
+        case 2:// nombre 
+		  var error='Es necesario rellenar la celda \'Nombre\'.';
+		  if(validarNoNulo(form.elements[n])==false){
+			msgError=error+msgErrorStd;
+			return false;
+		  }
+		  break;
+		  
+		case 3: // NIF medico 
+		  var error='Es necesario rellenar la celda \'NIF\'. El formato es 00000000A.';
+		  msgError=error+msgErrorStd;
+		  if(validarNoNulo(form.elements[n])==false)
+		    return false
+		  break;  
+		  
+		case 4:// apellido 1
+		   var error='Es necesario rellenar la celda \'Primer Apellido\'.';
+		  if(validarNoNulo(form.elements[n])==false){
+			msgError=error+msgErrorStd;
+			return false;
+		  }
+		  break;
+		  
+		case 5://telf fijo
+	      var error='Es necesario rellenar la celda \'Teléfono\'.';
+		  msgError=error+msgErrorStd;
+		    if(validarNoNulo(form.elements[n])==false)
+			  return false;
+		  break;  
+		  
+		case 6://apellido 2 
+		  var error='Es necesario rellenar la  celda \'Segundo Apellido\'.';
+		  if(validarNoNulo(form.elements[n])==false){
+			msgError=error+msgErrorStd;
+			return false;
+		  }
+		  break;
+		  
+		case 7://telf movil 
+		   var error='Es necesario rellenar la celda \'Teléfono móvil\'.';
+		   msgError=error+msgErrorStd;
+		   
+		   if(form.elements[n].value!=''){
+		      if(validarNoNulo(form.elements[n])==false){
+			    return false;
+		      }
+		  }
+		  break;
+		  
+		case 8://fecha nacimiento 
+		  var error='Es necesario rellenar la celda \'Fecha de Nacimiento\'. El formato es dd/mm/aaaa.';
+		  msgError=error+msgErrorStd;
+		  if(validarNoNulo(form.elements[n])==false)
+		    return false
+		  break;
+		  
+		case 9://mail
+          var error='Es necesario rellenar la celda \'e-mail\'.';
+		  msgError=error+msgErrorStd;
+		  if(validarEsMail(form.elements[n])==false)
+		    return false;
+		  break;  
+		  
+		case 10://fax
+		 
+		   var error='Es necesario rellenar la celda \'Fax\'.';
+		   msgError=error+msgErrorStd;
+
+		 
+		  if(form.elements[n].value!=''){
+		      if(validarNoNulo(form.elements[n])==false){
+			    return false;
+			  
+		    }
+		  }
+		  break;       
+		  
+		case 11://direccion
+		  if(validarNoNulo(form.elements[n])==false){
+		    var error='Es necesario rellenar la celda \'Dirección\'.';
+			msgError=error+msgErrorStd;
+		    return false;
+		  }
+		  break;
+		
+		case 12://poblacion 
+		  var error='Es necesario rellenar la celda \'Población\'.';
+          if(validarNoNulo(form.elements[n])==false){
+			msgError=error+msgErrorStd;
+			return false;
+		  }
+		  break;
+		  
+		case 13:// provincia
+		   var error='Es necesario rellenar el desplegable \'Provincia\'.';
+		    msgError=error+msgErrorStd;
+		    if(form.elements[n].value==''){
+		    return false;
+		    }
+		    break;    
+				   
+	    case 14://cod postal
+		  var error='Es necesario rellenar la celda \'Código postal\'.';
+		  msgError=error+msgErrorStd;	   	
+		  if(validarNoNulo(form.elements[n])==false)
+		    return false
+		  break;
+			
+		case 15://colegiado 
+		   var error='Es necesario rellenar la celda \'Número de colegiado\'.';
+		   msgError=error+msgErrorStd;
+		   if(validarNoNulo(form.elements[n])==false)
+		    return false
+		  break;
+		 
+		       /*
+			   caso especial
+			   
+			los desplegable y los campos de texto asociados 'OTROS' de
+			especialidad, existencia de VM
+			*/
+		
+		case 16://desplegable especialidad
+		  var error='Es necesario rellenar el desplegable \'Especialidad\'.';
+		  msgError=error+msgErrorStd;
+		  
+		  if(validarNoNulo(form.elements[form.elements[n].name+'_OTROS'])==false){
+		    if(validarNoNulo(form.elements[n])==false){
+			  return false;
+			}
+		  }
+		  break; 	  
+		  
+		case 17:
+		  //es el campo otros de especialidad
+		  break;
+		
+		//-------------------------campos del centro sanitario----------------------------
+		
+		case 18:// tipo centro
+		   var error='Es necesario rellenar el desplegable \'Tipo de centro\'.';
+		    msgError=error+msgErrorStd;
+		    if(form.elements[n].value==''){
+		    return false;
+		    }
+		    break;
+		
+		case 19:// nombre centro
+		  var error='Es necesario rellenar la celda \'Nombre\' del Centro Sanitario o Consulta privada';
+		  if(validarNoNulo(form.elements[n])==false){
+			msgError=error+msgErrorStd;
+			return false;
+		  }
+		  break; 
+		  
+		  case 20: // NIF centro 
+		  var error='Es necesario rellenar la celda \'NIF\' del Centro Sanitario o Consulta privada. El formato es 00000000A.';
+		  msgError=error+msgErrorStd;
+		  if(validarNoNulo(form.elements[n])==false)
+		    return false
+		  break;  
+		  
+		    
+		  
+		  case 21://direccion
+		  if(validarNoNulo(form.elements[n])==false){
+		    var error='Es necesario rellenar la celda \'Dirección\' del Centro Sanitario o Consulta Privada';
+			msgError=error+msgErrorStd;
+		    return false;
+		  }
+		  break;
+		  
+		  case 22://Persona de Contacto 
+		  var error='Es necesario rellenar la celda \'Persona de contacto\' del Centro Sanitario o Consulta Privada';
+		  if(validarNoNulo(form.elements[n])==false){
+			msgError=error+msgErrorStd;
+			return false;
+		  }
+		  break;
+		  
+		   
+		  
+		  case 23://poblacion 
+		  var error='Es necesario rellenar la celda \'Población\' del Centro Sanitario o Consulta Privada';
+          if(validarNoNulo(form.elements[n])==false){
+			msgError=error+msgErrorStd;
+			return false;
+		  }
+		  break;
+		  
+		  case 24://telf fijo
+	      var error='Es necesario rellenar la celda \'Teléfono\' del Centro Sanitario o Consulta Privada';
+		  msgError=error+msgErrorStd;
+		    if(validarNoNulo(form.elements[n])==false)
+			  return false;
+		  break; 
+		  
+		  case 25:// provincia
+		   var error='Es necesario rellenar el desplegable \'Provincia\' del Centro Sanitario o Consulta privada';
+		    msgError=error+msgErrorStd;
+		    if(form.elements[n].value==''){
+		    return false;
+		    }
+		    break; 
+			
+		  case 26://mail
+          var error='Es necesario rellenar la celda \'e-mail\' del Centro Sanitario o Consulta privada';
+		  msgError=error+msgErrorStd;
+		  if(validarEsMail(form.elements[n])==false)
+		    return false;
+		  break; 
+		  
+		//------------------------fin campos del centro sanitario---------------------------------
+		
+		case 36:// ¿como conocio...?
+		 var error='Es necesario rellenar el desplegable \'¿Cómo conoció a MedicalVM?\'.';
+		  msgError=error+msgErrorStd;
+		  
+		   if(validarNoNulo(form.elements[form.elements[n].name+'_OTROS'])==false){
+		    if(validarNoNulo(form.elements[n])==false){
+			  return false;
+			}
+		  }
+		  break;   
+		}//switch
+  }//for  
+  return true;
+}
+//---------declaracion-funciones--------------------------------------	  
+function validarNoNulo(obj){
+  if(obj.value=="")
+    return false
+  else
+    return true;
+}
+
+function validarEsCaracter(obj){
+   var cadena=obj.value.toLowerCase();
+   for(var n=0;n<cadena.length;n++){
+     var car=cadena.substring(n,n+1);
+     if((car>='0') && (car<='9'))
+       return false;  
+   }	
+  return true;
+}
+
+function validarEsEntero(obj){
+
+  var error=0;
+  
+  for(var n=0;n<obj.value.length;n++){
+    var car=obj.value.substring(n,n+1);
+    if((car<"0") || ("9"<car))
+      error=1;   
+  }	
+  if (error==1){
+    return false;
+  }
+  else
+    return true;
+}
+
+function validarEsMail(obj){
+   var cadena=obj.value.toLowerCase();
+     for(var n=0;n<cadena.length;n++){
+       var car=cadena.substring(n,n+1);
+       if(car=='@')
+         return true;   
+     }	
+  return false;
+}
+
+function validarTextoNoNulo(obj){
+  if(validarNoNulo(obj)==true)
+    return validarEsCaracter(obj);		
+  else 
+    return false;
+}
+
+function validarNumericoNoNulo(obj){
+  if(validarNoNulo(obj)==true)
+    return validarEsEntero(obj);		
+  else 
+    return false;
+}
+
+function validarLongitud(obj, longitud){
+  if(obj.value.length==longitud)
+    return true;		
+  else 
+    return false;
+}
+
+-->
+</SCRIPT>
+<STYLE>.tituloPagForm {
+	COLOR: #015e4b; FONT-FAMILY: Arial, Helvetica, Swiss, Geneva, Sans; FONT-SIZE: 14pt; FONT-WEIGHT: bold
+}
+.tituloForm {
+	COLOR: #015e4b; FONT-SIZE: 10pt; FONT-WEIGHT: bold
+}
+.subTituloForm {
+	COLOR: #018167; FONT-SIZE: 9pt; FONT-WEIGHT: bold
+}
+.textoForm {
+	COLOR: #000000; FONT-SIZE: 10pt; FONT-WEIGHT: bold
+}
+.textoLegal {
+	COLOR: #000000; FONT-SIZE: 8pt
+}
+.camposObligatorios { COLOR: #FF0000; FONT-SIZE: 10pt; FONT-WEIGHT: bold }
+</STYLE>
+
+</HEAD>
+<BODY bgColor=#eeffff leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<FORM action="FormAltaSave.xsql" method="POST" name="form1">
+  <TABLE border=0 width="100%">
+  
+    <TR> 
+      <TD class="tituloPagForm" height="44" colspan="2"> 
+        <DIV align=center>Alta Médicos</DIV>
+      </TD>
+    </TR>
+    <TR> 
+      <TD colspan="2"> 
+        <table width="100%" align="center">
+          <tr align="center"> 
+            <td class="textoForm">&nbsp;</td>
+            <td class="textoForm">&nbsp; </td>
+          </tr>
+          <tr align="center"> 
+            <td>&nbsp;</td>
+            <td>&nbsp; </td>
+          </tr>
+          <tr> 
+            <td class="textoLegal"> * Si se da de alta como médico dispondrá de 
+              un acceso a MedicalVM para realizar compras particulares que serán 
+              facturadas con su nombre y NIF personal.<br>
+            </td>
+            <td class="textoLegal"> * Si se da de alta como Clínica o Consulta 
+              Privada dispondrá de un acceso a MedicalVM para realizar compras 
+              que seran facturadas con el nombre y NIF de la Clínica o Consulta. 
+            </td>
+          </tr>
+        </table>
+        <table width="50%" align="center">
+          <tr> 
+            <td class="textoLegal"> ** Si se da de alta de ambas formas dispondrá 
+              de dos accesos a MedicalVM, que le servirán uno para sus compras 
+              particulares y otro para las compras de la Clínica o Consulta. </td>
+          </tr>
+        </table>
+      </TD>
+    </TR>
+    <TR bgColor=#a0d8d7> 
+      <TD class=tituloForm colspan="2">Datos personales:</TD>
+    </TR>
+    <TR class="textoForm"> 
+      <TD class="textoForm" height="219" colspan="2"> 
+        <TABLE border="0" width="100%">
+          <TR> 
+            <TD class="textoForm" width="15%">&nbsp;</TD>
+            <TD class="camposObligatorios" width="1%"> 
+              <div align="center"></div>
+            </TD>
+            <TD width="38%">&nbsp;</TD>
+            <td width="13%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td colspan="2" width="32%">&nbsp;</td>
+          </TR>
+          <TR> 
+            <TD class=textoForm width="15%"> 
+              <div align="right">Título:</div>
+            </TD>
+            <TD class=camposObligatorios width="1%"> 
+              <div align="center">*</div>
+            </TD>
+            <TD width="38%"> 
+              <select name="MED_TITULO">
+                <option value="" selected>[elija una opcion]</option>
+                <option value="H">Dr.</option>
+                <option value="M">Dra.</option>
+                <option value="H">Sr.</option>
+                <option value="M">Sra.</option>
+              </select>
+            </TD>
+            <td width="13%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td colspan="2" width="32%">&nbsp;</td>
+          </TR>
+          
+          <TR> 
+            <TD class=textoForm width="15%"> 
+              <div align="right">Nombre: </div>
+            </TD>
+            <TD class=camposObligatorios width="1%"> 
+              <div align="center">*</div>
+            </TD>
+            <TD width="38%"> 
+              <DIV align=left> 
+                <INPUT name=MED_NOMBRE size=25>
+              </DIV>
+            </TD>
+            <td width="13%"> 
+              <div align=right class=textoForm> Primer apellido: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td colspan="2" width="32%"> 
+              <div align=left> 
+                <input name=MED_APELLIDO1 size=25>
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%" height="31"> 
+              <div align=right class=textoForm> Segundo apellido: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="31"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%" height="31"> 
+              <div align=left> 
+                <input name=MED_APELLIDO2 size=25>
+              </div>
+            </td>
+            <td width="13%" class="textoForm" height="31"> 
+              <div align="right">NIF:&nbsp;</div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="31"> 
+              <div align="center">*</div>
+            </td>
+            <td height="31" colspan="2" width="32%"> 
+              <div align=left> 
+                <input name=MED_NIF size=20 maxlength="9">
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align=right class=textoForm> Fecha de nacimiento: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%"> 
+              <div align=left> 
+                <input name="MED_FECHA_NAC" size=20 maxlength="10">
+                <div class="textoLegal">(dd/mm/aaaa) </div>
+              </div>
+            </td>
+            <td class="textoForm" width="13%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="32%" class="textoForm">&nbsp;</td>
+            > </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align="right"></div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td width="38%">&nbsp;</td>
+            <td width="13%"> 
+              <div align="right"></div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td colspan="2" width="32%">&nbsp;</td>
+          </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align=right class=textoForm> Teléfono: (fijo) </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%"> 
+              <div align=left> 
+                <input name=MED_TF_FIJO size=20 maxlength="15" >
+              </div>
+            </td>
+            <td width="13%"> 
+              <div align=right class=textoForm>Fax: </div>
+            </td>
+            <td width="1%"> 
+              <div align="center"></div>
+            </td>
+            <td colspan="2" width="32%"> 
+              <div align=left> 
+                <input name=MED_FAX size=20 maxlength="15">
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%" height="14"> 
+              <div align=right class=textoForm>Teléfono: (móvil) </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="14"> 
+              <div align="center"></div>
+            </td>
+            <td width="38%" height="14"> 
+              <div align=left> 
+                <input name=MED_TF_MOVIL size=20 maxlength="15">
+              </div>
+            </td>
+            <td width="13%" height="14"> 
+              <div align="right"></div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="14"> 
+              <div align="center"></div>
+            </td>
+            <td colspan="2" width="32%" height="14">&nbsp;</td>
+          </TR>
+          <TR> 
+            <td width="15%" height="45"> 
+              <div align=right class=textoForm> e-mail: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="45"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%" height="45"> 
+              <div align=left> 
+                <input name=MED_EMAIL size=50>
+              </div>
+            </td>
+            <td width="13%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td colspan="2" width="32%">&nbsp;</td>
+          </TR>
+          <TR> 
+            <td width="15%" height="9">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="9">&nbsp;</td>
+            <td width="38%" height="9">&nbsp;</td>
+            <td width="13%" height="9">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="9">&nbsp;</td>
+            <td colspan="2" width="32%" height="9">&nbsp;</td>
+          </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align=right class=textoForm> Dirección: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%"> 
+              <div align=left> 
+                <input name=MED_DIRECCION size=25>
+              </div>
+            </td>
+            <td width="13%"> 
+              <div align=right class=textoForm> Población: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="32%"> 
+              <div align=left> 
+                <input name=MED_POBLACION size=25>
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align=right class=textoForm> Provincia: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%"> 
+              <div align=left> 
+                <select name=MED_PROVINCIA>
+                  <option selected 
+              value="">[Seleccione provincia]</option>
+                  <option value="ALAVA">ALAVA</option>
+                  <option value="ALBACETE">ALBACETE</option>
+                  <option value="ALICANTE">ALICANTE</option>
+                  <option value="ALMERIA">ALMERIA</option>
+                  <option value="ASTURIAS">ASTURIAS</option>
+                  <option value="AVILA">AVILA</option>
+                  <option value="BADAJOZ">BADAJOZ</option>
+                  <option value="BALEARES">BALEARES</option>
+                  <option value="BARCELONA">BARCELONA</option>
+                  <option value="BURGOS">BURGOS</option>
+                  <option value="CACERES">CACERES</option>
+                  <option value="CADIZ">CADIZ</option>
+                  <option value="CANTABRIA">CANTABRIA</option>
+                  <option value="CASTELLON">CASTELLON</option>
+                  <option value="CIUDAD REAL">CIUDAD REAL</option>
+                  <option value="CORDOBA">CORDOBA</option>
+                  <option value="CUENCA">CUENCA</option>
+                  <option value="GIRONA">GIRONA</option>
+                  <option value="GRANADA">GRANADA</option>
+                  <option value="GUADALAJARA">GUADALAJARA</option>
+                  <option value="GUIPUZCOA">GUIPUZCOA</option>
+                  <option value="HUELVA">HUELVA</option>
+                  <option value="HUESCA">HUESCA</option>
+                  <option value="JAEN">JAEN</option>
+                  <option value="LA CORUÑA">LA CORUÑA</option>
+                  <option value="LA RIOJA">LA RIOJA</option>
+                  <option value="LAS PALMAS DE GRAN CANARIA">LAS PALMAS DE GRAN 
+                  CANARIA</option>
+                  <option value="LEON">LEON</option>
+                  <option value="LLEIDA">LLEIDA</option>
+                  <option value="LUGO">LUGO</option>
+                  <option value="MADRID">MADRID</option>
+                  <option value="MALAGA">MALAGA</option>
+                  <option value="MURCIA">MURCIA</option>
+                  <option value="NAVARRA">NAVARRA</option>
+                  <option value="ORENSE">ORENSE</option>
+                  <option value="PALENCIA">PALENCIA</option>
+                  <option value="PONTEVEDRA">PONTEVEDRA</option>
+                  <option value="SALAMANCA">SALAMANCA</option>
+                  <option value="SANTA CRUZ DE TENERIFE">SANTA CRUZ DE TENERIFE</option>
+                  <option value="SEGOVIA">SEGOVIA</option>
+                  <option value="SEVILLA">SEVILLA</option>
+                  <option value="SORIA">SORIA</option>
+                  <option value="TARRAGONA">TARRAGONA</option>
+                  <option value="TERUEL">TERUEL</option>
+                  <option value="TOLEDO">TOLEDO</option>
+                  <option value="VALENCIA">VALENCIA</option>
+                  <option value="VALLADOLID">VALLADOLID</option>
+                  <option value="VIZCAYA">VIZCAYA</option>
+                  <option value="ZAMORA">ZAMORA</option>
+                  <option value="ZARAGOZA">ZARAGOZA</option>
+                </select>
+              </div>
+            </td>
+            <td width="13%"> 
+              <div align=right class=textoForm> Código postal: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="32%"> 
+              <div align=left> 
+                <input name=MED_CPOSTAL size=20 maxlength="5">
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="38%">&nbsp;</td>
+            <td width="13%">&nbsp;</td>
+            <td width="1%">&nbsp;</td>
+            <td width="32%">&nbsp;</td>
+          </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align=right class=textoForm> Especialidad: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%"> 
+              <div align=left> 
+                <select name=MED_ESPECIALIDAD size=1>
+                  <option 
+              selected 
+              value="">[Seleccione su especialidad]</option>
+                  <option value=GEN>Medicina General</option>
+                  <option value=AND>Andrología</option>
+                  <option value=ANES>Anestesiología</option>
+                  <option value=CCV>Cirugía Cardiovascular</option>
+                  <option value=C>Cirugía General</option>
+                  <option value=COF>Cirugía Oftalmológica</option>
+                  <option value=CPED>Cirugía Pediátrica</option>
+                  <option value=CEST>Cirugia Estetica y Cosmética</option>
+                  <option value=CPR>Cirugía Plástica y Reconstructiva</option>
+                  <option value=CR>Cirugía Renal</option>
+                  <option value=CT>Cirugía Torácica</option>
+                  <option value=DEN>Dentista</option>
+                  <option value=END>Endoscopia</option>
+                  <option value=EST>Estomatología</option>
+                  <option value=FIS>Fisioterapia</option>
+                  <option value=GET>Gerontología</option>
+                  <option value=GIN>Ginecología</option>
+                  <option value=LAB>Laboratorio</option>
+                  <option value=NN>Neonatología</option>
+                  <option value=NC>Neurocirugía</option>
+                  <option value=NE>Neurología</option>
+                  <option value=OBS>Obstetricia</option>
+                  <option value=OF>Oftalmología</option>
+                  <option value=OT>Ortopedia</option>
+                  <option value=ORL>Otorrinolaringología</option>
+                  <option value=PED>Pediatría</option>
+                  <option value=RX>Radiodiagnóstico</option>
+                  <option value=TR>Traumatología</option>
+                  <option value=UR>Urología</option>
+                  <option value=VET>Veterinaria</option>
+                  <option value=OTRA>Otras Especialidades</option>
+                </select>
+              </div>
+            </td>
+            <td width="13%"> 
+              <div align=right class=textoForm>Otras especialidades: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">&nbsp;</div>
+            </td>
+            <td width="32%"> 
+              <div align=left> 
+                <input name=MED_ESPECIALIDAD_OTROS size=25>
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align=right class=textoForm> Número de colegiado: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="38%"> 
+              <div align=left> 
+                <input name=MED_NUM_COLEGIADO size=20 maxlength="9">
+              </div>
+            </td>
+            <td width="13%">&nbsp;</td>
+            <td width="1%">&nbsp;</td>
+            <td width="32%">&nbsp;</td>
+          </TR>
+       
+        </TABLE>
+      </TD>
+    </TR>
+    <TR class="textoForm"> 
+      <TD colspan="2"> 
+        <div align="right"><span class="camposObligatorios">*</span> Datos obligatorios</div>
+      </TD>
+    </TR>
+    <TR class="textoForm"> 
+      <TD height="20" colspan="2">&nbsp;</TD>
+    </TR>
+    <TR bgColor=#a0d8d7> 
+      <TD class=tituloForm colspan="2">Datos de los centros de trabajo:</TD>
+    </TR>
+    <TR bgColor=#d6ebeb> 
+      <TD width="65%"> 
+        <DIV align=left class=subTituloForm> 
+          <LI>Centro Sanitario o Consulta privada 1 </LI>
+        </DIV>
+      </TD>
+      <TD width="35%" class="textoForm"> 
+        <div align="right">Afiliar este centro a MedicalVM 
+          <input name="MED_CEN_AFILIAR1" type="checkBox" value="clinica" checked>
+        </div>
+      </TD>
+    </TR>
+    <TR> 
+      <TD height=526 colspan="2"> 
+        <TABLE border=0 width="100%">
+          <TR> 
+            <TD ALIGN="right" class="textoForm" width="15%" height="2">&nbsp;</TD>
+            <TD  class="camposObligatorios" width="1%" height="2"> 
+              <div align="center"></div>
+            </TD>
+            <TD width="36%" height="2">&nbsp;</TD>
+            <TD width="20%" height="2">&nbsp;</TD>
+            <TD width="1%" height="2"> 
+              <div align="center"></div>
+            </TD>
+            <TD width="27%" height="2">&nbsp;</TD>
+          </TR>
+        
+          <TR> 
+            <TD ALIGN="right" class="textoForm" width="15%"> Tipo de centro: </TD>
+            <TD  class="camposObligatorios" width="1%"> 
+              <div align="center">* </div>
+            </TD>
+            <TD width="36%"> 
+              <SELECT name=MED_CEN_TIPO_CENTRO1>
+                <OPTION selected value="">[Seleccion tipo de centro]</OPTION>
+                <option value="CONSULTA">CONSULTA</option>
+                <option value="CLINICA">CLINICA</option>
+                <option value="HOSPITAL">HOSPITAL</option>
+                <option value="LABORATORIO">LABORATORIO</option>
+                <option value="CENTRO SOCIO-SANITARIO">CENTRO SOCIO-SANITARIO</option>
+                <option value="GERIATRICO">GERIATRICO</option>
+              </SELECT>
+            </TD>
+            <td width="20%"> 
+              <div align=right class=textoForm>Persona de contacto: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align="left"> 
+                <input name=MED_CEN_PERSONA_CONTACTO1 size=25>
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <TD ALIGN="right" class="textoForm" width="15%">&nbsp;</TD>
+            <TD  class="camposObligatorios" width="1%"> 
+              <div align="center"></div>
+            </TD>
+            <TD width="36%">&nbsp;</TD>
+            <TD width="20%"> 
+              <div align="right"></div>
+            </TD>
+            <TD width="1%"> 
+              <div align="center"></div>
+            </TD>
+            <TD width="27%">&nbsp;</TD>
+          </TR>
+          <TR> 
+            <TD width="15%"> 
+              <DIV align=right class=textoForm>Nombre: </DIV>
+            </TD>
+            <TD width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </TD>
+            <TD width="36%"> 
+              <DIV align=left> 
+                <INPUT name=MED_CEN_NOMBRE1 size=25>
+              </DIV>
+            </TD>
+            <td width="20%"> 
+              <div align="right"><span class="textoForm">NIF:</span>:</div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align="left"> 
+                <input type="text" name="MED_CEN_NIF1" size="9" maxlength="9">
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <TD width="15%">&nbsp;</TD>
+            <TD width="1%" class="camposObligatorios">&nbsp;</TD>
+            <TD width="36%">&nbsp;</TD>
+            <td width="20%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="27%">&nbsp;</td>
+          </TR>
+          <tr> 
+            <td width="15%"> 
+              <div align=right class=textoForm>Teléfono: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%"> 
+              <div align="left"> 
+                <input name=MED_CEN_TELEFONO1 size=9 maxlength="15">
+              </div>
+            </td>
+            <td width="20%" class="textoForm"> 
+              <div align="right">fax:</div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td width="27%"> 
+              <input name=MED_CEN_FAX1 size=20 maxlength="15">
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%" height="19"> 
+              <div align="right" class="textoForm">e-mail: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="19"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%" height="19"> 
+              <div align="left"> 
+                <input name=MED_CEN_EMAIL1 size=25>
+              </div>
+            </td>
+            <td width="20%" class="textoForm" height="19">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="19">&nbsp;</td>
+            <td width="27%" height="19">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="15%" height="19">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="19">&nbsp;</td>
+            <td width="36%" height="19">&nbsp;</td>
+            <td width="20%" class="textoForm" height="19">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="19">&nbsp;</td>
+            <td width="27%" height="19">&nbsp;</td>
+          </tr>
+          <TR> 
+            <TD width="15%"> 
+              <DIV align=right class=textoForm>Dirección: </DIV>
+            </TD>
+            <TD width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </TD>
+            <TD width="36%"> 
+              <DIV align=left> 
+                <INPUT name=MED_CEN_DIRECCION1 size=25>
+              </DIV>
+            </TD>
+            <td width="20%"> 
+              <div align=right class=textoForm>Población: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align=left> 
+                <input name=MED_CEN_POBLACION1 size=25>
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%"> 
+              <div align=right class=textoForm>Provincia: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%"> 
+              <div align=left> 
+                <select name=MED_CEN_PROVINCIA1>
+                  <option selected 
+              value="">[Seleccion provincia]</option>
+                  <option value="ALAVA">ALAVA</option>
+                  <option value="ALBACETE">ALBACETE</option>
+                  <option value="ALICANTE">ALICANTE</option>
+                  <option value="ALMERIA">ALMERIA</option>
+                  <option value="ASTURIAS">ASTURIAS</option>
+                  <option value="AVILA">AVILA</option>
+                  <option value="BADAJOZ">BADAJOZ</option>
+                  <option value="BALEARES">BALEARES</option>
+                  <option value="BARCELONA">BARCELONA</option>
+                  <option value="BURGOS">BURGOS</option>
+                  <option value="CACERES">CACERES</option>
+                  <option value="CADIZ">CADIZ</option>
+                  <option value="CANTABRIA">CANTABRIA</option>
+                  <option value="CASTELLON">CASTELLON</option>
+                  <option value="CIUDAD REAL">CIUDAD REAL</option>
+                  <option value="CORDOBA">CORDOBA</option>
+                  <option value="CUENCA">CUENCA</option>
+                  <option value="GIRONA">GIRONA</option>
+                  <option value="GRANADA">GRANADA</option>
+                  <option value="GUADALAJARA">GUADALAJARA</option>
+                  <option value="GUIPUZCOA">GUIPUZCOA</option>
+                  <option value="HUELVA">HUELVA</option>
+                  <option value="HUESCA">HUESCA</option>
+                  <option value="JAEN">JAEN</option>
+                  <option value="LA CORUÑA">LA CORUÑA</option>
+                  <option value="LA RIOJA">LA RIOJA</option>
+                  <option value="LAS PALMAS DE GRAN CANARIA">LAS PALMAS DE GRAN 
+                  CANARIA</option>
+                  <option value="LEON">LEON</option>
+                  <option value="LLEIDA">LLEIDA</option>
+                  <option value="LUGO">LUGO</option>
+                  <option value="MADRID">MADRID</option>
+                  <option value="MALAGA">MALAGA</option>
+                  <option value="MURCIA">MURCIA</option>
+                  <option value="NAVARRA">NAVARRA</option>
+                  <option value="ORENSE">ORENSE</option>
+                  <option value="PALENCIA">PALENCIA</option>
+                  <option value="PONTEVEDRA">PONTEVEDRA</option>
+                  <option value="SALAMANCA">SALAMANCA</option>
+                  <option value="SANTA CRUZ DE TENERIFE">SANTA CRUZ DE TENERIFE</option>
+                  <option value="SEGOVIA">SEGOVIA</option>
+                  <option value="SEVILLA">SEVILLA</option>
+                  <option value="SORIA">SORIA</option>
+                  <option value="TARRAGONA">TARRAGONA</option>
+                  <option value="TERUEL">TERUEL</option>
+                  <option value="TOLEDO">TOLEDO</option>
+                  <option value="VALENCIA">VALENCIA</option>
+                  <option value="VALLADOLID">VALLADOLID</option>
+                  <option value="VIZCAYA">VIZCAYA</option>
+                  <option value="ZAMORA">ZAMORA</option>
+                  <option value="ZARAGOZA">ZARAGOZA</option>
+                </select>
+              </div>
+            </td>
+            <td width="20%"> 
+              <div align=right class=textoForm> Código postal: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align=left> 
+                <input name=MED_CEN_CPOSTAL1 size=20 maxlength="5">
+              </div>
+            </td>
+          </TR>
+          <TR> 
+            <td width="15%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td width="36%">&nbsp;</td>
+            <td width="20%" class="textoForm">&nbsp;</td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td width="27%">&nbsp;</td>
+          </TR>
+          <tr> 
+            <td width="15%" height="23"> 
+              <div align=right class=textoForm> Especialidad: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="23"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%" height="23"> 
+              <div align=left> 
+                <select name=MED_CEN_ESPECIALIDAD1 size=1>
+                  <option 
+              selected 
+              value="">[Seleccione su especialidad]</option>
+                  <option value=GEN>Medicina General</option>
+                  <option value=AND>Andrología</option>
+                  <option value=ANES>Anestesiología</option>
+                  <option value=CCV>Cirugía Cardiovascular</option>
+                  <option value=C>Cirugía General</option>
+                  <option value=COF>Cirugía Oftalmológica</option>
+                  <option value=CPED>Cirugía Pediátrica</option>
+                  <option value=CEST>Cirugia Estetica y Cosmética</option>
+                  <option value=CPR>Cirugía Plástica y Reconstructiva</option>
+                  <option value=CR>Cirugía Renal</option>
+                  <option value=CT>Cirugía Torácica</option>
+                  <option value=DEN>Dentista</option>
+                  <option value=END>Endoscopia</option>
+                  <option value=EST>Estomatología</option>
+                  <option value=FIS>Fisioterapia</option>
+                  <option value=GET>Gerontología</option>
+                  <option value=GIN>Ginecología</option>
+                  <option value=LAB>Laboratorio</option>
+                  <option value=NN>Neonatología</option>
+                  <option value=NC>Neurocirugía</option>
+                  <option value=NE>Neurología</option>
+                  <option value=OBS>Obstetricia</option>
+                  <option value=OF>Oftalmología</option>
+                  <option value=OT>Ortopedia</option>
+                  <option value=ORL>Otorrinolaringología</option>
+                  <option value=PED>Pediatría</option>
+                  <option value=RX>Radiodiagnóstico</option>
+                  <option value=TR>Traumatología</option>
+                  <option value=UR>Urología</option>
+                  <option value=VET>Veterinaria</option>
+                  <option value=OTRA>Otras Especialidades</option>
+                </select>
+              </div>
+            </td>
+            <td width="20%" height="23"> 
+              <div align=right class=textoForm>Otra especialidad: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="23"> 
+              <div align="center">&nbsp;</div>
+            </td>
+            <td width="27%" height="23"> 
+              <div align=left> 
+                <input name=MED_CEN_ESPECIALIDAD_OTROS1 size=25>
+              </div>
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="36%">&nbsp;</td>
+            <td width="20%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="27%">&nbsp;</td>
+          </tr>
+       
+        </TABLE>
+        <table border=0 width="54%" align="center">
+         
+          <tr> 
+            <td class=textoForm width="89%">Breve descripción de su empresa:</td>
+            <td class=textoForm width="11%">Lista de 10 proveedores habituales:</td>
+          </tr>
+          <tr> 
+            <td width="89%"> 
+              <div align=center> 
+                <textarea cols=40 name="MED_CEN_DESC_EMPRESA1" rows=4></textarea>
+                <input name="MED_CEN_AFILIAR2" type="checkBox" value="clinica">
+              </div>
+            </td>
+            <td width="11%"> 
+              <textarea cols=40 name="MED_CEN_PROV_HABIT1" rows=4></textarea>
+            </td>
+          </tr>
+          <tr> 
+            <td width="89%">&nbsp;</td>
+            <td width="11%" class="textoLegal">En el caso de no tener en su Catálogo 
+              dichos proveedores, MedicalVM, iniciará gestiones de afiliación 
+              con estas empresas para facilitar sus compras habituales.</td>
+          </tr>
+         
+        </table>
+        <table width="100%" border="0">
+          <tr> 
+            <td class=textoForm width="38%" height="34"> 
+              <div align="right">¿Cual es su volumen de compras anual? </div>
+            </td>
+            <td class=camposObligatorios width="1%" height="34"> 
+              <div align="center"></div>
+            </td>
+            <td width="61%" height="34"> 
+              <select name="MED_VOLUMENCOMPRAANUAL">
+                <option 
+              selected 
+              value="">[Seleccione importe]</option>
+                <option value="<500000">Inferior a 500.000 Pts.</option>
+                <option 
+              value=1000000>Entre 500.000 y 1.000.000 Pts.</option>
+                <option 
+              value=2000000>Entre 1.000.000 y 2.000.000 Pts.</option>
+                <option 
+              value=5000000>Entre 2.000.000 y 5.000.000 Pts.</option>
+                <option 
+              value=10000000>Entre 5.000.000 y 10.000.000 Pts.</option>
+                <option 
+              value=">10000000">Superior a 10.000.000 Pts.</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </TD>
+    </TR>
+    <tr bgcolor=#d6ebeb> 
+      <td width="65%"> 
+        <div align=left class=subTituloForm> 
+          <li>Centro Sanitario o Consulta privada 2</li>
+        </div>
+      </td>
+      <td width="35%" class="textoForm"> 
+        <div align="right">Afiliar este centro a MedicalVM </div>
+      </td>
+    </tr>
+    <tr> 
+      <td height=526 colspan="2"> 
+        <table border=0 width="100%">
+          <tr> 
+            <td align="right" class="textoForm" width="15%" height="2">&nbsp;</td>
+            <td  class="camposObligatorios" width="1%" height="2"> 
+              <div align="center"></div>
+            </td>
+            <td width="36%" height="2">&nbsp;</td>
+            <td width="20%" height="2">&nbsp;</td>
+            <td width="1%" height="2"> 
+              <div align="center"></div>
+            </td>
+            <td width="27%" height="2">&nbsp;</td>
+          </tr>
+     
+          <tr> 
+            <td align="right" class="textoForm" width="15%"> Tipo de centro: </td>
+            <td  class="camposObligatorios" width="1%"> 
+              <div align="center">* </div>
+            </td>
+            <td width="36%"> 
+              <select name=MED_CEN_TIPO_CENTRO2>
+                <option selected value="">[Seleccion tipo de centro]</option>
+                <option value="CONSULTA">CONSULTA</option>
+                <option value="CLINICA">CLINICA</option>
+                <option value="HOSPITAL">HOSPITAL</option>
+                <option value="LABORATORIO">LABORATORIO</option>
+                <option value="CENTRO SOCIO-SANITARIO">CENTRO SOCIO-SANITARIO</option>
+                <option value="GERIATRICO">GERIATRICO</option>
+              </select>
+            </td>
+            <td width="20%"> 
+              <div align=right class=textoForm>Persona de contacto: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align="left"> 
+                <input name=MED_CEN_PERSONA_CONTACTO2 size=25>
+              </div>
+            </td>
+          </tr>
+          <tr> 
+            <td align="right" class="textoForm" width="15%">&nbsp;</td>
+            <td  class="camposObligatorios" width="1%"> 
+              <div align="center"></div>
+            </td>
+            <td width="36%">&nbsp;</td>
+            <td width="20%"> 
+              <div align="right"></div>
+            </td>
+            <td width="1%"> 
+              <div align="center"></div>
+            </td>
+            <td width="27%">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="15%"> 
+              <div align=right class=textoForm>Nombre: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%"> 
+              <div align=left> 
+                <input name=MED_CEN_NOMBRE2 size=25>
+              </div>
+            </td>
+            <td width="20%"> 
+              <div align="right"><span class="textoForm">NIF:</span>:</div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align="left"> 
+                <input type="text" name="MED_CEN_NIF2" size="9" maxlength="9">
+              </div>
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="36%">&nbsp;</td>
+            <td width="20%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="27%">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="15%"> 
+              <div align=right class=textoForm>Teléfono: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%"> 
+              <div align="left"> 
+                <input name=MED_CEN_TELEFONO2 size=9 maxlength="15">
+              </div>
+            </td>
+            <td width="20%" class="textoForm"> 
+              <div align="right">fax:</div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td width="27%"> 
+              <input name=MED_CEN_FAX2 size=20 maxlength="15">
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%" height="19"> 
+              <div align="right" class="textoForm">e-mail: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="19"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%" height="19"> 
+              <div align="left"> 
+                <input name=MED_CEN_EMAIL2 size=25>
+              </div>
+            </td>
+            <td width="20%" class="textoForm" height="19">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="19">&nbsp;</td>
+            <td width="27%" height="19">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="15%" height="19">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="19">&nbsp;</td>
+            <td width="36%" height="19">&nbsp;</td>
+            <td width="20%" class="textoForm" height="19">&nbsp;</td>
+            <td width="1%" class="camposObligatorios" height="19">&nbsp;</td>
+            <td width="27%" height="19">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="15%"> 
+              <div align=right class=textoForm>Dirección: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%"> 
+              <div align=left> 
+                <input name=MED_CEN_DIRECCION2 size=25>
+              </div>
+            </td>
+            <td width="20%"> 
+              <div align=right class=textoForm>Población: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align=left> 
+                <input name=MED_CEN_POBLACION2 size=25>
+              </div>
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%"> 
+              <div align=right class=textoForm>Provincia: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%"> 
+              <div align=left> 
+                <select name=MED_CEN_PROVINCIA2>
+                  <option selected 
+              value="">[Seleccion provincia]</option>
+                  <option value="ALAVA">ALAVA</option>
+                  <option value="ALBACETE">ALBACETE</option>
+                  <option value="ALICANTE">ALICANTE</option>
+                  <option value="ALMERIA">ALMERIA</option>
+                  <option value="ASTURIAS">ASTURIAS</option>
+                  <option value="AVILA">AVILA</option>
+                  <option value="BADAJOZ">BADAJOZ</option>
+                  <option value="BALEARES">BALEARES</option>
+                  <option value="BARCELONA">BARCELONA</option>
+                  <option value="BURGOS">BURGOS</option>
+                  <option value="CACERES">CACERES</option>
+                  <option value="CADIZ">CADIZ</option>
+                  <option value="CANTABRIA">CANTABRIA</option>
+                  <option value="CASTELLON">CASTELLON</option>
+                  <option value="CIUDAD REAL">CIUDAD REAL</option>
+                  <option value="CORDOBA">CORDOBA</option>
+                  <option value="CUENCA">CUENCA</option>
+                  <option value="GIRONA">GIRONA</option>
+                  <option value="GRANADA">GRANADA</option>
+                  <option value="GUADALAJARA">GUADALAJARA</option>
+                  <option value="GUIPUZCOA">GUIPUZCOA</option>
+                  <option value="HUELVA">HUELVA</option>
+                  <option value="HUESCA">HUESCA</option>
+                  <option value="JAEN">JAEN</option>
+                  <option value="LA CORUÑA">LA CORUÑA</option>
+                  <option value="LA RIOJA">LA RIOJA</option>
+                  <option value="LAS PALMAS DE GRAN CANARIA">LAS PALMAS DE GRAN 
+                  CANARIA</option>
+                  <option value="LEON">LEON</option>
+                  <option value="LLEIDA">LLEIDA</option>
+                  <option value="LUGO">LUGO</option>
+                  <option value="MADRID">MADRID</option>
+                  <option value="MALAGA">MALAGA</option>
+                  <option value="MURCIA">MURCIA</option>
+                  <option value="NAVARRA">NAVARRA</option>
+                  <option value="ORENSE">ORENSE</option>
+                  <option value="PALENCIA">PALENCIA</option>
+                  <option value="PONTEVEDRA">PONTEVEDRA</option>
+                  <option value="SALAMANCA">SALAMANCA</option>
+                  <option value="SANTA CRUZ DE TENERIFE">SANTA CRUZ DE TENERIFE</option>
+                  <option value="SEGOVIA">SEGOVIA</option>
+                  <option value="SEVILLA">SEVILLA</option>
+                  <option value="SORIA">SORIA</option>
+                  <option value="TARRAGONA">TARRAGONA</option>
+                  <option value="TERUEL">TERUEL</option>
+                  <option value="TOLEDO">TOLEDO</option>
+                  <option value="VALENCIA">VALENCIA</option>
+                  <option value="VALLADOLID">VALLADOLID</option>
+                  <option value="VIZCAYA">VIZCAYA</option>
+                  <option value="ZAMORA">ZAMORA</option>
+                  <option value="ZARAGOZA">ZARAGOZA</option>
+                </select>
+              </div>
+            </td>
+            <td width="20%"> 
+              <div align=right class=textoForm> Código postal: </div>
+            </td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center">*</div>
+            </td>
+            <td width="27%"> 
+              <div align=left> 
+                <input name=MED_CEN_CPOSTAL2 size=20 maxlength="5">
+              </div>
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td width="36%">&nbsp;</td>
+            <td width="20%" class="textoForm">&nbsp;</td>
+            <td width="1%" class="camposObligatorios"> 
+              <div align="center"></div>
+            </td>
+            <td width="27%">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="15%" height="23"> 
+              <div align=right class=textoForm> Especialidad: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="23"> 
+              <div align="center">*</div>
+            </td>
+            <td width="36%" height="23"> 
+              <div align=left> 
+                <select name=MED_CEN_ESPECIALIDAD2 size=1>
+                  <option 
+              selected 
+              value="">[Seleccione su especialidad]</option>
+                  <option value=GEN>Medicina General</option>
+                  <option value=AND>Andrología</option>
+                  <option value=ANES>Anestesiología</option>
+                  <option value=CCV>Cirugía Cardiovascular</option>
+                  <option value=C>Cirugía General</option>
+                  <option value=COF>Cirugía Oftalmológica</option>
+                  <option value=CPED>Cirugía Pediátrica</option>
+                  <option value=CEST>Cirugia Estetica y Cosmética</option>
+                  <option value=CPR>Cirugía Plástica y Reconstructiva</option>
+                  <option value=CR>Cirugía Renal</option>
+                  <option value=CT>Cirugía Torácica</option>
+                  <option value=DEN>Dentista</option>
+                  <option value=END>Endoscopia</option>
+                  <option value=EST>Estomatología</option>
+                  <option value=FIS>Fisioterapia</option>
+                  <option value=GET>Gerontología</option>
+                  <option value=GIN>Ginecología</option>
+                  <option value=LAB>Laboratorio</option>
+                  <option value=NN>Neonatología</option>
+                  <option value=NC>Neurocirugía</option>
+                  <option value=NE>Neurología</option>
+                  <option value=OBS>Obstetricia</option>
+                  <option value=OF>Oftalmología</option>
+                  <option value=OT>Ortopedia</option>
+                  <option value=ORL>Otorrinolaringología</option>
+                  <option value=PED>Pediatría</option>
+                  <option value=RX>Radiodiagnóstico</option>
+                  <option value=TR>Traumatología</option>
+                  <option value=UR>Urología</option>
+                  <option value=VET>Veterinaria</option>
+                  <option value=OTRA>Otras Especialidades</option>
+                </select>
+              </div>
+            </td>
+            <td width="20%" height="23"> 
+              <div align=right class=textoForm>Otra especialidad: </div>
+            </td>
+            <td width="1%" class="camposObligatorios" height="23"> 
+              <div align="center">&nbsp;</div>
+            </td>
+            <td width="27%" height="23"> 
+              <div align=left> 
+                <input name=MED_CEN_ESPECIALIDAD_OTROS2 size=25>
+              </div>
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="36%">&nbsp;</td>
+            <td width="20%">&nbsp;</td>
+            <td width="1%" class="camposObligatorios">&nbsp;</td>
+            <td width="27%">&nbsp;</td>
+          </tr>
+    
+        </table>
+        <table border=0 width="54%" align="center">
+       
+          <tr> 
+            <td class=textoForm width="89%">Breve descripción de su empresa:</td>
+            <td class=textoForm width="11%">Lista de 10 proveedores habituales:</td>
+          </tr>
+          <tr> 
+            <td width="89%"> 
+              <div align=center> 
+                <textarea cols=40 name="MED_CEN_DESC_EMPRESA2" rows=4></textarea>
+              </div>
+            </td>
+            <td width="11%"> 
+              <textarea cols=40 name="MED_CEN_PROV_HABIT2" rows=4></textarea>
+            </td>
+          </tr>
+          <tr> 
+            <td width="89%">&nbsp;</td>
+            <td width="11%" class="textoLegal">En el caso de no tener en su Catálogo 
+              dichos proveedores, MedicalVM, iniciará gestiones de afiliación 
+              con estas empresas para facilitar sus compras habituales.</td>
+          </tr>
+        
+        </table>
+        <table width="100%" border="0">
+          <tr> 
+            <td class=textoForm width="38%" height="34"> 
+              <div align="right">¿Cual es su volumen de compras anual? </div>
+            </td>
+            <td class=camposObligatorios width="1%" height="34"> 
+              <div align="center"></div>
+            </td>
+            <td width="61%" height="34"> 
+              <select name="MED_VOLUMENCOMPRAANUAL2">
+                <option 
+              selected 
+              value="">[Seleccione importe]</option>
+                <option value="<500000">Inferior a 500.000 Pts.</option>
+                <option 
+              value=1000000>Entre 500.000 y 1.000.000 Pts.</option>
+                <option 
+              value=2000000>Entre 1.000.000 y 2.000.000 Pts.</option>
+                <option 
+              value=5000000>Entre 2.000.000 y 5.000.000 Pts.</option>
+                <option 
+              value=10000000>Entre 5.000.000 y 10.000.000 Pts.</option>
+                <option 
+              value=">10000000">Superior a 10.000.000 Pts.</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <TR bgColor=#a0d8d7> 
+      <TD class=tituloForm colspan="2">Otros:</TD>
+    </TR>
+    <TR> 
+      <TD height=17 colspan="2"> 
+        <TABLE align=left border=0 width="100%">
+    
+          <TR> 
+            <TD class=textoForm width="28%"> 
+              <div align="left"> ¿Cómo conoció a MedicalVM? </div>
+            </TD>
+            <TD class=camposObligatorios width="1%"> 
+              <div align="center">*</div>
+            </TD>
+            <TD width="23%"> 
+              <SELECT name=MED_EXISTENCIA_VM>
+                <OPTION selected 
+              value="">[Seleccione opción]</OPTION>
+                <OPTION value="Buscador">Buscador</OPTION>
+                <OPTION value="Artículo">Artículo</OPTION>
+                <OPTION value="Publicidad">Publicidad</OPTION>
+                <OPTION value="e-mailing">e-mailing</OPTION>
+                <OPTION value="Contacto personal">Contacto personal</OPTION>
+                <OPTION value="Otros">Otros</OPTION>
+              </SELECT>
+            </TD>
+            <td class=textoForm width="23%"> 
+              <div align="left"> De otra forma: </div>
+            </td>
+            <td class=camposObligatorios width="3%"> 
+              <div align="center">&nbsp;</div>
+            </td>
+            <td width="22%"> 
+              <input name=MED_EXISTENCIA_VM_OTROS size=25>
+            </td>
+          </TR>
+       
+        </TABLE>
+      </TD>
+    </TR>
+    <TR> 
+      <TD class=textoForm height=160 colspan="2"><BR>
+        <TABLE border=0 cellPadding=25 width="100%">
+         
+          <TR> 
+            <TD class=textoLegal> 
+              <DIV class=textoLegal style="TEXT-ALIGN: justify">A los efectos 
+                de lo dispuesto en la Ley Orgánica 15/99 de 13 de diciembre de 
+                Protección de Datos de Carácter Personal, Medical Virtual Market 
+                comunica al Usuario que los datos facilitados para la formalización 
+                de los formularios contenidos en esta web site, podrán quedar 
+                recogidos en ficheros automatizados cuyo responsable es Medical 
+                Virtual Market (Via Augusta, 125 Atico 4, 08021 Barcelona), cuya 
+                finalidad es mantener una relación con los interesados para actividades 
+                de servicio, culturales, de ocio, de información, de mantenimiento 
+                y mejora de esta web site y la realización de acciones comerciales 
+                y promocionales especialmente diseñadas para los interesados. 
+                En esta misma dirección, los interesados podrán ejercitar el derecho 
+                de acceso, rectificación y cancelación de los datos, enviando 
+                una solicitud escrita y firmada incluyendo nombre, apellidos y 
+                DNI con las instrucciones precisas al efecto.</DIV>
+            </TD>
+          </TR>
+   
+        </TABLE>
+        <BR>
+      </TD>
+    </TR>
+    <TR> 
+      <TD colspan="2"> 
+        <TABLE align=right border=0 width="25%">
+    
+          <TR> 
+            <TD> 
+              <DIV align=center> 
+                <INPUT name=RESET type=reset value=Borrar>
+              </DIV>
+            </TD>
+            <TD> 
+              <DIV align=center> 
+                <INPUT name=SUBMIT onclick="if(validarFormulario(document.forms[0])) SubmitForm(document.forms[0]); else alert(msgError);" type=button value=Aceptar>
+              </DIV>
+            </TD>
+          </TR>
+        
+        </TABLE>
+      </TD>
+    </TR>
+   
+  </TABLE>
+</FORM><BR><BR></BODY></HTML>
+
+			
+	

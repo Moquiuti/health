@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TRFClientesParaListadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TRFClientesParaListadoHTML.xsl"?>
+
+
+<ClientesParaListado xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <!--	
+  	ET 1/8/2001
+  			Devuelve la lista de clientes de la empresa del Usuario	{@US_ID}
+			Se utiliza para llenar un combo de clientes en el listado de tarifas
+	Olivier 01/08   Modificado para que luego se pueda llamar con el template 'field' desde xsl...
+	-->
+ <field name="emp">
+   <xsql:query rowset-element="dropDownList" row-element="listElem">
+     <![CDATA[
+		SELECT	CLIENTE.EMP_ID AS "ID",
+				CLIENTE.EMP_NOMBRE AS "listItem"
+		FROM 	EMPRESAS CLIENTE, EMPRESAS PROVEEDOR,USUARIOS, CENTROS, CLIENTESYPROVEEDORES
+		WHERE 	CLIENTESYPROVEEDORES.CYP_IDEMPRESAPRINCIPAL=PROVEEDOR.EMP_ID
+				AND CLIENTESYPROVEEDORES.CYP_IDEMPRESA2=CLIENTE.EMP_ID
+				AND CYP_ESCLIENTE=1
+				AND (CLIENTE.EMP_STATUS<>'B' OR CLIENTE.EMP_STATUS IS NULL)
+				AND PROVEEDOR.EMP_ID=CEN_IDEMPRESA
+				AND CLIENTE.EMP_ID<>CEN_IDEMPRESA
+				AND CEN_ID=US_IDCENTRO
+				AND US_ID={@US_ID}
+		ORDER BY CLIENTE.EMP_NOMBRE
+     ]]>
+   </xsql:query>
+</field>
+ 
+ <button label="Buscar" caption="IMG-0490">
+  <name_function>Actua</name_function> 
+  <param>document.forms[0]</param> 
+ </button>
+ 
+</ClientesParaListado>

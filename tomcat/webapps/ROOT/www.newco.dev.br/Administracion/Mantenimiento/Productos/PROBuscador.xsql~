@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para la busqueda de productos en la plantilla
+	(c) 29/8/2001 E.Torrellas
+ --> 
+
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PROBuscadorHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PROBuscadorHTML.xsl"?>
+-->
+
+<MantenimientoProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="PRO_BUSQUEDA"/>
+  <xsql:include-param name="HAYPRODUCTOS"/>
+  <xsql:include-param name="HISTORY"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  
+  	  <xsql:include-owa>
+ <![CDATA[
+	MantenimientoProductos_PCK.ListaProductos_PROV_XML(
+	SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PROBuscador'),
+	'{@PRODUCTO}',
+	'{@IDCLIENTE}',
+	'{@IDCLIENTES}',
+	'{@FIDPROVEEDOR}',
+	'{@CAMBIOS}',
+	'{@SINPRIVADOS}',
+	'{@SINEMPLANTILLAR}',
+	'{@SOLODESTACADOS}',
+	'{@MODIFICADOSPROV}',
+	'{@SOLOOCULTOS}',
+	'{@SOLOVISIBLES}',
+	'{@SOLOFARMACOS}',
+	'{@SOLOASISA}',
+	'{@SOLOFNCP}',
+	'{@SOLOVIAMED}',
+	'{@SOLOTEKNON}',
+	'{@RECHAZADOS}',
+	'{@SINPRECIOMVM}',
+	'{@PRECIOASISADIFERENTE}',
+	'{@PAGINA}',
+	'{@ORDEN}',
+	'{@SENTIDO}'
+	);
+	 ]]>	
+  	  </xsql:include-owa>
+  	  
+  
+  <botones_nuevo>
+    <button label="ActualizarCambios" caption="PRO-0500">
+       <name_function>Enviar</name_function> 
+       <param>document.forms[1]</param> 
+       <param>document.forms[0]</param>
+       <param>'ACTUALIZAR'</param> 
+     </button>	
+     
+     <button label="NavegarAtras" caption="PRO-0480">
+         <name_function>Enviar</name_function> 
+         <param>document.forms[1]</param>
+         <param>document.forms[0]</param>  
+         <param>'ANTERIOR'</param>
+       </button>
+       
+       <button label="NavegarAdelante" caption="PRO-0490">
+         <name_function>Enviar</name_function> 
+         <param>document.forms[1]</param>
+         <param>document.forms[0]</param>  
+         <param>'SIGUIENTE'</param>
+       </button>
+       
+       <button label="BuscarProductos" caption="IMG-0120">
+         <name_function>EnviarBusqueda</name_function> 
+       </button>	
+    </botones_nuevo>
+  <returnHome/>
+</MantenimientoProductos>
+

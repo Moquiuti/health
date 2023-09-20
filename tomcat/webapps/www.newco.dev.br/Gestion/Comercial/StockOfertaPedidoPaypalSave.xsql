@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	ET 22/4/16	Pedidos desde Paypal
+-->
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockOfertaHTML.xsl"?>
+-->
+<StockOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="GUARDAR" value="{@GUARDAR}"/>
+<xsql:include-param name="STOCK_ESTADO" value="{@STOCK_ESTADO}"/>
+<xsql:include-param name="STOCK_ID" value="{@STOCK_ID}"/>
+
+<!--
+PEDIDO PAYPAL SES_ID: STOCK_ID: payment_statuspayment_status item_number: item_name:261
+-->
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		
+		v_Sesion		VARCHAR2(100);
+		v_IDAnuncio		NUMBER;
+		v_IDPedido		NUMBER;
+	BEGIN
+	
+		utilidades_pck.debug('PEDIDO PAYPAL. item_name:'||'{@item_name}');
+		
+		v_Sesion:=utilidades_pck.piece('{@item_name}','|',0);
+		v_IDAnuncio:=utilidades_pck.piece('{@item_name}','|',1);
+
+		utilidades_pck.debug('PEDIDO PAYPAL. v_Sesion:'||v_Sesion||' IDAnuncio:'||v_IDAnuncio);
+	
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion(v_Sesion,'StockPedidoPaypalSave');
+		IF US_ID > 0 THEN
+                
+			IF v_IDAnuncio IS NOT NULL THEN
+                        
+				utilidades_pck.debug('PEDIDO PAYPAL. v_Sesion:'||v_Sesion||' IDAnuncio:'||v_IDAnuncio|| '=> ANUNCIOSSTOCKS_PCK.NuevoPedido');
+               v_IDPedido := ANUNCIOSSTOCKS_PCK.NuevoPedido(
+							US_ID,
+							v_IDAnuncio,
+							'{@CODIGO_PEDIDO}',						--	NULL para CVT
+							'{@STOCK_CANTIDAD}'						--	NULL para CVT
+						);
+			
+			END IF;
+
+        	IF v_IDAnuncio IS NOT NULL AND v_IDPedido> 0 THEN
+					ANUNCIOSSTOCKS_PCK.Oferta_XML(
+						US_ID,
+						v_IDAnuncio,
+						'S'
+					);
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+
+    	END IF; --end if us_id mayor 0
+	END;
+]]>
+</xsql:include-owa>
+</StockOferta>

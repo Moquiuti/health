@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="USBorrarHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="USBorrarHTML.xsl"?>
+
+<MantenimientoBorrar xmlns:xsql="urn:oracle-xsql" connection="newco">
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  
+<xsql:include-owa>
+<![CDATA[
+BEGIN
+   USUARIOS_PCK.Borrar('{@ID_USUARIO}');
+END;
+]]>	  
+</xsql:include-owa>
+<JUMPTO_LINK>G-0011</JUMPTO_LINK>
+ <!--<jumpTo>
+    <picture-off>Anterior</picture-off> 
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0011</page>
+    <caption>G-0001</caption>
+  </jumpTo>-->
+  
+  <boton label="Cerrar" caption="IMG-0030">
+    <name_function>Refresh</name_function>
+    <param>top.mainFrame.Trabajo.document</param>  
+  </boton>
+  
+</MantenimientoBorrar>
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NoConformidadProductoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NoConformidadProductoHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="IDINFORME"/>
+  <xsql:include-param name="READ_ONLY"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		  DECLARE
+		    US_ID		NUMBER;
+      BEGIN
+		    US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NoConformidadProducto');	
+		    IF US_ID>=0 THEN
+          NOCONFORMIDADPRODUCTO_PCK.NOCONFORMIDADPROD_XML(
+            US_ID,
+            '{@IDINFORME}'
+          );
+        END IF;
+      END;
+    ]]>
+  </xsql:include-owa>
+
+ 
+  <botones>
+    
+    <button label="Pendiente" caption="CATPRIV-0700">
+      <name_function>GuardarCambios</name_function>
+      <param>document.forms[0]</param>
+      <param>'PENDIENTE'</param>
+    </button>
+      
+    <button label="Borrar" caption="CATPRIV-0710">
+      <name_function>GuardarCambios</name_function>
+      <param>document.forms[0]</param>
+      <param>'BORRAR'</param>
+    </button>
+    
+    <button label="Enviar" caption="CATPRIV-0720">
+      <name_function>GuardarCambios</name_function>
+      <param>document.forms[0]</param>
+      <param>'ENVIAR'</param>
+    </button>
+    
+    <button label="Finalizar" caption="CATPRIV-0740">
+      <name_function>GuardarCambios</name_function>
+      <param>document.forms[0]</param>
+      <param>'FINALIZAR'</param>
+    </button>
+      
+      <button label="Cancelar" caption="CATPRIV-0730">
+        <name_function>CerrarVentana</name_function>
+      </button> 
+      
+      <button label="Imprimir" caption="IMG-1490">
+        <name_function>window.print</name_function> 
+     </button>
+    
+  </botones>
+
+</Mantenimiento>

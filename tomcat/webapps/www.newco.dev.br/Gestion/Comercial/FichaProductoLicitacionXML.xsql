@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *XML de la Ficha de un producto de la licitacion para depuracion
+ *
++-->
+<!--
+<?xml-stylesheet type="text/xsl" href="FichaProductoLicitacionHTML.xsl"?>
+-->
+<FichaProductoLic xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="STYLE" value="{@PRMSTYLE}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantLicitacion');
+		IF US_ID>=0 THEN
+			LICITACIONES_PCK.ProductoConOfertas_XML(
+				US_ID,
+				'{@LIC_PROD_ID}',
+				NULL,
+				'S'
+			);
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</FichaProductoLic>

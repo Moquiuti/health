@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Adjudica una unica oferta en la ficha de producto de la licitacion (FichaProductoLicitacionHTML.xsl)
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AnadirProductosSolicitudOfertaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AnadirProductosSolicitudOfertaJSON.xsl"?>
+
+<AnadirProductosSolicitud xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AnadirProductosSolicitud');
+		IF US_ID>=0 THEN
+			v_res:=SOLICITUDESOFERTA_PCK.ProductoEnSolicitud(
+				'{@IDPRODSOLICITUD}',
+                '{@IDSOLICITUD}',
+                US_ID,
+                --	Datos solicitud
+                '{@REFCLIENTE}',
+                '{@REFPROVEEDOR}',
+                '{@PRODUCTO}',
+                '{@PROVEEDOR}',
+                '{@PRECIO}',
+                '{@CANTIDAD}',
+                '{@IDPROD}',        --recupero este valor de buscador catalogo proveedores
+                '{@IDPRODESTANDAR}'
+            );
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res > '1' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</AnadirProductosSolicitud>

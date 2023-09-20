@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockOfertaHTML.xsl"?>
+
+<StockOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="GUARDAR" value="{@GUARDAR}"/>
+<xsql:include-param name="STOCK_ESTADO" value="{@STOCK_ESTADO}"/>
+<xsql:include-param name="STOCK_ID" value="{@STOCK_ID}"/>
+
+
+
+
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDOferta		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockOfertaSave');
+		IF US_ID > 0 THEN
+                
+			IF '{@STOCK_ID}' IS NOT NULL AND '{@STOCK_ESTADO}' IS NOT NULL THEN
+                        
+               v_IDOferta := ANUNCIOSSTOCKS_PCK.ModificarOferta(
+							US_ID,
+							'{@STOCK_ID}',
+							'{@STOCK_TIPO}',
+							'{@STOCK_ID_PROD}',          
+							'{@STOCK_TITULO}',
+							'{@STOCK_FECHACADUCIDAD}',
+							'{@STOCK_REF_CLIENTE}',
+							'{@STOCK_PRODUCTO}',
+							'{@STOCK_DESCRIPCION}',			--	ET 16/4/16	NULL,
+							'{@STOCK_UDBASICA}',
+							'{@STOCK_UDLOTE}',
+							'{@STOCK_CANTIDAD}',
+							'{@STOCK_PRECIO}',
+							'{@STOCK_COMPRAMINIMA}',
+							NULL,
+							'{@STOCK_FECHACADUCIDAD_PROD}',
+							'{@STOCK_FICHATECNICA}',
+							'{@STOCK_IVA}',					--	25abr16
+							'{@STOCK_PEDIDOMINIMO}',
+							'{@CADENA_IMAGENES}',
+							'{@IMAGENES_BORRADAS}',
+							'{@STOCK_ESTADO}',
+							'{@STOCK_IDPRODESTANDAR}',
+							'{@STOCK_IDSUBFAMILIA}',
+							'{@STOCK_IDMARCA}',
+							'{@STOCK_PRECIOPUBLICO}',
+							'{@STOCK_PRECIOLOTE}',
+							'{@STOCK_PRECIOPUBLICOLOTE}',
+							'{@STOCK_COSTEENVIO}',
+							'{@STOCK_PLAZOENVIO}'
+						);
+		--nueva oferta	
+		 ELSIF '{@SO_ID}' IS NULL AND '{@STOCK_ESTADO}' IS NULL THEN
+                        
+			v_IDOferta:=ANUNCIOSSTOCKS_PCK.NuevaOferta(		--	ET 16/4/16 Ponía = en lugar de :=
+				US_ID,
+				'{@SO_TIPO}',
+				'{@SO_IDPRODUCTO}',
+				'{@SO_TITULO}',
+				'{@SO_FECHACADUCIDAD}',
+				'{@SO_REFCLIENTE}',
+				'{@SO_PRODUCTO}',
+				'{@SO_DESCRIPCION}',	
+				'{@SO_UDBASICA}',
+				'{@SO_UDLOTE}',
+				'{@SO_CANTIDAD}',
+				'{@SO_PRECIOUNITARIO}',
+				'{@SO_COMPRAMINIMA}',
+				NULL,										-- '{@SO_PRECIOUNITARIO}'
+				'{@SO_FECHACADUCIDAD_PROD}',
+				'{@SO_FICHATECNICA}',
+				'{@SO_IVA}',
+				'{@SO_PEDIDOMINIMO}',
+				'{@CADENA_IMAGENES}',
+				'{@SO_IDPRODESTANDAR}',
+				'{@SO_IDSUBFAMILIA}',
+				'{@SO_IDMARCA}',
+				'{@SO_PRECIOPUBLICO}',
+				'{@SO_PRECIOLOTE}',
+				'{@SO_PRECIOPUBLICOLOTE}',
+				'{@SO_COSTEENVIO}',
+				'{@SO_PLAZOENVIO}',
+				'{@SO_NUEVAMARCA}'
+			);
+			
+		END IF;
+                        
+        IF v_IDOferta > 0 THEN
+				ANUNCIOSSTOCKS_PCK.Oferta_XML(
+					US_ID,
+					v_IDOferta,			--	ET 16/4/16 Faltaba una ','
+					'S'
+				);
+		ELSE
+			HTP.P('<ERROR/>');
+		END IF;
+                        
+    END IF; --end if us_id mayor 0
+	END;
+]]>
+</xsql:include-owa>
+</StockOferta>

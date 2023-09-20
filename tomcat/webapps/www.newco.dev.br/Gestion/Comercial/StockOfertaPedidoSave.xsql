@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockOfertaHTML.xsl"?>
+
+<StockOferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="NUEVOPEDIDO" value="NUEVOPEDIDO"/>
+
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		pedido          	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockOfertaPedidoSave');
+		IF US_ID > 0 THEN
+                
+             pedido := ANUNCIOSSTOCKS_PCK.NuevoPedido(
+                        US_ID,
+						'{@OFERTA_STOCK}',
+                        '{@CODIGO_PEDIDO}',
+                        '{@PEDIDO_CANTIDAD}',
+                        '{@INFO_COMPLEMENTARIA}'
+						);
+    
+        	IF pedido > 0 THEN      
+				ANUNCIOSSTOCKS_PCK.Oferta_XML(
+					US_ID,
+					'{@OFERTA_STOCK}',
+					'S'
+				);
+        	END IF;
+                        
+       END IF; --end if us_id mayor 0
+	END;
+]]>
+</xsql:include-owa>
+</StockOferta>

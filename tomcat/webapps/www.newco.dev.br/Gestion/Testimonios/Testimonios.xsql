@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+ *
+ *  Testimonios de los clientes
+ *
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TestimoniosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TestimoniosHTML.xsl"?>
+
+<Testimonios xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="PARAM"/>
+  <xsql:include-param name="TIPO"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <LANGTESTI>spanish</LANGTESTI>
+
+  
+   <!-- guardamos nuevo testimonios -->
+   	 <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID						NUMBER;
+			v_IDUsuarioTestimonio		NUMBER;
+			v_Tipo						VARCHAR2(100);
+    	BEGIN
+			IF '{@SES_ID}' IS NOT NULL THEN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Testimonios');
+			END IF;
+			HTP.P(Utilidades_Pck.CabeceraXML || '<LISTADOTESTIMONIOS>');
+
+			v_IDUsuarioTestimonio:='{@IDUSUARIOTESTIMONIO}';
+	
+			IF v_IDUsuarioTestimonio IS NULL THEN
+				v_IDUsuarioTestimonio:=US_ID;
+			END IF;
+				
+			IF '{@TES_TEXTO}' IS NOT NULL THEN
+					
+	    			TESTIMONIOS_PCK.NuevoTestimonio_XML
+					(
+						v_IDUsuarioTestimonio,
+						'{@TES_NOMBRE}',
+						'{@TES_CENTRO}',
+						'{@TES_CARGO}',
+						'{@TES_TEXTO}',
+						'{@TES_PALABRAS}',
+						'{@TES_IMPORTANCIA}',
+						'{@TES_ESTADO}'
+					);	
+					
+			END IF;
+			
+			v_Tipo:='{@TIPO}';
+			
+			--enseño todos los testimonios
+			IF v_Tipo= 'TODOS' THEN
+
+				--Mostrar todos testimonios
+				TESTIMONIOS_PCK.Testimonios_XML ('{@US_ID}',v_IDUsuarioTestimonio,'','{@BUSCA_TESTI}','10',NVL('{@PAG}',0));
+				
+			ELSIF v_Tipo= '5ALEATORIOS' OR v_Tipo IS NULL THEN
+
+				--enseño 5 aleatorios
+			 	TESTIMONIOS_PCK.Testimonios_XML ('{@US_ID}',v_IDUsuarioTestimonio,'5ALEATORIOS','','10','0');
+
+			END IF;
+			
+			
+			HTP.P('</LISTADOTESTIMONIOS>');
+			
+			
+					
+		END;
+    ]]>
+  </xsql:include-owa>	
+  
+  
+  
+ 
+	
+  
+</Testimonios>

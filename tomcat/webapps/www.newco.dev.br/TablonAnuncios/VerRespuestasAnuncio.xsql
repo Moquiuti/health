@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VerRespuestasAnuncioHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VerRespuestasAnuncioHTML.xsl"?>
+
+<RespuestasAnuncio xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+  <xsql:include-owa>
+  	TablonAnuncios_PCK.Anuncio_XML ('{@US_ID}','{@IDAnuncio}','S','S');
+  </xsql:include-owa>
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption> 
+  </jumpTo>
+    
+  <returnHome/>
+</RespuestasAnuncio>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:import href = "http://www.newco.dev.br/General/General.xsl" />
+  <xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+  <xsl:param name="lang" select="@lang"/>  
+  <xsl:template match="/">
+    <html>
+      <head>
+      </head>
+        <!--
+         |   Lo hacemos saltar a la página de Lista 
+         |	Solo cuando no hay error!
+         +-->
+      
+    <body bgcolor="#EEFFFF">
+      
+      <xsl:choose>
+       <xsl:when test="//xsql-error">
+         <xsl:apply-templates select="//xsql-error"/>     
+       </xsl:when>
+       <xsl:when test="//Status">
+         <xsl:apply-templates select="//Status"/>
+       </xsl:when>
+       <xsl:otherwise>
+         <xsl:attribute name="onLoad">document.forms[0].submit(); return true;</xsl:attribute>
+         <form name="form1" method="POST" action="http://www.newco.dev.br/Compras/Multioferta/LPLista.xsql">
+	             <input type="hidden" name="LP_ID" value="{Main/LP_ID}"/>
+	             <input type="hidden" name="PL_ID" value="{Main/PL_ID}"/>
+	             <input type="hidden" name="IDDIVISA" value="{Main/IDDIVISA}"/>	             
+	</form>     
+       </xsl:otherwise>
+      </xsl:choose>      
+      
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>

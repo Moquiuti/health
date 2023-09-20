@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--	
+	Mostrar los historicos (logs) de la empresa
+	Ultima revision: ET 03ene23 10:40
+-->
+<?xml-stylesheet type="text/xsl" href="LogsCentroHTML2022.xsl"?>
+
+<LogsCentro xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LogsCentro');
+			IF US_ID>=0 THEN
+				centros_pck.Logs_XML(US_ID, {@CEN_ID});
+          END IF;					   
+        END;
+        ]]>
+  </xsql:include-owa>
+</LogsCentro>
+

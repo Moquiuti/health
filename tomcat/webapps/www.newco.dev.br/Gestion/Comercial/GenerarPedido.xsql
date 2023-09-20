@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Genera el pedido de una licitacion para pedido único (LIC_MESESDURACION=0)
+	Ultima revision: ET 28mar18 09:12
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="GenerarPedidoJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="GenerarPedidoJSON.xsl"?>
+
+<GenerarPedido xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR(3000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','RecuperaUsuariosLic');
+		IF US_ID>=0 THEN
+			v_res:=LICITACIONESPEDIDOS_PCK.CrearPedido(
+				US_ID,
+				'{@LIC_ID}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR>'||v_res||'</ERROR>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</GenerarPedido>

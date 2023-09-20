@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<!--
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ZonasComercialesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ZonasComercialesHTML.xsl"?>
+-->
+
+<MantenimientoEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   
+	<xsql:include-owa>
+  	<![CDATA[
+			DECLARE
+		  	US_ID		NUMBER;
+      BEGIN
+		  	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonasComerciales');
+		  	IF US_ID>=0 THEN
+        	EMPRESAS_PCK.LISTA_COMERCIALES_ZONA_xml('{@IDEMPRESA}','{@IDCENTRO}','{@IDUSUARIO}');
+        end if;				   
+      END;
+    ]]>
+  </xsql:include-owa>
+
+    <button label="Aceptar" caption="IMG-0020">
+      <name_function>ActualizarDatos</name_function>
+      <param>document.forms['MantenEmpresa']</param>
+    </button>
+    
+    <button label="Cancelar" caption="IMG-0050">       
+      <name_location>javascript:document.location='about:blank'</name_location>
+    </button>
+    
+    <button label="Cerrar" caption="IMG-0190">       
+      <name_location>javascript:document.location='about:blank'</name_location>
+    </button>
+    
+    <button label="ZonaComercial" caption="IMG-1515">       
+      <name_function>PedidoMinimoPorCliente</name_function>
+    </button>
+  
+</MantenimientoEmpresas>
+

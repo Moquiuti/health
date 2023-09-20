@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+   Mantenimiento de carpetas y plantillas de un usuario
+   Ultima revisión: 30ago18 ET 08:26
+-->
+<?xml-stylesheet type="text/xsl" href="CARPyPLMantenHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="ID_PROPIETARIO"/>
+  <xsql:include-param name="ID_USUARIO"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+    <xsql:include-owa>
+      <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CARPyPLManten');
+		  IF US_ID>=0 THEN
+	            CarpetasYPlantillas_pck.ListaCarpetasYPlantillasXML(US_ID,'{@ID_USUARIO}');
+          END IF;				   
+        END;
+        ]]>
+    </xsql:include-owa>
+ 
+  <boton label="Aceptar" caption="IMG-0020">
+    <name_function>ValidaySubmit</name_function>
+    <param>document.forms[0]</param>      
+  </boton>
+
+  <boton label="Cancelar" caption="IMG-0050">
+    <name_function>window.close</name_function>
+  </boton>
+
+</Mantenimiento>
+

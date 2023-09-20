@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Mantenimiento de productos desde fichero. Nuevo disenno.
+	Ultima revisión: ET 9abr22 09:41
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="MantenProductosTxtHTML2022.xsl"?>
+
+<MantenProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdminTecnica');
+
+			IF US_ID > 0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				CatProveedores_fic_pck.Inicio_XML(US_ID,'{@FIDEMPRESA}');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</MantenProductos>

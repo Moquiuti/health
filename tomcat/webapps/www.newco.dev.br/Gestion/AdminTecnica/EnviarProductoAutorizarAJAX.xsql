@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Pedidos desde fichero: Envía un producto para ser seleccionado en la licitacion e incluido en un pedido
+	ultima revision: ET 3abr23 15:20
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="EnviarProductoAutorizarJSON.xsl"?>
+
+<EnviarProducto xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID			NUMBER;
+			v_Res			VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PrepararEnvioFichero');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL: IntegracionRecepcion_pck.AutorizarProducto IDUs:{@US_ID}, Sol:{@SOLICITUD}, Ref:{@REFCLIENTE}, Nif:{@NIFPROVEEDOR} , Cant:{@CANTIDAD}');
+
+				v_Res:=IntegracionRecepcion_pck.AutorizarProducto
+				(
+					US_ID,					--	p_IDUsuario
+					'{@INTF_ID}',		 	--  p_IDFichero
+					'{@NUMLINEA}',			--	p_NumLInea
+					'{@TEXTO}',				--	p_TextoLinea
+					'{@SOLICITUD}',			--	Solicitud
+					'{@REFCLIENTE}',		--	Ref.cliente
+					'{@NIFPROVEEDOR}',		--	NIF/CNPJ Proveedor
+					'{@CANTIDAD}',			--	p_Cantidad
+					'{@OBSERVACIONES}'		--	Observaciones
+				);
+				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P(	'<OK>'
+						||	'<LIC_PROD_ID>'||utilidades_pck.Piece(v_Res,'|',1)||'</LIC_PROD_ID>'
+						||	'<CP_PRO_ID>'||utilidades_pck.Piece(v_Res,'|',2)||'</CP_PRO_ID>'
+						||	'<LIC_IDSELECCION>'||utilidades_pck.Piece(v_Res,'|',3)||'</LIC_IDSELECCION>'
+						||	'</OK>');
+				ELSE
+
+					HTP.P('<ERROR msg="'||utilidades_pck.Piece(v_Res,'|',2)||'"/>');
+				
+				END IF;
+			
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnviarProducto>
+

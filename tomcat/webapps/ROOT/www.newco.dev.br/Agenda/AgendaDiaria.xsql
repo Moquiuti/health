@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+
+	Agenda: Presenta una tarea para edición o simple publicación
+
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AgendaDiariaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AgendaDiariaHTML.xsl"?>
+
+<AgendaDiaria xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <xsql:include-owa>
+  	DECLARE
+		US_ID	NUMBER;
+  	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Agenda: Tarea');
+  		Agenda_PCK.AgendaDiaria_XML (US_ID,'{@IDUSUARIOAGENDA}', '{@FECHAACTIVA}');
+	END;
+  </xsql:include-owa>
+       
+  <returnHome/>
+  
+  
+  
+  
+</AgendaDiaria>
+

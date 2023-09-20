@@ -1,0 +1,27 @@
+mayo18	ET Desarrollo funcionalidad de carga
+22jun18	ET No se muestra correctamente la cadena de formato, faltan algunos separadores
+20dic18 ET No funciona la carga de clasificación
+10ene19 ET Permitir que el código MVM sea opcional en la carga de clasificación
+10ene19 ET Incluir producto estándar en carga de clasificación
+07mar19	ET Colombia: Mant.catalogo desde fichero: hacer opcionales precio y tipo de IVA, para actualizaciones de info de producto
+19mar19 ET Incluir MARCA ACEPTADA, registro MS, fecha caducidad registro (se guardara como el código INVIMA de Colombia) y nuevo campo "Oncologico"
+09abr19 ET Recuperar datos de cliente a partir de los datos de proveedor
+22oct19 ET Carga de ficheros: alta de empresas/centros/usuario
+26nov19 ET Incluir "unidad básica" del centro en la carga de homologación, necesario para Unimed
+11feb20 ET Solucionado error en la carga de precios de referencia. MantenProductos_110220.js
+13feb20 ET Nuevo campo PRO_CODIUM para COlombia
+17feb20 ET Mover producto estándar de grupo. MantenProductos_160220.js
+19feb20	ET Carga de Catálogo Maestro. MantenProductos_190220.js
+20feb20	ET Carga de Contrato. MantenProductos_200220.js
+26feb20 ET Retiramos la carga de modelo de contrato, que se podrá hacer desde el mantenimiento de modelo de contrato. MantenProductos_260220.js
+10jul20 ET Incluir precio de referencia en el proceso de homologación: MantenProductos_100720.js
+02oct20 ET Incluir como campos opcionales la fecha de inicio de la tarifa, la fecha de vencimiento de la misma, el convenio y el tipo de negociación  MantenProductos_051020.js
+06oct20 ET Nueva carga para asociar referencias de cliente al maestro. MantenProductos_051020.js
+10nov20 ET Nuevos campos (Bonificacion, AreaGeo) en la carga de productos de proveedor. MantenProductos_101120.js
+21dic20 ET Incluir Divisa en la carga de productos de proveedor. MantenProductos_211220.js
+24dic20 ET Incluir principio activo en la carga de productos estandar. MantenProductos_241220
+05ene21 ET Incluir grupo de stock en la carga de productos estandar. MantenProductos_050121
+16jul21 ET Utilizar este sistema de cargas para subir historico de pedidos. MantenProductos_160721.js
+18ene22 ET Carga de actualizacion de tarifas. MantenProductos_180122.js
+26ene22 ET Faltaba la llamada a procesar tarifas al cargar un CSV. MantenProductos_260122.js
+08abr22 ET Nueva carga reducida de pedidos para calculo de ahorros. MantenProductos_080422.js

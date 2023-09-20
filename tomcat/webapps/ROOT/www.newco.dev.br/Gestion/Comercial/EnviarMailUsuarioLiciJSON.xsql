@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Proceso AJAX que envia un mail a usuarios de licitaciones -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EnviarMailUsuarioLiciJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EnviarMailUsuarioLiciJSON.xsl"?>
+
+
+<EnviarMailUsuarioLiciJSON xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="SES_ID"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="IDEMPRESA"/>
+	<xsql:include-param name="REFERENCIA"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Enviar mail usuario licitacion');
+			IF US_ID>=0 THEN
+
+				LICITACIONES_PCK.AvisarProveedor_Mail(
+                                '{@IDPROVE}',
+                                '{@ESTADO}'
+                                );
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</EnviarMailUsuarioLiciJSON>

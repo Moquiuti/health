@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ExportacionOC_TXT.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ExportacionOC_TXT.xsl"?>
+<!--	 
+Pruebas: www.mvmnucleo.com/Gestion/AdminTecnica/ExportacionOC.xsql?MO_ID=981041
+-->
+<ExportacionOC xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdminTecnica');
+
+			IF US_ID > 0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				--INTEGRACIONMODELOS_PCK.Multioferta_File_o_XML('{@US_ID}','{@LIC_ID}','{@MO_ID}',35,'XML');
+				INTEGRACIONMODELOS_PCK.Licitacion_ToFileorXML('{@US_ID}','{@LIC_ID}','{@MO_ID}',35,'XML');
+			ELSE
+				HTP.P('<ERROR msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ExportacionOC>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Mantenimiento de GRUPO
+	Ultima revisión: ET 7mar22 17:50
+-->
+<?xml-stylesheet type="text/xsl" href="MantGruposHTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param  name="CATPRIV_IDEMPRESA"/>
+	<xsql:include-param  name="ACCION"/>
+	<xsql:include-param  name="TIPO"/>
+	<xsql:include-param  name="VENTANA"/>
+	<xsql:include-param  name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(1000);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantGrupos');
+		IF US_ID>=0 THEN
+
+			utilidades_pck.debug('XSQL. MantGrupos Accion:{@ACCION}');
+
+		  	IF 	'{@ACCION}' IS NOT NULL THEN	   
+				v_Res:=CATALOGOPRIVADO_MANT_PCK.MODIFICARGRUPO(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDSUBFAMILIA}',
+					'{@CATPRIV_ID}',
+					'{@CATPRIV_REFERENCIA}',
+					'{@CATPRIV_NOMBRE}',
+					'{@CATPRIV_REFCLIENTE}',
+					'{@ACCION}'
+				);
+
+				CATALOGOPRIVADO_MANT_PCK.GRUPO_XML(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDSUBFAMILIA}',
+					utilidades_pck.Piece(v_Res,'|',0), 
+					utilidades_pck.Piece(v_Res,'|',1)
+				);
+
+			ELSE
+
+				CATALOGOPRIVADO_MANT_PCK.Grupo_XML(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDSUBFAMILIA}',
+					'{@CATPRIV_IDGRUPO}'
+				);
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<botones>
+	<button label="Aceptar" caption="CATPRIV-0110">
+		<name_function>ValidarFormulario</name_function>
+		<param>document.forms[0]</param>
+	</button>
+
+	<button label="Cancelar" caption="CATPRIV-0120">
+		<name_location>BuscadorFrame.xsql</name_location>
+	</button>
+
+	<button label="Cerrar" caption="CATPRIV-0115">
+		<name_function>window.close</name_function>
+	</button>
+</botones>
+</Mantenimiento>

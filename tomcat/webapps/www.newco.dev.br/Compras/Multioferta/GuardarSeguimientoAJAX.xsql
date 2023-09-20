@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guarda los datos de seguimiento para una linea de multioferta
+	Ultima revision: ET 5jul21 15:00
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="GuardarSeguimientoJSON.xsl"?>
+
+<GuardarSeguimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InformaDatosCompra');
+		IF US_ID>=0 THEN
+			v_Res:=multiofertas_seguimiento_pck.GuardarSeguimiento(
+				US_ID,
+				'{@LMO_ID}',
+				'{@TEXTO}'
+			);
+			
+			IF v_Res LIKE 'OK%' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR>'||utilidades_pck.Piece(v_Res,'|',1)||'</ERROR>');
+			END IF;
+			
+			
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</GuardarSeguimiento>

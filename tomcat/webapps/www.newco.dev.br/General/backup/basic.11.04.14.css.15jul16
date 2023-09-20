@@ -1,0 +1,3299 @@
+m/* $Id$ */
+/* $Author$ */
+/* $Date$ */
+/* $Revision$ */
+/* Purpose */
+/* Colors: blu:#396BAD; blu+claro:#396394; azzurro:#ADBDDE;  gris/maron scuro:#6E6358*/
+
+/*global*/
+html, body {
+	/*background-color: #FFF;*/
+	font-size: 12px;
+	width: 100%;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	}
+@font-face {
+	font-family:BebasNeue;
+	src: url(http://www.newco.dev.br/General/BebasNeue.otf);
+}
+/*global*/
+*{
+	padding:0px;
+	margin:0px;
+}
+a {
+	color:#3b5998;
+	text-decoration: underline;
+	font-size:13px;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+}
+a:hover {
+	text-decoration: underline;
+	color:#8a8b8c;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+}
+p {
+	font-family:Arial, Helvetica, sans-serif;
+	padding:0px;
+	margin:0px;
+	font-size:13px;
+}
+img {
+	border: none;
+	margin:0px;
+	padding:0px;
+	vertical-align:middle;
+}
+h1 {
+	font-weight:bold;
+	color:#333333;
+	font-size:16px;
+}
+
+h2 {
+	font-weight:bold;
+	color:#333333;
+	font-size:14px;
+}
+h3  {
+	font-weight:bold;
+	font-size:12px;
+	color:#333333;
+}
+label{
+	font-size:13px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+	width:200px;
+}
+input{
+	font-size:13px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+	vertical-align:middle;
+}
+textarea{
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+}
+fieldset{
+border:none;
+}
+select.selectFont18{font-size:18px;}
+select.select250{width:250px;}
+select.select200{width:200px;}
+select.select170{width:170px;}
+select.select140{width:140px;}
+select.select120{width:120px;}
+select.select80{width:80px;}
+select.select110i{width:110px !important; display:inline;}
+select.select80i{width:80px !important; display:inline;}
+select.select100{width:100px;}
+select.select14{font-size: 14px;padding:1px 3px; font-weight:bold;}
+
+input.inright{ text-align:right;}
+
+a.noDecor{ text-decoration:none; border:none;}
+.celdaconrojo { color:#e40e3c }
+.celdaconverde { color:#36970b }
+.camposObligatorios{ color:#FF0000;}
+strong{color:#333333;}
+.strongContacto{ color:#000000;}
+.strongNegro{ color:#000000; font-weight:bold; font-size:13px;}
+.strongGris{color:#6d6e6f; font-weight:bold;}
+.strongAzul{color:#3b5998; font-weight:bold;}
+.textAzul{ color:#3b5998; font-weight:bold; font-size:14px;}
+.rojoNormal{ color:#FF0000; font-weight:normal;}
+a.rojoNormal{ color:#FF0000; font-weight:normal;}
+.rojo{ color:#FF0000 !important; font-weight:bold;}
+.rojoFondoBlanco{ color:#FF0000; font-weight:bold; font-size:14px; background:#FFFFFF; padding:2px;}
+.verde { color:#36970b; font-weight:bold; }
+.verdeNormal { color:#36970b; font-weight:normal; }
+.orange { color:#FF9900; font-weight:bold; }
+.yellow { color:#FFFF99; font-weight: bold;}
+.azul{ color:#3b5998;}
+.rojo14{ color:#FF0000; font-weight:bold; font-size:14px;}
+.rojoScuro{ color:#e52028; font-weight:bold;}
+a.rojoScuro{ color:#e52028; font-weight:bold;}
+.fondoVerde{background:#A8FFA8;}
+.fondoRojo{ background:#FE4162;}
+.fondoRojo:hover{ background:#FE4162;}
+.fondoAma{ background:#FFFF99;}
+.verAlign{ vertical-align:middle;}
+.inputNo{ border:none; text-align:center; font-weight:bold; background:transparent;}
+.gris14{ color:#333333; font-weight:bold; font-size:14px;}
+.oblique{ font-weight:bold; font-style:oblique; color:#6d6e6f;}
+.bold{ font-weight:bold;}
+.gris { background:#f5f5f5;}
+/*.grisMed { background:#D7D8D7;}*/
+.grisMed { border-right:0px solid #C3D2E9; border-bottom:2px solid #86E400; background:#dde7f7;}
+.tituloInci{
+    text-transform: uppercase;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius:5px;
+    border-left:2px solid #1E8CD9;
+    border-bottom:2px solid #1E8CD9;
+    background:#C3D2E9;
+}
+
+.celeste { background:#e1e9fa; }
+
+.font12{ font-size:12px; margin-top:7px;}
+.font11{ font-size:11px;}
+.font10{ font-size:10px;}
+.font8{ font-size:8px;}
+p.separation{ border-bottom:1px solid #f5f5f5; padding:2px 0px;}
+p.bienvenido{ background:#f2f4f6; padding:20px 0px; font-weight:bold; color:#333333; margin:50px 0px 120px; }
+.amarillo { background:#FFFF99; }
+.clear{clear:both;}
+.urgente{
+	color:#FF0000;
+	font-weight:bold;
+	font-size:16px;
+	background:#FFFF99;
+	float:left;
+	border:1px solid #FF0000;
+	padding:5px;
+}
+.importante{
+	color:#FF0000;
+	font-weight:bold;
+	font-size:12px;
+	background:#FFFF99;
+	float:left;
+	border:1px solid #FF0000;
+	padding:5px;
+}
+.exito{
+	color:#6D6E6F;
+	font-weight:bold;
+	font-size:14px;
+	background:#FFFF99;
+	float:left;
+	border:2px solid #8AC007;
+	padding:10px;
+}
+.cargado{
+	color:#FF0000;
+	font-weight:bold;
+	font-size:14px;
+	background:#FFFF99;
+	border:1px solid #FF0000;
+	padding:5px;
+	margin:5px 0px;
+}
+.borrar{
+	color:#FF0000;
+	background:#FFFF99;
+}
+input.noinput, textarea.noinput, select.noinput{
+	border:none;
+	background:transparent;
+	color:#000000;
+}
+/*home, index*/
+.homeBox {
+	width:650px;
+	height:435px;
+	border:0px solid green;
+	margin:80px auto 0px 20%;
+}
+.home{
+	width:650px;
+	height:435px;
+	border:0px solid red;
+	background: url(http://www.newco.dev.br/images/fondoHomeTotal.jpg) no-repeat ;
+}
+.banderas{
+	float:right;
+	margin:97px 20px 0px 0px;
+}
+.banderas img{ margin-right:10px;}
+.banderas a{ text-decoration:none;}
+
+.logoLogin{
+	float:left;
+	width:650px;
+	height:270px;
+	margin-top:8px;
+	border:0px solid red;
+}
+.logo{
+	float:left;
+	width:530px;
+	height:150px;
+	border:0px solid blue;
+}
+.login{
+	float:left;
+	width:110px;
+	height:150px;
+	border:0px solid blue;
+	margin-left:0px;
+}
+.login p{
+	text-align:center;
+	color:#787979;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	margin:5px 0px 0px 0px;
+	border:0px solid blue;
+}
+.login input.intext{
+	height:20px;
+	width:100px;
+	border:1px solid #d7d9db;
+	margin-left:0px;
+}
+.login input.buttonLogin{
+	margin:5px 0px 0px 6px;
+}
+/*iframe style*/
+iframe{
+	margin:0px 0px;
+}
+
+/*iframe style*/
+
+/*login movil*/
+.loginMovil{
+	float:left;
+	width:110px;
+	height:150px;
+	border:0px solid blue;
+	margin-left:5px;
+}
+.loginMovil p{
+	text-align:center;
+	color:#787979;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:28px;
+	margin:5px 0px 0px 0px;
+	border:0px solid blue;
+}
+.loginMovil input.intext{
+
+	font-size:28px;
+	border:1px solid #d7d9db;
+	margin-left:5px;
+}
+.loginMovil input.buttonLogin{
+	margin:5px 0px 0px 6px;
+	width:200px;
+}
+/*fin de login movil*/
+/*contacto*/
+.contactoLink{
+	float:right;
+	margin-right:18px;
+	border:0px solid red;
+}
+.contactoLink p{
+	margin:4px 0px 0px 4px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	color:#4d4e4e;
+	border:0px solid red;
+}
+.contactoLink img{ vertical-align:middle; margin:0px 2px 2px 0px;}
+.contactoLink a{ text-decoration:none; color:#4d4e4e; margin-top:2px;}
+/*contacto*/
+
+
+.menuHome{
+	float:left;
+	width:640px;
+	height:30px;
+	margin-top:0px;
+	font-size:14px;
+	border:0px solid blue;
+}
+.menuHome p.menuText{
+	margin:8px 0px 0px 6px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	color:#4d4e4e;
+}
+.menuHome a{ font-size:14px; color:#4d4e4e; text-decoration:none; margin-right:0px; border:0px solid red; }
+.menuHome a:hover{ font-size:14px; color:#4d4e4e; text-decoration:underline; }
+
+.menuHome p.register{
+	margin:0px 25px 0px 0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	text-align:right;
+	float:right;
+	color:#4d4e4e;
+}
+/*login en quienes somos...paginas estaticas*/
+.loginStatic{
+	float:left;
+	width:400px;
+	height:45px;
+	border:0px solid blue;
+	margin:5px 0px 0px 5px;
+}
+.loginLeft{
+	float:left;
+	width:250px;
+	border:0px solid blue;
+}
+.loginRight{
+	float:left;
+	width:100px;
+	border:0px solid blue;
+	margin:4px 0px 0px 5px;
+}
+.loginStatic label{
+	width:80px;
+	float:left;
+	font-weight:bold;
+	color:#999999;
+}
+.loginStatic p{	margin:3px 0px;}
+.linkHome{
+	float:left;
+	margin-top:15px;
+	padding:10px;
+}
+.linkHome p{ margin-bottom:5px; color:#333333; font-size:11px;}
+.linkHome a{
+	color:#999999;
+	font-weight:bold;
+}
+/*ancho columnas tablas*/
+.zerouno{ width:0.1%;}
+.uno{ width:1%; }
+.dos{ width:2%;}
+.tres{ width:3%; }
+.cuatro{ width:4%; }
+.seis{ width:6%; }
+.siete{ width:7%; }
+.cinco{ width:5%; }
+.ocho{ width:8%; }
+.dies{ width:10%; }
+.once{ width:11%; }
+.doce{ width:12%; }
+.catorce{ width:14%; }
+.quince{ width:15%; }
+.dieciseis{ width:16%; }
+.dieciocho{ width:18%; }
+.diecisiete{ width:17%; }
+.veinte{ width:20%; }
+.veintedos{ width:22%; }
+.veintecinco{ width:25%; }
+.veinteocho{ width:28%; }
+.trenta{ width:30%; }
+.trentacinco{ width:35%; }
+.cuarenta{ width:40%; }
+.cuarentacinco{ width:45%; }
+.cinquenta{ width:50%; }
+.cinquentasiete{ width:57%;}
+.sesanta{ width:60%; }
+.setanta{ width:70%; }
+.ochanta{ width:80%; }
+.noventaocho{ width:98%; }
+.noventacinco{ width:95%; }
+.noventa{ width:90%; }
+.cien{ width:100%; }
+.margin25{ margin-left:2.5%;}
+.margin5{ margin-left:5%;}
+.marginTop15{ margin-top:15px;}
+.marginTop20{ margin-top:20px;}
+/*.aster{ }*/
+.textRight{ text-align:right; padding-right:3px;}
+.textLeft{ text-align:left; padding-left:3px;}
+.right{ text-align:right;}
+.label{ font-weight:bold; color:#6d6e6f; }
+.center{ text-align:center; }
+.centerRight{ text-align:right; margin-right:10px; }
+.lineBorderBottom{ border-bottom:1px solid #e4e4e5;}
+.lineBorderBottom3{ border-bottom:3px solid #e4e4e5;}
+.lineBorderBottom5{ border-bottom:5px solid #e4e4e5;}
+.lineBorderTop{ border-top:1px solid #e4e4e5;}
+
+/*tituloPag*/
+.tituloPag{
+	float:left;
+	width:100%;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+	border-top:2px solid #3b5998;
+	border-bottom:1px solid #939494;
+}
+.tituloLeft{
+	float:left;
+	width:70%;
+	margin:10px 0px 10px 10px;
+	font-size:16px;
+	font-weight:bold;
+	color:#333333;
+}
+
+.tituloLeft div.boton {
+	font-size:12px;
+	margin: 10px 0 0 120px;
+}
+
+.tituloRight{
+	float:right;
+	width:24%;
+	margin:10px 10px 0px 0px;
+}
+.tituloCamp{
+	float:left;
+	width:100%;
+	border-bottom:1px solid #e4e4e5;
+	background:#f5f5f5;
+}
+.tituloCamp p{
+	margin:10px;
+	font-weight:bold;
+}
+.tituloForm{
+	background:#f5f5f5;
+}
+.tituloForm p{
+	color:#333333;
+	margin:15px 10px;
+	font-weight:bold;
+}
+.tituloForm textarea{
+	margin:5px 10px;
+}
+/*CabeceraHTML.xsl*/
+.cabeceraBox{
+	float:left;
+	width:100%;
+	border:0px solid green;
+	height:auto;
+	margin-bottom:10px;
+}
+.logoStatic{
+	float:left;
+	width:800px;
+	height:80px;
+	border:0px solid blue;
+	margin:5px 0px 0px 5px;
+}
+.logoStatic img{
+	float:left;
+	margin-left:180px;
+}
+.logoPage{
+	float:left;
+	width:15%;
+	border:0px solid blue;
+	height:80px;
+}
+.logoPageInside{
+	width:160px;
+	margin:0px 0px 0px 0%;
+	height:80px;
+	border:0px solid red;
+}
+
+.logoPage h1{
+	float:right;
+	width:100%;
+	height:70px;
+	text-indent:-9999px;
+	border:none;
+	text-decoration:none;
+}
+.logoDosPage{
+	float:left;
+	width:110px;
+	border:0px solid blue;
+	margin-left:2px;
+	height:70px;
+}
+.logoDosPageInside{
+	width:100%;
+	margin:0px 0px 0px 0%;
+	height:70px;
+	border:0px solid red;
+}
+.logoDosPageInside img{
+	width:100px;
+	float:right;
+	margin:0px 0px 0px 0%;
+	height:70px;
+	border:0px solid red;
+}
+.cabeceraCenter{
+	float:left;
+	width:70%;
+	border:0px solid black;
+	height:auto;
+}
+.cabeceraImage{
+	float:left;
+	width:100%;
+	border:0px solid red;
+	height:47px;
+}
+.cabeceraImage p.datosMVM{
+	float:left;
+	border:0px solid blue;
+	text-align:left;
+	font-size:11px;
+	line-height:17px;
+	margin-top:7px;
+	margin-left:20px;
+	text-decoration:none;
+}
+.cabeceraImage p.datosMVM img{ vertical-align:middle; text-decoration:none; }
+.cabeceraImage p.usuario{
+	float:left;
+	border:0px solid blue;
+	text-align:center;
+	line-height:20px;
+	margin-top:5px;
+	margin-left:0%;
+	font-size:11px;
+}
+
+.cabeceraImage .fecha{
+	margin-top:10px;
+	font-size:11px;
+}
+.cabeceraMenu{
+	float:left;
+	width:84.5%;
+	margin-left:15.5%;
+	height:23px;
+	border:0px solid yellow;
+}
+.cabeceraMenuLogado{
+	float:left;
+	width:100%;
+	height:23px;
+	border:0px solid yellow;
+}
+table.menuButton {
+	border-collapse:collapse;
+}
+table.menuButton .buttonMenu{
+	width:102px;
+	text-align:center;
+}
+table.menuButton .buttonMenuLado{
+	width:80px;
+	text-align:center;
+}
+table.menuButton tbody td.claro{
+	background: url(http://www.newco.dev.br/images/buscaFondoAzulCl.gif) repeat-x;
+	border-bottom:2px solid #3b5998;
+}
+table.menuButton tbody td.medio{
+	background: url(http://www.newco.dev.br/images/buscaFondoAzul.gif) repeat-x;
+	border-bottom:2px solid #3b5998;
+}
+table.menuButton .borderRight{ border-right:1px solid #FFFFFF; }
+table.menuButton .borderLeft{ border-left:1px solid #FFFFFF; }
+.inicioMenu{
+	background: url(http://www.newco.dev.br/images/sepInicio.gif) no-repeat;
+	width:10px;
+	height:23px;
+	border-bottom:2px solid #3b5998;
+}
+.finMenu{
+	background: url(http://www.newco.dev.br/images/sepFin.gif) no-repeat;
+	width:10px;
+	height:23px;
+	border:0px solid red;
+	border-bottom:2px solid #3b5998;
+}
+table.menuButton a{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#333333;
+	text-decoration:none;
+}
+table.menuButton a:hover{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#999999;
+	text-decoration:none;
+}
+/*template boton*/
+.botonBox{
+	height:25px;
+	float:left;
+	margin:10px 0px;
+}
+.boton{
+	width:150px;
+	height:20px;
+	padding-top:5px;
+	float:left;
+	text-align:center;
+	border:1px solid #ccc;
+        border-radius: 5px;
+        background-color:#cccccc;  
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f7f7f7), color-stop(1, #cccccc));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#f7f7f7, #cccccc);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #f7f7f7, #cccccc);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #f7f7f7, #cccccc);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#cccccc');  
+}
+.boton:hover{
+        background-color:#C3D2E9;  
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f7f7f7), color-stop(1, #C3D2E9));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#f7f7f7, #C3D2E9);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #f7f7f7, #C3D2E9);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #f7f7f7, #C3D2E9);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#C3D2E9');  
+	transition: all 1s ease-in-out;
+}
+.boton a{
+     font-weight:bold;
+	color:#333333;
+        font-size:13px;
+	text-decoration:none;
+}
+
+.boton a.grey, .botonLargo a.grey, .botonLargoVerdadNara a.grey{
+	color:#C4C4C4;
+}
+/*botonPequeño*/
+a.botonPeque{
+	width:auto;
+	height:auto;
+        font-size:11px;
+        color:azul;
+        padding:2px 5px;
+        text-decoration: none;
+        font-weight: bold;
+	text-align:center;
+	border:1px solid #ccc;
+        border-radius: 5px;
+        background-color:#cccccc;  
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f7f7f7), color-stop(1, #cccccc));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#f7f7f7, #cccccc);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #f7f7f7, #cccccc);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #f7f7f7, #cccccc);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#cccccc');  
+}
+
+a.botonPeque:hover{
+        background-color:#C3D2E9;  
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f7f7f7), color-stop(1, #C3D2E9));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#f7f7f7, #C3D2E9);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #f7f7f7, #C3D2E9);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #f7f7f7, #C3D2E9);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#C3D2E9');  
+	transition: all 1s ease-in-out;
+}
+/*fin boton peque*/
+.botonNara{
+        width:150px;
+	height:20px;
+	padding-top:4px;
+	float:left;
+        color:#333;
+        font-size:14px;
+	text-align:center;
+	border:2px solid #FFF;
+        border-radius: 5px;
+        background-color:#fea700;  
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #ffd27c), color-stop(1, #fea700));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#ffd27c, #fea700);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #ffd27c, #fea700);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #ffd27c, #fea700);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffd27c', EndColorStr='#fea700');  
+}
+.botonNara:hover{
+        background-color:#A7A8A9;  
+        color:#fff;
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #E3E2E2), color-stop(1, #A7A8A9));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#E3E2E2, #A7A8A9);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #E3E2E2, #A7A8A9);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #E3E2E2, #A7A8A9);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#E3E2E2', EndColorStr='#A7A8A9');  
+	transition: background 1s ease-in-out;
+}
+
+a.botonTitleRight{
+	padding:5px 36px;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	text-decoration:none;
+	font-size:12px;
+	color:#333333;
+	float:right;
+        border-radius: 5px;
+	margin-right:20px;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+a.botonTitleRight:hover{
+	color:#6d6e6f;
+	text-decoration:none;
+}
+a.botonTitle{
+	padding:4px 25px;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	text-decoration:none;
+	font-size:12px;
+	color:#333333;
+        border-radius: 5px;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+a.botonTitle:hover{
+	color:#6d6e6f;
+	text-decoration:none;
+}
+.botonCenter{
+	width:150px;
+	height:20px;
+	margin:0px auto;
+	padding-top:5px;
+	text-align:center;
+	border:1px solid #ccc;
+	border-radius: 5px;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+.botonCenter a{
+	font-weight:bold;
+	color:#333333;
+	margin-top:4px;
+	text-decoration:none;
+}
+.botonCenter a:hover{
+	font-weight:bold;
+	color:#6d6e6f;
+	text-decoration:none;
+}
+.botonCenterAzul{
+	width:200px;
+	height:30px;
+	margin:0px auto;
+	padding-top:12px;
+	text-align:center;
+	border:1px solid #ccc;
+	border-radius: 5px;
+	background: url(http://www.newco.dev.br/images/buscaFondoAzul.gif) repeat-x;
+}
+.botonCenterAzul a{
+	font-weight:bold;
+	font-size:14px;
+	color:#000;
+	margin-top:4px;
+	text-decoration:none;
+}
+.botonCenterAzul a:hover{
+	font-weight:bold;
+	color:#6d6e6f;
+	font-size:14px;
+	text-decoration:none;
+}
+.botonLargo{
+	height:20px;
+	margin:0px auto;
+	padding-top:5px;
+	text-align:center;
+	border:1px solid #ccc;
+        border-radius: 5px;
+        background-color:#cccccc;  
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f7f7f7), color-stop(1, #cccccc));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#f7f7f7, #cccccc);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #f7f7f7, #cccccc);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #f7f7f7, #cccccc);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#cccccc');  
+}
+.botonLargo:hover{
+     background-color:#C3D2E9;  
+        /* Safari 4+ y Chrome 1+ */  
+        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f7f7f7), color-stop(1, #C3D2E9));  
+        /* Safari 5.1+ y Chrome 10+ */  
+        background-image:-webkit-linear-gradient(#f7f7f7, #C3D2E9);  
+        /* Firefox 3.6+ */  
+        background-image:-moz-linear-gradient(top, #f7f7f7, #C3D2E9);  
+          /* Opera 11.10+ */  
+        background-image:-o-linear-gradient(top, #f7f7f7, #C3D2E9);  
+        /* Internet Explorer 5.5+ */  
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#C3D2E9');  
+	transition: all 1s ease-in-out;
+}
+.botonLargoAma{
+	height:20px;
+	width:200px;
+	margin:0px auto;
+	padding-top:5px;
+	text-align:center;
+	border:1px solid #ccc;
+        border-radius: 5px;
+	background: url(http://www.newco.dev.br/images/botonFondoAma.gif) repeat-x;
+}
+.botonLargoNara{
+	height:20px;
+	width:180px;
+	margin:0px auto;
+	padding-top:5px;
+	text-align:center;
+	border:1px solid #ccc;
+        border-radius: 5px;
+	background: url(http://www.newco.dev.br/images/botonFondoNara.gif) repeat-x;
+}
+.botonLargoVerdadNara{
+	height:20px;
+	margin:0px auto;
+	padding-top:5px;
+	text-align:center;
+	border:1px solid #ccc;
+        border-radius: 5px;
+	background: url(http://www.newco.dev.br/images/botonFondoNara.gif) repeat-x;
+}
+.botonEstrecho{
+	height:17px;
+	width:120px;
+	margin:0px auto;
+	padding-top:3px;
+	text-align:center;
+	border:1px solid #ccc;
+        border-radius: 5px;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+.botonEstrecho a{
+	font-weight:bold;
+	color:#333333;
+	margin-top:2px;
+	text-decoration:none;
+}
+.botonLargo a, .botonLargoAma a, .botonLargoNara a, .botonLargoVerdadNara a{
+	font-weight:bold;
+	color:#333333;
+	margin-top:4px;
+	text-decoration:none;
+}
+.botonLargo a:hover, .botonLargoAma a:hover, .botonLargoNara a:hover, .botonLargoVerdadNara a:hover{
+	font-weight:bold;
+	color:#6d6e6f;
+	text-decoration:none;
+}
+
+.botonMenu{
+	width:90px;
+	text-align:center;
+}
+.botonDinamico{
+	width:100px;
+	text-align:center;
+}
+table.botonperso {
+	border:2px solid black;
+}
+/*boton link, mnanten prod*/
+a.botonLink{
+	padding:2px 5px;
+	background:#ebf0fb;
+	border-radius: 3px;
+	border:1px solid #939494;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:11px;
+}
+
+/*clasificacion proveedores page estatica*/
+table.clasificacion{
+	width:100%;
+	float:left;
+	border-collapse:collapse;
+	font-size:13px;
+}
+table.clasificacion th{
+	height:40px;
+	color:#333333;
+	text-align:center;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background: #C3D2E9;
+}
+table.clasificacion tr.subTitulo td{
+	color:#666666;
+	font-weight:bold;
+	padding:3px 5px;
+	border-bottom:1px solid #939494;
+	background:#d0cfd0;
+}
+
+table.clasificacion tr.subCategoria1 td{
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	padding:3px 5px;
+	border-bottom:1px solid #939494;
+}
+table.clasificacion tr.subCategoria2 td{
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	padding:3px 5px;
+	border-bottom:1px solid #939494;
+}
+.clasificacion tbody {
+	color:#666;
+	font-size:13px;
+	font-weight:bold;
+}
+table.clasificacion tr.body:hover td, table.clasificacion tr:hover th:before { background:#E3E2E2;}
+
+.clasificacion td.margin{
+	width:60px;
+}
+.clasificacion td.num{
+	width:25px;
+	color:#FF0000;
+	text-align:center;
+	border-right:1px solid #CCCCCC;
+}
+.clasificacion td.ref{
+	width:25px;
+	color:#333333;
+	text-align:left;
+	padding:2px 0px 2px 7px;
+	border-right:1px solid #CCCCCC;
+	border-bottom:1px solid #CCCCCC;
+}
+.clasificacion td.descri{
+	text-align:left;
+	margin-left:5px;
+	padding:2px 0px 2px 7px;
+	border-bottom:1px solid #CCCCCC;
+}
+.clasificacion td.textCenter{
+	text-align:center;
+}
+.clasificacion td{ padding:2px; border-bottom:0px solid #CCCCCC; }
+
+.clasificacion th.textRight{
+	text-align:right;
+}
+
+/*listado clientes*/
+.clientes{
+	width:100%;
+	float:left;
+	border-collapse:collapse;
+	border:0px solid black;
+}
+.oneCliente{
+	width:120px;
+	margin:0px 10px 0px 10px;
+	padding-bottom:30px;
+	height:auto;
+	float:left;
+	border:0px solid black;
+	border-bottom:0px solid #939494;
+}
+.oneCliente img{
+	height:50px;
+	width:120px;
+	margin:5px 0px;
+	border:0px solid black;
+}
+.oneCliente p.nombre{
+	margin-bottom:2px;
+	color:#333333;
+	height:30px;
+	background:#c4d4f5;
+	border:0px solid red;
+	text-align:center;
+	font-weight:normal;
+	overflow:hidden;
+}
+.oneCliente p.poblacion{
+	margin-bottom:4px;
+	color:#333333;
+	height:30px;
+	background:#ededee;
+	text-align:center;
+	font-size:11px;
+	font-weight:normal;
+}
+
+/*pagina con left y right*/
+.left{
+	width:18%;
+	float:left;
+	padding:15px 0px 0px 0.8%;
+	border:0px solid red;
+}
+.right{
+	width:80%;
+	float:right;
+	padding-top:15px;
+	border:0px solid red;
+}
+.divLeft h2{
+	margin-left:30px;
+	text-align:center;
+}
+/*eis consultas tabla inicio del eis*/
+table.eisConsultas {
+	width:90%;
+	border-collapse:collapse;
+	background:#f5f5f5;
+	font-size:13px;
+}
+table.eisConsultas tbody tr:hover td, table.eisConsultas tbody tr:hover th:before { background:#fff;}
+
+table.eisConsultas tr{
+	margin:5px 0px;
+	padding:3px 0px;
+}
+table.eisConsultas tr.tituloTabla{
+	height:40px;
+	color:#333333;
+	text-align:left;
+	border-bottom:1px solid #e4e4e5;
+	border-top:2px solid #939494;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+}
+table.eisConsultas tr.tituloTabla p{ padding:3px 5px; color:#333333;}
+table.eisConsultas img{ vertical-align:middle; }
+table.eisConsultas td.subTitle{
+	height:30px;
+	background: url(http://www.newco.dev.br/images/subTitleFondo.gif) repeat-x;
+}
+table.eisConsultas tr:hover td.subTitle{
+	background: url(http://www.newco.dev.br/images/subTitleFondo.gif) repeat-x;
+}
+table.eisConsultas td.subTitle p{
+	margin-left:20px;
+	font-weight:bold;
+}
+table.eisConsultas td{ text-align:left; }
+/*fin de eisConsultas*/
+
+/*paginas del eis*/
+table.azul {
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	font-size:13px;
+}
+table.azul a{ text-decoration:none; font-weight:bold; }
+table.azul th{
+	height:30px;
+	color:#6d6e6f;
+	background:#C3D2E9;
+	border-bottom:1px solid #939494;
+}
+table.azul th.thleft{ text-align:left; padding-left:10px; }
+table.azul th.thright{ text-align:right; padding-right:5px; }
+table.azul tr.titleTabla{
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#C3D2E9;
+}
+table.azul tr.titleTablaEIS{
+	height:35px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#C3D2E9;
+}
+table.azul tr.titleTablaEIS td.selected{
+	background:#FFFF69;
+}
+table.azul td.selected{
+	background:#FFFF69;
+}
+table.azul tr.titleMatriz{
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/matrizTitulos.gif) repeat-x;
+}
+table.azul tr.lineGris{
+	height:30px;
+	color:#333333;
+	font-weight:bold;
+	text-align:left;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#e9e8e8;
+	/*background: url(http://www.newco.dev.br/images/subTitleFondo.gif) repeat-x;*/
+}
+p.verEIS { height:30px; float:left; border:0px solid red; width:100%; display:inline-block;}
+p.verEIS a{ float:left; margin-right:8px;display:inline-block;}
+
+table.azul img{ vertical-align:middle; }
+table.azul tr.tituloTabla p{ padding:3px 5px; color:#333333;}
+table.azul tr.subTituloTabla{
+	color:#333333;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+}
+table.azul tr{
+	/*background: none repeat scroll 0 0 #F2F4F6;*/
+	margin:5px 0px;
+	height:25px;
+	/*background:#f2f4f6;*/
+	border-bottom:1px solid #e4e4e5;
+}
+table.azul tr.body td{ background:#fff;}
+table.azul tbody tr:hover:not(.titleTablaEIS):not(.subTituloTabla) td, table.azul tbody tr:hover:not(.titleTablaEIS):not(.subTituloTabla)  { background:#f2f4f6;}
+/*table.azul tbody tr.subTituloTabla:hover td, table.azul tbody tr.subTituloTabla:hover  { background:url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;}*/
+/*table.azul tbody tr.titleTablaEIS:hover td, table.azul tbody tr.titleTablaEIS:hover  { background:url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;}*/
+
+table.azul tr table.button{
+	float:left;
+	background: none repeat scroll 0 0 #F2F4F6;
+	border:1px solid #C0C0C0;
+}
+table.azul tr table.button tr{
+	height:20px;
+}
+
+/*matriz eis*/
+table.azul tr.matrizbody td{ border:1px solid #CCC;}
+table.azul tr.BLANCO{ background:#fff;}
+table.azul tr.matrizbody td.BLANCO{ background:#fff;}
+table.azul tr.matrizbody td.NORMAL{ background:#f2f4f6;}
+table.azul tr.matrizbody td.ROJO{ background:#fedfdf;}
+table.azul tr.matrizbody td.AZUL{ background:#cee6fe;}
+table.azul tr.matrizbody td.NEGRO{/* background:#d9d8d8;*/ }
+table.azul tr.matrizbody td.AMARILLO{ background:#fbfbca;}
+table.azul tr.matrizbody td.VERDE{ background:#C4FFC4;}
+table.azul tr.matrizbody td.NARANJA{ background:#fcd3ab;}
+
+/*table.azul tr.matrizbody:hover td, table.azul tr.matrizbody:hover th:before { background:#fff; }*/
+.comentarioMatriz{
+	/*position:absolute;
+	top:200px;
+	left:100px;
+	width:100px;
+	height:auto;*/
+	background:#FFFFFF;
+	border:5px solid #CCC;
+}
+.insertCome{
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 35%;
+	width:250px;
+	height:300px;
+	background:#FFFFFF;
+	border:25px solid #CCC;
+	z-index:1002;
+	overflow: auto;
+	text-align:center;
+}
+
+.insertCome textarea{
+	width:200px;
+	height:120px;
+	margin:15px 0px 10px;
+}
+.insertCome select{
+	width:160px;
+	margin-right:10px;
+	margin-bottom:10px;
+}
+.insertCome p.cerrarInsertCome{
+	text-align:right;
+	margin:5px;
+}
+table.azul td.colorComeMatriz{ background:#FFFF99;}
+/*lightBox matriz*/
+    .fadebox {
+        display: none;
+        position:fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+        /*filter:alpha(opacity=80);*/
+    }
+/*fin de matriz eis*/
+table.azul td{ padding:0px 4px;}
+table.azul .tdcenter td{ padding:0px 4px; text-align:center;}
+table.azul .textLeft{ text-align:left; }
+table.azul .textRight{ text-align:right; }
+table.azul .textCenter{ text-align:center; }
+table.azul  td.borderLeft{ border-left:1px solid #e4e4e5;}
+
+
+/*en eis matriz*/
+table.azul .textArriba{
+	text-align:center;
+	width:6%;
+	border-right:1px solid #e4e4e4;
+}
+table.azul td.labelLeft{
+	text-align:left;
+	padding-left:15%;
+	font-weight:bold;
+	color:#6d6e6f;
+	background:#FFFFFF;
+}
+
+table.azul tfoot tr{
+	height:30px;
+	color:#6d6e6f;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/subTitleFondoClaro.gif) repeat-x;
+}
+/*eisDatos buttones selecion*/
+table.selecion{
+	font-weight:bold;
+	width:100%;
+	border:0px solid red;
+}
+
+/*fin de azul tabla*/
+/*info tabla, buscador en el eis EISDatos*/
+table.infoTable {
+	width:100%;
+	margin:0px auto 0px auto;
+	border-collapse:collapse;
+	font-family:Arial, Helvetica, sans-serif;
+	border:0px solid black;
+	font-size:13px;
+}
+/*table.infoTable tr td{
+	border:1px solid red;
+}*/
+table.incidencias {
+	border-left:2px solid #D7D8D7;
+        border-right:2px solid #D7D8D7;
+        border-collapse:separate;
+}
+table.incidenciasNoborder {
+	border-left:2px solid #D7D8D7;
+        border-right:2px solid #D7D8D7;
+        border-collapse:separate;
+}
+table.incidencias td.title{
+    text-transform:uppercase;
+    text-align:left;
+    background-color:#D3D3D3;
+    padding-left:10px;
+}
+table.incidencias td.titleAzul{
+    text-transform:uppercase;
+    text-align:center;
+    font-weight: bold;
+    background-color:#C3D2E9;
+    padding-left:10px;
+    color:#666666;
+}
+table.borderTable {
+	border:1px solid #3b5998;
+	background:#FFF;
+}
+table.borderTable { background:#FFF; }
+table.borderTable tr.body:hover td { background:#f2f4f6; }
+
+table.infoTable th{
+	height:35px;
+	color:#333333;
+	border-bottom:2px solid #3b5998;
+	background:#c3d2e9;
+}
+
+table.infoTable tr{
+	margin:5px 0px;
+	height:30px;
+}
+table.infoTable tr.lejenda p{ padding-right:5px; text-align:left;}
+
+table.infoTable tr.tituloTabla{
+	height:30px;
+	color:#333333;
+	text-align:center;
+	font-weight:bold;
+	font-size:14px;
+}
+table.infoTable tr.titulosAzul{
+	font-weight:bold;
+	text-align:center;
+	color:#333;
+	border-bottom:1px solid #3b5998;
+	background:#c3d2e9;
+}
+
+table.infoTable tr.subTituloTabla{
+	height:30px;
+	color:#333;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #999999;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+}
+
+table.infoTable tr.titulos{
+	font-weight:bold;
+	text-align:center;
+	color:#333;
+	/*border-bottom:2px solid #e4e4e5;
+	border-top:2px solid #3b5998;*/
+	background:#c3d2e9;
+}
+table.infoTable tr td.titulos{
+	font-weight:bold;
+	text-align:center;
+	color:#333;
+	border:2px solid #3b5998;
+	background:#c3d2e9;
+}
+table.infoTable tr.gris{
+	font-weight:bold;
+	text-align:center;
+	color:#333;
+	border-bottom:2px solid #e4e4e5;
+	background:#f5f5f5;
+}
+table.infoTable tr.line{
+	border-bottom:2px solid #8fa3cc;
+}
+table.infoTable tr.lineGris{
+	border-bottom:1px solid #e4e4e5;
+}
+table.infoTable tr.lineGris{
+	border-bottom:1px solid #e4e4e5;
+}
+table.infoTable tr.lineGris td{
+	padding:3px 0;
+}
+table.infoTable tr.lineGris:hover td{
+	background: #e4e4e5;
+}
+/*tareas.xsql*/
+
+table.infoTable tr.subTituloTablaNoB{
+	height:28px;
+	color:#666666;
+	text-align:center;
+	font-weight:bold;
+	background:#E3E2E3;
+}
+table.infoTable tr.tareaLine{
+	height:35px;
+	color:#666666;
+	text-align:center;
+	font-weight:bold;
+	background:#FFF;
+}
+table.infoTable tr.subTareasTot{ border-bottom:1px solid #CCCCCC;}
+
+table.infoTable td.amarillo{ background:#FFFF99; }
+table.infoTable td.fondoVerde{ background:#A8FFA8;}
+table.infoTable td.fondoRojo{ background:#FE9090;}
+table.infoTable tbody tr.amarillo td{ background:#FFFF99; }
+table.infoTable tr.tareaLine td.borderTop{ border-top:0px solid #8fa3cc; }
+
+table.infoTable tr.tareaLine td.amarillo{ background:#FFFF99; border-top:2px solid #8fa3cc;}
+table.infoTable tr.line5{
+	border-bottom:2px solid #8fa3cc;
+	height:5px;
+}
+table.infoTable tr.azulEspacio{
+	font-weight:bold;
+	text-align:center;
+	color:#666666;
+	border-top:2px solid #3b5998;
+	border-bottom:2px solid #8fa3cc;
+	height:50px;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+}
+table.infoTable tr.amarilloEspacio{
+	font-weight:bold;
+	text-align:center;
+	color:#666666;
+	border-top:2px solid #3b5998;
+	border-bottom:2px solid #3b5998;
+	height:50px;
+	background:#FF9;
+}
+table.infoTable td.borderRight{
+	border-right:2px solid #8fa3cc;
+}
+table.infoTable td.borderLeft{
+	border-left:1px solid #999999;
+}
+table.infoTable td.borderBottom{ border-bottom:2px solid #8fa3cc; }
+table.infoTable td.borderGris{ border-bottom:2px solid #ccc; }
+
+table.infoTable td.rojo{ background:#FE4162; }
+
+table.infoTable td{ padding-left:2px; text-align:center; }
+table.infoTable .labelRight{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:5px;}
+
+table.infoTable .label{ font-weight:bold; color:#6d6e6f; padding-right:5px;}
+table.infoTable .labelRightTop{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:5px; vertical-align:top;}
+
+table.infoTable .label{ text-align:left; font-weight:bold; color:#6d6e6f; padding-left:5px;}
+
+table.infoTable .select{ float:left; color:#6d6e6f;}
+table.infoTable .margin5{ margin:10px 0px; padding:10px; border:0px solid red;}
+
+table.infoTable .datosLeft{ text-align:left;}
+table.infoTable .datosRight{ text-align:right;}
+table.infoTable td.white{ background:#FFFFFF;}
+
+table.selectEis select{ width:180px;}
+table.selectEis select.largo{ width:250px;}
+
+table.infoTable select.selectMatriz{ width:120px;}
+
+table.infoTable .datosLeft textarea{ margin:5px 0px;}
+table.infoTable .multiInputs input{ margin:2px 0px;}
+
+table.infoTable tfoot tr{ height:15px; padding:0px; }
+
+table.infoTable tfoot td.footLeft{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+}
+table.infoTable tfoot td.footRight{
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+}
+table#Grafico{
+	border-top:1px solid #6d6e6f;
+}
+/*fin de info tabla*/
+
+/*infotable naranja 2o paso pedido*/
+#divProductosManuales{
+	border:2px solid #fbc17c;
+	margin:15px 0px;
+}
+table.infoTableNara {
+	width:100%;
+	margin:0px auto 0px auto;
+	border-collapse:collapse;
+	font-family:Arial, Helvetica, sans-serif;
+	padding:5px 0px;
+	border-top:2px solid #fbc17c;
+	background:#fbe1c2;
+	font-size:13px;
+}
+
+table.infoTableNara .labelRight{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:5px;}
+table.infoTableNara .datosLeft{ text-align:left;}
+table.infoTableNara tr.tituloGrisScuro td{
+	height:30px;
+	color:#333333;
+	text-align:left;
+	background:#FC6;
+	margin-left:10px;
+	color:#333333;
+	border-bottom:1px solid #939494;
+	border-top:2px solid #939494;
+	font-size:12px;
+}
+table.infoTableNara tr.bold td{
+	font-weight:bold;
+	border-bottom:1px solid grey;
+}
+table.infoTableNara tbody td{
+	padding:5px 0px;
+	color:#333333;
+}
+/*fin infotable naranja 2o paso pedido*/
+
+
+/*infotable amarillo mant prod*/
+table.infoTableAma {
+	width:100%;
+	margin:0px auto 0px auto;
+	border-collapse:collapse;
+	font-family:Arial, Helvetica, sans-serif;
+	border:1px solid #999999;
+	padding:5px 0px;
+	background:#FFFF66;
+	font-size:13px;
+}
+
+table.infoTableAma .labelRight{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:5px;}
+table.infoTableAma .datosLeft{ text-align:left;}
+table.infoTableAma tr.tituloGrisScuro td{
+	height:30px;
+	color:#333333;
+	text-align:left;
+	background:#FC6;
+	margin-left:10px;
+	color:#333333;
+	border-bottom:1px solid #939494;
+	border-top:2px solid #939494;
+	font-size:12px;
+}
+table.infoTableAma tr.bold td{
+	font-weight:bold;
+	border-bottom:1px solid grey;
+}
+table.infoTableAma tbody td{
+	padding:5px 0px;
+	color:#333333;
+}
+/*fin table amarillo, en detalle empresa y en manten empresa*/
+
+
+table.docuProd tr td{
+	/*padding:3px 0px;
+	border-bottom:1px solid #999999;*/
+}
+
+table.docuProd tr.body td { background:#FFFF99; }
+table.docuProd tr.body:hover td { background:#FF9966; }
+/*fin infotable amarillo mant prod*/
+
+
+
+
+/*enviar pedidos*/
+table.busca{
+	width:100%;
+	height:auto;
+	border-collapse:collapse;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+        padding: 0px;
+        border-top:2px solid #3b5998;
+}
+table.busca th {
+	margin:0px 0px;
+	border:0px solid blue;
+}
+table.busca td {
+	margin:0px 0px;
+	font-weight:bold;
+	border-top:2px solid #3b5998;
+	border:0px solid red;
+}
+table.busca label{
+	color:#333333;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+}
+table.busca img{ border:none; }
+table.busca tr{
+	margin:0px 0px;
+	height:auto;
+	background:#c3d2e9;
+}
+table.busca tr.auxToogleClass{
+	height:25px;
+}
+table.busca tr.auxToogleClass td{
+	padding:0px 0 0px 0;
+}
+table.busca td.buscaLeft{
+	height:50px;
+	width:10px;
+	background: url(http://www.newco.dev.br/images/buscaLeftAzul.gif) no-repeat;
+}
+table.busca td.buscaRight{
+	height:50px;
+	width:10px;
+	background: url(http://www.newco.dev.br/images/buscaRightAzul.gif) no-repeat;
+}
+table.busca td.buscaLeftCorto{
+	height:15px;
+	width:15px;
+        padding:0px;
+	background: url(http://www.newco.dev.br/images/buscaLeftCorto.gif) no-repeat;
+}
+table.busca td.buscaRightCorto{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/buscaRightCorto.gif) no-repeat;
+}
+table.busca td{ text-align:center;}
+table.busca td span{ width:100px; float:left; border:0px solid red;}
+table.busca .labelRight{ text-align:right; font-weight:bold; color:#6d6e6f; padding-right:0px;}
+table.busca .datosLeft{ text-align:left;}
+table.busca .datosLeft textarea{ margin:5px 0px;}
+
+
+/*plantilla*/
+table.plantilla{
+	width:96%;
+	border-collapse:collapse;
+	margin:0px 2% 0px 2%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#f5f5f5;
+}
+table.plantilla td { border:0px solid red; }
+table.plantilla p{ color:#333333; padding-top:3px;}
+table.plantilla img{ padding:0px 4px 0px 3px; vertical-align:middle;}
+table.plantilla th {
+	margin:2px 5px;
+	color:#333333;
+	height:auto;
+	border-top:2px solid #3b5998;
+	border-bottom:1px solid #ffffff;
+	background:#c3d2e9;
+}
+
+table.plantilla tr.lineBorderTop td{ border-top:1px solid silver;}
+table.plantilla tr.lineBorderBottom td{ border-bottom:1px solid silver;}
+
+table.plantilla tr.lineBorderTop td img{ margin:2px 0px;}
+table.plantilla td.botones{
+	width:33%;
+	text-align:center;
+}
+table.plantilla td.botonesLargo{
+	text-align:center;
+}
+table.plantilla td.textLeft{
+	text-align:left;
+}
+table.plantilla .textCenter{
+	text-align:center;
+	float:center;
+}
+table.plantilla td.botones, td.botonesLargo a{
+	padding:2px 5px 3px;
+	color:#333333;
+	text-decoration:none;
+	font-weight:bold;
+	border:1px solid #ccc;
+	background: url(http://www.newco.dev.br/images/botonFondo.gif) repeat-x;
+}
+table.plantilla td.botones a:hover{
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/titleGris.gif) repeat-x;
+}
+table.plantilla td.select{ text-align:center; height:40px; margin:10px 0px; }
+table.plantilla td.select select{ width:98%;}
+
+table.plantilla tfoot td.footLeft{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+}
+
+table.plantilla tfoot td.footRight{
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+}
+table.plantilla tfoot td.foot{
+	height:15px;
+	width:15px;
+}
+/*fin plantilla*/
+/*botones pedidos*/
+.botonGrande{
+	width:95px;
+	height:35px;
+	padding:6px 0px 4px;
+	margin-left:30%;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/botonGrandeFondo.gif) no-repeat;
+}
+.botonGrande a{
+	color:#333333;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:13px;
+	margin:10px 5px;
+	float:center;
+}
+.botonGrande a:hover{
+	color:#666;
+}
+a.botonPedido{
+	text-decoration:none;
+	padding:4px 7px;
+	border:1px solid #f9b34b;
+	background: url(http://www.newco.dev.br/images/botonNara.gif) repeat-x;
+	color:#000;
+	border-radius:4px;
+}
+a.botonPedido:hover { color:#000; text-decoration:underline; }
+/*encuestas pagina enviar pedidos*/
+table.encuesta {
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	border:0px solid black;
+	font-size:13px;
+}
+table.encuesta tr.tituloTabla{
+	height:40px;
+	color:#333333;
+	border-bottom:1px solid #e4e4e5;
+	border-top:2px solid #939494;
+	padding:3px 5px;
+	font-size:13px;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+}
+table.encuesta tr.center{ text-align:center; }
+
+table.encuesta tr.lejenda{
+	height:40px;
+	color:#333333;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	padding:0px 10px;
+	background: url(http://www.newco.dev.br/images/fondoGrisCla50.gif) repeat-x;
+}
+table.encuesta img{ vertical-align:middle; }
+table.encuesta tr.titulos{
+	margin:5px 0px;
+	height:40px;
+	color:#333333;
+	font-size:13px;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	border-bottom:1px solid #e4e4e5;
+}
+table.encuesta tr.titulosNaranja{
+	margin:5px 0px;
+	height:30px;
+	color:#333333;
+	font-size:13px;
+	font-weight:normal;
+	background: url(http://www.newco.dev.br/images/fondoNaranja40.gif) repeat-x;
+	border-bottom:5px solid #e4e4e5;
+}
+table.encuesta tr.subCategorias{
+	height:30px;
+	color:#000;
+	text-align:left;
+	/*background: url(http://www.newco.dev.br/images/fondoGrisSubCat.gif) repeat-x;*/
+	padding-left:10px;
+}
+table.encuesta tr.subCategorias th{
+	font-weight:normal;
+	border-top:1px solid #999999;
+	background: url(http://www.newco.dev.br/images/fondoGrisSubCat.gif) repeat-x;
+}
+table.encuesta .paddingLeft{
+	padding-left:10px;
+}
+table.encuesta th{
+	color:#333333;
+	padding:0px 3px;
+}
+table.encuesta tr.titulosNoAlto{
+	margin:5px 0px;
+	color:#333333;
+	height:45px;
+	border-top:1px solid #FFF;
+	background:#C3D2E9;
+}
+table.encuesta tr.titulosNoAlto th{
+	margin:5px 0px;
+	color:#333333;
+	height:45px;
+	font-weight:normal;
+	font-size:13px;
+	border-top:1px solid #FFF;
+	background:#C3D2E9;
+}
+table.encuesta tr.titulosNoAlto th.left{
+	text-align:left;
+}
+table.encuesta tr.titulos img{ vertical-align:middle; }
+table.encuesta tr.titulos td{
+	padding-left:2px;
+}
+table.encuesta tr.lineBorder{ border-bottom:1px solid #e4e4e5; }
+table.encuesta tr.center td{ text-align:center; }
+
+table.encuesta tbody td{
+	padding:5px 1px;
+	background:#ffffff;
+	border-bottom:2px solid #e4e4e5;
+}
+table.encuesta tbody a{ text-decoration:none; }
+
+table.encuesta .fondoRojo{ background:#fe9090;}
+table.encuesta tr.amarillo td{ background:#FFFF99;}
+
+table.encuesta tbody tr.destacado td{ background:#fbfbbe; }
+table.encuesta tbody tr.destacado:hover td{ background:#fbfbbe; }
+table.encuesta tbody tr.ocultoTR td{
+	background: url(http://www.newco.dev.br/images/ocultoTR.gif) repeat-x;
+}
+table.encuesta tbody tr:hover td, table.encuesta tbody tr:hover th:before { background:#E3E2E2;}
+
+table.encuesta td.center{ text-align:center;}
+table.encuesta td.textLeft{ text-align:left;}
+table.encuesta td.textRight{ text-align:right;}
+
+table.encuesta textarea{ width:400px; height:100px; }
+table.encuesta tfoot tr{ background:#f2f4f6;}
+table.encuesta tfoot td{ height:15px; padding:0px; background:#f2f4f6;}
+
+/*lista de clientes en PROBuscador*/
+#listaClientes .clientesList{
+	width:240px;
+	padding:2px 4px;
+	border:0px solid red;
+	float:left;
+
+}
+.centerDiv{
+	text-align:center;
+}
+/*fin de encuestas*/
+
+/*pagina inicio*/
+.divNoticia90{ float:left; width:90%; margin-left:5%; border:0px solid red;}
+.divCenter{ width:100%; margin:0px auto; border:0px solid red;}
+.divCenter90{ width:90%; margin-left:5%; border:0px solid red;}
+.divCenter70{ width:70%; margin:0px auto; border:0px solid red;}
+.divCenter50{ width:50%; margin:0px auto; border:0px solid red;}
+.divCenter40{ width:40%; margin:0px auto; border:0px solid red;}
+.divCenter30{ width:30%; margin:0px auto; border:0px solid red;}
+.divCenter20{ width:20%; margin:0px auto; border:0px solid red;}
+.divCenter10{ width:10%; margin:0px auto; border:0px solid red;}
+
+.divLeft90{ float:left; width:90%; margin:0px auto; border:0px solid red;}
+
+.divLeft95m5{ float:left; width:95%; margin-left:2.5%; border:0px solid red;clear:both;}
+.divLeft99{ float:left; width:100%; padding:0px; margin:0px auto; border:0px solid red;}
+.divLeft85{ float:left; width:85%; margin:0px auto; border:0px solid red;}
+
+.divLeft80{ float:left; width:80%; margin:0px auto;}
+
+.divLeft70{ float:left; width:70%; margin:0px auto; border:0px solid red;}
+.divLeft50{ float:left; width:50%; margin:0px auto; border:0px solid red; padding:5px;}
+.divLeft50nopa{ float:left; width:49.5%; margin:0px 0px; border:0px solid red; }
+.divLeft60nopa{ float:left; width:60%; margin:0px auto; }
+.divLeft68{ float:left; width:68%; margin:0px auto; border:0px solid red;}
+.divLeft65{ float:left; width:65%; margin:0px auto; border:0px solid red; }
+
+.divLeft48{ float:left; width:48%; margin:0px 1% 20px; border:0px solid red;}
+.divLeft40{ float:left; width:40%; margin:0px 0px 0px 1.5%; border:0px solid red; padding:5px;}
+.divLeft45nopa{ float:left; width:45%;}
+.divLeft55nopa{ float:left; width:55%;}
+.divLeft50{ float:left; width:50%;}
+.divLeft40nopa{ float:left; width:40%;}
+.divLeft39{ float:left; width:39%;}
+.divLeft35{ float:left; width:35%; border:0px solid red; padding:0px;}
+.divLeft30{ float:left; width:30%; border:0px solid red; padding:5px;}
+.divLeft30nopa{ float:left; width:30%; border:0px solid red; padding:0px;}
+.divLeft28{ float:left; width:28%; border:0px solid red; margin-left:1%;}
+.divLeft27nopa{ float:left; width:27%; border:0px solid red;}
+.divLeft25{ float:left; width:25%; border:0px solid red; margin-left:1%;}
+.divLeft25nopa{ float:left; width:25%; border:0px solid red; }
+.divLeft20{ float:left; width:20%; border:0px solid red; }
+.divLeft15nopa{ float:left; width:15%; border:0px solid red; }
+.divLeft10{ float:left; width:10%; border:0px solid red; }
+
+.divLeft5{ float:left; width:5%; border:0px solid red; }
+
+.divLeft3{ float:left; width:3%; border:0px solid red; }
+.divLeft{ float:left; width:100%; clear:both; border:0px solid red; }
+.divRight{ float:right; width:100%; clear:both; border:0px solid red; }
+.divRight10{ float:right; width:10%; border:0px solid red; }
+
+.divProBuscaIma{ float:left; margin-left:10px; width:240px; border:0px solid green; }
+.divProBuscaIma a{ margin-right:20px; border:0px solid green; }
+
+.left50td{ float:left; width:50%;}
+
+.sombra {
+	height:15px;
+	border:0px solid red;
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/sombraMediaTabla.gif) repeat-x;
+}
+.lineaAzul {
+	height:3px;
+	border-top:2px solid #3b5998;
+	background: #c9d7f5;
+}
+.divRight{ float:right; }
+
+.middle{ width:90%; margin:0px auto 10px 5%; }
+.middle p{ text-align:center; }
+.titlePage{
+	text-align:center;
+	color:#333333;
+	font-weight:bold;
+	padding-top:10px;
+	height:32px;
+	background: #c3d2e9;
+	border-bottom:2px solid #3b5998;
+	font-size:16px;
+}
+.titlePageBorder{
+	text-align:center;
+	color:#333333;
+	font-weight:bold;
+	padding-top:10px;
+	height:32px;
+	border-top:2px solid #3b5998;
+	font-size:16px;
+}
+.titlePageBajo{
+	text-align:center;
+	color:#333333;
+	font-weight:bold;
+	padding-top:2px;
+	height:18px;
+	background: url(http://www.newco.dev.br/images/titulosFondo.gif) repeat-x;
+	border-bottom:2px solid #3b5998;
+	font-size:13px;
+}
+.breadcrumbs{
+	color:#333333;
+	padding:0px 5px 0px 5px;
+	color:#333333;
+	font-weight:bold;
+}
+.salir{ padding:10px 0px 0px 5px; border-top:2px solid #3b5998; margin-top:10px; }
+.botonLeft{ float:left; margin-left:2%; }
+.botonRight{ float:right; margin-right:2%; }
+
+.evidenciado{
+	float:left;
+	margin-left:5%;
+	margin-right:2%;
+	height:100px;
+	width:250px;
+	background: url(http://www.newco.dev.br/images/postit.gif) no-repeat;
+}
+.evidenciado p{
+	text-align:left;
+	width:230px;
+	font-weight:bold;
+	color:#666666;
+	font-family:Arial, Helvetica, sans-serif;
+	margin:10px;
+	font-size:11px;
+}
+/*cuadro abajo para pedidos problematicos*/
+.problematicos{
+	float:left;
+        border:1px dotted #FF0000;
+	background-color:#FFFF99;
+}
+.problematicos p{
+	text-align:justify;
+	font-weight:bold;
+	color:#666666;
+	font-family:Arial, Helvetica, sans-serif;
+	margin:5px;
+	font-size:11px;
+}
+.problematicos img{ vertical-align: middle;}
+.problematicos select{
+	font-size:12px;
+}
+.contacto{
+	float:left;
+	height:40px;
+	background: url(http://www.newco.dev.br/images/fondoGrisCla50.gif) repeat-x;
+	border-bottom:2px solid #CCCCCC;
+}
+.contacto p.contact{
+	text-align:center;
+	font-weight:bold;
+	color:#666666;
+	font-size:11px;
+	margin-top:5px;
+}
+.contacto p.derechos{
+	text-align:center;
+	color:#666666;
+	font-size:10px;
+	margin-top:5px;
+}
+/*noticias inicio*/
+table.noticiasMvm{
+	width:100%;
+	border-collapse:collapse;
+	margin-left:0px;
+	font-size:12px;
+	background:#FFFFFF;
+	border:2px solid #f9b247;
+}
+table.noticiasMvm td { padding:3px 4px; color:#6d6e6f;}
+table.noticiasMvm p{ color:#6d6e6f; padding:5px 4px; text-align:left;}
+table.noticiasMvm img{ padding:0px 4px 0px 3px; vertical-align:middle;}
+table.noticiasMvm tr.tituloTabla p{
+	text-align:left;
+	color:#f9b247;
+	font-size:16px;
+	font-size:20px;
+	font-family:"BebasNeue", sans-serif;
+}
+/*resumen ahorro inicio*/
+table.resumen{
+	width:97%;
+	border-collapse:collapse;
+	margin:0px 1.5%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#f5f5f5;
+}
+table.resumen tr.tituloTabla {
+	border-top:2px solid #6d6e6f;
+	height:30px;
+	color:#6d6e6f;
+	background: url(http://www.newco.dev.br/images/fondoGrisResumen.gif) repeat-x;
+}
+table.resumen tr.tituloTabla p{ text-align:center; color:#333333; margin:3px 0px; }
+table.resumen tr.titulos p{ color:#6d6e6f; margin-top:3px;}
+table.resumen td { text-align:center; color:#333333;}
+table.resumen tfoot td.footLeft{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+}
+table.resumen tfoot td.footRight{
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+}
+/*alarmas ahorro inicio*/
+table.alarmas{
+	width:97%;
+	border-collapse:collapse;
+	margin:0px 0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#f5f5f5;
+}
+table.alarmas tr.tituloPrinc {
+	border-top:2px solid #3b5998;
+	height:40px;
+	color:#6d6e6f;
+	padding:0px 5px 0px 5px;
+	background:#c3d2e9;
+}
+table.alarmas tr.tituloTabla {
+	border-top:2px solid #3b5998;
+	height:35px;
+	color:#6d6e6f;
+	background:#c3d2e9;
+}
+table.alarmas tr.subTitle td{
+	height:25px;
+	color:#6d6e6f;
+	font-weight:bold;
+	font-size:12px;
+	border-bottom:1px solid #CCCCCC;
+	border-top:1px solid #CCCCCC;
+}
+table.alarmas tr.tituloTabla p{ text-align:left; color:#333333; padding:0px 5px 0px 5px;}
+table.alarmas td img{ vertical-align:middle; border:none; margin-top:0px;}
+table.alarmas td p{ text-align:left; color:#333333; padding:5px 0px 5px 5px;}
+table.alarmas tfoot td.footLeft{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+}
+table.alarmas tfoot td.footRight{
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+}
+table.alarmas tbody tr:hover td, table.alarmas tbody tr:hover th:before { background:#fff;}
+
+/*tabla grande abajo inicio*/
+table.grandeInicio {
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	border:0px solid black;
+	font-size:13px;
+}
+table .grandeInicio th{
+	height:auto;
+	color:#333333;
+	font-size:15px;
+	padding:3px 0px;
+	text-align:center;
+
+}
+table.grandeInicio th.grisCla{ background:#fff;}
+table.grandeInicio th.grisOscuro{ background:#f5f5f5;}
+table.grandeInicio tr.tituloTabla{
+	height:40px;
+	color:#333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	font-size:14px;
+	background:#c3d2e9;
+}
+table.grandeInicio tr.tituloTablaPeq{
+	height:40px;
+	color:#333;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	font-size:14px;
+	background:#c3d2e9;
+}
+table.grandeInicio tr.tituloTablaPeq a{ font-size:13px; color:#333; }
+
+
+table.grandeInicio img{ vertical-align:middle; }
+table.grandeInicio tr.subTituloTabla{
+	text-align:center;
+	height:30px;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #999999;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	padding:3px 5px;
+	color:#333333;
+}
+table.grandeInicio tr.subTituloTablaGris{
+	text-align:center;
+	height:30px;
+	font-weight:bold;
+	background:#E3E2E2;
+	padding:3px 5px;
+	color:#333333;
+}
+
+table.grandeInicio tr.lejenda{
+	height:40px;
+	color:#333333;
+	font-weight:bold;
+}
+table.grandeInicio tr.lejenda p{ padding-right:5px; text-align:left;}
+
+table.grandeInicio tr.titulos{
+	margin:5px 0px;
+	height:40px;
+	color:#3b5998;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+}
+
+table.grandeInicio tr.titulosAzul{
+	font-weight:bold;
+	text-align:center;
+	color:#666666;
+	border-bottom:2px solid #e4e4e5;
+	border-top:2px solid #3b5998;
+	background: #C3D2E9;
+}
+
+table.grandeInicio tr.titulos img{ vertical-align:middle; }
+table.grandeInicio tr.titulos th{
+	padding:4px 2px 2px 2px;
+	color:#3b5998;
+	border:0px solid red;
+}
+
+table.grandeInicio tr.titulosAzul th{ padding:4px 2px 2px 2px; }
+
+table.grandeInicio tr.oculta td{ display:none;}
+table.grandeInicio tr.categoria td{
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background:#b5b4b4;
+}
+table.grandeInicio tr.familia td{
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background:#c9c8c8;
+        padding:3px;
+}
+table.grandeInicio tr.subFamilia td{
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background:#dfdede;
+}
+table.grandeInicio tr.grupo td{
+	color:#666666;
+	text-align:left;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+	background:#eeedee;
+}
+table.grandeInicio tr.categoria:hover td, table.grandeInicio tr:hover th:before { background:#b5b4b4;}
+table.grandeInicio tr.familia:hover td, table.grandeInicio tr:hover th:before { background:#c9c8c8;}
+table.grandeInicio tr.subFamilia:hover td, table.grandeInicio tr:hover th:before { background:#dfdede;}
+table.grandeInicio tr.grupo:hover td, table.grandeInicio tr:hover th:before { background:#eeedee;}
+
+table.grandeInicio tr.producto td{
+	color:#666666;
+	text-align:left;
+	padding-left:5%;
+	font-weight:bold;
+	border-bottom:1px solid #939494;
+}
+table.grandeInicio tr.gris td{
+	color:#666666;
+	background:#eeedee;
+	border:0px solid red;
+}
+table.grandeInicio tr.select{
+	text-align:center;
+	height:42px;
+	padding:0px;
+	background:#f5f5f5;
+	border:none;
+}
+
+table.grandeInicio tr.separator{
+	height:5px;
+	padding:0px;
+	background:#e4e4e5;
+}
+table.grandeInicio input.noinput{
+	border:none;
+	background:transparent;
+	text-align:center;
+	font-weight:bold;
+}
+table.grandeInicio input.noinput:hover{
+	border:none;
+	background:#ffffff;
+}
+
+
+table.grandeInicio tbody tr td{
+	height:30px;
+	background:#ffffff;
+	border-bottom:2px solid #e4e4e5;
+	border:0px solid red;
+}
+table.grandeInicio tbody tr.azul td{
+	border-bottom:2px solid #e4e4e5;
+	background:#D5DFF7;
+	color:#000;
+}
+table.grandeInicio tbody tr td.naranja{
+	border-bottom:2px solid #e4e4e5;
+	background:#fbe1c2;
+	color:#000;
+}
+table.grandeInicio tbody tr.fondoAlternativa td{ background:#FF9; border:none; border-bottom:1px solid #939494; }
+table.grandeInicio tbody tr.fondoAlternativa:hover td{ background:#FF9; border:none; border-bottom:1px solid #939494; }
+
+table.grandeInicio tbody tr.fondoAlternativaBorder td{
+	background:#FF9;
+	border-bottom:2px solid #e4e4e5;
+}
+table.grandeInicio tbody tr.fondoAlternativaBorder:hover td{
+	background:#FF9;
+	border-bottom:2px solid #e4e4e5;
+}
+table.grandeInicio tr.azul:hover td, table.grandeInicio tr.azul:hover th:before { background:#D5DFF7;}
+
+table.grandeInicio td.fondoRojo{ background:#FE4162;}
+table.grandeInicio tbody tr:hover td.fondoRojo, table.grandeInicio tbody tr:hover th:before { background:#FE4162;}
+
+table.grandeInicio td.fondoNaranja{ background:#FF9900; }
+table.grandeInicio tbody tr:hover td.fondoNaranja, table.grandeInicio tbody tr:hover th:before { background:#FF9900;}
+
+table.grandeInicio td.fondoAmarillo{ background:#FFFF99; }
+table.grandeInicio tbody tr:hover td.fondoAmarillo, table.grandeInicio tbody tr:hover th:before { background:#FFFF99;}
+
+
+
+table.grandeInicio tr.fondoRojo td{ background:#FE4162; }
+table.grandeInicio tr.fondoNaranja td{ background:#FF9900; }
+table.grandeInicio tr.fondoAmarillo td{ background:#FFFF99; }
+table.grandeInicio tr.fondoNaranjaSuave td{ background:#fbbf65; }
+table.grandeInicio tr.fondoAmarilloSuave td{ background:#ffffc4; }
+
+table.grandeInicio td.grisOscuro{ background:#f5f5f5;}
+table.grandeInicio tr.grisOscuroB{ background:#f5f5f5; font-weight:bold; color:#333333;}
+table.grandeInicio tr.grisOscuroB:hover{ background:#f5f5f5; font-weight:bold; color:#333333;}
+table.grandeInicio tr.subTituloTabla:hover td{ background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x; }
+
+table.grandeInicio tbody tr:hover td, table.grandeInicio tbody tr:hover th:before { background:#E3E2E2;}
+table.grandeInicio tbody tr.noChange:hover td, table.grandeInicio tbody tr:hover th:before { background:#ffffff;}
+
+table.grandeInicio tbody tr.fondoRojo:hover td, table.grandeInicio tbody tr:hover th:before { background:#FE4162;}
+table.grandeInicio tbody tr.fondoNaranja:hover td, table.grandeInicio tbody tr.fondoNaranja:hover th:before { background:#FF9900;}
+table.grandeInicio tbody tr.fondoAmarillo:hover td, table.grandeInicio tbody tr.fondoAmarillo:hover th:before { background:#FFFF99;}
+table.grandeInicio tbody tr.fondoNaranjaSuave:hover td, table.grandeInicio tbody tr.fondoNaranjaSuave:hover th:before { background:#faa82c;}
+table.grandeInicio tbody tr.fondoAmarilloSuave:hover td, table.grandeInicio tbody tr.fondoNaranjaSuave:hover th:before { background:#FFFF99;}
+
+table.grandeInicio tbody tr.separator:hover td, table.grandeInicio tbody tr:hover th:before { background:#eeedee;}
+
+
+table.grandeInicio tbody tr.center{ text-align:center;}
+table.grandeInicio tbody td{ padding:3px 2px;}
+
+table.grandeInicio tbody td.azul{ background:#D5DFF7;}
+
+table.grandeInicio .borderLeft{ border-left:1px solid #CCCCCC;}
+table.grandeInicio .borderRight{ border-right:1px solid #CCCCCC;}
+
+table.grandeInicio .textLeft{
+	text-align:left;
+	margin-top:3px;
+}
+table.grandeInicio td.textLeft{
+	text-align:left;
+	padding:3px;
+}
+table.grandeInicio .textRight{ text-align:right;}
+table.grandeInicio tfoot tr{
+	height:auto;
+	color:#6d6e6f;
+	text-align:center;
+	background:#FFF;
+}
+table.grandeInicio tfoot tr.gris{
+	height:30px;
+	color:#6d6e6f;
+	text-align:right;
+	border:0px solid red;
+}
+table.grandeInicio tfoot tr td{ border:0px solid red; }
+
+table.grandeInicio tfoot tr.gris td{ padding-right:4px; }
+table.grandeInicio td.select{ text-align:center; height:40px; margin:10px 0px; }
+table.grandeInicio select{ border:1px solid #ccc;}
+table.grandeInicio td{ border:0px solid red; text-align:center;}
+
+table.grandeInicio tfoot td.footLeft{
+	height:15px;
+	width:15px;
+}
+table.grandeInicio tfoot td{ background:#f5f5f5; border:0px solid red; }
+table.grandeInicio tfoot td.quincepx{ width:15px; }
+table.grandeInicio tfoot td.footRight{
+	height:15px;
+	width:15px;
+	float:right;
+}
+/*tabla buscador*/
+table.buscador { width:100%; background:#f5f5f5; border-collapse:collapse; font-size:13px;}
+table.buscador tr.select label{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:100px;
+}
+table.buscador tr.select select{
+	font-weight:bold;
+	color:#6d6e6f;
+	width:120px;
+	border:1px solid #ccc;
+}
+table.buscador tr.select:hover th { background:#F5F5F5;}
+
+table.buscador tr.selectAva{
+        text-align:left;
+        color:#6d6e6f;
+}
+table.buscador tr.selectAva th {
+        padding-left:10px;
+}
+table.buscador tr.selectAva th label{
+        color:#6d6e6f;
+}
+/*Pestanyas*/
+table#Pestanyas tr th{
+	margin:0px;
+	padding:10px 20px;
+        color:#666;
+}
+table#PestanasInicio{ width:100%; }
+table#PestanasInicio tr th{
+	margin:0px;
+	padding:5px 0px;
+        color:#666;
+        font-size:14px;
+}
+table#PestanasInicio tr th a{
+	text-decoration: none;
+}
+table#PestanasEis tr th{
+	padding:0px 5px;
+        color:#666;
+        margin:0 3%;
+        font-size:12px;
+}
+table#PestanasEis tr th a{
+	color:#666;
+}
+.pestanaInicio{
+    background:#E3E2E2;
+    border:1px solid #FFF;
+}
+.pestanaSelect{
+    background:#C3D2E9;
+    border:1px solid #FFF;
+}
+/*menu Gestion*/
+table.menuGestion{
+	border:0px solid blue;
+	border-bottom:0px solid #396BAD;
+	font-size:12px;
+}
+table.menuGestion th{
+        padding:5px 11px;
+        color:#666;
+        font-size:14px;
+	border-left:2px solid white;
+	background:#E3E2E2;
+}
+table.menuGestion th.selectGestion{
+	background:#C3D2E9;
+}
+.menuGestion a{ color:#666; text-decoration:none;}
+/*multiframe tablas*/
+table.mediaTabla{
+	border-collapse:collapse;
+	width:100%;
+	font-size:13px;
+}
+table.mediaTabla img{ vertical-align:middle;}
+table.mediaTabla tbody tr td{ border:0px solid red; }
+table.mediaTabla p{ text-align:left; line-height:14px;}
+table.mediaTabla thead tr th {
+	padding:5px 0px;
+	text-align:center;
+	color:#333333;
+	font-weight:bold;
+	background:#C3D2E9;
+}
+table.mediaTabla th {
+	padding:5px 0px;
+	text-align:center;
+	color:#333333;
+	font-weight:bold;
+	background:#C3D2E9;
+
+}
+table.mediaTabla tr.bold td{
+	font-weight:bold;
+	border-bottom:1px solid grey;
+}
+
+table.mediaTabla .center{
+	text-align:center;
+}
+table.mediaTabla tbody td{
+	padding:5px 0px;
+	color:#333333;
+}
+.bgPestana{
+	background:#CC3300;
+}
+table.mediaTabla tr.tituloTabla td{
+	height:30px;
+	color:#333333;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background:#e8e7e7;
+}
+
+table.mediaTabla tr.tituloTabla p{ padding:3px 10px; text-align:center;}
+/*linea pedido*/
+table.mediaTabla tr.tituloGris td{
+	height:30px;
+	color:#333333;
+	text-align:left;
+	font-weight:bold;
+	background:#DDDDDD;
+	margin-left:10px;
+	color:#333333;
+	border-bottom:1px solid #939494;
+	font-size:12px;
+}
+table.mediaTabla tr.tituloGrisScuro td{
+	height:30px;
+	color:#333333;
+	text-align:left;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	margin-left:10px;
+	color:#333333;
+	border-top:2px solid #939494;
+	border-bottom:1px solid #939494;
+	font-size:12px;
+}
+table.mediaTabla td.label{
+	text-align:right;
+	color:#6d6e6f;
+	padding-right:2%;
+}
+table.mediaTabla td.datosLeft{ text-align:left; }
+table.mediaTabla td.datosCenter{ text-align:center; }
+table.mediaTabla td.datosRight{ text-align:right; }
+
+table.mediaTabla tr.redondo td{ background:#f5f5f5; height:15px; }
+table.mediaTabla tr.redondo td.headLeft{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/headLeft.gif) no-repeat;
+}
+table.mediaTabla tr.redondo td.headRight{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/headRight.gif) no-repeat;
+}
+table.mediaTabla tfoot td{ background:#f5f5f5; border:0px solid red; }
+table.mediaTabla tfoot td.quincepx{ width:15px; }
+table.mediaTabla tfoot td.alto20{ height:19px; width:15px; border:0px solid red;  }
+table.mediaTabla tfoot td.footLeft{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+}
+table.mediaTabla tfoot td.footRight{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+}
+/*tabla detalle producto proDetalle*/
+table.prodTabla{
+	border-collapse:collapse;
+	width:100%;
+	/*border-left:1px solid grey;
+	border-right:1px solid grey;*/
+}
+table.prodTabla tr td{
+	border-bottom:0px solid #CCC;
+	height:26px;
+        font-size:14px;
+}
+table.prodTabla td.label{
+	text-align:right;
+	color:#6d6e6f;
+	padding-right:10px;
+	font-size:14px;
+}
+table.prodTabla td.labelnopa{
+	text-align:right;
+        font-weight:bold;
+	color:#6d6e6f;
+	font-size:14px;
+}
+table.prodTabla td.datosLeft{
+	text-align:left;
+        font-size:14px;
+}
+
+/*tabla redonda*/
+table.redonda {
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+}
+table.redonda tr.tituloTabla{
+	height:25px;
+	color:#333333;
+	text-align:left;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/alarmasTitulos.gif) repeat-x;
+}
+table.redonda tr.tituloTabla p{ padding:3px 5px; color:#333333;}
+table.redonda tbody td{
+	padding:3px 0px;
+	text-align:left;
+	color:#333333;
+	background:#f5f5f5;
+}
+table.redonda tr.lejenda{
+	height:40px;
+	color:#333333;
+}
+table.redonda tr.lejenda p{ padding-right:5px; text-align:left;}
+table.redonda td.label{
+	text-align:right;
+	color:#6d6e6f;
+	padding-right:1%;
+}
+table.redonda tbody tr:hover td, table.redonda tbody tr:hover th:before { background:#fff;}
+
+table.redonda .borderLeft{ border-left:1px solid #e4e4e5;}
+table.redonda .borderRight{ border-right:1px solid #e4e4e5;}
+
+table.redonda .textLeft{
+	text-align:right;
+	padding-right:0.5%;
+	width:32.5%;
+	border-right:1px solid #e4e4e4;
+}
+table.redonda tfoot tr{
+	height:30px;
+	color:#6d6e6f;
+	text-align:center;
+	background: url(http://www.newco.dev.br/images/subTitleFondoClaro.gif) repeat-x;
+}
+table.redonda td.select{ text-align:center; height:40px; margin:10px 0px; }
+table.redonda select{ border:1px solid #ccc;}
+table.redonda tfoot td.footLeft{
+	height:15px;
+	width:15px;
+	background: url(http://www.newco.dev.br/images/footLeft.gif) no-repeat;
+}
+
+table.redonda tfoot td.footRight{
+	height:15px;
+	width:15px;
+	float:right;
+	background: url(http://www.newco.dev.br/images/footRight.gif) no-repeat;
+}
+
+/*botones compras multiofertaframe */
+table.botonesMOF{
+	width:100%;
+	border:0px solid red;
+}
+
+/*tabla grande abajo inicio*/
+table.oscuro {
+	width:100%;
+	margin-top:0px;
+	border-collapse:collapse;
+	border:0px solid black;
+}
+
+table.oscuro tr.tituloTabla{
+	height:40px;
+	color:#000;
+	font-weight:bold;
+	text-align:center;
+	border-bottom:1px solid #939494;
+	border-top:1px solid #e4e4e5;
+	background: url(http://www.newco.dev.br/images/titulosFondo70.gif) repeat-x;
+}
+table.oscuro tr.subTituloTabla{
+	height:auto;
+	color:#666666;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-bottom:1px solid #999999;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+}
+table.oscuro tr.titulos{
+	margin:5px 0px;
+	height:40px;
+	color:#3b5998;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+}
+
+table.oscuro td.oscuro{ background:#e9e8e8;}
+table.oscuro tbody tr:hover td, table.oscuro tbody tr:hover th:before { background:#f5f5f5;}
+
+/*tabla noBorder*/
+table.noBorder{
+	border:none;
+	border-collapse:collapse;
+	width:100%;
+}
+table.noBorder tr td{ border:none;}
+table.noBorder td{ border:none;}
+/*imagenes EMPManten*/
+.imageLineEmp{
+	float:left;
+	width:auto;
+	margin-right:15px;
+}
+/*imagenes PROManten*/
+.imageLine{
+	float:left;
+	clear:both;
+	width:100%;
+	margin:0px 0px 15px 15px;
+}
+.imageManten{
+	float:left;
+	clear:both;
+	width:100%;
+}
+.imageLine label{ float:left; width:20px;}
+.imageLine input{ float:left; }
+.imageLine img{
+	float:left;
+	width:70px;
+	height:70px;
+	border:1px solid #396BAD;
+
+}
+.imageLine a{	float:left; margin-left:10px; }
+.imageManten img{
+	float:left;
+	width:70px;
+	height:70px;
+	border:1px solid #396BAD;
+
+}
+.imageManten a{	float:left; margin-left:10px; }
+/*mantenimiento imagenes proveedor en buscador*/
+.imageLineBusca{
+	float:left;
+
+}
+.imageLineBusca .remove{ float:right; margin:3px 0px 0px 10px;}
+.imageBuscaManten{
+	float:left;
+}
+.imageBuscaManten img.manFotoBusca{
+	float:left;
+	width:20px;
+	height:20px;
+	border:1px solid #396BAD;
+
+}
+.imageBuscaManten a{ float:left; margin-left:2px; }
+.imageBuscaManten img{float:left; }
+/*div donde aparecen las fotos en Admin/Manten/Produc/PROBuscadorHTML.xsl*/
+.divFotoProBusca{
+	padding-right:10px;
+	background:#FFF;
+}
+.divFotoProBusca img{
+	border:2px solid #D1D2D4;
+}
+/*imagenes en Compras/Multioferta/ListaProductos*/
+
+.imagenListaProd{
+	width:25px;
+	height:25px;
+	margin-left:2px;
+	border:1px solid #D1D2D4;
+}
+.imagenProDetalle{
+	border:1px solid #D1D2D4;
+}
+/*carga documentos*/
+.confirmBox{
+	/*float:center;*/
+}
+.waitBox{ /*float:center;*/ }
+#cargaDoc{
+	background: url(http://www.newco.dev.br/images/fondoCargaDoc.gif) repeat;
+	border-top:2px solid #D1D2D4;
+	border-bottom:2px solid #D1D2D4;
+}
+.divCargaDoc{ background:#f5f5f5; padding:5px;  }
+
+#docLine_LOGO .remove{
+	border:0px solid red;
+	margin-top:2px;
+	float:right;
+}
+#docLongEspec_LOGO{border:0px solid red; width:50%; float:left; }
+#docLine_ALBARAN .remove{
+	border:1px solid red;
+	margin-top:2px;
+        width:80px;
+	float:right;
+}
+.docLine{
+    border:0px solid red;
+}
+/*estilo input file listado*/
+div.docLongEspec {
+	position: relative;
+}
+div.fakefile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+        border:0px solid yellow;
+	z-index: 1;
+        
+}
+div.fakefile input {
+	padding:0 3px;
+        margin-top:3px;
+        width:105px;
+}
+div.docLongEspec input.file {
+	position: relative;
+	text-align: center;
+	-moz-opacity:0 ;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+	z-index: 2;
+        background:#DBE4F2;
+        cursor:pointer;
+}
+
+/*reclamar en bandeja de entrada*/
+.reclamarCaja{ float:right;  }
+.reclamarCaja a{ float:right; margin:7px 10px 0px 0px;}
+.confirmReclamacion{ margin-top:7px; }
+
+/*datos producto original*/
+.originalPro{
+	text-align:center;
+	margin-top:5px;
+	padding:10px 0px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.originalPro label{ font-weight:bold; color:#6d6e6f; font-family:Arial, Helvetica, sans-serif;}
+#backAma{ background:#FFFF99;}
+#backRojo{ background:#F38F65;}
+
+/*autorizar clientes*/
+.autorizarClientes{
+	width:100%;
+	float:left;
+}
+.autorizarClientesBox{
+	width:260px;
+	float:left;
+}
+.autorizarClientesBox .oneAutorizar{
+	width:100%;
+	float:left;
+	margin:2px 0px;
+}
+/*noticia static page*/
+p.grisNoticias{ color:#333; font-weight:bold;}
+p.grisNoticias img{ vertical-align:middle;}
+a.linkNoticias{ text-decoration:none;}
+a:hover.linkNoticias{ text-decoration:underline;}
+p.fechaNoticias{ text-align:right; margin-right:15px; color:#8fa3cc;}
+p.textNoticias{ color:#666666;}
+p.lineNoticias{ margin-top:4px; border-top:1px solid #8fa3cc; }
+
+/*Testimonios*/
+.oneTestimonio{
+	border:0px solid red;
+	margin:10px 0px;
+	float:left;
+	width:100%;
+	padding:5px 10px 5px;
+}
+.oneTestimonio p.quienTestimonio{
+	float:right;
+	text-align:right;
+	font-family:Arial, Helvetica, sans-serif;
+	margin-top:5px;
+
+}
+.contentTestimonio{
+	float:left;
+	margin-bottom:5px;
+}
+.textTestimonio{
+	float:left;
+	width:98%;
+}
+
+.textTestimonio p{
+	float:left;
+	width:100%;
+	text-align:justify;
+	line-height:20px;
+	font-family:Arial, Helvetica, sans-serif;
+	border:0px solid red;
+}
+
+.mantTestimonio{
+	border:2px solid #ccc;
+	margin-bottom:10px;
+	padding:5px;
+	float:left;
+	width:100%;
+}
+.mantQuienTesti{
+	margin-top:5px;
+	float:left;
+	width:70%;
+}
+.mantLinkTesti{
+	margin-top:5px;
+	float:left;
+	width:30%;
+}
+.mantLinkTesti p{ float:right; }
+.mantTestimonio .detalleTesti{ float:left; width:70%; margin-top:4px;}
+.mantTestimonio .estadoTesti{ float:left; width:30%;}
+.mantTestimonio .estadoTesti p{ float:right; margin-top:10px;}
+.mantTestimonio .mantTextTesti p{ margin-top:5px;}
+/*buscador testi parte publica*/
+.buscaTesti{
+	float:left;
+	border:0px solid red;
+	margin:0px 0px 10px 50px;
+}
+.buscaTesti p.checkTesti{
+	float:left;
+}
+
+.buscaTesti input{
+	float:left;
+	font-size:13px;
+	margin:2px 20px 0px 0px;
+}
+
+/*fncp style home, index   width:650px;
+	height:435px;
+	*/
+.homeBoxFNCP {
+	width:1024px;
+	height:768px;
+	border:0px solid green;
+	margin:80px auto 0px 20%;
+	font-family:Georgia, "Times New Roman", Times, serif;
+
+}
+.homeFNCP{
+	width:1024px;
+	height:768px;
+	border:0px solid red;
+	background: url(http://www.newco.dev.br/images/fondoHomeFNCP1.jpg) no-repeat ;
+}
+.logoLoginFNCP{
+	float:left;
+	width:640px;
+	height:270px;
+	margin-top:120px;
+	border:0px solid red;
+}
+.logoFNCP{
+	float:left;
+	width:520px;
+	height:150px;
+	border:1px solid blue;
+}
+.loginFNCP{
+	float:left;
+	width:110px;
+	height:150px;
+	border:1px solid blue;
+	margin-left:5px;
+}
+.loginFNCP p{
+	text-align:center;
+	color:#787979;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	margin:5px 0px 0px 0px;
+	border:0px solid blue;
+}
+.loginFNCP input.intext{
+	height:20px;
+	width:100px;
+	border:1px solid #c7d5e5;
+	margin-left:5px;
+}
+.loginFNCP input.buttonLogin{
+	margin:15px 0px 0px 6px;
+}
+.menuFNCP{
+	float:left;
+	width:640px;
+	height:30px;
+	margin-top:22px;
+	border:0px solid blue;
+}
+.menuFNCP p.menuTextFNCP{
+	margin:8px 0px 0px 6px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:16px;
+	font-weight:bold;
+	color:#4d4e4e;
+}
+.menuFNCP a{ color:#1d397b; text-decoration:none; margin-right:0px; border:0px solid red; }
+.menuFNCP a:hover{ color:#4d4e4e; text-decoration:none; }
+
+/*fin de fncp style home*/
+
+a.accFirma, a.accAdjud, a.accRollBack{
+	text-decoration:none;
+}
+
+.botonesLic div.botonLargo {
+	margin-bottom: 10px;
+}
+
+#MensPedidoMinimo, #MensActualizarOfertas {
+	color:green;
+	float:left;
+	height:20px;
+	padding-top:5px;
+	width:300px;
+}
+
+.rojo1{
+	color:#fa8322;
+}
+.rojo2{
+	color:#fb0d40;
+	font-weight:bold;
+}
+
+/* ToolTip kit for pop-ups */
+.tooltip {
+	outline: none;
+	cursor: help; text-decoration: none;
+	position: relative;
+}
+.tooltip span {
+	margin-left: -999em;
+	position: absolute;
+	text-align: left;
+}
+.tooltip:hover span.classic {
+	border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+	position: absolute; left: 1em; top: 2em; z-index: 99;
+	margin-left: 0; width: 250px;
+}
+.tooltip:hover span {
+	border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+	position: absolute; left: 1em; top: 2em; z-index: 99;
+	margin-left: 0; width: 250px;
+}
+.tooltip:hover span.spanEIS {
+	position: absolute; left: -10em; top: 2em; z-index: 99;
+	margin-left: 0; width: 150px;
+}
+.tooltip:hover img {
+	border: 0; margin: -10px 0 0 -55px;
+	float: left; position: absolute;
+}
+.tooltip:hover img.static {
+	vertical-align: middle;
+	margin: 0; padding: 0; float: none; position: static;
+}
+.tooltip:hover em {
+	font-family: Candara, Tahoma, Geneva, sans-serif; font-size: 1.2em; font-weight: bold;
+	display: block; padding: 0.2em 0 0.6em 0;
+}
+
+.custom { padding: 0.5em 0.8em 0.8em 2em; }
+* html a:hover { background: transparent; }
+.classic {padding: 0.8em 1em; background: #FFFFAA; border: 1px solid #FFAD33; }
+/*.classicEIS {padding: 0.8em 1em; background: #FFFFAA; border: 1px solid #FFAD33; }*/
+.critical { background: #FFCCAA; border: 1px solid #FF3334;	}
+.help { background: #9FDAEE; border: 1px solid #2BB0D7;	}
+.info { background: #9FDAEE; border: 1px solid #2BB0D7;	}
+.warning { background: #FFFFAA; border: 1px solid #FFAD33; }
+
+/* FIN ToolTip kit for pop-ups */
+
+
+/* div flotante */
+#floatingBox, #floatingBoxMin{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border: 1px solid #CCC;
+	background-color: #F2F2F2;
+	width:300px;
+}
+#TableFB, #TableFBMin{
+	font-size:12px;
+	width:100%;
+}
+#TableFB th{
+	background-color: #CCC;
+	padding:4px;
+	margin:0
+}
+#TableFB td{
+	text-align:right;
+	padding-right:5px;
+}
+
+#TableFBMin td {
+	text-align:center;
+}
+
+#TableFBMin td.title {
+	text-align:right;
+	background-color:#CCC;
+	padding:4px;
+	margin:0;
+	font-weight:bold;
+	width:90px;
+}
+/* FIN div flotante */
+
+#floatingBoxOBJ{
+	border:3px solid #CCC;
+	background-color:#F2F2F2;
+	width:400px;
+}
+
+.highlight{
+	background-color:#FFFF99;
+}
+
+div#topPesProds{
+	float:left;
+	color:#333333;
+	text-align:center;
+	border-top:1px solid #939494;
+	border-right:1px solid #939494;
+	border-bottom:1px solid #e4e4e5;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	height:30px;
+}
+
+div#botPesProds{
+	float:left;
+	color:#333333;
+	text-align:center;
+	border-top:1px solid #e4e4e5;
+	border-right:1px solid #939494;
+	border-bottom:1px solid #939494;
+	font-weight:bold;
+	background: url(http://www.newco.dev.br/images/fondoGris50.gif) repeat-x;
+	height:30px;
+}
+
+.rating-holder {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rating-holder ul {
+  display: inline;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+
+.rating-holder ul li {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.rating-holder li {
+  margin: 0 3px 0;
+	float:left;
+}
+
+.rating-holder li a {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("http://www.newco.dev.br/images/ico-stars02.png");
+    background-origin: padding-box;
+    background-position: -22px 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 19px;
+    width: 20px;
+		display: block;
+		font-size: 0;
+		line-height: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-indent: -9999px;
+}
+
+.rating-holder ul li.active a, .rating-holder ul li a:hover {
+    background-position: 0 0;
+}
+
+.rating-holder .rating {
+    font-size: 14px;
+    line-height: 16px;
+		vertical-align: middle;
+}
+/*
+span.rating{
+	margin-left:3px;
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url("http://www.newco.dev.br/images/ico-stars02.png");
+	background-origin: padding-box;
+	background-position: 0;
+	background-repeat: no-repeat;
+	background-size: auto auto;
+	height: 19px;
+	width: 20px;
+	display: inline-block;
+	font-size: 0;
+	line-height: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	text-indent: -9999px;
+	vertical-align: bottom;
+}
+*/

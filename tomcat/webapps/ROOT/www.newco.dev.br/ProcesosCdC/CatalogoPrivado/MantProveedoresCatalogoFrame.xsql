@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantProveedoresCatalogoFrameHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantProveedoresCatalogoFrameHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param  name="CATPRIV_IDEMPRESA"/>
+  <xsql:include-param  name="ACCION"/>
+  <xsql:include-param  name="IDCENTRO"/>
+  <xsql:include-param  name="IDNUEVOPROVEEDOR"/>
+  <xsql:include-param  name="IDPROVEEDORPRODUCTO"/>
+  <xsql:include-param  name="IDPRODUCTOESTANDAR"/>
+  <xsql:include-param name="STYLE"/>
+
+</Mantenimiento>

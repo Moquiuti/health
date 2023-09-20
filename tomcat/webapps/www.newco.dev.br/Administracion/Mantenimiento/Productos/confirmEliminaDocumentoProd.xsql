@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="confirmEliminaDocumentoProd.xsl"?>
+<?xml-stylesheet type="text/xsl" href="confirmEliminaDocumentoProd.xsl"?>
+
+ 
+
+<confirmEliminaDocumentoProd xmlns:xsql="urn:oracle-xsql" connection="newco">
+    <xsql:include-param name="TIPO"/>
+    <xsql:include-param name="PRO_BUSQUEDA"/>
+    <xsql:include-param name="ID_USUARIO"/>
+    <xsql:include-param name="HISTORY"/>
+	<xsql:include-param name="ID_PROVEEDOR"/>
+     <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	    
+   
+	<xsql:include-owa>
+		  
+	
+	    	DECLARE
+		        US_ID		NUMBER;
+			BEGIN
+            	US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantProd');
+				IF US_ID>0 THEN
+				
+					DOCUMENTOS_PCK.QuitarDocumentoAProducto(
+					 '{@IDUSUARIO}',
+					 '{@IDDOCUMENTO}',
+					 '{@IDPRODUCTO}'
+					
+					);	
+							   
+				END IF;
+			END;
+   		
+	      	  
+    	  
+	</xsql:include-owa>
+    
+  
+</confirmEliminaDocumentoProd>
+

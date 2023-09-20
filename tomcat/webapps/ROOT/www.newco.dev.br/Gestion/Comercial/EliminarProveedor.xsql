@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Inserta nuevo usuario que firma para la licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EliminarProveedorJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EliminarProveedorJSON.xsl"?>
+
+<EliminarProveedor xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_EliminaProve	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EliminarProve');
+		IF US_ID>=0 THEN
+			v_EliminaProve:=LICITACIONES_PCK.ModificarProveedor(
+				US_ID,
+				'{@ID_PROVE}',
+				'{@ID_USUARIO_PROVE}',
+				'{@ID_ESTADO}',
+				'',
+				'',
+				''
+				
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_EliminaProve > 0 THEN
+				HTP.P('<OK>'||v_EliminaProve||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EliminarProveedor>

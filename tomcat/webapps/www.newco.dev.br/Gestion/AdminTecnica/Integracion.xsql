@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	XSQL correspondiente a la carga de pedidos/licitaciones desde fichero XML
+	Ultima revision: ET 15oct19 12:06
+-->
+<?xml-stylesheet type="text/xsl" href="IntegracionHTML.xsl"?>
+
+<Administracion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InicioIntegracion');
+
+			IF US_ID > 0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				IntegracionRecepcion_pck.Inicio_XML(US_ID, '{@FIDEMPRESA}', '{@PLAZOCONSULTA}',NVL('{@ACCION}','INT_CONSULTA'), '{@PARAMETROS}');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</Administracion>

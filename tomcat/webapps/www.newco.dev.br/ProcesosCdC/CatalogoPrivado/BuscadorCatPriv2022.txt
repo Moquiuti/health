@@ -1,0 +1,3 @@
+04mar22 ET Nuevo disenno 2022. BuscadorCatPriv2022_040322.js
+04mar22 ET Incluir buscador en la misma pagina
+30set22 ET Se producia un error al cambiar la fecha limite, debido a &amp; en la URL

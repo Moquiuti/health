@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Clasificacion proveedores interna
+	Ultima revisión: ET 17ago18 12:02
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ClasificacionProveedoresEIS.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ClasificacionProveedoresEIS.xsl"?>
+
+<ClasificacionProveedores xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG"/>
+
+	<!--<LANG>spanish</LANG>-->
+
+  
+    <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+    	BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ClasificacionProveedores');
+			
+				EIS_PROVEEDORES_PCK.Listado_XML(
+					US_ID,
+					'{@IDPAIS}',
+					NULL,
+					'{@ORDEN}',
+					'{@SENTIDO}',
+					'S',							--	Cabecera
+					'{@IDCLIENTE}',					--	Cliente
+					'{@FIDSELECCION}'				--	13oct17	Seleccion
+					);
+			
+		END;
+    ]]>
+  </xsql:include-owa>	
+	
+  
+</ClasificacionProveedores>

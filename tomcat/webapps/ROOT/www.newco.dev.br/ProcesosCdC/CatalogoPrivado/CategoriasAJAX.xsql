@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CategoriasJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CategoriasJSON.xsl"?>
+
+<Categorias xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	BEGIN
+		IF '{@IDEMPRESA}'>=0 THEN
+			CATALOGOPRIVADO_SEG_PCK.DesplegableCategorias_XML('{@IDEMPRESA}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Categorias>

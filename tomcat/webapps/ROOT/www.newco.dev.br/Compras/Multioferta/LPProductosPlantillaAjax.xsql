@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Recupera los productos para el primer paso del pedido manual
+	ultima revision ET 10feb21 11:30
+-->
+	
+<?xml-stylesheet type="text/xsl" href="LPProductosPlantillaJSON.xsl"?>
+
+<Analizar xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;	
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LPAnalizarFrame');
+		IF US_ID>=0 THEN
+			
+			ANALIZAR.Analizar(
+				'{@LP_ID}',
+				US_ID,
+				'DIRECTO',				--  ACCION
+				'0',					--  IDDIVISA
+				'{@LINEASPORPAGINA}',	--	LINEASPORPAGINA
+				'{@PAGINA}',			--	PAGINA
+				NULL					--	04ago20, 12oct20: nuevos campos
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+</Analizar>

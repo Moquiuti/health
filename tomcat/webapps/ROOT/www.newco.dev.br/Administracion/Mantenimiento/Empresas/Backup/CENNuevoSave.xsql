@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CENMantenSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CENMantenSaveHTML.xsl"?>
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CENMantenHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CENMantenHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="CEN_DESCRIPCIONCOMERCIAL"/>
+<xsql:include-param name="NUEVO"/>
+
+<form name="frmManten" action="CENMantenSave.xsql" method="post">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDCentro	CENTROS.CEN_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CENMantenSave');
+		IF US_ID>=0 THEN
+			v_IDCentro:=CENTROS_PCK.Modificar(
+				'{@CEN_ID}',
+				'{@CEN_NOMBRE}',
+				'{@CEN_NOMBRECORTO}',
+				'{@CEN_NIF}',
+				'{@CEN_DIRECCION}',
+				'{@CEN_PROVINCIA}',
+				'{@CEN_CPOSTAL}',
+				'{@CEN_POBLACION}',
+				'{@CEN_TELEFONO}',
+				'{@CEN_FAX}',
+				'{@EMP_ID}',
+				'{@IDFORMAPAGO}',
+				'{@IDPLAZOPAGO}',
+				'{@PLAZOENTREGA}',
+				'{@CEN_CAMAS}',
+				'{@CEN_QUIROFANOS}',
+				'{@CEN_PEDIDOSPREVISTOSMES}',
+				'{@ESTADO}',
+				'{@CEN_CDC}',
+				'{@CEN_DISTRIBUIDOR}',
+				'{@CEN_COMPROMISO}',
+				'{@CEN_SINCOMISIONES}',
+				'{@CEN_IDLOGOTIPO}',
+				'{@CEN_DESCRIPCIONCOMERCIAL}',
+				'{@CEN_IDUSUARIOINTEGRACION_PDF}',
+				'{@CEN_IDUSUARIOINTEGRACION_XML}',
+				'{@CEN_LIMITECOMPRASMENSUALES}',
+				'{@CEN_FECHAPRIMERACUOTA}',
+				'{@CEN_FECHACUOTAACTIVA}',
+				'{@CEN_MOSTRARCENTROSCONSUMO}',
+                '{@IDMODELONEGOCIO}',
+                '{@CEN_MODELODENEGOCIO_EXPLIC}',
+                '{@CEN_PRESCRIPTOR}',
+                '{@CEN_COMISIONAHORRO}',
+                '{@CEN_COMISIONTRANSACCIONES}',
+                '{@IDFORMASPAGOMVM}',
+                '{@IDPLAZOSPAGOMVM}',
+                '{@CEN_DETALLEFORMAPAGOAMVM}',
+                '{@CUENTAPAGOAMVM}',
+                '{@TEXTOFACTURAMVM}',
+                '{@CEN_IDUSUARIOFACTURACION}',
+				'{@CEN_INCLUIRENFACTURACION}'
+			);
+            
+			CENTROS_PCK.Mantenimiento (US_ID,v_IDCentro,'{@EMP_ID}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<button label="Aceptar" caption="IMG-0020">
+	<name_function>document.forms['frmManten'].submit</name_function>
+</button>
+</form>
+
+<ExtraButtons>
+	<!-- Para evitar el problema con los FORMS ANIDADOS -->
+	<formu name="dummy" action="none"></formu>
+
+	<!-- Para el boton Borrar -->
+	<formu name="frmCentro" action="CENBorrar.xsql">
+		<field type="hidden" name="CEN_ID">
+			<xsql:include-param name="ID"/>
+		</field>
+		<button label="Eliminar" caption="IMG-0000">
+			<name_function>Actua</name_function>
+			<param>document.forms['frmCentro']</param>
+		</button>
+	</formu>
+</ExtraButtons>
+
+<jumpTo>
+	<picture-on>Anterior_mov</picture-on>
+	<picture-off>Anterior</picture-off>
+	<page>CEN-0260</page>
+	<caption>G-0001</caption>
+</jumpTo>
+
+<botones_nuevo>
+	<button label="GuardarCentro" caption="IMG-0020">
+		<name_function>ActualizarDatos</name_function>
+		<param>document.forms['frmManten']</param>
+	</button>
+
+	<button label="Cancelar" caption="IMG-0050">
+		<name_location>javascript:document.location='about:blank'</name_location>
+	</button>
+
+	<button label="NuevoLugar" caption="IMG-1530">
+		<name_function>NuevoLugarEntrega</name_function>
+	</button>
+
+	<button label="NuevoCentroConsumo" caption="IMG-1535">
+		<name_function>NuevoCentroConsumo</name_function>
+	</button>
+<!--
+	<button label="NuevoAlmacenInterno" caption="IMG-1537">
+		<name_function>NuevoAlmacenInterno</name_function>
+	</button>
+-->
+	<ExtraButtons_nuevo>
+		<!-- Para evitar el problema con los FORMS ANIDADOS -->
+		<formu name="dummy" action="none"></formu>
+
+		<!-- Para el boton Borrar -->
+		<formu name="frmCentro" action="CENBorrar.xsql">
+			<field type="hidden" name="CEN_ID">
+				<xsql:include-param name="ID"/>
+			</field>
+
+			<button label="BorrarCentro" caption="IMG-0000">
+				<name_function>Actua</name_function>
+				<param>document.forms['frmCentro']</param>
+			</button>
+		</formu>
+	</ExtraButtons_nuevo>
+</botones_nuevo>
+
+<field name="CEN_PROVINCIA">
+	<xsql:query rowset-element="dropDownList" row-element="listElem">
+	<![CDATA[
+		select ZON_NOMBRE as "ID",
+			ZON_NOMBRE as "listItem"
+		from GEO_ZONAS
+		where ZON_IDPADRE IN (
+			SELECT ZON_IDZONA
+			from GEO_ZONAS
+			where ZON_IDPADRE = 0
+		)
+		order by zon_nombre
+	]]>
+
+	<xsql:no-rows-query>
+		Select 'Sorry' "Sorry" from dual
+	</xsql:no-rows-query>
+	</xsql:query>
+</field>
+</Mantenimiento>

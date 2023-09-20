@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Anyade una entrada en la tabla LIC_PRODUCTOSOFERTAS
+	Revisado ET 16set16 13:25
+-->
+<?xml-stylesheet type="text/xsl" href="InformarFormaYPlazoPagoCentroJSON.xsl"?>
+
+<InformaDatosPagoProv xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<xsql:include-param name="IDCENTRO"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="CANTIDAD"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','InformaDatosCompra');
+		IF US_ID>=0 THEN
+			Licitacionesagregadas_pck.InformarDatosPagoProv_XML(
+				US_ID,
+				'{@LIC_ID}',
+				'{@IDCENTRO}',
+				'{@LIC_PROV_ID}',
+				'{@IDFORMAPAGO}',
+				'{@IDPLAZOPAGO}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</InformaDatosPagoProv>

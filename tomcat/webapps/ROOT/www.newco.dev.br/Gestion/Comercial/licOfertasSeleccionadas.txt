@@ -1,0 +1,45 @@
+			Incluir pedido minimo, totales y aviso
+			Incluir enlace ficha proveedor
+25oct16 ET Acceso al chat
+31oct16 ET Varias mejoras y correcciones solicitadas por clientes
+15mar17 ET Presentar forma/plazo de pago para centros
+27feb18 ET Varias mejoras y correcciones solicitadas por clientes:
+	- Incluir plazo de entrega en el formato para impresión de "Vencedores"
+	- Incluir palabra "dias" junto plazo de entrega en "Vencedores"
+	- Incluir contador junto a los productos	
+ 	- Incluir la divisa correcta en los totales, tanto en la cabecera como para cada proveedor
+	- Reducir decimales para Colombia
+21mar18 ET Se está mostrando el campo "Consumo Total" en lugar del "Consumo adjudicado", probablemente debido a los cambios hechos para las licitaciones agregadas
+24may18 ET Incluir lista de productos adjudicados eliminados de pedidos
+03may19 ET Destacar más los pedidos que no llegan al mínimo
+14may19 ET Separar por centros en la vista general
+02ene20 ET Incluir enlace a los pedidos
+03ene20 ET Nuevo botón para crear pedido para un único proveedor
+14ene20 ET Cambio boton "Pedido" -> "Enviar pedido". Solicitar confirmación antes de enviar el pedido. licOfertasSeleccionadas_140120
+15ene20 ET En las ofertas no seleccionadas no aparecía la cantidad ni la ref MVM cuando no había ref cliente
+29ene20 ET Ocultar el botón "pedido" en cuanto lo pulsan. licOfertasSeleccionadas_290120
+30ene20 ET Incluir el número de productos comprados
+30mar20 ET Incluir botón a la página de vencedores con ofertas alternativas
+26may20 ET Incluir fecha del informe
+27may20 ET Solicitado por Bruno: incluir observaciones proveedor, ampliar botón guardar forma/plazo de pago, incluir marcas aceptables
+16jun20 ET Incluir el total en pedidos
+17jul20 ET Incluir FRETE
+28ago20 ET Problema en licitación agregada al enviar pedido. licOfertasSeleccionadas_270820.js
+04set20 ET Mejora del control de las unidades básicas al enviar pedidos uno a uno. licOfertasSeleccionadas_040920.js
+07set20 ET Control de la unidades básicas al enviar todos los pedidos. licOfertasSeleccionadas_070920.js
+14set20 ET Separa texto y función de adjudicar de enviar todos pedidos (PreparaLanzarTodosPedidos()): licOfertasSeleccionadas_140920.js
+22set20 ET FESO: incluir el código del pedido a través de un textbox antes de lanzar el pedido: licOfertasSeleccionadas_220920.js
+24set20 ET Resuelto problema inicializando "fechaEntregaPedidoVencida"
+01oct20 ET FESO: incluir el código del pedido a través de un textbox antes de lanzar el pedido y poder lanzar todos los pedidos de una vez: licOfertasSeleccionadas_011020.js
+16oct20 ET FESO: Problema con el código de pedido si hay varios al mismo proveedor : licOfertasSeleccionadas_161020.js
+22dic20 ET UNIMED: Exportar a EXCEL: licOfertasSeleccionadas_221220.js
+17may21 ET FESO: Descarga de Vencedores: licOfertasSeleccionadas_170521.js
+30jun21 ET FESO: Boton para ajustar las cantidades antes de descargar vencedores, generar pedidos, etc. licOfertasSeleccionadas_300621.js
+20jul21 ET Incluir el campo "importe total adjudicado con precio de referencia"
+27jul21 ET Solucionar error en exportacion Excel ("importe total adjudicado" no es correcto) 
+01oct21 ET Incluir ref.MVM y ref. Centro (solicitado por UNIMED)
+05oct21 ET Quitar ref.MVM (Unimed solo necesitaba ref.Centro)
+06oct21 ET Incluir ref. Centro en Excel (solicitado por UNIMED). licOfertasSeleccionadas_061021.js
+04nov21 ET Aparecen 2 botones de "generar pedidos" en algunas licitaciones
+23nov21 ET Incluir icono (i) con principio activo, llevar alli tambien las marcas aceptables. licOfertasSeleccionadas_231121.js
+07dic21 ET VOlvemos a separar las marcas aceptables, solo el principio activo en (i) 

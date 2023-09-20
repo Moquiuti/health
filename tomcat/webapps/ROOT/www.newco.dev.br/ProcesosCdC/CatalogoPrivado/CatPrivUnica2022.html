@@ -1,0 +1,20 @@
+<!--
+	Esta pagina crea los frames y framesets necesarios, pero el buscador y los resultados se cargan desde ZonaCatalogo, BuscadorFrame2022.xsql
+	Ultima revision: ET 28feb22 18:00
+-->
+<!DOCTYPE html>
+<html>
+	<head><title>Mantenimiento Catalogo Privado</title></head>
+	<frameset cols="225px,*" frameborder="no" border="0" framespacing="0">
+		<frameset name="fs1" rows="600px,*" frameborder="no" border="0" framespacing="0">
+			<frame name="zonaCatalogo" src="http://www.newco.dev.br/ProcesosCdC/CatalogoPrivado/ZonaCatalogo2022.xsql" scrolling="auto" noresize="yes"/>
+			<frame name="zonaProducto" src="about:blank" scrolling="auto"/>
+		</frameset>
+		<frame name="areaTrabajo"> 
+			<!--<frameset name="fs2" rows="180px,*" frameborder="no" border="0" framespacing="0">
+				<frame name="Cabecera" scrolling="auto" noresize="yes" src="http://www.newco.dev.br/ProcesosCdC/CatalogoPrivado/Buscador2022.xsql"/>
+				<frame name="Resultados" scrolling="auto" noresize="yes" src="about:blank"/>
+			</frameset>-->
+		</frame>
+	</frameset>
+</html>

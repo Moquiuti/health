@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de centros de consumo. Nuevo disenno 2022.
+	Ultima revisión: ET 2ene23 11:15
+-->
+<?xml-stylesheet type="text/xsl" href="CentrosConsumoHTML2022.xsl"?>
+
+
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="CEN_ID"/>
+   <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+    <xsql:include-owa>
+      <![CDATA[
+        DECLARE
+          US_ID		NUMBER;
+        BEGIN
+          US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MantenimientoCentrosConsumo');
+          if us_id>=0 then
+            CENTROS_PCK.MantenimientoCentrosConsumo(
+ 				US_ID,					--3ene23
+             '{@CENTROCONSUMO_ID}',
+              '{@CEN_ID}',
+              '{@NUEVAREFERENCIA}',
+              '{@NUEVONOMBRE}',
+              '{@NUEVOPORDEFECTO}',
+              '{@IDPORDEFECTO}',
+              '{@ACCION}',
+              'CABECERA');
+            end if;		   
+        END;
+      ]]>	  
+    </xsql:include-owa>
+
+    <xsql:include-owa>
+      <![CDATA[
+        DECLARE
+          US_ID		NUMBER;
+        BEGIN
+          US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CentroConsumoPorCentroXML');
+          if us_id>=0 then
+            CENTROS_PCK.CentrosConsumoPorCentroXML('{@CEN_ID}','CABECERA');
+            end if;		   
+        END;
+      ]]>	  
+    </xsql:include-owa>
+</Mantenimiento>
+

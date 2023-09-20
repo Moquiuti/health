@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Buscador/Listado de proveedores de convocatorias
+	ultima revision 17oct18 14:13
+-->
+
+<?xml-stylesheet type="text/xsl" href="ProveedoresHTML.xsl"?>
+
+<Proveedores xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Conv.Esp.Mant.Proveedores');
+		IF US_ID>=0 THEN
+			Convocatorias_pck.Proveedores_XML(
+				US_ID,
+                '{@FIDCONVOCATORIA}',
+                '{@FIDPROVEEDOR}',
+                '{@FTEXTO}',
+                '{@FESPECIALES}',
+                '{@ORDEN}',
+                '{@SENTIDO}',
+                '{@FLINEASPORPAGINA}',
+                '{@PAGINA}',
+				'S'
+			);
+                        
+                     
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Proveedores>

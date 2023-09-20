@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Configuración de la integración por centro
+	Ultima revisión: 27nov19 15:05
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="IntegracionHTML2022.xsl"?>
+
+<Integracion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+    <xsql:include-owa>
+      <![CDATA[
+        DECLARE
+          	US_ID		NUMBER;
+			v_Res		VARCHAR2(100);
+        BEGIN
+          US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Integracion');
+          if US_ID>=0 then
+
+			--solodebug	utilidades_pck.debug('Integracion US_ID:'||US_ID||' IDEMPRESA:{@IDEMPRESA} IDCENTRO:{@IDCENTRO} IDMODELO:{@IDMODELO} ACCION:{@ACCION}');
+
+			--	Devuelve los datos para el formulario de edición del lugar de entrega	
+			IF '{@ACCION}'='GUARDAR' THEN
+				v_Res:=centros_pck.CambiaIntegracionCentro
+						(
+						  US_ID,
+						  '{@IDEMPRESA}',
+						  '{@IDCENTRO}',
+						  '{@IDMODELO}',
+						  '{@CEN_NOMBREERP}',
+						  '{@CEN_REFERENCIAINTEGRACION}',
+						  '{@CEN_CODIFICACIONPEDIDOS}',
+						  '{@CEN_SEPFICCARGAPEDIDOS}',
+						  '{@CEN_CABFICCARGAPEDIDOS}',
+						  '{@CEN_MODELOFICCARGAPEDIDOS}'
+					  	);
+
+			END IF;
+
+            centros_pck.Integracion_XML('{@IDEMPRESA}');
+          end if;	
+        END;
+      ]]>	  
+    </xsql:include-owa>
+ 
+</Integracion>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="Multioferta-RO-HTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="Multioferta-RO-HTML.xsl"?>
+<!--
+ |
+ |    Version READ-ONLY de la multioferta.
+ | 
+ +-->
+<Multioferta xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+        
+        <xsql:include-param name="ROL"/>
+ 
+        <xsql:include-owa>
+        <![CDATA[
+        BEGIN
+          MULTIOFERTAS_PCK.Multioferta('{@MO_ID}','NO_VALIDAR','Y','0');
+        END;
+        ]]>
+        </xsql:include-owa>
+  
+  <button label="Cancelar" caption="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button>
+      
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>IMG-0040</caption>
+  </jumpTo>
+ 
+</Multioferta>

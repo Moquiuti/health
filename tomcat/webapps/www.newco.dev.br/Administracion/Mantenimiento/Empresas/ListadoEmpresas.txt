@@ -1,0 +1,2 @@
+19oct21 ET Buscador de empresas pendientes de aprobar (destacar en rojo estas)
+20oct21 ET Quitar columnas de menor uso

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Menus de Gestion y Administracion del Usuario
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="FichaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="FichaHTML.xsl"?>
+
+<Ficha xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+
+
+</Ficha>

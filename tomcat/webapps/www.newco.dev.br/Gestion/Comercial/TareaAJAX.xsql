@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Recupera los datos de una tarea
+	Ultima revision: ET 6jun19 17:48
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="TareaJSON.xsl"?>
+
+<Tarea xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDGESTION"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+      v_IDRendimiento NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','GC_Tareas');
+
+	 		IF US_ID>0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				GESTIONCOMERCIAL_PCK.Gestion_XML(
+					US_ID,
+					'{@IDGESTION}'
+				);
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</Tarea>

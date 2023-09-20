@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Cambia el estado de la oferta en la tabla LIC_PRODUCTOSOFERTAS
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CambiarEstadoOfertaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CambiarEstadoOfertaJSON.xsl"?>
+
+<EstadoOferta xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDLicOfe	LIC_PRODUCTOSOFERTAS.LIC_OFE_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambiarEstadoOfertaLicitacion');
+		IF US_ID>=0 THEN
+			v_IDLicOfe:=LICITACIONES_PCK.EvaluacionOferta(
+				US_ID,
+				'{@LIC_OFE_ID}',
+				'{@IDESTADO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDLicOfe > 0 THEN
+				HTP.P('<OK>'||v_IDLicOfe||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EstadoOferta>

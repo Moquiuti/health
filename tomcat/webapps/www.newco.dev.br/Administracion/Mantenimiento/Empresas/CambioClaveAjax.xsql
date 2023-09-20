@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+	Fuerza el cambio de clave para un usuario
+	Ultima revision ET 18oct21 10:35
++-->
+<?xml-stylesheet type="text/xsl" href="CambioClaveJSON.xsl"?>
+
+<CambioClave xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambioClave');
+		IF US_ID>=0 THEN
+			v_res:=USUARIOS_PCK.CambiarClave(
+				US_ID,
+				'{@ID_USUARIO}'
+			);
+
+			IF v_res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CambioClave>

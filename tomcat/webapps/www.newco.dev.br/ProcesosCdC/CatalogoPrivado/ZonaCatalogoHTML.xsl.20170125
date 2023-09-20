@@ -1,0 +1,1345 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Margen izquierdo del mantenimiento del catálogo privado
+	20oct16	Pequeña limpieza	
+	5dic16	Nuevo diseño
+	ultima revision: 5dic16 09:15
+-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:import href = "http://www.newco.dev.br/General/General.xsl"/>
+	<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+	<xsl:param name="lang" select="@lang"/>
+	<xsl:template match="/">
+
+<html>
+<head>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:value-of select="/ZonaCatalogo/LANG"/>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+
+	<title> <xsl:value-of select="document($doc)/translation/texts/item[@name='mant_cat_priv']/node()"/></title>
+	<!--style-->
+	<xsl:call-template name="estiloIndip"/>
+	<!--fin de style-->
+
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+
+	<script>
+        var sin_nivel1, sin_nivel2, sin_nivel3, sin_nivel4	= "";
+		var sin_nivel1_para_editar, sin_nivel2_para_editar, sin_nivel3_para_editar, sin_nivel4_para_editar	= "";
+		var sin_nivel2_para_borrar, sin_nivel3_para_borrar, sin_nivel4_para_borrar	= "";
+		var para_nivel3, para_nivel4	= "";
+		var borrar_antes_nivel2, borrar_antes_nivel3, borrar_antes_nivel4, borrar_antes_nivel5	= "";
+                var borrar_antes_nivel5_para_nivel3 = "";
+		var borrar_nivel1, borrar_nivel2, borrar_nivel3, borrar_nivel4	= "";
+
+		var para_prod_estandar		= "<xsl:value-of select="document($doc)/translation/texts/item[@name='para_prod_estandar']/node()"/>";
+		var sin_prod_estan_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_prod_estandar_para_editar']/node()"/>";
+		var sin_prod_estan_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_prod_estandar_para_borrar']/node()"/>";
+		var borrar_prod_estandar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_prod_estandar']/node()"/>";
+		var clientes_utilizan_prod_estandar = "<xsl:value-of select="document($doc)/translation/texts/item[@name='clientes_utilizan_prod_estandar']/node()"/>";
+		var prod_estandar_con_consumo	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='prod_estandar_con_consumo']/node()"/>";
+		var borrar_prod_estandar_error	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_prod_estandar_error']/node()"/>";
+		
+        <xsl:choose>
+		<xsl:when test="ZonaCatalogo/AREACATALOGOS/NOMBRESNIVELES[@id='custom']">
+			sin_nivel1	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_tipo']/node()"/>";
+			sin_nivel2	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_grupo']/node()"/>";
+			sin_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_subgrupo']/node()"/>";
+			sin_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_familia']/node()"/>";
+
+			sin_nivel1_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_tipo_para_editar']/node()"/>";
+			sin_nivel2_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_grupo_para_editar']/node()"/>";
+			sin_nivel3_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_subgrupo_para_editar']/node()"/>";
+			sin_nivel4_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_familia_para_editar']/node()"/>";
+
+			sin_nivel1_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_tipo_para_borrar']/node()"/>";
+			sin_nivel2_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_grupo_para_borrar']/node()"/>";
+			sin_nivel3_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_subgrupo_para_borrar']/node()"/>";
+			sin_nivel4_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_familia_para_borrar']/node()"/>";
+
+			para_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='para_subgrupo']/node()"/>";
+			para_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='para_familia']/node()"/>";
+
+			borrar_antes_nivel2	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_grupos_para_tipos']/node()"/>";
+			borrar_antes_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_subgrupos']/node()"/>";
+			borrar_antes_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_familias_para_subgrupo']/node()"/>";
+			borrar_antes_nivel5	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_prod_estan_para_familia']/node()"/>";
+			borrar_antes_nivel5_para_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_prod_estan_para_subgrupo']/node()"/>";
+
+			borrar_nivel1	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_tipo']/node()"/>";
+			borrar_nivel2	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_grupo']/node()"/>";
+			borrar_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_subgrupo']/node()"/>";
+			borrar_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_familia']/node()"/>";
+		</xsl:when>
+		<xsl:when test="ZonaCatalogo/AREACATALOGOS/NOMBRESNIVELES[@id='estandar']">
+			sin_nivel1	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_categoria']/node()"/>";
+			sin_nivel2	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_familia']/node()"/>";
+			sin_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_subfamilia2']/node()"/>";
+			sin_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_grupo']/node()"/>";
+
+			sin_nivel1_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_categoria_para_editar']/node()"/>";
+			sin_nivel2_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_familia_para_editar']/node()"/>";                        
+			sin_nivel3_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_subfamilia_para_editar']/node()"/>";
+			sin_nivel4_para_editar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_grupo_para_editar']/node()"/>";
+
+			sin_nivel1_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_categoria_para_borrar']/node()"/>";
+			sin_nivel2_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_familia_para_borrar']/node()"/>";
+			sin_nivel3_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_subfamilia_para_borrar']/node()"/>";
+			sin_nivel4_para_borrar	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_grupo_para_borrar']/node()"/>";
+
+			para_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='para_subfamilia']/node()"/>";
+			para_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='para_grupo']/node()"/>";
+
+			borrar_antes_nivel2	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_familias']/node()"/>";
+			borrar_antes_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_subfamilias']/node()"/>";
+			borrar_antes_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_grupos']/node()"/>";
+			borrar_antes_nivel5	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_prod_estan_para_grupo']/node()"/>";
+			borrar_antes_nivel5_para_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_antes_prod_estan_para_subfamilia']/node()"/>";
+
+			borrar_nivel1	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_categoria']/node()"/>";
+			borrar_nivel2	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_familia']/node()"/>";
+			borrar_nivel3	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_subfamilia']/node()"/>";
+			borrar_nivel4	= "<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar_grupo']/node()"/>";
+		</xsl:when>
+		</xsl:choose>
+
+	</script>
+
+	<xsl:text disable-output-escaping="yes"><![CDATA[
+		<script language="javascript">
+		<!--
+			var TAMANYO_FRAME_MAXIMIZADO='100';
+			var TIPO_TAMANYO_FRAME_MAXIMIZADO='%';
+			var TAMANYO_FRAME_NORMAL=290;
+			var TIPO_TAMANYO_FRAME_NORMAL='px';
+/*
+        IMPORTANTE  -- IMPORTANTE --  IMPORTANTE  -- IMPORTANTE --  IMPORTANTE  -- IMPORTANTE --  IMPORTANTE  -- IMPORTANTE
+
+	Los nombres de las funciones seguiran siendo las mismas que en la zona de productos
+	esto es necesario porque para hacer la insercion de productos se utilizara el buscador
+	de ofertas y pedidos. El listado de productos llama a unas funciones de esos frames
+	y no se puede cambiar la estructura, de momento
+
+	IMPORTANTE  -- IMPORTANTE --  IMPORTANTE  -- IMPORTANTE --  IMPORTANTE  -- IMPORTANTE --  IMPORTANTE  -- IMPORTANTE
+*/
+
+	]]></xsl:text>
+
+	var arrayCategorias=new Array();
+	var arrayFamilias=new Array();
+	var arraySubfamilias=new Array();
+	var arrayGrupos=new Array();
+	var arrayProductosEstandar=new Array();
+
+	<xsl:for-each select="ZonaCatalogo/AREACATALOGOS/CATEGORIAS/field/dropDownList/listElem">
+		arrayCategorias[arrayCategorias.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="../../@current"/>','<xsl:value-of select="listItem3"/>');
+	</xsl:for-each>
+
+	<xsl:for-each select="ZonaCatalogo/AREACATALOGOS/FAMILIAS/field/dropDownList/listElem">
+		arrayFamilias[arrayFamilias.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="../../@current"/>','<xsl:value-of select="listItem3"/>');
+	</xsl:for-each>
+
+	<xsl:for-each select="ZonaCatalogo/AREACATALOGOS/SUBFAMILIAS/field/dropDownList/listElem">
+		arraySubfamilias[arraySubfamilias.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="../../@current"/>','<xsl:value-of select="listItem3"/>');
+	</xsl:for-each>
+
+	<xsl:for-each select="ZonaCatalogo/AREACATALOGOS/GRUPOS/field/dropDownList/listElem">
+		arrayGrupos[arrayGrupos.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="../../@current"/>','<xsl:value-of select="listItem3"/>');
+	</xsl:for-each>
+
+	<xsl:for-each select="ZonaCatalogo/AREACATALOGOS/PRODUCTOSESTANDAR/field/dropDownList/listElem">
+		arrayProductosEstandar[arrayProductosEstandar.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="../../@current"/>','<xsl:value-of select="HIJOS"/>' );
+	</xsl:for-each>
+
+<!--	2oct12
+	var arrayMaestroSubfamilias=new Array();
+	<xsl:for-each select="ZonaCatalogo/AREACATALOGOS/TODOSPRODUCTOSESTANDAR/SUBFAMILIA">
+		arrayMaestroSubfamilias[arrayMaestroSubfamilias.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="@current"/>');
+		var arrayMaestroProductosEstandar_<xsl:value-of select="ID"/>=new Array();
+		<xsl:for-each select="PRODUCTOESTANDAR">
+			arrayMaestroProductosEstandar_<xsl:value-of select="../ID"/>[arrayMaestroProductosEstandar_<xsl:value-of select="../ID"/>.length]=new Array('<xsl:value-of select="ID"/>','<xsl:value-of select="listItem"/>','<xsl:value-of select="@current"/>','<xsl:value-of select="../@current"/>', '<xsl:value-of select="HIJOS"/>');
+		</xsl:for-each>
+	</xsl:for-each>
+-->
+
+	<xsl:text disable-output-escaping="yes"><![CDATA[
+/*
+		funcion para enviar los cambios al servidor
+		solo llega aqui si se hay pasado todos los filtros (quiere borrar?, no tiene permisos, etc...)
+		por lo que habria que hacer comprobaciones en esta funcion
+*/
+		function EnviarCambios(idObjeto, accion){
+			alert('EnviarCambios');
+		}
+
+/*
+		funciones para el catalogo
+*/
+//		funcion que obtiene el desplegable con la nueva familia seleccionada y su lista de productos
+		function obtenerIdProductoEstandar(){
+			return document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value;
+		}
+
+		function obtenerIdSubfamilia(){
+			return document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value;
+		}
+
+		function obtenerPosicionDesplegableProductoEstandar(){
+			return document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].selectedIndex;
+		}
+
+		function obtenerPosicionDesplegableGrupo(){
+			return document.forms[0].elements['CATPRIV_IDGRUPO'].selectedIndex;
+		}
+        
+        function obtenerPosicionDesplegableSubfamilia(){
+			return document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].selectedIndex;
+		}
+        
+		function obtenerPosicionDesplegableFamilia(){
+			return document.forms[0].elements['CATPRIV_IDFAMILIA'].selectedIndex;
+		}
+
+		function CambioEmpresaActual(idEmpresa, accion){
+			//	11jul16	Recarga el marco con el buscador
+			objFrame=obtenerFrame(top, 'Cabecera');
+
+			if(objFrame!=null){
+				objFrame.document.location.href='Buscador.xsql?IDEMPRESA='+idEmpresa;
+			}
+		
+			document.location.href='ZonaCatalogo.xsql?IDEMPRESA='+idEmpresa+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+		}
+
+		function CambioCategoriaActual(idEmpresa, idCategoria, accion){
+			document.location.href='ZonaCatalogo.xsql?IDEMPRESA='+idEmpresa+'&IDNUEVACATEGORIA='+idCategoria+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+		}
+
+		function CambioFamiliaActual(idEmpresa, idFamilia, accion){
+			document.location.href='ZonaCatalogo.xsql?IDEMPRESA='+idEmpresa+'&IDNUEVAFAMILIA='+idFamilia+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+		}
+
+		function CambioSubfamiliaActual(idEmpresa, idSubfamilia, accion){
+			document.location.href='ZonaCatalogo.xsql?IDEMPRESA='+idEmpresa+'&IDNUEVASUBFAMILIA='+idSubfamilia+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+		}
+
+		function CambioGrupoActual(idEmpresa, idGrupo, accion){
+			document.location.href='ZonaCatalogo.xsql?IDEMPRESA='+idEmpresa+'&IDNUEVOGRUPO='+idGrupo+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value; 
+		}
+
+//		añadimos una nueva categoria -- dc 07/01/13
+		function NuevaCategoria(idCategoria,accion){
+			var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+			var objFrame=new Object();
+
+/* 5oct12 ******************************************
+			objFrame=obtenerFrame(top,'zonaCatalogo');
+			objFrame.redimensionarFrame('MINIMIZADO');
+************************************************************/
+
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+
+			if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+				objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+			}else{
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'Resultados');
+				objFrame.location.href='MantCategorias.xsql?CATPRIV_IDCATEGORIA='+idCategoria+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+			}
+		}
+
+//		funcion para modificar la ref y el nombre de la categoria -- dc 07/01/13
+		function ModificarCategoria(idCategoria,accion){
+			var tipoModificacion='';
+
+			if(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value>''){
+				if(accion=='CONSULTARCATEGORIA'){
+					tipoModificacion='&TIPO=CONSULTA';
+				}
+
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantCategorias.xsql?CATPRIV_IDCATEGORIA='+idCategoria+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+				}
+//				fin nuevo trozo 21-09-12
+			}else{
+				alert(sin_nivel1_para_editar);
+			}
+		}
+
+//		borra la categoria seleccionada, pide confirmacion -- dc 07/01/13
+		function BorrarCategoria(idCategoria, accion){
+			if(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value>''){
+				if(!tieneHijos(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,arrayCategorias)){
+					if(confirm(borrar_nivel1)){
+						document.location.href='ZonaCatalogo.xsql?IDNUEVACATEGORIA='+idCategoria+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+						var objFrame=new Object();
+						objFrame=obtenerFrame(top,'areaTrabajo');
+						objFrame.location.href='BuscadorFrame.xsql';
+					}
+				}else{
+					alert(borrar_antes_nivel2);
+				}
+			}else{
+				alert(sin_nivel1_para_borrar);
+			}
+		}
+
+//		añadimos una nueva familia
+		function NuevaFamilia(idFamilia,idCategoria,accion){
+			var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+			var objFrame=new Object();
+
+/* 5oct12 ******************************************
+			objFrame=obtenerFrame(top,'zonaCatalogo');
+			objFrame.redimensionarFrame('MINIMIZADO');
+************************************************************/
+
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+
+			if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+				objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+			}else{
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'Resultados');
+				objFrame.location.href='MantFamilias.xsql?CATPRIV_IDCATEGORIA='+idCategoria+'&CATPRIV_IDFAMILIA='+idFamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+			}
+		}
+
+//		funcion para modificar la ref y el nombre de la familia
+		function ModificarFamilia(idFamilia,idCategoria,accion){
+			var tipoModificacion='';
+			if(document.forms[0].elements['CATPRIV_IDFAMILIA'].value>''){
+				if(accion=='CONSULTARFAMILIA'){
+					tipoModificacion='&TIPO=CONSULTA';
+				}
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantFamilias.xsql?CATPRIV_IDCATEGORIA='+idCategoria+'&CATPRIV_IDFAMILIA='+idFamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+				}
+//				fin nuevo trozo 21-09-12
+			}else{
+				alert(sin_nivel2_para_editar);
+			}
+		}
+
+//		borra la familia seleccionada, pide confirmacion
+		function BorrarFamilia(idCategoria,idFamilia, accion){
+			if(document.forms[0].elements['CATPRIV_IDFAMILIA'].value>''){
+				if(!tieneHijos(document.forms[0].elements['CATPRIV_IDFAMILIA'].value,arrayFamilias)){
+					if(confirm(borrar_nivel2)){
+						document.location.href='ZonaCatalogo.xsql?IDNUEVACATEGORIA='+idCategoria+'&IDNUEVAFAMILIA='+idFamilia+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+						var objFrame=new Object();
+						objFrame=obtenerFrame(top,'areaTrabajo');
+						objFrame.location.href='BuscadorFrame.xsql';
+					}
+				}else{
+					alert(borrar_antes_nivel3);
+				}
+			}else{
+				alert(sin_nivel2_para_borrar);
+			}
+		}
+
+//		añadimos una nueva familia
+		function NuevaSubfamilia(idSubfamilia,idFamilia,accion){
+			if(document.forms[0].elements['CATPRIV_IDFAMILIA'].value>''){
+//				redimensionarFrame('MINIMIZADO');
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantSubfamilias.xsql?CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDFAMILIA='+idFamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+				}
+//				fin nuevo trozo 21-09-12
+//				objFrame.location.href='MantSubfamilias.xsql?CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDFAMILIA='+idFamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+			}else{
+				alert(sin_nivel2 + para_nivel3);
+			}
+		}
+
+//		funcion para modificar la ref y el nombre de la familia
+		function ModificarSubfamilia(idSubfamilia,idFamilia,accion){
+//			redimensionarFrame('MINIMIZADO');
+			var tipoModificacion='';
+			if(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value>''){
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				if(accion=='CONSULTARSUBFAMILIA'){
+					tipoModificacion='&TIPO=CONSULTA';
+				}
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantSubfamilias.xsql?CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDFAMILIA='+idFamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+				}
+//				fin nuevo trozo 21-09-12
+
+//				objFrame.location.href='MantSubfamilias.xsql?CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDFAMILIA='+idFamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+			}else{
+				alert(sin_nivel3_para_editar);
+			}
+		}
+
+//		borra la subfamilia seleccionada, pide confirmacion
+		function BorrarSubfamilia(idCategoria,idFamilia,idSubfamilia,accion){
+			if(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value>''){
+				if(!tieneHijos(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,arraySubfamilias)){
+					if(confirm(borrar_nivel3)){
+						document.location.href='ZonaCatalogo.xsql?IDNUEVACATEGORIA='+idCategoria+'&IDNUEVAFAMILIA='+idFamilia+'&IDNUEVASUBFAMILIA='+idSubfamilia+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+						var objFrame=new Object();
+						objFrame=obtenerFrame(top,'areaTrabajo');
+						objFrame.location.href='BuscadorFrame.xsql';
+					}
+				}else{
+					if(document.getElementById('td_grupos')){
+						alert(borrar_antes_nivel4);
+					}else{
+						alert(borrar_antes_nivel5_para_nivel3);
+					}
+				}
+			}else{
+				alert(sin_nivel3_para_borrar);
+			}
+		}
+		
+        //el listItem 3 tiene un contador con el num de hijos, si es 0 entonces no tiene hijos, si no si
+		function tieneHijos(valor,array){
+			for(var n=0;n<array.length;n++){
+				arrayRegistro=array[n];
+				if(arrayRegistro[0]==valor){
+					if(arrayRegistro[3]==0){
+						return 0;
+					}else{
+						return 1;
+					}
+				}
+			}
+			return 0;
+		}
+
+//		funciones para los grupos -- dc 07/01/13
+		function NuevoGrupo(idGrupo,idSubfamilia,accion){
+			if(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value>''){
+//				redimensionarFrame('MINIMIZADO');
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantGrupos.xsql?CATPRIV_IDGRUPO='+idGrupo+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+				}
+//				fin nuevo trozo 21-09-12
+
+//				objFrame.location.href='MantGrupos.xsql?CATPRIV_IDGRUPO='+idGrupo+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+			}else{
+				alert(sin_nivel3+para_nivel4);
+			}
+		}
+
+		function ModificarGrupo(idGrupo,idSubfamilia, accion){
+			var tipoModificacion='';
+			if(document.forms[0].elements['CATPRIV_IDGRUPO'].value>''){
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				if(accion=='CONSULTARGRUPO'){
+					tipoModificacion='&TIPO=CONSULTA';
+				}
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantGrupos.xsql?CATPRIV_IDGRUPO='+idGrupo+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+				}
+//				fin nuevo trozo 21-09-12
+
+//				objFrame.location.href='MantGrupos.xsql?CATPRIV_IDGRUPO='+idGrupo+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+			}else{
+				alert(sin_nivel4_para_editar);
+			}
+		}
+
+//		borra el grupo seleccionado, pide confirmacion -- dc 07/01/13
+		function BorrarGrupo(idCategoria,idFamilia,idSubfamilia,idGrupo, accion){
+        //alert(idCategoria+' '+idFamilia+' '+idSubfamilia+' '+idGrupo+' '+accion);
+			if(document.forms[0].elements['CATPRIV_IDGRUPO'].value>''){
+            
+				if(!tieneHijos(document.forms[0].elements['CATPRIV_IDGRUPO'].value,arrayGrupos)){
+                
+					if(confirm(borrar_nivel4)){
+						document.location.href='ZonaCatalogo.xsql?IDNUEVACATEGORIA='+idCategoria+'&IDNUEVAFAMILIA='+idFamilia+'&IDNUEVASUBFAMILIA='+idSubfamilia+'&IDNUEVOGRUPO='+idGrupo+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+						var objFrame=new Object();
+						objFrame=obtenerFrame(top,'areaTrabajo');
+						objFrame.location.href='BuscadorFrame.xsql';
+					}
+				}else{
+					alert(borrar_antes_nivel5);
+				}
+			}else{
+				alert(sin_nivel4_para_borrar);
+			}
+		}
+
+		//		funciones para los productos estandar
+		function NuevoProductoEstandar(idProducto,idGrupo,idSubfamilia,accion){
+			if(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value>''){
+//				redimensionarFrame('MINIMIZADO');
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantProductosEstandar.xsql?CATPRIV_IDPRODUCTOESTANDAR='+idProducto+'&CATPRIV_IDGRUPO='+idGrupo+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+				}
+//				fin nuevo trozo 21-09-12
+
+//				objFrame.location.href='MantProductosEstandar.xsql?CATPRIV_IDPRODUCTOESTANDAR='+idProducto+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion;
+			}else{
+				if(document.getElementById('td_grupos')){
+					alert(sin_nivel4 + para_prod_estandar);
+				}else{
+					alert(sin_nivel3 + para_prod_estandar);
+				}
+			}
+		}
+
+
+		function CambioProductoEstandarActual(idEmpresa, idProductoEstandar, accion){
+			var idSubfamilia=document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value;
+			
+			//solodebug	alert('idEmpresa:'+idEmpresa+' idProductoEstandar:'+idProductoEstandar+ ' idSubfamilia:'+idSubfamilia);
+            
+			document.location.href='ZonaCatalogo.xsql?IDEMPRESA='+idEmpresa+'&IDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'&IDNUEVASUBFAMILIA='+idSubfamilia+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+		}
+
+		function ModificarProductoEstandar(idProducto,idGrupo,idSubfamilia,idFamilia,idCategoria,accion){
+			var tipoModificacion='';
+			if(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value>''){
+				var idEmpresa=document.forms[0].elements['CATPRIV_IDEMPRESA'].value;
+				var objFrame=new Object();
+				if(accion=='CONSULTARPRODUCTOESTANDAR'){
+					tipoModificacion='&TIPO=CONSULTA';
+				}
+				objFrame=obtenerFrame(top,'areaTrabajo');
+
+//				nuevo trozo para que se enseñe tb buscador siempre
+				if(!objFrame.location.href.match('BuscadorFrame.xsql')){
+					objFrame.location.href='BuscadorFrame.xsql?PAGINARESULTADOS=DetalleProductoEstandar.xsql%3FIDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'%26IDNUEVASUBFAMILIA='+idSubfamilia+'%26IDEMPRESA='+idEmpresa+'%26PRODUCTOACTUAL='+productoActual+'%26SUBFAMILIAACTUAL='+subfamiliaActual+'%26IDNUEVAFAMILIA='+idFamilia+'%26IDCATEGORIA='+idCategoria;
+				}else{
+					var objFrame=new Object();
+					objFrame=obtenerFrame(top,'Resultados');
+					objFrame.location.href='MantProductosEstandar.xsql?CATPRIV_IDPRODUCTOESTANDAR='+idProducto+'&CATPRIV_IDGRUPO='+idGrupo+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDCATEGORIA='+idCategoria+'&CATPRIV_IDFAMILIA='+idFamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+				}
+//				fin nuevo trozo 21-09-12
+
+//				objFrame.location.href='MantProductosEstandar.xsql?CATPRIV_IDPRODUCTOESTANDAR='+idProducto+'&CATPRIV_IDSUBFAMILIA='+idSubfamilia+'&CATPRIV_IDEMPRESA='+idEmpresa+'&ACCION='+accion+tipoModificacion;
+			}else{
+				alert(sin_prod_estan_para_editar);
+			}
+		}
+
+		function buscarHijos(valor,array,posicion){
+//			alert('valor '+valor+' array '+array+' pos '+posicion)
+			for(var n=0;n<array.length;n++){
+				if(array[n][0]==valor){
+//					alert(array[n][0]+' == '+valor);
+					return array[n][posicion];
+				}
+			}
+		}
+
+		function BorrarProductoEstandar(idCategoria,idFamilia,idSubfamilia,idGrupo,idProductoEstandar,accion){
+			//alert(' prod estand: '+document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value+ 'hijos:'+buscarHijos(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,arrayProductosEstandar,3));
+
+			if(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value!=''){
+				if(buscarHijos(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,arrayProductosEstandar,3)==0){
+					if(confirm(borrar_prod_estandar)){
+						document.location.href='ZonaCatalogo.xsql?IDCNUEVACATEGORIA='+idCategoria+'&IDNUEVAFAMILIA='+idFamilia+'&IDNUEVASUBFAMILIA='+idSubfamilia+'&IDNUEVOGRUPO='+idGrupo+'&IDNUEVOPRODUCTOESTANDAR='+idProductoEstandar+'&ACCION='+accion+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value;
+						var objFrame=new Object();
+						objFrame=obtenerFrame(top,'areaTrabajo');
+						objFrame.location.href='BuscadorFrame.xsql';
+					}
+				}else{
+					alert(clientes_utilizan_prod_estandar);
+				}
+			}else{
+				alert(sin_prod_estan_para_borrar);
+			}
+		}
+
+//		funciones para los productos
+//		funcion que añade un producto a la familia seleccionada
+		function NuevoProducto(idProducto,accion){
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+			objFrame.location.href='MantProductoCatalogo.xsql';
+		}
+
+//		borra un producto, pide confirmacion
+		function BorrarProducto(idProducto,accion){
+			alert('BorrarProducto: '+idProducto+' '+accion);
+		}
+
+//		modifica un producto del catalogo actual
+		function ModificarProducto(idProducto,accion){
+			alert('ModificarProducto: '+idProducto+' '+accion);
+		}
+
+		function ListarFamiliasYProductos(){
+//			redimensionarFrame('MINIMIZADO');
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+			objFrame.location.href='FamiliasYProductos_Inicio.xsql';
+		}
+
+		function ModeloPedidosPorFax(){
+//			redimensionarFrame('MINIMIZADO');
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+			objFrame.location.href='ModeloPedidos_Inicio.xsql';
+		}
+
+		function ListarPrecios(){
+//			redimensionarFrame('MINIMIZADO');
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+			objFrame.location.href='FamiliasYPrecios_Inicio.xsql';
+		}
+
+		function recargarPagina(propagar){
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+			objFrame.location.href='about:blank';
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'zonaProducto');
+			objFrame.location.href='about:blank';
+			document.location.href='ZonaCatalogo.xsql?IDNUEVOPRODUCTOESTANDAR='+document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value+'&IDNUEVAFAMILIA='+document.forms[0].elements['CATPRIV_IDFAMILIA'].value+'&ACCION=CAMBIOPRODUCTOESTANDAR'+'&TIPOVENTANA='+document.forms[0].elements['TIPOVENTANA'].value+'&PROPAGAR='+propagar;
+		}
+
+		function CargarProductoEstandar(idProductoEstandar){
+			var propagar=document.forms['form1'].elements['CATPRIV_IDFAMILIA'].value;
+			if(idProductoEstandar!='' && idProductoEstandar>0){
+				var objFrame=new Object();
+				objFrame=obtenerFrame(top,'zonaProducto');
+				var idCategoria=document.forms['form1'].elements['CATPRIV_IDCATEGORIA'].value;
+				var idFamilia=document.forms['form1'].elements['CATPRIV_IDFAMILIA'].value;
+				var idSubfamilia=document.forms['form1'].elements['CATPRIV_IDSUBFAMILIA'].value;
+				var idGrupo=document.forms['form1'].elements['CATPRIV_IDGRUPO'].value;
+
+//alert('idPE: '+idProductoEstandar+' , idG: '+idGrupo+' , idSF: '+idSubfamilia+' , idF: '+idFamilia+' , idC: '+idCategoria);
+
+				objFrame.location.href='http://www.newco.dev.br/ProcesosCdC/CatalogoPrivado/ZonaProductos.xsql?IDPRODUCTOESTANDAR='+idProductoEstandar+'&IDGRUPO='+idGrupo+'&IDSUBFAMILIA='+idSubfamilia+'&IDFAMILIA='+idFamilia+'&IDCATEGORIA='+idCategoria;
+			}else{
+//				CargarProductoEstandarEnBlanco();
+			}
+
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'areaTrabajo');
+			if(!objFrame.location.href.match('BuscadorFrame.xsql'))
+				if(propagar!='NOPROPAGAR')
+					objFrame.location.href='BuscadorFrame.xsql';
+		}
+
+		function CargarProductoEstandarEnBlanco(){
+			var objFrame=new Object();
+			objFrame=obtenerFrame(top,'zonaProducto');
+			var idSubfamilia=document.forms['form1'].elements['CATPRIV_IDSUBFAMILIA'].value;
+			var idFamilia=document.forms[0].elements['CATPRIV_IDFAMILIA'].value;
+			objFrame.location.href='http://www.newco.dev.br/ProcesosCdC/CatalogoPrivado/ZonaProductos.xsql?IDPRODUCTOESTANDAR=-1&IDFAMILIA='+idFamilia+'&IDSUBFAMILIA='+idSubfamilia;
+		}
+
+		function montarDesplegable(arrayDatos,obj,defecto){
+			obj.length=0;
+			for(var n=0;n<arrayDatos.length;n++){
+				if(defecto==arrayDatos[n][0]){
+					var addOption=new Option('['+arrayDatos[n][1]+']',arrayDatos[n][0]);
+					privilegiosPlantilla=arrayDatos[n][2];
+					obj.options[obj.length]=addOption;
+					obj.options[obj.length-1].selected=true;
+				}else{
+					var addOption=new Option(arrayDatos[n][1],arrayDatos[n][0]);
+					obj.options[obj.length]=addOption;
+				}
+			}
+		}
+
+		// Funcion que revisa si un producto estandar tiene consumo historico y lo borra si no hay consumo
+		function BorrarProductoEstandarSinConsumo(oForm){
+			var IDProdEstandar	= oForm.elements['CATPRIV_IDPRODUCTOESTANDAR'].value;
+			var IDCategoria		= oForm.elements['CATPRIV_IDCATEGORIA'].value;
+			var IDFamilia		= oForm.elements['CATPRIV_IDFAMILIA'].value;
+			var IDSubfamilia	= oForm.elements['CATPRIV_IDSUBFAMILIA'].value;
+			var IDGrupo		= oForm.elements['CATPRIV_IDGRUPO'].value;
+			var d = new Date();
+
+			jQuery.ajax({
+				cache:	false,
+				url:	'http://www.newco.dev.br/ProcesosCdC/CatalogoPrivado/ProductoEstandarConConsumoAJAX.xsql',
+				type:	"GET",
+				data:	"ID_PROD_EST="+IDProdEstandar+"&_="+d.getTime(),
+				contentType: "application/xhtml+xml",
+				success: function(objeto){
+					var data = eval("(" + objeto + ")");
+
+					if(data.consumo == 'No'){
+						// Producto Estandar no tiene consumo => se puede borrar
+						if(buscarHijos(IDProdEstandar,arrayProductosEstandar,3)==0){
+							if(confirm(borrar_prod_estandar)){
+								document.location.href='ZonaCatalogo.xsql?IDNUEVACATEGORIA='+IDCategoria+'&IDNUEVAFAMILIA='+IDFamilia+'&IDNUEVASUBFAMILIA='+IDSubfamilia+'&IDNUEVOGRUPO='+IDGrupo+'&IDNUEVOPRODUCTOESTANDAR='+IDProdEstandar+'&ACCION=BORRARPRODUCTOESTANDAR';
+								var objFrame=new Object();
+								objFrame=obtenerFrame(top,'areaTrabajo');
+								objFrame.location.href='BuscadorFrame.xsql';
+							}
+						}else{
+							alert(clientes_utilizan_prod_estandar);
+						}
+					}else if(data.consumo == 'Si'){
+						// Producto Estandar tiene consumo => NO se puede borrar
+						alert(prod_estandar_con_consumo);
+					}else{
+						// Se ha producido un error
+						alert(borrar_prod_estandar_error);						
+					}
+				},
+				error: function(xhr, errorString, exception) {
+					alert("xhr.status="+xhr.status+" error="+errorString+" exception="+exception);
+				}
+			});
+		}
+
+	//-->
+	</script>  
+	]]></xsl:text>
+</head>
+<body class="areaizq">
+	<xsl:choose>
+		<xsl:when test="CarpetasYPlantillas/SESION_CADUCADA">
+			<xsl:apply-templates select="CarpetasYPlantillas/SESION_CADUCADA"/>
+		</xsl:when>
+		<xsl:when test="CarpetasYPlantillas/ROWSET/ROW/Sorry">
+			<xsl:apply-templates select="CarpetasYPlantillas/ROWSET/ROW/Sorry"/>
+		</xsl:when>
+		<xsl:otherwise>
+<!--4oct12 -->
+<!--
+			montarDesplegable(arrayProductosEstandar,document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'],'{//ZonaCatalogo/AREACATALOGOS/PRODUCTOSESTANDAR/field/@current}');
+-->
+			<xsl:attribute name="onLoad">
+				CargarProductoEstandar(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value);
+			</xsl:attribute>
+
+			<!--idioma-->
+			<xsl:variable name="lang">
+				<xsl:value-of select="/ZonaCatalogo/LANG"/>
+			</xsl:variable>
+			<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+			<!--idioma fin-->
+
+			<form name="form1" action="" method="post">
+				<input type="hidden" name="CATPRIV_IDUSUARIO" value="1"/>
+				<input type="hidden" name="CATPRIV_IDEMPRESA" value="{ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/EMP_ID}"/>
+				<input type="hidden" name="TIPOVENTANA" value="{ZonaCatalogo/TIPOVENTANA}"/>
+				<input type="hidden" name="PROPAGAR" value="{ZonaCatalogo/PROPAGAR}"/>
+				
+				<xsl:choose>
+					<xsl:when test="ZonaCatalogo/AREACATALOGOS/MVM">
+					<!--<table class="plantilla" style="background:#F44810;">-->
+					<table class="areaizq">
+						<tr id="table_titulos">
+							<th>&nbsp;</th>
+							<th colspan="3">
+								<xsl:value-of select="document($doc)/translation/texts/item[@name='empresa']/node()"/>
+							</th>
+							<th>&nbsp;</th>
+						</tr>					
+						<!--<tr height="5px"><td colspan="5"></td></tr>-->
+						<tr align="center" style="height:40px;background:#F44810;">
+							<td>&nbsp;</td>
+							<td id="td_categorias" colspan="3">
+								<xsl:choose>
+									<xsl:when test="ZonaCatalogo/AREACATALOGOS/EMPRESA/field/dropDownList/listElem">
+										<xsl:call-template name="desplegable">
+											<xsl:with-param name="path" select="ZonaCatalogo/AREACATALOGOS/EMPRESA/field"></xsl:with-param>
+											<xsl:with-param name="claSel">select200</xsl:with-param>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_de_empresas']/node()"/>
+										<input type="hidden" name="IDEMPRESA" value="{/ZonaCatalogo/AREACATALOGOS/EMP_ID}"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+						<!--<tr height="5px"><td colspan="5"></td></tr>-->
+					</table>
+					</xsl:when>
+					<xsl:otherwise>
+						<input type="hidden" name="IDEMPRESA" value="{/ZonaCatalogo/AREACATALOGOS/EMP_ID}"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				
+
+				<!--tabla plantilla categoria para 5 niveles... 7-01-13 mc -->
+				<xsl:choose>
+					<xsl:when test="ZonaCatalogo/AREACATALOGOS/CATEGORIAS">
+						<!--<table class="plantilla">-->
+						<table class="areaizq">
+							<tr id="table_titulos">
+								<th>&nbsp;</th>
+								<th colspan="3">
+									<xsl:value-of select="ZonaCatalogo/AREACATALOGOS/NOMBRESNIVELES/NIVEL1"/>
+								</th>
+								<th>&nbsp;</th>
+							</tr>
+							<!--<tr height="5px"><td colspan="5"></td></tr>-->
+							<tr align="center">
+								<td>&nbsp;</td>
+								<td id="td_categorias" colspan="3">
+									<xsl:choose>
+										<xsl:when test="ZonaCatalogo/AREACATALOGOS/CATEGORIAS/field/dropDownList/listElem">
+											<xsl:call-template name="desplegable">
+												<xsl:with-param name="path" select="ZonaCatalogo/AREACATALOGOS/CATEGORIAS/field"></xsl:with-param>
+												<xsl:with-param name="claSel">select200</xsl:with-param>
+											</xsl:call-template>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_de_categorias']/node()"/>
+											<input type="hidden" name="CATPRIV_IDCATEGORIA"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+							<!--<tr height="5px"><td colspan="5"></td></tr>-->
+							<tr align="center">
+								<td>&nbsp;</td>
+								<xsl:choose>
+									<!-- USUARIO CON PRIVILEGIOS DE MASTER_UNICO (EL ANTIGUO EDICION) -->
+									<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER_UNICO">
+										<td class="trenta">
+											<a href="javascript:NuevaCategoria('','NUEVACATEGORIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">
+											<a href="javascript:ModificarCategoria(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARCATEGORIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+										<td>
+											<a href="javascript:BorrarCategoria(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'BORRARCATEGORIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+											</a>
+										</td>
+									</xsl:when>
+									<!-- USUARIO CON PRIVILEGIOS DE MASTER (PUEDE CAMBIAR EL NOMBRE Y CREAR NUEVAS) -->
+									<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER">
+										<td class="trenta">
+											<a href="javascript:NuevaCategoria('','NUEVACATEGORIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">
+											<a href="javascript:ModificarCategoria(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARCATEGORIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+										<td>
+											<a href="javascript:BorrarCategoria(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'BORRARCATEGORIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+											</a>
+										</td>
+									</xsl:when>
+									<!-- USUARIO QUE SOLO PUEDE MODIFICAR ALGUNOS CAMPOS DEL PRODUCTO ESTANDAR -->
+									<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/EDICION">
+										<td class="trenta">&nbsp;</td>
+										<td class="trenta">
+											<a href="javascript:ModificarCategoria(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'CONSULTARCATEGORIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">&nbsp;</td>
+									</xsl:when>
+									<!-- RESTO DE USUARIOS 
+									<xsl:otherwise>
+										<td class="trenta">&nbsp;</td>
+										<td class="trenta">
+											<a href="javascript:ModificarFamilia(document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'CONSULTARFAMILIA');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+									</xsl:otherwise>-->
+								</xsl:choose>
+								<td>&nbsp;</td>
+							</tr>
+							<!--<tr height="5px"><td colspan="5">&nbsp;</td></tr>-->
+						</table>
+					</xsl:when>
+					<xsl:otherwise>
+						<input type="hidden" name="CATPRIV_IDCATEGORIA" value="{/ZonaCatalogo/AREACATALOGOS/IDCATEGORIA}"/>
+					</xsl:otherwise>
+				</xsl:choose>
+
+				<!--table plantilla familia 2a-->
+				<!--<table class="plantilla">-->
+				<table class="areaizq">
+					<tr id="table_titulos">
+						<th>&nbsp;</th>
+						<th colspan="3">
+							<xsl:value-of select="ZonaCatalogo/AREACATALOGOS/NOMBRESNIVELES/NIVEL2"/>
+						</th>
+						<th>&nbsp;</th>
+					</tr>
+					<!--<tr height="5px"><td colspan="5"></td></tr>-->
+					<tr align="center">
+						<td>&nbsp;</td>
+						<td id="td_familias" colspan="3">
+							<xsl:choose>
+								<xsl:when test="ZonaCatalogo/AREACATALOGOS/FAMILIAS/field/dropDownList/listElem">
+									<xsl:call-template name="desplegable">
+										<xsl:with-param name="path" select="ZonaCatalogo/AREACATALOGOS/FAMILIAS/field"></xsl:with-param>
+										<xsl:with-param name="claSel">select200</xsl:with-param>
+									</xsl:call-template>
+								</xsl:when>
+								<xsl:otherwise>
+									<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_de_familias']/node()"/></strong>
+									<input type="hidden" name="CATPRIV_IDFAMILIA"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					<!--<tr height="5px"><td colspan="5"></td></tr>-->
+					<tr align="center">
+						<td>&nbsp;</td>
+						<xsl:choose>
+							<!-- USUARIO CON PRIVILEGIOS DE MASTER_UNICO (EL ANTIGUO EDICION) -->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER_UNICO">
+								<td class="trenta">
+									<a href="javascript:NuevaFamilia('',document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'NUEVAFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:ModificarFamilia(document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td>
+									<a href="javascript:BorrarFamilia(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'BORRARFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+									</a>
+								</td>
+							</xsl:when>
+							<!-- USUARIO CON PRIVILEGIOS DE MASTER (PUEDE CAMBIAR EL NOMBRE Y CREAR NUEVAS) -->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER">
+								<td class="trenta">
+									<a href="javascript:NuevaFamilia('',document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'NUEVAFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:ModificarFamilia(document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:BorrarFamilia(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'BORRARFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+									</a>
+								</td>
+							</xsl:when>
+							<!-- USUARIO QUE SOLO PUEDE MODIFICAR ALGUNOS CAMPOS DEL PRODUCTO ESTANDAR -->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/EDICION">
+								<td class="trenta">&nbsp;</td>
+								<td class="trenta">
+									<a href="javascript:ModificarFamilia(document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'CONSULTARFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+									<!-- <xsl:call-template name="botonNostyle">
+										<xsl:with-param name="path" select="ZonaCatalogo/botones/button[@label='ConsultarFamilia']"/>
+									</xsl:call-template>-->
+								</td>
+								<td class="trenta">&nbsp;</td>
+							</xsl:when>
+							<!-- RESTO DE USUARIOS
+							<xsl:otherwise>
+								<td class="trenta">&nbsp;</td>
+								<td class="trenta">
+									<a href="javascript:ModificarFamilia(document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'CONSULTARFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+							</xsl:otherwise>-->
+						</xsl:choose>
+						<td>&nbsp;</td>
+					</tr>
+					<!--<tr height="5px"><td colspan="5">&nbsp;</td></tr>-->
+				</table>
+
+				<!--3a tabla plantilla subfamilia-->
+				<!--<table class="plantilla">-->
+				<table class="areaizq">
+					<tr>
+						<th>&nbsp;</th>
+						<th colspan="3">
+							<xsl:value-of select="ZonaCatalogo/AREACATALOGOS/NOMBRESNIVELES/NIVEL3"/>
+						</th>
+						<th>&nbsp;</th>
+					</tr>
+					<!--<tr height="5px"><td colspan="5"></td></tr>-->
+					<tr align="center">
+						<td>&nbsp;</td>
+						<td colspan="3" id="td_subfamilias">
+							<xsl:choose>
+								<xsl:when test="ZonaCatalogo/AREACATALOGOS/SUBFAMILIAS/field/dropDownList/listElem">
+									<xsl:call-template name="desplegable">
+										<xsl:with-param name="path" select="ZonaCatalogo/AREACATALOGOS/SUBFAMILIAS/field"></xsl:with-param>
+										<xsl:with-param name="claSel">select200</xsl:with-param>
+									</xsl:call-template>
+								</xsl:when>
+								<xsl:otherwise>
+									<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_de_subfamilias']/node()"/></strong>
+									<input type="hidden" name="CATPRIV_IDSUBFAMILIA"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					<!--<tr height="5px"><td colspan="5"></td></tr>-->
+					<tr align="center">
+						<td>&nbsp;</td>
+						<xsl:choose>
+							<!-- USUARIO MASTER_UNICO (EL ANTIGUO USUARIO EDICION)-->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER_UNICO">
+								<td class="trenta">
+									<a href="javascript:NuevaSubfamilia('',document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'NUEVASUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:ModificarSubfamilia(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'MODIFICARSUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:BorrarSubfamilia(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'BORRARSUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+									</a>
+								</td>
+							</xsl:when>
+							<!-- USUARIO MASTER (PUEDE CAMBIAR EL NOMBRE Y CREAR NUEVOS)-->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER">
+								<td class="trenta">
+									<a href="javascript:NuevaSubfamilia('',document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'NUEVASUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:ModificarSubfamilia(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'MODIFICARSUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+										<a href="javascript:BorrarSubfamilia(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'BORRARSUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+									</a>
+								</td>
+							</xsl:when>
+							<!-- USUARIO QUE SOLO PUEDE MODIFICAR ALGUNOS CAMPOS DEL PRODUCTO ESTANDAR -->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/EDICION">
+								<td class="trenta">&nbsp;</td>
+								<td class="trenta">
+									<a href="javascript:ModificarSubfamilia(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'CONSULTARSUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">&nbsp;</td>
+							</xsl:when>
+							<!-- RESTO DE USUARIOS
+							<xsl:otherwise>
+								<td class="trenta">&nbsp;</td>
+								<td class="trenta">
+									<a href="javascript:ModificarSubfamilia(document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,'CONSULTARSUBFAMILIA');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">&nbsp;</td>
+							</xsl:otherwise>-->
+						</xsl:choose>
+						<td>&nbsp;</td>
+					</tr>
+					<!--<tr height="5px"><td colspan="5">&nbsp;</td></tr>-->
+				</table>
+				<!--fin 3a tabla-->
+
+				<!--4a tabla plantilla grupos-->
+				<xsl:choose>
+					<xsl:when test="ZonaCatalogo/AREACATALOGOS/GRUPOS">
+						<!--<table class="plantilla">-->
+						<table class="areaizq">
+							<tr>
+								<th>&nbsp;</th>
+								<th colspan="3">
+									<xsl:value-of select="ZonaCatalogo/AREACATALOGOS/NOMBRESNIVELES/NIVEL4"/>
+								</th>
+								<th>&nbsp;</th>
+							</tr>
+							<!--<tr height="5px"><td colspan="5"></td></tr>-->
+							<tr align="center">
+								<td>&nbsp;</td>
+								<td colspan="3" id="td_grupos">
+									<xsl:choose>
+										<xsl:when test="ZonaCatalogo/AREACATALOGOS/GRUPOS/field/dropDownList/listElem">
+											<xsl:call-template name="desplegable">
+												<xsl:with-param name="path" select="ZonaCatalogo/AREACATALOGOS/GRUPOS/field"></xsl:with-param>
+												<xsl:with-param name="claSel">select200</xsl:with-param>
+											</xsl:call-template>
+										</xsl:when>
+										<xsl:otherwise>
+											<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_de_grupos']/node()"/></strong>
+											<input type="hidden" name="CATPRIV_IDGRUPO"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+							<!--<tr height="5px"><td colspan="5"></td></tr>-->
+							<tr align="center">
+								<td>&nbsp;</td>
+								<xsl:choose>
+									<!-- USUARIO MASTER_UNICO (EL ANTIGUO USUARIO EDICION)-->
+									<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER_UNICO">
+										<td class="trenta">
+											<a href="javascript:NuevoGrupo('',document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'NUEVOGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">
+											<a href="javascript:ModificarGrupo(document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'MODIFICARGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">
+											<a href="javascript:BorrarGrupo(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,'BORRARGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+											</a>
+										</td>
+									</xsl:when>
+									<!-- USUARIO MASTER (PUEDE CAMBIAR EL NOMBRE Y CREAR NUEVOS)-->
+									<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER">
+										<td class="trenta">
+											<a href="javascript:NuevoGrupo('',document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'NUEVOGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">
+											<a href="javascript:ModificarGrupo(document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'MODIFICARGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">
+												<a href="javascript:BorrarGrupo(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,'BORRARGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+											</a>
+										</td>
+									</xsl:when>
+									<!-- USUARIO QUE SOLO PUEDE MODIFICAR ALGUNOS CAMPOS DEL GRUPO -->
+									<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/EDICION">
+										<td class="trenta">&nbsp;</td>
+										<td class="trenta">
+											<a href="javascript:ModificarGrupo(document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'CONSULTARGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">&nbsp;</td>
+									</xsl:when>
+									<!-- RESTO DE USUARIOS
+									<xsl:otherwise>
+										<td class="trenta">&nbsp;</td>
+										<td class="trenta">
+											<a href="javascript:ModificarGrupo(document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'CONSULTARGRUPO');">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+											</a>
+										</td>
+										<td class="trenta">&nbsp;</td>
+									</xsl:otherwise>-->
+								</xsl:choose>
+								<td>&nbsp;</td>
+							</tr>
+							<!--<tr height="5px"><td colspan="5">&nbsp;</td></tr>-->
+						</table>
+					</xsl:when>
+					<xsl:otherwise>
+						<input type="hidden" name="CATPRIV_IDGRUPO" value="{/ZonaCatalogo/AREACATALOGOS/IDGRUPO}"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				<!--fin grupos tabla-->
+
+				<!--5a tabla producto estandar-->
+				<!--<table class="plantilla">-->
+				<table class="areaizq">
+					<tr>
+						<th>&nbsp;</th>
+						<th colspan="3">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='Productos_estandar']/node()"/>
+						</th>
+						<th>&nbsp;</th>
+					</tr>
+					<!--<tr height="5px"><td colspan="5"></td></tr>-->
+					<tr align="center">
+						<td>&nbsp;</td>
+						<td colspan="3" id="td_productosestandar">
+							<xsl:choose>
+								<xsl:when test="count(/ZonaCatalogo/AREACATALOGOS/PRODUCTOSESTANDAR/field/dropDownList/listElem)>0">
+									<xsl:call-template name="desplegable">
+										<xsl:with-param name="path" select="/ZonaCatalogo/AREACATALOGOS/PRODUCTOSESTANDAR/field"></xsl:with-param>
+										<xsl:with-param name="claSel">select200</xsl:with-param>
+									</xsl:call-template>
+								</xsl:when>
+								<xsl:otherwise>
+									<strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_dispone_de_productos']/node()"/></strong>
+									<input type="hidden" name="CATPRIV_IDPRODUCTOESTANDAR"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					<!--<tr height="5px"><td colspan="5"></td></tr>-->
+					<tr align="center">
+						<td>&nbsp;</td>
+						<xsl:choose>
+							<!-- USUARIO MASTER_UNICO, (EL ANTIGUO USUARIOS EDICION) -->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER_UNICO">
+								<td class="trenta">
+									<a href="javascript:NuevoProductoEstandar('',document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'NUEVOPRODUCTOESTANDAR');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:ModificarProductoEstandar(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARPRODUCTOESTANDAR');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+<!-- DC - 14/07/14 - Anyadimos validacion de consumo historico
+									<a href="javascript:BorrarProductoEstandar(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,'BORRARPRODUCTOESTANDAR');">
+-->
+									<a href="javascript:BorrarProductoEstandarSinConsumo(document.forms[0]);">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+									</a>
+								</td>
+							</xsl:when>
+							<!-- USUARIO MASTER (PUEDE CAMBIAR EL NOMBRE Y CREAR NUEVOS)-->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/MASTER">
+								<td class="trenta">
+									<a href="javascript:NuevoProductoEstandar('',document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,'NUEVOPRODUCTOESTANDAR');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='nuevo']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<a href="javascript:ModificarProductoEstandar(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARPRODUCTOESTANDAR');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+<!-- DC - 14/07/14 - Anyadimos validacion de consumo historico
+									<a href="javascript:BorrarProductoEstandar(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,'BORRARPRODUCTOESTANDAR');">
+-->
+									<a href="javascript:BorrarProductoEstandarSinConsumo(document.forms[0]);">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+									</a>
+								</td>
+							</xsl:when>
+							<!-- USUARIO QUE SOLO PUEDE MODIFICAR ALGUNOS CAMPOS DEL PRODUCTO ESTANDAR O BORRAR UN PRODUCTO ESTANDAR-->
+							<xsl:when test="ZonaCatalogo/AREACATALOGOS/DATOSUSUARIO/EDICION">
+								<td class="veinte">&nbsp;</td>
+								<td class="trenta">
+									<a href="javascript:ModificarProductoEstandar(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARPRODUCTOESTANDAR');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td class="trenta">
+									<!--quitado borrar 29-5-14 desastro viamed
+                                                                        <a href="javascript:BorrarProductoEstandar(document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,'BORRARPRODUCTOESTANDAR');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>
+									</a>-->
+								</td>
+							</xsl:when>
+							<!-- RESTO DE USUARIOS
+							<xsl:otherwise>
+								<td class="trenta">&nbsp;</td>
+								<td class="trenta">
+									<a href="javascript:ModificarProductoEstandar(document.forms[0].elements['CATPRIV_IDPRODUCTOESTANDAR'].value,document.forms[0].elements['CATPRIV_IDGRUPO'].value,document.forms[0].elements['CATPRIV_IDSUBFAMILIA'].value,document.forms[0].elements['CATPRIV_IDFAMILIA'].value,document.forms[0].elements['CATPRIV_IDCATEGORIA'].value,'MODIFICARPRODUCTOESTANDAR');">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='propriedades']/node()"/>
+									</a>
+								</td>
+								<td>&nbsp;</td>
+							</xsl:otherwise>-->
+						</xsl:choose>
+						<td>&nbsp;</td>
+					</tr>
+					<tfoot>
+						<tr>
+							<td class="footLeft">&nbsp;</td>
+							<td colspan="3">&nbsp;</td>
+							<td class="footRight">&nbsp;</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</xsl:otherwise>
+	</xsl:choose>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

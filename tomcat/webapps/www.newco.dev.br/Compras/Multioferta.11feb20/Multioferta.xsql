@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MultiofertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MultiofertaHTML.xsl"?>
+
+<Analizar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="STYLE"/>
+  
+	<xsql:include-owa>
+		BEGIN
+			MULTIOFERTAS_PCK.FrameSet('{@MO_ID}','{@US_ID}','{@ROL}', '{@TIPO}', '{@READ_ONLY}');
+		END;
+	</xsql:include-owa>
+</Analizar>
+
+

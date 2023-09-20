@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Envia una linea de historico de pedidos
+	ultima revision ET 25jul21 18:00 MantenProductos_160721.js
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="EnviarHistoricoPedidosJSON.xsl"?>
+
+<EnvioLineaFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NUMLINEA" value="NUMLINEA"/>
+	<xsql:include-param name="TEXTO" value="{@TEXTO}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	
+	<!--	Datos que devolvera el PL/SQL	
+	<OK/>
+	-->	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidoHistorico');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('integracionrecepcion_pck.PedidoHistorico {@IDFICHERO},{@NUMLINEA},{@IDCLIENTE},{@REFESTANDAR},{@REFMVM}');
+
+				v_Res:=integracionrecepcion_pck.PedidoHistorico
+				(
+					US_ID,
+					'{@INTF_ID}',
+					'{@NUMLINEA}',
+					'{@IDCLIENTE}',
+					'{@CODPEDIDO}',
+					'{@CODLUGARENTREGA}',
+					'{@CODCENTROCOSTE}',
+					'{@CODCOMPRADOR}',
+					'{@NIFPROVEEDOR}',
+					'{@PROVEEDOR}',
+					'{@REFCLIENTE}',
+					'{@REFPROVEEDOR}',
+					'{@PRODUCTO}',
+					'{@UNIDADBASICA}',
+					'{@UNIDADESLOTE}',
+					'{@TIPOIVA}',
+					'{@ESTADOPEDIDO}',	
+					'{@PRECIO}',
+					'{@PRECIODIV}',
+					'{@DIVISA}',
+					'{@CANTIDAD}',
+					'{@CANTIDADPEND}',
+					'{@IMPORTEPEND}',
+					'{@FECHAPEDIDO}',
+					'{@FECHAENTREGA}'
+				);
+				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P(	'<OK>'
+						||	'<NUMLINEA>{@NUMLINEA}</NUMLINEA>'
+						||	'<IDLINEAPEDIDO>'||utilidades_pck.Piece(v_Res,'|',1)||'</IDLINEAPEDIDO>'
+						||	'</OK>');
+				ELSE
+
+					HTP.P(utilidades_pck.CabeceraXML||'<ERROR msg="'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'"/>');
+				
+				END IF;
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesión incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnvioLineaFichero>

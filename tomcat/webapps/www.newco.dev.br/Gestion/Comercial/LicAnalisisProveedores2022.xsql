@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+    Analisis licitaciones
+	Ultima revision: ET 20jun19 13:00
+-->
+<?xml-stylesheet type="text/xsl" href="LicAnalisisProveedoresHTML2022.xsl"?>
+
+
+<AnalisisProveedores xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDPRODUCTO" />
+  <xsql:include-param name="IDEMPRESA" />
+
+	<!--	Pedidos problematicos, alarmas, bandeja y licitaciones en curso	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Analisis proveedores');
+					IF US_ID>=0 THEN
+						--AnalisisPedidos_Pck.Lista_XML
+						LicitacionesAnalisisProv_Pck.Lista_XML
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDPRODESTANDAR}',
+							'{@IDPRODUCTO}',
+							'{@CODIGOLICITACION}',
+							'{@PRODUCTO}',
+							'{@FECHA_INICIO}',   --fecha inicio
+							'{@FECHA_FINAL}',
+							'{@TOTAL_LINEA_MIN}',
+							'{@TOTAL_LINEA_MAX}',
+							'{@PORC_AHORRO_MIN}',
+							'{@PORC_AHORRO_MAX}',
+							'{@PAGINA}',
+							'{@LINEA_POR_PAGINA}',
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+							'S'                             --CABECERA
+							--'{@UTILFECHAENTREGA}'
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</AnalisisProveedores>

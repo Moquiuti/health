@@ -1,0 +1,8 @@
+
+`	java:S112T"FDefine and throw a dedicated exception instead of using a generic one.(–ª¦øÿÿÿÿ
+t
+java:S2293,"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÏââÈúÿÿÿÿ
+c
+java:S1192:"HDefine a constant instead of duplicating this literal "* %s %s" 3 times.(œ™œŞùÿÿÿÿ
+_
+java:S1858L"J"message" is already a string, there's no need to call "toString()" on it.(óşï

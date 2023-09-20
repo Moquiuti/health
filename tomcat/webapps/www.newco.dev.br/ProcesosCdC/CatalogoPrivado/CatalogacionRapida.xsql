@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Catalogación rápida
+	UltimaRevisión: ET 31ago18 11:15
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="CatalogacionRapidaHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param  name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID					NUMBER(6);
+		v_IDProdEstandar		NUMBER(12);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CatalogacionRapida');
+		IF US_ID>=0 THEN
+		
+			v_IDProdEstandar:='{@IDPRODESTANDAR}';
+
+			IF '{@ACTION}'='ADJUDICAR' THEN
+			
+				utilidades_pck.debug('XSQL. Llamando a Catalogoprivado_rapido_pck.GuardarYAdjudicar. IDPRODESTANDAR:'||'{@IDPRODESTANDAR}'||' CREARVARIANTE:'||'{@CREARVARIANTE}');
+			
+				v_IDProdEstandar:=Catalogoprivado_rapido_pck.GuardarYAdjudicar
+				(
+					US_ID,
+					'{@IDPRODESTANDAR}',
+					'{@IDPRODUCTO}',
+					'{@IDPROVEEDOR}',
+					'{@REFERENCIA}',
+					'{@NOMBRE}',
+					'{@MARCA}',
+					'{@UNIDADBASICA}',
+					'{@UNIDADESLOTE}',
+					'{@PRECIO}',
+					'{@IDTIPOIVA}',
+					'{@CREARVARIANTE}',
+					'{@TRF_FECHAINICIO}',
+					'{@TRF_FECHALIMITE}',
+					'{@TRF_NOMBREDOCUMENTO}',
+					'{@IDTIPONEGOCIACION}'
+				);
+
+			ELSIF '{@ACTION}'='DESADJUDICAR' THEN
+
+				utilidades_pck.debug('CatalogacionRapida.xsql. Desadjudicar. IDEmpresa:'||'{@IDEMPRESA}'||' IDProducto:'||'{@IDPRODUCTO}');
+			    MVM_V3_PCK.BorrarProd_PlantEnEmp(
+					US_ID,
+					'{@IDEMPRESA}',
+					'{@IDPRODUCTO}'
+				);
+
+			ELSIF '{@ACTION}'='ACTUALIZAR' THEN
+
+				v_IDProdEstandar:=Catalogoprivado_rapido_pck.GuardarDatosProveedor
+				(
+					US_ID,
+					'{@IDPRODESTANDAR}',
+					'{@IDPRODUCTO}',
+					'{@UNIDADBASICA}',
+					'{@UNIDADESLOTE}',
+					'{@PRECIO}',
+					'{@IDTIPOIVA}',
+					'{@TRF_FECHAINICIO}',
+					'{@TRF_FECHALIMITE}',
+					'{@TRF_NOMBREDOCUMENTO}',
+					'{@IDTIPONEGOCIACION}'
+				);
+
+			END IF;
+			
+			Catalogoprivado_rapido_pck.ProductoEstandar_XML
+			(
+				US_ID,
+				v_IDProdEstandar
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

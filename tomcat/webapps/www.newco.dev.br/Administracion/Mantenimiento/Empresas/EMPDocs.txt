@@ -1,0 +1,22 @@
+26oct17	ET Nuevo procedimiento que devuelve la documentación correcta según los derechos de los usuarios sin devolver toda la info de empresa
+2nov17	ET No se muestra bien el listado de documentos para Brasil
+11jun18	ET Separar documentos opcionales de obligatorios, permitir a los proveedores acceder a esta funcionalidad
+12jun18	ET Botón para aprobar documento (cliente cdc, MVM)
+12jun18 ET Cambio versión JS: EMPDetalle_060217.js -> EMPDocs_120618.js
+28set18 ET No se están mostrando los documentos internos
+10set19 ET No se están mostrando anexos ni documentos comerciales
+16dic19 ET Permitir cambiar la fecha de vencimiento de cualquier documento
+16dic19 ET Incluir buscador con filtros: EMPDocs_161218.js
+18dic19 ET Incluir nombre centro/empresa del documento: EMPDocs_181218.js 
+19dic19 ET Solucionados algunos problemas de funcionamiento: EMPDocs_181218.js
+10ene19 ET Para usuarios MVM, permitir buscar entre todos los documentos
+13abr20 ET Destacar la linea al pasar el cursor <tr class="conhover">
+14abr20 ET Incluir CNPJ en el listado excel. EMPDocs_140420.js
+16abr20 ET Incluir los nuevos campos EIS_PROV_FECHAULTIMOPEDIDO,EIS_PROV_FECHAULTIMALICITACION en el listado excel
+28may20 ET Incluir contratossubidos desde el menú "contratos"
+22dic20 ET Incluir datos comercial por defecto al extraer CSV de ficha de UN proveedor EMPDocs_221220.js
+23dic20 ET Incluir datos usuario al extraer CSV de todos los proveedores (filtrando por MVM)
+27jul21 ET Construir las tablas mediante AJAX en lugar de recargar la pagina. EMPDocs_280721.js
+18set21 ET Se producia un error al marcar un documento como revisado. EMPDocs_180921.js
+21set21 ET Se producia un error para usuarios de cliente/proveedor editando sus propios documentos. EMPDocs_210921.js
+25may22 ET Se habia perdido el tipo de documento en la table

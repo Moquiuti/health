@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+   Mostrar documentos de producto. Creado a partir de EMPDocs. Nuevo disenno 2022.
+ 	Ultima revision: ET 9mar22 17:00 
+-->
+
+<?xml-stylesheet type="text/xsl" href="PRODocsHTML2022.xsl"?>
+
+<Docs xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DocsProducto');
+		IF US_ID>0 THEN
+			DOCUMENTOS_PCK.FichaDocumentosProducto(US_ID, '{@PRO_ID}');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Docs>

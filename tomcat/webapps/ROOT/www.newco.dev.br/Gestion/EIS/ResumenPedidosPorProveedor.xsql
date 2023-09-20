@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Analisis de pedidos, línea a línea
+	Ultima revision 26jul21 16:00
+-->
+<!--	-->	
+<?xml-stylesheet type="text/xsl" href="ResumenPedidosPorProveedorHTML.xsl"?>
+
+<ResumenPedidosPorProveedor xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDPRODUCTO" />
+  <xsql:include-param name="IDEMPRESA" />
+
+	<!--	Analisis de lineas de pedidos	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidosPorProveedor');
+					IF US_ID>=0 THEN
+						AnalisisPedidos_Pck.ResumenPedidosPorProveedor_XML
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDPRODESTANDAR}',
+							'{@IDPRODUCTO}',
+							'{@CODIGOPEDIDO}',
+							'{@PRODUCTO}',
+							'{@FINALIZADOS}',
+							'{@PENDIENTES}',
+							'{@URGENTES}',
+							'{@FECHA_INICIO}', 
+							'{@FECHA_FINAL}',
+							'{@UTILFECHAENTREGA}',
+							'{@ORDEN}'
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</ResumenPedidosPorProveedor>

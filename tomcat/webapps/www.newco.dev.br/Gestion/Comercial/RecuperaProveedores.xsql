@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Recupera lista de proveedores de una licitacion vía AJAX
+	Ultima revision: ET 25abr22 15:10
++-->
+<?xml-stylesheet type="text/xsl" href="RecuperaProveedoresJSON.xsl"?>
+
+<Proveedores xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProveedor');
+		IF US_ID>=0 THEN
+			LICITACIONES_PCK.ProveedoresLicitacion_XML(
+				US_ID,
+				'{@LIC_ID}',
+				'{@ROL}',
+				'{@IDIDIOMA}',
+				'N',					--25abr22
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Proveedores>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CYPEditaSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CYPEditaSaveHTML.xsl"?>
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+    <JUMPTO_LINK>CYP-0320</JUMPTO_LINK>
+  <!--
+   | Incluimos el parametro NAVEGA
+   +-->
+  <xsql:include-param name="NAVEGA"/>
+  <xsql:include-param name="STYLE"/>
+
+  <xsql:include-owa>
+      CLIENTESYPROVEEDORES_PCK.Actualizar(SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CYPEditaSave'),'{@LISTAINICIAL}','{@LISTAFINAL}');
+  </xsql:include-owa>
+
+  <xsql:include-xsql href="CYPComun.xsql"/> 
+  
+  <boton label="Cerrar" caption="IMG-0190">
+    <name_location>about:blank</name_location> 
+  </boton>    
+
+</Lista>

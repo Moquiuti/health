@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Borra el campo LIC_PROV_IDDOCUMENTO de la tabla LIC_PROVEEDORES
+	Ultima revision: ET 11feb20 11:00
++-->
+<?xml-stylesheet type="text/xsl" href="BorrarDocumentoLicitacionJSON.xsl"?>
+
+<BorraDocumento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(50);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','BorrarDocumentoProv');
+		IF US_ID>=0 THEN
+			v_Res:=LICITACIONES_PCK.Proveedor_BorrarDocumento(
+				US_ID,
+				'{@ID}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Res = 'OK' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</BorraDocumento>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="TRFListadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="TRFListadoHTML.xsl"?>
+
+
+<ListadoTarifas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <!-- OLIVIER 01/08/01: para distinguir una lista pedida en texto plano o no (S/N)-->
+  <xsql:include-param name="TEXTO_PLANO"/> 
+  <xsql:include-param name="CON_PRECIO"/>
+  
+  <!--	Datos basicos de la cabecera con Fecha, Proveedor, Cliente y Usuario	-->
+  <xsql:query tag-case="upper" row-element="Cabecera" rowset-element="">
+  
+  
+  
+    <![CDATA[
+		SELECT	to_char(SYSDATE,'dd/mm/yyyy hh24:mi') AS FECHA,
+				PROVEEDOR.EMP_NOMBRE AS PROVEEDOR,
+				CLIENTE.EMP_NOMBRE AS CLIENTE,
+				US_APELLIDO1||' '||US_APELLIDO2||','||US_NOMBRE AS NOMBRE
+		FROM USUARIOS, EMPRESAS PROVEEDOR, CENTROS, EMPRESAS CLIENTE
+		WHERE 	PROVEEDOR.EMP_ID=CEN_IDEMPRESA
+				AND (CLIENTE.EMP_STATUS<>'B' OR CLIENTE.EMP_STATUS IS NULL)
+				AND CEN_ID=US_IDCENTRO
+				AND US_ID={@US_ID}
+				AND CLIENTE.EMP_ID={@EMP_IDCLIENTE}
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="LineaProducto" rowset-element="">
+    <![CDATA[
+		SELECT	PRO_REFERENCIA AS REFERENCIA,
+				PRO_NOMBRE AS PRODUCTO,
+				PRO_UNIDADBASICA AS UNIDADBASICA,
+ 				PRO_UNIDADESPORLOTE AS UNIDADESPORLOTE,
+				Tarifas_PCK.BuscarTarifa (PRO_ID, {@EMP_IDCLIENTE},1,1) AS IMPORTE
+		FROM USUARIOS, EMPRESAS, CENTROS, PRODUCTOS
+		WHERE 	PRO_IDPROVEEDOR=EMP_ID
+				AND EMP_ID=CEN_IDEMPRESA
+				AND (EMP_STATUS<>'B' OR EMP_STATUS IS NULL)
+				AND (PRO_STATUS<>'B' OR PRO_STATUS IS NULL)
+				AND CEN_ID=US_IDCENTRO
+				AND US_ID={@US_ID}
+		ORDER BY PRO_NOMBRE   
+	]]>
+  </xsql:query>
+  <returnHome/>
+  
+  <jumpTo>
+    <picture-off>Anterior</picture-off>     
+    <picture-on>Anterior_mov</picture-on>  
+    <page>G-0010</page>
+    <caption>G-0001</caption>   
+  </jumpTo>
+  
+</ListadoTarifas>

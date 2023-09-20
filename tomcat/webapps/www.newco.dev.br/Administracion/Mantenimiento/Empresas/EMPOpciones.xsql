@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EmpOpcionesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EmpOpcionesHTML.xsl"?>
+
+<OpcionesEmpresa xmlns:xsql="urn:oracle-xsql" connection="newco" >
+ <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <Parametros>
+    <xsql:include-param name="EMP_ID"/>
+  </Parametros>
+  
+  <Opcion name="btnCentros" action="CENLista.xsql" label="Centros"/>
+  <Opcion name="btnDepartamentos" action="DPLista.xsql" label="Departamentos"/>
+  <Opcion name="btnUsuarios" action="USLista.xsql" label="Usuarios"/>    
+
+  <jumpTo>
+    <picture-on>Anterior_mov</picture-on>
+    <picture-off>Anterior</picture-off>     
+    <page>G-0010</page>
+    <caption>G-0001</caption>    
+  </jumpTo>
+</OpcionesEmpresa>
+

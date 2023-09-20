@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AdminTecnicaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AdminTecnicaHTML.xsl"?>
+
+<Administracion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			/*	21mar14	Limpiamos
+			IF '{@PARAMETRO}' IS NOT NULL THEN
+				US_ID:=seguridad_pck.Login('{@PARAMETRO}','{@MVMCOOKIE}','{@RESOLUCION}','http://www.newco.dev.br/','IDUSUARIO');
+			ELSE
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdminTecnica');
+			END IF;*/
+
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdminTecnica');
+
+			IF US_ID > 0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				ADMINISTRACIONTECNICA_PCK.Inicio_XML(US_ID,'{@ACCION}', '{@PARAMETROS}');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+
+	<!--21mar14	Limpiamos
+	La cookie solo se inicializa si estamos en el login, PARAMETRO<>'NULL'	
+	
+	<xsql:if-param name="PARAMETRO" exists="yes">
+		<xsql:set-cookie host="www.mvmnucleo.com" path="/" names="US_ID SES_ID LANG">
+			SELECT US_ID, 
+				SES_ID, 
+				DECODE(US_IDIDIOMA,0,'spanish',2,'portugues','error') 
+			FROM USUARIOS, 
+    			  sesionesActivas
+			  WHERE UPPER(US_USUARIO) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}',1))
+				AND UPPER(US_CLAVE) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}',2))
+				AND NVL(US_STATUS,' ') != 'B'
+				and ses_idUsuario=us_id
+    			and ses_fecha=(select max(ses_fecha) 
+	            			   from sesionesactivas
+							   where ses_idUsuario=(SELECT US_ID
+                                        			FROM USUARIOS
+                                        			WHERE UPPER(US_USUARIO) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}',1))
+                                        			   AND UPPER(US_CLAVE) = UPPER(seguridad_pck.DescodificarDatos('{@PARAMETRO}',2))
+                                        			   AND NVL(US_STATUS,' ') != 'B')) 
+		</xsql:set-cookie>
+	</xsql:if-param>
+	-->
+</Administracion>

@@ -1,0 +1,4 @@
+24feb21 ET Analisis ABC solicitado por UNIMED
+12mar21 ET Incluir precio medio
+12jul21 ET No agrupar por marca, pero recuperar marca desde catalogo
+15dic21 ET Revision disenno, incluir campo de texto para busqueda por producto/marca. AnalisisABCPedidos_151221.js

@@ -1,0 +1,5 @@
+21feb19 ET CG detecta algunos problemas en el funcionamiento de esta página, en particular no se puede quitar el comentario por defecto.
+10oct20 ET Permitir asociar una categoría al comentario UltimosComentarios_101020.js
+17feb21 ET Nuevos campos para las clausulas de Imbanaco: UltimosComentarios_170221.js
+07oct21 ET Comentarios INCLUIR SIEMPRE (se copian en TODOS los correos segun condicion de categoria) UltimosComentarios_071021.js
+11oct21 ET Dejamos de utilizar COmentarioDefectoSave

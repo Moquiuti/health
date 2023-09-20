@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!--<?xml-stylesheet type="text/xsl" media="Mozilla" href="EIS_SVG.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EIS_SVG.xsl"?>-->
+
+<svg 
+  width="800" 
+  height="600" 
+  xmlns="http://www.w3.org/2000/svg" 
+  preserveAspectRatio="xMidYMid meet" 
+  zoomAndPan="magnify" version="1.0"
+  contentScriptType="text/ecmascript" 
+  contentStyleType="text/css" 
+  xmlns:xsql="urn:oracle-xsql" 
+  connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  
+  <!--
+  <xsql:include-owa>
+    <![CDATA[
+        BEGIN
+            EIS_PCK.pruebaSVG();				   
+        END;
+        ]]>
+  </xsql:include-owa>
+  -->
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISDatos');
+		  IF US_ID>=0 THEN
+                    EIS_PCK.CuadroDeMando(US_ID,'{@IDCUADROMANDO}', '{@ANNO}','{@IDEMPRESA}','{@IDCENTRO}',
+									'{@IDUSUARIO}','{@IDEMPRESA2}','{@IDPRODUCTO}','{@IDFAMILIA}','{@IDNOMENCLATOR}'
+									,'{@URGENCIA}','{@IDESTADO}','{@IDTIPOINCIDENCIA}','{@IDGRAVEDAD}',
+									'{@REFPRODUCTO}','{@CODIGO}','{@AGRUPARPOR}','{@IDRESULTADOS}',
+									null,'GRAFICO'||'{@TIPOGRAFICO}','{@IDRATIO}');
+                  end if;
+					   
+        END;
+        ]]>
+  </xsql:include-owa>
+  
+  <!--<xsql:include-owa>
+    <![CDATA[
+        DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISDatos');
+		  IF US_ID>=0 THEN
+            seguridad_pck.prueba('{@ANNO}');	
+            end if;			   
+        END;
+        ]]>
+  </xsql:include-owa>-->
+
+</svg>
+
+

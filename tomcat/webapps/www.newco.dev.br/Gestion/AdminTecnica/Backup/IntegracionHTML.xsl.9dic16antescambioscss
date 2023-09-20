@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ |	Gestión de los fichero de integración
++-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href = "http://www.newco.dev.br/General/General.xsl"/>
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+<xsl:param name="lang" select="@lang"/>
+<xsl:template match="/Administracion">
+<html>
+<head>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+			<xsl:when test="/Administracion/LANG"><xsl:value-of select="/Administracion/LANG"/></xsl:when>
+			<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+
+	<title><xsl:value-of select="document($doc)/translation/texts/item[@name='integracion']/node()"/></title>
+	<xsl:call-template name="estiloIndip"/>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/AdminTecnica/FileSaver.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/AdminTecnica/admintecnica_220816.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/AdminTecnica/envioFicheroIntegracion_28jul16.js"></script>
+</head>
+
+<body>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+			<xsl:when test="/Administracion/LANG"><xsl:value-of select="/Administracion/LANG"/></xsl:when>
+			<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+	
+<xsl:choose>
+<xsl:when test="/Administracion/ERROR">
+	<h1 class="titlePage"><xsl:value-of select="document($doc)/translation/texts/item[@name='integracion']/node()"/></h1>
+	<h2 class="titlePage"><xsl:value-of select="document($doc)/translation/texts/item[@name='no_tiene_derechos']/node()"/></h2>
+</xsl:when>
+<xsl:otherwise>
+	<!-- Bloque de título -->
+	<table  align="center" class="encuesta">
+	<tr>
+		<td colspan="6">
+			<h1 class="titlePage"><xsl:value-of select="document($doc)/translation/texts/item[@name='integracion']/node()"/></h1>
+		</td>
+	</tr>
+	<tr>
+        <td class="quince">&nbsp;</td>
+        <td class="labelRight dies"></td>
+        <td class="datosLeft veintecinco">
+        	<div class="altaDocumento">
+        		<span class="anadirDoc">
+        			<div class="docLine" id="docLine">
+        				<div class="docLongEspec" id="docLongEspec">
+						<form name="SubirDocumentos" method="post">
+							<input type="hidden" name="IDPROVEEDOR" id="IDPROVEEDOR" value="1"/>
+							<input type="hidden" name="CADENA_DOCUMENTOS"/>
+							<input type="hidden" name="DOCUMENTOS_BORRADOS"/>
+							<input type="hidden" name="BORRAR_ANTERIORES"/>
+							<input type="hidden" name="REMOVE" value="Eliminar"/>
+							<input id="inputFileDoc" name="inputFileDoc" type="file" onChange="addDocFile();"/>
+							<input type="hidden" name="TIPO_DOC" id="TIPO_DOC" value="Integracion"/>
+							<!--<a href="javascript:cargaDoc(document.forms['SubirDocumentos']);"><span class="text">Subir documento</span></a>-->
+							<div id="waitBoxDoc" align="center">&nbsp;</div>
+							<!--<div id="confirmBoxDocEmpresa" align="center" style="display:none;"><span class="cargado"><xsl:value-of select="document($doc)/translation/texts/item[@name='documento_cargado']/node()"/></span></div>-->
+							<div id="uploadFrameBox" style="display:none;"><iframe id="uploadFrame" name="uploadFrame" style="width:100%;"></iframe></div>
+							<div id="uploadFrameBoxDoc" style="display:none;"><iframe id="uploadFrameDoc" name="uploadFrameDoc" style="width:100%;"></iframe></div>
+						</form>
+        				</div>
+        			</div>
+        		</span>
+        	</div>
+        </td>
+        <td class="quince">
+            <div class="boton">
+            	<a href="javascript:cargaDoc(document.forms['SubirDocumentos']);">
+            		<span class="text"><xsl:value-of select="document($doc)/translation/texts/item[@name='subir_documento']/node()"/></span>
+                </a>
+            </div>
+            <div id="waitBoxDoc" align="center">&nbsp;</div>
+        </td>
+        <td class="quince">
+            <div id="confirmBoxDocEmpresa" style="display:none;" align="center">
+            	<span class="cargado"><xsl:value-of select="document($doc)/translation/texts/item[@name='documento_cargado']/node()"/></span>
+            </div>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+	</table>
+
+	<!--
+	<xsl:choose>
+	<xsl:when test="/Administracion/INICIO/RESULTADO">
+		<h1 class="titlePage"><xsl:value-of select="document($doc)/translation/texts/item[@name='ficheros_de_integracion']/node()"/>
+		< ! - -<xsl:value-of select="/Administracion/INICIO/RESULTADO"/> - - >
+		</h1>
+	</xsl:when>
+	<xsl:otherwise>
+		<h1 class="titlePage"><xsl:value-of select="document($doc)/translation/texts/item[@name='integracion']/node()"/></h1>
+	</xsl:otherwise>
+	</xsl:choose>
+	-->
+	<!-- Bloque de info para los ficheros de integración -->
+	<xsl:if test="/Administracion/INICIO/ACCION='INT_CONSULTA' or /Administracion/INICIO/ACCION='INT_EJECUTAR' or /Administracion/INICIO/ACCION='INT_OKMANUAL'">
+		<xsl:choose>
+		<xsl:when test="/Administracion/INICIO/INTEGRACION/FICHERO">
+			<table align="center" class="encuesta">
+			<thead>
+				<tr class="titulos">
+					<th align="center"> <!--colspan="4"-->
+						<xsl:attribute name="colspan">
+							<xsl:choose>
+							<xsl:when test="/Administracion/INICIO/ADMIN_MVM">11</xsl:when>
+							<xsl:otherwise>8</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='ficheros_de_integracion']/node()"/>
+					</th>
+				</tr>
+				<tr class="titulos">
+					<th align="center" class="dies"><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha']/node()"/></th>
+					<th align="center" class="dies"><xsl:value-of select="document($doc)/translation/texts/item[@name='cliente']/node()"/></th>
+					<th align="center"><xsl:value-of select="document($doc)/translation/texts/item[@name='fichero']/node()"/></th>
+					<th align="center" class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='licitaciones']/node()"/>/<xsl:value-of select="document($doc)/translation/texts/item[@name='lineas']/node()"/></th>
+					<th align="center" class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='pedidos']/node()"/>/<xsl:value-of select="document($doc)/translation/texts/item[@name='lineas']/node()"/></th>
+					<xsl:if test="/Administracion/INICIO/ADMIN_MVM">
+						<th align="center" class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='accion']/node()"/></th>
+						<th align="center" class="trenta"><xsl:value-of select="document($doc)/translation/texts/item[@name='comentarios']/node()"/></th>
+					</xsl:if>
+					<th align="center" class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/></th>
+					<xsl:if test="/Administracion/INICIO/ADMIN_MVM">
+						<th align="center" class="trenta"><xsl:value-of select="document($doc)/translation/texts/item[@name='acciones']/node()"/></th>
+					</xsl:if>
+					<th align="center" class="ocho"><xsl:value-of select="document($doc)/translation/texts/item[@name='boton_descargarOC']/node()"/></th>
+				</tr>
+			</thead>
+
+			<tbody>
+			<xsl:for-each select="/Administracion/INICIO/INTEGRACION/FICHERO">
+				<tr>
+					<td align="center">&nbsp;<xsl:value-of select="FECHA"/></td>
+					<td align="center">&nbsp;<xsl:value-of select="CLIENTE/NOMBRE"/></td>
+					<td align="left">&nbsp;<xsl:value-of select="NOMBRE"/></td>
+					<td align="center">&nbsp;
+    					<xsl:choose>
+        					<xsl:when test="NUMPRODUCTOSLICITACION>0"><xsl:value-of select="NUMLICITACIONES"/>/<xsl:value-of select="NUMPRODUCTOSLICITACION"/></xsl:when>
+        					<xsl:otherwise>-</xsl:otherwise>
+    					</xsl:choose>
+					</td>
+					<td align="center">&nbsp;
+    					<xsl:choose>
+        					<xsl:when test="NUMPRODUCTOSPEDIDO>0"><xsl:value-of select="NUMPEDIDOS"/>/<xsl:value-of select="NUMPRODUCTOSPEDIDO"/></xsl:when>
+        					<xsl:otherwise>-</xsl:otherwise>
+    					</xsl:choose>
+					</td>
+					<xsl:if test="/Administracion/INICIO/ADMIN_MVM">
+						<td align="center">&nbsp;<xsl:value-of select="ACCION"/></td>
+						<td align="left">&nbsp;<xsl:value-of select="COMENTARIOS_CORTO"/></td>
+					</xsl:if>
+					<td align="center">&nbsp;<xsl:value-of select="NOMBREESTADO"/></td>
+					<xsl:if test="/Administracion/INICIO/ADMIN_MVM">
+					<td align="center">
+						<a href="javascript:EjecutarFichero({ID});">
+    						<xsl:attribute name="title">
+        						<xsl:value-of select="document($doc)/translation/texts/item[@name='ejecutar_integ_expli']/node()"/>
+    						</xsl:attribute>
+    						<xsl:choose>
+        						<xsl:when test="Administracion/LANG = 'spanish'"><img src="http://www.newco.dev.br/images/botonEjecutar.gif" alt="Ejecutar" /></xsl:when>
+        						<xsl:otherwise><img src="http://www.newco.dev.br/images/botonEjecutar-BR.gif" alt="Executar" /></xsl:otherwise>
+    						</xsl:choose>
+						</a>&nbsp;
+						<a href="javascript:OkManualFichero({ID});">
+    						 <xsl:attribute name="title">
+        						<xsl:value-of select="document($doc)/translation/texts/item[@name='archivar_integ_expli']/node()"/>
+    						</xsl:attribute>
+    						<xsl:choose>
+        						<xsl:when test="Administracion/LANG = 'spanish'"><img src="http://www.newco.dev.br/images/botonArchivar.gif" alt="Archivar" /></xsl:when>
+        						<xsl:otherwise><img src="http://www.newco.dev.br/images/botonArchivar-BR.gif" alt="Archivo" /></xsl:otherwise>
+    						</xsl:choose>
+						</a>&nbsp;
+						<a href="javascript:EditarFichero({ID});">
+    						 <xsl:attribute name="title">
+        						<xsl:value-of select="document($doc)/translation/texts/item[@name='editar_integ_expli']/node()"/>
+    						</xsl:attribute>
+    						<img src="http://www.newco.dev.br/images/botonEditar.gif" alt="Editar" />
+						</a>
+						&nbsp;
+					</td>
+					</xsl:if>
+					<td align="center">
+						<xsl:choose>
+						<xsl:when test="BOTON_DESCARGAR_OC">
+						<div class="botonLargoVerdadNara clear" id="botonDescargarOC" valign="center"><a href="javascript:DescargarOC({ID});"><xsl:value-of select="document($doc)/translation/texts/item[@name='boton_descargarOC']/node()"/></a>
+                 		</div>
+						<!--<div class="botonLargoVerdadNara clear" id="botonDescargarOC"><a href="javascript:MostrarOC({ID});">Prueba OC</a></div>-->
+						</xsl:when>
+						<xsl:otherwise>&nbsp;</xsl:otherwise>
+						</xsl:choose>
+					</td>
+				</tr>
+			</xsl:for-each>
+			</tbody>
+			</table>
+            
+			<xsl:if test="/Administracion/INICIO/ADMIN_MVM">           
+            <table class="infoTable">
+			<tfoot>
+				<tr class="lejenda lineBorderBottom3" style="background:#E4E4E5;font-weight:bold;"> 
+					<td colspan="5" class="datosLeft" style="padding:3px 0px 0px 20px;"><xsl:value-of select="document($doc)/translation/texts/item[@name='leyenda']/node()"/>:</td>
+				</tr>
+                <tr class="lineBorderBottom5">
+                    <td class="trenta datosLeft">
+                        <p style="line-height:20px;">
+							&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <xsl:choose>
+                                <xsl:when test="Administracion/LANG = 'spanish'"><img src="http://www.newco.dev.br/images/botonEjecutar.gif" alt="Ejecutar" /></xsl:when>
+                                <xsl:otherwise><img src="http://www.newco.dev.br/images/botonEjecutar-BR.gif" alt="Executar" /></xsl:otherwise>
+                            </xsl:choose> 
+                            &nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='ejecutar_integ_expli']/node()"/><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <xsl:choose>
+                                <xsl:when test="Administracion/LANG = 'spanish'"><img src="http://www.newco.dev.br/images/botonArchivar.gif" alt="Archivar" /></xsl:when>
+                                <xsl:otherwise><img src="http://www.newco.dev.br/images/botonArchivar-BR.gif" alt="Archivo" /></xsl:otherwise>
+                            </xsl:choose> 
+                            &nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='archivar_integ_expli']/node()"/><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <img src="http://www.newco.dev.br/images/botonEditar.gif" alt="Editar" />
+                            &nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='editar_integ_expli']/node()"/>
+                        </p>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+			</tfoot>
+			</table>
+			</xsl:if >
+			
+			<!-- solo para pruebas de guardar fichero <div id="prueba">Prueba</div>	-->
+			
+		</xsl:when>
+		<xsl:otherwise>
+                    <p style="text-align:center;font-weight:bold;"><xsl:value-of select="document($doc)/translation/texts/item[@name='sin_ficheros_pendientes']/node()"/></p>
+		</xsl:otherwise>
+		</xsl:choose>
+	</xsl:if>
+	<br/>
+	<br/>
+	<!-- Formulario, menús -->
+	<form name="Admin" method="post" action="Integracion.xsql">
+	<input type="hidden" name="ACCION"/>
+	<input type="hidden" name="PARAMETROS"/>
+	</form>
+</xsl:otherwise>
+</xsl:choose>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Nueva solicitu de oferta
+	Ultima revision: ET 21jul17 10:53
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevaSolicitudOfertaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevaSolicitudOfertaHTML.xsl"?>
+
+<NuevaSolicitud xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		EMPRESA_ID	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevaSolicitudCatalogacion');
+		IF US_ID>=0 THEN
+		
+			SOLICITUDESOFERTA_PCK.NuevaSolicitud_XML(US_ID);
+			
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevaSolicitud>

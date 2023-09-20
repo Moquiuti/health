@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+	Inserta nueva seleccion de proveedores para la licitacion
+	21dic21 Ahora se devuelve un contador de proveedores insertados
+
+	Ultima revision: ET 21dic21 10:45
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="AnnadirSeleccionesProveedoresJSON.xsl"?>
+
+<NuevaSeleccion xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		--v_IDLicitacionProv	LIC_PROVEEDORES.LIC_PROV_ID%TYPE;
+		v_NumProvs		NUMBER(6);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AnnadirSeleccionesProv');
+		IF US_ID>=0 THEN
+			--v_IDLicitacionProv:=LICITACIONES_PCK.NuevasSelecciones(
+			v_NumProvs:=LICITACIONES_PCK.NuevasSelecciones(
+				US_ID,
+				'{@LIC_ID}',
+				'{@SELECCIONES}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			--21dic21 IF v_IDLicitacionProv > 0 THEN
+			--21dic21 	HTP.P('<OK>'||v_IDLicitacionProv||'</OK>');
+			IF v_NumProvs > 0 THEN
+				HTP.P('<NUM_PROVEEDORES>'||v_NumProvs||'</NUM_PROVEEDORES>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevaSeleccion>

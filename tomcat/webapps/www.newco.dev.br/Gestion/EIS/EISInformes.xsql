@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+ 	Informes EIS
+	Ultima revision: ET 15nov17
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EISInformesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EISInformesHTML.xsl"?>
+
+<EISInformes xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="IDEMPRESA"/>
+<xsql:include-param name="IDCENTRO"/>
+<xsql:include-param name="IDINFORME"/>
+
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-request-params/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISInformes');
+		IF US_ID>=0 THEN
+			EISSEGUIMIENTO_PCK.Informe_XML(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDCENTRO}',				-- 20ago2015
+				'{@IDINFORME}',
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EISInformes>

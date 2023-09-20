@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Analisis MEDDICC de potencial CLIENTE. Nuevo disenno 2022.
+	ultima revision: ET 23feb22
+-->
+<?xml-stylesheet type="text/xsl" href="MeddiccHTML2022.xsl"?>
+
+<Meddicc xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Meddicc');
+			
+	 		IF US_ID>0 THEN			--	Solo superusuarios MVM
+				--	Devuelve el XML, ejecuta la acción
+				GESTIONCOMERCIAL_PCK.InicioMEDDICC_XML(US_ID, '{@FIDEMPRESA}',  '{@ACCION}','{@PARAMETROS}');
+				
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+    		END IF;
+			
+		END;
+        	]]>
+	</xsql:include-owa>
+</Meddicc>
+

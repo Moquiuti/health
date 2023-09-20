@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Mantenimiento de un contrato
+	Ultima revisión: ET 17set18 13:20
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="ContratoHTML.xsl"?>
+
+<Contrato xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<!--
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="CON_ID"/>
+<xsql:include-param name="ACCION"/>
+<xsql:include-param name="CON_IDDOCUMENTO"/>
+-->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER(6);
+		IDContrato		NUMBER(12);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Contrato');
+		IF US_ID > 0 THEN
+		
+			utilidades_pck.debug('Contrato.xsql Ses:{@SES_ID}. IDUsuario:'||US_ID||' Accion:'||'{@ACCION}'||' IDModelo:'||'{@CON_ID}');
+
+			IF '{@ACCION}'='GUARDAR' THEN
+				IDContrato:=CONTRATOS_PCK.Contrato(
+					US_ID,
+					'{@CON_ID}',
+					'{@CON_IDMODELO}',
+					'{@CON_CODIGO}',
+					'{@CON_TITULO}',
+					'{@CON_IDPROVEEDOR}',
+					'{@CON_DESCRIPCION}',
+					'{@CON_IDDOCUMENTO}',
+					'{@CON_FECHAFIRMA}',
+					'{@CON_FECHAINICIO}',
+					'{@CON_FECHAFINAL}',
+					'{@CON_DURACIONCONTRATO}'
+				);
+			ELSIF '{@ACCION}'='CAMBIOESTADO' THEN
+			
+				--PENDIENTE
+				NULL;
+				--
+			
+			ELSIF '{@ACCION}'='QUITARDOC' THEN
+			
+				IDContrato:=CONTRATOS_PCK.QuitarDocumento(US_ID,'{@CON_ID}');
+			
+			ELSE
+			
+				IDContrato:='{@CON_ID}';			--	Si está vacío, sin '' dará error
+			
+			END IF;
+
+			IF IDContrato IS NULL OR IDContrato > 0 THEN
+				CONTRATOS_PCK.Contrato_XML(
+					US_ID,
+					IDContrato,
+					'S'
+				);
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Contrato>

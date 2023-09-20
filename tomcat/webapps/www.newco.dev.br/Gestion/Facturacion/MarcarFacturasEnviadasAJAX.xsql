@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MarcarFacturasEnviadasJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MarcarFacturasEnviadasJSON.xsl"?>
+
+<FacturasEnviadas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="LISTA"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		    NUMBER;
+      v_count     NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Marcar Facturas Enviadas');
+
+	 		IF US_ID > 0 THEN
+				v_count := FACTURACION_PCK.FacturasEnviadas(
+					US_ID,
+          '{@LISTA}'
+				);
+
+        IF v_count > 0 THEN
+          HTP.P('<OK>'||v_count||'</OK>');
+        ELSE
+          HTP.P('<ERROR/>');
+        END IF;
+    	END IF;
+		END;
+]]>
+</xsql:include-owa>
+</FacturasEnviadas>

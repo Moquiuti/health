@@ -1,0 +1,25 @@
+18dic17 ET Permitir el uso por parte del usuario aprobador del pedido
+20dic17 ET Incluir pedidos mínimo
+17ene18	ET Permitir acceso a usuarios con permiso "admin pedidos"
+17ene18	ET Botón para abrir catálogo privado del cliente
+12feb18	ET Editar comentarios, desplegable lugar de entrega
+15feb18	ET Permitir recuperar pedidos borrados
+16feb18 ET Bloquear importe o cantidad menor a 0 en pedidos
+27feb18	ET No se mostraba correctamente el comentario original
+07mar19	ET Desplegable con los centros de consumo del cliente
+04abr19 ET Desplegable con estado válidos para retroceder el pedido (solo si no es el usuario aprobador en estado 40)
+13may19 ET Incluir documento y hoja de gasto
+08ene20 ET Solucionado problema con PACKS
+29ene20 ET Quitar nombre empresa y nombre proveedor de cabecera
+10abr20 ET Derechos específicaos para poder modificar precios (US_MANTPEDIDOSPRECIOSMANT). MANTPedidos_100420.js
+14abr20 ET Solucionado error al inicializar derPrecios 
+18jun20 ET Si el pedido solo tiene una línea, obligar a borrar todo el pedido
+06jul20 ET Tener en cuenta si es obligatorio justificar cualquier cambio. MANTPedidos_060720.js
+30set20 ET Nueva página para la gestión de documentos. MANTPedidos_300920.js
+23feb21 ET Mostrar divisa para los precios
+23feb21 ET No devolver desplegables de clientes y proveedores
+23feb21 ET Filtrar por proveedor y divisa el buscador de productos para incluir en el pedido 
+23feb21 ET No permitir mantenimiento de pedidos descargados en el ERP. MANTPedidos_230221.js
+27abr21 ET Solucionado error por falta de {} en IDCLIENTE, IDPROVEEDOR
+21jul21 ET Permitir borrar pedidos descargados desde el ERP.
+02set21 ET Cambio de tipo de cambio para pedidos en divisa. MANTPedidos_020921.js

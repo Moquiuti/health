@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Obtener ID producto estandar a partir de RefMVM o RefCLiente
+	Ultima revisión: ET 17abr19 15:57
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="IDProductoEstandarJSON.xsl"?>
+
+<IDProductoEstandar xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER(6);
+			v_ID		NUMBER(12);
+			v_Ref		VARCHAR2(100);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','IDProductoEstandarAJAX');
+			IF US_ID>=0 THEN
+				v_Ref:='{@REFERENCIA}';
+				
+				IF LENGTH(v_Ref) IN (8,9) THEN
+					v_ID := CATALOGOPRIVADO_V4_PCK.IDProductoEstandar({@IDEMPRESA},'{@REFERENCIA}');
+				END IF;
+
+				IF NVL(v_ID,-1)=-1 THEN
+					v_ID := CATALOGOPRIVADO_V4_PCK.IDProdEstandarPorRefCliente({@IDEMPRESA},'{@REFERENCIA}');
+				END IF;
+
+				HTP.P(Utilidades_Pck.CabeceraXML
+					||'<IDPRODUCTOESTANDAR>'||v_ID||'</IDPRODUCTOESTANDAR>');
+
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</IDProductoEstandar>

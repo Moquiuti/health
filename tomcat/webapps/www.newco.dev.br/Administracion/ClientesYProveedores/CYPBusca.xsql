@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CYPBuscaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CYPBuscaHTML.xsl"?>
+
+<BusquedaEmpresas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   <xsql:include-param name="STYLE"/>    
+  <BuscForm name="BuscaEmpresa"  method="post">
+  
+  <xsql:include-owa>
+  BEGIN
+     TIPOSEMPRESAS_PCK.ListadoTiposDesarrollado('EMP_IDTIPO');
+  END;
+  </xsql:include-owa>
+   <!--
+    <field name="EMP_IDTIPO">
+      <xsql:query rowset-element="dropDownList" 
+                row-element="listElem">
+        <![CDATA[
+          select 0 as ID,
+                '[Seleccione opcion]' as "listItem"
+          FROM DUAL
+          UNION        
+	  select TE_ID AS ID,
+               TE_DESCRIPCION AS "listItem"
+	  from tiposempresas_vw
+        ]]>
+       <xsql:no-rows-query>
+          Select 'No existen empresas' "Sorry" from dual
+       </xsql:no-rows-query>  
+      </xsql:query>
+    </field>
+    -->
+    
+    <button label="BuscarCYP" alt="Buscar" caption="IMG-0480">
+      <name_function>Envia</name_function>
+      <param>document.forms[0]</param>
+      <param>'CYPEdita.xsql'</param>
+    </button>
+    </BuscForm>
+
+<!--
+  <jumpTo>
+    <picture-off>Anterior</picture-off>     
+    <picture-on>Anterior_mov</picture-on>  
+    <page>G-0015</page>
+    <caption>G-0001</caption>   
+  </jumpTo>
+-->
+</BusquedaEmpresas>
+

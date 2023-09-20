@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ConversacionLicitacionSaveJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ConversacionLicitacionSaveJSON.xsl"?>
+
+<ConversacionLicitacionSave xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="IDLICITACION"/>
+	<xsql:include-param name="IDPROVEEDOR"/>
+	<xsql:include-param name="IDUSUARIOCLIENTE"/>
+	<xsql:include-param name="IDUSUARIOPROV"/>
+	<xsql:include-param name="LIC_MENSAJE"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ConversacionLicitacionSave');
+			
+	 		IF US_ID>0 THEN			
+				--	Devuelve el XML, ejecuta la acción
+				v_Res := LICITACIONES_PCK.GuardarMensaje(
+					US_ID,
+					'{@IDLICITACION}',
+					'{@IDPROVEEDOR}',
+					'{@IDUSUARIOCLIENTE}',
+					'{@IDUSUARIOPROV}',
+					'{@LIC_MENSAJE}'
+				);
+
+				HTP.P(Utilidades_Pck.CabeceraXML);
+				HTP.P('<RESPUESTA>');
+
+				IF US_ID = '{@IDUSUARIOCLIENTE}' AND '{@IDUSUARIOPROV}' IS NOT NULL THEN
+					HTP.P('<EMPRESA>'||UTILIDADES_PCK.NombreEmpresaDelUsuario('{@IDUSUARIOPROV}')||'</EMPRESA>');
+				ELSIF '{@IDUSUARIOPROV}' IS NOT NULL THEN
+					HTP.P('<EMPRESA>'||UTILIDADES_PCK.NombreEmpresaDelUsuario('{@IDUSUARIOCLIENTE}')||'</EMPRESA>');
+				END IF;
+
+				IF v_Res > 0 THEN
+					HTP.P('<OK>'||v_Res||'</OK>');
+				ELSE
+					HTP.P('<ERROR/>');
+				END IF;
+
+				HTP.P('</RESPUESTA>');
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ConversacionLicitacionSave>

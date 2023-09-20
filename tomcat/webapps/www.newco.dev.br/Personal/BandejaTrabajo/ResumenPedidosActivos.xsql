@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+   Resumen de situación de los pedidos activos
+   Ultima revisión: ET 9may18 11:34
+-->
+
+<?xml-stylesheet type="text/xsl" href="ResumenPedidosActivosHTML.xsl"?>
+
+<InformePedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="STYLE" />
+
+	<!--	Pedidos problematicos, alarmas, bandeja y licitaciones en curso	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','WFStatus');
+					IF US_ID>=0 THEN
+						pedidosproblematicos_pck.Resumen_XML
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDFILTROMOTIVO}',
+							'{@IDFILTRORESPONSABLE}',
+							'{@IDFILTROCOMPRADOR}',
+							'{@IDFILTROESTADO}',
+							'{@IDFILTROSEMAFORO}',
+							'{@IDFILTROTIPOPEDIDO}',
+							'{@IDCENTROCONSUMO}',				--27may22
+							'{@BLOQUEADO}',
+							'{@NOCUMPLEPEDMIN}',				--15mar18 NOCUMPLEPEDMIN:	{@FARMACIA},
+							'{@BUSCAR_PACKS}',					--27may22 {@MATERIAL},
+							'{@CODIGOPEDIDO}',
+							'{@SINSTOCKS}',
+							'{@PRODUCTO}',
+							'{@TODOS12MESES}',
+							'{@INCFUERAPLAZO}',
+							'{@PED_ENTREGADOOK}',               --7abr15
+							'{@PED_PEDIDONOCOINCIDE}',          --7abr15
+							'{@PED_RETRASADO}',                 --7abr15
+							'{@PED_ENTREGADOPARCIAL}',          --7abr15
+							'{@PED_RETRASODOCTECNICA}',         --7abr15
+							'{@PED_NOINFORMADOENPLATAFORMA}',   --7abr15
+							'{@PED_PRODUCTOSANYADIDOS}',        --7abr15
+							'{@PED_PRODUCTOSRETIRADO}',         --7abr15
+							'{@FECHA_INICIO}',                  --7abr15
+							'{@FECHA_FINAL}',                   --7abr15
+							'{@PED_MALAATENCIONPROV}',          --8abr15
+							'{@PED_URGENTE}',                   --5oct15
+							'{@PAGINA}',                        --7abr15
+							'{@LINEA_POR_PAGINA}',              --7abr15
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+							'S',								--27may22
+							'S'									--27may22
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+</InformePedidos>

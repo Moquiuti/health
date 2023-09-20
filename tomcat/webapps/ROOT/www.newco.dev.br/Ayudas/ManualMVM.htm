@@ -1,0 +1,1776 @@
+<html>
+<head>
+<title>Manual de Usuario MVM</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+.enlaces {  font-size: 12px}
+.texto {  font-size: 12px; color: #000000}
+.tituloPag {  font-family: Arial, Helvetica, sans-serif; font-size: 36px; font-weight: bold; color: #000000}
+.textoBold { font-size: 12px; font-weight: bold}
+.textoLigth { font-size: 12px; font-weight: lighter}
+.subTituloPag { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #000000 }
+.subTituloPagUnderline { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #000000 ; text-decoration: underline}
+.textoUnderline { font-size: 12px; text-decoration: underline}
+.alerta {  font-size: 24px; color: #FF3333}
+-->
+</style>
+</head>
+
+<body bgcolor="#EEFFFF"><br><br>
+<table width="100%" border="0" align="center">
+  <tr> 
+    <td> 
+      <div align="center"><span class="tituloPag"><br>
+        <br>
+        <br>
+        <br>
+        MANUAL DE FORMACIÓN<br>
+        de<br>
+        Medical Virtual Market</span><br>
+        <br>
+        <a href="http://www.newco.dev.br"><span class="enlaces">www.mvmnucleo.com</span></a><span class="enlaces"><br>
+        </span><br>
+        <br>
+        <table width="267" border="0" class="titulo" bordercolorlight="#FFFFFF" bgcolor="#000000" bordercolordark="#FFFFFF">
+          <tr bgcolor="#EEFFFF"> 
+            <td> 
+              <div align="center"><span class="tituloPag">Uso Interno</span></div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <span class="enlaces"><span class="texto">Responsables:</span><br>
+        <br>
+        <br>
+        <span class="subTituloPagUnderline">Atención:</span> <span class="texto">Documento 
+        confidencial de uso exclusivo para el personal de:</span><br>
+        <br>
+        <span class="subTituloPagUnderline">MedicalVM</span><br>
+        <br>
+        <span class="textoLigth"><span class="textoLigth"><span class="textoLigth">jueves, 
+        14 de Junio de 2001</span></span></span></span><br>
+        <br>
+        <span class="texto"><span class="texto">Para cualquier consulta contactar 
+        con Alfonso Linares</span><br>
+        <br>
+        </span> <a href="mailto:%3Ca%20href=%22mailto:%22%3Ealinares@medicalvm.com%3C/a%3E">alinares@medicalvm.com</a><br>
+        <br>
+        <span class="texto"><span class="texto">Tel.</span> 606 99 36 11<br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <span class="subTituloPagUnderline">INDICE</span> </span></div>
+    </td>
+  </tr>
+</table>
+<br>
+  <a href="#notaUsuario"><span class="enlaces">NOTA IMPORTANTE AL USUARIO</span></a><span class="enlaces"><br>
+  <br>
+  <a href="#esquemaFuncionalidades">ESQUEMA DEL MENÚ DE FUNCIONALIDADES</a><br>
+  <br>
+<a href="#funcionalidadesConstruccion">FUNCIONALIDADES EN CONSTRUCCIÓN</a><br>
+  <br>
+<a href="#diagramaProceso">DIAGRAMA DE PROCESO DE MEDICALVM</a><br>
+  <br>
+<a href="#paginaInicial">ACCESO A MEDICAL – PÁGINA INICIAL.</a> <br>
+  </span>
+<ol>
+  <li><span class="enlaces"><a href="#paginaPublica">PÁGINA PÚBLICA</a></span></li>
+  <span class="enlaces"><br>
+  <br>
+  </span>
+  <li><span class="enlaces"><a href="#introduccion">INTRODUCCIÓN</a></span></li>
+  <span class="enlaces"><br>
+  <br>
+  </span>
+  <li><span class="enlaces"><a href="#personal">PERSONAL</a></span></li>
+  <span class="enlaces"><br>
+  <br>
+  </span>
+  <li><span class="enlaces"><a href="#compras">COMPRAS</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#ofertasPedidos">OFERTAS Y PEDIDOS</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#solicitudOfertas">SOLICITUD DE OFERTAS</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#pedidoDirecto">PEDIDO DIRECTO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#comprasCurso">COMPRAS EN CURSO:<br>
+        </a><br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#ventas">VENTAS</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#bandejaTareas">BANDEJA DE TAREAS<br>
+        <br>
+        </a></span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#ventasCurso">VENTAS EN CURSO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#negociacion">NEGOCIACIÓN</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#confirmacionPedido">CONFIRMACIÓN DEL 
+        PEDIDO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#bannersDinamicos">BANNERS DINÁMICOS</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#gestion">GESTIÓN</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#confirmacionProductos">CONFIRMACIÓN 
+        PRODUCTOS Y DATOS EMPRESA</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#administracion">ADMINISTRACIÓN</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#gestionClientesProveedores">GESTIÓN 
+        CLIENTES Y PROVEEDORES</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#estructuraEmpresa">ESTRUCTURA DE EMPRESA</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#estructuraProductos">ESTRUCTURA DE PRODUCTOS</a><br>
+    <br>
+    </span>
+    <ul>
+      <li><span class="enlaces"><a href="#asignacionPrecios">ASIGNACIÓN DE PRECIO</a><br>
+        <br>
+        </span></li>
+    </ul>
+    <ul>
+      <li><span class="enlaces"><a href="#sugerencias">SUGERENCIAS A MEDICALVM</a><br>
+        <br>
+        <br>
+        </span></li>
+    </ul>
+  </li>
+  <li><span class="enlaces"><a href="#ejercicios">EJERCICIOS DE FORMACIÓN </a><br>
+    <br>
+    </span><br></li></ol>
+    <br>
+    <br>
+    <br>
+    <table width="100%" border="0" class="subTituloPag">
+      <tr bgcolor="#a0d8d7"> 
+        <td> 
+          <a name="notaUsuario">
+          <div align="center">NOTA IMPORTANTE AL USUARIO</div>
+          </a>
+        </td>
+      </tr>
+    </table>
+  
+
+<table width="100%" border="1" bgcolor="#000000" bordercolordark="#FFFFFF" bordercolorlight="#FFFFFF" class="texto">
+  <tr bgcolor="#EEFFFF"> 
+    <td> 
+      <div align="center">Al entrar por primera con su clave de acceso personal 
+        le recomendamos que vaya al menú:<br>
+        <br>
+        <span class="textoBold">Administración > Gestión de Clientes y Proveedores</span> 
+        <br>
+        <br>
+        Para configurar quienes son Sus Clientes y Sus Proveedores<br>
+        <br>
+        . De este modo ningún otro Cliente o Proveedor, que no haya sido expresamente 
+        indicado por Ud. Tendrá la posibilidad de consultar sus Productos.<br>
+        <br>
+        Para más detalles vaya al Capítulo 7 de este Manual “Administración”.<br>
+        <br>
+        Para cualquier duda consulte con Alfonso Linares, 606 99 36 11, <span class="enlaces"><a href="#%3Cspan%20class=%22enlaces%22%3Ealinares@medicalvm.com%20">alinares@medicalvm.com 
+        </a></span><br>
+        <br>
+        Gracias.</div>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td>
+      <a name="esquemaFuncionalidades"> 
+      <div align="center">ESQUEMA DEL MENÚ DE FUNCIONALIDADES</div>
+      </a>
+    </td>
+  </tr>
+  <tr class="texto"> 
+    <td height="111">Agente: tanto Comprador como Vendedor<br>
+      Comprador: habitualmente es un centro hospitalario <br>
+      Vendedor: habitualmente es un distribuidor o fabricante</td>
+  </tr>
+  <tr> 
+    <td height="84"> 
+      <table width="100%" border="1" bgcolor="#000000" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" height="52">
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47"> 
+            <div align="center" class="textoUnderline">Menú</div>
+          </td>
+          <td width="33%" height="47"> 
+            <div align="center" class="textoUnderline">Submenú</div>
+          </td>
+          <td width="33%" height="47"> 
+            <div align="center" class="textoUnderline">Explicación</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td height="55"> 
+      <div align="center"><span class="textoUnderline"><span class="texto">COMPRADOR:</span></span><span class="texto"> 
+        CLINICA U HOSPITAL</span></div>
+    </td>
+  </tr>
+  <tr> 
+    <td height="68"> 
+      <table width="100%" border="1" bgcolor="#000000" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" height="52">
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Compras<br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+                <li> Ofertas y Pedidos<br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                </li>
+                <li> Compras en curso </li>
+              </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+                <li> Permite una compra planificada y organizada. Se crean carpetas 
+                  (plantillas) por temas, tipo de producto, proveedor, tipo de 
+                  pedido (pedido urgente, programado,...), etc... para enviarlo 
+                  posteriormente al Vendedor como un sólo Pedido de materiales 
+                  o servicios<br>
+                  <br>
+                </li>
+                <li>Es el resumen de las peticiones de oferta o pedido enviados 
+                  por confirmar por parte del Vendedor </li>
+              </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="116" class="texto"> 
+            <ul>
+              <li>Ventas </li>
+            </ul>
+            <br>
+            <br>
+          </td>
+          <td width="33%" height="116" class="texto"> 
+            <ul>
+              <li>Ventas en curso </li>
+            </ul>
+            <br>
+            <br>
+          </td>
+          <td width="33%" height="116" class="texto"> 
+            <ul>
+              <li>Es el resumen de las Peticiones de ofertas enviadas, Peticiones 
+                de Aceptación de Pedidos en curso o aceptadas.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Administración <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Gestión Clientes y Proveedores<br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+              <li>Estructura Empresa Estructura<br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+              <li>Productos </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Permite al Agente decidir “quién me ve”; el otro Agente deberá 
+                dar también su Ok para que “los 2 se vean”<br>
+                <br>
+              </li>
+              <li>Permite al Agente definir los datos básicos de su empresa, usuarios, 
+                limites de compra y venta, etc...<br>
+                <br>
+              </li>
+              <li>Permite al Vendedor mantener su base de datos de productos en 
+                catálogo, nombres, unidades, precios,... </li>
+            </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Incidencias </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Incidencias <br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </li>
+              <li>Sugerencias </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Permite a todo Agente remitir una incidencia a la empresa que 
+                la causó <br>
+                <br>
+              </li>
+              <li>Permite a todo Agente comunicarse directamente con Medical Virtual 
+                Market S.L. </li>
+            </ul>
+</td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Gestión </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Confirmación de Productos y Datos de empresa </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Permite al Vendedor confirmar la estructura inicial de productos 
+                introducida por MedicalVM </li>
+            </ul>
+          </td>
+        </tr>
+        <tr bgcolor="#EEFFFF"> 
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Personal </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li> Bandeja de trabajo <br>
+                <br>
+              </li>
+              <li> Cambio de clave </li>
+            </ul>
+          </td>
+          <td width="33%" height="47" class="texto"> 
+            <ul>
+              <li>Lista de tareas pendientes<br>
+                <br>
+              </li>
+              <li>Cambio de password, no de nombre de usuario </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+ <br>
+  <br>
+<br>
+<br>
+<br>
+  <br>
+
+<table width="100%" border="0" align="center">
+  <tr bgcolor="#a0d8d7"> 
+    <td>
+<a name="funcionalidadesConstruccion"> 
+      <div align="center" class="subTituloPag">FUNCIONALIDADES EN CONSTRUCCIÓN</div>
+</a>
+    </td>
+  </tr>
+</table>
+<br>
+  <br>
+  <br>
+  <span class="texto">Medical Virtual Market y su equipo técnico siguen desarrollando 
+  funcionalidades que pronto estarán en funcionamiento:</span><br>
+  <br>
+  <span class="textoBold">Consultas generales</span><br>
+  <span class="texto">Permite al agente comprador realizar un sondeo de condiciones 
+  de venta de productos o servicios. Este sondeo podrá hacerse por Región, Especialidad, 
+  Distribuidor o Fabricante, Familia de productos, Calidad, etc... <br>
+  La diferencia con una multioferta es que los campos a describir estarán abiertos 
+  (texto y fichas técnicas) y no existirán campos restrictivos como fecha de pago 
+  o fecha de entrega, sino que éstos serán opcionales. <br>
+  </span><br>
+  <span class="textoBold">Promociones y liquidación de stocks </span><br>
+  <span class="texto">Permitirá al vendedor anunciar en un lugar determinado, 
+  filtrado por el Comprador, aquellas ofertas especiales o excesos de stocks existentes. 
+  Se podrán seleccionar dichas oportunidades y se procederá a su compra siguiendo 
+  el proceso habitual de MedicalVM. </span><br>
+  <br>
+  <span class="textoBold">Alarmas </span><br>
+  <span class="texto">Existirán alarmas que controlarán y avisarán al usuario 
+  de cualquier desvío sobre las previsiones fijadas: entregas, pagos, contestación 
+  a ofertas, presupuestos, etc... <br>
+  </span><br>
+  <br>
+  <br>
+  <br>
+
+<table width="100%" border="0" align="center">
+  <tr bgcolor="#a0d8d7"> 
+    <td> 
+<a name="diagramaProceso">
+      <div align="center" class="subTituloPag">DIAGRAMA DE PROCESO DE MEDICALVM 
+      </div>
+</a>
+    </td>
+  </tr>
+  <tr>
+    <td height="467"> 
+      <div align="center"><img src="../images/manual/diagramaProcesos.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<br>
+  <br>
+  <span class="texto">Este gráfico nos muestra el proceso de compra – venta a 
+  través de MedicalVM desde el momento en el que se busca un producto (búsqueda) 
+  a través del menú de compras, hasta que se recibe el material solicitado. Para 
+  ello, MedicalVM nos aporta las herramientas necesarias para poder establecer 
+  una negociación y controlar todas las incidencias aparecidas durante el proceso 
+  de compra – venta.</span> <br>
+  <br>
+  <br>
+<table width="100%" border="0">
+  <tr class="subTituloPag"> 
+    <td bgcolor="#a0d8d7"> 
+<a name="paginaInicial">
+      <div align="center">ACCESO A MEDICAL – PAGINA INICIAL</div>
+</a>
+    </td>
+  </tr>
+  <tr> 
+    <td height="312"> 
+      <div align="center"><img src="../images/manual/img01.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<div class="texto">Es la pantalla que nos aparece al conectarnos a <span class="textoBold">www.mvmnucleo.com</span> 
+  . Pulsando sobre cualquier zona <img src="../images/manual/01.gif" width="24" height="24"> 
+  de la misma accederemos a la pantalla de presentación. </div>
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td>
+<a name="paginaPublica">
+1. PAGINA PÚBLICA
+</a>
+</td>
+  </tr>
+  <tr> 
+    <td> 
+      <div align="center"><img src="../images/manual/img02.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<div class="texto"> Ésta es la pantalla de presentación de MedicalVM. En ella se 
+  explica de manera sencilla todas las <span class="textoBold">ventajas y beneficios</span> 
+  que podemos obtener usando éste canal de transacciones.<br>
+  <br>
+  En el menú de la izquierda tenemos el menú siguiente:<br>
+  <br>
+  </div>
+  <ul>
+  <li><span class="textoUnderline">Presentación: </span></li>
+  <span class="texto">una breve presentación de MedicalVM<br>
+  </span>
+  <li><span class="textoUnderline">Contactar: </span></li>
+  <span class="texto">para poder ponerse en contacto con nosotros. Sólo es necesario 
+  rellenar un pequeño cuestionario y MedicalVM se pondrá en contacto con usted.<br>
+  </span>
+  <li><span class="textoUnderline">Documentación: </span></li>
+  <span class="texto">diversa documentación sobre MedicalVM: información sobre 
+  el primer congreso MedicalVM y listado de asistentes, noticias, ponencia sobre 
+  los problemas en la gestión de las compras en el sector, y diversas estadísticas 
+  relevantes dentro del sector sanitario.</span> 
+</ul>
+<br>
+<br>
+<span class="texto">Para la entrada registrada al sistema será necesario rellenar 
+los campos de USUARIO y el de CLAVE DE ACCESO. El</span> <span class="textoBold">USUARIO</span> 
+<span class="texto">siempre es </span><span class="textoBold">JGONZALEZ</span> 
+<span class="texto">(ejemplo para Javier González). La clave de acceso deberá 
+solicitarse a MedicalVM. </span><br>
+  <br>
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td><a name="introduccion">
+2. INTRODUCCIÓN:
+</a>
+</td>
+  </tr>
+  <tr> 
+    <td> 
+      <div align="center"><img src="../images/manual/img03.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<div class="texto"><br>
+  Al conectarnos a </div> 
+<span class="textoBold"> www.mvmnucleo.com</span> <span class="texto">y entrar 
+nuestra CLAVE DE ACCESO, nos aparece la pantalla siguiente, que es la pantalla 
+de acceso a los distintos menús de MedicalVM.</span> <br>
+  <br>
+<span class="texto">Siempre, al acceder a MedicalVM el sistema nos muestra nuestra 
+Bandeja de tareas <img src="../images/manual/01.gif" width="24" height="24"> con 
+las tareas pendientes. (nos muestra las tareas agrupadas: ventas, compras, incidencias, 
+alarmas, etc.).</span> <br>
+  <br>
+<span class="texto">En el menú de la izquierda <img src="../images/manual/02.gif" width="24" height="24"> 
+tenemos las distintas opciones a las que podemos acceder. </span><br>
+  <br>
+<span class="textoBold">Para contactar directamente con MedicalVM</span> <img src="../images/manual/03.gif" width="24" height="24"><br>
+  <br>
+  <span class="textoBold"><ul><li>Compras</li> <br>
+  <li>Ventas</li> <br>
+  <li>Gestión</li> <br>
+  <li>Administración</li> <br>
+  <li>Incidencias</li> <br>
+  <li>Personal</li></ul></span> 
+<p><br>
+  ---------------------------------------nacho---------------------------------------------<br>
+  <span class="texto">Debemos tener en cuenta que la página en curso se actualiza 
+  al llegar al final de cualquier menú operativo. <br>
+  <br>
+  Puede ir en cualquier momento a su bandeja de tareas <img src="../images/manual/04.gif" width="24" height="24">.</span>De 
+  la misma forma puede imprimir <span class="texto"><img src="../images/manual/05.gif" width="24" height="24"> 
+  la ventana en curso.</span></p>
+<p><span class="texto">Si tiene dudas sobre las acciones que puede realizar en 
+  en cada una de las pantallas dispone de una ayuda contextual<img src="../images/manual/06.gif" width="24" height="24">, 
+  la cual le ofrecer&aacute; informaci&oacute;n sobre<br>
+  la pantalla en curso adem&aacute;s de cualquier otra 
+  pantalla a trav&eacute;s de un sencillo navegador.<br>
+  --------------------nacho-----------------------<br>
+  A continuación vamos a explicar detalladamente cada una de las opciones: </span><br>
+  <br>
+  <br>
+</p>
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td>
+<a name="personal">
+3. PERSONAL
+</a>
+</td>
+  </tr>
+  <tr> 
+    <td> 
+      <div align="center"><img src="../images/manual/img04.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<br>
+<span class="textoBold">A.1 Bandeja de trabajo</span> <img src="../images/manual/01.gif" width="24" height="24"><br>
+  <br>
+<span class="texto">Al acceder a PERSONAL desde la pantalla de acceso a MedicalVM, 
+nos aparece nuestra bandeja de trabajo con los asuntos pendientes a los que podemos 
+acceder simplemente con “pulsar sobre el tema” <img src="../images/manual/02.gif" width="24" height="24">, 
+o sobre la opción de CAMBIO DE CLAVE </span>. <br>
+<span class="texto">Si pulsamos la opción CAMBIO DE CLAVE <img src="../images/manual/03.gif" width="24" height="24">, 
+nos aparece la pantalla siguiente: <br>
+</span><br>
+  <span class="textoBold">Pantalla de CAMBIO DE CLAVE:</span> <br>
+<table width="100%" border="0">
+  <tr>
+    <td>
+      <div align="center"><img src="../images/manual/img05.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<br>
+<span class="texto">El cambio de clave, nos permite modificar la clave que nos 
+haya sido asignada por una nueva. Simplemente debemos rellenar los campos de CLAVE 
+ANTIGUA (que es la asignada por MedicalVM), NUEVA CLAVE (la nueva clave con la 
+que queremos acceder al sistema), REPETIR NUEVA CLAVE (para confirmar nuestra 
+nueva clave de acceso a MedicalVM).</span> <br>
+  <br>
+<span class="alerta"> </span><br>
+<br>
+  <br>
+  <br>
+
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td><a name="compras">4. COMPRAS</a></td>
+  </tr>
+  <tr> 
+    <td> 
+      <div align="center"><img src="../images/manual/img06.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<br>
+<span class="texto">En el menú de COMPRAS <img src="../images/manual/01.gif" width="24" height="24"> 
+realizaremos nuestras solicitudes de Oferta a los diversos proveedores (</span><span class="textoBold">Multiofertas</span><span class="texto">), 
+así como</span> <span class="textoBold">Pedidos Directos</span> <span class="texto">a 
+proveedores determinados. Podremos acceder a 2 submenús:<br>
+</span><br>
+<span class="textoBold"> 
+<ul>
+  <li>OFERTAS Y PEDIDOS </li>
+  <img src="../images/manual/02.gif" width="24" height="24"> <br>
+  <br>
+  <li>COMPRAS EN CURSO <img src="../images/manual/03.gif" width="24" height="24"></li>
+</ul>
+</span> <br>
+  <br>
+<ul>
+  <li><span class="textoBold"><a name="ofertasPedidos">OFERTAS Y PEDIDOS</a></span><br>
+  </li>
+  <ol>
+    <li><span class="texto">Selección de Plantilla</span></li>
+    <span class="texto"><br>
+    </span> 
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img07.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <span class="texto"><br>
+    Podemos utilizar una plantilla ya existente <img src="../images/manual/01.gif" width="24" height="24"> 
+    o crear una nueva plantilla <img src="../images/manual/02.gif" width="24" height="24">. 
+    <br>
+    Debemos tener en cuenta que por defecto, el sistema siempre nos muestra la 
+    última plantilla que hayamos utilizado. Sobre ésta podemos realizar las modificaciones 
+    que deseemos. <br>
+    <br>
+    </span> 
+    <li><span class="texto">Nueva Plantilla</span> <br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img08.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">Damos</span> <span class="textoBold">nombre <img src="../images/manual/01.gif" width="24" height="24"></span> 
+      <span class="texto">a la plantilla y una descripción del material. </span><br>
+      <span class="texto">Podemos establecer unos criterios respecto a la</span> 
+      <span class="textoBold">forma de pago </span><img src="../images/manual/02.gif" width="24" height="24"> 
+      <span class="texto">y unos criterios generales, como</span><span class="textoBold"> 
+      lugar de entrega o días de entrega</span> <img src="../images/manual/03.gif" width="24" height="24">, 
+      <span class="texto">que serán recibidos por los proveedores.</span><br>
+      <br>
+      <span class="texto">Una vez hemos realizado los pasos anteriores, pulsamos</span> 
+      <span class="textoBold">continuar</span> <img src="../images/manual/04.gif" width="24" height="24">: 
+      <br>
+      <br>
+    </li>
+    <li><span class="textoBold"><span class="texto">Inserción de Productos</span>:</span><br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img09.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+    </li>
+    <span class="texto">Nos aparece el </span><span class="textoBold">nombre </span><img src="../images/manual/01.gif" width="24" height="24"> 
+    <span class="texto">(Prueba) que le hemos asignado a la plantilla y un</span> 
+    <span class="textoBold">número de plantilla <img src="../images/manual/02.gif" width="24" height="24"></span> 
+    <span class="texto">(se genera automáticamente), para nuestro control.</span> 
+    <br>
+    <br>
+    <span class="texto">Ahora vamos a insertar los productos de la plantilla <img src="../images/manual/03.gif" width="24" height="24">. 
+    Para ello podemos utilizar dos sistemas:</span> <br>
+    <br>
+    <ul>
+      <li><span class="texto">Buscador rápido</span></li>
+      <span class="texto"><br>
+      <br>
+      </span> 
+      <ul>
+        <li><span class="texto">Permite rápidamente buscar cualquier material 
+          que se encuentre en nuestras bases de datos. La búsqueda puede ser:</span></li>
+        <span class="texto"><br>
+        <br>
+        </span> 
+        <ul>
+          <li><span class="texto">Descripción del producto:</span></li>
+          <span class="texto">Ej: gasas, jeringuillas, etc. <br>
+          </span> 
+          <li><span class="texto">Proveedores:</span></li>
+        </ul>
+        <span class="texto">Si queremos buscar los proveedores de un cierto material 
+        <br>
+        </span> 
+      </ul>
+      <span class="texto"><br>
+      </span> 
+      <ul>
+        <li><span class="texto">Buscador completo</span></li>
+        <span class="texto"><br>
+        <br>
+        </span> 
+        <ul>
+          <li><span class="texto">Permite acceder a la estructura de Catálogo 
+            por Categoría, Familia y Subfamilia, así como Buscar aquellos Proveedores 
+            o fabricantes que disponen de dicho producto.</span></li>
+          <span class="texto"><br>
+          </span> 
+          <li><span class="texto">Para acceder al buscador completo pulsar</span> 
+            <span class="textoBold">Catálogo<img src="../images/manual/03.gif" width="24" height="24">.</span></li>
+        </ul>
+      </ul>
+      <br>
+      <br>
+      <li class="textoBold">Buscador completo<br>
+        <table width="100%" border="0">
+          <tr> 
+            <td> 
+              <div align="center"><img src="../images/manual/img10.gif" width="640" height="480"></div>
+            </td>
+          </tr>
+        </table>
+        <br>
+      </li>
+      <ul>
+        <li><span class="texto">Podemos volver a realizar la búsqueda mediante 
+          el buscador rápido<img src="../images/manual/01.gif" width="24" height="24"></span></li>
+        <span class="texto">.<br>
+        </span> 
+        <li><span class="texto">Observamos que podemos ver el resultado de la 
+          búsqueda como una lista de productos o de proveedores que disponen de 
+          dicho producto. Esta búsqueda podremos</span> <span class="textoBold">ordenarla 
+          <img src="../images/manual/02.gif" width="24" height="24"></span> <span class="texto">alfabéticamente 
+          o por producto / proveedor.</span></li>
+        <span class="texto"><br>
+        </span> 
+        <li><span class="texto">Especificar si queremos que el producto que buscamos 
+          posea algún tipo de</span> <span class="textoBold">certificación</span> 
+          .</li>
+        <br>
+        <li><span class="texto">Tenemlis la opción de ver las</span> <span class="textoBold">fichas 
+          ampliadas </span><img src="../images/manual/03.gif" width="24" height="24"> 
+          d<span class="texto">e los productos a buscar.</span></li>
+        <br>
+        <li><span class="texto">O delimitar aún más la búsqueda seleccionando 
+          las diversas opciones de</span> <span class="textoBold">categoría, familia, 
+          subfamilia</span>, <span class="texto">etc. a través del Nomenclator.</span></li>
+      </ul>
+    </ul>
+    <br>
+    <br>
+    <ul>
+      <li class="textoBold">Nomenclator</li>
+      <br>
+      <span class="texto"><span class="texto">De este modo accedemos al Maestro 
+      de productos de MedicalVM pudiendo de este modo acceder a todos los productos 
+      por Categoría, Familia y Subfamilia.</span> <br>
+      </span> 
+    </ul>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img11.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <span class="textoBold">Ejemplo de utilización de la pantalla única:</span><br>
+    <br>
+    <span class="textoBold">Buscamos jeringuillas</span><br>
+    <span class="texto">Para ello pondremos en la línea de “descripción” jeringuillas 
+    (no es necesario que introduzcamos el nombre completo del material a buscar), 
+    ni que especifiquemos puntuación ortográfica, como acentos o plurales.</span><br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img12.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <span class="texto">Hemos realizado una búsqueda por producto. El sistema 
+    nos mostrará toda la información referente a</span> <span class="textoBold">jeringuillas 
+    </span><img src="../images/manual/01.gif" width="24" height="24"> <span class="texto">y 
+    a los</span> <span class="textoBold">proveedores </span><img src="../images/manual/02.gif" width="24" height="24"> 
+    <span class="texto">(el sistema nos indica los proveedores que poseen jeringuillas) 
+    que esté cargada en la base de datos de MedicalVM. Debemos tener en cuenta 
+    que esta base de datos irá creciendo a medida que sean incorporados nuevos 
+    proveedores nacionales y extranjeros a nuestro sistema.<br>
+    También vemos la posibilidad para todo proveedor de adjuntar sus</span> <span class="textoBold">logos 
+    de empresa <img src="../images/manual/03.gif" width="24" height="24"></span> 
+    <span class="texto">por familia de producto, en este caso “Equipos para la 
+    administración de fluidos”, dónde están ubicadas las jeringas.</span><br>
+    <br>
+    <span class="texto">Tenemos diversos sistemas de re-ordenación (presentación 
+    en pantalla) del material sobre el que deseamos realizar una búsqueda:</span><br>
+    <br>
+    <ul>
+      <li class="textoBold">Re-ordenación de los datos</li>
+      <br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img13.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">Podemos re-ordenar los datos por:<br>
+      </span> 
+      <ul>
+        <li><span class="texto">a) Por Proveedor <img src="../images/manual/01.gif" width="24" height="24">: 
+          <br>
+          para ver primero los productos del proveedor seleccionado. <br>
+          </span></li>
+        <li><span class="texto">b) Por Nomenclator <img src="../images/manual/02.gif" width="24" height="24">: 
+          <br>
+          accederá a las familias de los productos seleccionados pudiendo ver 
+          primero la que le interese</span></li>
+        <li><span class="texto">c) Por selección <img src="../images/manual/03.gif" width="24" height="24">: 
+          <br>
+          después de haber elegido productos podrá ver primero los seleccionados 
+          </span><br>
+          <br>
+        </li>
+      </ul>
+    </ul>
+    <ul>
+      <li class="textoBold">Selección de Productos</li>
+      <br>
+      <span class="texto">Ahora sólo debemos <span class="textoBold">seleccionar</span> 
+      <img src="../images/manual/01.gif" width="24" height="24"> la jeringuilla 
+      que nos interesa poniendo simplemente la <span class="textoBold">cantidad</span> 
+      <img src="../images/manual/02.gif" width="24" height="24"> requerida o el 
+      número de <span class="textoBold">cajas</span><img src="../images/manual/03.gif" width="24" height="24"> 
+      , así como a los diversos proveedores de los que queremos recibir una oferta. 
+      En el caso de plantillas destinadas a Multiofertas (una línea con varias 
+      opciones de producto) es necesario definir en “<span class="textoBold">Pre</span>” 
+      un producto/proveedor en particular.</span><br>
+      <br>
+      <span class="texto">Seleccionamos las jeringuillas que nos interesan y la 
+      cantidad que deseamos:<br>
+      </span> 
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img14.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">El sistema nos informa de la <span class="textoBold">cantidad 
+      mínima <img src="../images/manual/04.gif" width="24" height="24"></span> 
+      por pedido, del precio, del tipo de IVA aplicable a cada tipo de producto, 
+      y de las unidades / caja del material.</span><br>
+      <table width="96%" border="0" height="480">
+        <tr> 
+          <td height="482"> 
+            <div align="center"><img src="../images/manual/img15.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">Vemos que tenemos diversos iconos que nos dan información 
+      adicional:<br>
+      </span> 
+      <ul>
+        <li><span class="texto"> Ver <span class="textoBold">ficha ampliada</span> 
+          <img src="../images/manual/01.gif" width="24" height="24">, nos permite 
+          ver con más detalle el producto que estamos seleccionando. <span class="textoBold">Asignar 
+          referencia</span> <img src="../images/manual/02.gif" width="24" height="24">, 
+          permite al comprador utilizar su referencia (nombre interno) en cualquier 
+          producto de la lista. <br>
+          </span></li>
+        <li><span class="texto"> Para finalizar la selección y aceptar el/los 
+          productos <img src="../images/manual/03.gif" width="24" height="24">: 
+          <br>
+          </span></li>
+        <span class="texto"><br>
+        </span> 
+      </ul>
+      <br>
+      <ul>
+        <!--                           nacho                             --> 
+        <li> <span class="texto"><span class="textoBold">Insertar líneas</span>: 
+          permite crear una línea de producto (“Pre”) incluyendo varias alternativas 
+          (resto de las líneas seleccionadas). Así mismo puede seleccionar de 
+          una sola vez y de forma independiente (“carrito de la compra”) varios 
+          productos seleccionados. En este caso no es necesario la opción (“Pre”). 
+          <br>
+          <!--                          fin nacho                             --> 
+          </span></li>
+      </ul>
+      <li><span class="textoBold"><span class="texto"> Resultado y Nueva búsqueda</span></span><span class="texto"><br>
+        </span> 
+        <table width="100%" border="0">
+          <tr> 
+            <td> 
+              <div align="center"><img src="../images/manual/img16.gif" width="640" height="480"></div>
+            </td>
+          </tr>
+        </table>
+        <br>
+      </li>
+      <span class="texto">Vemos que en la plantilla nos queda insertada nuestra 
+      <span class="textoBold">línea de Jeringuillas <img src="../images/manual/01.gif" width="24" height="24"></span> 
+      que acabamos de realizar. Vemos que esta línea consta de: </span><br>
+      <ul>
+        <li> <span class="texto">Nombre del material de la solicitud <br>
+          </span></li>
+        <li><span class="texto"> Cantidad de la que solicitamos oferta <br>
+          </span></li>
+        <li><span class="texto"> Precio de nuestra solicitud <br>
+          </span></li>
+        <li><span class="texto"> Opciones: Número de proveedores que podrían suministrar 
+          dichos productos, que utilizaré para realizar Multiofertas o enviar 
+          un pedido directo a uno de ellos. </span><br>
+        </li>
+      </ul>
+      <br>
+      <span class="texto">Finalmente, utilizaremos esta plantilla para <span class="textoBold">Solicitar 
+      Ofertas </span><img src="../images/manual/02.gif" width="24" height="24"> 
+      o un <span class="textoBold">Pedido Directo</span> <img src="../images/manual/03.gif" width="24" height="24"></span><br>
+      <br>
+      <span class="texto">Si no realizamos ninguna de éstas dos opciones, la plantilla 
+      nos quedará guardada automáticamente y podremos rescatarla en otro momento. 
+      </span> 
+    </ul>
+    <br>
+    <br>
+    <br>
+    <ul>
+      <li class="textoBold"><a name="solicitudOfertas">SOLICITUD DE OFERTAS</a></li>
+      <br>
+      <br>
+      <span class="texto">Una vez completada nuestra plantilla (carpeta) de pedido, 
+      pulsaremos Solicitar Ofertas:</span><br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img17.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">En éste punto, ya tenemos la petición de oferta lista 
+      para ser enviada al proveedor o proveedores.</span><br>
+      <br>
+      <span class="texto">Vemos en la cabecera la <span class="textoBold">forma 
+      de pago <img src="../images/manual/01.gif" width="24" height="24"></span> 
+      que hemos insertado anteriormente, así como las consideraciones generales 
+      que hayamos querido dar a conocer a los proveedores, tales como el <span class="textoBold">Punto 
+      de entrega <img src="../images/manual/02.gif" width="24" height="24"></span> 
+      del material solicitado.</span><br>
+      <br>
+      <ul>
+        <li><span class="textoBold">Fecha límite de adjudicación <img src="../images/manual/03.gif" width="24" height="24">:</span> 
+          <span class="texto">es la fecha máxima de entrega de ofertas por parte 
+          de los proveedores y de respuesta por parte del comprador.</span> <br>
+        </li>
+        <li><span class="textoBold">Fecha de entrega <img src="../images/manual/04.gif" width="24" height="24">:</span> 
+          <span class="texto">es la fecha en la que deseamos nos sea entregado 
+          el material solicitado. (Éste campo es opcional para la solicitud de 
+          oferta y obligatorio en el caso de un pedido directo)</span> <br>
+        </li>
+      </ul>
+      <br>
+      <span class="texto">Una vez cumplimentados todos los campos anteriores, 
+      pulsamos</span> <span class="textoBold">CONTINUAR</span> <img src="../images/manual/05.gif" width="24" height="24">:<br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img18.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">Ya tenemos la solicitud de oferta lista para ser enviada 
+      al proveedor.<br>
+      <br>
+      Vemos todo el detale de nuestra solicitud de oferta: condiciones de pago, 
+      condiciones generales, la especificación del producto, etc. <br>
+      <br>
+      Es importante destacar la posibilidad de solicitar a los proveedores el 
+      envío de una <span class="textoBold">MUESTRA</span> <img src="../images/manual/01.gif" width="24" height="24"> 
+      del material, la visita de un <span class="textoBold">COMERCIAL</span> <img src="../images/manual/02.gif" width="24" height="24">, 
+      así como la posibilidad que nos da el sistema de intercambiar <span class="textoBold">COMENTARIOS</span> 
+      <img src="../images/manual/03.gif" width="24" height="24"> con nuestros 
+      proveedores. </span><br>
+      <br>
+      <br>
+    </ul>
+    <ul>
+      <li class="textoBold"><a name="pedidoDirecto">PEDIDO DIRECTO</a></li>
+      <br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img19.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">El Pedido Directo permite acortar tiempo respecto a 
+      la solicitud de oferta, permitiendo asignar directamente las</span> <span class="textoBold">formas 
+      de pago</span> <img src="../images/manual/01.gif" width="24" height="24"> 
+      y <span class="textoBold">fechas de entrega</span> <span class="texto"><img src="../images/manual/02.gif" width="24" height="24">, 
+      sin posibilidad de modificar las condiciones de Precio, Cantidad, etc... 
+      En contrapartida, el Proveedor no podrá Negociar, sólo tendrá entonces la 
+      posibilidad de Aceptarlo o Rechazarlo.</span><br>
+      <br>
+      <span class="textoBold">Importante</span>: <span class="texto">NUNCA se 
+      podrá realizar un pedido directo de uno o varios productos que no posean 
+      precio asignado, público o privado <img src="../images/manual/03.gif" width="24" height="24">. 
+      <br>
+      Pulsamos</span> <span class="textoBold">continuar</span>:<br>
+      <br>
+      <li><span class="textoBold">Pedido listo para enviar:</span> <br>
+        <table width="100%" border="0">
+          <tr> 
+            <td> 
+              <div align="center"><img src="../images/manual/img20.gif" width="640" height="480"></div>
+            </td>
+          </tr>
+        </table>
+        <br>
+      </li>
+      <span class="texto">Enviamos el pedido:</span><br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img21.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <br>
+    </ul>
+    <ul>
+      <span class="textoBold"> 
+      <li><a name="comprasCurso">COMPRAS EN CURSO:</a></li>
+      </span> <br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img22.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">Compras en Curso <img src="../images/manual/01.gif" width="24" height="24">, 
+      nos indica en qué situación se encuentran nuestras Solicitudes de oferta 
+      o Pedidos directos.</span><br>
+      <br>
+      <span class="texto">Pulsando sobre cada una de las</span> <span class="textoBold">plantillas</span> 
+      <span class="texto"><img src="../images/manual/02.gif" width="24" height="24">, 
+      podremos ver, detalladamente, cada una de nuestras solicitudes:</span><br>
+      <ul>
+        <li><span class="texto">Detalle del material solicitado en cada plantilla 
+          de pedido. <br>
+          </span></li>
+        <li><span class="texto">Detalle de los proveedores a los que se ha solicitado 
+          la oferta <br>
+          </span></li>
+        <li><span class="texto"> Etc... </span><br>
+        </li>
+        <br>
+        <ul>
+          <li><span class="textoBold">Detalle de la compra</span> <br>
+            <br>
+          </li>
+          <span class="texto">Nos aparece la petición de Oxígeno. Vemos que el 
+          sistema nos muestra el</span> <span class="textoBold">nombre</span> 
+          <span class="texto"><img src="../images/manual/01.gif" width="24" height="24"> 
+          que le asignamos a la plantilla y la especificación del</span> <span class="textoBold">estado</span> 
+          <span class="texto"><img src="../images/manual/02.gif" width="24" height="24"> 
+          en el que se encuentra nuestra compra <img src="../images/manual/03.gif" width="24" height="24"> 
+          (en éste caso la compra está finalizada).</span><br>
+          <table width="100%" border="0">
+            <tr> 
+              <td> 
+                <div align="center"><img src="../images/manual/img23.gif" width="640" height="480"></div>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <span class="texto">Si pulsamos sobre</span> <span class="textoBold">COMPRA 
+          FINALIZADA</span>:<br>
+          <table width="100%" border="0">
+            <tr> 
+              <td> 
+                <div align="center"><img src="../images/manual/img24.gif" width="640" height="480"></div>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <span class="texto">Aquí podemos ver el detalle de nuestra gestión de 
+          compras. </span><br>
+          <br>
+        </ul>
+        <br>
+      </ul>
+    </ul>
+  </ol>
+</ul>
+    
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td><a name="ventas">5. VENTAS </a></td>
+  </tr>
+</table>
+    <br>
+    <br>
+<ul>
+  <li><span class="textoBold"><a name="bandejaTareas">BANDEJA DE TAREAS</a></span><br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img25.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+  </li>
+  <span class="texto">Aunque este apartado es habitualmente utilizado por los 
+  proveedores, en el caso de un hospital o clínica, se refiere a las ventas que 
+  hemos realizado con otros hospitales o clínicas, productos de segunda mano, 
+  servicios, etc... </span><br>
+  <span class="texto">El Proveedor se encuentra con la misma bandeja de tareas 
+  que el centro, informándole de las</span> <span class="textoBold">peticiones 
+  de oferta</span> <span class="texto"><img src="../images/manual/01.gif" width="24" height="24"> 
+  recibidas así como de las</span> <span class="textoBold">incidencias</span> 
+  <span class="texto"><img src="../images/manual/02.gif" width="24" height="24"> 
+  (es el caso que se nos muestra) acaecidas con otro agente (ver capítulo 9, Incidencias). 
+  </span><br>
+  <span class="texto">El Proveedor podrá acceder directamente al detalle de la 
+  tarea que tiene pendiente pulsando el texto de las tareas que tenemos pendientes.</span> 
+  <br>
+  <br>
+  <li><span class="textoBold"><a name="ventasCurso">VENTAS EN CURSO</a></span> 
+    <br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img26.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+  </li>
+  <span class="texto">También podrá acceder a la lista de <span class="textoBold">Ventas 
+  en curso</span> <img src="../images/manual/01.gif" width="24" height="24"> a 
+  través del submenú de Ventas, dónde encontrará el detalle del <span class="textoBold">estado</span> 
+  <img src="../images/manual/02.gif" width="24" height="24"> de dicha petición 
+  de oferta. </span><br>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img27.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span class="texto">El proveedor encuentra:</span> <br>
+  <br>
+  <ul>
+    <li><span class="textoBold">detalle</span> <span class="texto"><img src="../images/manual/01.gif" width="24" height="24"> 
+      de la oferta en su cabecera, pudiendo incluir (si así lo requiere el Cliente), 
+      el</span> <span class="textoBold">número de proveedores</span> <span class="texto"><img src="../images/manual/02.gif" width="24" height="24"> 
+      a los cuales se ha solicitado la misma oferta.</span> <br>
+    </li>
+    <li><span class="texto">El proveedor podrá entonces fijar: </span><br>
+      <br>
+      <ul>
+        <li><span class="texto">Tipo de</span> <span class="textoBold">IVA</span> 
+          <span class="texto"><img src="../images/manual/03.gif" width="24" height="24"> 
+          (si no es correcto por defecto) </span><br>
+        </li>
+        <li><span class="texto">Asignar</span> <span class="textoBold">precios 
+          Privados</span> <span class="texto"><img src="../images/manual/04.gif" width="24" height="24"> 
+          (mediante escalados)</span> <br>
+        </li>
+        <li><span class="texto">Proponer</span> <span class="textoBold">descuentos</span> 
+          <span class="texto"><img src="../images/manual/05.gif" width="24" height="24"> 
+          y asignar coste de</span> <span class="textoBold">transporte</span> 
+          <img src="../images/manual/06.gif" width="24" height="24">.<br>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img28.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <li><span class="textoBold"><a name="negociacion">NEGOCIACION</a></span> <br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img29.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+  </li>
+  <span class="texto">Finalmente el proveedor contará con un espacio</span> <span class="textoBold">Negociación</span> 
+  <span class="texto"><img src="../images/manual/01.gif" width="24" height="24"> 
+  dónde podrá: </span><br>
+  <ul>
+    <li><span class="texto">modificar las condiciones de la</span> <span class="textoBold">oferta</span> 
+      , <span class="textoBold">Precios</span>, <span class="textoBold">Descuentos 
+      </span><span class="texto">o</span> <span class="textoBold">Portes</span>. 
+      <br>
+    </li>
+    <li><span class="texto">dejar</span> <span class="textoBold">Pendiente</span> 
+      <span class="texto"><img src="../images/manual/02.gif" width="24" height="24"> 
+      una respuesta para posterior análisis, manteniéndose entonces en su bandeja 
+      de tareas. </span><br>
+    </li>
+    <li><span class="textoBold">Rechazarla</span> <span class="texto"><img src="../images/manual/03.gif" width="24" height="24"> 
+      o</span> <span class="textoBold">Enviarla</span> <span class="texto"><img src="../images/manual/04.gif" width="24" height="24">, 
+      proponiendo en ambos casos un</span> <span class="textoBold">texto explicativo 
+      o de negociación.</span> <br>
+    </li>
+  </ul>
+  <br>
+  <li><span class="textoBold"><a name="confirmacionPedido">CONFIRMACIÓN DEL PEDIDO</a></span> <br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img30.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+  </li>
+  <span class="texto">Al proveedor le aparece como</span> <span class="textoBold">tarea 
+  pendiente</span> <img src="../images/manual/01.gif" width="24" height="24">. 
+  <br>
+  <span class="texto">Deberá</span> <span class="textoBold">Confirmar</span> <img src="../images/manual/03.gif" width="24" height="24">, 
+  <span class="textoBold">Rechazar</span> <span class="texto"><img src="../images/manual/02.gif" width="24" height="24"> 
+  o dejar</span> <span class="textoBold">Pendiente</span> <span class="texto"><img src="../images/manual/01.gif" width="24" height="24"> 
+  el pedido. </span><br>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img31.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <li><span class="textoBold"><a name="bannersDinamicos">BANNERS DINAMICOS</a></span> <br>
+  </li>
+  <span class="texto">El proveedor podrá alquilar espacios publicitarios dinámicos, 
+  como por ejemplo asignar a una Familia en particular (p.e. apósitos) su Logo 
+  de empresa. </span><br>
+  <br>
+  <span class="texto">De este modo cuando el Centro busque</span> <span class="textoBold">Apósitos</span> 
+  <span class="texto"><img src="../images/manual/01.gif" width="24" height="24"> 
+  en el buscador de MedicalVM le aparecerán todos los productos que cuelgan de 
+  esta familia, incluidos los del proveedor y el</span> <span class="textoBold">Logo</span> 
+  <span class="texto"><img src="../images/manual/02.gif" width="24" height="24"> 
+  específico del proveedor que haya reservado este espacio publicitario. </span><br>
+  <br>
+</ul>
+    
+<table width="100%" border="0">
+  <tr> 
+    <td> 
+      <div align="center"><img src="../images/manual/img32.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+      <div align="center"><img src="../images/manual/img33.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
+    
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td><a name="gestion">6. GESTIÓN</a></td>
+  </tr>
+</table>
+    <span class="textoBold"><br>
+</span> 
+<ul>
+  <li><span class="textoBold"><a name="confirmacionProductos">CONFIRMACIÓN PRODUCTOS Y DATOS EMPRESA</a> </span></li>
+  <img src="../images/manual/01.gif" width="24" height="24"><br>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img34.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span class="texto">Al acceder a éste menú, el sistema nos pide la confirmación 
+  de validación de los datos disponibles por el sistema referentes a nuestra empresa, 
+  y así poder empezar a operar en el mercado. </span><br>
+  <br>
+  <span class="texto">En el caso de pulsar</span> <span class="textoBold">CONFIRMAR 
+  PRODUCTOS </span><img src="../images/manual/02.gif" width="24" height="24"> 
+  <span class="texto">los productos que deseamos vender y que hemos incluido en 
+  la base de datos de MedicalVM, según la estructura propuesta en el Maestro de 
+  MedicalVM, habrán sido formalmente aceptados. </span><br>
+  <br>
+  <span class="texto">En el caso de que existan errores o que la clasificación 
+  no sea la adecuada rogamos se pongan en contacto con MedicalVM, Alfonso Linares 
+  (</span><a href="alinares@medicalvm.com">alinares@medicalvm.com</a><span class="texto">). 
+  </span><br>
+  <br>
+  <br>
+</ul>
+    
+<table width="100%" border="0">
+  <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+    <td><a name="administracion">7. ADMINISTRACIÓN</a></td>
+  </tr>
+</table>
+    <br>
+<ul>
+  <li><span class="textoBold"><a name="gestionClientesProveedores">GESTIÓN CLIENTES Y PROVEEDORES</a></span> <br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img35.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+  </li>
+  <span class="texto">Esta opción permite: <br>
+  </span> 
+  <ol>
+    <li><span class="texto"> Obtener una lista todas las empresa afiliados a MedicalVM, 
+      o hacer una selección de tipo de empresa (Clínicas, Hospitales, Fabricantes, 
+      Laboratorios, etc...). <br>
+      </span></li>
+    <li><span class="texto"> Seleccionar estas empresa bajo el criterio de si 
+      es Cliente Visible, no Visible, etc.. <br>
+      </span></li>
+  </ol>
+  <br>
+  <span class="textoBold">Definición de Clientes y Proveedores</span> <br>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img36.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <ul>
+    <li> <span class="textoBold">Asignar Clientes y Proveedores</span> <img src="../images/manual/01.gif" width="24" height="24"><br>
+    </li>
+    <span class="texto">Permite definir "a quién veo" sus productos y "quién ve" 
+    los míos. </span><br>
+    <li><span class="textoBold">Proveedor Habitual</span> <img src="../images/manual/02.gif" width="24" height="24"><br>
+      <span class="texto">En el caso de un Proveedor, puedo definir si es habitual 
+      o no, para después facilitar las búsquedas </span><br>
+    </li>
+    <li> <span class="textoBold">Nota de Calidad</span> <img src="../images/manual/03.gif" width="24" height="24"><br>
+      <span class="texto">Es una nota INTERNA. Sólo </span><span class="textoBold">"la 
+      veré yo"</span> <span class="texto">y permite realizar búsquedas más concretas 
+      con el criterio de "Calidad Mínima".</span> <br>
+    </li>
+  </ul>
+  <br>
+  <li><span class="textoBold"><a name="estructuraEmpresa">ESTRUCTURA DE EMPRESA</a></span><br>
+  </li>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img37.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span class="texto">Aquí vemos la estructura actual de nuestra empresa. El sistema 
+  permite que realicemos modificaciones en la estructura de nuestra propia empresa. 
+  </span><br>
+  <br>
+  <!--                           nacho                             -->
+  <span class="texto">En esta pantalla podemos asignar un agente comercial por defecto. También 
+  podemos acceder al mantenimiento de los centros, departamentos y usuarios. 
+  <!--                          fin nacho                             -->
+  </span><br>
+  <br>
+  <ul>
+    <li><span class="textoBold">Mantenimiento de Centros</span> <img src="../images/manual/02.gif" width="24" height="24"><br>
+    </li>
+    <span class="texto">En éste punto, podemos realizar varios tipos de modificaciones 
+    en la estructura de nuestra empresa. Éstas modificaciones pueden afectar: 
+    </span><br>
+    <br>
+    <span class="texto">A los</span> <span class="textoBold">CENTROS</span> <span class="texto">de 
+    nuestra empresa. Ésta opción nos permite modificar el centro actual, o añadir 
+    nuevos centros a nuestra empresa. También nos permite eliminar centros de 
+    la base de datos.</span> <br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img38.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <span class="texto">Se nos muestra los centros disponibles actualmente en 
+    la base de datos. Ahora podemos</span> <span class="textoBold">AÑADIR UN CENTRO</span><span class="texto"> 
+    <img src="../images/manual/01.gif" width="24" height="24">. Esta opción es 
+    interesante en empresas que cuenten con diferentes centros, agrupaciones hospitalarias, 
+    o proveedores con filiales. </span><br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img39.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <span class="texto">Podemos incorporar un nuevo centro a nuestra empresa. 
+    Para ello, sólo tendremos que rellenar los campos solicitados por el sistema 
+    y pulsar</span> <span class="textoBold">GUARDAR</span> <span class="texto"><img src="../images/manual/01.gif" width="24" height="24">. 
+    El centro introducido quedara guardado en la estructura de nuestra empresa: 
+    </span><br>
+    <br>
+    <li><span class="textoBold">Mantenimiento de Departamentos </span><img src="../images/manual/03.gif" width="24" height="24"><br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img40.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+    </li>
+    <span class="texto">Esta pantalla nos muestra los departamentos de los que 
+    actualmente dispone nuestra empresa y su responsable. <br>
+    Si deseamos añadir algún otro departamento, como contabilidad, finanzas o 
+    dirección, pulsaremos</span> <span class="textoBold">AÑADIR DEPARTAMENTO: 
+    </span><br>
+    <br>
+    <span class="textoBold">IMPORTANTE</span>: <span class="texto">Siempre deberemos</span> 
+    <span class="textoBold">AÑADIR UN USUARIO</span> <span class="texto">nuevo, 
+    antes de crear un departamento, puesto que el sistema nos pide un usuario 
+    para cada nuevo departamento.</span> <br>
+    <br>
+    <li><span class="textoBold">Mantenimiento de Usuarios</span> <img src="../images/manual/04.gif" width="24" height="24"><br>
+      <span class="texto">El sistema nos muestra los usuarios que tiene acceso 
+      al sistema actualmente. Pulsando sobre el usuario actual, el sistema nos 
+      permite modificar todos los datos referentes a éste: </span><br>
+      <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <div align="center"><img src="../images/manual/img41.gif" width="640" height="480"></div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <span class="texto">También podríamos realizar: </span><br>
+      <ul>
+        <li> <span class="texto">un cambio de</span> <span class="textoBold">Clave 
+          de Acceso <img src="../images/manual/01.gif" width="24" height="24"></span>. 
+          <br>
+        </li>
+        <li><span class="texto">Definir importes máximos de compras por usuarios 
+          </span><br>
+        </li>
+        <li class="texto">Definir tipo de usuario </li>
+        <li class="texto">Asignar usuarios a diferentes centros, etc...</li>
+      </ul>
+      <br>
+      <br>
+    </li>
+  </ul>
+</ul>
+    <br>
+    <table width="100%" border="0">
+      <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+        <td><a name="estructuraProductos">8. ESTRUCTURA DE PRODUCTOS.</a></td>
+      </tr>
+      <tr> 
+        <td>
+      <div align="center"><img src="../images/manual/img42.gif" width="640" height="480"></div>
+    </td>
+      </tr>
+    </table>
+    <br>
+    <span class="texto">Esta opción nos permite un mantenimiento de los productos 
+    de nuestra empresa. En el caso de un hospital / clínica es probable que éste 
+    apartado sea útil en cuanto al mantenimiento de los servicios o material de 
+    segunda mano que disponemos y que vendemos a otros centros similares. </span><br>
+    <br>
+    <span class="textoUnderline">Podremos acceder: </span><br>
+<ul>
+  <li><span class="texto">directamente a un producto mediante el <span class="textoBold">Buscador 
+    Rápido</span> <img src="../images/manual/02.gif" width="24" height="24">y 
+    el <span class="textoBold">Completo</span> <img src="../images/manual/03.gif" width="24" height="24">. 
+    <br>
+    </span></li>
+  <li><span class="texto">Disponer de un extracto en excel clasificado por Categorías, 
+    Familias, Subfamilias y Productos. Dicho extracto puede ser modificado y deberá 
+    ser entregado a MedicalVM para su actualización (Eduardo Torrellas, <a href="mailto:etorrellas@medicalvm.com"> 
+    </a></span><a href="mailto:etorrellas@medicalvm.com">etorrellas@medicalvm.com</a><span class="texto">).</span> 
+    <br>
+    <br>
+  </li>
+</ul>
+    <ul>
+      <li><span class="textoBold"><a name="asignacionPrecios">ASIGNACIÓN DE PRECIOS</a></span> <br>
+      </li>
+    </ul>
+    
+<table width="100%" border="0">
+  <tr>
+    <td>
+      <div align="center"><img src="../images/manual/img43.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<span class="texto"><br>
+El Proveedor puede asignar precios <img src="../images/manual/01.gif" width="24" height="24">, 
+</span><span class="textoBold">Públicos</span> <span class="texto">o</span> <span class="textoBold">Privados</span><span class="texto">, 
+directamente. </span><br>
+    <br>
+<span class="texto">Simplemente escogiendo la opción</span> <span class="textoBold">Tarifas 
+Públicas</span> <img src="../images/manual/01.gif" width="24" height="24">,<span class="texto"> 
+o cualquiera de los agentes Clientes que hemos definido con anterioridad <img src="../images/manual/02.gif" width="24" height="24"> 
+(cap. 7 Gestión de Clientes y Proveedores). </span><br>
+<table width="100%" border="0">
+  <tr>
+    <td>
+      <div align="center"><img src="../images/manual/img44.gif" width="640" height="480"></div>
+    </td>
+  </tr>
+</table>
+<br>
+<span class="texto">También podemos asignar precios por <span class="textoBold">volumen</span> 
+<img src="../images/manual/04.gif" width="24" height="24">, indicando el <span class="textoBold">precio 
+unitario</span> <img src="../images/manual/03.gif" width="24" height="24">para 
+el volumen correspondiente. </span><br>
+    <br>
+<ul>
+  <li><span class="textoBold">INCIDENCIAS</span><br>
+  </li>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img45.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span class="texto">Éste apartado nos permite introducir todas las incidencias 
+  que hayamos tenido con nuestros Clientes y Proveedores: </span><span class="textoBold">retraso 
+  en la entrega</span>, <span class="textoBold">factura impagada</span>, <span class="textoBold">calidad 
+  insuficiente</span>, <span class="textoBold">pedido no entregado en plazo</span><span class="texto">, 
+  etc...</span> <br>
+  <br>
+  <span class="textoBold">Selección de la empresa</span> <br>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img46.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span class="textoBold">Selección del departamento</span> <br>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img47.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span class="textoBold">Definición de la Incidencia</span> <br>
+  <table width="100%" border="0">
+    <tr> 
+      <td> 
+        <div align="center"><img src="../images/manual/img48.gif" width="640" height="480"></div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span class="texto">El modelo de definición de las incidencias de</span> <span class="textoBold">MedicalVM</span> 
+  <span class="texto">sigue el modelo standard de las</span> <span class="textoBold">normas 
+  ISO</span><span class="texto">. En él pueden especificar: </span><br>
+  <ul>
+    <li><span class="textoBold"> tipo</span> <span class="texto"><img src="../images/manual/01.gif" width="24" height="24"> 
+      de incidencia </span><br>
+    <li> <span class="textoBold">descripción</span> <span class="texto"><img src="../images/manual/02.gif" width="24" height="24"> 
+      de la incidencia </span><br>
+    </li>
+    <li> <span class="texto">descripción de los</span> <span class="textoBold">costes</span> 
+      <span class="texto"><img src="../images/manual/03.gif" width="24" height="24"> 
+      ocasionados </span><br>
+    </li>
+    <li> <span class="textoBold">valoración</span> <span class="texto"><img src="../images/manual/04.gif" width="24" height="24"> 
+      monetaria de dichos costes </span><br>
+    </li>
+    <br>
+  </ul>
+</ul>
+    
+<ul>
+  <li><span class="textoBold"><a name="sugerencias">SUGERENCIAS A MEDICALVM </a></span><br>
+    <span class="texto">Nos permite enviar sugerencias al personal de</span> <span class="textoBold">MEDICALVM</span>. 
+    <br>
+    <table width="100%" border="0">
+      <tr> 
+        <td> 
+          <div align="center"><img src="../images/manual/img49.gif" width="640" height="480"></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <span class="texto">Aunque siempre tenemos la posibilidad de realizar</span> 
+    <span class="textoBold">comentarios</span> <span class="texto"><img src="../images/manual/02.gif" width="24" height="24">hacerlo 
+    a través de Sugerencias a MedicalVM tiene la ventaja de su seguimiento específico 
+    por parte del personal de MedicalVM, así como la posibilidad del usuario de 
+    consultar un histórico de sugerencias. <br>
+    </span><br>
+    <span class="texto">Una vez finalizada la</span> <span class="textoBold">descripción</span> 
+    <span class="texto"><img src="../images/manual/03.gif" width="24" height="24"> 
+    de la incidencia pulsaremos</span> <span class="textoBold">Enviar</span> <img src="../images/manual/04.gif" width="24" height="24">. 
+    <br>
+    <br>
+    <br>
+  </li>
+</ul>
+        <table width="100%" border="0">
+          <tr class="subTituloPag" bgcolor="#a0d8d7"> 
+            <td> 
+              <div align="center"><a name="ejercicios">EJERCICIOS DE FORMACIÓN</a></div>
+            </td>
+          </tr>
+          <tr class="texto"> 
+            <td> 
+              <div align="center">Contactar con Alfonso Linares, <a href="alinares@medicalvm.com" class="enlaces">alinares@medicalvm.com 
+                </a></div>
+            </td>
+          </tr>
+        </table>
+        <br>
+    <br>
+
+</body>
+</html>

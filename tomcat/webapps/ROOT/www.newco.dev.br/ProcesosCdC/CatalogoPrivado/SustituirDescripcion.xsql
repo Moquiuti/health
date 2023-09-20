@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SustituirDescripcionJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SustituirDescripcionJSON.xsl"?>
+
+<SustituirDescripcion xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		TOTAL		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SustituirDescripcion');
+		IF US_ID > 0 THEN
+			TOTAL:=Catalogoprivado_Mant_Pck.ActualizarDescripcionEstandar(
+				US_ID,
+				'{@IDEMPRESA}',
+				'{@IDPRODESTANDAR}',
+				'{@DUMP_NOMBREANTIGUO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF TOTAL > 0 THEN
+				HTP.P('<OK>'||TOTAL||'</OK>');
+			ELSE
+				HTP.P('<ERROR>'||TOTAL||'</ERROR>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</SustituirDescripcion>

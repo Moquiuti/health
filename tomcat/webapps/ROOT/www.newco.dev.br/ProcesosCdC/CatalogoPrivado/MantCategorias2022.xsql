@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Catalogo Privado. Mantenimiento de categorias. Nuevo disenno
+	Ultima revision: ET 07mar22 15:30.
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="MantCategoriasHTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="CATPRIV_IDEMPRESA"/>
+  <xsql:include-param name="ACCION"/>
+  <xsql:include-param name="TIPO"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  
+  <xsql:include-owa>
+	<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Res		VARCHAR2(100);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','mantCategorias');	
+		IF US_ID>=0 THEN
+			utilidades_pck.debug('mantCategorias. Accion:{@ACCION} IDCat:{@CATPRIV_IDCATEGORIA}');
+			
+		  	IF 	'{@ACCION}' IS NOT NULL THEN	   
+          		v_Res:=CATALOGOPRIVADO_MANT_PCK.ModificarCategoria
+				(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+ 					'{@CATPRIV_IDCATEGORIA}',
+					'{@CATPRIV_REFERENCIACATEGORIA}',
+					'{@CATPRIV_NOMBRE}',
+					'{@CATPRIV_REFCLIENTE}',
+					'{@CP_CAT_IDSELECCION}',
+					'{@ACCION}'
+				);
+							
+          		CATALOGOPRIVADO_MANT_PCK.Categoria_XML
+				(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					utilidades_pck.Piece(v_Res,'|',0),	
+					utilidades_pck.Piece(v_Res,'|',1)	
+					
+				);
+
+			ELSE
+				CATALOGOPRIVADO_MANT_PCK.Categoria_XML
+				(
+					US_ID,
+					'{@CATPRIV_IDEMPRESA}',
+					'{@CATPRIV_IDCATEGORIA}'
+				);
+			END IF;
+    	END IF;
+	END;
+        ]]>
+  </xsql:include-owa>
+  
+  <botones>
+  
+    <button label="Aceptar" caption="CATPRIV-0110">
+      <name_function>ValidarFormulario</name_function>
+      <param>document.forms[0]</param>                
+    </button>
+    
+    <button label="Cancelar" caption="CATPRIV-0120">
+      <name_location>BuscadorFrame.xsql</name_location>               
+    </button>
+    
+  </botones>
+  
+  
+</Mantenimiento>

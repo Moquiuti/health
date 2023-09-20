@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	ultima revision ET 27set18 16:10
+-->
+<?xml-stylesheet type="text/xsl" href="CerrarFicheroJSON.xsl"?>
+
+<FinEnvioFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas
+	<xsql:include-param name="NOMBRE" value="{@NOMBRE}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	-->
+	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ConvocatoriasEspeciales.CerrarFichero');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL: ConvocatoriasEspeciales_pck.CerrarFichero_XML {@US_ID}, {@IDFICHERO},{@NUMLINEAS},{@ESTADO}');
+
+				ConvocatoriasEspeciales_pck.FinEnvio_XML('{@US_ID}','{@IDFICHERO}','{@NUMLINEAS}','{@ESTADO}');
+    		END IF;
+		END;
+]]>
+</xsql:include-owa>
+</FinEnvioFichero>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Mostrar documentos de la empresa. Nuevo disenno 2022.
+ 	ultima revision: ET 22feb22 09:15
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="EMPDocsHTML2022.xsl"?>
+-->
+<Docs xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-param name="FICHAEMPRESA"/><!--	Si es ficha empresa no mostramos desplegable en cabecera	-->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DocsEmpresa');
+		IF US_ID>0 THEN
+		
+			--utilidades_pck.debug('DocsEmpresa. US_ID:'||US_ID||' IDFILTROEMPRESA:{@IDFILTROEMPRESA} FIDTIPODOCUMENTO:{@FIDTIPODOCUMENTO} FIDESTADO:{@FIDESTADO}');
+			
+			--8set21 DOCUMENTOS_PCK.FichaDocumentos
+			DOCUMENTOS_PCK.NuevaFichaDocumentos
+			(
+				US_ID,
+				'{@IDFILTROEMPRESA}',
+				'{@FIDTIPODOCUMENTO}',
+				'{@FIDESTADO}',				
+				'{@FTEXTO}',
+				'S',
+				'S'
+			);
+			
+			
+			--HTP.P('<OK/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Docs>

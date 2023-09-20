@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Analisis ABC de pedidos. Nuevo disenno.
+	Ultima revision 17mar22 16:15
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="AnalisisABCPedidosHTML2022.xsl"?>
+
+<AnalisisPedidos xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="SES_ID" value="{@SES_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="IDPRODUCTO" />
+  <xsql:include-param name="IDEMPRESA" />
+
+	<!--	Analisis de lineas de pedidos	-->
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Analisis ABC Pedidos');
+					IF US_ID>=0 THEN
+						AnalisisABCPedidos_Pck.Lista_XML
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+                            '{@FECHA_INICIO}', 
+                            '{@FECHA_FINAL}',
+							'{@IDCENTROCONSUMO}',
+							'{@IDFAMILIA}',
+							'{@GRUPODESTOCK}',
+							'{@ONCOLOGICO}',
+							'{@PRODUCTO}',									--	15dic21
+							'{@PORCENTAJE_A}',
+							'{@PORCENTAJE_B}',
+                            '{@PAGINA}',
+                            '{@LINEA_POR_PAGINA}',
+                            'S'												--	cabecera
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</AnalisisPedidos>

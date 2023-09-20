@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para las noticias, FAQs, consejos, etc.
+		
+	(c) 10/9/2001 E.Torrellas
+-->
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="VerNoticiaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="VerNoticiaHTML.xsl"?>
+
+<WorkFlowPendientes xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <!--
+  <xsql:query tag-case="upper" 
+              row-element="NOTICIA" 
+              max-rows="1"
+              rowset-element="">
+    <![CDATA[
+                       select NOT_ID as ID,
+                              NOT_IDTIPO AS TIPO,
+                              NOT_FECHAENTRADA AS FECHA,
+                              NOT_TITULO AS TITULO,
+                              NOT_RESPUESTA AS TEXTO from noticias
+                      where NOT_ID={@ID}
+    ]]>
+  </xsql:query>
+  -->
+  <!--
+     
+     el package...
+  
+  -->
+  <xsql:include-owa>
+  	NOTICIAS_PCK.EscribirNoticia ('{@ID}');
+  </xsql:include-owa>
+  <returnHome/>
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0010</page>
+    <caption>G-0001</caption> 
+  </jumpTo> 
+  
+    <button label="Cancelar" alt="IMG-0190">
+    <name_function>window.close</name_function>  
+  </button> 
+  
+</WorkFlowPendientes>
+

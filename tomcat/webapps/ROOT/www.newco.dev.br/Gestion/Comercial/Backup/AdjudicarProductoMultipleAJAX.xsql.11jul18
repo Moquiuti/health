@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Adjudica múltiples ofertas en la ficha de producto de la licitacion (FichaProductoLicitacionHTML.xsl)
+	Ultima revision ET 6jul18 11:13
+-->
+<!---->	
+<?xml-stylesheet type="text/xsl" href="AdjudicarProductoMultipleJSON.xsl"?>
+
+<AdjudicarProducto xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_res		NUMBER;
+		v_IDMotivo	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdjudicarProductosMultipleAJAX');
+		IF US_ID>=0 THEN
+		
+			SELECT DECODE('{@IDMOTIVO}', 'undefined',NULL,'{@IDMOTIVO}') INTO v_IDMotivo FROM DUAL;
+		
+			v_res:=LICITACIONES_ADJUDMULT_PCK.AdjudicarProductoMultiple(
+				US_ID,
+				'{@IDLIC}',
+				'{@IDPRODUCTOLIC}',
+				'{@LISTA_OFERTAS}',
+				v_IDMotivo,
+				'{@MOTIVO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_res <> '-1' THEN
+				HTP.P('<OK/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</AdjudicarProducto>

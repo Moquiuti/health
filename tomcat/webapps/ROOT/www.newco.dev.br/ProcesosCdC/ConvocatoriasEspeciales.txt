@@ -1,0 +1,8 @@
+21set18	ET	Convocatorias especiales. Carga de datos de proveedor.
+9oct18	ET	Informar procedimientos
+10oct18	ET	Buscadores/listados procedimientos y productos
+11oct18 ET	Avisar si ya se ha subido fichero o informado procedimiento
+26oct18 ET	Poder seleccionar si se desea actualizar el fichero anterior o sustituirlo
+2nov18	ET	Cambios de estado: CURS, SUS, REOFERTA,etc
+
+

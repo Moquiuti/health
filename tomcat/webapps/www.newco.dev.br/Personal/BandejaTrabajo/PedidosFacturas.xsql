@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Gestion de pedidos/albaranes/facturas/pagos
+	Ultima revision: ET 14nov19 14:16
+-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="PedidosFacturasHTML.xsl"?>
+
+
+<PedidosYFacturas xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <!--<xsql:include-param name="SES_ID" value="{@SES_ID}"/>-->
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="STYLE" />
+	<xsql:include-owa>
+        <![CDATA[
+				DECLARE
+					US_ID		NUMBER;
+				BEGIN
+					US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidosFacturas');
+					IF US_ID>=0 THEN
+						BANDEJA_PCK.Inicio
+						(
+							US_ID,
+							'{@IDEMPRESA}',
+							'{@IDCENTRO}',
+							'{@IDPROVEEDOR}',
+							'{@IDFILTROMOTIVO}',
+							'{@IDFILTRORESPONSABLE}',
+							'{@IDFILTROCOMPRADOR}',
+							'{@IDFILTROESTADO}',
+							'{@IDFILTROSEMAFORO}',
+							'{@IDFILTROTIPOPEDIDO}',
+							'{@BLOQUEADO}',
+							'{@NOCUMPLEPEDMIN}',			
+							'{@BUSCAR_PACKS}',	
+							'{@CODIGOPEDIDO}',
+							'{@SINSTOCKS}',
+							'{@PRODUCTO}',
+							'S',										--	15mar21	'{@TODOS12MESES}',
+							'{@INCFUERAPLAZO}',
+							'{@PED_ENTREGADOOK}',     
+							'{@PED_PEDIDONOCOINCIDE}', 
+							'{@PED_RETRASADO}',                  
+							'{@PED_ENTREGADOPARCIAL}',       
+							'{@PED_RETRASODOCTECNICA}',      
+							'{@PED_NOINFORMADOENPLATAFORMA}', 
+							'{@PED_PRODUCTOSANYADIDOS}', 
+							'{@PED_PRODUCTOSRETIRADO}',  
+							'{@FECHA_INICIO}',  
+							'{@FECHA_FINAL}',      
+							'{@PED_MALAATENCIONPROV}',     
+							'{@PED_URGENTE}',                 
+							'{@PAGINA}',               
+							'{@LINEA_POR_PAGINA}',     
+							'{@ORDEN}'||' '||'{@SENTIDO}',
+							'S'                				    		--    2set19
+						);
+					END IF;
+				END;
+        ]]>
+        </xsql:include-owa>
+
+
+</PedidosYFacturas>

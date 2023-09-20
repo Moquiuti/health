@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Lista de documentos de una multioferta
+ 	Ultima revision: ET 18set20 16:30
+-->
+<!--
+<?xml-stylesheet type="text/xsl" href="MODocsHTML.xsl"?>
+-->
+<Docs xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="ORIGEN"/>
+
+<!--<xsql:include-param name="FICHAEMPRESA"/><!- -	Si es ficha empresa no mostramos desplegable en cabecera	-->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','MODocs');
+		IF US_ID>0 THEN
+		
+			--utilidades_pck.debug('DocsEmpresa. US_ID:'||US_ID||' IDFILTROEMPRESA:{@IDFILTROEMPRESA} FIDTIPODOCUMENTO:{@FIDTIPODOCUMENTO} FIDESTADO:{@FIDESTADO}');
+			
+			DOCUMENTOS_PCK.FichaDocumentosMO_XML
+			(
+				US_ID,
+				'{@MO_ID}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Docs>

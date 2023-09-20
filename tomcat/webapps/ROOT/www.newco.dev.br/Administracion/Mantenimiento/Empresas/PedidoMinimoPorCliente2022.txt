@@ -1,0 +1,4 @@
+05may22 ET Mantenimiento de condiciones particulares de pedido minimo, plazo de entrega, plazo de envio de un proveedor. Nuevo disenno. Separar JS. PedidoMinimoPorCliente2022_050522.js
+25jul22 ET Solucionado error, no se desbloqueaba campo importe. PedidoMinimoPorCliente2022_250722.js
+29set22 ET No se muestra "Todos" en el desplegable de centros
+ 

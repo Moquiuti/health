@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NoConformidadProductoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NoConformidadProductoHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		  DECLARE
+		    US_ID		NUMBER;
+      BEGIN
+		    US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NoConformidadProducto');	
+		    IF US_ID>=0 THEN
+          NOCONFORMIDADPRODUCTO_PCK.NOCONFORMIDADPROD_XML(
+            US_ID,
+            '0'
+          );
+        END IF;
+      END;
+    ]]>
+  </xsql:include-owa>
+
+ 
+  <botones>
+    
+    <button label="Cancelar" caption="CATPRIV-0120">
+      <name_function>CerrarVentana</name_function>
+    </button>
+      
+    <button label="Borrar" caption="CATPRIV-0590">
+      <name_function>BorrarActa</name_function>
+      <param>document.forms[0]</param>
+      <param>'BORRARACTA'</param>
+    </button>
+    
+    <button label="AnyadirResponsable" caption="CATPRIV-0620">
+        <name_function>AnyadirResponsable</name_function>
+        <param>document.forms[0]</param>
+        <param>document.forms[0].elements['IDRESPONSABLEEVALUACION'].value</param>
+        <param>'ANYADIRRESPONSABLE'</param>
+    </button>
+      
+      <button label="Guardar" caption="IMG-1560">
+        <name_function>GuardarActa</name_function>
+        <param>document.forms[0]</param>
+        <param>'GUARDARACTA'</param>
+      </button>
+      
+      <button label="Imprimir" caption="IMG-1490">
+        <name_function>window.print</name_function> 
+     </button>
+     
+     <button label="CerrarActa" caption="CATPRIV-0625">
+      <name_function>CerrarActa</name_function>
+      <param>document.forms[0]</param>
+        <param>'CERRARACTA'</param>
+    </button>
+    
+    <button label="Cerrar" caption="CATPRIV-0680">
+      <name_function>CerrarVentana</name_function>
+    </button>
+    
+    
+  </botones>
+  
+  <field name="COMBO_PREVISION">
+    <dropDownList>
+      <listElem>
+        <ID>2</ID>
+        <listItem>2 días</listItem>
+      </listElem>
+      <listElem>
+        <ID>3</ID>
+        <listItem>3 días</listItem>
+      </listElem>
+      <listElem>
+        <ID>7</ID>
+        <listItem>7 días</listItem>
+      </listElem>
+      <listElem>
+        <ID>15</ID>
+        <listItem>15 días</listItem>
+      </listElem>
+      <listElem>
+        <ID>999</ID>
+        <listItem>otros</listItem>
+      </listElem>
+    </dropDownList>
+  </field>
+
+</Mantenimiento>

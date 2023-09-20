@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Inserta nuevo usuario que firma para la licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ModificaEstadoProveedorJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ModificaEstadoProveedorJSON.xsl"?>
+
+<ModificaEstadoProveedor xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_ModificaProve	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EliminarProve');
+		IF US_ID>=0 THEN
+			v_ModificaProve:=LICITACIONES_PCK.CambiarEstadoProveedor(
+				US_ID,
+				'{@ID_PROVE}',
+				'{@ID_ESTADO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_ModificaProve > 0 THEN
+				HTP.P('<OK>'||v_ModificaProve||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</ModificaEstadoProveedor>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PLDirectoSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PLDirectoSaveHTML.xsl"?>
+
+<Analizar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+  <xsql:include-param name="PL_ID"/>
+  <!--
+   |   Se trata de un Pedido Directo.
+   +-->
+ <!-- Unicamente pedimos la fecha de entrega. La fecha de decisión sera la
+  	de hoy. La visibilidad sera ...
+  -->
+  <xsql:include-owa>
+   <![CDATA[
+     BEGIN
+        COMPRAVENTA_PCK.LanzarMultiofertaDirecto (
+ 		   '{@PL_ID}',
+ 		   '{@US_ID}' );
+     END;
+   ]]>
+  </xsql:include-owa>
+ 
+</Analizar>

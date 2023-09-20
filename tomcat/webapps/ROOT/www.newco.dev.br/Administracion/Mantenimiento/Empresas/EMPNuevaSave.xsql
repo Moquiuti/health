@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Guardar alta de nueva empresa 
+	ultima revision	ET 12set19 11:31
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="EMPMantenHTML.xsl"?>
+
+<MantenimientoEmpresas xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco" >
+<!--	<xsql:include-param name="EMP_ID"/>-->
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+    
+<!--
+   Nombre de la pagina. Parametro para guardar el error en caso de xsql-error
+ 
+<pagename>EMPNuevaSave</pagename>
+
+   Incluimos en el XML el parametro DESDE. Que indica desde donde se ha llamado al
+     mantenimiento. Valores posibles: Alta | Manten | Usuario | Error.
+ 
+<xsql:include-param name="DESDE"/>
+<xsql:include-param name="EMP_REFERENCIAS"/>
+-->
+<form name="MantenEmpresa" action="EMPMantenSave.xsql" method="post">
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDEMpresa	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EMPMantenSave');
+		IF US_ID>=0 THEN
+
+		v_IDEMpresa:=EMPRESAS_PCK.Nueva
+				(
+					US_ID,
+					'{@EMP_ID}',
+					'{@EMP_IDPAIS}',
+					'{@EMP_NIF}',
+					'{@EMP_NOMBRE}',
+					'{@EMP_DIRECCION}',
+					'{@EMP_PROVINCIA}',
+					'{@EMP_CPOSTAL}',
+					'{@EMP_POBLACION}',
+					'{@EMP_IDTIPO}',
+					'{@EMP_TELEFONO}',
+					'{@EMP_FAX}',
+					'{@EMP_REFERENCIAS}',
+					'{@EMP_ZONACOMERCIAL}',
+					'{@EMP_ENLACE}',
+					'{@EMP_PUBLICAR}',
+					'{@EMP_COMISION_TRANSACCIONES}',
+					'{@EMP_COMISION_AHORRO}',
+					'{@EMP_COMERCIAL_DEFECTO}',
+					'{@EMP_PEDIDOMINIMO}',	
+					'{@EMP_DESCRIPCIONPEDIDOMINIMO}',
+					'{@EMP_PEDMINIMOACTIVO}',
+					'{@EMP_SERVICIOSCDC}',
+					'{@EMP_IDUSUARIOMUESTRAS}',	
+					'{@EMP_PROVNONAVEGAR}',	
+					'{@EMP_EXTERNA}',
+					'{@DEP_NOMBRE}',
+					'{@US_TITULO}',
+					'{@US_NOMBRE}',
+					'{@US_APELLIDO_1}',
+					'{@US_APELLIDO_2}',
+					'{@US_EMAIL}',
+					'{@US_TF_FIJO}',
+					'{@US_TF_MOVIL}',
+					'{@US_OPERADOR}',
+					'{@US_IDTIPO}',
+					'{@US_USUARIOGERENTE}',
+					'{@US_PEDIDO_MAXIMO}',
+					'{@US_COMPRAMENSUALMAXIMA}',
+					'{@US_COMPRAANUALMAXIMA}'
+        	  );
+		END IF;
+
+		IF v_IDEMpresa<0 THEN
+			HTP.P('<ERROR/>');
+		ELSE
+			EMPRESAS_PCK.Mantenimiento_XML(US_ID, v_IDEMpresa, 'EMPRESA DESDE="Manten"', 'S');
+		END IF;
+	END;
+]]>	  
+</xsql:include-owa>
+</form>
+</MantenimientoEmpresas>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Inserta nuevo usuario que firma para la licitacion
+ *
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevoUsuarioJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevoUsuarioJSON.xsl"?>
+
+<NuevoUsuario xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="US_FIRMA_ID"/>
+<xsql:include-param name="LIC_USU_FIRMA"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_IDLicitacionUsu	LIC_USUARIOS.LIC_USU_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevoProveedor');
+		IF US_ID>=0 THEN
+			v_IDLicitacionUsu:=LICITACIONES_PCK.NuevoUsuario(
+				US_ID,
+				'{@LIC_ID}',
+				'{@US_FIRMA_ID}',
+				'{@LIC_USU_FIRMA}',
+				'{@LIC_USU_PERFIL}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDLicitacionUsu > 0 THEN
+				HTP.P('<OK>'||v_IDLicitacionUsu||'</OK>');
+			ELSIF v_IDLicitacionUsu = -2 THEN
+				HTP.P('<ERROR_USUARIO_YA_EXISTE/>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</NuevoUsuario>

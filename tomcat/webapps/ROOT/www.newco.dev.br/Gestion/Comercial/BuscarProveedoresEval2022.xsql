@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Buscador de prodcutos en el catalogo de proveedores utilizado desde el primer paso de Evaluacion de producto. Nuevo disenno 2022.
+	Ultima revision ET 12may22 11:10
+-->
+<?xml-stylesheet type="text/xsl" href="BuscarProveedoresEvalHTML2022.xsl"?>
+
+
+<Lista xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="LP_ID"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <xsql:include-param name="NOMBRE_PROD"/>
+  <xsql:include-param name="PROVEE"/>
+  <xsql:include-param name="SIN_STOCK"/>
+  
+  <!--si vengo de página de solicitudes-->
+  <xsql:include-param name="DESCRIPCION"/>
+  <xsql:include-param name="SOL_PROD_ID"/>
+  <!--si vengo de stock oferta-->
+  <xsql:include-param name="ORIGEN"/>
+  
+  <form>
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Buscador');
+			IF US_ID>=0 THEN
+             	BUSCADOR_PCK.Buscador_XML( US_ID );
+			END IF;
+		END;
+        ]]>
+  </xsql:include-owa>
+  
+  <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			v_IDUsuario		NUMBER;
+    	BEGIN
+			v_IDUsuario:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ListaProductos');
+			
+			IF v_IDUsuario>=0 AND '{@LLP_NOMBRE}' IS NOT NULL THEN
+			
+				NUEVOBUSCADOR_PCK.Buscador
+				(    
+					v_IDUsuario,
+					TRIM('{@ULTIMAPAGINA}'),
+					20,
+					'{@LLP_NOMBRE}',
+					'{@LLP_PROVEEDOR}',
+					'{@ORDEN}',
+					'{@SENTIDO}',
+					'{@LLP_LISTAPROVEEDORES}',
+					'{@EMPLANTILLAR}',
+					'{@SIN_STOCKS}',
+					'{@SOLO_VISIBLES}',
+					'{@IDPRODUCTO}',
+					'{@FIDProveedor}',
+					'{@FMarca}',
+					'{@GRUPOPRODUCTOS}'
+				);
+			END IF;
+		END;
+    ]]>
+  </xsql:include-owa>
+  
+   </form>
+</Lista>  

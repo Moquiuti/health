@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Cambia el estado de la solicitud de oferta a IDEstado
+	Ultima revision: ET 18jul17 11:41
++-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CambiarEstadoSolicitudOfertaJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CambiarEstadoSolicitudOfertaJSON.xsl"?>
+
+<CambiarEstadoSolicitud xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="IDSOLICITUD"/>
+<xsql:include-param name="IDESTADO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		v_IDSolicitud	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CambioEstadoSolicitud');
+		IF US_ID>=0 THEN
+			v_IDSolicitud:=SOLICITUDESOFERTA_PCK.CambioEstadoSolicitud(
+				US_ID,
+				'{@IDSOLICITUD}',
+				'{@IDESTADO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_IDSolicitud > 0 THEN
+				HTP.P('<OK>'||v_IDSolicitud||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CambiarEstadoSolicitud>

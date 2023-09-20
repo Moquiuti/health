@@ -1,0 +1,2 @@
+21feb22 ET Nuevo disenno. EMPDocs2022_220222.js
+25may22 ET Se habia perdido el tipo de documento en la table

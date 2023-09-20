@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="AccesosUsuarios.xsl"?>
+<?xml-stylesheet type="text/xsl" href="AccesosUsuarios.xsl"?>
+
+<AccesosUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <USUARIOS>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		--	20 /2/03 ET: Modificada la consulta para presentar el ULTIMO ACCESO
+		SELECT US_APELLIDO1||' '||US_APELLIDO2||', '||US_NOMBRE 	AS NOMBREUSUARIO, 
+			to_char((SELECT MAX(ACCESOS2.LA_FECHA) FROM LOGACCESOS ACCESOS2 WHERE ACCESOS2.LA_SESION=LOGACCESOS.LA_SESION),'dd/mm/yyyy hh24:mi') FECHA,
+			LA_USUARIO		AS USUARIO,
+			EMP_NOMBRE 		AS EMPRESA,
+			LA_NAVEGADOR 	AS NAVEGADOR,
+			LA_SESION		AS SESION,
+			LA_DIRECC_IP	AS IP,
+			US_RESOLUCION	AS RESOLUCION
+		FROM LOGACCESOS, USUARIOS, EMPRESAS, CENTROS
+		WHERE LA_IDUSUARIO=US_ID
+		AND US_IDCENTRO=CEN_ID
+		AND CEN_IDEMPRESA=EMP_ID
+		AND LA_FECHA>SYSDATE-2
+		AND LA_USUARIO IS NOT NULL
+		ORDER BY LA_FECHA desc
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="TOTAL" rowset-element="">
+    <![CDATA[
+		SELECT COUNT(*) TOTAL
+		FROM LOGACCESOS, USUARIOS, EMPRESAS, CENTROS
+		WHERE LA_IDUSUARIO=US_ID
+		AND US_IDCENTRO=CEN_ID
+		AND CEN_IDEMPRESA=EMP_ID
+		AND LA_FECHA>SYSDATE-2
+		AND LA_USUARIO IS NOT NULL
+		--AND EMP_ID <> 1
+    ]]>
+  </xsql:query>
+  </USUARIOS>
+  <PAGINAS>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+  	SELECT count(*) TOTAL, la_pagina
+	FROM logaccesos
+	WHERE  LA_FECHA>SYSDATE-2
+	GROUP BY la_pagina
+	ORDER BY TOTAL DESC
+    ]]>
+  </xsql:query>
+  <xsql:query tag-case="upper" row-element="TOTAL" rowset-element="">
+    <![CDATA[
+  	SELECT count(*) TOTAL
+	FROM logaccesos
+	WHERE LA_FECHA>SYSDATE-2
+    ]]>
+  </xsql:query>
+  </PAGINAS>
+
+  <returnHome/>
+</AccesosUsuarios>
+

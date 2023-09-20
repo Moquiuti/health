@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	XSQL para la gestión de los sinónimos
+		
+	(c) 10/9/2001 E.Torrellas
+-->
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="SinonimosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="SinonimosHTML.xsl"?>
+
+<Sinonimos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+			SELECT
+				SIN_NOMBRE			NOMBRE,
+				SIN_SINONIMO		SINONIMO,
+				SIN_CADENACOMPLETA	CADENACOMPLETA,
+				SIN_DATE			FECHA,
+				SIN_IDIDIOMA		IDIOMA
+			FROM SINONIMOS
+			ORDER BY SIN_NOMBRE
+    ]]>
+  </xsql:query>
+  <returnHome/>
+</Sinonimos>
+

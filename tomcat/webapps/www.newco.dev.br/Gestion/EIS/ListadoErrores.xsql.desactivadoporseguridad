@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListadoErrores.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListadoErrores.xsl"?>
+
+<!--
+	7mar06	Et	Reducimos a dos dias el lsitado, sino era muy pesado
+-->
+<ListadoErrores xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   
+  <ERRORES>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT 			to_char(ERR_FECHA,'dd/mm hh24:mi') FECHA, 
+						ERR_FICHERO,
+						ERR_TABLA,
+						ERR_DATO1||ERR_DATO2||ERR_DATO3 MENSAJE
+			FROM 		ERRORES
+			WHERE 		ERR_FECHA>SYSDATE-2
+			ORDER BY	ERR_FECHA desc
+	]]>
+  </xsql:query>
+  </ERRORES>
+  <LOGEDU>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT 			to_char(FECHA,'dd/mm hh24:mi') FECHA, 
+						TXT MENSAJE
+			FROM 		LOGEDU
+			WHERE 		FECHA>SYSDATE-2
+			ORDER BY	ID desc
+	]]>
+  </xsql:query>
+  </LOGEDU>
+  <!--
+  <LOGADMINISTRACION>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT			TO_CHAR(FECHA,'dd/mm hh24:mi:ss') FECHA, IDUSUARIO, IDCAMBIO, TABLA, IDREGISTRO, CAMBIO
+			FROM 		LOGADMINISTRACION  
+			WHERE 		FECHA>SYSDATE-2
+			ORDER BY	FECHA desc
+	]]>
+  </xsql:query>
+  </LOGADMINISTRACION>
+  <LOGLIMPIEZA>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT			TO_CHAR(FECHA,'dd/mm hh24:mi') FECHA, TXT
+			FROM 		LOGLIMPIEZA
+			WHERE 		FECHA>SYSDATE-2
+			ORDER BY	FECHA desc
+	]]>
+  </xsql:query>
+  </LOGLIMPIEZA>
+  <LOG_PEDIDOSPROGRAMADOS>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT			TO_CHAR(LPP_FECHA,'dd/mm hh24:mi') FECHA, LPP_IDUSUARIO, LPP_IDPEDIDOPROGRAMADO, 	
+						LPP_IDOFERTA, LPP_PROXIMOLANZAMIENTO, LPP_STATUS
+			FROM 		LOG_PEDIDOSPROGRAMADOS
+			WHERE 		LPP_FECHA>SYSDATE-2
+			ORDER BY	LPP_FECHA desc
+	]]>
+  </xsql:query>
+  </LOG_PEDIDOSPROGRAMADOS>
+  <LOGCARGAS>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT			TO_CHAR(FECHA,'dd/mm hh24:mi') FECHA, IDCARGA, MENSAJE 
+			FROM 		LOGCARGAS
+			WHERE 		FECHA>SYSDATE-2
+			ORDER BY	ID desc
+	]]>
+  </xsql:query>
+  </LOGCARGAS>
+  <LOGPRECIOSREFERENCIA>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT TO_CHAR(LPR_FECHA,'dd/mm hh24:mi') FECHA, ' Centro:'||LPR_IDCENTRO||' IDProdEstandar:'||LPR_IDPRODUCTOESTANDAR||' Mas info:'||LPR_COMENTARIOS MENSAJE
+			FROM 		LOGPRECIOSREFERENCIA
+			WHERE 		LPR_FECHA>SYSDATE-2
+			ORDER BY	LPR_ID desc
+	]]>
+  </xsql:query>
+  </LOGPRECIOSREFERENCIA>
+  -->
+  <returnHome/>
+</ListadoErrores>

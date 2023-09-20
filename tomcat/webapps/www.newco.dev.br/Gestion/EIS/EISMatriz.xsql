@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+	Devuelve una matriz con los totales de pedidos por centro (columna) y proveedor (fila)
+-->
+<?xml-stylesheet type="text/xsl" href="EISMatrizHTML.xsl"?>
+
+<EIS_XML xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:set-page-param name="US_ID" value="{@US_ID}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="ANNOINICIO"/>
+<xsql:include-param name="TOP_V"/>
+<xsql:include-param name="TOP_H"/>
+<xsql:include-param name="IDEMPRESA"/>
+
+<xsql:include-request-params/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISMatriz');
+		IF US_ID>=0 THEN
+			EIS_MATRIZ_PCK.Matriz_XML(
+				US_ID,
+				'{@INDICADOR}',
+				'{@AGRUPARPOR_HOR}',
+				'{@AGRUPARPOR_VER}',
+				'{@MESINICIO}',
+				'{@ANNOINICIO}',
+				'{@MESFINAL}',
+				'{@ANNOFINAL}',
+				'{@IDEMPRESA}',
+				'{@IDCENTRO}',
+				'{@IDEMPRESA2}',
+				'{@IDGRUPO}',
+				'{@IDSUBFAMILIA}',
+				'{@IDFAMILIA}',
+				'{@IDCATEGORIA}',
+				'{@IDRESULTADOS}',
+				'{@TEXTO}',
+				'TABLADATOS'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<SELECT name="TOP_V">
+	<option value="-1" name="todos"/>
+	<option value="5"/>
+	<option value="10"/>
+	<option value="15"/>
+	<option value="20"/>
+</SELECT>
+
+<SELECT name="TOP_H">
+	<option value="-1" name="todos"/>
+	<option value="5"/>
+	<option value="10"/>
+	<option value="15"/>
+	<option value="-2" name="con_resultados"/>
+</SELECT>
+
+<returnHome/>
+</EIS_XML>

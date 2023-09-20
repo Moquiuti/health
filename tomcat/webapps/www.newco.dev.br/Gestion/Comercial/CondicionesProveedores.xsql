@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Devuelve las condiciones comerciales para TODOS los proveedores de un cliente
+	Ultima revision: ET 14abr20 15:15
+ -->
+<?xml-stylesheet type="text/xsl" href="CondicionesProveedoresHTML.xsl"?>
+
+<CondicionesProv xmlns:xsql="urn:oracle-xsql" connection="newco">
+    <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="US_ID"/>
+	<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','CondicionesProv');
+		IF US_ID>=0 THEN		   
+			EMPRESAS_PCK.CondicionesProveedores_XML(
+				US_ID,
+				'{@IDCLIENTE}',				--	Cliente
+				'S'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CondicionesProv>

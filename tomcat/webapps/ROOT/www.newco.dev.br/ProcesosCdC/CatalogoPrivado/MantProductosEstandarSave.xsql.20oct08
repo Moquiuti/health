@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="MantProductosEstandarSaveHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="MantProductosEstandarSaveHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param  name="CATPRIV_IDEMPRESA"/>
+  <xsql:include-param  name="VENTANA"/>
+  
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaFamilias');	
+		  IF US_ID>=0 THEN
+                    CATALOGOPRIVADO_PCK.MODIFICARPRODUCTOESTANDAR_S(
+                      US_ID,
+                      '{@CATPRIV_IDEMPRESA}', 
+                      '{@CATPRIV_IDSUBFAMILIA}',
+                      '{@CATPRIV_ID}',
+                      '{@CATPRIV_REFERENCIA}',
+                      '{@CATPRIV_NOMBRE}',
+                      '{@CATPRIV_DESCRIPCION}',
+                      '{@CATPRIV_PRECIOREFERENCIA}',
+                      '{@CATPRIV_PRECIOREFERENCIA_INVENTADO}',
+                      '{@CATPRIV_PROVEEDOR_ANTERIOR}',
+                      '{@CATPRIV_IDDIVISA}',
+                      '{@CATPRIV_UDBASE}',
+                      '{@CATPRIV_CONSUMOESTIMADO}',
+                      '{@CATPRIV_MUESTRA}',
+                      '{@CATPRIV_COMENTARIOS}',
+                      '{@ACCION}',
+                      '{@CATPRIV_PADRE}');
+        	  END IF;
+                END;
+        ]]>
+  </xsql:include-owa>
+  
+  <botones>
+  
+    <button label="Aceptar" caption="CATPRIV-0110">
+      <name_function>RecargarZonaCatalogo</name_function>
+      <param>'zonaCatalogo'</param>                
+    </button>
+    
+    <button label="Volver" caption="CATPRIV-0310">
+      <name_function>history.go</name_function> 
+      <param>-1</param>              
+    </button>
+    
+    <button label="Cerrar" caption="CATPRIV-0115">
+      <name_function>CerrarVentana</name_function> 
+                   
+    </button>
+    
+    
+  </botones>
+  
+  
+</Mantenimiento>

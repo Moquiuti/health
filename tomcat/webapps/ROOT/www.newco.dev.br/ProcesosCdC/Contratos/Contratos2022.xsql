@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Listado/Buscador de contratos
+	Ultima revision: ET 12may22 12:10
+-->
+<?xml-stylesheet type="text/xsl" href="ContratosHTML2022.xsl"?>
+
+<Contratos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="FIDEMPRESA"/>
+<xsql:include-param name="FIDCENTRO"/>
+<xsql:include-param name="FIDRESPONSABLE"/>
+<xsql:include-param name="FTEXTO"/>
+<xsql:include-param name="FESTADO"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Contratos');
+		IF US_ID>=0 THEN		   
+			Contratos_PCK.Contratos_XML(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+				'{@FIDRESPONSABLE}',
+				'{@FIDPROVEEDOR}',
+				'{@FTEXTO}',
+				'{@FESTADO}',
+				'{@ORDEN}',
+				'{@SENTIDO}',
+				20,
+				0,
+				'S',
+				'{@PLAZOCONSULTA}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Contratos>

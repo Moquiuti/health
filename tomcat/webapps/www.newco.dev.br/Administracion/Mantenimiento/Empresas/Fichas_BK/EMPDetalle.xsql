@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="EMPDetalleHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="EMPDetalleHTML.xsl"?>
+<!--
+	[ffp]
+	CUIDADO: Este fichero no debe ser llamado directamente.
+		Llamar a EMPDetalleFrame.xsql.
++-->
+<Empresas xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="EMP_ID"/>
+<xsql:include-param name="ESTADO"/>
+<xsql:include-param name="VENTANA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="ZONA"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="DEST"/>
+
+<!--  obtenemos el vendedor para el usuario que esta visualizando la pagina de empresa -->
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','DetalleEmpresa');
+		IF US_ID>0 THEN
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			EMPRESAS_PCK.Mostrar(US_ID,'{@EMP_ID}','EMPRESA DESDE="Manten"', 'N');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+<button label="VolverAntigua" caption="G-0001">
+	<name_function_msg>G-0012</name_function_msg>
+</button>
+
+<button label="CerrarNueva" caption="IMG-0190">
+	<name_function_msg>G-0035</name_function_msg>
+</button>
+</Empresas>

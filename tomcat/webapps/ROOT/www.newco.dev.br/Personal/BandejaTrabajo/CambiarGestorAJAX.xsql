@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ *
+ *	Cambia el gestor de un pedido
+ *
++-->
+<?xml-stylesheet type="text/xsl" href="CambiarCompradorJSON.xsl"?>
+
+<CambiarComprador xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ControlPedidos');
+		IF US_ID>=0 THEN
+			PedidosProblematicos_Pck.CambiarGestorPedido_XML(
+				US_ID,
+				'{@IDMULTIOFERTA}',
+				'{@IDNUEVOGESTOR}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</CambiarComprador>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListadoFamiliasHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListadoFamiliasHTML.xsl"?>
+
+<FamiliasYProductos xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="VENTANA"/>
+	<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ProveedoresPorProducto');
+		IF US_ID>=0 THEN
+			CATALOGOPRIVADO_SEG_PCK.FamiliasYProductos_XML
+			(
+				US_ID,
+				NULL,		-- 'IDCliente'
+				'PP',
+				'{@IDCATEGORIA}',	--
+				'{@IDFAMILIA}',
+				'{@IDSUBFAMILIA}',
+				'{@IDPROVEEDOR}',
+				'{@PRODUCTO}',
+				'{@PROVEEDOR}',
+				'{@IDCENTRO}',
+				'{@CONPRECIO}',
+				'{@SINPRECIO}',
+				'{@SOLOHISTORICO}',
+				'{@SINUSAR}',
+				'{@MES}',
+				'{@ANNO}'
+			);
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+<returnHome/>
+</FamiliasYProductos>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--	
+	Crear un centro de coste via Ajax
+	ultima revision ET 5set22 18:00
+-->
+
+<?xml-stylesheet type="text/xsl" href="CrearCentroCosteJSON.xsl"?>
+
+<EnvioLineaFichero xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<!--	Datos para pruebas	-->
+	<xsql:include-param name="NUMLINEA" value="NUMLINEA"/>
+	<xsql:include-param name="TEXTO" value="{@TEXTO}"/>
+	<xsql:include-param name="INTF_ID" value="{@INTF_ID}"/>
+	
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+			v_Res		VARCHAR2(1000);	--	La respuesta contendra varias cadenas separadas por |
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','AdjudicacionProducto');
+
+	 		IF US_ID > 0 THEN
+				utilidades_pck.debug('XSQL:CatPrivado_fic_pck.AdjudicarProducto {@INTF_ID},{@NUMLINEA},{@NIFPROVEEDORR},{@PROVEEDOR}');
+
+				v_Res:=MantenimientoEmpresas_PCK.NuevoCentroDeCosteFic
+				(
+					US_ID,
+					'{@INTF_ID}',
+					'{@NUMLINEA}',
+					'{@IDCLIENTE}',
+					'{@CODNITCENTRO}',
+					'{@CODCENTROCOSTE}',
+					'{@CENTROCOSTE}',
+					'{@PORDEFECTO}'
+				);
+				
+				IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+					HTP.P(	'<OK>'
+						||	'<NUMLINEA>{@NUMLINEA}</NUMLINEA>'
+						||	'<IDEMPRESA>'||utilidades_pck.Piece(v_Res,'|',1)||'</IDEMPRESA>'
+						||	'</OK>');
+				ELSE
+
+					HTP.P(utilidades_pck.CabeceraXML
+						||	'<ERROR msg="'||mvm.ScapeHTMLString(utilidades_pck.Piece(v_Res,'|',1))||'"/>'
+						);
+				
+				END IF;
+			ELSE
+			
+				HTP.P('<ERROR msg="Sesion incorrecta"/>');
+				
+   			END IF;
+		END;
+]]>
+</xsql:include-owa>
+</EnvioLineaFichero>

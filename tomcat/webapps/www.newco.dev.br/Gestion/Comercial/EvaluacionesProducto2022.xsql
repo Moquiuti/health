@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Buscador/listado de Evaluaciones de producto. Nuevo disenno 2022.
+	Ultima revision ET 11may22 11:50
+-->
+<?xml-stylesheet type="text/xsl" href="EvaluacionesProductoHTML2022.xsl"?>
+
+<EvaluacionProductos xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="FIDEMPRESA"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Evaluacion Productos');
+		IF US_ID>=0 THEN
+			EVALUACIONPRODUCTOS_PCK.Evaluaciones_XML(
+				US_ID,
+				'{@FIDEMPRESA}',
+				'{@FIDCENTRO}',
+                '{@FIDRESPONSABLE}',
+                '{@FIDCOORD}',
+                '{@FPROVEEDOR}',
+                '{@ID_PROD_ESTANDAR}',
+                '{@FPRODUCTO}',
+                '{@FTEXTO}',
+                '{@FESTADO}',
+                '{@FDIAGNOSTICO}',
+				'{@PLAZOCONSULTA}',
+                '{@ORDEN}',
+                '{@SENTIDO}',
+                '{@LINEAS}',
+                '{@PAG}',
+				'S'
+			);
+                        
+                     
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</EvaluacionProductos>

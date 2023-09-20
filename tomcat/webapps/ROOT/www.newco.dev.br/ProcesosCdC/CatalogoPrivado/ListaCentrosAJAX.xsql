@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ListaCentrosJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ListaCentrosJSON.xsl"?>
+
+<ListaCentros xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+	EMPRESAS_PCK.DesplegableCentros_XML('LISTACENTROS', 'IDCENTROCLIENTE', '{@IDEMPRESA}', -1, 'S', 'S');
+</xsql:include-owa>
+</ListaCentros>

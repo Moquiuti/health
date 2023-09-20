@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--  
+	Selecciones/agrupaciones para consultas
+	Ultima revision: ET 4feb22 10:45
+-->
+<?xml-stylesheet type="text/xsl" href="EISSeleccionHTML.xsl"?>
+
+<EISSeleccion xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+   <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID			NUMBER;
+			v_IDSeleccion	NUMBER(12);
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','EISSeleccion');
+			IF US_ID>=0 THEN
+
+				IF '{@ACCION}' = 'GUARDAR' THEN
+    				v_IDSeleccion:=EISSelecciones_pck.GuardarSeleccion_XML(
+        				US_ID,
+        				'{@IDSELECCION}',
+        				'{@IDEMPRESA}',
+        				'{@SEL_NOMBRE}',
+        				'{@IDTIPO}',
+        				'{@LISTAREGISTROS}',
+						'{@PUBLICO}',
+        				'{@EXCLUIR}',
+        				'{@TODOS_ADMIN}',
+        				'{@AUTORIZADOS}',
+        				'{@EXCLUIDOS}',
+        				'{@IDCLASIFICACION}',						--	1abr20 Antes: AREA GEOGRAFICA
+        				'{@SEL_NOMBRECORTO}',
+        				'{@IDSELTIPOSDOCUMENTOS}',					--	19mar21 Seleccion de tipos de documento
+        				'{@IDPORTALINCLUIR}',						--	04feb22 Portal incluido
+        				'{@IDPORTALEXCLUIR}'						--	19mar21 Portal excluido
+    				);
+/*
+				ELSIF '{@ACCION}' = 'BORRAR' THEN
+    				EISSelecciones_PCK.BorrarSeleccion_XML(
+        				US_ID,
+        				'{@IDSELECCION}'
+    				);*/
+					
+				END IF;
+
+				v_IDSeleccion:=NVL(v_IDSeleccion, '{@IDSELECCION}');
+				EISSelecciones_PCK.Seleccion_XML(
+    				US_ID,
+    				v_IDSeleccion,
+    				'S'
+				);
+
+           END IF;
+
+        END;
+        ]]>
+  </xsql:include-owa>
+
+</EISSeleccion>

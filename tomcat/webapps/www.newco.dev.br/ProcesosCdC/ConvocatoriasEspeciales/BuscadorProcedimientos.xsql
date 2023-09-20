@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Ultima revision ET 24oct18 11:46
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="BuscadorProcedimientosHTML.xsl"?>
+
+<Procedimientos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Conv.Esp.Busc.Procedimientos');
+		IF US_ID>=0 THEN
+			ConvocatoriasEspeciales_pck.Procedimientos_XML(
+				US_ID,
+                '{@FIDCONVOCATORIA}',
+                '{@FIDPROVEEDOR}',
+                '{@FTEXTO}',
+                '{@FINFORMADO}',
+				'{@FESPECIALES}',
+                '{@ORDEN}',
+                '{@SENTIDO}',
+                '{@FLINEASPORPAGINA}',
+                '{@PAGINA}',
+				'S'
+			);
+                        
+                     
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Procedimientos>

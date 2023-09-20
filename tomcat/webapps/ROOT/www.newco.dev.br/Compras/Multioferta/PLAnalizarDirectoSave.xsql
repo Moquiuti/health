@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="LPAnalFrameHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="LPAnalFrameHTML.xsl"?>
+
+<Analizar xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+
+  <xsql:include-owa>
+   <![CDATA[
+     BEGIN
+        COMPRAVENTA_PCK.Analizar_Plantilla_Directo (
+ 		   '{@PL_ID}',
+ 		   '{@US_ID}');
+     END;
+   ]]>
+  </xsql:include-owa>
+  <!--
+      Devuelve XML con todos los datos de la consulta
+        + 
+      Codigo de transaccion
+   +-->
+
+</Analizar>     

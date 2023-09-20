@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	13jul10	Sistema para poner comentarios que ayuden a la gestión comercial
+-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ComentariosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ComentariosHTML.xsl"?>
+
+<Comentarios xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Comentarios');
+			IF US_ID>=0 THEN
+				COMENTARIOS_PCK.Accion_XML
+					(
+           				'{@US_ID}',
+           				'{@IDCOMENTARIO}',
+           				'{@IDRELACIONADO1}',
+           				'{@IDRELACIONADO2}',
+						'{@TIPO}',	
+						'{@TITULO}',
+						'{@TEXTO}',
+						'{@ESTADO}',
+						'{@ACCION}'
+        			);
+			END IF;			   
+    	END;
+        	]]>  
+	</xsql:include-owa>
+
+	<button label="Cerrar" caption="IMG-0190">
+		<name_function>CerrarVentana</name_function>
+	</button>
+
+	<button label="InsertarComentario" caption="IMG-1610">
+		<name_function>ActualizarDatos</name_function>
+		<param>document.forms[0]</param>
+		<param>'INSERTARCOMENTARIO'</param>
+	</button>
+
+	<button label="GuardarComentario" caption="IMG-0020">
+		<name_function>ActualizarDatos</name_function>
+		<param>'NUEVO'</param>
+	</button>
+
+</Comentarios>

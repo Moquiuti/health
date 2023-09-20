@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Firma la licitacion
+	Ultima revision: ET 29dic22 11:30
++-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="FirmarLicitacionJSON.xsl"?>
+
+
+<Firma xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="US_ID"/>
+<xsql:include-param name="LIC_ID"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER(12);
+		v_Res		VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','FirmaLic');
+		IF US_ID>=0 THEN
+			v_Res:=LICITACIONES_PCK.Firma(
+				US_ID,
+				'{@LIC_ID}',
+				'{@TIPO}',
+				'{@MOTIVO}'
+			);
+
+			HTP.P(Utilidades_Pck.CabeceraXML);
+			IF utilidades_pck.Piece(v_Res,'|',0)='OK' THEN
+				HTP.P('<OK>'||utilidades_pck.Piece(v_Res,'|',1)||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Firma>

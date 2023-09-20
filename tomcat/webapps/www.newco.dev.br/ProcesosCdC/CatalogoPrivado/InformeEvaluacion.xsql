@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="InformeEvaluacionHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="InformeEvaluacionHTML.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="US_ID"/>
+  <xsql:include-param name="READ_ONLY"/>
+  <xsql:include-param name="POSICION_PAGINA"/>
+  <xsql:include-param name="DESDE"/>
+  
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ZonaFamilias');	
+		  IF US_ID>=0 THEN
+                    EVALUACIONPRODUCTOS_PCK.MODIFICARINFORME(
+                      US_ID,
+                      '{@IDINFORME}',
+                      '{@EVALUADORINFORME}',
+                      '{@CARGOEVALUADORINFORME}',
+                      '{@NUMEROMUESTRAS}',
+                      '{@FECHANO_REC_INF}',
+                      '{@FECHA_PRE_INF}',
+                      '{@EVALUACIONFUNCIONAL}',
+                      '{@EVALUACIONENVOLTORIO}',
+                      '{@COMENTARIOS}',
+                      '{@CHK_CONCLUSION}',
+                      '{@FECHANOCIERRE}',
+                      '{@FECHANO_RECEPCIONMUESTRAS}',
+                      '{@CHK_FICHATECNICA}',
+                      '{@CHK_CERTIFICADO}',
+                      '{@CAMBIOSCRITERIOS}',
+                      '{@ACCION}'
+                    );
+        	  END IF;
+        	  
+                END;
+        ]]>
+  </xsql:include-owa>
+  
+  <botones>
+    
+    <button label="Cancelar" caption="CATPRIV-0115">
+      <name_function>CerrarVentana</name_function>
+    </button>
+    
+    <button label="Archivar" caption="CATPRIV-0122">
+      <name_function>ArchivarInforme</name_function>
+        <param>document.forms[0]</param>
+        <param>'ARCHIVARINFORME'</param>
+    </button>
+    
+    <button label="CerrarInforme" caption="CATPRIV-0690">
+      <name_function>CerrarInforme</name_function>
+      <param>document.forms[0]</param>
+        <param>'CERRARINFORME'</param>
+    </button>
+       
+      <button label="Guardar" caption="IMG-1560">
+        <name_function>ActualizarDatos</name_function>
+        <param>document.forms[0]</param>
+        <param>'GUARDARINFORME'</param>
+      </button>
+      
+      <button label="Imprimir" caption="IMG-1490">
+        <name_function>window.print</name_function> 
+     </button>
+     
+     <button label="Cerrar" caption="CATPRIV-0680">
+      <name_function>CerrarVentana</name_function>
+    </button>
+    
+    
+  </botones>
+  
+  <field name="PLAZODEVOLUCION">
+    <dropDownList>
+      <listElem>
+        <ID>7</ID>
+        <listItem>1 Semana</listItem>
+      </listElem>
+      <listElem>
+        <ID>14</ID>
+        <listItem>2 Semanas</listItem>
+      </listElem>
+      <listElem>
+        <ID>21</ID>
+        <listItem>3 Semanas</listItem>
+      </listElem>
+      <listElem>
+        <ID>28</ID>
+        <listItem>4 Semanas</listItem>
+      </listElem>
+    </dropDownList>
+  </field>
+  
+  
+</Mantenimiento>

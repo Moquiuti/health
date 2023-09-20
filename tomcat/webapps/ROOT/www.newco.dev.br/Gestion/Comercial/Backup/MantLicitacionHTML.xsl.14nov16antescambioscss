@@ -1,0 +1,1622 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Revisado ET 11oct16 09:55	-->
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="http://www.newco.dev.br/General/General.xsl"/>
+<xsl:import href="http://www.newco.dev.br/Gestion/Comercial/LicGeneralTemplates.xsl"/>
+<xsl:import href="http://www.newco.dev.br/Gestion/Comercial/LicProductosTemplates.xsl"/>
+<xsl:import href="http://www.newco.dev.br/Gestion/Comercial/LicProveedoresTemplates.xsl"/>
+<xsl:import href="http://www.newco.dev.br/Gestion/Comercial/LicCentrosTemplates.xsl"/>
+
+<xsl:output media-type="text/html" method="html" encoding="iso-8859-1"/>
+<xsl:param name="lang" select="@lang"/>
+<xsl:param name="usuario" select="@US_ID"/>
+
+<xsl:template match="/">
+
+<html>
+<head>
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:choose>
+		<xsl:when test="/Mantenimiento/LANG"><xsl:value-of select="/Mantenimiento/LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+
+	<meta http-equiv="Cache-Control" content="no-cache"/>
+
+	<title><xsl:value-of select="document($doc)/translation/texts/item[@name='mantenimiento_licitaciones']/node()"/></title>
+
+	<!--style-->
+	<xsl:call-template name="estiloIndip"/>
+	<!--fin de style-->
+
+	<link href="http://www.newco.dev.br/Gestion/Comercial/licTablaProductos.css" rel="stylesheet" type="text/css"/>
+	<link href="http://www.newco.dev.br/General/Tabla-popup.150715.css" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript" src="http://www.newco.dev.br/General/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/General/basic_180608.js"></script>
+	<!--<script type="text/javascript" src="http://www.newco.dev.br/General/Tabla-popup.150715.js"></script>-->
+
+    <!--codigo etiquetas-->
+	<script type="text/javascript" src="http://www.newco.dev.br/General/Tabla-popup.150715.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/Comercial/etiquetas.js"></script>
+
+	<link rel="stylesheet" href="http://www.newco.dev.br/General/lightbox.css" type="text/css" media="screen"/>
+	<link href="http://www.newco.dev.br/General/Tabla-popup.150715.css" rel="stylesheet" type="text/css"/>
+        <!--fin codigo etiquetas-->
+
+	<script type="text/javascript">
+		//	Revisado ET 23set16 16:41
+		var lang		= '<xsl:value-of select="/Mantenimiento/LANG"/>';
+		var IDUsuario		= '<xsl:value-of select="/Mantenimiento/US_ID"/>';
+		var filtroNombre	= '';
+
+    <!-- Variables y Strings JS para las etiquetas -->
+		var IDRegistro = '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_ID"/>';
+		var IDTipo = 'LIC';
+		var str_NuevaEtiquetaGuardada	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='nueva_etiqueta_guardada']/node()"/>';
+		var str_NuevaEtiquetaError		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='nueva_etiqueta_error']/node()"/>';
+		var str_autor			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='autor']/node()"/>';
+		var str_fecha			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='fecha']/node()"/>';
+		var str_etiqueta	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='etiqueta']/node()"/>';
+		var str_borrar		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>';
+		<!-- FIN Variables y Strings JS para las etiquetas -->
+
+
+    <xsl:choose>
+		<xsl:when test='/Mantenimiento/LICITACION/COMPLETAR_COMPRA_CENTRO'>
+		var completarCompraCentro = 'S';
+		</xsl:when>
+		<xsl:otherwise>
+		var completarCompraCentro = 'N';
+		</xsl:otherwise>
+    </xsl:choose>
+
+    <xsl:choose>
+		<xsl:when test='/Mantenimiento/NUEVALICITACION'>
+			var mesesSelected	= '<xsl:value-of select="/Mantenimiento/NUEVALICITACION/MESESDURACION"/>';
+			var estadoLicitacion	= 'EST';
+			var rol			= 'COMPRADOR';
+			var isAutor		= 'S';
+			var isLicAgregada	='N';	//	15set16 Valor por defecto, sino falla el cambio de meses
+			var numProveedoresActivos=0;	// 22set16 Valor por defecto
+		</xsl:when>
+		<xsl:when test='/Mantenimiento/LICITACION'>
+		<!--
+		
+			LICITACION EXISTENTE
+		
+		-->
+			var IDLicitacion	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_ID"/>';
+			var mesesSelected	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_MESESDURACION"/>';
+			var estadoLicitacion	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_IDESTADO"/>';
+			var rol			= '<xsl:value-of select="/Mantenimiento/LICITACION/ROL"/>';
+			var isAutor		= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/AUTOR">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			var isAdmin		= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/ADMIN">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			var mostrarPrecioIVA	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/MOSTRAR_PRECIO_IVA">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			var IDPais		= '<xsl:value-of select="/Mantenimiento/LICITACION/IDPAIS"/>';
+			var IDEmpresa		= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_IDEMPRESA"/>';
+			var IDIdioma		= '<xsl:value-of select="/Mantenimiento/LICITACION/IDIDIOMA"/>';
+			var isLicPorProducto	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_PORPRODUCTO"/>';
+			var isLicAgregada	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			var NumCentrosEnLicitacion= '<xsl:value-of select="/Mantenimiento/LICITACION/CENTROS_EN_LICITACION"/>';
+			var NumCentrosPendientes= '<xsl:value-of select="/Mantenimiento/LICITACION/CENTROS_PENDIENTES_INFORMAR"/>';
+
+			var permitirEdicionPROV	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/PERMITIR_EDICION">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+
+			//var numProveedores	= <xsl:value-of select="/Mantenimiento/LICITACION/PROVEEDORESLICITACION/TOTAL"/>;
+			var provsInformados	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/PROVEEDORESLICITACION/PROVEEDOR">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			var prodsInformados	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/TODOS_VALIDADOS">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+
+			var mostrarCategorias	= '<xsl:value-of select="/Mantenimiento/LICITACION/NOMBRESNIVELES/@MostrarCategoria"/>';
+			var mostrarGrupos	= '<xsl:value-of select="/Mantenimiento/LICITACION/NOMBRESNIVELES/@MostrarGrupo"/>';
+
+			var objLicitacion	= [];
+			objLicitacion['ConsHist']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CONSUMOHISTORICO"/>';
+			objLicitacion['ConsHistIVA']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CONSUMOHISTORICOIVA"/>';
+			objLicitacion['Consumo']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CONSUMO"/>';
+			objLicitacion['ConsumoIVA']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CONSUMOIVA"/>';
+			objLicitacion['ConsumoAdj']	= '<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/TOTAL_ADJUDICADO"/>';
+			objLicitacion['ConsumoAdjIVA']	= '<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/TOTAL_ADJUDICADOIVA"/>';
+			objLicitacion['Ahorro']		= '<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/AHORRO"/>';
+			objLicitacion['NumProductos']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_NUMEROLINEAS"/>';
+			objLicitacion['PorcConsNeg']	= '<xsl:value-of select="/Mantenimiento/LICITACION/PORCCONSUMONEGOCIADO"/>';
+			objLicitacion['AhorMejPrecio']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_AHORROCONMEJORPRECIO"/>';
+			objLicitacion['NumSinOferta']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_PRODUCTOSSINOFERTA"/>';
+			objLicitacion['NumSinAhorro']	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_PRODUCTOSSINAHORRO"/>';
+
+			var anyChange		= false;
+		</xsl:when>
+		</xsl:choose>
+
+
+		<!-- Mensajes JS para validacion de formularios -->
+		<!-- Condiciones de la licitacion -->
+		var val_faltaTitulo		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_titulo']/node()"/>';
+		var val_faltaFechaDecision	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_fecha_decision']/node()"/>';
+		var val_malFechaDecision	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_fecha_decision']/node()"/>';
+		var val_faltaDescripcion	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_descripcion']/node()"/>';
+		var val_faltaCondEntr		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_condiciones_entrega']/node()"/>';
+		var val_faltaCondPago		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_condiciones_pago']/node()"/>';
+		var val_faltaFechaRealAdj	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_fecha_real_adj']/node()"/>';
+		var val_malFechaRealAdj		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_fecha_real_adj']/node()"/>';
+		var val_faltaFechaRealCad	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_fecha_real_cad']/node()"/>';
+		var val_malFechaRealCad		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_fecha_real_cad']/node()"/>';
+		var conf_SalirDatosGenLic	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='seguro_salir_datos_gen_licitacion']/node()"/>';
+		var val_malFechaAdjudic		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_fecha_adjudicacion']/node()"/>';
+		var val_malFechaAdjudic2	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_adjudicacion_posterior_fecha_decision_obli']/node()"/>';
+		<!-- Anyadir productos por referencia -->
+		var val_faltaReferencia		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_referencia']/node()"/>';
+		var val_maxReferencias		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='num_max_referencias']/node()"/>';
+		var val_faltaTipoIVA		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_tipoIVA']/node()"/>';
+		var val_faltaPorcentaje		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_porcentaje']/node()"/>';
+		var val_errorPorcentaje1	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_porcentaje_1']/node()"/>';
+		var val_errorPorcentaje2	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_porcentaje_2']/node()"/>';
+		<!-- Anyadir productos por desplegable cat.priv. -->
+		var val_faltaSelecDespl		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_seleccionar_desplegable_cat_priv']/node()"/>';
+		<!-- Actualizar productos -->
+		var val_faltaUdBasica		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_unidad_basica']/node()"/>';
+		var val_malPrecioRef		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_precio_referencia']/node()"/>';
+		var val_malPrecioObj		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_precio_objetivo']/node()"/>';
+		var val_faltaCantidad		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_cantidad']/node()"/>';
+		var val_ceroCantidad		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='cero_cantidad']/node()"/>';
+		var val_malCantidad		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_cantidad']/node()"/>';
+		<!-- Anyadir proveedores -->
+		var val_faltaProveedor		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_proveedor']/node()"/>';
+		var val_faltaUsuarioProv	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_usuario_proveedor']/node()"/>';
+		var val_faltaMensaje		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_comentario_licitacion']/node()"/>';
+		<!-- Anyadir usuarios firmantes -->
+		var val_faltaUsuario		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_usuario']/node()"/>';
+		<!-- Anyadir centros -->
+		var val_faltaCentro		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_centro']/node()"/>';
+		<!-- Proveedor - Pedido minimo -->
+		var val_faltaPedidoMinimo	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_pedido_minimo']/node()"/>';
+		var val_malPedidoMinimo		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_pedido_minimo']/node()"/>';
+		var val_faltaFrete		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_frete']/node()"/>';
+		var val_faltaPlazoEntrega		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_plazo_entrega']/node()"/>';
+		<!-- Proveedor - Informar ofertas -->
+		var val_faltaPrecio		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_precio']/node()"/>';
+		var val_marcaObligatoria= '<xsl:value-of select="document($doc)/translation/texts/item[@name='marca_obligatoria']/node()"/>';
+		var val_malPrecio		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_precio']/node()"/>';
+		var val_elPrecioProd		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='el_precio_prod']/node()"/>';
+		var val_precioProd		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='precio_prod']/node()"/>';
+		var val_doblePrecio		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_doble_precio']/node()"/>';
+		var val_faltaUnidades		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_unidades']/node()"/>';
+		var val_malUnidades		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_unidades']/node()"/>';
+		var val_malEnteroUnidades	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_malo_entero_unidades']/node()"/>';
+		var val_notZeroUnidades	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='valor_no_cero_unidades']/node()"/>';
+		var val_faltaRefProv		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_ref_proveedor']/node()"/>';
+		var val_igualesRefProv		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='duplicada_ref_proveedor']/node()"/>';
+		var conf_estaSeguro		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='esta_seguro']/node()"/>';
+		var val_PrecioProvGrande	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='alert_precios_prov']/node()"/>';
+		var conf_CentrosPendientesInformar	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='centros_pendientes_informar']/node()"/>';
+		<!-- FIN Mensajes JS para validacion de formularios -->
+
+		<!-- Strings para tabla productos EST -->
+		var str_licSinProductos		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_sin_productos']/node()"/>';
+		var txtNivel3			= '<xsl:value-of select="/Mantenimiento/LICITACION/NOMBRESNIVELES/NIVEL3"/>';
+		var str_borrar			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='borrar']/node()"/>';
+		var str_totalConsumo		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='total_consumo']/node()"/>';
+		var str_ActualizarDatos		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='actualizar_datos']/node()"/>';
+		var str_PagAnterior		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='anterior']/node()"/>';
+		var str_PagSiguiente		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='siguiente']/node()"/>';
+		var str_Paginacion		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='leyenda_paginacion']/node()"/>';
+		var str_Todas			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='todas']/node()"/>';
+		var str_Selecciona		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/>';
+		var str_AnyadirInfoAmpliada	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='anyadir_info_ampliada']/node()"/>';
+		var str_InfoAmpliada		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='info_ampliada']/node()"/>';
+		var str_Documento		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='documento']/node()"/>';
+		var str_Anotaciones		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='anotaciones']/node()"/>';
+		<!-- Strings para tabla productos OFE -->
+		var str_ProductoSinSeleccion	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='producto_sin_seleccion']/node()"/>';
+		var str_ProductoSinAhorro	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='producto_sin_ahorro']/node()"/>';
+		var str_OfertaNoInformada	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='oferta_no_informada']/node()"/>';
+		var str_SinOferta	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_oferta']/node()"/>';
+		var str_OfertaNoOfertada	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='oferta_no_ofertada']/node()"/>';
+		var str_OfertaAdjudicada	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='oferta_adjudicada']/node()"/>';
+		var str_PrecioOfertaSospechoso	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='precio_oferta_sospechoso']/node()"/>';
+		var str_PrecioOfertaMuySospechoso	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='precio_oferta_muy_sospechoso']/node()"/>';
+		var str_ofertaNoApto		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='oferta_no_apto_evaluacion']/node()"/>';
+		var str_ofertaPendiente	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='oferta_pendiente_evaluacion']/node()"/>';
+		var str_ofertaApto			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='oferta_apto_evaluacion']/node()"/>';
+		var str_FichaTecnica		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='ficha_tecnica']/node()"/>';
+		var str_TotalConsCIVA		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='total_cIVA']/node()"/>';
+		var str_TotalConsSIVA		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='total_sIVA']/node()"/>';
+		var str_PorcNegociado		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='porcentage_negociado']/node()"/>';
+		var str_PorcAhorro			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='porcentage_ahorro']/node()"/>';
+		var str_ProdsSinOferta	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='num_productos_sin_oferta']/node()"/>';
+		var str_ProdsSinOfertaConAhorro	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='num_productos_sin_oferta_con_ahorro']/node()"/>';
+		<!-- Strings para tabla productos PROVE -->
+		var str_SinOfertar	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='sin_ofertar']/node()"/>';
+		var str_SubirFicha	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='subir_ficha']/node()"/>';
+		var str_DocCargado	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='documento_cargado']/node()"/>';
+		var str_Guardar			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>';
+		<!-- Strings para tabla proveedores -->
+		var str_licSinProveedores	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_sin_proveedores']/node()"/>';
+		var str_provOfertasVacias	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='productos_sin_ofertas']/node()"/>';
+		var str_enviarCorreo	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='enviar_email']/node()"/>';
+		var str_leerConversacion	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='leer_conversacion']/node()"/>';
+		var str_iniciarConversacion	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='iniciar_conversacion']/node()"/>';
+		var str_provNoApto		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor_no_apto_evaluacion']/node()"/>';
+		var str_provPendiente	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor_pendiente_evaluacion']/node()"/>';
+		var str_provApto		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='proveedor_apto_evaluacion']/node()"/>';
+		var str_Activar			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='activar']/node()"/>';
+		var str_SuspenderOferta		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='suspender_oferta']/node()"/>';
+		var str_Rollback		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='lic_rollback_estado']/node()"/>';
+		var str_Adjudicar		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='adjudicar']/node()"/>';
+		var str_ImprimirOferta		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='imprimir_oferta']/node()"/>';
+		var str_ListadoExcel		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='listado_excel']/node()"/>';
+		var str_ConsHistIVA		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='consumo_historico_cIVA']/node()"/>';
+		var str_ConsHist		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='consumo_historico_sIVA']/node()"/>';
+		var str_TotalProductos		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='total_prod']/node()"/>';
+		var str_EnCurso			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='en_curso']/node()"/>';
+		var str_autor			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='autor']/node()"/>';
+		var str_fecha			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='fecha']/node()"/>';
+		var str_comentario		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='comentario']/node()"/>';
+		var str_guardarCommOK		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='comentario_licitacion_guardado']/node()"/>';
+		var str_guardarCommKO		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='comentario_licitacion_error']/node()"/>';
+		var str_Contrato		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='contrato']/node()"/>';
+		var str_SubirContrato		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='subir_contrato']/node()"/>';
+		var str_cambiarUsuario		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='cambiar_usuario']/node()"/>';
+		<!-- Strings para tabla usuarios -->
+		var str_Autor			= '<xsl:value-of select="document($doc)/translation/texts/item[@name='autor']/node()"/>';
+		var str_SinUsuarios		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_sin_usuarios']/node()"/>';
+		<!-- Strings para tabla centros -->
+		var str_SinCentros		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_sin_centros']/node()"/>';
+		var str_TituloTablaCentrosProv		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='titulo_tabla_centros_prov']/node()"/>';
+		<!-- Alerts para tabla 'Condiciones Licitacion' -->
+		var alrt_ModFechaDecisionOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='modificar_fecha_decision_ok']/node()"/>';
+		var alrt_ModFechaDecisionKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='modificar_fecha_decision_error']/node()"/>';
+		var alrt_ModFechasRealesOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='modificar_fechas_reales_ok']/node()"/>';
+		var alrt_ModFechasRealesKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='modificar_fechas_reales_error']/node()"/>';
+		var alrt_RenovarLicOK		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='confirm_renovar_licitacion']/node()"/>';
+		var alrt_RenovarLicKO		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_renovar_licitacion']/node()"/>';
+		var alrt_GenerarPedidoOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_generar_pedido']/node()"/>';
+		var alrt_LicitacionHijaOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_crear_licitacion_hija']/node()"/>';
+		var alrt_LicitacionHijaKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_crear_licitacion_hija']/node()"/>';
+		<!-- Alerts para tabla productos -->
+		var alrt_ProdsActualizadosOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_productos_actualizados']/node()"/>';
+		var alrt_ProdsActualizadosKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_productos_actualizados']/node()"/>';
+		var alrt_errorNuevosProductos	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevos_productos']/node()"/>';
+		var alrt_errorEliminarProduct	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_eliminar_producto']/node()"/>';
+		var alrt_errorDescargaFichero	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_descarga_fichero']/node()"/>';
+		var alrt_prodsPrecioRefVacio	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='productos_precioref_vacio']/node()"/>';
+		var alrt_errSinOfertaSelec	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_sin_oferta_seleccionada']/node()"/>';
+		var alrt_guardarSeleccionAdjOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar_selecc_adjudica_ok']/node()"/>';
+		var alrt_guardarSeleccionAdjKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar_selecc_adjudica_ko']/node()"/>';
+		var alrt_faltaSeleccProductos	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='revisa_seleccion_productos']/node()"/>';
+		var conf_adjudicar1		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='confirm_boton_adjudicar_1']/node()"/>';
+		var conf_adjudicar2		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='confirm_boton_adjudicar_2']/node()"/>';
+		var conf_hayCambios		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='confirm_se_han_producido_cambios']/node()"/>';
+		var alrt_pedidoMinimoKO		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_validar_pedido_minimo']/node()"/>';
+		var alrt_pedidoMinimoGlobalKO= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_validar_pedido_minimo_agr']/node()"/>';
+		var conf_autoeditar_uds_x_lote	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='autoeditar_uds_x_lote']/node()"/>';
+		var alrt_avisoCambioUnidades	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='aviso_cambio_uds_x_lote']/node()"/>';
+		var alrt_CantsActualizadasOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_cantidades_actualizadas']/node()"/>';
+		var alrt_CantsActualizadasKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_cantidades_actualizadas']/node()"/>';
+		var alrt_PreciosObjCalculadosOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_calculo_precios_objetivo']/node()"/>';
+		var alrt_CamposAvanzadosOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_guardar_campos_avanzados']/node()"/>';
+		var alrt_CamposAvanzadosKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_guardar_campos_avanzados']/node()"/>';
+		var alrt_BorrarDocumentoOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_borrar_documento']/node()"/>';
+		var alrt_BorrarDocumentoKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_borrar_documento']/node()"/>';
+
+		var alrt_avisoBorrarProducto	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='aviso_borrar_producto']/node()"/>';
+
+		<!-- Alerts para tabla productos (lado proveedor) -->
+		var alrt_errorNuevasOfertas	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevas_ofertas']/node()"/>';
+		var alrt_publicarOfertaOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='publicar_ofertas_ok']/node()"/>';
+		<!-- Alerts para tabla proveedores -->
+		var alrt_mensajeEnviado		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='mensaje_enviado']/node()"/>';
+		var alrt_AdjudicarProveedorKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_adjudicar_proveedor']/node()"/>';
+		var alrt_SuspenderProveedorKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_suspender_proveedor']/node()"/>';
+		var alrt_RollBackProveedorKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_rollback_proveedor']/node()"/>';
+		var alrt_NuevoProveedorKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevo_proveedor']/node()"/>';
+		var alrt_EliminarProveedorKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_eliminar_proveedor']/node()"/>';
+		var alrt_SubirContratoKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_subir_contrato']/node()"/>';
+		var alrt_SubirContratoOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_subir_contrato']/node()"/>';
+		var alrt_nuevoUsuarioProvOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='success_nuevo_usuario_proveedor']/node()"/>';
+		var alrt_nuevoUsuarioProvKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevo_usuario_proveedor']/node()"/>';
+		<!-- Alerts para tabla usuarios -->
+		var alrt_UsuarioYaExiste	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_usuario_ya_existe']/node()"/>';
+		var alrt_NuevoUsuarioKO		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevo_usuario']/node()"/>';
+		var alrt_EliminarUsuarioKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_eliminar_usuario']/node()"/>';
+		var alrt_licitacionFirmada	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='cliente_firma_licitacion']/node()"/>';
+		<!-- Alerts para tabla usuarios -->
+		var alrt_CentroYaExiste	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_centro_ya_existe']/node()"/>';
+		var alrt_NuevoCentroKO		= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevo_centro']/node()"/>';
+		var alrt_EliminarCentroKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_eliminar_centro']/node()"/>';
+
+		<!-- Otros alerts -->
+		var alrt_NoIniciarLicitacion	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_no_iniciar_licitacion']/node()"/>';
+		var alrt_NoIniciarLicProds	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_no_iniciar_licitacion_productos']/node()"/>';
+		var alrt_NoIniciarLicProvs	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_no_iniciar_licitacion_proveedores']/node()"/>';
+		var alrt_NoIniciarLicCentros	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_no_iniciar_licitacion_centros']/node()"/>';
+		var alrt_NuevoEstadoLicKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevo_estado_licitacion']/node()"/>';
+		var alrt_faltaInformarOfertas	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_informar_ofertas']/node()"/>';
+		var alrt_faltaPedidoMinimo	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='validacion_pedido_minimo']/node()"/>';
+		var alrt_faltaCondLicitacion	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='falta_aceptar_condiciones_licitacion']/node()"/>';
+		var alrt_firmaProveedorOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='firma_proveedor_ok']/node()"/>';
+		var alrt_NuevoEstadoProveedorKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_nuevo_estado_proveedor']/node()"/>';
+		var conf_InsertarCatalogoProv	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='confirm_insertar_en_catalogo_proveedores']/node()"/>';
+		var alrt_InsertarCatProvKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_insertar_en_catalogo_proveedores']/node()"/>';
+		var conf_InsertarEnPlantilla	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='confirm_insertar_en_plantilla']/node()"/>';
+		var alrt_InsertarEnPlantillaKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_insertar_en_plantilla']/node()"/>';
+		var alrt_sinResultados = '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_sin_resultados']/node()"/>';
+
+		var alrt_guardarDatosInformeOK	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='confirm_guardar_datos_informe']/node()"/>';
+		var alrt_guardarDatosInformeKO	= '<xsl:value-of select="document($doc)/translation/texts/item[@name='error_guardar_datos_informe']/node()"/>';
+
+
+		var arrProductos	= new Array();
+		<xsl:choose>
+		<xsl:when test="count(/Mantenimiento/LICITACION/PRODUCTOSLICITACION/PRODUCTO) &gt; 0 and /Mantenimiento/LICITACION/ROL = 'COMPRADOR'">
+		<!--
+		
+			COMPRADOR
+		
+		-->
+		var arrConsumoProvs	= new Array();
+		var NumProvsOfertas	= '<xsl:value-of select="count(/Mantenimiento/LICITACION/PRODUCTOSLICITACION/PROVEEDORESLICITACION/PROVEEDOR)"/>';
+		var productosOlvidados	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/PRODUCTOS_OLVIDADOS">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+		var numProdsSeleccion	= '<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/TOTAL_SELECCIONADAS"/>';
+		var numProveedoresActivos	= <xsl:value-of select="/Mantenimiento/LICITACION/PROVEEDORESLICITACION/TOTALACTIVOS"/>;
+
+		<xsl:for-each select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/PROVEEDORESLICITACION/PROVEEDOR">
+			var items		= [];
+			items['columna']	= '<xsl:value-of select="COLUMNA"/>';
+			items['IDProvLic']	= '<xsl:value-of select="IDPROVEEDOR_LIC"/>';
+			items['IDProveedor']	= '<xsl:value-of select="IDPROVEEDOR"/>';
+			items['PedidoMin']	= '<xsl:value-of select="LIC_PROV_PEDIDOMINIMO"/>';
+			items['NombreCorto']	= '<xsl:value-of select="NOMBRECORTO"/>';
+			items['TieneOfertas']	= '<xsl:choose><xsl:when test="TIENE_OFERTAS">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+
+			items['Consumo']	= '<xsl:value-of select="LIC_PROV_CONSUMO"/>';
+			items['ConsumoIVA']	= '<xsl:value-of select="LIC_PROV_CONSUMOIVA"/>';
+			items['ConsumoPot']	= '<xsl:value-of select="LIC_PROV_CONSUMOPOTENCIAL"/>';
+			items['ConsumoPotIVA']	= '<xsl:value-of select="LIC_PROV_CONSUMOPOTENCIALIVA"/>';
+			items['ConsumoAdj']	= '<xsl:value-of select="LIC_PROV_CONSUMOADJUDICADO"/>';
+			items['ConsumoAdjIVA']	= '<xsl:value-of select="LIC_PROV_CONSUMOADJUDICADOIVA"/>';
+
+			items['Ahorro']		= '<xsl:value-of select="LIC_PROV_AHORRO"/>';
+			items['AhorroIVA']	= '<xsl:value-of select="LIC_PROV_AHORROIVA"/>';
+
+			items['OfertasAdj']	= '<xsl:value-of select="LIC_PROV_OFERTASADJUDICADAS"/>';
+			<!-- DC - 26feb16 - Variable auxiliar que nos permite modificar su valor al vuelo cuando se hacen cambios en el DOM sin perder el valor guardado en la BBDD -->
+			items['OfertasAdjAux']	= '<xsl:value-of select="LIC_PROV_OFERTASADJUDICADAS"/>';
+
+			arrConsumoProvs.push(items);
+		</xsl:for-each>
+
+		<xsl:for-each select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/PRODUCTO">
+			var items = [];
+			items['linea']		= '<xsl:value-of select="LINEA"/>';
+			items['IDProdLic']	= '<xsl:value-of select="LIC_PROD_ID"/>';
+			items['IDProd']		= '<xsl:value-of select="LIC_PROD_IDPRODESTANDAR"/>';
+			items['RefEstandar']	= '<xsl:value-of select="LIC_PROD_REFESTANDAR"/>';
+			items['RefCliente']	= '<xsl:value-of select="LIC_PROD_REFCLIENTE"/>';
+			items['Nombre']		= '<xsl:value-of select="LIC_PROD_NOMBRE"/>';
+			items['NombreNorm']	= '<xsl:value-of select="PROD_NOMBRENORM"/>';
+			items['UdBasica']	= '<xsl:value-of select="LIC_PROD_UNIDADBASICA"/>';
+			items['FechaAlta']	= '<xsl:value-of select="LIC_PROD_FECHAALTA"/>';
+			items['FechaMod']	= '<xsl:value-of select="LIC_PROD_FECHAMODIFICACION"/>';
+			items['Consumo']	= '<xsl:value-of select="LIC_PROD_CONSUMO"/>';
+			items['ConsumoIVA']	= '<xsl:value-of select="LIC_PROD_CONSUMOIVA"/>';
+			items['ConsumoHist']	= '<xsl:value-of select="LIC_PROD_CONSUMOHISTORICO"/>';
+			items['ConsumoHistIVA']	= '<xsl:value-of select="LIC_PROD_CONSUMOHISTORICOIVA"/>';
+			items['Cantidad']	= '<xsl:value-of select="LIC_PROD_CANTIDAD"/>';
+			items['PrecioObj']	= '<xsl:value-of select="LIC_PROD_PRECIOOBJETIVO"/>';
+			items['PrecioObjIVA']	= '<xsl:value-of select="LIC_PROD_PRECIOOBJETIVOIVA"/>';
+			items['PrecioHist']	= '<xsl:value-of select="LIC_PROD_PRECIOREFERENCIA"/>';
+			items['PrecioHistIVA']	= '<xsl:value-of select="LIC_PROD_PRECIOREFERENCIAIVA"/>';
+			items['TipoIVA']	= '<xsl:value-of select="LIC_PROD_TIPOIVA"/>';
+			items['NumOfertas']	= 0; 	//30set16	Calcularemos al cargar proveedores. Antes: select="NUMERO_OFERTAS"
+			items['TieneSeleccion']	= '<xsl:value-of select="TIENE_SELECCION"/>';
+			items['Validado']	= '<xsl:choose><xsl:when test="VALIDADO">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			items['NoAdjudicado']	= '<xsl:choose><xsl:when test="NO_ADJUDICADO">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			items['Ordenacion']	= '0';
+			items['ColSeleccionada']	= '-1';
+
+			<!-- Campos Avanzados -->
+			items['Anotaciones']	= '<xsl:copy-of select="LIC_PROD_ANOTACIONES_JS/node()"/>';
+			items['InfoAmpliada']	= '<xsl:copy-of select="LIC_PROD_INFOAMPLIADA_JS/node()"/>';
+			items['Documento']	= [];
+			<xsl:if test="DOCUMENTO">
+				items['Documento']['ID']		= '<xsl:value-of select="DOCUMENTO/ID"/>';
+				items['Documento']['Nombre']		= '<xsl:value-of select="DOCUMENTO/NOMBRE"/>';
+				items['Documento']['Descripcion']	= '<xsl:value-of select="DOCUMENTO/DESCRIPCION"/>';
+				items['Documento']['Url']		= '<xsl:value-of select="DOCUMENTO/URL"/>';
+				items['Documento']['Fecha']		= '<xsl:value-of select="DOCUMENTO/FECHA"/>';
+			</xsl:if>
+			<!-- FIN Campos Avanzados -->
+
+			items['Sospechoso']	= '<xsl:choose><xsl:when test="MUY_SOSPECHOSO">2</xsl:when><xsl:when test="SOSPECHOSO">1</xsl:when><xsl:otherwise>0</xsl:otherwise></xsl:choose>';
+
+			items['AhorroMax']	= '<xsl:value-of select="AHORRO_MAX"/>';
+			items['SinAhorro']	= '<xsl:choose><xsl:when test="AVISO_SIN_AHORRO">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+
+			<!--	14set16	No añadimos aquí las ofertas, lo haremos posteriormente vía ajax
+			<xsl:if test="OFERTA">
+			items['Ofertas']	= new Array();
+			<xsl:for-each select="OFERTA">
+				var oferta		= [];
+				oferta['columna']	= '<xsl:value-of select="COLUMNA"/>';
+				oferta['IDOferta']	= '<xsl:value-of select="LIC_OFE_ID"/>';
+				oferta['IDProvLic']	= '<xsl:value-of select="LIC_OFE_IDPROVEEDORLIC"/>';
+				oferta['IDProdLic']	= '<xsl:value-of select="LIC_OFE_IDPRODUCTO"/>';
+				oferta['Referencia']	= '<xsl:value-of select="LIC_OFE_REFERENCIA"/>';
+				oferta['Nombre']	= '<xsl:value-of select="LIC_OFE_NOMBRE"/>';
+				oferta['Marca']		= '<xsl:value-of select="LIC_OFE_MARCA"/>';
+				oferta['FechaAlta']	= '<xsl:value-of select="LIC_OFE_FECHAALTA"/>';
+				oferta['FechaMod']	= '<xsl:value-of select="LIC_OFE_FECHAMODIFICACION"/>';
+				oferta['UdsXLote']	= '<xsl:value-of select="LIC_OFE_UNIDADESPORLOTE"/>';
+				oferta['Cantidad']	= '<xsl:value-of select="LIC_OFE_CANTIDAD"/>';
+				oferta['Precio']	= '<xsl:value-of select="LIC_OFE_PRECIO"/>';
+				oferta['PrecioIVA']	= '<xsl:value-of select="LIC_OFE_PRECIOIVA"/>';
+				oferta['TipoIVA']	= '<xsl:value-of select="LIC_OFE_TIPOIVA"/>';
+				oferta['Consumo']	= '<xsl:value-of select="LIC_OFE_CONSUMO"/>';
+				oferta['ConsumoIVA']	= '<xsl:value-of select="LIC_OFE_CONSUMOIVA"/>';
+				oferta['IDEstadoEval']	= '<xsl:value-of select="LIC_OFE_IDESTADOEVALUACION"/>';
+				oferta['Ahorro']	= '<xsl:value-of select="LIC_OFE_AHORRO"/>';
+				oferta['EstadoEval']	= '<xsl:value-of select="ESTADOEVALUACION"/>';
+
+				<! - - Campos Avanzados - - >
+				oferta['InfoAmpliada']	= '<xsl:copy-of select="LIC_OFE_INFOAMPLIADA_JS/node()"/>';
+				oferta['Documento']	= [];
+				<xsl:if test="DOCUMENTO">
+					oferta['Documento']['ID']		= '<xsl:value-of select="DOCUMENTO/ID"/>';
+					oferta['Documento']['Nombre']		= '<xsl:value-of select="DOCUMENTO/NOMBRE"/>';
+					oferta['Documento']['Descripcion']	= '<xsl:value-of select="DOCUMENTO/DESCRIPCION"/>';
+					oferta['Documento']['Url']		= '<xsl:value-of select="DOCUMENTO/URL"/>';
+					oferta['Documento']['Fecha']		= '<xsl:value-of select="DOCUMENTO/FECHA"/>';
+				</xsl:if>
+				<! - - FIN Campos Avanzados - - >
+
+				oferta['PrecioColor']	= '<xsl:choose><xsl:when test="IGUAL">Naranja</xsl:when><xsl:when test="SUPERIOR">Rojo</xsl:when><xsl:otherwise>Verde</xsl:otherwise></xsl:choose>';
+				oferta['OfertaAdjud']	= '<xsl:choose><xsl:when test="OFERTA_ADJUDICADA">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+
+				oferta['Sospechoso']	= '<xsl:choose><xsl:when test="MUY_SOSPECHOSO">2</xsl:when><xsl:when test="SOSPECHOSO">1</xsl:when><xsl:otherwise>0</xsl:otherwise></xsl:choose>';
+
+				oferta['FichaTecnica']	= [];
+				<xsl:if test="FICHA_TECNICA/ID">
+					oferta['FichaTecnica']['ID']		= '<xsl:value-of select="FICHA_TECNICA/ID"/>';
+					oferta['FichaTecnica']['Nombre']	= '<xsl:value-of select="FICHA_TECNICA/NOMBRE"/>';
+					oferta['FichaTecnica']['Descripcion']	= '<xsl:value-of select="FICHA_TECNICA/DESCRIPCION"/>';
+					oferta['FichaTecnica']['Url']		= '<xsl:value-of select="FICHA_TECNICA/URL"/>';
+					oferta['FichaTecnica']['Fecha']		= '<xsl:value-of select="FICHA_TECNICA/FECHA"/>';
+				</xsl:if>
+
+				oferta['NoInformada']	= '<xsl:choose><xsl:when test="NO_INFORMADA">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+				oferta['NoOfertada']	= '<xsl:choose><xsl:when test="LIC_OFE_PRECIOIVA = '0,0000' and LIC_OFE_UNIDADESPORLOTE = '0,00'">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+
+				items['Ofertas'].push(oferta);
+			</xsl:for-each>
+			</xsl:if>
+			-->
+			
+			<!--	14set16	Inicializamos las ofertas en blanco		-->
+			items['Ofertas'] = new Array();
+			
+			<!--
+			<xsl:text disable-output-escaping="yes">
+			<![CDATA[
+			for(var i=0; i < numProveedores; i++){
+			]]>
+			</xsl:text>
+
+				var oferta		= [];
+				oferta['columna']	= i;
+				oferta['IDOferta']	= '';
+				oferta['IDProvLic']	= '<xsl:value-of select="LIC_OFE_IDPROVEEDORLIC"/>';
+				oferta['IDProdLic']	= '<xsl:value-of select="LIC_OFE_IDPRODUCTO"/>';
+				oferta['Referencia']	= '';	
+				oferta['Nombre']	= '';
+				oferta['Marca']		= '';
+				oferta['FechaAlta']	= '';
+				oferta['FechaMod']	= '';
+				oferta['UdsXLote']	= '';
+				oferta['Cantidad']	= '';
+				oferta['Precio']	= '';
+				oferta['PrecioIVA']	= '';
+				oferta['TipoIVA']	= '';
+				oferta['Consumo']	= '';
+				oferta['ConsumoIVA']	= '';
+				oferta['IDEstadoEval']	= '';
+				oferta['Ahorro']	= '';
+				oferta['EstadoEval']	= '';
+
+				// Campos Avanzados
+				oferta['InfoAmpliada']	= '';
+				oferta['Documento']	= [];
+				// FIN Campos Avanzados
+
+				oferta['PrecioColor'] = '';
+				oferta['OfertaAdjud'] = '';
+				oferta['Sospechoso'] = '';
+				
+				oferta['FichaTecnica']	= [];
+
+				oferta['NoInformada']	= 'S';
+				oferta['NoOfertada']	= 'S';
+				
+				items['Ofertas'].push(oferta);
+			}
+			-->
+			arrProductos.push(items);
+		</xsl:for-each>
+		</xsl:when>
+		<xsl:when test="count(/Mantenimiento/LICITACION/PRODUCTOSLICITACION/PRODUCTO) &gt; 0 and /Mantenimiento/LICITACION/ROL = 'VENDEDOR'">
+		<!--
+		
+			VENDEDOR
+		
+		-->
+		var IDProveedorIni	= '<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_IDPROVEEDOR"/>';
+		var IDEstadoProveedor	= '<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_IDESTADO"/>';
+		var ofertaProvInformada	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/TODOS_INFORMADOS">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+		var pedidoMinimoInform	= '<xsl:choose><xsl:when test="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_PEDIDOMINIMO != ''">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+		var IDLicProveedor	= '<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_ID"/>';
+		var IDUsuarioCliente	= '<xsl:value-of select="/Mantenimiento/LICITACION/LIC_IDUSUARIO"/>';
+		var NombreCliente	= '<xsl:value-of select="/Mantenimiento/LICITACION/EMPRESALICITACION/NOMBRE"/>';
+		var numProveedoresActivos	= 0;
+
+		var arrFichasTecnicas	= new Array();
+		<xsl:for-each select="/Mantenimiento/LICITACION/FICHAS_TECNICAS/field/dropDownList/listElem">
+			var items		= [];
+			items['ID']		= '<xsl:value-of select="ID"/>';
+			items['listItem']	= '<xsl:value-of select="listItem"/>';
+			items['URL']	= '<xsl:value-of select="listItem"/>';
+
+			arrFichasTecnicas.push(items);
+		</xsl:for-each>
+
+		<xsl:for-each select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/PRODUCTO">
+			var items		= [];
+			items['linea']		= '<xsl:value-of select="LINEA"/>';
+			items['IDProdLic']	= '<xsl:value-of select="LIC_PROD_ID"/>';
+			items['IDProd']		= '<xsl:value-of select="LIC_PROD_IDPRODESTANDAR"/>';
+			items['RefEstandar']	= '<xsl:value-of select="LIC_PROD_REFESTANDAR"/>';
+			items['RefCliente']	= '<xsl:value-of select="LIC_PROD_REFCLIENTE"/>';
+			items['Nombre']		= '<xsl:value-of select="LIC_PROD_NOMBRE"/>';
+			items['NombreNorm']	= '<xsl:value-of select="PROD_NOMBRENORM"/>';
+			items['UdBasica']	= '<xsl:value-of select="LIC_PROD_UNIDADBASICA"/>';
+			items['FechaAlta']	= '<xsl:value-of select="LIC_PROD_FECHAALTA"/>';
+			items['FechaMod']	= '<xsl:value-of select="LIC_PROD_FECHAMODIFICACION"/>';
+			items['Consumo']	= '<xsl:value-of select="LIC_PROD_CONSUMO"/>';
+			items['ConsumoIVA']	= '<xsl:value-of select="LIC_PROD_CONSUMOIVA"/>';
+			items['Cantidad']	= '<xsl:value-of select="LIC_PROD_CANTIDAD"/>';
+			items['PrecioHist']	= '<xsl:value-of select="LIC_PROD_PRECIOREFERENCIA"/>';
+			items['PrecioObj']	= '<xsl:value-of select="LIC_PROD_PRECIOOBJETIVO"/>';
+			items['TipoIVA']	= '<xsl:value-of select="LIC_PROD_TIPOIVA"/>';
+			items['Ordenacion']	= '0';
+
+			<!-- Campos Avanzados producto -->
+			items['InfoAmpliada']	= '<xsl:copy-of select="LIC_PROD_INFOAMPLIADA_JS/node()"/>';
+			items['Documento']	= [];
+			<xsl:if test="DOCUMENTOPRODUCTO">
+				items['Documento']['ID']		= '<xsl:value-of select="DOCUMENTOPRODUCTO/ID"/>';
+				items['Documento']['Nombre']		= '<xsl:value-of select="DOCUMENTOPRODUCTO/NOMBRE"/>';
+				items['Documento']['Descripcion']	= '<xsl:value-of select="DOCUMENTOPRODUCTO/DESCRIPCION"/>';
+				items['Documento']['Url']		= '<xsl:value-of select="DOCUMENTOPRODUCTO/URL"/>';
+				items['Documento']['Fecha']		= '<xsl:value-of select="DOCUMENTOPRODUCTO/FECHA"/>';
+			</xsl:if>
+			<!-- FIN Campos Avanzados producto -->
+
+			items['ConsumoOferta']	= '<xsl:value-of select="LIC_OFE_CONSUMO"/>';
+
+			items['Oferta']	= [];
+			items['Oferta']['ID']		= '<xsl:value-of select="LIC_OFE_ID"/>';
+			items['Oferta']['IDProvLic']	= '<xsl:value-of select="LIC_OFE_IDPROVEEDORLIC"/>';
+			items['Oferta']['IDProducto']	= '<xsl:value-of select="LIC_OFE_IDPRODUCTO"/>';
+			items['Oferta']['RefProv']	= '<xsl:value-of select="LIC_OFE_REFERENCIA"/>';
+			items['Oferta']['Nombre']	= '<xsl:value-of select="LIC_OFE_NOMBRE"/>';
+			items['Oferta']['Marca']	= '<xsl:value-of select="LIC_OFE_MARCA"/>';
+			items['Oferta']['FechaAlta']	= '<xsl:value-of select="LIC_OFE_FECHAALTA"/>';
+			items['Oferta']['FechaMod']	= '<xsl:value-of select="LIC_OFE_FECHAMODIFICACION"/>';
+			items['Oferta']['UdsXLote']	= '<xsl:value-of select="LIC_OFE_UNIDADESPORLOTE"/>';
+			items['Oferta']['Cantidad']	= '<xsl:value-of select="LIC_OFE_CANTIDAD"/>';
+			items['Oferta']['Precio']	= '<xsl:value-of select="LIC_OFE_PRECIO"/>';
+			items['Oferta']['TipoIVA']	= '<xsl:value-of select="LIC_OFE_TIPOIVA"/>';
+			items['Oferta']['Consumo']	= '<xsl:value-of select="LIC_OFE_CONSUMO"/>';
+			items['Oferta']['ConsumoIVA']	= '<xsl:value-of select="LIC_OFE_CONSUMOIVA"/>';
+			items['Oferta']['IDEstadoEval']	= '<xsl:value-of select="LIC_OFE_IDESTADOEVALUACION"/>';
+			items['Oferta']['EstadoEval']	= '<xsl:value-of select="ESTADOEVALUACION"/>';
+
+			<!-- Campos Avanzados oferta -->
+			items['Oferta']['InfoAmpliada']	= '<xsl:copy-of select="LIC_OFE_INFOAMPLIADA_JS/node()"/>';
+			items['Oferta']['Documento']	= [];
+			<xsl:if test="DOCUMENTOOFERTA">
+				items['Oferta']['Documento']['ID']		= '<xsl:value-of select="DOCUMENTOOFERTA/ID"/>';
+				items['Oferta']['Documento']['Nombre']		= '<xsl:value-of select="DOCUMENTOOFERTA/NOMBRE"/>';
+				items['Oferta']['Documento']['Descripcion']	= '<xsl:value-of select="DOCUMENTOOFERTA/DESCRIPCION"/>';
+				items['Oferta']['Documento']['Url']		= '<xsl:value-of select="DOCUMENTOOFERTA/URL"/>';
+				items['Oferta']['Documento']['Fecha']		= '<xsl:value-of select="DOCUMENTOOFERTA/FECHA"/>';
+			</xsl:if>
+			<!-- FIN Campos Avanzados oferta -->
+
+			items['Oferta']['Informada']	= '<xsl:choose><xsl:when test="INFORMADA">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			items['Oferta']['Adjudicada']	= '<xsl:choose><xsl:when test="OFERTA_ADJUDICADA">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+
+			items['Oferta']['FichaTecnica']	= [];
+			<xsl:if test="FICHA_TECNICA/ID">
+				items['Oferta']['FichaTecnica']['ID']		= '<xsl:value-of select="FICHA_TECNICA/ID"/>';
+				items['Oferta']['FichaTecnica']['Nombre']	= '<xsl:value-of select="FICHA_TECNICA/NOMBRE"/>';
+				items['Oferta']['FichaTecnica']['Descripcion']	= '<xsl:value-of select="FICHA_TECNICA/DESCRIPCION"/>';
+				items['Oferta']['FichaTecnica']['Url']		= '<xsl:value-of select="FICHA_TECNICA/URL"/>';
+				items['Oferta']['FichaTecnica']['Fecha']	= '<xsl:value-of select="FICHA_TECNICA/FECHA"/>';
+			</xsl:if>
+
+			arrProductos.push(items);
+		</xsl:for-each>
+		</xsl:when>
+		</xsl:choose>
+
+		var arrProveedores	= new Array();
+		<xsl:if test="count(/Mantenimiento/LICITACION/PROVEEDORESLICITACION/PROVEEDOR) &gt; 0">
+		<xsl:for-each select="/Mantenimiento/LICITACION/PROVEEDORESLICITACION/PROVEEDOR">
+			var items		= [];
+			items['linea']		= '<xsl:value-of select="ORDEN"/>';
+			items['IDProvLic']	= '<xsl:value-of select="IDPROVEEDOR_LIC"/>';
+			items['IDProveedor']	= '<xsl:value-of select="IDPROVEEDOR"/>';
+			items['Nombre']		= '<xsl:value-of select="NOMBRE"/>';
+			items['NombreCorto']	= '<xsl:value-of select="NOMBRECORTO"/>';
+			items['FechaAlta']	= '<xsl:value-of select="LIC_PROV_FECHAALTA"/>';
+			items['FechaOferta']	= '<xsl:value-of select="LIC_PROV_FECHAOFERTA"/>';
+			items['IDEstadoProv']	= '<xsl:value-of select="LIC_PROV_IDESTADO"/>';
+			items['EstadoProv']	= '<xsl:value-of select="ESTADOLICITACION"/>';
+			items['CommsProv']	= '<xsl:copy-of select="LIC_PROV_COMENTARIOSPROV_JS/node()"/>';
+			items['CommsCdC']	= '<xsl:copy-of select="LIC_PROV_COMENTARIOSCDC_JS/node()"/>';
+			items['IDEstadoEval']	= '<xsl:value-of select="LIC_PROV_IDESTADOEVALUACION"/>';
+			items['EstadoEval']	= '<xsl:value-of select="ESTADOEVALUACION"/>';
+			items['PedidoMin']	= '<xsl:value-of select="LIC_PROV_PEDIDOMINIMO"/>';
+			items['ConsumoProv']	= '<xsl:value-of select="LIC_PROV_CONSUMO"/>';
+			items['ConsumoProvIVA']	= '<xsl:value-of select="LIC_PROV_CONSUMOIVA"/>';
+			items['Ahorro']		= '<xsl:value-of select="LIC_PROV_AHORRO"/>';
+			items['OfertasVacias']	= '<xsl:value-of select="LIC_PROV_OFERTASVACIAS"/>';
+			items['ConsumoPot']	= '<xsl:value-of select="LIC_PROV_CONSUMOPOTENCIAL"/>';
+			items['ConsumoPotIVA']	= '<xsl:value-of select="LIC_PROV_CONSUMOPOTENCIALIVA"/>';
+			items['ConsumoAdj']	= '<xsl:value-of select="LIC_PROV_CONSUMOADJUDICADO"/>';
+			items['ConsumoAdjIVA']	= '<xsl:value-of select="LIC_PROV_CONSUMOADJUDICADOIVA"/>';
+			items['AhorroIVA']	= '<xsl:value-of select="LIC_PROV_AHORROIVA"/>';
+			items['NumeroLineas']	= '<xsl:value-of select="LIC_PROV_NUMEROLINEAS"/>';
+			items['NivelDocumentacion']	= '<xsl:value-of select="EMP_NIVELDOCUMENTACION"/>';
+
+			items['Frete']	= '<xsl:value-of select="LIC_PROV_FRETE"/>';
+			items['PlazoEntrega']	= '<xsl:value-of select="LIC_PROV_PLAZOENTREGA"/>';
+
+			items['OfeConAhorro']	= '<xsl:value-of select="LIC_PROV_OFERTASCONAHORRO"/>';
+			items['OfeMejPrecio']	= '<xsl:value-of select="LIC_PROV_OFERTASCONMEJORPRECIO"/>';
+			items['ConsMejPrecio']	= '<xsl:value-of select="LIC_PROV_CONSUMOCONMEJORPRECIO"/>';
+			items['ConsMejPrecIVA']	= '<xsl:value-of select="LIC_PROV_CONSCONMEJORPRECIOIVA"/>';
+			items['AhorMejPrecio']	= '<xsl:value-of select="LIC_PROV_AHORROENMEJORPRECIO"/>';
+			items['ConsConAhorro']	= '<xsl:value-of select="LIC_PROV_CONSUMOCONAHORRO"/>';
+			items['ConsConAhorIVA']	= '<xsl:value-of select="LIC_PROV_CONSUMOCONAHORROIVA"/>';
+			items['AhorOfeConAhor']	= '<xsl:value-of select="LIC_PROV_AHORROOFECONAHORRO"/>';
+			items['OfertasAdj']	= '<xsl:value-of select="LIC_PROV_OFERTASADJUDICADAS"/>';
+
+			items['IDUsuarioProv']	= '<xsl:value-of select="USUARIO/ID"/>';
+			items['NombreUsuario']	= '<xsl:value-of select="USUARIO/NOMBRE"/>';
+
+			items['HayConversa']	= '<xsl:choose><xsl:when test="CONVERSACION">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';
+			items['TieneOfertas']	= '<xsl:choose><xsl:when test="TIENE_OFERTAS">S</xsl:when><xsl:otherwise>N</xsl:otherwise></xsl:choose>';	//	14set16
+			
+			items['Contrato'] = [];
+			<xsl:if test="CONTRATO/ID">
+				items['Contrato']['ID']		= '<xsl:value-of select="CONTRATO/ID"/>';
+				items['Contrato']['Nombre']	= '<xsl:value-of select="CONTRATO/NOMBRE"/>';
+				items['Contrato']['Descripcion']	= '<xsl:value-of select="CONTRATO/DESCRIPCION"/>';
+				items['Contrato']['Url']		= '<xsl:value-of select="CONTRATO/URL"/>';
+				items['Contrato']['Fecha']	= '<xsl:value-of select="CONTRATO/FECHA"/>';
+			</xsl:if>
+			arrProveedores.push(items);
+		</xsl:for-each>
+		</xsl:if>
+		var arrProductosPorCentro	= new Array();
+		<xsl:for-each select="/Mantenimiento/LICITACION/COMPRAPORCENTRO/PRODUCTO">
+			var items		= [];
+			items['linea']		= '<xsl:value-of select="LINEA"/>';
+			items['IDProdLic']	= '<xsl:value-of select="LIC_PROD_ID"/>';
+			items['IDProd']		= '<xsl:value-of select="LIC_PROD_IDPRODESTANDAR"/>';
+			items['RefEstandar']= '<xsl:value-of select="LIC_PROD_REFESTANDAR"/>';
+			items['RefCliente']	= '<xsl:value-of select="LIC_PROD_REFCLIENTE"/>';
+			//16ago16	items['Nombre']		= '<xsl:value-of select="LIC_PROD_NOMBRE"/>';
+			//16ago16	items['NombreNorm']	= '<xsl:value-of select="PROD_NOMBRENORM"/>';
+			items['UdBasica']	= '<xsl:value-of select="LIC_PROD_UNIDADBASICA"/>';
+			//16ago16	items['FechaAlta']	= '<xsl:value-of select="LIC_PROD_FECHAALTA"/>';
+			//16ago16	items['FechaMod']	= '<xsl:value-of select="LIC_PROD_FECHAMODIFICACION"/>';
+			//16ago16	items['Consumo']	= '<xsl:value-of select="LIC_PROD_CONSUMO"/>';
+			//16ago16	items['ConsumoIVA']	= '<xsl:value-of select="LIC_PROD_CONSUMOIVA"/>';
+			items['Cantidad']	= '<xsl:value-of select="CENTRO/CANTIDAD_SINFORMATO"/>';
+			arrProductosPorCentro.push(items);
+		</xsl:for-each>
+		
+	</script>
+
+	<script type="text/javascript" src="http://www.newco.dev.br/Gestion/Comercial/lic_170916.js"></script>
+	<script type="text/javascript" src="http://www.newco.dev.br/Utilidades/Utilidades.js"></script>
+
+	<style type="text/css">
+		td.mejorPrecio { background-color: #FFFF99;}
+	</style>
+</head>
+
+<body onload="onloadEvents();">
+<!--idioma-->
+<xsl:variable name="lang">
+	<xsl:choose>
+		<xsl:when test="/Mantenimiento/LANG"><xsl:value-of select="/Mantenimiento/LANG"/></xsl:when>
+		<xsl:otherwise>spanish</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+<!--idioma fin-->
+<xsl:choose>
+	<xsl:when test="//SESION_CADUCADA">
+		<xsl:apply-templates select="//SESION_CADUCADA"/>
+	</xsl:when>
+	<xsl:when test="//Sorry">
+		<xsl:apply-templates select="//Sorry"/>
+	</xsl:when>
+	<xsl:otherwise>
+		<div class="divLeft">
+			<h1 class="titlePage" style="height:50px;float:left;width:19%;padding-left:1%;background:#FFF;border:0;">
+				<div class="boton">
+					<a href="http://www.newco.dev.br/Gestion/Comercial/Licitaciones.xsql" title="Volver a las licitaciones">
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='volver']/node()"/>
+					</a>
+				</div>
+			</h1>
+
+			<h1 class="titlePage" style="height:50px;float:left;width:60%;background:#FFF;border:0;">
+
+			<a id="conEtiquetas" href="javascript:abrirEtiqueta(true);" style="text-decoration:none;display:none;">
+				<img src="http://www.newco.dev.br/images/tagsAma.png" width="20px">
+					<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='ver_mas_nueva_etiqueta']/node()"/></xsl:attribute>
+					<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='ver_mas_nueva_etiqueta']/node()"/></xsl:attribute>
+				</img>
+			</a>&nbsp;
+
+			<a id="sinEtiquetas" href="javascript:abrirEtiqueta(false);" style="text-decoration:none;display:none;">
+				<img src="http://www.newco.dev.br/images/tags.png" width="20px">
+					<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='nueva_etiqueta']/node()"/></xsl:attribute>
+					<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='nueva_etiqueta']/node()"/></xsl:attribute>
+				</img>
+			</a>&nbsp;
+			<xsl:choose>
+			<xsl:when test="not(/Mantenimiento/NUEVALICITACION)">
+				<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion']/node()"/>&nbsp;<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CODIGO"/>:&nbsp;<xsl:value-of select="substring(/Mantenimiento/LICITACION/LIC_TITULO,1,60)"/>&nbsp;
+
+				<xsl:if test="/Mantenimiento/LICITACION/ROL='COMPRADOR' and /Mantenimiento/LICITACION/LIC_IDESTADO != 'EST' and /Mantenimiento/LICITACION/LIC_CONSUMOADJUDICADO > '0'">		
+				&nbsp;<div id="botonVerOC" class="botonLargoVerdadNara" style="width:15%;float:right"> <!-- style="width:120px;float:right;">-->
+					<!--<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Gestion/Comercial/licOfertasSeleccionadas.xsql?LIC_ID={/Mantenimiento/LICITACION/LIC_ID}',90,90,10,10);" target="OfertasSeleccionadas"><xsl:value-of select="document($doc)/translation/texts/item[@name='situacion_pedido']/node()"/></a>-->
+					<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Gestion/Comercial/licOfertasSeleccionadas.xsql?LIC_ID={/Mantenimiento/LICITACION/LIC_ID}',10,90,90,10);"><xsl:value-of select="document($doc)/translation/texts/item[@name='Vencedores']/node()"/></a>
+				</div>
+				<div id="botonVerOC" class="botonLargoVerdadNara" style="width:15%;float:right"> <!-- style="width:120px;float:right;">-->
+					<a href="javascript:MostrarPagPersonalizada('http://www.newco.dev.br/Gestion/Comercial/licResumenProveedores.xsql?LIC_ID={//LIC_ID}',30,60,30,30);"><xsl:value-of select="document($doc)/translation/texts/item[@name='Proveedores']/node()"/></a>
+				</div>
+				</xsl:if>
+
+								
+				<a style="text-decoration:none;">
+					<xsl:choose>
+					<xsl:when test="/Mantenimiento/LICITACION/ROL='VENDEDOR'">
+						<xsl:attribute name="href">javascript:listadoExcel(<xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSLICITACION/LIC_PROV_ID"/>);</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="href">javascript:listadoExcel();</xsl:attribute>
+					</xsl:otherwise>
+					</xsl:choose>
+
+					<img src="http://www.newco.dev.br/images/iconoExcel.gif">
+						<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='listado_excel']/node()"/></xsl:attribute>
+						<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='listado_excel']/node()"/></xsl:attribute>
+					</img>
+				</a>
+
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/IDPAIS = '34' and not(/Mantenimiento/LICITACION/MOSTRAR_PRECIO_IVA)">
+					<br /><span style="font-size:12px;margin:5px 0px;">(<xsl:value-of select="document($doc)/translation/texts/item[@name='precios_sin_iva']/node()"/>)</span>
+				</xsl:when>
+				<xsl:when test="/Mantenimiento/LICITACION/IDPAIS = '34' and /Mantenimiento/LICITACION/MOSTRAR_PRECIO_IVA">
+					<br /><span style="font-size:12px;margin:5px 0px;">(<xsl:value-of select="document($doc)/translation/texts/item[@name='precios_con_iva']/node()"/>)</span>
+				</xsl:when>
+				</xsl:choose>
+
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="document($doc)/translation/texts/item[@name='nueva_licitacion']/node()"/>
+			</xsl:otherwise>
+			</xsl:choose>
+
+			<!-- Solo mostramos el link en caso de usuario autor o en caso de usuario admin -->
+			<xsl:if test="/Mantenimiento/LICITACION/AUTOR or (/Mantenimiento/LICITACION/COMENTARIOS_PRIVADOS and /Mantenimiento/LICITACION/ADMIN)">
+				&nbsp;<a href="javascript:comentarioInterno();" style="text-decoration:none;">
+					<img src="http://www.newco.dev.br/images/edit.png">
+						<xsl:attribute name="alt">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='leer_comentario']/node()"/>
+						</xsl:attribute>
+						<xsl:attribute name="title">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='leer_comentario']/node()"/>
+						</xsl:attribute>
+					</img>
+				</a>
+			</xsl:if>
+
+			<xsl:if test="/Mantenimiento/LICITACION/MENSAJE">
+				<br />
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/MENSAJE='OK'"><xsl:value-of select="document($doc)/translation/texts/item[@name='cambios_guardados']/node()"/></xsl:when>
+				<xsl:otherwise><xsl:value-of select="/Mantenimiento/LICITACION/MENSAJE"/></xsl:otherwise>
+				</xsl:choose>
+				&nbsp;(<xsl:value-of select="/Mantenimiento/LICITACION/LIC_FECHAALTA"/>)
+			</xsl:if>
+
+			<!--29jul16 Este aviso no tiene sentido en Brasil	-->
+			<xsl:if test="/Mantenimiento/LICITACION/IDPAIS = '34' and /Mantenimiento/LICITACION/LIC_IDESTADO != 'EST' != 'COMP'">
+				<p style="margin-top:5px;">
+					<span style="font-size:12px;padding:4px 8px;background:#F3F781;border:1px solid red;text-align:center;">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/LIC_PORPRODUCTO = 'S'">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_por_producto_expli']/node()"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_por_paquete_expli']/node()"/>
+						</xsl:otherwise>
+						</xsl:choose>
+					</span>
+				</p>
+			</xsl:if>
+			</h1>
+
+			<h1 class="titlePage" style="height:45px;float:left;width:19%;padding-right:1%;background:#FFF;border:0;">&nbsp;</h1>
+		</div><!--fin de divLeft-->
+
+		<div class="divLeft">
+
+		<xsl:choose>
+		<xsl:when test="/Mantenimiento/NUEVALICITACION">
+			<xsl:call-template name="Tabla_Datos_Generales_Nuevo"/>
+		</xsl:when>
+		<xsl:when test="/Mantenimiento/LICITACION/LIC_IDESTADO = 'EST' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'COMP'">
+			<xsl:call-template name="Tabla_Datos_Generales_Estudio_Previo"/>
+		</xsl:when>
+		<xsl:when test="(/Mantenimiento/LICITACION/LIC_IDESTADO = 'CURS' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'INF') and /Mantenimiento/LICITACION/AUTOR">
+			<xsl:call-template name="Tabla_Datos_Generales_Autor"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:call-template name="Tabla_Datos_Generales"/>
+		</xsl:otherwise>
+		</xsl:choose>
+
+		<xsl:if test="not(/Mantenimiento/NUEVALICITACION)">
+
+			<!-- PESTANA INFO PEDIDO -->
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/LIC_IDESTADO != 'EST' and /Mantenimiento/LICITACION/LIC_MESESDURACION = 0">
+				<form name="infoPedido" id="infoPedido" method="POST" action="MantLicitacionSave.xsql">
+				<input type="hidden" name="LIC_IDUSUARIO" value="{Mantenimiento/US_ID}"/>
+				<input type="hidden" name="LIC_IDEMPRESA" value="{/Mantenimiento/LICITACION/LIC_IDEMPRESA}"/>
+				<input type="hidden" name="LIC_ID" value="{/Mantenimiento/LICITACION/LIC_ID}"/>
+				<input type="hidden" name="ACCION" value="INFOPEDIDO"/>
+                <input type="hidden" name="lici" id="lici" value="NUEVA"/>
+				<table class="infoTable divLeft tablaInfoPedido incidencias" id="lInfoPedido" style="display:none;border-top:1px solid #999;" cellspacing="5">
+				<tbody>
+					<tr style="height:5px;"><td colspan="3">&nbsp;</td></tr>
+
+					<tr>
+						<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuario']/node()"/>:</td>
+						<td class="cuarenta datosLeft borderGris" style="padding:15px 10px;">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+							<select name="LIC_IDUSUARIOPEDIDO" id="LIC_IDUSUARIOPEDIDO">
+								<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+								<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDUSUARIOPEDIDO']/dropDownList/listElem">
+									<option value="{ID}">
+										<xsl:if test="ID = ../../SelectedElement"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+										<xsl:value-of select="listItem"/>
+									</option>
+								</xsl:for-each>
+							</select>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDUSUARIOPEDIDO']/dropDownList/listElem">
+								<xsl:if test="ID = ../../SelectedElement">
+									<xsl:value-of select="listItem"/>
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:otherwise>
+						</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='lugar_entrega']/node()"/>:</td>
+						<td class="datosLeft borderGris" style="padding:15px 10px;">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+							<select name="LIC_IDLUGARENTREGA" id="LIC_IDLUGARENTREGA">
+								<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+								<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDLUGARENTREGA']/dropDownList/listElem">
+									<option value="{ID}">
+										<xsl:if test="ID = ../../SelectedElement"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+										<xsl:value-of select="listItem"/>
+									</option>
+								</xsl:for-each>
+							</select>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:for-each select="/Mantenimiento/LICITACION/field[@name='IDLUGARENTREGA']/dropDownList/listElem">
+								<xsl:if test="ID = ../../SelectedElement">
+									<xsl:value-of select="listItem"/>
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:otherwise>
+						</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='forma_pago']/node()"/>:</td>
+						<td class="datosLeft borderGris" style="padding:15px 10px;">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+							<select name="LIC_IDFORMAPAGO" id="LIC_IDFORMAPAGO">
+								<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+								<xsl:for-each select="/Mantenimiento/LICITACION/FORMASPAGO/field[@name='IDFORMAPAGO']/dropDownList/listElem">
+									<option value="{ID}">
+										<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+										<xsl:value-of select="listItem"/>
+									</option>
+								</xsl:for-each>
+							</select>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:for-each select="/Mantenimiento/LICITACION/FORMASPAGO/field[@name='IDFORMAPAGO']/dropDownList/listElem">
+								<xsl:if test="ID = ../../../field/@current">
+									<xsl:value-of select="listItem"/>
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:otherwise>
+						</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='plazo_pago']/node()"/>:</td>
+						<td class="datosLeft borderGris" style="padding:15px 10px;">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+							<select name="LIC_IDPLAZOPAGO" id="LIC_IDPLAZOPAGO">
+								<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+								<xsl:for-each select="/Mantenimiento/LICITACION/PLAZOSPAGO/field[@name='IDPLAZOPAGO']/dropDownList/listElem">
+									<option value="{ID}">
+										<xsl:if test="ID = ../../../field/@current"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if>
+										<xsl:value-of select="listItem"/>
+									</option>
+								</xsl:for-each>
+							</select>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:for-each select="/Mantenimiento/LICITACION/PLAZOSPAGO/field[@name='IDPLAZOPAGO']/dropDownList/listElem">
+								<xsl:if test="ID = ../../../field/@current">
+									<xsl:value-of select="listItem"/>
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:otherwise>
+						</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='codigo_pedido']/node()"/>:</td>
+						<td class="datosLeft borderGris" style="padding:15px 10px;">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+							<input type="text" id="LIC_CODIGOPEDIDO" name="LIC_CODIGOPEDIDO" value="{/Mantenimiento/LICITACION/LIC_CODIGOPEDIDO}"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CODIGOPEDIDO"/>
+						</xsl:otherwise>
+						</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='observaciones_pedido']/node()"/>:</td>
+						<td class="datosLeft borderGris" style="padding:15px 10px;">
+						<xsl:choose>
+						<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+							<textarea id="LIC_OBSPEDIDO" name="LIC_OBSPEDIDO" rows="4" cols="70">
+								<xsl:copy-of select="/Mantenimiento/LICITACION/LIC_COMENTARIOSPEDIDO/node()"/>
+							</textarea>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:copy-of select="/Mantenimiento/LICITACION/LIC_COMENTARIOSPEDIDO/node()"/>
+						</xsl:otherwise>
+						</xsl:choose>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+
+				<xsl:if test="/Mantenimiento/LICITACION/AUTOR">
+					<tr><td colspan="3">&nbsp;</td></tr>
+
+					<tr>
+						<td colspan="3">
+							<table class="infoTable">
+								<tr>
+									<td class="trenta labelRight">&nbsp;</td>
+									<td class="veinte">
+										<div class="boton">
+											<a href="javascript:SubmitForm(document.forms['infoPedido']);">
+												<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+											</a>
+										</div>
+									</td>
+									<td class="veinte">&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</xsl:if>
+				</tbody>
+				</table>
+				</form>
+			</xsl:if>
+			<!-- FIN PESTANA INFO PEDIDO -->
+
+			<!-- PESTANA PRODUCTOS -->
+			<xsl:choose>
+			<xsl:when test="/Mantenimiento/LICITACION/ROL = 'VENDEDOR'">
+				<xsl:call-template name="Tabla_Productos_Proveedor"/>
+			</xsl:when>
+			<xsl:when test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/COMPLETAR_COMPRA_CENTRO">
+				<xsl:call-template name="Tabla_Productos_Centro_Estudio_Previo"/>
+			</xsl:when>
+			<xsl:when test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/LIC_IDESTADO = 'EST'">
+				<xsl:call-template name="Tabla_Productos_Cliente_Estudio_Previo"/>
+			</xsl:when>
+			<xsl:when test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR'">
+				<xsl:call-template name="Tabla_Productos_Ofertas_Cliente"/>
+			</xsl:when>
+			<xsl:otherwise></xsl:otherwise>
+			</xsl:choose>
+			<!-- FIN PESTANA PRODUCTOS -->
+
+			<!-- PESTANA PRODUCTOS COMPACTO (ANALISIS) -->
+<!--
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and /Mantenimiento/LICITACION/LIC_IDESTADO != 'EST'">
+				<xsl:call-template name="Tabla_Productos_Compacto"/>
+			</xsl:if>
+-->
+			<!-- FIN PESTANA PRODUCTOS COMPACTO (ANALISIS) -->
+
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR'">
+			<!-- PESTANA PROVEEDORES -->
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/LIC_IDESTADO = 'EST' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'COMP' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'CURS' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'INF'">
+					<xsl:call-template name="Tabla_Proveedores_Previo"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="Tabla_Proveedores_Adjudicado"/>
+				</xsl:otherwise>
+				</xsl:choose>
+			<!-- FIN PESTANA PROVEEDORES -->
+
+			<!-- PESTANA USUARIOS -->
+			<table class="divLeft tablaUsuarios infoTable" id="lUsuarios" style="display:none;">
+			<thead>
+				<tr class="subTituloTabla">
+					<td style="text-align:left;">&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='nombre']/node()"/></td>
+					<td><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_alta']/node()"/></td>
+					<td><xsl:value-of select="document($doc)/translation/texts/item[@name='estado']/node()"/></td>
+					<td><xsl:value-of select="document($doc)/translation/texts/item[@name='fecha_firma']/node()"/></td>
+					<td><xsl:value-of select="document($doc)/translation/texts/item[@name='comentarios']/node()"/></td>
+					<td><xsl:value-of select="document($doc)/translation/texts/item[@name='acciones']/node()"/></td>
+				</tr>
+			</thead>
+
+			<tbody>
+			<xsl:choose>
+			<xsl:when test="/Mantenimiento/LICITACION/USUARIOSLICITACION/USUARIO">
+				<xsl:for-each select="/Mantenimiento/LICITACION/USUARIOSLICITACION/USUARIO">
+				<tr style="border-bottom:1px solid #7d7d7d;">
+					<td class="datosLeft">&nbsp;
+						<xsl:if test="AUTOR"><span class="amarillo"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='autor']/node()"/>:</strong></span>&nbsp;</xsl:if>
+						<xsl:value-of select="NOMBRE"/>
+					</td>
+					<td><xsl:value-of select="LIC_USU_FECHAALTA"/></td>
+					<td><xsl:value-of select="ESTADOLICITACION"/></td>
+					<td><xsl:value-of select="LIC_USU_FECHAMODIFICACION"/></td>
+					<td><xsl:value-of select="LIC_USU_COMENTARIOS"/></td>
+					<td>
+						<xsl:if test="/Mantenimiento/LICITACION/LIC_IDESTADO = 'FIRM' and ID = /Mantenimiento/US_ID and LIC_USU_IDESTADO != 'FIRM' and LIC_USU_FIRMA = 'S'">
+							<a class="accFirma" href="javascript:modificaUsuario({IDUSUARIO_LIC},'FIRM');"><img src="http://www.newco.dev.br/images/firmar.gif"/></a>&nbsp;
+						</xsl:if>
+						<xsl:if test="not(AUTOR) and /Mantenimiento/LICITACION/AUTOR and /Mantenimiento/LICITACION/LIC_IDESTADO='EST'">
+							<a class="accBorrar" href="javascript:modificaUsuario({IDUSUARIO_LIC},'B');">
+								<img src="http://www.newco.dev.br/images/borrar.gif"/>
+							</a>
+						</xsl:if>
+					</td>
+				</tr>
+				</xsl:for-each>
+			</xsl:when>
+			<xsl:otherwise>
+				<tr><td colspan="6" align="center"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion_sin_usuarios']/node()"/></strong></td></tr>
+			</xsl:otherwise>
+			</xsl:choose>
+			</tbody>
+			</table>
+
+			<xsl:if test="/Mantenimiento/LICITACION/AUTOR and (/Mantenimiento/LICITACION/LIC_IDESTADO='EST' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'COMP' or /Mantenimiento/LICITACION/LIC_IDESTADO='CURS')">
+			<form id="Usuarios" name="Usuarios" method="post">
+<!--
+			<input type="hidden" name="LIC_ID" VALUE="{/Mantenimiento/LICITACION/LIC_ID}"/>
+			<input type="hidden" name="ROL" VALUE="{Mantenimiento/LICITACION/ROL}"/>
+			<input type="hidden" name="IDIOMA" VALUE="{Mantenimiento/LICITACION/IDIDIOMA}"/>
+-->
+			<table class="divLeft tablaUsuarios infoTable incidencias" id="lUsuariosForm" style="display:none;" cellspacing="5">
+				<tr style="border-top:2px solid #66667B;"><td colspan="4">&nbsp;</td></tr>
+
+				<tr>
+					<td class="trenta">&nbsp;</td>
+					<td class="labelRight quince grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='usuarios']/node()"/>:</td>
+					<td class="quince datosLeft">
+						<select name="LIC_IDUSUARIO">
+							<option value=""><xsl:value-of select="document($doc)/translation/texts/item[@name='selecciona']/node()"/></option>
+							<xsl:for-each select="/Mantenimiento/LICITACION/USUARIOS/USUARIO">
+								<option value="{ID}"><xsl:value-of select="NOMBRE"/></option>
+							</xsl:for-each>
+						</select>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<td>&nbsp;</td>
+					<td class="labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='firma']/node()"/>:</td>
+					<td class="datosLeft" colspan="2">
+						<input type="checkbox" name="LIC_USU_FIRMA" id="LIC_USU_FIRMA" value="S"/>&nbsp;
+						<xsl:value-of select="document($doc)/translation/texts/item[@name='expli_firma']/node()"/>
+					</td>
+				</tr>
+
+				<tr><td colspan="4">&nbsp;</td></tr>
+
+				<tr>
+					<td colspan="2">&nbsp;</td>
+					<td>
+						<div class="boton">
+							<a href="javascript:ValidarFormulario(document.forms['Usuarios'],'usuarios');">
+								<xsl:value-of select="document($doc)/translation/texts/item[@name='anadir']/node()"/>
+							</a>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+			</form>
+			</xsl:if>
+			<!-- FIN PESTANA USUARIOS -->
+
+			<!-- PESTANA CENTROS -->
+			<!--xsl:if test="/Mantenimiento/LICITACION/LICITACIONES_AGREGADAS">-->
+			<xsl:if test="/Mantenimiento/LICITACION/LICITACION_AGREGADA">
+				<xsl:choose>
+				<xsl:when test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR' and (/Mantenimiento/LICITACION/LIC_IDESTADO = 'EST' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'COMP' or /Mantenimiento/LICITACION/LIC_IDESTADO = 'CURS')">
+					<xsl:call-template name="Tabla_Centros_Estudio_Previo"/>
+				</xsl:when>
+				<xsl:when test="/Mantenimiento/LICITACION/ROL = 'COMPRADOR'">
+					<xsl:call-template name="Tabla_Centros"/>
+				</xsl:when>
+				<xsl:otherwise></xsl:otherwise>
+				</xsl:choose>
+			</xsl:if>
+			<!-- FIN PESTANA CENTROS -->
+
+
+			<!-- PESTANA INFORME -->
+			<table class="infoTable divLeft tablaInforme incidencias" id="lInforme" style="display:none;border-top:1px solid #999;" cellspacing="5">
+			<tbody>
+				<tr style="height:5px;"><td colspan="3">&nbsp;</td></tr>
+				
+				<!--	3oct16	Añadimos un breve resumen cuantitativo		-->
+				<tr>
+					<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='Productos']/node()"/>:</td>
+					<td class="cuarenta datosLeft borderGris" style="padding:0px 10px;"><xsl:value-of select="/Mantenimiento/LICITACION/PRODUCTOSADJUDICADOS"/>/<xsl:value-of select="/Mantenimiento/LICITACION/LIC_NUMEROLINEAS"/></td>
+				</tr>
+				<tr>
+					<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='Proveedores']/node()"/>:</td>
+					<td class="cuarenta datosLeft borderGris" style="padding:0px 10px;"><xsl:value-of select="/Mantenimiento/LICITACION/LIC_PROVEEDORESADJUDICADOS"/>/<xsl:value-of select="/Mantenimiento/LICITACION/LIC_NUMEROPROVEEDORES"/></td>
+				</tr>
+				<tr>
+					<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='Total_adjudicado']/node()"/>:</td>
+					<td class="cuarenta datosLeft borderGris" style="padding:0px 10px;"><xsl:value-of select="/Mantenimiento/LICITACION/LIC_CONSUMOADJUDICADO"/><!--/<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CONSUMOHISTADJUDICADO"/>--></td>
+				</tr>
+				<tr>
+					<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='Ahorro']/node()"/>:</td>
+					<td class="cuarenta datosLeft borderGris" style="padding:0px 10px;"><xsl:value-of select="/Mantenimiento/LICITACION/LIC_AHORROADJUDICADO"/></td>
+				</tr>
+
+				<tr>
+					<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='presentacion']/node()"/>:</td>
+					<td class="cuarenta datosLeft borderGris" style="padding:0px 10px;">
+					<xsl:choose>
+					<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+						<textarea id="LIC_INF_PRESENTACION" name="LIC_INF_PRESENTACION" rows="5" cols="90">
+							<xsl:value-of select="/Mantenimiento/LICITACION/INFORME/LIC_INF_PRESENTACION_SINFORMATO"/>
+						</textarea>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:copy-of select="/Mantenimiento/LICITACION/INFORME/LIC_INF_PRESENTACION" disable-output-escaping="yes"/>
+					</xsl:otherwise>
+					</xsl:choose>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='analisis']/node()"/>:</td>
+					<td class="cuarenta datosLeft borderGris" style="padding:0px 10px;">
+					<xsl:choose>
+					<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+						<textarea id="LIC_INF_ANALISIS" name="LIC_INF_ANALISIS" rows="5" cols="90">
+							<xsl:value-of select="/Mantenimiento/LICITACION/INFORME/LIC_INF_ANALISIS_SINFORMATO"/>
+						</textarea>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:copy-of select="/Mantenimiento/LICITACION/INFORME/LIC_INF_ANALISIS" disable-output-escaping="yes"/>
+					</xsl:otherwise>
+					</xsl:choose>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<td class="trenta labelRight grisMed"><xsl:value-of select="document($doc)/translation/texts/item[@name='conclusiones']/node()"/>:</td>
+					<td class="cuarenta datosLeft borderGris" style="padding:0px 10px;">
+					<xsl:choose>
+					<xsl:when test="/Mantenimiento/LICITACION/AUTOR">
+						<textarea id="LIC_INF_CONCLUSIONES" name="LIC_INF_CONCLUSIONES" rows="5" cols="90">
+							<xsl:value-of select="/Mantenimiento/LICITACION/INFORME/LIC_INF_CONCLUSIONES_SINFORMATO"/>
+						</textarea>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:copy-of select="/Mantenimiento/LICITACION/INFORME/LIC_INF_CONCLUSIONES" disable-output-escaping="yes"/>
+					</xsl:otherwise>
+					</xsl:choose>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+
+			<xsl:if test="/Mantenimiento/LICITACION/AUTOR">
+				<tr><td colspan="3">&nbsp;</td></tr>
+
+				<tr>
+					<td colspan="3">
+						<table class="infoTable" >
+							<tr>
+								<td class="trenta labelRight">&nbsp;</td>
+								<td class="veinte">
+									<div class="boton">
+										<a href="javascript:guardarDatosInforme();">
+											<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+										</a>
+									</div>
+								</td>
+								<td class="veinte">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</xsl:if>
+			</tbody>
+			</table>
+			<!-- FIN PESTANA INFORME -->
+
+			</xsl:if>
+
+			<xsl:if test="/Mantenimiento/LICITACION/ROL = 'VENDEDOR'">
+
+	<!-- DIV Conversacion Proveedor -->
+	<div class="overlay-container" id="convProveedor">
+		<div class="window-container zoomout">
+			<p><a href="javascript:showTabla(false);"><xsl:value-of select="document($doc)/translation/texts/item[@name='cerrar']/node()"/></a></p>
+
+			<p id="tableTitle">
+				<xsl:value-of select="document($doc)/translation/texts/item[@name='conversacion_con']/node()"/>&nbsp;<span id="NombreProv"></span>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='para']/node()"/>&nbsp;"<xsl:value-of select="/Mantenimiento/LICITACION/LIC_TITULO"/>"
+
+				&nbsp;<a href="javascript:window.print();" style="text-decoration:none;">
+					<img src="http://www.newco.dev.br/images/imprimir.gif">
+						<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='imprimir']/node()"/></xsl:attribute>
+						<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='imprimir']/node()"/></xsl:attribute>
+					</img>
+				</a>
+			</p>
+
+			<div id="mensError" class="divLeft" style="display:none;">
+				<p><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_tiene_derechos']/node()"/></strong></p>
+			</div>
+
+			<table id="viejosComentarios" border="0" style="width:100%;display:none;">
+			<thead>
+				<th colspan="5">&nbsp;</th>
+			</thead>
+
+			<tbody></tbody>
+
+			</table>
+
+			<form name="convProveedorForm" method="post" id="convProveedorForm">
+			<input type="hidden" name="IDPROVEEDOR" id="IDPROVEEDOR"/>
+			<input type="hidden" name="IDUSUARIOCLIENTE" id="IDUSUARIOCLIENTE"/>
+			<input type="hidden" name="IDUSUARIOPROV" id="IDUSUARIOPROV"/>
+
+			<table id="nuevoComentario" style="width:100%;display:none;">
+			<thead>
+				<th colspan="3">&nbsp;</th>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td class="dies"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='comentario']/node()"/>:</strong></td>
+					<td colspan="2"><textarea name="LIC_MENSAJE" id="LIC_MENSAJE" rows="4" cols="70" style="float:left;"/></td>
+				</tr>
+			</tbody>
+
+			<tfoot>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<div class="boton">
+							<a href="javascript:guardarConversProv();">
+								<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+							</a>
+						</div>
+					</td>
+					<td id="Respuesta" style="text-align:left;"></td>
+				</tr>
+			</tfoot>
+			</table>
+			</form>
+		</div>
+	</div>
+	<!-- FIN DIV Conversacion Proveedor -->
+
+			</xsl:if>
+		</xsl:if>
+
+                </div><!--fin de divleft bajo h1-->
+
+                <!-- DIV Nueva etiqueta -->
+<div class="overlay-container" id="verEtiquetas">
+	<div class="window-container zoomout">
+		<p style="text-align:right;">
+                    <a href="javascript:showTabla(false);" style="text-decoration:none;">
+                        <xsl:value-of select="document($doc)/translation/texts/item[@name='cerrar']/node()"/>
+                    </a>&nbsp;
+                    <a href="javascript:showTabla(false);" style="text-decoration:none;">
+                        <img src="http://www.newco.dev.br/images/cerrar.gif" alt="Cerrar" />
+                    </a>
+                </p>
+
+		<p id="tableTitle">
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='nueva_etiqueta']/node()"/>&nbsp;<xsl:value-of select="document($doc)/translation/texts/item[@name='para']/node()"/>&nbsp;
+			<xsl:value-of select="document($doc)/translation/texts/item[@name='licitacion']/node()"/>&nbsp;<xsl:value-of select="/Mantenimiento/LICITACION/LIC_CODIGO"/>:&nbsp;<xsl:value-of select="/Mantenimiento/LICITACION/LIC_TITULO"/>&nbsp;
+
+<!--
+			&nbsp;<a href="javascript:window.print();" style="text-decoration:none;">
+				<img src="http://www.newco.dev.br/images/imprimir.gif">
+					<xsl:attribute name="alt"><xsl:value-of select="document($doc)/translation/texts/item[@name='imprimir']/node()"/></xsl:attribute>
+					<xsl:attribute name="title"><xsl:value-of select="document($doc)/translation/texts/item[@name='imprimir']/node()"/></xsl:attribute>
+				</img>
+			</a>
+-->
+		</p>
+
+		<div id="mensError" class="divLeft" style="display:none;">
+			<p><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='no_tiene_derechos']/node()"/></strong></p>
+		</div>
+
+		<table id="viejasEtiquetas" border="0" style="width:100%;display:none;">
+		<thead>
+			<th colspan="5">&nbsp;</th>
+		</thead>
+
+		<tbody></tbody>
+
+		</table>
+
+		<form name="nuevaEtiquetaForm" method="post" id="nuevaEtiquetaForm">
+
+		<table id="nuevaEtiqueta" style="width:100%;">
+		<thead>
+			<th colspan="3">&nbsp;</th>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td class="quince"><strong><xsl:value-of select="document($doc)/translation/texts/item[@name='etiqueta']/node()"/>:</strong></td>
+				<td colspan="2" style="text-align:left;"><textarea name="TEXTO" id="TEXTO" rows="4" cols="70" /></td>
+			</tr>
+		</tbody>
+
+		<tfoot>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<div class="boton" id="botonGuardar">
+						<a href="javascript:guardarEtiqueta();">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='guardar']/node()"/>
+						</a>
+					</div>
+				</td>
+				<td id="Respuesta" style="text-align:left;"></td>
+			</tr>
+		</tfoot>
+		</table>
+		</form>
+	</div>
+</div>
+<!-- FIN DIV Nueva etiqueta -->
+
+		<div id="uploadFrameBox" style="display:none;"><iframe src="" id="uploadFrame" name="uploadFrame" style="width: 100%;"></iframe></div>
+		<div id="uploadFrameBoxDoc" style="display:none;"><iframe src="" id="uploadFrameDoc" name="uploadFrameDoc" style="width: 100%;"></iframe></div>
+
+	</xsl:otherwise>
+</xsl:choose>
+
+</body>
+</html>
+</xsl:template>
+
+
+<!-- template carga documentos (template compartido) -->
+<!-- Se pueden subir fichas tecnicas (lado proveedor) => se informa campo en la tabla lic_productosofertas a partir del LIC_PROD_ID (LicProdID) -->
+<!-- Tambien se pueden subir contratos/ofertas (autor de la licitacion) => se informa campo en la tabla licitaciones a partir del LIC_ID (LicID) -->
+<xsl:template name="CargaDocumentos">
+	<xsl:param name="tipo"/>
+	<xsl:param name="LicProdID"/>
+	<xsl:param name="LicID"/>
+	<xsl:param name="nombre_corto"/>
+
+	<!--idioma-->
+	<xsl:variable name="lang">
+		<xsl:value-of select="/Mantenimiento/LANG"/>
+	</xsl:variable>
+	<xsl:variable name="doc">http://www.newco.dev.br/General/texts_<xsl:value-of select="$lang"/>.xml</xsl:variable>
+	<!--idioma fin-->
+
+	<xsl:variable name="valueID">
+		<xsl:choose>
+		<xsl:when test="$LicProdID != ''"><xsl:value-of select="$LicProdID"/></xsl:when>
+		<xsl:when test="$LicID != ''"><xsl:value-of select="$LicID"/></xsl:when>
+		</xsl:choose>
+	</xsl:variable>
+
+	<div id="cargaDoc{$tipo}">
+		<xsl:attribute name="class">
+			<xsl:choose>
+			<xsl:when test="$LicProdID != ''">divLeft80</xsl:when>
+			<xsl:otherwise>divLeft99</xsl:otherwise>
+			</xsl:choose>
+		</xsl:attribute>
+
+		<!--tabla imagenes y documentos-->
+		<table class="infoTable" border="0">
+			<tr>
+				<!-- solo mostramos este tr en el caso de fichas tecnicas -->
+				<xsl:if test="$LicProdID != ''">
+				<!--documentos-->
+				<td class="labelRight quince">
+					<span class="text{$tipo}_{$valueID}">
+						<xsl:choose>
+						<xsl:when test="$nombre_corto != ''">
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='subir_oferta']/node()"/>&nbsp;<xsl:value-of select="$nombre_corto"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="document($doc)/translation/texts/item[@name='subir_ficha']/node()"/>
+						</xsl:otherwise>
+						</xsl:choose>
+       	  </span>
+				</td>
+				</xsl:if>
+
+				<td class="datosLeft trenta">
+					<div class="altaDocumento">
+						<span class="anadirDoc">
+							<xsl:call-template name="documentos">
+								<xsl:with-param name="num" select="number(1)"/>
+								<xsl:with-param name="LicProdID" select="$LicProdID"/>
+								<xsl:with-param name="type" select="$tipo"/>
+								<xsl:with-param name="LicID" select="$LicID"/>
+							</xsl:call-template>
+						</span>
+					</div>
+				</td>
+
+				<td class="veinte">
+					<div class="botonLargo">
+						<a href="javascript:cargaDoc(document.forms['ProductosProveedor'],'{$tipo}','{$LicProdID}');">
+							<xsl:choose>
+							<xsl:when test="$LicProdID != ''">
+								<xsl:attribute name="href">
+									<xsl:text>javascript:cargaDoc(document.forms['ProductosProveedor'],'</xsl:text><xsl:value-of select="$tipo"/><xsl:text>','</xsl:text><xsl:value-of select="$LicProdID"/><xsl:text>');</xsl:text>
+								</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="$LicID != ''">
+								<xsl:attribute name="href">
+									<xsl:text>javascript:cargaDoc(document.forms['SubirContrato'],'</xsl:text><xsl:value-of select="$tipo"/><xsl:text>','</xsl:text><xsl:value-of select="$LicID"/><xsl:text>');</xsl:text>
+								</xsl:attribute>
+							</xsl:when>
+							</xsl:choose>
+
+							<span class="text{$tipo}">
+								<xsl:choose>
+								<xsl:when test="$LicProdID != ''">
+									<xsl:choose>
+									<xsl:when test="$nombre_corto != ''">
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='subir_oferta']/node()"/>&nbsp;<xsl:value-of select="$nombre_corto"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="document($doc)/translation/texts/item[@name='subir_ficha']/node()"/>
+									</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:when test="$LicID != ''">
+									<xsl:value-of select="document($doc)/translation/texts/item[@name='subir_contrato']/node()"/>
+								</xsl:when>
+								</xsl:choose>
+                                                        </span>
+						</a>
+					</div>
+				</td>
+				<td>
+                                    <div id="waitBoxDoc_{$valueID}" align="center">&nbsp;</div>
+                                    <div id="confirmBox_{$valueID}" style="display:none;" align="center">
+                                            <span class="cargado" style="font-size:10px;">¡<xsl:value-of select="document($doc)/translation/texts/item[@name='documento_cargado']/node()"/>!</span>
+                                    </div>
+                                </td>
+			</tr>
+		</table><!--fin de tabla imagenes doc-->
+	</div><!--fin de divleft-->
+</xsl:template><!--fin de template carga documentos-->
+
+
+<!--documentos-->
+<xsl:template name="documentos">
+	<xsl:param name="num" />
+	<xsl:param name="type"/>
+	<xsl:param name="LicProdID"/>
+	<xsl:param name="LicID"/>
+
+	<xsl:variable name="valueID">
+		<xsl:choose>
+		<xsl:when test="$LicProdID != ''"><xsl:value-of select="$LicProdID"/></xsl:when>
+		<xsl:when test="$LicID != ''"><xsl:value-of select="$LicID"/></xsl:when>
+		</xsl:choose>
+	</xsl:variable>
+
+	<xsl:choose>
+	<xsl:when test="$num &lt; number(5)">
+		<div class="docLine" id="docLine_{$valueID}">
+			<div class="docLongEspec" id="docLongEspec_{$valueID}">
+				<input id="inputFileDoc_{$valueID}" name="inputFileDoc" type="file" onChange="addDocFile('{$valueID}');" />
+			</div>
+		</div>
+	</xsl:when>
+	</xsl:choose>
+</xsl:template>
+<!--fin de documentos-->
+
+</xsl:stylesheet>

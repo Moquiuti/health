@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tomcat/webapps/ROOT/www.newco.dev.br/WEB-INF/lib/oraclexsql.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tomcat/webapps/ROOT/www.newco.dev.br/WEB-INF/lib/classes12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tomcat/webapps/ROOT/www.newco.dev.br/WEB-INF/lib/xsu12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tomcat/webapps/ROOT/www.newco.dev.br/WEB-INF/lib/xmlparserv2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

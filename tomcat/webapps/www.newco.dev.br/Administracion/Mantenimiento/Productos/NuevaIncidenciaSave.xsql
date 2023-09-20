@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NuevaIncidencia.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NuevaIncidencia.xsl"?>
+
+<NuevaIncidencia xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="IDEMPRESA_COMPRADORA"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="LIC_OFE_ID"/>
+<xsql:include-param name="PRO_ID"/>
+<xsql:include-param name="USER"/>
+<xsql:include-param name="SEGUIR_UTILIZANDO"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+		v_Incidencia	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevaIncidenciaSave');
+		IF US_ID>=0 THEN
+			--si es incidencia de licitacion
+			IF '{@LIC_OFE_ID}' IS NOT NULL THEN
+				v_Incidencia:=INCIDENCIASPRODUCTOS_PCK.NuevaIncidencia(
+					US_ID,
+					'{@PRO_ID}',
+					'{@LIC_OFE_ID}',
+					'{@REF_CLIENTE}',
+					'{@REF_ESTANDAR}',
+					'{@DESC_ESTANDAR}',
+					'{@REF_PROVE}',
+					'{@NOMBRE}',
+					'{@INCIDENCIA}',
+					'{@PROD_INC_IDDOCINCIDENCIA}',
+                                        '{@SEGUIR_UTILIZANDO}',          --VARCHAR2 DEFAULT 'S' 13oct14
+                                        '{@NUM_LOTE}'          --VARCHAR2 DEFAULT NULL 13nov15
+				);
+			ELSE
+				--si es incidencia normal
+				v_Incidencia:=INCIDENCIASPRODUCTOS_PCK.NuevaIncidencia(
+					US_ID,
+					'{@PRO_ID}',
+					NULL,
+					'{@REF_CLIENTE}',
+					'{@REF_ESTANDAR}',
+					'{@DESC_ESTANDAR}',
+					'{@REF_PROVE}',
+					'{@NOMBRE}',
+					'{@INCIDENCIA}',
+					'{@PROD_INC_IDDOCINCIDENCIA}',
+                                        '{@SEGUIR_UTILIZANDO}',         --VARCHAR2 DEFAULT 'S' 13oct14
+                                        '{@NUM_LOTE}'          --VARCHAR2 DEFAULT NULL 13nov15
+				);
+			END IF;
+
+			--HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_Incidencia > 0 THEN
+                            INCIDENCIASPRODUCTOS_PCK.Incidencia_XML(
+				US_ID,
+				v_Incidencia,
+				'S'
+                                );
+				--HTP.P('<OK>'||v_Incidencia||'</OK>');
+                                
+                               
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+
+</NuevaIncidencia>

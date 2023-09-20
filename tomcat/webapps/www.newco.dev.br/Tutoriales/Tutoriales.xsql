@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+	XSQL tutorial
+			WHERE 		LA_SESION='{@SESION}'
+			ORDER BY 	LA_FECHA
+-->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="Tutoriales.xsl"?>
+<?xml-stylesheet type="text/xsl" href="Tutoriales.xsl"?>
+
+
+
+<Tutoriales xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="PRO_BUSQUEDA"/>
+  <xsql:include-param name="HAYPRODUCTOS"/>
+  <xsql:include-param name="HISTORY"/>
+  <xsql:include-param name="STYLE"/>
+  
+  	  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+		<![CDATA[
+			SELECT 		TUT_ID 									AS ID,
+						TUT_ROL									AS ROL,
+						TUT_ORDEN								AS ORDEN,
+						TUT_NOMBRE								AS NOMBRE,
+						TUT_URL									AS URL,
+						TUT_EXCLUIREMPRESAS						AS EXCLUIR_EMPRESAS
+						
+			FROM		TUTORIALES
+			
+		]]>
+  </xsql:query>
+  
+</Tutoriales>
+

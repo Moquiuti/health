@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+ 	Vencedores de la licitacion. Nuevo disenno 2022.
+	Revisado ET 3feb23 15:20
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="LicitacionV2_HTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LIC_ID"/>
+<!--<xsql:include-param name="IDCENTROCOMPRAS"/>-->
+<xsql:include-param name="LIC_PROD_ID"/>
+<xsql:include-param name="STYLE"/>
+ 
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID				NUMBER(6);
+		--v_Res				VARCHAR2(100);
+		v_IDLicitacion		LICITACIONES.LIC_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','LicitacionV2');
+		
+		IF US_ID>=0 AND '{@LIC_ID}' IS NULL AND NVL('{@ACCION}','XXXX')<>'NUEVO' THEN
+			LICITACIONES_PCK.NuevaLicitacion_XML
+			(
+				US_ID
+			);
+		ELSIF US_ID>=0 AND '{@LIC_ID}' IS NULL THEN
+
+			v_IDLicitacion:=LICITACIONES_PCK.NuevaLicitacion(
+				US_ID,
+				'{@LIC_IDEMPRESA}',
+				'{@LIC_TITULO}',
+				'{@LIC_DESCRIPCION}',
+				'{@LIC_CONDENTREGA}',
+				'{@LIC_CONDPAGO}',
+				'{@LIC_CONDOTRAS}',
+				'{@LIC_MESES}',
+				'{@LIC_CONSUMO}',
+				'{@LIC_FECHADECISION}',
+				'{@LIC_PORPRODUCTO}',
+                NULL,
+                '{@LIC_FARMACIA}',
+                '{@LIC_IDUSUARIOPEDIDO}',
+                '{@LIC_IDLUGARENTREGA}',
+                '{@LIC_CODIGOPEDIDO}',
+                '{@LIC_OBSPEDIDO}',
+                '{@LIC_IDFORMAPAGO}',
+                '{@LIC_IDPLAZOPAGO}',
+				NULL,
+				NULL,
+				'{@LIC_AGREGADA}',
+				'{@LIC_HORADECISION}',
+				'{@LIC_MINUTODECISION}',
+				'{@LIC_CONTINUA}',
+				'{@LIC_URGENTE}',					--	24may18
+				'{@LIC_SOLICDATOSPROV}',			--	24may18
+				'{@LIC_MULTIOPCION}',				--	4jul18
+				'{@LIC_IDDOCUMENTO}',				--	5mar19
+				'{@LIC_FECHAENTREGAPEDIDO}',		--	19set19
+				'{@LIC_FRETECIFOBLIGATORIO}',		--	17jun20
+				'{@LIC_PAGOAPLAZODOOBLIGATORIO}',	--	17jun20
+				'{@LIC_PRECIOOBJETIVOESTRICTO}',	--	17jun20
+				NULL,
+				NULL
+			);
+		ELSIF US_ID>=0 AND '{@LIC_ID}' IS NOT NULL THEN
+
+			v_IDLicitacion:='{@LIC_ID}';
+
+		END IF;
+
+		IF v_IDLicitacion IS NOT NULL THEN
+
+			LICITACIONES_PCK.Licitacion_XML(
+				US_ID,
+				v_IDLicitacion,
+				NULL,
+				NULL,												--	'{@IDCENTROAINFORMAR}'
+				'N'													--	Solo proveedores informados, hasta 20jun22 'S'
+			);
+		ELSE
+			HTP.P('<Sorry/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

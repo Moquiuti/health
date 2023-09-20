@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="CambiosAdministracion.xsl"?>
+<?xml-stylesheet type="text/xsl" href="CambiosAdministracion.xsl"?>
+
+
+
+<ListadoAdministracion xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  
+  <CAMBIOS>
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+			SELECT 		us_apellido1||', '||us_nombre USUARIO, 
+						TO_CHAR(FECHA,'dd/mm/yyyy hh24:mi:ss') FECHAFORMATO,
+						--TO_CHAR(FECHA,'dd/mm hh24:mi') FECHA, 
+						IDUSUARIO, 
+						IDCAMBIO, 
+						MVM.ScapeHTMLString(TABLA) TABLA, 
+						IDREGISTRO, 
+						MVM.ScapeHTMLString(CAMBIO) CAMBIO,
+						DECODE(IDCAMBIO, 
+								1, 'Insercion', 
+								2, 'Modificacion', 
+								3, 'Borrado', 
+								'Otras' ) 			TIPOCAMBIO
+				FROM	logadministracion, usuarios
+				WHERE	idusuario=us_id(+)
+				AND		FECHA>SYSDATE-2
+				ORDER BY FECHA desc
+	]]>
+  </xsql:query>
+  </CAMBIOS>
+  <returnHome/>
+</ListadoAdministracion>

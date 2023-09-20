@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Buscador/Listado de proveedores de convocatorias especiales
+	Ultima revision ET 18oct18 10:39
+-->
+<!--	-->
+<?xml-stylesheet type="text/xsl" href="ProveedoresHTML.xsl"?>
+
+<Proveedores xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER(6);
+		v_IDProveedor	NUMBER(5);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Conv.Esp.Proveedores');
+		IF US_ID>=0 THEN
+		
+			IF '{@ACCION}'='REOFERTA' THEN
+				
+				v_IDProveedor:=ConvocatoriasEspeciales_pck.CambiarEstadoProveedor(US_ID,'{@FIDCONVOCATORIA}','{@PARAMETROS}','REOFERTA');
+				
+			ELSIF '{@ACCION}'='SUS' THEN
+				
+				v_IDProveedor:=ConvocatoriasEspeciales_pck.CambiarEstadoProveedor(US_ID,'{@FIDCONVOCATORIA}','{@PARAMETROS}','SUS');
+				
+			END IF;
+		
+			ConvocatoriasEspeciales_pck.Proveedores_XML(
+				US_ID,
+                '{@FIDCONVOCATORIA}',
+                '{@FIDPROVEEDOR}',
+                '{@FTEXTO}',
+                '{@FESPECIALES}',
+                '{@ORDEN}',
+                '{@SENTIDO}',
+                '{@FLINEASPORPAGINA}',
+                '{@PAGINA}',
+				'S'
+			);
+                        
+                     
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Proveedores>

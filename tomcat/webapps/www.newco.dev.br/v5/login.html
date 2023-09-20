@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+</head>
+<body class="header_login">
+	<div class="barra_superior_login"></div>
+	<div class="menu_login">
+		<a href="#">MedicalVM</a>
+		<a href="#">Servicios</a>
+		<a href="#">Clientes</a>
+		<a href="#">Proveedores</a>
+		<a href="#">Contacto</a>
+	</div>
+	<div id="coluna_esquerda_login" class="coluna_esquerda_login">
+		<div id="coluna_esquerda_interna_login" class="coluna_esquerda_interna_login">
+			<a href="#default" class="logo_login"></a>
+			<div id="coluna_login" class="coluna_login">
+				<div class="col-sm-12">
+					<label class="label">Usuário</label>
+					<input name="usuario_login" class="input_fornec" type="text">
+				</div>
+			</div>
+			<div id="coluna_login" class="coluna_login">
+				<div class="col-sm-12">
+					<label class="label">Senha</label>
+					<input name="senha_login" class="input_fornec" type="password">
+				</div>
+			</div>
+			<div id="coluna_login" class="coluna_login">
+				<a href="index.html"><button class="botao_acessar">ACESSAR PLATAFORMA</button></a>
+			</div>
+			<a href="#default" class="esqueci_senha">Esqueci minha senha</a>
+		</div>
+		<a href="#default" id="logo_login_mvm" class="logo_login_mvm"></a>
+		<a href="#default" id="direito_autoral" class="direito_autoral">MVM | Medical Virtual Marketing – Todos os direitos reservados.</a>
+	</div>
+	<div id="coluna_direita_login" class="coluna_direita_login">
+		<p class="slogan_login">O céu <br>é o limite! </p>
+		<p class="slogan_login_destaque">Mas Nós podemos ir além.</p>
+		<p class="dados_telefonico_login">Fale com nossos especialistas: </p>
+		<p class="dados_telefonico_login_destaque">0800 123 456</p>
+	</div>
+	<script>
+		if( window.screen.width < 800){
+			coluna_direita_login.style.display = 'none';
+
+			coluna_esquerda_login.style.width = '660px';
+			coluna_esquerda_login.style.height = '570px';
+			coluna_esquerda_login.style.left = '192px';
+			coluna_esquerda_login.style.top = '233px';
+
+			coluna_esquerda_interna_login.style.width = '100%';
+			coluna_esquerda_interna_login.style.height = '700px';
+
+			logo_login_mvm.style.width = '214px';
+			logo_login_mvm.style.height = '36px';
+			logo_login_mvm.style.left = '229px';
+			logo_login_mvm.style.top = '620px';
+
+			direito_autoral.style.width = '403px';
+			direito_autoral.style.height = '16px';
+			direito_autoral.style.left = '160px';
+			direito_autoral.style.top = '670px';
+		}
+	</script>
+</body>
+</html>

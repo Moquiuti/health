@@ -1,0 +1,8 @@
+05feb20 ET Cambio a charts.js EISDatos_050220.js 
+24feb20 ET Pruebas para poner el mínimo del eje Y a 0 (NO HAN FUNCIONADO). EISDatos_240220.js
+27feb20 ET Solucionado error al descargar excel
+27feb20 ET Creamos excel desde JS en lugar de llamar a la librería PL/SQL. EISDatos_270220.js
+24mar20	ET Al cambiar de cuadro de mando, el título aparece en español. EISDatos_240320
+10abr20 ET Usuario multiempresa. EISDatos_100420.js
+18feb21 ET Solucionado error en string FiltroSQL='...' a FiltroSQL="...."
+20dic21 ET Quitamos el bton de borrar seleccion. EISDatos_201221.js

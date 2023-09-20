@@ -1,0 +1,195 @@
+Aug 28, 2023 3:18:09 AM org.apache.coyote.http11.AbstractHttp11Processor process
+INFO: Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [Z0xa50x01]. HTTP method names must be tokens
+	at org.apache.coyote.http11.InternalInputBuffer.parseRequestLine(InternalInputBuffer.java:140)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1108)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:654)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:317)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+
+Aug 28, 2023 8:00:41 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:42 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:42 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:42 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:43 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:43 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:44 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:44 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:45 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:45 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:46 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:46 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:46 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:47 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:47 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:48 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:48 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:49 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:49 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:49 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:50 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:50 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:51 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:51 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:52 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:52 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:52 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:53 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:53 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:54 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:54 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:55 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:55 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:55 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:56 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:56 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:57 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:57 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:58 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:58 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:58 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:59 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:00:59 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:00 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:00 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:01 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:01 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:02 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:02 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:03 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:03 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:04 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:04 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [tomcat]
+Aug 28, 2023 8:01:06 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:07 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:07 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:07 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:08 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:08 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:09 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:09 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:10 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:10 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:11 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:11 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:11 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:12 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:12 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:13 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:13 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:14 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:14 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:15 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:15 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:15 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:16 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:16 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:17 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:17 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:18 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:18 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:19 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:19 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:19 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:20 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:20 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:21 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:21 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:22 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:22 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]
+Aug 28, 2023 8:01:22 PM org.apache.catalina.realm.LockOutRealm filterLockedAccounts
+WARNING: An attempt was made to authenticate the locked user [admin]

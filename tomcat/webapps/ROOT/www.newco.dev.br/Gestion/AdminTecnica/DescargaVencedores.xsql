@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+	Descarga Vencedores asociados a una LICITACION
+	ultima revision: ET 17may21
+-->
+<!-- -->
+<?xml-stylesheet type="text/xsl" href="DescargaVencedores_HTML.xsl"?>
+
+<DescargaOC xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Descarga OC');
+
+	 		IF US_ID > 0 THEN
+				INTEGRACIONMODELOS_PCK.Winners_DeFichero_ToFileorXML(US_ID, NULL, '{@IDLICITACION}', 'FILE');
+    		END IF;
+		END;
+]]>
+</xsql:include-owa>
+</DescargaOC>

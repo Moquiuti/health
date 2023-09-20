@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+	Nueva licitacion
+	Ultima revision: ET 15jul22 09:30
++-->
+<!---->
+<?xml-stylesheet type="text/xsl" href="NuevaLicV2HTML2022.xsl"?>
+
+<Mantenimiento xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="STYLE"/>
+<xsql:include-param name="US_ID"/>
+<xsql:include-owa>
+
+	<![CDATA[
+	DECLARE
+		US_ID				NUMBER;
+		v_IDLicitacion		LICITACIONES.LIC_ID%TYPE;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','NuevaLicV2');
+		
+		
+		IF US_ID>=0  THEN
+			LICITACIONES_PCK.NuevaLicitacion_XML(US_ID);
+		ELSE
+			HTP.P('<ERROR msg="Usuario no autorizado"/>');
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</Mantenimiento>

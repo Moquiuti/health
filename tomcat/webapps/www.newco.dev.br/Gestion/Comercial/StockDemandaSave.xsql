@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="StockDemandaHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="StockDemandaHTML.xsl"?>
+
+<StockDemanda xmlns:xsql="urn:oracle-xsql" connection="newco">
+
+<xsql:include-param name="SES_ID"/>
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+<xsql:include-param name="GUARDAR" value="{@GUARDAR}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID			NUMBER;
+		CT_DEM_ID	NUMBER;
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','StockDemandaSave');
+		IF US_ID > 0 THEN
+			CT_DEM_ID:=ANUNCIOSSTOCKS_PCK.NuevaDemanda(
+				US_ID,
+				NULL,											-- '{@SD_IDCATEGORIA}',
+				NULL,											-- '{@SD_IDFAMILIA}',
+				NULL,											-- '{@SD_IDSUBFAMILIA}',
+				NULL,											-- '{@SD_IDGRUPO}',
+				NULL,											-- '{@SD_IDPRODESTANDAR}',
+				'{@SD_TITULO}',
+				'{@SD_FECHACADUCIDAD}',
+				'{@SD_REFCLIENTE}',
+				'{@SD_PRODUCTO}',
+				NULL,											-- '{@SD_DESCRIPCION}',
+				'{@SD_CANTIDAD}',
+				'{@SD_PRECIOUNITARIO}',
+				NULL											-- '{@SD_PRECIOUNITARIO}'
+			);
+
+			IF CT_DEM_ID > 0 THEN
+				ANUNCIOSSTOCKS_PCK.Demanda_XML(
+					US_ID,
+					CT_DEM_ID,
+					'S'
+				);
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+		END IF;
+	END;
+]]>
+</xsql:include-owa>
+</StockDemanda>

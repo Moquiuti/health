@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="ConversacionLicitacionJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="ConversacionLicitacionJSON.xsl"?>
+
+<ConversacionLicitacion xmlns:xsql="urn:oracle-xsql" connection="newco">
+	<xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+	<xsql:include-param name="STYLE"/>
+	<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+	<xsql:include-param name="IDLICITACION"/>
+	<xsql:include-param name="IDPROVEEDOR"/>
+
+	<xsql:include-owa>
+	<![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','ConversacionLicitacion');
+
+	 		IF US_ID>0 THEN
+				--	Devuelve el XML, ejecuta la acción
+				LICITACIONES_PCK.Conversacion_XML(
+					US_ID,
+					'{@IDLICITACION}',
+					'{@IDPROVEEDOR}',
+					'S'
+				);
+			ELSE
+				HTP.P('<ERROR  msg="Sin derechos" />');
+			END IF;
+		END;
+	]]>
+	</xsql:include-owa>
+</ConversacionLicitacion>

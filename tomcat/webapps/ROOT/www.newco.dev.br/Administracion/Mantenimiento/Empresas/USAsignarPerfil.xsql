@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!---->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="USAsignarPerfilJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="USAsignarPerfilJSON.xsl"?>
+
+<USAsignarPerfil xmlns:xsql="urn:oracle-xsql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" connection="newco">
+  <xsql:include-param name="EMP_ID"/>
+  <xsql:include-param name="US_ID"/>	
+  <xsql:include-param name="PRO_ID"/>	
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	DECLARE
+		US_ID		NUMBER;
+                v_USPerfilAsignado   VARCHAR2(10);
+	BEGIN
+		US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','Asignar perfil');
+		IF US_ID>=0 THEN
+                
+                    IF '{@PERFIL}' = 'COMPR-ADMIN' THEN
+                        v_USPerfilAsignado := USUARIOS_PCK.DerechosCompradorAdmin('{@ID_USU}');
+                        utilidades_pck.debug('COMPR-ADMIN');  
+                        
+                    ELSIF '{@PERFIL}' = 'COMPR-CDC' THEN
+                        v_USPerfilAsignado := USUARIOS_PCK.DerechosCompradorCdC('{@ID_USU}');
+                        utilidades_pck.debug('COMPR-CDC');  
+                    
+                    ELSIF '{@PERFIL}' = 'COMPR-COMM' THEN
+                        v_USPerfilAsignado := USUARIOS_PCK.DerechosCompradorComercial('{@ID_USU}');
+                        utilidades_pck.debug('COMPR-comm');  
+			
+                    ELSIF '{@PERFIL}' = 'COMPR-NORMAL' THEN
+                        v_USPerfilAsignado := USUARIOS_PCK.DerechosComprador('{@ID_USU}');
+                        utilidades_pck.debug('COMPR-NORMAL');  
+                     
+                    ELSIF '{@PERFIL}' = 'VEND-ADMIN' THEN
+                        v_USPerfilAsignado := USUARIOS_PCK.DerechosVendedorAdmin('{@ID_USU}');
+                        utilidades_pck.debug('VEND-ADMIN');  
+                        
+                    ELSIF '{@PERFIL}' = 'VEND-NORMAL' THEN
+                        v_USPerfilAsignado := USUARIOS_PCK.DerechosVendedor('{@ID_USU}');
+                        utilidades_pck.debug('VEND-NORM');  
+                    
+                    END IF;
+                    
+			
+			--HTP.P(Utilidades_Pck.CabeceraXML);
+			IF v_USPerfilAsignado = 'OK' THEN
+				HTP.P('<OK>'||v_USPerfilAsignado||'</OK>');
+			ELSE
+				HTP.P('<ERROR/>');
+			END IF;
+			
+			
+				
+			
+		END IF;			   
+    END;
+        ]]>  
+</xsql:include-owa>
+
+</USAsignarPerfil>

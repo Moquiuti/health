@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="DetalleOfertasMVM.xsl"?>
+<?xml-stylesheet type="text/xsl" href="DetalleOfertasMVM.xsl"?>
+
+<ListadoComisiones xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+  <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+  <xsql:set-stylesheet-param name="US_ID" value="{@US_ID}"/>
+  <xsql:include-param name="STYLE"/>
+  
+  <xsql:query tag-case="upper" row-element="ROW" rowset-element="">
+    <![CDATA[
+		SELECT to_char(mo_fecha,'dd/mm/yyyy') As Fecha,
+			   Proveedor.emp_nombre AS NombreEmpresa, 
+			   Cliente.emp_nombre AS NombreCliente, 
+			   pro_nombre AS PRODUCTO,
+			  
+DECODE(ROUND(SUM(lmo_cantidad*lmo_precio)/166.386,2),null,'-',ROUND(SUM(lmo_cantidad*lmo_precio)/166.386,2)) AS Comision,
+			   DECODE(ROUND(SUM(lmo_cantidad*lmo_precio),0),null,'-',ROUND(SUM(lmo_cantidad*lmo_precio),0)) AS ComisionPtas
+		FROM lineasmultioferta, empresas Proveedor, empresas Cliente, multiofertas, productos
+		WHERE mo_idproveedor=Proveedor.emp_id
+		AND lmo_idmultioferta = mo_id
+		AND mo_idcliente=Cliente.emp_id
+		AND lmo_idproducto = pro_id
+		AND mo_id={@id}
+		GROUP BY to_char(mo_fecha,'dd/mm/yyyy'), mo_fecha, Proveedor.emp_nombre, Cliente.emp_nombre, pro_nombre
+		ORDER BY mo_fecha
+	]]>
+  </xsql:query>
+  <returnHome/>
+</ListadoComisiones>

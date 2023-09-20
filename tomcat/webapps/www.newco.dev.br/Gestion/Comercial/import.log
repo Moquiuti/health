@@ -1,0 +1,540 @@
+;;; 
+Import: Release 10.2.0.5.0 - 64bit Production on Viernes, 21 Octubre, 2016 13:06:56
+
+Copyright (c) 2003, 2007, Oracle.  All rights reserved.
+;;; 
+Connected to: Oracle Database 10g Release 10.2.0.5.0 - 64bit Production
+Master table "DEMOMVM"."SYS_IMPORT_SCHEMA_01" successfully loaded/unloaded
+Starting "DEMOMVM"."SYS_IMPORT_SCHEMA_01":  DEMOMVM/********@mvm directory=IMP dumpfile=datapump_FULL.20161021_0001_01.dmp schemas=MEDICALVM remap_schema=MEDICALVM:DEMOMVM remap_tablespace=USERS:DEMOMVM_DAT 
+Processing object type DATABASE_EXPORT/SCHEMA/USER
+ORA-39083: Object type USER failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+ CREATE USER "DEMOMVM" IDENTIFIED BY VALUES 'C9AECA480203C2F4' DEFAULT TABLESPACE "DEMOMVM_DAT" TEMPORARY TABLESPACE "TEMP"
+Processing object type DATABASE_EXPORT/SCHEMA/GRANT/SYSTEM_GRANT
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE EXTERNAL JOB TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT MANAGE SCHEDULER TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE JOB TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT SELECT ANY DICTIONARY TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE ANY DIRECTORY TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE MATERIALIZED VIEW TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE PROCEDURE TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE SEQUENCE TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE VIEW TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT CREATE TABLE TO "DEMOMVM"
+ORA-39083: Object type SYSTEM_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+GRANT UNLIMITED TABLESPACE TO "DEMOMVM"
+Processing object type DATABASE_EXPORT/SCHEMA/ROLE_GRANT
+ORA-39083: Object type ROLE_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+ GRANT "CONNECT" TO "DEMOMVM"
+ORA-39083: Object type ROLE_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+ GRANT "RESOURCE" TO "DEMOMVM"
+ORA-39083: Object type ROLE_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+ GRANT "SELECT_CATALOG_ROLE" TO "DEMOMVM"
+ORA-39083: Object type ROLE_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+ GRANT "CTXAPP" TO "DEMOMVM"
+ORA-39083: Object type ROLE_GRANT failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+ GRANT "SCHEDULER_ADMIN" TO "DEMOMVM"
+Processing object type DATABASE_EXPORT/SCHEMA/DEFAULT_ROLE
+ORA-39083: Object type DEFAULT_ROLE failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+ ALTER USER "DEMOMVM" DEFAULT ROLE ALL
+Processing object type DATABASE_EXPORT/SCHEMA/TABLESPACE_QUOTA
+ORA-39083: Object type TABLESPACE_QUOTA failed to create with error:
+ORA-31625: Schema SYSTEM is needed to import this object, but is unaccessible
+ORA-01031: insufficient privileges
+Failing sql is:
+DECLARE   TEMP_COUNT NUMBER;   SQLSTR VARCHAR2(200); BEGIN   SQLSTR := 'ALTER USER "DEMOMVM" QUOTA UNLIMITED ON "DEMOMVM_DAT"';  EXECUTE IMMEDIATE SQLSTR;EXCEPTION   WHEN OTHERS THEN    IF SQLCODE = -30041 THEN       SQLSTR := 'SELECT COUNT(*) FROM USER_TABLESPACES               WHERE TABLESPACE_NAME = ''DEMOMV
+Processing object type DATABASE_EXPORT/SCHEMA/SEQUENCE/SEQUENCE
+Processing object type DATABASE_EXPORT/SCHEMA/PROCACT_SCHEMA
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TABLE
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TABLE_DATA
+. . imported "DEMOMVM"."EIS_VALORES"                     1.155 GB 3293455 rows
+. . imported "DEMOMVM"."LOGEDU"                          878.5 KB    5547 rows
+. . imported "DEMOMVM"."CATPRIV_LISTADOS"                158.3 MB  760058 rows
+. . imported "DEMOMVM"."LINEASMULTIOFERTA"               120.0 MB  475878 rows
+. . imported "DEMOMVM"."TARIFAS"                         132.4 MB 3097533 rows
+. . imported "DEMOMVM"."RENDIMIENTO"                     3.563 MB   42247 rows
+. . imported "DEMOMVM"."LOGPEDIDOS"                      80.52 MB  518203 rows
+. . imported "DEMOMVM"."LOGACCESOS"                      66.59 MB 1264981 rows
+. . imported "DEMOMVM"."MULTIOFERTAS"                    36.91 MB  163407 rows
+. . imported "DEMOMVM"."LINEASPEDIDOS"                   57.31 MB  467023 rows
+. . imported "DEMOMVM"."PEDIDOS"                         50.87 MB  160624 rows
+. . imported "DEMOMVM"."CONTROLPRECIOS"                  47.29 MB  344660 rows
+. . imported "DEMOMVM"."EIS_VALORES_ANUALES"             40.68 MB  299103 rows
+. . imported "DEMOMVM"."INT_LINEASFICHEROS"              45.18 MB  990129 rows
+. . imported "DEMOMVM"."HISTORICOTARIFAS"                14.75 MB  324431 rows
+. . imported "DEMOMVM"."LINEASPLANTILLAS"                7.600 MB   89163 rows
+. . imported "DEMOMVM"."PRODUCTOSLINEASPLANTILLAS"       4.692 MB   87368 rows
+. . imported "DEMOMVM"."CATPRIV_LOGCAMBIOS"              35.39 MB  125211 rows
+. . imported "DEMOMVM"."LOGLICITACIONES"                 34.43 MB  201873 rows
+. . imported "DEMOMVM"."MENSAJESENVIADOS"                1.931 MB   15579 rows
+. . imported "DEMOMVM"."CATPRIV_PRODUCTOSESTANDAR"       28.67 MB  116380 rows
+. . imported "DEMOMVM"."PRODUCTOS"                       26.50 MB   95033 rows
+. . imported "DEMOMVM"."LISTAPRODUCTOS"                  16.13 MB  162283 rows
+. . imported "DEMOMVM"."NEGOCIACIONMULTIOFERTAS"         20.26 MB  500426 rows
+. . imported "DEMOMVM"."REFERENCIASCLIENTES"             61.83 KB    1352 rows
+. . imported "DEMOMVM"."PRODUCTOS_HISTCAMBIOS"           21.49 MB  125296 rows
+. . imported "DEMOMVM"."PEDIDOS_CONTROLMVM"              19.86 MB  180517 rows
+. . imported "DEMOMVM"."LOGADMINISTRACION"               2.451 MB   19954 rows
+. . imported "DEMOMVM"."LOGLIMPIEZA"                     18.13 MB  339215 rows
+. . imported "DEMOMVM"."BUSC_PRODUCTOS"                  10.40 MB   35603 rows
+. . imported "DEMOMVM"."ERRORES"                         55.29 KB     199 rows
+. . imported "DEMOMVM"."LIC_PRODUCTOSOFERTAS_BACKUP"     16.01 MB  176729 rows
+. . imported "DEMOMVM"."PEDIDOS_ESPECIALES"              15.08 MB  262791 rows
+. . imported "DEMOMVM"."LOGPRECIOSREFERENCIA"            13.16 MB  104519 rows
+. . imported "DEMOMVM"."EIS_RESUMENCONSUMOS"             10.27 MB  538501 rows
+. . imported "DEMOMVM"."LOGINTEGRACION"                  12.13 MB  242972 rows
+. . imported "DEMOMVM"."EIS_VALORESTEMPORAL"             219.0 KB     815 rows
+. . imported "DEMOMVM"."TMP_CARGASAPLANTILLASDESDECSV"   11.03 MB   50191 rows
+. . imported "DEMOMVM"."CATPRIV_GRUPOS"                  8.074 MB  127611 rows
+. . imported "DEMOMVM"."LINEASPAGOSPEDIDOS"              4.267 MB  141248 rows
+. . imported "DEMOMVM"."MANT_PRODUCTO"                   5.660 MB   39030 rows
+. . imported "DEMOMVM"."PLANTILLAS"                      1.216 MB   16367 rows
+. . imported "DEMOMVM"."CATPRIV_BACKUP"                  6.605 MB   41716 rows
+. . imported "DEMOMVM"."CATPRIV_SUBFAMILIAS"             7.251 MB  158487 rows
+. . imported "DEMOMVM"."LIC_PRODUCTOSOFERTAS"            7.186 MB   72945 rows
+. . imported "DEMOMVM"."CLIENTESYPROVEEDORES"            5.897 MB  326920 rows
+. . imported "DEMOMVM"."CONCURSOS"                       6.654 MB   24778 rows
+. . imported "DEMOMVM"."CANTIDADPRODUCTOPORUSUARIO"      4.207 MB  252055 rows
+. . imported "DEMOMVM"."LOGHISTORICOPORCENTRO"           5.457 MB   14930 rows
+. . imported "DEMOMVM"."CARGAS_BRASIL"                   4.076 MB   25159 rows
+. . imported "DEMOMVM"."DERECHOSMENUS"                   3.432 MB  210644 rows
+. . imported "DEMOMVM"."HISTORICOCLIENTESYPROVEEDORES"   30.82 KB     905 rows
+. . imported "DEMOMVM"."LOG"                             3.704 MB    3828 rows
+. . imported "DEMOMVM"."LOGCARGAS"                       8.734 KB      25 rows
+. . imported "DEMOMVM"."PEDIDOSPROBLEMATICOS"            3.668 MB   67534 rows
+. . imported "DEMOMVM"."PLANTILLAS_ACCESOSUSUARIOS"      2.991 MB  180006 rows
+. . imported "DEMOMVM"."CATPRIV_PRODUCTOSEGUNESTANDAR"   2.584 MB   50370 rows
+. . imported "DEMOMVM"."LIC_PRODUCTOS"                   2.613 MB   15699 rows
+. . imported "DEMOMVM"."PEDIDOS_COMENTARIOSCLINICAS"     2.819 MB   35310 rows
+. . imported "DEMOMVM"."REGISTROALARMAS"                 2.603 MB   55392 rows
+. . imported "DEMOMVM"."COMP_RESUMEN"                    1.282 MB     580 rows
+. . imported "DEMOMVM"."CONC_ETIQUETAS_ANUNCIOS"         1.754 MB  107739 rows
+. . imported "DEMOMVM"."CONTROLPRECIOS_RESUMEN"          2.387 MB   32645 rows
+. . imported "DEMOMVM"."EIS_DESPLEGABLESDINAMICOS"       1.747 MB   31959 rows
+. . imported "DEMOMVM"."LOG_CONSULTAS"                   106.4 KB    1582 rows
+. . imported "DEMOMVM"."LOG_PEDIDOSPROGRAMADOS"          2.337 MB   24077 rows
+. . imported "DEMOMVM"."PAGOSPORCENTRO"                  1.750 MB   81588 rows
+. . imported "DEMOMVM"."RESUMEN_CAMBIOSCATALOGO"         44.06 KB     163 rows
+. . imported "DEMOMVM"."CARGAS_CLIENTES"                 952.1 KB    7072 rows
+. . imported "DEMOMVM"."CARGAS_PEDIDOS"                  890.9 KB    2880 rows
+. . imported "DEMOMVM"."CATPRIV_PRODUCTOS_PRODESTANDAR"  953.5 KB   44658 rows
+. . imported "DEMOMVM"."DOCUMENTOS_EXCEL"                1.198 MB    1626 rows
+. . imported "DEMOMVM"."EIS_MAT_PRECALCULADAS"           880.6 KB   19013 rows
+. . imported "DEMOMVM"."EIS_PRODESTANDARMASCOMPRADOS"    1.516 MB   19211 rows
+. . imported "DEMOMVM"."EMPRESAS"                        1.318 MB    3251 rows
+. . imported "DEMOMVM"."GEO_ZONAS"                       8.210 KB     100 rows
+. . imported "DEMOMVM"."INCIDENCIAS"                     188.9 KB     908 rows
+. . imported "DEMOMVM"."INC_RESPUESTARECLAMADO"          82.57 KB     390 rows
+. . imported "DEMOMVM"."INC_RESPUESTARECLAMANTE"         20.42 KB     314 rows
+. . imported "DEMOMVM"."LOGBANNERS"                      1021. KB   53347 rows
+. . imported "DEMOMVM"."LOG_SOLICITUDES_HIST"            1.013 MB   34975 rows
+. . imported "DEMOMVM"."USUARIOS"                        1000. KB    4767 rows
+. . imported "DEMOMVM"."BANNERS_NOMENCLATOR"             8.375 KB      71 rows
+. . imported "DEMOMVM"."CENTROS"                         890.9 KB    4048 rows
+. . imported "DEMOMVM"."ESPECIALIDADES"                  6.867 KB      41 rows
+. . imported "DEMOMVM"."MANT_CENTRO"                     170.5 KB    1352 rows
+. . imported "DEMOMVM"."MANT_DEPARTAMENTO"               130.3 KB    2714 rows
+. . imported "DEMOMVM"."MANT_USUARIO"                    202.5 KB    1369 rows
+. . imported "DEMOMVM"."MEDICOS"                         82.99 KB    1174 rows
+. . imported "DEMOMVM"."MEDICOS_CENTROS"                 125.7 KB     694 rows
+. . imported "DEMOMVM"."NOMENCLATOR"                     125.7 KB    2279 rows
+. . imported "DEMOMVM"."OPCIONESVARIABLESSUGERENCIAS"    6.140 KB      16 rows
+. . imported "DEMOMVM"."CARPETAS_ACCESOSUSUARIOS"        450.6 KB   27965 rows
+. . imported "DEMOMVM"."INT_FICHEROS"                    692.9 KB    5751 rows
+. . imported "DEMOMVM"."CATPRIV_HISTORICOSPORCENTRO_C"   419.0 KB   18457 rows
+. . imported "DEMOMVM"."PRODUCTOSDESTACADOS"             501.3 KB   19511 rows
+. . imported "DEMOMVM"."CATPRIV_MVM"                     571.7 KB    4278 rows
+. . imported "DEMOMVM"."DOCUMENTOS"                      628.6 KB    5129 rows
+. . imported "DEMOMVM"."EIS_RESUMENMENSUAL"              476.5 KB   13586 rows
+. . imported "DEMOMVM"."CARGAEMPRESAS"                   461.8 KB    2208 rows
+. . imported "DEMOMVM"."CARGAS_ASISA"                    571.6 KB    3907 rows
+. . imported "DEMOMVM"."MULTIOFERTAS_COPIAOCT03"         553.9 KB    4055 rows
+. . imported "DEMOMVM"."CONC_USUARIOS"                   463.6 KB    2874 rows
+. . imported "DEMOMVM"."CONTROLERRORES"                  454.1 KB   26938 rows
+. . imported "DEMOMVM"."EIS_RESUMENMENSUALPORCENTRO"     359.8 KB    9816 rows
+. . imported "DEMOMVM"."CATPRIV_FAMILIAS"                439.5 KB    9544 rows
+. . imported "DEMOMVM"."CONCURSOS_LOGCONTACTOS"          399.1 KB    1013 rows
+. . imported "DEMOMVM"."BANNERS"                         7.406 KB      21 rows
+. . imported "DEMOMVM"."BANNERSPALABRAS"                 8.929 KB      57 rows
+. . imported "DEMOMVM"."LIC_PROVEEDORES"                 424.2 KB    3958 rows
+. . imported "DEMOMVM"."MENSAJES"                        12.10 KB     122 rows
+. . imported "DEMOMVM"."PAISES"                          6.335 KB       2 rows
+. . imported "DEMOMVM"."RESUMEN_ANUNCIOS_INTERES"        383.1 KB   13892 rows
+. . imported "DEMOMVM"."CARGAS_HISTORICOSPORCENTRO"      307.1 KB    1199 rows
+. . imported "DEMOMVM"."CATPRIV_PRECIOSOBJETIVO"         306.8 KB    6734 rows
+. . imported "DEMOMVM"."EIS_TAREASREALIZADAS"            352.1 KB    5318 rows
+. . imported "DEMOMVM"."LUGARESENTREGA"                  328.8 KB    4251 rows
+. . imported "DEMOMVM"."CATPRIV_HISTORICOSPORCENTRO"     271.6 KB    1358 rows
+. . imported "DEMOMVM"."CONC_ETIQUETAS"                  273.1 KB   17075 rows
+. . imported "DEMOMVM"."EIS_CENTROS"                     138.4 KB    5162 rows
+. . imported "DEMOMVM"."EIS_PROVEEDORES"                 179.8 KB    2820 rows
+. . imported "DEMOMVM"."LOGCOMPROMISOS"                  289.0 KB    3027 rows
+. . imported "DEMOMVM"."LOGCONTROLPRECIOS"               279.2 KB    2242 rows
+. . imported "DEMOMVM"."LOG_SOLICITUDES"                 67.24 KB    1999 rows
+. . imported "DEMOMVM"."PARAMETROS"                      8.914 KB      45 rows
+. . imported "DEMOMVM"."PICKINGPACK2001"                 299.7 KB    4979 rows
+. . imported "DEMOMVM"."PRECIOGPP"                       290.9 KB    4865 rows
+. . imported "DEMOMVM"."PRODUCTOS_DOCUMENTOS"            260.0 KB    9125 rows
+. . imported "DEMOMVM"."SINONIMOS"                       8.320 KB      71 rows
+. . imported "DEMOMVM"."VENDEDORNUEVOSCLIENTES"          20.33 KB    1174 rows
+. . imported "DEMOMVM"."CARPETAS"                        212.4 KB    3649 rows
+. . imported "DEMOMVM"."EIS_MAT_COMENTARIOS"             220.0 KB    2720 rows
+. . imported "DEMOMVM"."GESCOM_SEGUIMIENTO"              248.1 KB     809 rows
+. . imported "DEMOMVM"."LOGCLIENTESNOAUTORIZADOS"        220.5 KB    5491 rows
+. . imported "DEMOMVM"."MANT_EMPRESA"                    251.3 KB    1370 rows
+. . imported "DEMOMVM"."RESUMEN_CATALOGOSPROVEEDORES"    198.3 KB   10788 rows
+. . imported "DEMOMVM"."AYUDA"                           6.054 KB      15 rows
+. . imported "DEMOMVM"."CATPRIV_CATALOGOREFERENCIAS"     129.3 KB    4874 rows
+. . imported "DEMOMVM"."CENTROSCONSUMO"                  166.1 KB    3452 rows
+. . imported "DEMOMVM"."CONTACTOS"                       147.8 KB     409 rows
+. . imported "DEMOMVM"."EIS_RESUMENMENSUALCENTROYPROV"   107.2 KB    2857 rows
+. . imported "DEMOMVM"."HIST_CONTROLSTOCKS"              191.1 KB    1860 rows
+. . imported "DEMOMVM"."OPERADORES_TELEFONIA"            5.343 KB       4 rows
+. . imported "DEMOMVM"."PALABRASPRODUCTOS"               186.1 KB   12857 rows
+. . imported "DEMOMVM"."PRODUCTOS_INCIDENCIAS"           206.0 KB     171 rows
+. . imported "DEMOMVM"."TESTIMONIOS"                     199.3 KB    1262 rows
+. . imported "DEMOMVM"."TIPOSCALIDADES"                  5.398 KB      10 rows
+. . imported "DEMOMVM"."CATPRIV_PRODUCTOSESTANDAR_TMP"   112.7 KB    1628 rows
+. . imported "DEMOMVM"."DEPARTAMENTOS"                   94.69 KB    3267 rows
+. . imported "DEMOMVM"."IMAGENES"                        99.26 KB    1139 rows
+. . imported "DEMOMVM"."LICITACIONES"                    159.9 KB     272 rows
+. . imported "DEMOMVM"."MO_PRODUCTOSMANUALES"            98.41 KB    1704 rows
+. . imported "DEMOMVM"."PEDIDOS_PROGRAMACION"            101.4 KB     834 rows
+. . imported "DEMOMVM"."PRODUCTOS_EVALUACIONES"          114.5 KB     230 rows
+. . imported "DEMOMVM"."ACTUALIZARBANNERS"               11.29 KB     273 rows
+. . imported "DEMOMVM"."AGENDA_ACTIVIDADESTAREAS"        7.117 KB      11 rows
+. . imported "DEMOMVM"."AGENDA_TAREAS"                   31.60 KB     176 rows
+. . imported "DEMOMVM"."BED_2001"                        40.39 KB     504 rows
+. . imported "DEMOMVM"."BG_CAMPOS"                       10.64 KB       9 rows
+. . imported "DEMOMVM"."BG_CONSULTAS"                    9.937 KB       3 rows
+. . imported "DEMOMVM"."CARTERACLIENTESVENDEDOR"         12.56 KB     399 rows
+. . imported "DEMOMVM"."CATPRIV_ESTADOS"                 5.843 KB       9 rows
+. . imported "DEMOMVM"."CATPRIV_HISTORICOPORCENTRO_BK"   17.40 KB     191 rows
+. . imported "DEMOMVM"."CATPRIV_HISTORICOSPORCENTRO_E"   33.28 KB     691 rows
+. . imported "DEMOMVM"."CENTRALDECOMPRAS"                9.140 KB      86 rows
+. . imported "DEMOMVM"."COM_COMISIONESPORAGENTE"         14.67 KB     575 rows
+. . imported "DEMOMVM"."COM_DESCUENTOSPORVOLUMEN"        5.453 KB      11 rows
+. . imported "DEMOMVM"."COM_DESCUENTOSVOLUMENPEDIDO"     5.351 KB       1 rows
+. . imported "DEMOMVM"."COMPROMISOS"                     53.29 KB    1326 rows
+. . imported "DEMOMVM"."CONC_MENSAJESEMPRESAS"           84.76 KB     215 rows
+. . imported "DEMOMVM"."CONC_PROVEEDORES"                57.04 KB     724 rows
+. . imported "DEMOMVM"."CONCURSOS_FAMILIAS"              7.710 KB     139 rows
+. . imported "DEMOMVM"."CONDICIONESPROVEEDORES"          84.28 KB    2005 rows
+. . imported "DEMOMVM"."CONTINENTES"                     5.375 KB       6 rows
+. . imported "DEMOMVM"."CONTINENTESIDIOMAS"              6.132 KB       6 rows
+. . imported "DEMOMVM"."COPIABANNERSFAM"                 7.859 KB      57 rows
+. . imported "DEMOMVM"."DEPARTAMENTOSUSUARIO"            67.47 KB    4796 rows
+. . imported "DEMOMVM"."DERECHOSPORPERFIL"               11.94 KB     319 rows
+. . imported "DEMOMVM"."DIVISAS"                         7.304 KB       3 rows
+. . imported "DEMOMVM"."EIS_FAMILIAS"                    6.140 KB      14 rows
+. . imported "DEMOMVM"."EIS_RESUMENDIARIO"               37.15 KB     863 rows
+. . imported "DEMOMVM"."ENCUESTAS"                       59.29 KB     549 rows
+. . imported "DEMOMVM"."ERRORES_PRECIOS"                 12.95 KB     265 rows
+. . imported "DEMOMVM"."ESTADOSREGISTROSWORKFLOW"        9.859 KB      67 rows
+. . imported "DEMOMVM"."ESTADOS_UNIVERSALES"             6.296 KB      12 rows
+. . imported "DEMOMVM"."ESTADOS_UNIVERSALES_AGRUPADOS"   5.828 KB      18 rows
+. . imported "DEMOMVM"."ESTADOS_UNIVERSALES_TIPOS"       5.320 KB       2 rows
+. . imported "DEMOMVM"."FAC_ESTADOS"                     5.687 KB       5 rows
+. . imported "DEMOMVM"."FORMASPAGO"                      5.859 KB      10 rows
+. . imported "DEMOMVM"."GESTIONCOMERCIAL"                54.57 KB     195 rows
+. . imported "DEMOMVM"."IDIOMAS"                         5.304 KB       2 rows
+. . imported "DEMOMVM"."IE_EMPRESASNOAFILIADAS"          24.68 KB     276 rows
+. . imported "DEMOMVM"."IE_IDTIPOSEMPRESASNOAFILIADAS"   5.367 KB       3 rows
+. . imported "DEMOMVM"."IE_INVITACIONESENVIADAS"         5.851 KB      10 rows
+. . imported "DEMOMVM"."INC_TIPOSCAUSAS"                 5.421 KB       6 rows
+. . imported "DEMOMVM"."INC_TIPOSGRAVEDAD"               5.351 KB       4 rows
+. . imported "DEMOMVM"."INC_TIPOSINCIDENCIAS"            5.898 KB      18 rows
+. . imported "DEMOMVM"."INC_TIPOSVALORACION"             5.414 KB       3 rows
+. . imported "DEMOMVM"."LICITACIONES_LISTADOS"           45.18 KB     494 rows
+. . imported "DEMOMVM"."LINEASPEDIDO_ALTERNATIVAS"       65.10 KB     975 rows
+. . imported "DEMOMVM"."LOGAVISOSAUTORIZACIONES"         52.97 KB    1974 rows
+. . imported "DEMOMVM"."LOGPEDIDOSBORRADOS"              45.57 KB     636 rows
+. . imported "DEMOMVM"."LOGPEDIDOSBORRADOS_LINEAS"       59.57 KB    1376 rows
+. . imported "DEMOMVM"."MEDICOS_PREGUNTAS"               5.796 KB       6 rows
+. . imported "DEMOMVM"."MENSAJESNEGOCIACION"             8.984 KB      61 rows
+. . imported "DEMOMVM"."MENUS"                           19.81 KB      99 rows
+. . imported "DEMOMVM"."MESES"                           5.445 KB      12 rows
+. . imported "DEMOMVM"."NOMENCLATOR_COPIA"               94.64 KB    1791 rows
+. . imported "DEMOMVM"."NOMENCLATOR2"                    12.25 KB     101 rows
+. . imported "DEMOMVM"."NOTICIAS"                        69.75 KB     328 rows
+. . imported "DEMOMVM"."PALABRASCLAVE"                   7.554 KB      76 rows
+. . imported "DEMOMVM"."PEDIDOMINIMOPORCENTRO"           7.710 KB      10 rows
+. . imported "DEMOMVM"."PEDIDOMINIMOPOREMPRESA"          12.83 KB     146 rows
+. . imported "DEMOMVM"."PEDIDOS_LISTADOS"                55.28 KB     321 rows
+. . imported "DEMOMVM"."PEDIDOS_PROGRAMACION_HIST"       10.53 KB       8 rows
+. . imported "DEMOMVM"."PERFILESMENUS"                   6.437 KB       6 rows
+. . imported "DEMOMVM"."PLAN_TABLE"                      12.38 KB       3 rows
+. . imported "DEMOMVM"."PLAZOSPAGO"                      6.148 KB      14 rows
+. . imported "DEMOMVM"."PRO_DEFINICIONPROCESOS"          6.257 KB       6 rows
+. . imported "DEMOMVM"."PRO_DEFINICIONTAREAS"            6.843 KB       3 rows
+. . imported "DEMOMVM"."PROVINCIAS"                      5.648 KB       1 rows
+. . imported "DEMOMVM"."PULSACIONES_BANNERS"             48.77 KB    1238 rows
+. . imported "DEMOMVM"."RENDIMIENTO_TIPOS"               6.523 KB      31 rows
+. . imported "DEMOMVM"."REPOSITORIO_COMENTARIOS"         56.07 KB     549 rows
+. . imported "DEMOMVM"."REPOSITORIO_TIPOS"               5.257 KB       1 rows
+. . imported "DEMOMVM"."RESUMEN_ANUNCIOS"                67.17 KB    3133 rows
+. . imported "DEMOMVM"."RESUMENSEMANAL"                  44.64 KB      30 rows
+. . imported "DEMOMVM"."RESUMENSEMANAL_ESTADOS"          5.656 KB       3 rows
+. . imported "DEMOMVM"."SESIONESACTIVAS"                 8.304 KB     100 rows
+. . imported "DEMOMVM"."SEXOS"                           5.257 KB       2 rows
+. . imported "DEMOMVM"."SIS_BLOQUESOPERACIONENCURSO"     5.375 KB       2 rows
+. . imported "DEMOMVM"."SIS_BLOQUESOPERACIONES"          6.695 KB       5 rows
+. . imported "DEMOMVM"."SIS_CAMPOSOPERACIONENCURSO"      8.875 KB      49 rows
+. . imported "DEMOMVM"."SIS_CAMPOSOPERACIONES"           9.460 KB      54 rows
+. . imported "DEMOMVM"."SIS_CONDICIONESCAMPOS"           6.773 KB      30 rows
+. . imported "DEMOMVM"."SIS_OPERACIONES"                 9.062 KB       4 rows
+. . imported "DEMOMVM"."SIS_OPERACIONESENCURSO"          7.679 KB       2 rows
+. . imported "DEMOMVM"."SIS_PROCESOS"                    6.179 KB       3 rows
+. . imported "DEMOMVM"."SIS_REGISTROSOPERACIONENCURSO"   6.148 KB       9 rows
+. . imported "DEMOMVM"."SOLICITUDESCATALOGACION"         69.34 KB     124 rows
+. . imported "DEMOMVM"."TIPOSANUNCIOS"                   5.375 KB       5 rows
+. . imported "DEMOMVM"."TIPOSEMPRESAS"                   7.640 KB      23 rows
+. . imported "DEMOMVM"."TIPOSIVA"                        6.203 KB      10 rows
+. . imported "DEMOMVM"."TIPOSMENUS"                      6.296 KB      12 rows
+. . imported "DEMOMVM"."TIPOSNOTICIAS"                   5.312 KB       4 rows
+. . imported "DEMOMVM"."TIPOSPRODUCTOS"                  5.351 KB       3 rows
+. . imported "DEMOMVM"."TIPOSREGISTROSWORKFLOW"          5.531 KB       8 rows
+. . imported "DEMOMVM"."TIPOSUSUARIOS"                   6.015 KB      15 rows
+. . imported "DEMOMVM"."USUARIOS_CARGOS"                 5.515 KB      13 rows
+. . imported "DEMOMVM"."ALTA_XML_SSTOCKS"                12.05 KB      12 rows
+. . imported "DEMOMVM"."CATPRIV_CATEGORIAS"              28.86 KB     822 rows
+. . imported "DEMOMVM"."CLIENTESNOAUTORIZADOS"           15.75 KB     429 rows
+. . imported "DEMOMVM"."COMERCIAL_PORTALNOAUTORIZADO"    5.351 KB       4 rows
+. . imported "DEMOMVM"."COMISIONESPORFAMILIA"            5.304 KB       1 rows
+. . imported "DEMOMVM"."COMISIONESPORSUBFAMILIA"         5.367 KB       5 rows
+. . imported "DEMOMVM"."CONC_CENTROS"                    12.67 KB      56 rows
+. . imported "DEMOMVM"."CONC_DEBUG"                      10.46 KB      85 rows
+. . imported "DEMOMVM"."CONC_EMPRESASDISTRIBUIDORES"     6.406 KB       2 rows
+. . imported "DEMOMVM"."CONC_SESIONESACTIVAS"            7.804 KB      84 rows
+. . imported "DEMOMVM"."CONTROLPRECIOS_OFERTAS"          45.24 KB      77 rows
+. . imported "DEMOMVM"."CONTROLPRECIOS_PEDIDOS"          9.382 KB       6 rows
+. . imported "DEMOMVM"."CONTROLSTOCKS"                      22 KB     332 rows
+. . imported "DEMOMVM"."COSTETRANSPORTEPORCENTRO"        7.109 KB       1 rows
+. . imported "DEMOMVM"."COSTETRANSPORTEPOREMPRESA"       6.765 KB       2 rows
+. . imported "DEMOMVM"."DERECHOSPEDIDOSPROBLEMATICOS"    6.203 KB      80 rows
+. . imported "DEMOMVM"."EIS_ALARMAS"                     21.71 KB      33 rows
+. . imported "DEMOMVM"."EIS_ANYOS"                       5.093 KB      16 rows
+. . imported "DEMOMVM"."EIS_BLOQUESINFORMES"             6.781 KB      10 rows
+. . imported "DEMOMVM"."EIS_CONFIGURACION"               4.960 KB       1 rows
+. . imported "DEMOMVM"."EIS_CONSULTABASE"                18.50 KB      17 rows
+. . imported "DEMOMVM"."EIS_CONSULTASPREDEFINIDAS"       16.42 KB      18 rows
+. . imported "DEMOMVM"."EIS_CUADROSDEMANDO"              12.86 KB      18 rows
+. . imported "DEMOMVM"."EIS_DIASLABORABLESPORMES"        10.78 KB     372 rows
+. . imported "DEMOMVM"."EIS_GRUPOSCONSULTAS"             6.359 KB       2 rows
+. . imported "DEMOMVM"."EIS_INDICADORES"                 14.89 KB      20 rows
+. . imported "DEMOMVM"."EIS_INDICADORESPORCUADRO"        5.914 KB      19 rows
+. . imported "DEMOMVM"."EIS_INDICADORESSEGUIMIENTO"      9.835 KB      24 rows
+. . imported "DEMOMVM"."EIS_INFORMES"                    6.406 KB       3 rows
+. . imported "DEMOMVM"."EIS_LINEASBLOQUESINFORMES"       9.156 KB      62 rows
+. . imported "DEMOMVM"."EIS_MAT_PREDEFINIDAS"            16.42 KB      75 rows
+. . imported "DEMOMVM"."EIS_SELECCIONES"                 9.554 KB      31 rows
+. . imported "DEMOMVM"."EIS_SELECCIONES_DATOS"           20.02 KB     424 rows
+. . imported "DEMOMVM"."EIS_VAN_CLIENTESINFORMADOS"      6.765 KB     146 rows
+. . imported "DEMOMVM"."EMPRESASESPECIALES"              6.781 KB      18 rows
+. . imported "DEMOMVM"."ENCUESTAS_CENTROS"               29.78 KB     374 rows
+. . imported "DEMOMVM"."ENCUESTAS_MOSTRARCENTRO"         8.984 KB     378 rows
+. . imported "DEMOMVM"."ETIQUETAS"                       9.343 KB      14 rows
+. . imported "DEMOMVM"."FACTURAS"                        28.85 KB     160 rows
+. . imported "DEMOMVM"."GESCOM_MEDDICC_BAK"              20.33 KB      81 rows
+. . imported "DEMOMVM"."GESCOM_MEDDICC_DEF"              5.789 KB       9 rows
+. . imported "DEMOMVM"."GESTIONCOMERCIAL_MEDDICC"        17.29 KB      83 rows
+. . imported "DEMOMVM"."HIST_COMPROMISOS"                14.74 KB     139 rows
+. . imported "DEMOMVM"."HISTORICOPROVEEDORES"            9.820 KB      37 rows
+. . imported "DEMOMVM"."IDIOMAS_TEXTOSMENSAJES"          32.43 KB     480 rows
+. . imported "DEMOMVM"."INTEGRACION_CLIENTES"            5.914 KB       1 rows
+. . imported "DEMOMVM"."INTEGRACION_CLIENTES_ELEMENTOS"  4.968 KB       1 rows
+. . imported "DEMOMVM"."INTEGRACION_CLIENTES_LOG"        29.16 KB     735 rows
+. . imported "DEMOMVM"."INT_EXCEPCIONES"                 5.687 KB       1 rows
+. . imported "DEMOMVM"."INT_FICHEROSXML"                 9.421 KB       1 rows
+. . imported "DEMOMVM"."INT_LINEASFICHEROSXML"           9.835 KB      34 rows
+. . imported "DEMOMVM"."INT_MODELOS"                     14.20 KB      80 rows
+. . imported "DEMOMVM"."LIC_CENTROS"                     9.117 KB      37 rows
+. . imported "DEMOMVM"."LIC_COMPRASPORCENTRO"            35.39 KB     561 rows
+. . imported "DEMOMVM"."LIC_CONVERSACIONES"              37.83 KB     236 rows
+. . imported "DEMOMVM"."LIC_INFORMES"                    11.32 KB      12 rows
+. . imported "DEMOMVM"."LIC_USUARIOS"                    19.02 KB     304 rows
+. . imported "DEMOMVM"."LOGAVISOSNUEVOSCLIENTES"         6.539 KB      23 rows
+. . imported "DEMOMVM"."LOGCONTACTOS"                    28.39 KB      50 rows
+. . imported "DEMOMVM"."MARCASPORPORTAL"                 8.367 KB      69 rows
+. . imported "DEMOMVM"."NOTICIAS_DERECHOS"               6.984 KB      26 rows
+. . imported "DEMOMVM"."NOTICIAS_LEIDAS"                 8.687 KB     150 rows
+. . imported "DEMOMVM"."PEDIDOS_MOTIVOSPROBLEMAS"        5.945 KB      10 rows
+. . imported "DEMOMVM"."PERSONALIZACION_ESTILOS"         5.710 KB       3 rows
+. . imported "DEMOMVM"."PERSONALIZACION_LOGOTIPOS"       17.61 KB     206 rows
+. . imported "DEMOMVM"."PORTALESMVM"                     10.22 KB      10 rows
+. . imported "DEMOMVM"."PRO_UNIDADESPORLOTE"             25.84 KB     527 rows
+. . imported "DEMOMVM"."PRO_UNIDADESPORLOTE_BACKUP"      18.86 KB     333 rows
+. . imported "DEMOMVM"."RESUMEN_AHORROS"                 12.72 KB     263 rows
+. . imported "DEMOMVM"."SOLCAT_PRODUCTOS"                21.22 KB     113 rows
+. . imported "DEMOMVM"."TMP_INIBSA"                      5.281 KB       2 rows
+. . imported "DEMOMVM"."TMP_NOVOSYN"                     11.72 KB      65 rows
+. . imported "DEMOMVM"."TMP_REEMPLANTILLARFARMACIA"      8.484 KB     105 rows
+. . imported "DEMOMVM"."TUTORIALES"                      6.570 KB       1 rows
+. . imported "DEMOMVM"."USUARIOS_CENTROSAUTORIZADOS"     7.914 KB     151 rows
+. . imported "DEMOMVM"."USUARIOS_PERFILES"               6.906 KB       5 rows
+. . imported "DEMOMVM"."ZONASHORARIAS"                   5.656 KB       2 rows
+. . imported "DEMOMVM"."CATPRIV_HISTORICOPORCENTRO"          0 KB       0 rows
+. . imported "DEMOMVM"."CATPRIV_PROVEEDORES"                 0 KB       0 rows
+. . imported "DEMOMVM"."CONC_ERRORES"                        0 KB       0 rows
+. . imported "DEMOMVM"."CONC_LOGACCESOS"                     0 KB       0 rows
+. . imported "DEMOMVM"."CONCURSOS_LOGCONSULTAS"              0 KB       0 rows
+. . imported "DEMOMVM"."CONCURSOS_LOGPROVEEDORESVISTOS"      0 KB       0 rows
+. . imported "DEMOMVM"."CONTROLPRECIOS_DEMANDAS"             0 KB       0 rows
+. . imported "DEMOMVM"."EIS_LISTADOS"                        0 KB       0 rows
+. . imported "DEMOMVM"."EIS_TAREASPENDIENTES"                0 KB       0 rows
+. . imported "DEMOMVM"."FACTURAS_LISTADOS"                   0 KB       0 rows
+. . imported "DEMOMVM"."IDIOMAS_SINONIMOS"                   0 KB       0 rows
+. . imported "DEMOMVM"."LINEASLICITACION_LISTADOS"           0 KB       0 rows
+. . imported "DEMOMVM"."LINEASPEDIDO_LISTADOS"               0 KB       0 rows
+. . imported "DEMOMVM"."LOG_CAMBIOSEMPRESAS"                 0 KB       0 rows
+. . imported "DEMOMVM"."PRODUCTOSEQUIVALENTES"               0 KB       0 rows
+. . imported "DEMOMVM"."PRODUCTOS_EVALUACIONES_LISTADO"      0 KB       0 rows
+. . imported "DEMOMVM"."PRODUCTOS_INCIDENCIAS_LISTADOS"      0 KB       0 rows
+. . imported "DEMOMVM"."SOLICITUDESCATALOGACION_LIST"        0 KB       0 rows
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/INDEX/INDEX
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/COMMENT
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE/PACKAGE_SPEC
+Processing object type DATABASE_EXPORT/SCHEMA/PROCEDURE/PROCEDURE
+Processing object type DATABASE_EXPORT/SCHEMA/PROCEDURE/ALTER_PROCEDURE
+Processing object type DATABASE_EXPORT/SCHEMA/VIEW/VIEW
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/CONSTRAINT/REF_CONSTRAINT
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."PROD_INC_IDUSUARIODIAGNOSTICO" already exists
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."PROD_INC_IDUSUARIOSOLUCION" already exists
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."SC_IDUSUARIODIAGNOSTICO" already exists
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."SC_IDUSUARIOSOLUCION" already exists
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."CT_DEM_IDUSUARIODIAGNOSTICO" already exists
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."CT_DEM_IDUSUARIOSOLUCION" already exists
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."CT_OFE_IDUSUARIODIAGNOSTICO" already exists
+ORA-31684: Object type REF_CONSTRAINT:"DEMOMVM"."CT_OFE_IDUSUARIOSOLUCION" already exists
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE_BODIES/PACKAGE/PACKAGE_BODY
+ORA-39082: Object type PACKAGE_BODY:"DEMOMVM"."BATCH_PCK" created with compilation warnings
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/STATISTICS/TABLE_STATISTICS
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/INDEX/DOMAIN_INDEX/INDEX
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TRIGGER
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$BPRO_TEXTO_NORMTC" after insert or update on "MEDICALVM"."BUSC_PRODUCTOS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('BPRO_TEXTO_NORM') or       :new."BPRO_TEXT
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$CP_PRO_TIDXTC" after insert or update on "MEDICALVM"."CATPRIV_PRODUCTOSESTANDAR" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('CP_PRO_TEXTONORM') or       :new."C
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$CONC_NOMBREPRODUCTONORMTC" after insert or update on "MEDICALVM"."CONCURSOS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('CONC_NOMBREPRODUCTONORM') or       :new
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$EIS_VA_TIDX_SETTC" after insert or update on "MEDICALVM"."EIS_VALORES" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('EIS_VA_TEXTONORM') or       :new."EIS_VA_TEXT
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$TST_TEXTO_NORMTC" after insert or update on "MEDICALVM"."TESTIMONIOS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('TST_TEXTO_NORM') or       :new."TST_TEXTO_NORM
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$LIC_TEXTONORMTC" after insert or update on "MEDICALVM"."LICITACIONES" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('LIC_TEXTONORM') or       :new."LIC_TEXTONORM" 
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$LIC_PRODUCTOS_TIDXTC" after insert or update on "MEDICALVM"."LIC_PRODUCTOS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('LIC_PROD_TEXTONORM') or       :new."LIC_
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$PROD_EV_TEXTONORMTC" after insert or update on "MEDICALVM"."PRODUCTOS_EVALUACIONES" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('PROD_EV_TEXTONORM') or       :ne
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$CT_OFE_TEXTONORMTC" after insert or update on "MEDICALVM"."CONTROLPRECIOS_OFERTAS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('CT_OFE_TEXTONORM') or       :new.
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$SC_TEXTONORMTC" after insert or update on "MEDICALVM"."SOLICITUDESCATALOGACION" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('SC_TEXTONORM') or       :new."SC_TEX
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$PROD_INC_TEXTONORMTC" after insert or update on "MEDICALVM"."PRODUCTOS_INCIDENCIAS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('PROD_INC_TEXTONORM') or       :n
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$GC_TEXTO_NORMTC" after insert or update on "MEDICALVM"."GESTIONCOMERCIAL" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('GC_TEXTO_NORM') or       :new."GC_TEXTO_NO
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$PRO_TEXTO_NORMTC" after insert or update on "MEDICALVM"."PRODUCTOS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('PRO_TEXTO_NORM') or       :new."PRO_TEXTO_NORM" 
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$LPE_TIDX_SETTC" after insert or update on "MEDICALVM"."LINEASPEDIDOS" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('LPE_TEXTONORM') or       :new."LPE_TEXTONORM" 
+ORA-39083: Object type TRIGGER failed to create with error:
+ORA-00942: table or view does not exist
+Failing sql is:
+CREATE TRIGGER "DEMOMVM"."DR$LMO_TIDX_SETTC" after insert or update on "MEDICALVM"."LINEASMULTIOFERTA" for each row declare   reindex boolean := FALSE;   updop   boolean := FALSE; begin   ctxsys.drvdml.c_updtab.delete;   ctxsys.drvdml.c_numtab.delete;   ctxsys.drvdml.c_vctab.delete;   ctxsys.drvdml.c_rowid := :new.rowid;   if (inserting or updating('LMO_TEXTONORM') or       :new."LMO_TEXTONO
+Processing object type DATABASE_EXPORT/SCHEMA/POST_SCHEMA/PROCACT_SCHEMA
+Job "DEMOMVM"."SYS_IMPORT_SCHEMA_01" completed with 43 error(s) at 13:53:48

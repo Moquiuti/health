@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+
+ |
+ +-->
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="NCListadoHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="NCListadoHTML.xsl"?>
+
+
+<Multiofertas xmlns:xsql="urn:oracle-xsql" connection="newco" lang="spanish">
+   <xsql:set-stylesheet-param name="lang" value="{@lang}"/>
+   <xsql:include-param name="SES_ID"/>
+
+  <xsql:include-owa>
+        <![CDATA[
+		DECLARE
+		  US_ID		NUMBER;
+                BEGIN
+		  US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','SMListado');
+		  IF US_ID>=0 THEN		   
+                   NOCONFORMIDADPRODUCTO_SEG_PCK.ListaTareas (US_ID, '{@ACTIVIDAD}', '{@ESTADO}');
+        	  END IF;
+                END;
+        ]]>
+  
+        
+  </xsql:include-owa>
+  
+  <jumpTo>
+    <picture-off>Anterior</picture-off>
+    <picture-on>Anterior_mov</picture-on>    
+    <page>G-0015</page>
+    <caption>G-0001</caption> 
+  </jumpTo>
+  
+</Multiofertas>

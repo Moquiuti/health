@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--  -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PerfilesUsuariosHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PerfilesUsuariosHTML.xsl"?>
+
+<PerfilesUsuarios xmlns:xsql="urn:oracle-xsql" connection="newco">
+  <xsql:include-param name="STYLE"/>
+  <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+  <xsql:include-param name="NOMBRE_PERFIL"/>
+  <xsql:include-param name="IDEMPRESA"/>
+  <xsql:include-param name="IDPERFIL"/>
+  
+  <!--
+  	Listado de centros cliente asignados a los vendedores de la empresa
+  -->
+ 
+   <xsql:include-owa>
+    <![CDATA[
+		DECLARE
+			US_ID		NUMBER;
+                        PERFIL		NUMBER;
+		BEGIN
+			US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PerfilesUsuarios');
+			IF US_ID>=0 THEN
+                                
+                                IF '{@ACCION}' = 'CREAR' OR '{@ACCION}' = 'MODIFICA' THEN
+                                    PERFIL:=Usuarios_PCK.ModificarPerfil(
+                                        US_ID,
+                                        '{@IDPERFIL}',
+                                        '{@IDEMPRESA}',
+                                        '{@IDUSUARIO}',
+                                        '{@NOMBRE_PERFIL}'                              
+                                    );
+                                
+                                ELSIF '{@ACCION}' = 'BORRAR' THEN
+                                    PERFIL:=Usuarios_PCK.BorrarPerfil(
+                                        US_ID,
+                                        '{@IDPERFIL}'                                                               
+                                    );
+                                END IF;
+                                
+                                
+                                Usuarios_PCK.Perfiles_XML(
+                                    US_ID,
+                                    '{@IDEMPRESA}',
+                                    'S'                                   
+                                );
+                        END IF;				
+				
+                END;
+        ]]>
+  </xsql:include-owa>	
+
+</PerfilesUsuarios>
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="PedidosEspecialesHTML.xsl"?>
+<?xml-stylesheet type="text/xsl" href="PedidosEspecialesHTML.xsl"?>
+
+
+<!--
+ |   Pedidos especiales: Primeros pedidos, muestras pendientes, primeros pedidos tras muestras
+ +-->
+
+<PedidosEspeciales xmlns:xsql="urn:oracle-xsql" connection="newco">
+ <xsql:include-param name="STYLE"/>
+ <xsql:include-param name="LANG" value="{@PRMLANG}"/>
+ 
+	<xsql:include-owa>
+        <![CDATA[
+			DECLARE
+				US_ID		NUMBER;
+    		BEGIN
+				US_ID:=SEGURIDAD_PCK.CompruebaCodigoDeSesion('{@SES_ID}','PedidosEspeciales');	
+				IF US_ID>=0 THEN
+					PedidosEspeciales_PCK.ListaPedidos_XML
+					(
+						US_ID,
+						'{@FIDTIPO}',			--	Tipo de pedido a mostrar
+						'{@FIDEMPRESA}',		--	Cliente
+						'{@FIDCENTRO}',			--	Centro cliente
+						'{@FIDPROVEEDOR}',
+						'{@FIDPRODUCTO}',
+						'{@FREFERENCIA}',
+						'{@FREFPROVEEDOR}',
+						'{@FIDPLAZO}',
+						'{@ORDEN}',
+						'{@SENTIDO}',
+						'{@PAGINA}'
+					);
+				END IF;
+			END;
+        ]]>
+	</xsql:include-owa>
+	<botones>
+	<button label="NavegarAtras" caption="PRO-0480">
+	 	<name_function>Atras</name_function> 
+	  	<param>'ANTERIOR'</param>
+	</button>
+
+	<button label="NavegarAdelante" caption="PRO-0490">
+		<name_function>Adelante</name_function> 
+		<param>'SIGUIENTE'</param>
+	</button>
+	</botones>
+</PedidosEspeciales>
+
+

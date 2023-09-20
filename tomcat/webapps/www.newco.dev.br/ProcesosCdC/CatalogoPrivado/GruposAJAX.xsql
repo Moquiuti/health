@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- -->
+<?xml-stylesheet type="text/xsl" media="Mozilla" href="GruposJSON.xsl"?>
+<?xml-stylesheet type="text/xsl" href="GruposJSON.xsl"?>
+
+<Grupos xmlns:xsql="urn:oracle-xsql" connection="newco">
+<xsql:include-param name="LANG" value="{@PRMLANG}"/>
+
+<xsql:include-owa>
+<![CDATA[
+	BEGIN
+		CATALOGOPRIVADO_SEG_PCK.DesplegableGrupos_XML ('{@IDSUBFAMILIA}');
+	END;
+]]>
+</xsql:include-owa>
+</Grupos>
